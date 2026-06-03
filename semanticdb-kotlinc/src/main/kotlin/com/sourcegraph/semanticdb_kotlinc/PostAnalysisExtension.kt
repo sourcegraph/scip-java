@@ -1,11 +1,8 @@
 package com.sourcegraph.semanticdb_kotlinc
 
-import com.sourcegraph.semanticdb.Semanticdb
-import com.sourcegraph.semanticdb.SemanticdbPaths
-import com.sourcegraph.semanticdb.SemanticdbWriter
-
 import java.io.PrintWriter
 import java.io.Writer
+import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
 import kotlin.contracts.ExperimentalContracts
@@ -30,8 +27,11 @@ class PostAnalysisExtension(
             for ((ktSourceFile, visitor) in AnalyzerCheckers.visitors) {
                 try {
                     val document = visitor.build()
-                    semanticdbOutPathForFile(ktSourceFile)?.let { outPath ->
-                        SemanticdbWriter.writeTextDocument(outPath, document)
+                    semanticdbOutPathForFile(ktSourceFile)?.apply {
+                        Files.write(this, TextDocuments { addDocuments(document) }.toByteArray())
+                    }
+                    scipShardOutPathForFile(ktSourceFile)?.apply {
+                        ScipShardWriter.write(this, visitor.buildScipIndex())
                     }
                     callback(document)
                 } catch (e: Exception) {
@@ -43,14 +43,32 @@ class PostAnalysisExtension(
         }
     }
 
-    private fun semanticdbOutPathForFile(file: KtSourceFile): Path? {
+    private fun semanticdbOutPathForFile(file: KtSourceFile): Path? =
+        outPathForFile(file, subdir = "semanticdb", suffix = ".semanticdb")
+
+    private fun scipShardOutPathForFile(file: KtSourceFile): Path? =
+        outPathForFile(file, subdir = "scip", suffix = ".scip")
+
+    private fun outPathForFile(file: KtSourceFile, subdir: String, suffix: String): Path? {
         val normalizedPath = Paths.get(file.path).normalize()
-        val outPath = SemanticdbPaths.semanticdbPath(targetRoot, sourceRoot, normalizedPath)
-        if (outPath.isPresent) {
-            return outPath.get()
+        if (normalizedPath.startsWith(sourceRoot)) {
+            val relative = sourceRoot.relativize(normalizedPath)
+            val filename = relative.fileName.toString() + suffix
+            val outPath =
+                targetRoot
+                    .resolve("META-INF")
+                    .resolve(subdir)
+                    .resolve(relative)
+                    .resolveSibling(filename)
+
+            Files.createDirectories(outPath.parent)
+            return outPath
         }
-        System.err.println(
-            "given file is not under the sourceroot.\n\tSourceroot: $sourceRoot\n\tFile path: ${file.path}\n\tNormalized file path: $normalizedPath")
+        // Warn once per file; attach to the SemanticDB path to avoid double warnings.
+        if (subdir == "semanticdb") {
+            System.err.println(
+                "given file is not under the sourceroot.\n\tSourceroot: $sourceRoot\n\tFile path: ${file.path}\n\tNormalized file path: $normalizedPath")
+        }
         return null
     }
 

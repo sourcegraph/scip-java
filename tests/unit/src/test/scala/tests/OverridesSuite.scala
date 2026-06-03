@@ -1,10 +1,10 @@
 package tests
 
-import java.util.stream.Collectors
+import scala.jdk.CollectionConverters._
 
 import scala.meta.Input
 
-import com.sourcegraph.scip_semanticdb.Symtab
+import com.sourcegraph.semanticdb_javac.ScipSymbols
 import munit.FunSuite
 import munit.TestOptions
 
@@ -26,16 +26,37 @@ class OverridesSuite extends FunSuite with TempDirectories {
       val relativePath = "example.Parent".replace('.', '/') + ".java"
       val input = Input.VirtualFile(relativePath, source)
       val result = compiler.compileSemanticdb(List(input))
-      val symtab = new Symtab(result.textDocument.orNull)
+      val document = result.document.getOrElse(fail("no SCIP document emitted"))
 
+      val placeholderSymbol = ScipSymbols.PLACEHOLDER_PREFIX + extractSymbol
+      val info = document
+        .getSymbolsList
+        .asScala
+        .find(_.getSymbol == placeholderSymbol)
+        .getOrElse(
+          fail(
+            s"symbol $extractSymbol not found in document; symbols = " +
+              document
+                .getSymbolsList
+                .asScala
+                .map(_.getSymbol)
+                .mkString("\n  ", "\n  ", "")
+          )
+        )
+
+      val obtainedSymbols = info
+        .getRelationshipsList
+        .asScala
+        .filter(_.getIsImplementation)
+        .map(_.getSymbol)
+        .map { sym =>
+          if (sym.startsWith(ScipSymbols.PLACEHOLDER_PREFIX))
+            sym.substring(ScipSymbols.PLACEHOLDER_PREFIX.length)
+          else
+            sym
+        }
       val expectedSyms = expectedSymbols.mkString("\n")
-      val syms = symtab
-        .symbols
-        .get(extractSymbol)
-        .getOverriddenSymbolsList
-        .stream
-        .collect(Collectors.joining("\n"))
-      assertNoDiff(syms, expectedSyms)
+      assertNoDiff(obtainedSymbols.mkString("\n"), expectedSyms)
     }
   }
 

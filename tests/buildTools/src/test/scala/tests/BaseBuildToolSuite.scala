@@ -54,9 +54,9 @@ abstract class BaseBuildToolSuite extends MopedSuite(ScipJava.app) {
       }
     }
 
-  private val semanticdbPattern = FileSystems
+  private val scipShardPattern = FileSystems
     .getDefault
-    .getPathMatcher("glob:**.semanticdb")
+    .getPathMatcher("glob:**/META-INF/scip/**.scip")
 
   def checkBuild(
       options: TestOptions,
@@ -120,17 +120,17 @@ abstract class BaseBuildToolSuite extends MopedSuite(ScipJava.app) {
         case None =>
           assertEquals(exit, 0, clues(app.capturedOutput))
       }
-      val semanticdbFiles =
+      val scipShards =
         if (!Files.isDirectory(targetroot))
           Nil
         else
           FileIO
             .listAllFilesRecursively(AbsolutePath(targetroot))
-            .filter(p => semanticdbPattern.matches(p.toNIO))
-      if (semanticdbFiles.length != expectedSemanticdbFiles) {
+            .filter(p => scipShardPattern.matches(p.toNIO))
+      if (scipShards.length != expectedSemanticdbFiles) {
         fail(
-          s"Expected $expectedSemanticdbFiles SemanticDB file(s) to be generated.",
-          clues(semanticdbFiles, app.capturedOutput)
+          s"Expected $expectedSemanticdbFiles SCIP shard file(s) to be generated.",
+          clues(scipShards, app.capturedOutput)
         )
       }
       if (expectedPackages.nonEmpty) {

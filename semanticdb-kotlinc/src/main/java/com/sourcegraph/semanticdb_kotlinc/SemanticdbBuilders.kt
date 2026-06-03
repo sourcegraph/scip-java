@@ -3,8 +3,6 @@
 
 package com.sourcegraph.semanticdb_kotlinc
 
-import com.sourcegraph.semanticdb.Semanticdb
-
 import kotlin.DslMarker
 import kotlin.Unit
 import kotlin.annotation.AnnotationRetention

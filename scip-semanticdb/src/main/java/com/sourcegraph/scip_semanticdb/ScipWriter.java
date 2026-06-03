@@ -36,6 +36,10 @@ public class ScipWriter implements AutoCloseable {
 
   public void build() throws IOException {
     close();
+    Path parent = options.output.getParent();
+    if (parent != null) {
+      Files.createDirectories(parent);
+    }
     Files.move(tmp, options.output, StandardCopyOption.REPLACE_EXISTING);
   }
 

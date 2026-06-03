@@ -1,11 +1,9 @@
 package com.sourcegraph.semanticdb_kotlinc.test
 
-import com.sourcegraph.semanticdb.Semanticdb
-
 import com.sourcegraph.semanticdb_kotlinc.*
-import com.sourcegraph.semanticdb.Semanticdb.Documentation.Format
-import com.sourcegraph.semanticdb.Semanticdb.Language
-import com.sourcegraph.semanticdb.Semanticdb.SymbolOccurrence.Role
+import com.sourcegraph.semanticdb_kotlinc.Semanticdb.Documentation.Format
+import com.sourcegraph.semanticdb_kotlinc.Semanticdb.Language
+import com.sourcegraph.semanticdb_kotlinc.Semanticdb.SymbolOccurrence.Role
 import com.sourcegraph.semanticdb_kotlinc.test.ExpectedSymbols.SemanticdbData
 import com.sourcegraph.semanticdb_kotlinc.test.ExpectedSymbols.SymbolCacheData
 import com.tschuchort.compiletesting.SourceFile

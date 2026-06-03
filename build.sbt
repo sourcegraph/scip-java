@@ -117,6 +117,8 @@ lazy val javacPlugin = project
     fatjarPackageSettings,
     javaOnlySettings,
     moduleName := "semanticdb-javac",
+    libraryDependencies +=
+      "org.scip-code" % "scip-java-bindings" % V.scipBindings,
     // Scoped to compile so doc tasks (which reject -g) are unaffected.
     Compile / compile / javacOptions += "-g",
     // JDK 14+ ServiceLoader-scans the classpath for Plugin providers; our
@@ -329,8 +331,14 @@ lazy val semanticdbKotlinc = project
     // classpath via Provided so the assembled fat-jar does not bundle it.
     libraryDependencies +=
       "org.jetbrains.kotlin" % "kotlin-stdlib" % V.kotlinVersion % Provided,
-    // The SemanticDB proto schema and the generated Java classes live in
-    // semanticdbShared; we get them transitively via .dependsOn below.
+    // protobuf java codegen — proto file lives at src/main/proto/...
+    Compile / PB.protoSources :=
+      Seq((Compile / sourceDirectory).value / "proto"),
+    Compile / PB.targets :=
+      Seq(PB.gens.java(V.protobuf) -> (Compile / sourceManaged).value),
+    libraryDependencies += "com.google.protobuf" % "protobuf-java" % V.protobuf,
+    libraryDependencies +=
+      "org.scip-code" % "scip-java-bindings" % V.scipBindings,
     // kotlin-compiler-embeddable is supplied by kotlinc at runtime
     libraryDependencies +=
       "org.jetbrains.kotlin" % "kotlin-compiler-embeddable" % V.kotlinVersion %
@@ -488,15 +496,19 @@ lazy val semanticdbKotlincMinimized = project
           val snapDir =
             (baseDirectory.value / "src" / "generatedSnapshots" / "resources")
               .getAbsolutePath
-          val scipOut = s"$tgtRoot/index.scip"
+          // Write `index.scip` outside the shard-scanned targetroot to avoid re-ingestion.
+          val scipOut = (target.value / "scip-index" / "index.scip")
+            .getAbsolutePath
           val mainCls = "com.sourcegraph.scip_java.ScipJava"
           Def.sequential(
             Compile / compile,
             (cli / Compile / runMain).toTask(
-              s" $mainCls index-semanticdb --no-emit-inverse-relationships --cwd $srcRoot --output $scipOut $tgtRoot"
+              s" $mainCls index-semanticdb --no-emit-inverse-relationships --use-scip-shards --cwd $srcRoot --output $scipOut $tgtRoot"
             ),
             (cli / Compile / runMain).toTask(
-              s" $mainCls snapshot --cwd $srcRoot --output $snapDir $tgtRoot"
+              s" $mainCls snapshot --cwd $srcRoot --output $snapDir ${file(
+                  scipOut
+                ).getParentFile.getAbsolutePath}"
             )
           )
         }

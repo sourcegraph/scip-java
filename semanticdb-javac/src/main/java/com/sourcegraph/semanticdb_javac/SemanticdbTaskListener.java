@@ -1,38 +1,29 @@
 package com.sourcegraph.semanticdb_javac;
 
-import com.sourcegraph.semanticdb.LocalSymbolsCache;
 import com.sourcegraph.semanticdb.NoRelativePathMode;
-import com.sourcegraph.semanticdb.Semanticdb;
-import com.sourcegraph.semanticdb.SemanticdbDocumentBuilder;
-import com.sourcegraph.semanticdb.SemanticdbPaths;
-import com.sourcegraph.semanticdb.SemanticdbSymbols;
-import com.sourcegraph.semanticdb.SemanticdbWriter;
 import com.sourcegraph.semanticdb.UriScheme;
-
 import com.sun.source.util.JavacTask;
 import com.sun.source.util.TaskEvent;
 import com.sun.source.util.TaskListener;
 import com.sun.source.util.Trees;
 import javax.lang.model.util.Elements;
 import javax.lang.model.util.Types;
+import org.scip_code.scip.Index;
 
-import javax.lang.model.element.Element;
 import javax.tools.JavaFileObject;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.HashMap;
-import java.util.IdentityHashMap;
-import java.util.Map;
-import java.util.Optional;
 
 /**
- * Callback hook that generates SemanticDB when the compiler has completed typechecking a Java
- * source file.
+ * Callback hook that drives {@link ScipVisitor} after javac finishes typechecking a Java source
+ * file. The visitor builds a self-contained {@code *.scip} shard which is written (or merged) under
+ * {@code META-INF/scip/...}.
  */
 public final class SemanticdbTaskListener implements TaskListener {
   private final SemanticdbJavacOptions options;
@@ -41,8 +32,6 @@ public final class SemanticdbTaskListener implements TaskListener {
   private final Types types;
   private final Trees trees;
   private final Elements elements;
-  // Javac fires ANALYZE once per top-level type; accumulate across rounds per output path.
-  private final Map<Path, PerSourceState> perSourceState = new HashMap<>();
   private int noRelativePathCounter = 0;
 
   public SemanticdbTaskListener(
@@ -61,17 +50,14 @@ public final class SemanticdbTaskListener implements TaskListener {
 
   @Override
   public void started(TaskEvent e) {
-    // Upon first encounter with a file (before any other tasks are run)
-    // we remove the semanticdb file for this source file to ensure
-    // stale data doesn't cause problems
+    // Upon first encounter with a file (before any other tasks are run) we remove any prior SCIP
+    // shard for this source file to avoid accumulating stale occurrences across builds.
     if (e.getKind() == TaskEvent.Kind.ENTER) {
       inferBazelSourceroot(e.getSourceFile());
-      Result<Path, String> semanticdbPath = semanticdbOutputPath(options, e);
-      if (semanticdbPath.isOk()) {
-        Path output = semanticdbPath.getOrThrow();
-        perSourceState.remove(output);
+      Result<Path, String> shardPath = scipShardOutputPath(options, e);
+      if (shardPath != null && shardPath.isOk()) {
         try {
-          Files.deleteIfExists(output);
+          Files.deleteIfExists(shardPath.getOrThrow());
         } catch (IOException ex) {
           this.reportException(ex, e);
         }
@@ -95,12 +81,8 @@ public final class SemanticdbTaskListener implements TaskListener {
     try {
       onFinishedAnalyze(e);
     } catch (Throwable ex) {
-      // Catch exceptions because we don't want to stop the compilation even if this
-      // plugin has a
+      // Catch exceptions because we don't want to stop the compilation even if this plugin has a
       // bug. We report the full stack trace because it's helpful for bug reports.
-      // Exceptions
-      // should only happen in *exceptional* situations and they should be reported
-      // upstream.
       Throwable throwable = ex;
       if (e.getSourceFile() != null) {
         throwable =
@@ -111,10 +93,8 @@ public final class SemanticdbTaskListener implements TaskListener {
     }
   }
 
-  // Uses reporter.error with the full stack trace of the exception instead of
-  // reporter.exception
-  // because reporter.exception doesn't seem to print any meaningful information
-  // about the
+  // Uses reporter.error with the full stack trace of the exception instead of reporter.exception
+  // because reporter.exception doesn't seem to print any meaningful information about the
   // exception, it just prints the location with an empty message.
   private void reportException(Throwable exception, TaskEvent e) {
     ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -125,57 +105,39 @@ public final class SemanticdbTaskListener implements TaskListener {
   }
 
   private void onFinishedAnalyze(TaskEvent e) {
-    Result<Path, String> path = semanticdbOutputPath(options, e);
-    if (path != null) {
-      if (path.isOk()) {
-        Path output = path.getOrThrow();
-        PerSourceState state = perSourceState.computeIfAbsent(output, k -> new PerSourceState());
-        Semanticdb.TextDocument textDocument =
-            new SemanticdbVisitor(
-                    globals,
-                    state.locals,
-                    e.getCompilationUnit(),
-                    options,
-                    types,
-                    trees,
-                    elements,
-                    state.documentBuilder)
-                .buildTextDocument(e.getCompilationUnit());
-        writeSemanticdb(e, output, textDocument);
-      } else {
-        reporter.error(path.getErrorOrThrow(), e);
-      }
+    Result<Path, String> path = scipShardOutputPath(options, e);
+    if (path == null) return;
+    if (!path.isOk()) {
+      reporter.error(path.getErrorOrThrow(), e);
+      return;
     }
-  }
 
-  private void writeSemanticdb(TaskEvent event, Path output, Semanticdb.TextDocument textDocument) {
+    Path shardPath = path.getOrThrow();
     try {
-      SemanticdbWriter.writeTextDocument(output, textDocument);
-    } catch (IOException e) {
-      this.reportException(e, event);
+      Index shard =
+          new ScipVisitor(globals, e.getCompilationUnit(), options, types, trees, elements)
+              .buildShard(e.getCompilationUnit());
+      Files.createDirectories(shardPath.getParent());
+      if (Files.exists(shardPath)) {
+        try (InputStream is = Files.newInputStream(shardPath)) {
+          shard = ScipShards.merge(Index.parseFrom(is), shard);
+        }
+      }
+      Files.write(shardPath, shard.toByteArray());
+    } catch (IOException ex) {
+      this.reportException(ex, e);
     }
-  }
-
-  private static final class PerSourceState {
-    final SemanticdbDocumentBuilder documentBuilder = new SemanticdbDocumentBuilder();
-    final LocalSymbolsCache<Element, String> locals =
-        new LocalSymbolsCache<>(new IdentityHashMap<>(), SemanticdbSymbols::local);
   }
 
   public static Path absolutePathFromUri(SemanticdbJavacOptions options, JavaFileObject file) {
     URI uri = file.toUri();
     if (options.uriScheme == UriScheme.BAZEL) {
       String toString = file.toString().replace(":", "/");
-      // This solution is hacky, and it would be very nice to use a dedicated API
-      // instead.
-      // The Bazel Java compiler constructs `SimpleFileObject/DirectoryFileObject`
-      // with a
-      // "user-friendly" name that points to the original source file and an
-      // underlying/actual
-      // file path in a temporary directory. We're constrained by having to use only
-      // public APIs of
-      // the Java compiler and `toString()` seems to be the only way to access the
-      // user-friendly
+      // This solution is hacky, and it would be very nice to use a dedicated API instead.
+      // The Bazel Java compiler constructs `SimpleFileObject/DirectoryFileObject` with a
+      // "user-friendly" name that points to the original source file and an underlying/actual
+      // file path in a temporary directory. We're constrained by having to use only public APIs of
+      // the Java compiler and `toString()` seems to be the only way to access the user-friendly
       // path.
       String[] knownBazelToStringPatterns =
           new String[] {"SimpleFileObject[", "DirectoryFileObject["};
@@ -202,19 +164,6 @@ public final class SemanticdbTaskListener implements TaskListener {
     }
     Path absolutePath = absolutePathFromUri(options, file);
     Path uriPath = Paths.get(file.toUri());
-    // absolutePath is the "human-readable" original path, for example
-    // /home/repo/com/example/Hello.java
-    // uriPath is the sandbox/temporary file path, for example
-    // /private/var/tmp/com/example/Hello.java
-    //
-    // We infer sourceroot by iterating the names of both files in reverse order
-    // and stop at the first entry where the two paths are different. For the
-    // example above, we compare "Hello.java", then "example", then "com", and
-    // when we reach "repo" != "tmp" then we guess that "/home/repo" is the
-    // sourceroot. This logic is brittle and it would be nice to use more
-    // dedicated APIs, but Bazel actively makes an effort to sandbox
-    // compilation and hide access to the original workspace, which is why we
-    // resort to solutions like this.
     int relativePathDepth = 0;
     int uriPathDepth = uriPath.getNameCount();
     int absolutePathDepth = absolutePath.getNameCount();
@@ -232,34 +181,36 @@ public final class SemanticdbTaskListener implements TaskListener {
             .resolve(absolutePath.subpath(0, absolutePathDepth - relativePathDepth));
   }
 
-  private Result<Path, String> semanticdbOutputPath(SemanticdbJavacOptions options, TaskEvent e) {
+  private Result<Path, String> scipShardOutputPath(SemanticdbJavacOptions options, TaskEvent e) {
     Path absolutePath = absolutePathFromUri(options, e.getSourceFile());
-    Optional<Path> happyPath =
-        SemanticdbPaths.semanticdbPath(options.targetroot, options.sourceroot, absolutePath);
-    if (happyPath.isPresent()) {
-      return Result.ok(happyPath.get());
+    if (absolutePath.startsWith(options.sourceroot)) {
+      Path relativePath = options.sourceroot.relativize(absolutePath);
+      String filename = relativePath.getFileName().toString() + ".scip";
+      Path scipOutputPath =
+          options
+              .targetroot
+              .resolve("META-INF")
+              .resolve("scip")
+              .resolve(relativePath)
+              .resolveSibling(filename);
+      return Result.ok(scipOutputPath);
     }
 
     switch (options.noRelativePath) {
       case INDEX_ANYWAY:
-        // Come up with a unique relative path for this file even if it's not under the
-        // sourceroot.
-        // By indexing auto-generated files, we collect SymbolInformation for
-        // auto-generated symbol,
-        // which results in more useful hover tooltips in the editor.
-        // In the future, we may want to additionally embed the full text contents of
-        // these files
-        // so that it's possible to browse generated files with precise code navigation.
+        // Come up with a unique relative path for this file even if it's not under the sourceroot.
+        // By indexing auto-generated files, we collect SymbolInformation for auto-generated
+        // symbols, which results in more useful hover tooltips in the editor.
         String uniqueFilename =
-            String.format("%d.%s.semanticdb", ++noRelativePathCounter, absolutePath.getFileName());
-        Path semanticdbOutputPath =
+            String.format("%d.%s.scip", ++noRelativePathCounter, absolutePath.getFileName());
+        Path scipOutputPath =
             options
                 .targetroot
                 .resolve("META-INF")
-                .resolve("semanticdb")
+                .resolve("scip")
                 .resolve("no-relative-path")
                 .resolve(uniqueFilename);
-        return Result.ok(semanticdbOutputPath);
+        return Result.ok(scipOutputPath);
       case WARNING:
         reporter.info(
             String.format(

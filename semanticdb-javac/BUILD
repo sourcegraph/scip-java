@@ -32,5 +32,6 @@ java_library(
     resources = ["src/main/resources/META-INF/services/com.sun.source.util.Plugin"],
     deps = [
         "//semanticdb-shared",
+        "@maven//:org_scip_code_scip_java_bindings",
     ],
 )

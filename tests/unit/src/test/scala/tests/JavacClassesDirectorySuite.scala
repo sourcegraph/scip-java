@@ -36,12 +36,12 @@ class JavacClassesDirectorySuite extends FunSuite with TempDirectories {
       )
     )
     assert(clue(compileResult).isSuccess)
-    val semanticdbPath = Paths
+    val shardPath = Paths
       .get("META-INF")
-      .resolve("semanticdb")
+      .resolve("scip")
       .resolve("example")
-      .resolve("Example.java.semanticdb")
-    assert(Files.isRegularFile(clue(sourceroot().resolve(semanticdbPath))))
+      .resolve("Example.java.scip")
+    assert(Files.isRegularFile(clue(sourceroot().resolve(shardPath))))
   }
 
 }
