@@ -35,15 +35,7 @@ public final class SemanticdbTaskListener implements TaskListener {
   private final Types types;
   private final Trees trees;
   private final Elements elements;
-  // One shared accumulator + local-symbol cache per output path. Javac fires
-  // ANALYZE once per top-level type, so a multi-type source file produces
-  // several ANALYZE events that all target the same SemanticDB file. We
-  // accumulate across rounds so the final document keeps the richest
-  // information from any single round (notably, enclosing_range positions
-  // are only stable in the round that originally analyzed a given type) and
-  // the LocalSymbolsCache is shared so `local 0`, `local 1`, ... keep stable
-  // identities across rounds. See SemanticdbDocumentBuilder for the dedup
-  // policy.
+  // Javac fires ANALYZE once per top-level type; accumulate across rounds per output path.
   private final Map<Path, PerSourceState> perSourceState = new HashMap<>();
   private int noRelativePathCounter = 0;
 
@@ -158,7 +150,6 @@ public final class SemanticdbTaskListener implements TaskListener {
     }
   }
 
-  /** Per-source-file state that survives across all ANALYZE rounds for that source. */
   private static final class PerSourceState {
     final SemanticdbDocumentBuilder documentBuilder = new SemanticdbDocumentBuilder();
     final LocalSymbolsCache locals = new LocalSymbolsCache();

@@ -85,10 +85,7 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
       Trees trees,
       Elements elements,
       SemanticdbDocumentBuilder documentBuilder) {
-    this.globals = globals; // Reused cache between compilation units.
-    // Reused across all ANALYZE rounds for the same source so that local
-    // symbols (`local 0`, `local 1`, ...) keep stable identities even when
-    // javac fires several ANALYZE events for a multi-type source file.
+    this.globals = globals;
     this.locals = locals;
     this.options = options;
     this.types = types;
