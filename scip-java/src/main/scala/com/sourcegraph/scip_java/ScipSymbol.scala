@@ -42,10 +42,8 @@ object ScipSymbol {
     }
   }
 
-  private def parseDescriptors(
-      semanticdbSymbol: String
-  ): List[SymbolDescriptor] = {
-    val descriptor = SymbolDescriptor.parseFromSymbol(semanticdbSymbol)
+  private def parseDescriptors(symbol: String): List[SymbolDescriptor] = {
+    val descriptor = SymbolDescriptor.parseFromSymbol(symbol)
     if (descriptor.owner == SemanticdbSymbols.ROOT_PACKAGE)
       Nil
     else

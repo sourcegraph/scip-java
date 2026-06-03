@@ -74,7 +74,7 @@ class ScipTextDocumentBuilder(
             Occurrence
                 .newBuilder()
                 .addAllRange(scipRange(element))
-                .setSymbol(ScipSymbols.fromSemanticdbSymbol(symbol))
+                .setSymbol(ScipSymbols.format(symbol))
                 .setSymbolRoles(roles)
         if (enclosingSource != null) {
             builder.addAllEnclosingRange(scipEnclosingRange(enclosingSource))
@@ -89,7 +89,7 @@ class ScipTextDocumentBuilder(
         element: KtSourceElement,
         context: CheckerContext,
     ) {
-        val scipSymbolStr = ScipSymbols.fromSemanticdbSymbol(symbol)
+        val scipSymbolStr = ScipSymbols.format(symbol)
         val builder =
             SymbolInformation
                 .newBuilder()
@@ -110,7 +110,7 @@ class ScipTextDocumentBuilder(
 
         val supportsRefRel = supportsReferenceRelationship(firBasedSymbol)
         for (parent in parentOrOverriddenSymbols(firBasedSymbol, context)) {
-            val parentSymbolStr = ScipSymbols.fromSemanticdbSymbol(parent)
+            val parentSymbolStr = ScipSymbols.format(parent)
             if (parentSymbolStr.isEmpty()) continue
             builder.addRelationships(
                 Relationship.newBuilder()

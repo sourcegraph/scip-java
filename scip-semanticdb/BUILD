@@ -19,7 +19,7 @@ java_library(
     srcs = glob(["src/main/java/**/*.java"]),
     deps = [
         ":all_java_proto",
-        "//semanticdb-shared",
+        "//semanticdb-java",
         "@maven//:com_google_code_findbugs_jsr305",
         "@maven//:com_google_protobuf_protobuf_java",
         "@maven//:com_google_protobuf_protobuf_java_util",

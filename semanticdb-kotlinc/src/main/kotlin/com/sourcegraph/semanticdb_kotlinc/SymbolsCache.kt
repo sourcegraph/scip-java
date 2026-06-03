@@ -66,7 +66,7 @@ class GlobalSymbolsCache {
         locals[symbol]?.let {
             return it
         }
-        return uncachedSemanticdbSymbol(symbol, locals).also {
+        return uncachedSymbol(symbol, locals).also {
             if (it.isGlobal()) globals[symbol] = it
         }
     }
@@ -74,7 +74,7 @@ class GlobalSymbolsCache {
         packages[symbol]?.let {
             return it
         }
-        return uncachedSemanticdbSymbol(symbol).also { if (it.isGlobal()) packages[symbol] = it }
+        return uncachedSymbol(symbol).also { if (it.isGlobal()) packages[symbol] = it }
     }
 
     private fun skip(symbol: FirBasedSymbol<*>?): Boolean {
@@ -83,7 +83,7 @@ class GlobalSymbolsCache {
     }
 
     @OptIn(SymbolInternals::class)
-    private fun uncachedSemanticdbSymbol(
+    private fun uncachedSymbol(
         symbol: FirBasedSymbol<*>?,
         locals: LocalSymbolsCache
     ): Symbol {
@@ -95,12 +95,12 @@ class GlobalSymbolsCache {
 
         if (owner.isLocal() || owner == Symbol.NONE) return locals + symbol
 
-        val semanticdbDescriptor = semanticdbDescriptor(symbol)
+        val descriptor = descriptor(symbol)
 
-        return Symbol.createGlobal(owner, semanticdbDescriptor)
+        return Symbol.createGlobal(owner, descriptor)
     }
 
-    private fun uncachedSemanticdbSymbol(symbol: FqName): Symbol {
+    private fun uncachedSymbol(symbol: FqName): Symbol {
         if (symbol.isRoot) return Symbol.ROOT_PACKAGE
 
         val owner = this.getSymbol(symbol.parent())
@@ -139,7 +139,7 @@ class GlobalSymbolsCache {
     }
 
     @OptIn(SymbolInternals::class)
-    private fun semanticdbDescriptor(symbol: FirBasedSymbol<*>): SemanticdbSymbolDescriptor {
+    private fun descriptor(symbol: FirBasedSymbol<*>): SemanticdbSymbolDescriptor {
         return when {
             symbol is FirAnonymousObjectSymbol ->
                 symbol.source?.let { source ->

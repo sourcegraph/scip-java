@@ -17,18 +17,18 @@ class ScipSymbolsSuite extends FunSuite {
 
   test("global symbol gets placeholder prefix") {
     assertEquals(
-      ScipSymbols.fromSemanticdbSymbol("com/example/Foo#bar()."),
+      ScipSymbols.format("com/example/Foo#bar()."),
       ". . . . com/example/Foo#bar()."
     )
   }
 
   test("local symbol gets canonical SCIP form") {
-    assertEquals(ScipSymbols.fromSemanticdbSymbol("local42"), "local 42")
+    assertEquals(ScipSymbols.format("local42"), "local 42")
   }
 
   test("empty / null symbol stays empty") {
-    assertEquals(ScipSymbols.fromSemanticdbSymbol(""), "")
-    assertEquals(ScipSymbols.fromSemanticdbSymbol(null), "")
+    assertEquals(ScipSymbols.format(""), "")
+    assertEquals(ScipSymbols.format(null), "")
   }
 
   // PackageTable that always returns no package; isolates SymbolRewriter from classpath.

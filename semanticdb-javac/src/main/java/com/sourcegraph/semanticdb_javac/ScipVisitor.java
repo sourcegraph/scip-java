@@ -58,8 +58,8 @@ import javax.tools.Diagnostic;
 
 /**
  * Walks a typechecked compilation unit and builds a {@link Document}. Symbols come from {@link
- * GlobalSymbolsCache} via {@link ScipSymbols#fromSemanticdbSymbol(String)} and signatures from
- * {@link ScipSignatureFormatter}.
+ * GlobalSymbolsCache} via {@link ScipSymbols#format(String)} and signatures from {@link
+ * ScipSignatureFormatter}.
  */
 public final class ScipVisitor extends TreePathScanner<Void, Void> {
 
@@ -132,36 +132,36 @@ public final class ScipVisitor extends TreePathScanner<Void, Void> {
   private void emitOccurrence(
       Element sym, Optional<ScipRange> range, int roles, Optional<ScipRange> enclosingRange) {
     if (sym == null || !range.isPresent()) return;
-    String semanticdbSymbol = semanticdbSymbol(sym);
-    if (semanticdbSymbol.equals(SemanticdbSymbols.NONE)) return;
+    String symbol = symbol(sym);
+    if (symbol.equals(SemanticdbSymbols.NONE)) return;
 
     Occurrence.Builder occ =
         Occurrence.newBuilder()
             .addAllRange(range.get().asScipRange())
-            .setSymbol(ScipSymbols.fromSemanticdbSymbol(semanticdbSymbol))
+            .setSymbol(ScipSymbols.format(symbol))
             .setSymbolRoles(roles);
     enclosingRange.ifPresent(r -> occ.addAllEnclosingRange(r.asScipRange()));
     occurrences.add(occ.build());
   }
 
   private void emitSymbolInformation(Element sym, Tree tree) {
-    String semanticdbSymbol = semanticdbSymbol(sym);
-    if (semanticdbSymbol.equals(SemanticdbSymbols.NONE)) return;
+    String symbol = symbol(sym);
+    if (symbol.equals(SemanticdbSymbols.NONE)) return;
 
     SymbolInformation.Builder builder =
         SymbolInformation.newBuilder()
-            .setSymbol(ScipSymbols.fromSemanticdbSymbol(semanticdbSymbol))
+            .setSymbol(ScipSymbols.format(symbol))
             .setDisplayName(sym.getSimpleName().toString())
             .setKind(scipKind(sym));
 
-    if (SemanticdbSymbols.isLocal(semanticdbSymbol)) {
-      String enclosingSymbol = semanticdbSymbol(sym.getEnclosingElement());
+    if (SemanticdbSymbols.isLocal(symbol)) {
+      String enclosingSymbol = symbol(sym.getEnclosingElement());
       if (enclosingSymbol != null && !enclosingSymbol.equals(SemanticdbSymbols.NONE)) {
-        builder.setEnclosingSymbol(ScipSymbols.fromSemanticdbSymbol(enclosingSymbol));
+        builder.setEnclosingSymbol(ScipSymbols.format(enclosingSymbol));
       }
     }
 
-    String documentation = semanticdbDocumentation(tree);
+    String documentation = documentation(tree);
     if (documentation != null && !documentation.isEmpty()) {
       builder.addDocumentation(documentation);
     }
@@ -183,12 +183,11 @@ public final class ScipVisitor extends TreePathScanner<Void, Void> {
         break;
       case METHOD:
         for (String overridden :
-            semanticdbOverrides(
-                (ExecutableElement) sym, sym.getEnclosingElement(), new HashSet<>())) {
+            overrides((ExecutableElement) sym, sym.getEnclosingElement(), new HashSet<>())) {
           if (isIgnoredOverriddenSymbol(overridden)) continue;
           builder.addRelationships(
               Relationship.newBuilder()
-                  .setSymbol(ScipSymbols.fromSemanticdbSymbol(overridden))
+                  .setSymbol(ScipSymbols.format(overridden))
                   .setIsImplementation(true)
                   .setIsReference(supportsReferenceRel));
         }
@@ -215,11 +214,11 @@ public final class ScipVisitor extends TreePathScanner<Void, Void> {
 
   private void addParentRelationships(
       SymbolInformation.Builder builder, TypeElement sym, boolean supportsReferenceRel) {
-    for (String parent : semanticdbParentSymbols(sym)) {
+    for (String parent : parentSymbols(sym)) {
       if (isIgnoredOverriddenSymbol(parent)) continue;
       builder.addRelationships(
           Relationship.newBuilder()
-              .setSymbol(ScipSymbols.fromSemanticdbSymbol(parent))
+              .setSymbol(ScipSymbols.format(parent))
               .setIsImplementation(true)
               .setIsReference(supportsReferenceRel));
     }
@@ -466,8 +465,8 @@ public final class ScipVisitor extends TreePathScanner<Void, Void> {
     }
   }
 
-  private String semanticdbSymbol(Element sym) {
-    return globals.semanticdbSymbol(sym, locals);
+  private String symbol(Element sym) {
+    return globals.symbol(sym, locals);
   }
 
   private Optional<ScipRange> scipRangeOf(Tree tree, CompilerRange kind, Element sym, String name) {
@@ -572,11 +571,11 @@ public final class ScipVisitor extends TreePathScanner<Void, Void> {
     }
   }
 
-  private List<String> semanticdbParentSymbols(TypeElement typeElement) {
+  private List<String> parentSymbols(TypeElement typeElement) {
     ArrayList<String> parentSymbols = new ArrayList<>();
-    Set<TypeElement> parentElements = semanticdbParentTypeElements(typeElement, new HashSet<>());
+    Set<TypeElement> parentElements = parentTypeElements(typeElement, new HashSet<>());
     for (TypeElement parentElement : parentElements) {
-      String ssym = semanticdbSymbol(parentElement);
+      String ssym = symbol(parentElement);
       if (!Objects.equals(ssym, SemanticdbSymbols.NONE)) {
         parentSymbols.add(ssym);
       }
@@ -584,27 +583,26 @@ public final class ScipVisitor extends TreePathScanner<Void, Void> {
     return parentSymbols;
   }
 
-  private Set<TypeElement> semanticdbParentTypeElements(
-      TypeElement typeElement, Set<TypeElement> result) {
+  private Set<TypeElement> parentTypeElements(TypeElement typeElement, Set<TypeElement> result) {
     TypeMirror superType = typeElement.getSuperclass();
-    semanticdbParentSymbol(superType, result);
+    parentSymbol(superType, result);
     for (TypeMirror interfaceType : typeElement.getInterfaces()) {
-      semanticdbParentSymbol(interfaceType, result);
+      parentSymbol(interfaceType, result);
     }
     return result;
   }
 
-  private void semanticdbParentSymbol(TypeMirror elementType, Set<TypeElement> result) {
+  private void parentSymbol(TypeMirror elementType, Set<TypeElement> result) {
     if (!(elementType instanceof NoType)) {
       Element superElement = types.asElement(elementType);
       if (superElement instanceof TypeElement) {
         result.add((TypeElement) superElement);
-        semanticdbParentTypeElements((TypeElement) superElement, result);
+        parentTypeElements((TypeElement) superElement, result);
       }
     }
   }
 
-  private Set<String> semanticdbOverrides(
+  private Set<String> overrides(
       ExecutableElement sym, Element enclosingElement, Set<String> overriddenSymbols) {
     if (enclosingElement instanceof TypeElement) {
       List<? extends TypeMirror> superTypes = types.directSupertypes(enclosingElement.asType());
@@ -620,15 +618,15 @@ public final class ScipVisitor extends TreePathScanner<Void, Void> {
                 ExecutableElement enclosedExecutableElement = (ExecutableElement) enclosedElement;
                 if (elements.overrides(
                     sym, enclosedExecutableElement, (TypeElement) sym.getEnclosingElement())) {
-                  String symbol = semanticdbSymbol(enclosedExecutableElement);
+                  String symbol = symbol(enclosedExecutableElement);
                   overriddenSymbols.add(symbol);
                   methodFound = true;
-                  semanticdbOverrides(enclosedExecutableElement, superElement, overriddenSymbols);
+                  overrides(enclosedExecutableElement, superElement, overriddenSymbols);
                 }
               }
             }
             if (!methodFound) {
-              semanticdbOverrides(sym, superElement, overriddenSymbols);
+              overrides(sym, superElement, overriddenSymbols);
             }
           }
         }
@@ -655,7 +653,7 @@ public final class ScipVisitor extends TreePathScanner<Void, Void> {
     return out.toString();
   }
 
-  private String semanticdbDocumentation(Tree tree) {
+  private String documentation(Tree tree) {
     try {
       TreePath treePath = nodes.get(tree);
       String doc = trees.getDocComment(treePath);
