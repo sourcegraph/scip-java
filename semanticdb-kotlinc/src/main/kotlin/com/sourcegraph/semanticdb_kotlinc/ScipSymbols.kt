@@ -10,13 +10,12 @@ object ScipSymbols {
 
     const val PLACEHOLDER_PREFIX: String = ". . . . "
 
-    fun fromSemanticdbSymbol(symbol: String?): String {
-        if (symbol.isNullOrEmpty()) return ""
-        if (symbol.startsWith("local")) {
-            return "local " + symbol.substring("local".length)
+    fun fromSemanticdbSymbol(symbol: Symbol): String {
+        if (symbol == Symbol.NONE) return ""
+        val raw = symbol.toString()
+        if (symbol.isLocal()) {
+            return "local " + raw.substring("local".length)
         }
-        return PLACEHOLDER_PREFIX + symbol
+        return PLACEHOLDER_PREFIX + raw
     }
-
-    fun fromSemanticdbSymbol(symbol: Symbol): String = fromSemanticdbSymbol(symbol.toString())
 }

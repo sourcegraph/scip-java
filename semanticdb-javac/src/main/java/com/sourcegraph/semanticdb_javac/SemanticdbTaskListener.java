@@ -116,7 +116,7 @@ public final class SemanticdbTaskListener implements TaskListener {
     try {
       Index shard =
           new ScipVisitor(globals, e.getCompilationUnit(), options, types, trees, elements)
-              .buildShard(e.getCompilationUnit());
+              .buildShard();
       Files.createDirectories(shardPath.getParent());
       if (Files.exists(shardPath)) {
         try (InputStream is = Files.newInputStream(shardPath)) {

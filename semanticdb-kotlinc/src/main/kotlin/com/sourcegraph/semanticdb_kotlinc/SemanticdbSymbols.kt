@@ -23,8 +23,6 @@ value class Symbol(private val symbol: String) {
     override fun toString(): String = symbol
 }
 
-fun String.symbol(): Symbol = Symbol(this)
-
 data class SemanticdbSymbolDescriptor(
     val kind: Kind,
     val name: String,

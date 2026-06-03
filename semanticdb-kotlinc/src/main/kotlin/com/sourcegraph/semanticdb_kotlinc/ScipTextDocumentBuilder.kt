@@ -7,10 +7,9 @@ import org.scip_code.scip.Relationship
 import org.scip_code.scip.Signature
 import org.scip_code.scip.SymbolInformation
 import org.scip_code.scip.SymbolRole
-import com.sourcegraph.semanticdb_kotlinc.Semanticdb.SymbolOccurrence.Role
 import kotlin.contracts.ExperimentalContracts
 import org.jetbrains.kotlin.KtSourceElement
-import org.jetbrains.kotlin.KtSourceFile
+import org.jetbrains.kotlin.descriptors.ClassKind
 import org.jetbrains.kotlin.fir.analysis.checkers.context.CheckerContext
 import org.jetbrains.kotlin.fir.analysis.checkers.directOverriddenSymbolsSafe
 import org.jetbrains.kotlin.fir.analysis.checkers.toClassLikeSymbol
@@ -30,7 +29,6 @@ import org.jetbrains.kotlin.text
  */
 @ExperimentalContracts
 class ScipTextDocumentBuilder(
-    private val file: KtSourceFile,
     private val lineMap: LineMap,
     private val cache: SymbolsCache,
     private val relativePath: String,
@@ -39,29 +37,29 @@ class ScipTextDocumentBuilder(
     // Keyed by symbol so re-encounters (multi-round compilation, synthetic accessors) don't dup.
     private val symbols = LinkedHashMap<String, SymbolInformation>()
 
-    fun build(): Document =
-        Document
-            .newBuilder()
-            .setRelativePath(relativePath)
-            .setLanguage(LANGUAGE_KOTLIN)
-            .addAllOccurrences(occurrences.values())
-            .addAllSymbols(symbols.values)
+    fun buildIndex(): Index =
+        Index.newBuilder()
+            .addDocuments(
+                Document.newBuilder()
+                    .setRelativePath(relativePath)
+                    .setLanguage(LANGUAGE_KOTLIN)
+                    .addAllOccurrences(occurrences.values())
+                    .addAllSymbols(symbols.values)
+                    .build())
             .build()
-
-    fun buildIndex(): Index = Index.newBuilder().addDocuments(build()).build()
 
     fun emitScipData(
         firBasedSymbol: FirBasedSymbol<*>?,
         symbol: Symbol,
         element: KtSourceElement,
-        role: Role,
+        roles: Int,
         context: CheckerContext,
         enclosingSource: KtSourceElement? = null,
     ) {
         if (symbol == Symbol.NONE) return
 
-        emitOccurrence(symbol, element, role, enclosingSource)
-        if (role == Role.DEFINITION) {
+        emitOccurrence(symbol, element, roles, enclosingSource)
+        if (roles == SymbolRole.Definition_VALUE) {
             emitSymbolInformation(firBasedSymbol, symbol, element, context)
         }
     }
@@ -69,7 +67,7 @@ class ScipTextDocumentBuilder(
     private fun emitOccurrence(
         symbol: Symbol,
         element: KtSourceElement,
-        role: Role,
+        roles: Int,
         enclosingSource: KtSourceElement?,
     ) {
         val builder =
@@ -77,7 +75,7 @@ class ScipTextDocumentBuilder(
                 .newBuilder()
                 .addAllRange(scipRange(element))
                 .setSymbol(ScipSymbols.fromSemanticdbSymbol(symbol))
-                .setSymbolRoles(scipRole(role))
+                .setSymbolRoles(roles)
         if (enclosingSource != null) {
             builder.addAllEnclosingRange(scipEnclosingRange(enclosingSource))
         }
@@ -244,27 +242,16 @@ class ScipTextDocumentBuilder(
                 else -> firBasedSymbol.toString()
             }
 
-        private fun scipRole(role: Role): Int =
-            when (role) {
-                Role.DEFINITION -> SymbolRole.Definition_VALUE
-                else -> 0
-            }
-
         private fun scipKind(firBasedSymbol: FirBasedSymbol<*>?): SymbolInformation.Kind =
             when (firBasedSymbol) {
                 null -> SymbolInformation.Kind.UnspecifiedKind
                 is FirRegularClassSymbol ->
                     when (firBasedSymbol.classKind) {
-                        org.jetbrains.kotlin.descriptors.ClassKind.INTERFACE ->
-                            SymbolInformation.Kind.Interface
-                        org.jetbrains.kotlin.descriptors.ClassKind.ENUM_CLASS ->
-                            SymbolInformation.Kind.Enum
-                        org.jetbrains.kotlin.descriptors.ClassKind.ENUM_ENTRY ->
-                            SymbolInformation.Kind.EnumMember
-                        org.jetbrains.kotlin.descriptors.ClassKind.OBJECT ->
-                            SymbolInformation.Kind.Object
-                        org.jetbrains.kotlin.descriptors.ClassKind.ANNOTATION_CLASS ->
-                            SymbolInformation.Kind.Interface
+                        ClassKind.INTERFACE -> SymbolInformation.Kind.Interface
+                        ClassKind.ENUM_CLASS -> SymbolInformation.Kind.Enum
+                        ClassKind.ENUM_ENTRY -> SymbolInformation.Kind.EnumMember
+                        ClassKind.OBJECT -> SymbolInformation.Kind.Object
+                        ClassKind.ANNOTATION_CLASS -> SymbolInformation.Kind.Interface
                         else -> SymbolInformation.Kind.Class
                     }
                 is FirAnonymousObjectSymbol -> SymbolInformation.Kind.Object

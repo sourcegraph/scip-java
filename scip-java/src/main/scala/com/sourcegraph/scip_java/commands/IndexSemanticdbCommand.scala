@@ -9,7 +9,6 @@ import com.sourcegraph.io.AbsolutePath
 import com.sourcegraph.scip_java.BuildInfo
 import com.sourcegraph.scip_java.buildtools.ClasspathEntry
 import com.sourcegraph.scip_semanticdb.ConsoleScipSemanticdbReporter
-import com.sourcegraph.scip_semanticdb.ScipSemanticdb
 import com.sourcegraph.scip_semanticdb.ScipSemanticdbOptions
 import com.sourcegraph.scip_semanticdb.ScipShardAggregator
 import moped.annotations._
@@ -18,7 +17,7 @@ import moped.cli.Command
 import moped.cli.CommandParser
 import org.scip_code.scip.ToolInfo
 
-@Description("Converts SemanticDB files into a single SCIP index file.")
+@Description("Aggregates SCIP shard files into a single SCIP index file.")
 @Usage("scip-java index-semanticdb [OPTIONS ...] [POSITIONAL ARGUMENTS ...]")
 @ExampleUsage(
   "scip-java index-semanticdb --out=myindex.scip my/targetroot1 my/targetroot2"
@@ -27,14 +26,14 @@ import org.scip_code.scip.ToolInfo
 final case class IndexSemanticdbCommand(
     @Description("The name of the output file.")
     output: Path = Paths.get("index.scip"),
-    @Description("Whether to process the SemanticDB files in parallel")
+    @Description("Whether to process the SCIP shard files in parallel")
     parallel: Boolean = true,
     @Description(
       "Whether to emit parent->child relationships for 'Find references' and 'Find implementations'. " +
         "This flag exists as a workaround for the issue https://github.com/sourcegraph/sourcegraph/issues/50927"
     )
     emitInverseRelationships: Boolean = true,
-    @Description("Directories that contain SemanticDB files.")
+    @Description("Directories that contain SCIP shard files.")
     @PositionalArguments()
     targetroot: List[Path] = Nil,
     @Description(
@@ -50,11 +49,6 @@ final case class IndexSemanticdbCommand(
         "Maven->Maven or Gradle->Gradle projects because those build tools compile sources to classfiles inside directories."
     )
     allowExportingGlobalSymbolsFromDirectoryEntries: Boolean = true,
-    @Description(
-      "If true, aggregate *.scip shards under META-INF/scip/ instead of *.semanticdb files. " +
-        "Pass --use-scip-shards=false to fall back to the SemanticDB-based aggregator."
-    )
-    useScipShards: Boolean = true,
     @Inline()
     app: Application = Application.default
 ) extends Command {
@@ -92,10 +86,7 @@ final case class IndexSemanticdbCommand(
         allowEmptyIndex,
         allowExportingGlobalSymbolsFromDirectoryEntries
       )
-    if (useScipShards)
-      ScipShardAggregator.run(options)
-    else
-      ScipSemanticdb.run(options)
+    ScipShardAggregator.run(options)
     if (!app.reporter.hasErrors()) {
       app.info(options.output.toString)
     }

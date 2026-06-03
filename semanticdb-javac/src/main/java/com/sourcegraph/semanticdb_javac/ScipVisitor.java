@@ -57,11 +57,9 @@ import javax.lang.model.util.Types;
 import javax.tools.Diagnostic;
 
 /**
- * Walks the AST of a typechecked compilation unit and generates a {@link Document} directly.
- *
- * <p>Symbols are produced through {@link GlobalSymbolsCache} and then translated to the placeholder
- * SCIP form via {@link ScipSymbols#fromSemanticdbSymbol(String)}. Signature documentation is
- * produced by {@link ScipSignatureFormatter} directly from javac's element model.
+ * Walks a typechecked compilation unit and builds a {@link Document}. Symbols come from {@link
+ * GlobalSymbolsCache} via {@link ScipSymbols#fromSemanticdbSymbol(String)} and signatures from
+ * {@link ScipSignatureFormatter}.
  */
 public final class ScipVisitor extends TreePathScanner<Void, Void> {
 
@@ -99,9 +97,9 @@ public final class ScipVisitor extends TreePathScanner<Void, Void> {
     this.nodes = new LinkedHashMap<>();
   }
 
-  /** Builds a single-document {@link Index} shard for the given compilation unit. */
-  public Index buildShard(CompilationUnitTree tree) {
-    this.scan(tree, null);
+  /** Builds a single-document {@link Index} shard for this compilation unit. */
+  public Index buildShard() {
+    this.scan(compUnitTree, null);
     resolveNodes();
 
     Document.Builder document =
@@ -117,10 +115,6 @@ public final class ScipVisitor extends TreePathScanner<Void, Void> {
 
   /** SCIP {@code Document.language} value for Java sources. */
   private static final String LANGUAGE_JAVA = "java";
-
-  // ==========================
-  // Symbol/occurrence emission
-  // ==========================
 
   private Optional<ScipRange> emitSymbolOccurrence(
       Element sym, Tree tree, Name name, int roles, CompilerRange kind) {
@@ -247,10 +241,6 @@ public final class ScipVisitor extends TreePathScanner<Void, Void> {
     }
   }
 
-  // =================================================
-  // Kind translation for SCIP emission.
-  // =================================================
-
   private static SymbolInformation.Kind scipKind(Element sym) {
     Set<Modifier> modifiers = sym.getModifiers();
     boolean isStatic = modifiers.contains(Modifier.STATIC);
@@ -291,10 +281,6 @@ public final class ScipVisitor extends TreePathScanner<Void, Void> {
         return SymbolInformation.Kind.UnspecifiedKind;
     }
   }
-
-  // ===========================================
-  // Node resolution and traversal (unchanged from SemanticdbVisitor)
-  // ===========================================
 
   void resolveNodes() {
     HashSet<Tree> ignoreNodes = new HashSet<>();
@@ -480,10 +466,6 @@ public final class ScipVisitor extends TreePathScanner<Void, Void> {
     }
   }
 
-  // =================================================
-  // Symbol / range helpers used by the SCIP emission path.
-  // =================================================
-
   private String semanticdbSymbol(Element sym) {
     return globals.semanticdbSymbol(sym, locals);
   }
@@ -494,12 +476,11 @@ public final class ScipVisitor extends TreePathScanner<Void, Void> {
     SourcePositions sourcePositions = trees.getSourcePositions();
     int start = (int) sourcePositions.getStartPosition(compUnitTree, tree);
     int end = (int) sourcePositions.getEndPosition(compUnitTree, tree);
-    if (kind.isPlusOne()) start++;
 
     if (name != null) {
       if (kind.isFromTextSearch() && name.length() > 0) {
         Optional<RangeFinder.StartEndRange> startEndRange =
-            RangeFinder.findRange(sym, name, start, end, this.source, kind.isFromEnd());
+            RangeFinder.findRange(name, start, end, this.source);
         if (startEndRange.isPresent()) {
           start = startEndRange.get().start;
           end = startEndRange.get().end;

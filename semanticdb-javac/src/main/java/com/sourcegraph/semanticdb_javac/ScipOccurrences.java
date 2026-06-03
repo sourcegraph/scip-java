@@ -8,15 +8,14 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Accumulator that deduplicates SCIP {@link Occurrence} entries by their {@code (symbol, range,
- * roles)} key. Variants that differ only in whether {@code enclosing_range} is set are collapsed,
- * preferring the one that carries the enclosing range.
+ * Accumulator that deduplicates SCIP {@link Occurrence} entries by {@code (symbol, range, roles)}.
+ * Variants differing only in whether {@code enclosing_range} is set are collapsed, preferring the
+ * one that carries it.
  */
 final class ScipOccurrences {
 
   private final LinkedHashMap<Key, Occurrence> out = new LinkedHashMap<>();
 
-  /** Adds {@code occ}, collapsing it into any existing entry with the same {@link Key}. */
   void add(Occurrence occ) {
     Key key = Key.of(occ);
     Occurrence existing = out.get(key);
@@ -29,12 +28,10 @@ final class ScipOccurrences {
     }
   }
 
-  /** Adds every occurrence in {@code occs}. */
   void addAll(Iterable<Occurrence> occs) {
     for (Occurrence occ : occs) add(occ);
   }
 
-  /** Returns the deduplicated occurrences in insertion order. */
   Collection<Occurrence> values() {
     return out.values();
   }

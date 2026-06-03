@@ -16,24 +16,20 @@ import org.jetbrains.kotlin.config.CommonConfigurationKeys
 import org.jetbrains.kotlin.config.CompilerConfiguration
 import org.jetbrains.kotlin.ir.declarations.IrModuleFragment
 
+/** Writes the per-source SCIP shards collected by [SemanticdbVisitor] after FIR analysis. */
 class PostAnalysisExtension(
     private val sourceRoot: Path,
     private val targetRoot: Path,
-    private val callback: (Semanticdb.TextDocument) -> Unit
 ) : IrGenerationExtension {
     @OptIn(ExperimentalContracts::class)
     override fun generate(moduleFragment: IrModuleFragment, pluginContext: IrPluginContext) {
         try {
             for ((ktSourceFile, visitor) in AnalyzerCheckers.visitors) {
                 try {
-                    val document = visitor.build()
-                    semanticdbOutPathForFile(ktSourceFile)?.apply {
-                        Files.write(this, TextDocuments { addDocuments(document) }.toByteArray())
+                    scipShardOutPathForFile(ktSourceFile)?.let { outPath ->
+                        Files.createDirectories(outPath.parent)
+                        Files.write(outPath, visitor.buildScipIndex().toByteArray())
                     }
-                    scipShardOutPathForFile(ktSourceFile)?.apply {
-                        ScipShardWriter.write(this, visitor.buildScipIndex())
-                    }
-                    callback(document)
                 } catch (e: Exception) {
                     handleException(e)
                 }
@@ -43,32 +39,19 @@ class PostAnalysisExtension(
         }
     }
 
-    private fun semanticdbOutPathForFile(file: KtSourceFile): Path? =
-        outPathForFile(file, subdir = "semanticdb", suffix = ".semanticdb")
-
-    private fun scipShardOutPathForFile(file: KtSourceFile): Path? =
-        outPathForFile(file, subdir = "scip", suffix = ".scip")
-
-    private fun outPathForFile(file: KtSourceFile, subdir: String, suffix: String): Path? {
+    private fun scipShardOutPathForFile(file: KtSourceFile): Path? {
         val normalizedPath = Paths.get(file.path).normalize()
         if (normalizedPath.startsWith(sourceRoot)) {
             val relative = sourceRoot.relativize(normalizedPath)
-            val filename = relative.fileName.toString() + suffix
-            val outPath =
-                targetRoot
-                    .resolve("META-INF")
-                    .resolve(subdir)
-                    .resolve(relative)
-                    .resolveSibling(filename)
-
-            Files.createDirectories(outPath.parent)
-            return outPath
+            val filename = relative.fileName.toString() + ".scip"
+            return targetRoot
+                .resolve("META-INF")
+                .resolve("scip")
+                .resolve(relative)
+                .resolveSibling(filename)
         }
-        // Warn once per file; attach to the SemanticDB path to avoid double warnings.
-        if (subdir == "semanticdb") {
-            System.err.println(
-                "given file is not under the sourceroot.\n\tSourceroot: $sourceRoot\n\tFile path: ${file.path}\n\tNormalized file path: $normalizedPath")
-        }
+        System.err.println(
+            "given file is not under the sourceroot.\n\tSourceroot: $sourceRoot\n\tFile path: ${file.path}\n\tNormalized file path: $normalizedPath")
         return null
     }
 
@@ -95,7 +78,7 @@ class PostAnalysisExtension(
         writer.println("Exception in semanticdb-kotlin compiler plugin:")
         e.printStackTrace(writer)
         writer.println(
-            "Please report a bug to https://github.com/sourcegraph/scip-kotlin with the stack trace above.")
+            "Please report a bug to https://github.com/sourcegraph/scip-java with the stack trace above.")
         writer.close()
     }
 }

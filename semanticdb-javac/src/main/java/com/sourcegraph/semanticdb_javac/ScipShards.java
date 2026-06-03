@@ -7,7 +7,9 @@ import org.scip_code.scip.SymbolInformation;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Pure merge helpers for SCIP shards produced by the compiler plugin.
@@ -21,10 +23,7 @@ public final class ScipShards {
 
   private ScipShards() {}
 
-  /**
-   * Merges two SCIP shards by combining their document lists. Documents that share a {@code
-   * relative_path} have their occurrences, symbols and external symbols deduplicated.
-   */
+  /** Merges two shards: documents sharing a {@code relative_path} are dedup-merged. */
   static Index merge(Index a, Index b) {
     Index.Builder builder = Index.newBuilder();
     if (b.hasMetadata()) {
@@ -47,7 +46,7 @@ public final class ScipShards {
     }
     builder.addAllDocuments(byPath.values());
 
-    // External symbols: deduplicate by symbol string. Last writer wins to keep latest data.
+    // External symbols: last writer wins to keep the most recent data.
     LinkedHashMap<String, SymbolInformation> externals = new LinkedHashMap<>();
     for (SymbolInformation s : a.getExternalSymbolsList()) externals.put(s.getSymbol(), s);
     for (SymbolInformation s : b.getExternalSymbolsList()) externals.put(s.getSymbol(), s);
@@ -57,19 +56,16 @@ public final class ScipShards {
   }
 
   private static Document mergeDocuments(Document a, Document b) {
+    // b.toBuilder() carries forward the most recent language/relative_path/text/encoding.
     Document.Builder builder = b.toBuilder().clearOccurrences().clearSymbols();
-    // Use the most recent metadata for language/relative_path/text/encoding which already
-    // come from b via toBuilder().
 
-    // Deduplicate occurrences by (range, symbol, roles). Variants that differ only in
-    // enclosing_range get collapsed, preferring the one that carries the enclosing range.
     ScipOccurrences occurrences = new ScipOccurrences();
     occurrences.addAll(a.getOccurrencesList());
     occurrences.addAll(b.getOccurrencesList());
     builder.addAllOccurrences(occurrences.values());
 
-    // Deduplicate symbols by symbol string; merge relationships and documentation.
-    LinkedHashMap<String, SymbolInformation> bySymbol = new LinkedHashMap<>();
+    // Dedup symbols by symbol string; merge relationships and documentation.
+    Map<String, SymbolInformation> bySymbol = new LinkedHashMap<>();
     for (SymbolInformation info : a.getSymbolsList()) bySymbol.put(info.getSymbol(), info);
     for (SymbolInformation info : b.getSymbolsList()) {
       SymbolInformation existing = bySymbol.get(info.getSymbol());
@@ -82,13 +78,12 @@ public final class ScipShards {
 
   private static SymbolInformation mergeSymbol(SymbolInformation a, SymbolInformation b) {
     SymbolInformation.Builder builder = b.toBuilder();
-    // Merge relationships, deduplicating by structural equality with deterministic ordering.
-    LinkedHashMap<Relationship, Relationship> rels = new LinkedHashMap<>();
-    for (Relationship r : a.getRelationshipsList()) rels.put(r, r);
-    for (Relationship r : b.getRelationshipsList()) rels.put(r, r);
-    builder.clearRelationships().addAllRelationships(rels.values());
+    // Dedup relationships by structural equality; preserve insertion order.
+    LinkedHashSet<Relationship> rels = new LinkedHashSet<>(a.getRelationshipsList());
+    rels.addAll(b.getRelationshipsList());
+    builder.clearRelationships().addAllRelationships(rels);
 
-    // Merge documentation, preserving order and avoiding duplicates.
+    // Dedup documentation; preserve insertion order.
     List<String> docs = new ArrayList<>(a.getDocumentationList());
     for (String d : b.getDocumentationList()) {
       if (!docs.contains(d)) docs.add(d);
