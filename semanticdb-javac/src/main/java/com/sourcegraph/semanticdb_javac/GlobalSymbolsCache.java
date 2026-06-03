@@ -1,5 +1,6 @@
 package com.sourcegraph.semanticdb_javac;
 
+import com.sourcegraph.semanticdb.LocalSymbolsCache;
 import com.sourcegraph.semanticdb.SemanticdbSymbols;
 
 import javax.lang.model.element.Element;
@@ -25,7 +26,7 @@ public final class GlobalSymbolsCache {
     this.options = options;
   }
 
-  public String semanticdbSymbol(Element sym, LocalSymbolsCache locals) {
+  public String semanticdbSymbol(Element sym, LocalSymbolsCache<Element, String> locals) {
     String result = globals.get(sym);
     if (result != null) return result;
     String localResult = locals.get(sym);
@@ -37,7 +38,7 @@ public final class GlobalSymbolsCache {
     return result;
   }
 
-  private String uncachedSemanticdbSymbol(Element sym, LocalSymbolsCache locals) {
+  private String uncachedSemanticdbSymbol(Element sym, LocalSymbolsCache<Element, String> locals) {
     if (sym == null) return SemanticdbSymbols.ROOT_PACKAGE;
 
     if (sym instanceof PackageElement) {

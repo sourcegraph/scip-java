@@ -1,6 +1,7 @@
 package com.sourcegraph.semanticdb_kotlinc.test
 
 import com.sourcegraph.semanticdb.Semanticdb
+import com.sourcegraph.semanticdb.SemanticdbOptions
 
 import com.sourcegraph.semanticdb_kotlinc.*
 import com.sourcegraph.semanticdb_kotlinc.AnalyzerCheckers.Companion.visitors
@@ -162,7 +163,7 @@ class TestAnalyzerParamsProvider(
     var globals: GlobalSymbolsCache,
     var locals: LocalSymbolsCache,
     sourceroot: Path,
-) : AnalyzerParamsProvider(session, sourceroot) {
+) : AnalyzerParamsProvider(session, SemanticdbOptions().apply { this.sourceroot = sourceroot }) {
     companion object {
         fun getFactory(
             globals: GlobalSymbolsCache,

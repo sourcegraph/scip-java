@@ -1,5 +1,6 @@
 package com.sourcegraph.semanticdb_javac;
 
+import com.sourcegraph.semanticdb.LocalSymbolsCache;
 import com.sourcegraph.semanticdb.Semanticdb;
 
 import com.sourcegraph.semanticdb.SemanticdbDocumentBuilder;
@@ -64,7 +65,7 @@ import static com.sourcegraph.semanticdb.SemanticdbBuilders.*;
 public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
 
   private final GlobalSymbolsCache globals;
-  private final LocalSymbolsCache locals;
+  private final LocalSymbolsCache<Element, String> locals;
   private final Types types;
   private final Trees trees;
   private final CompilationUnitTree compUnitTree;
@@ -78,7 +79,7 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
 
   public SemanticdbVisitor(
       GlobalSymbolsCache globals,
-      LocalSymbolsCache locals,
+      LocalSymbolsCache<Element, String> locals,
       CompilationUnitTree compUnitTree,
       SemanticdbJavacOptions options,
       Types types,

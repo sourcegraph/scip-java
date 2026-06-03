@@ -1,5 +1,6 @@
 package com.sourcegraph.semanticdb_kotlinc
 
+import com.sourcegraph.semanticdb.LocalSymbolsCache as SharedLocalSymbolsCache
 import com.sourcegraph.semanticdb_kotlinc.SemanticdbSymbolDescriptor.Kind
 import java.lang.System.err
 import kotlin.contracts.ExperimentalContracts
@@ -210,26 +211,13 @@ class GlobalSymbolsCache(testing: Boolean = false) : Iterable<Symbol> {
     override fun iterator(): Iterator<Symbol> = globals.values.iterator()
 }
 
-class LocalSymbolsCache : Iterable<Symbol> {
-    private val symbols = HashMap<FirBasedSymbol<*>, Symbol>()
-    private var localsCounter = 0
+typealias LocalSymbolsCache = SharedLocalSymbolsCache<FirBasedSymbol<*>, Symbol>
 
-    val iterator: Iterable<Map.Entry<FirBasedSymbol<*>, Symbol>>
-        get() = symbols.asIterable()
+@Suppress("FunctionName")
+fun LocalSymbolsCache(): LocalSymbolsCache =
+    SharedLocalSymbolsCache(HashMap()) { Symbol.createLocal(it) }
 
-    val size: Int
-        get() = symbols.size
-
-    operator fun get(symbol: FirBasedSymbol<*>): Symbol? = symbols[symbol]
-
-    operator fun plus(symbol: FirBasedSymbol<*>): Symbol {
-        val result = Symbol.createLocal(localsCounter++)
-        symbols[symbol] = result
-        return result
-    }
-
-    override fun iterator(): Iterator<Symbol> = symbols.values.iterator()
-}
+operator fun LocalSymbolsCache.plus(symbol: FirBasedSymbol<*>): Symbol = put(symbol)
 
 @ExperimentalContracts
 class SymbolsCache(private val globals: GlobalSymbolsCache, private val locals: LocalSymbolsCache) {

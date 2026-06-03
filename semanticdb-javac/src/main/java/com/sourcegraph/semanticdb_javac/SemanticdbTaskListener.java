@@ -1,9 +1,13 @@
 package com.sourcegraph.semanticdb_javac;
 
+import com.sourcegraph.semanticdb.LocalSymbolsCache;
+import com.sourcegraph.semanticdb.NoRelativePathMode;
 import com.sourcegraph.semanticdb.Semanticdb;
 import com.sourcegraph.semanticdb.SemanticdbDocumentBuilder;
 import com.sourcegraph.semanticdb.SemanticdbPaths;
+import com.sourcegraph.semanticdb.SemanticdbSymbols;
 import com.sourcegraph.semanticdb.SemanticdbWriter;
+import com.sourcegraph.semanticdb.UriScheme;
 
 import com.sun.source.util.JavacTask;
 import com.sun.source.util.TaskEvent;
@@ -12,6 +16,7 @@ import com.sun.source.util.Trees;
 import javax.lang.model.util.Elements;
 import javax.lang.model.util.Types;
 
+import javax.lang.model.element.Element;
 import javax.tools.JavaFileObject;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -21,6 +26,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
+import java.util.IdentityHashMap;
 import java.util.Map;
 import java.util.Optional;
 
@@ -152,7 +158,8 @@ public final class SemanticdbTaskListener implements TaskListener {
 
   private static final class PerSourceState {
     final SemanticdbDocumentBuilder documentBuilder = new SemanticdbDocumentBuilder();
-    final LocalSymbolsCache locals = new LocalSymbolsCache();
+    final LocalSymbolsCache<Element, String> locals =
+        new LocalSymbolsCache<>(new IdentityHashMap<>(), SemanticdbSymbols::local);
   }
 
   public static Path absolutePathFromUri(SemanticdbJavacOptions options, JavaFileObject file) {

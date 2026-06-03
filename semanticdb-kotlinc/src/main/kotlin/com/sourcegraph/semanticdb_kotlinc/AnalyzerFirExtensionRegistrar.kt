@@ -1,13 +1,13 @@
 package com.sourcegraph.semanticdb_kotlinc
 
-import java.nio.file.Path
+import com.sourcegraph.semanticdb.SemanticdbOptions
 import org.jetbrains.kotlin.fir.extensions.FirExtensionRegistrar
 
 class AnalyzerFirExtensionRegistrar(
-    private val sourceroot: Path,
+    private val options: SemanticdbOptions,
 ) : FirExtensionRegistrar() {
     override fun ExtensionRegistrarContext.configurePlugin() {
-        +AnalyzerParamsProvider.getFactory(sourceroot)
+        +AnalyzerParamsProvider.getFactory(options)
         +::AnalyzerCheckers
     }
 }

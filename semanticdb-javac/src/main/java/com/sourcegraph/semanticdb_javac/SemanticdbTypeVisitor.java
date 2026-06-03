@@ -1,5 +1,6 @@
 package com.sourcegraph.semanticdb_javac;
 
+import com.sourcegraph.semanticdb.LocalSymbolsCache;
 import com.sourcegraph.semanticdb.Semanticdb;
 
 import javax.lang.model.element.Element;
@@ -25,10 +26,11 @@ class SemanticdbTypeVisitor extends SimpleTypeVisitor8<Semanticdb.Type, Void> {
   static final String ARRAY_SYMBOL = "scala/Array#";
 
   private final GlobalSymbolsCache cache;
-  private final LocalSymbolsCache locals;
+  private final LocalSymbolsCache<Element, String> locals;
   private final Types types;
 
-  SemanticdbTypeVisitor(GlobalSymbolsCache cache, LocalSymbolsCache locals, Types types) {
+  SemanticdbTypeVisitor(
+      GlobalSymbolsCache cache, LocalSymbolsCache<Element, String> locals, Types types) {
     this.cache = cache;
     this.locals = locals;
     this.types = types;

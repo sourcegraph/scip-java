@@ -1,4 +1,4 @@
-package com.sourcegraph.semanticdb_javac;
+package com.sourcegraph.semanticdb;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;
