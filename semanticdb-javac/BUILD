@@ -33,5 +33,6 @@ java_library(
     deps = [
         "//semanticdb-java",
         "//semanticdb-java/src/main/protobuf:semanticdb_java_proto",
+        "//semanticdb-shared",
     ],
 )

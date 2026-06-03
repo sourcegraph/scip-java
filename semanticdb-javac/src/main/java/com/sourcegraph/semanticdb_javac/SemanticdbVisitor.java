@@ -1,5 +1,7 @@
 package com.sourcegraph.semanticdb_javac;
 
+import com.sourcegraph.semanticdb.SemanticdbSymbols;
+
 import com.sun.source.util.SourcePositions;
 import com.sun.source.util.Trees;
 import com.sun.source.util.TreePathScanner;

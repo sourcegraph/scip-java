@@ -1,11 +1,17 @@
 package com.sourcegraph.semanticdb_kotlinc
 
+import com.sourcegraph.semanticdb.SemanticdbSymbols as SharedSymbols
+
 @JvmInline
 value class Symbol(private val symbol: String) {
     companion object {
-        val NONE = Symbol("")
-        val ROOT_PACKAGE = Symbol("_root_/")
+        val NONE = Symbol(SharedSymbols.NONE)
+        val ROOT_PACKAGE = Symbol(SharedSymbols.ROOT_PACKAGE)
 
+        // Note: this intentionally diverges from `SharedSymbols.global` when
+        // `desc == NONE` — Java returns `NONE`, Kotlin returns the owner.
+        // SymbolsCache relies on this behavior; do not delegate without first
+        // updating those call sites.
         fun createGlobal(owner: Symbol, desc: SemanticdbSymbolDescriptor): Symbol =
             when {
                 desc == SemanticdbSymbolDescriptor.NONE -> owner
@@ -13,12 +19,12 @@ value class Symbol(private val symbol: String) {
                 else -> desc.encode()
             }
 
-        fun createLocal(i: Int) = Symbol("local$i")
+        fun createLocal(i: Int) = Symbol(SharedSymbols.local(i))
     }
 
-    fun isGlobal() = !isLocal()
+    fun isGlobal() = SharedSymbols.isGlobal(symbol)
 
-    fun isLocal() = symbol.startsWith("local")
+    fun isLocal() = SharedSymbols.isLocal(symbol)
 
     override fun toString(): String = symbol
 }
@@ -28,22 +34,13 @@ fun String.symbol(): Symbol = Symbol(this)
 data class SemanticdbSymbolDescriptor(
     val kind: Kind,
     val name: String,
+    // Default differs from `SharedSymbols.Descriptor` (which is "") because
+    // Kotlin call sites — getters/setters in particular — rely on the no-arg
+    // overload producing `name().` rather than `name.` for METHOD kinds.
     val disambiguator: String = "()"
 ) {
     companion object {
         val NONE = SemanticdbSymbolDescriptor(Kind.NONE, "")
-
-        private fun encodeName(name: String): String {
-            if (name.isEmpty()) return "``"
-            val isStartOk = Character.isJavaIdentifierStart(name[0])
-            var isPartsOk = true
-            var i = 1
-            while (isPartsOk && i < name.length) {
-                isPartsOk = Character.isJavaIdentifierPart(name[i])
-                i++
-            }
-            return if (isStartOk && isPartsOk) name else "`$name`"
-        }
     }
 
     enum class Kind {
@@ -53,18 +50,21 @@ data class SemanticdbSymbolDescriptor(
         TYPE,
         PACKAGE,
         PARAMETER,
-        TYPE_PARAMETER
+        TYPE_PARAMETER;
+
+        internal fun toSharedKind(): SharedSymbols.Descriptor.Kind =
+            when (this) {
+                NONE -> SharedSymbols.Descriptor.Kind.None
+                TERM -> SharedSymbols.Descriptor.Kind.Term
+                METHOD -> SharedSymbols.Descriptor.Kind.Method
+                TYPE -> SharedSymbols.Descriptor.Kind.Type
+                PACKAGE -> SharedSymbols.Descriptor.Kind.Package
+                PARAMETER -> SharedSymbols.Descriptor.Kind.Parameter
+                TYPE_PARAMETER -> SharedSymbols.Descriptor.Kind.TypeParameter
+            }
     }
 
-    fun encode() =
-        Symbol(
-            when (kind) {
-                Kind.NONE -> ""
-                Kind.TERM -> "${encodeName(name)}."
-                Kind.METHOD -> "${encodeName(name)}${disambiguator}."
-                Kind.TYPE -> "${encodeName(name)}#"
-                Kind.PACKAGE -> "${encodeName(name)}/"
-                Kind.PARAMETER -> "(${encodeName(name)})"
-                Kind.TYPE_PARAMETER -> "[${encodeName(name)}]"
-            })
+    fun encode(): Symbol =
+        if (kind == Kind.NONE) Symbol(SharedSymbols.NONE)
+        else Symbol(SharedSymbols.Descriptor(kind.toSharedKind(), name, disambiguator).encode())
 }

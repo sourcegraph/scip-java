@@ -1,8 +1,8 @@
 package com.sourcegraph.scip_semanticdb;
 
-import com.sourcegraph.semanticdb_javac.SemanticdbSymbols;
-import com.sourcegraph.semanticdb_javac.SemanticdbSymbols.Descriptor;
-import com.sourcegraph.semanticdb_javac.SemanticdbSymbols.Descriptor.Kind;
+import com.sourcegraph.semanticdb.SemanticdbSymbols;
+import com.sourcegraph.semanticdb.SemanticdbSymbols.Descriptor;
+import com.sourcegraph.semanticdb.SemanticdbSymbols.Descriptor.Kind;
 import java.util.Optional;
 
 public class SymbolDescriptor {

@@ -3,7 +3,7 @@ package com.sourcegraph.scip_semanticdb;
 import com.sourcegraph.semanticdb_javac.Semanticdb.SymbolInformation.Property;
 import com.sourcegraph.semanticdb_javac.Semanticdb.*;
 
-import com.sourcegraph.semanticdb_javac.SemanticdbSymbols;
+import com.sourcegraph.semanticdb.SemanticdbSymbols;
 
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;

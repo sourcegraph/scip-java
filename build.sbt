@@ -72,6 +72,17 @@ commands +=
       "scalafixAll --check" :: "publishLocal" :: s
   }
 
+// Shared, proto-free utility code consumed by both the Java and Kotlin
+// SemanticDB compiler plugins. Kept intentionally small so each plugin's
+// fat-jar pays only for the encoding helpers, not for the full Java proto
+// schema.
+lazy val semanticdbShared = project
+  .in(file("semanticdb-shared"))
+  .settings(
+    moduleName := "semanticdb-shared",
+    javaOnlySettings
+  )
+
 lazy val semanticdb = project
   .in(file("semanticdb-java"))
   .settings(
@@ -80,6 +91,7 @@ lazy val semanticdb = project
     (Compile / PB.targets) :=
       Seq(PB.gens.java(V.protobuf) -> (Compile / sourceManaged).value)
   )
+  .dependsOn(semanticdbShared)
 
 lazy val agent = project
   .in(file("semanticdb-agent"))
@@ -431,6 +443,7 @@ lazy val semanticdbKotlinc = project
       Attributed.blank(dir)
     }
   )
+  .dependsOn(semanticdbShared)
 
 // `semanticdbKotlincMinimized` mirrors the (still-present) Gradle build at
 // semanticdb-kotlinc/minimized/build.gradle.kts. It compiles a small set of
