@@ -51,9 +51,6 @@ case class IndexCommand(
     buildTool: Option[String] = None,
     @Description("Whether to remove generated temporary files on exit.")
     cleanup: Boolean = true,
-    @Description("URL to a PackageHub instance")
-    @Hidden // Hidden because it's not supposed to be used yet by normal users.
-    packagehub: Option[String] = None,
     @Hidden // Hidden because it's only used for testing purposes
     temporaryDirectory: Option[Path] = None,
     @Section("SCIP Build Tool")

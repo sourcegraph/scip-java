@@ -4,7 +4,6 @@ import scala.collection.mutable
 import scala.jdk.CollectionConverters.CollectionHasAsScala
 import scala.math.Ordering.Implicits.seqOrdering
 
-import com.sourcegraph.scip_java.commands.CommentSyntax
 import moped.reporters.Input
 import moped.reporters.Position
 import org.scip_code.scip.Document
@@ -20,11 +19,12 @@ object ScipPrinters {
    */
   val sourceIndent = "  "
 
-  def printTextDocument(
-      doc: Document,
-      text: String,
-      comments: CommentSyntax = CommentSyntax.default
-  ): String = {
+  // Snapshot comment prefix for each rendered file extension. Languages not
+  // listed fall back to `//`.
+  private val commentSyntaxByExtension: Map[String, String] =
+    Map("py" -> "#", "sql" -> "--", "yaml" -> "#", "yml" -> "#")
+
+  def printTextDocument(doc: Document, text: String): String = {
     val out = new mutable.StringBuilder()
     val occurrencesByLine = doc
       .getOccurrencesList
@@ -57,7 +57,7 @@ object ScipPrinters {
         )
         .toMap
     val extension = doc.getRelativePath.split("\\.").lastOption.getOrElse("")
-    val commentSyntax = comments.extensionSyntax(extension)
+    val commentSyntax = commentSyntaxByExtension.getOrElse(extension, "//")
     val input = Input.filename(doc.getRelativePath, text)
 
     // Collect enclosing ranges from all occurrences, grouped by start/end line.

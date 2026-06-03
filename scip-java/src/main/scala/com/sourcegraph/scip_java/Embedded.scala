@@ -21,8 +21,6 @@ object Embedded {
     "gradle-plugin.jar"
   )
 
-  def agentJar(tmpDir: Path): Path = copyFile(tmpDir, "semanticdb-agent.jar")
-
   def semanticdbKotlincJar(tmpDir: Path): Path = copyFile(
     tmpDir,
     "semanticdb-kotlinc.jar"

@@ -64,11 +64,7 @@ case class SnapshotCommand(
                       Files.readAllBytes(sourcepath),
                       StandardCharsets.UTF_8
                     )
-                  val document = ScipPrinters.printTextDocument(
-                    doc,
-                    source,
-                    CommentSyntax.default
-                  )
+                  val document = ScipPrinters.printTextDocument(doc, source)
                   val snapshotOutput = output.resolve(doc.getRelativePath)
                   Files.createDirectories(snapshotOutput.getParent)
                   Files.write(

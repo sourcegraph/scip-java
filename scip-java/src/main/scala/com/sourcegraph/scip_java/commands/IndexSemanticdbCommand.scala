@@ -2,7 +2,6 @@ package com.sourcegraph.scip_java.commands
 
 import java.nio.file.Path
 import java.nio.file.Paths
-import java.util.concurrent.TimeUnit
 
 import scala.jdk.CollectionConverters._
 
@@ -17,8 +16,6 @@ import moped.cli.Application
 import moped.cli.Command
 import moped.cli.CommandParser
 import org.scip_code.scip.ToolInfo
-import ujson.Arr
-import ujson.Obj
 
 @Description("Converts SemanticDB files into a single SCIP index file.")
 @Usage("scip-java index-semanticdb [OPTIONS ...] [POSITIONAL ARGUMENTS ...]")
@@ -40,9 +37,6 @@ final case class IndexSemanticdbCommand(
         "This flag exists as a workaround for the issue https://github.com/sourcegraph/sourcegraph/issues/50927"
     )
     emitInverseRelationships: Boolean = true,
-    @Description("URL to a PackageHub instance")
-    @Hidden
-    packagehub: Option[String] = None,
     @Description("Directories that contain SemanticDB files.")
     @PositionalArguments()
     targetroot: List[Path] = Nil,
@@ -97,41 +91,10 @@ final case class IndexSemanticdbCommand(
         allowExportingGlobalSymbolsFromDirectoryEntries
       )
     ScipSemanticdb.run(options)
-    postPackages(packages)
     if (!app.reporter.hasErrors()) {
       app.info(options.output.toString)
     }
     app.reporter.exitCode()
-  }
-
-  /**
-   * If the PackageHub URL is configured, sends an HTTP POST request to register
-   * the packages that are used in this codebase.
-   *
-   * PackageHub is a prototype implementation of this proposal
-   * https://docs.google.com/document/d/1ZcZbPLZX0vblcTI_xb5VtO_49b_9tR5lOWSLoVEBm2A/edit#
-   */
-  private def postPackages(packages: List[ClasspathEntry]): Unit = {
-    if (packages.isEmpty)
-      return
-    packagehub.foreach { url =>
-      val json = Obj("packages" -> Arr.from(packages.map(_.toPackageHubId)))
-      app.info(s"Posting ${packages.length} package(s) to PackageHub URL $url")
-      val response = requests.post(
-        s"$url/packagehub/packages",
-        headers = Seq("Content-Type" -> "application/json"),
-        data = json,
-        chunkedUpload = false,
-        readTimeout = TimeUnit.MINUTES.toMillis(1).toInt
-      )
-      val responseJson = ujson.read(response)
-      for {
-        errors <- responseJson.obj.get("errors").toList
-        error <- errors.arr
-      } {
-        app.warning(error.str)
-      }
-    }
   }
 }
 

@@ -139,7 +139,7 @@ abstract class BaseBuildToolSuite extends MopedSuite(ScipJava.app) {
       if (expectedPackages.nonEmpty) {
         val obtainedPackages = ClasspathEntry
           .fromTargetroot(targetroot, workingDirectory)
-          .map(_.toPackageHubId)
+          .map(_.mavenCoordinate)
           .sorted
           .distinct
           .mkString("\n")

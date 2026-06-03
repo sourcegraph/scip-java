@@ -23,7 +23,7 @@ case class ClasspathEntry(
     artifactId: String,
     version: String
 ) {
-  def toPackageHubId: String = s"maven:$groupId:$artifactId:$version"
+  def mavenCoordinate: String = s"maven:$groupId:$artifactId:$version"
   def toPackageInformation: MavenPackage =
     new MavenPackage(entry, groupId, artifactId, version)
 }

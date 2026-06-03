@@ -15,7 +15,6 @@ lazy val V =
     val gradle = "7.0"
     val scala213 = "2.13.13"
     val scalameta = "4.9.3"
-    val requests = "0.8.0"
     val kotlinVersion = "2.2.0"
     val kotest = "4.6.3"
     val kctfork = "0.7.1"
@@ -86,25 +85,6 @@ lazy val semanticdbShared = project
     libraryDependencies += "com.google.protobuf" % "protobuf-java" % V.protobuf
   )
 
-lazy val agent = project
-  .in(file("semanticdb-agent"))
-  .settings(
-    fatjarPackageSettings,
-    javaOnlySettings,
-    moduleName := "semanticdb-agent",
-    libraryDependencies ++=
-      List(
-        "net.bytebuddy" % "byte-buddy" % "1.15.11",
-        "net.bytebuddy" % "byte-buddy-agent" % "1.15.11"
-      ),
-    Compile / packageBin / packageOptions +=
-      Package.ManifestAttributes(
-        "Agent-Class" -> "com.sourcegraph.semanticdb_javac.SemanticdbAgent",
-        "Can-Redefine-Classes" -> "true",
-        "Can-Retransform-Classes" -> "true",
-        "Premain-Class" -> "com.sourcegraph.semanticdb_javac.SemanticdbAgent"
-      )
-  )
 lazy val gradlePlugin = project
   .in(file("semanticdb-gradle-plugin"))
   .settings(
@@ -243,7 +223,6 @@ lazy val cli = project
     libraryDependencies ++=
       List(
         "org.scala-lang.modules" %% "scala-xml" % V.scalaXml,
-        "com.lihaoyi" %% "requests" % V.requests,
         "org.scalameta" %% "moped" % V.moped,
         "org.jetbrains.kotlin" % "kotlin-compiler-embeddable" % V.kotlinVersion,
         "org.jetbrains.kotlin" % "kotlin-scripting-common" % V.kotlinVersion,
@@ -266,10 +245,6 @@ lazy val cli = project
           addJar(
             (javacPlugin / Compile / Keys.`package`).value,
             "semanticdb-plugin.jar"
-          )
-          addJar(
-            (agent / Compile / Keys.`package`).value,
-            "semanticdb-agent.jar"
           )
           addJar((gradlePlugin / Compile / assembly).value, "gradle-plugin.jar")
           addJar(
@@ -532,16 +507,6 @@ lazy val semanticdbKotlincMinimized = project
         .value
   )
 
-commands +=
-  Command.command("nativeImageProfiled") { s =>
-    val targetroot =
-      file("tests/minimized/.j11/target/scala-2.13/meta").absolutePath
-    val output = Files.createTempFile("scip-java", "index.scip")
-    "minimized/compile" ::
-      s"""nativeImageRunAgent " index-semanticdb --output=$output $targetroot"""" ::
-      "nativeImage" :: s
-  }
-
 def minimizedSourceDirectory =
   file("tests/minimized/src/main/java").getAbsoluteFile
 
@@ -577,7 +542,7 @@ lazy val minimizedSettings = List[Def.Setting[_]](
 lazy val minimized = project
   .in(file("tests/minimized/.j11"))
   .settings(minimizedSettings, javaOnlySettings)
-  .dependsOn(agent, javacPlugin)
+  .dependsOn(javacPlugin)
   .disablePlugins(JavaFormatterPlugin)
 
 def javacModuleOptions = List(
@@ -617,15 +582,6 @@ lazy val buildTools = project
   .in(file("tests/buildTools"))
   .settings(
     testSettings,
-    (Test / javaOptions) ++=
-      List(
-        s"-javaagent:${(agent / Compile / Keys.`package`).value}",
-        s"-Dsemanticdb.pluginpath=${(javacPlugin / Compile / Keys.`package`)
-            .value}",
-        s"-Dsemanticdb.sourceroot=${(ThisBuild / baseDirectory).value}",
-        s"-Dsemanticdb.targetroot=${(agent / Compile / target).value /
-            "semanticdb-targetroot"}"
-      ),
     Test / envVars ++=
       Map(
         "SCIP_JAVA_CLI" -> ((cli / pack).value / "bin" / "scip-java").toString
@@ -635,7 +591,7 @@ lazy val buildTools = project
     // everything worse
     Test / testForkedParallel := !sys.env.contains("CI")
   )
-  .dependsOn(agent, unit)
+  .dependsOn(unit)
 
 lazy val snapshots = project
   .in(file("tests/snapshots"))
