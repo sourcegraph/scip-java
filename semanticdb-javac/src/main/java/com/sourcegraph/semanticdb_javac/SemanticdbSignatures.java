@@ -1,6 +1,8 @@
 package com.sourcegraph.semanticdb_javac;
 
-import com.sourcegraph.semanticdb_javac.Semanticdb.*;
+import com.sourcegraph.semanticdb.Semanticdb;
+
+import com.sourcegraph.semanticdb.Semanticdb.*;
 
 import javax.lang.model.element.Element;
 import javax.lang.model.element.TypeElement;
@@ -13,7 +15,7 @@ import javax.lang.model.util.Types;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.sourcegraph.semanticdb_javac.SemanticdbBuilders.*;
+import static com.sourcegraph.semanticdb.SemanticdbBuilders.*;
 import static com.sourcegraph.semanticdb_javac.SemanticdbTypeVisitor.UNRESOLVED_TYPE_REF;
 
 public final class SemanticdbSignatures {

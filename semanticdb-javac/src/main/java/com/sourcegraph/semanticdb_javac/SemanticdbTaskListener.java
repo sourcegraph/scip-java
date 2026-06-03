@@ -1,5 +1,9 @@
 package com.sourcegraph.semanticdb_javac;
 
+import com.sourcegraph.semanticdb.Semanticdb;
+import com.sourcegraph.semanticdb.SemanticdbPaths;
+import com.sourcegraph.semanticdb.SemanticdbWriter;
+
 import com.sun.source.util.JavacTask;
 import com.sun.source.util.TaskEvent;
 import com.sun.source.util.TaskListener;
@@ -14,6 +18,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -125,10 +130,7 @@ public final class SemanticdbTaskListener implements TaskListener {
 
   private void writeSemanticdb(TaskEvent event, Path output, Semanticdb.TextDocument textDocument) {
     try {
-      byte[] bytes =
-          Semanticdb.TextDocuments.newBuilder().addDocuments(textDocument).build().toByteArray();
-      Files.createDirectories(output.getParent());
-      Files.write(output, bytes);
+      SemanticdbWriter.writeTextDocument(output, textDocument);
     } catch (IOException e) {
       this.reportException(e, event);
     }
@@ -278,17 +280,10 @@ public final class SemanticdbTaskListener implements TaskListener {
 
   private Result<Path, String> semanticdbOutputPath(SemanticdbJavacOptions options, TaskEvent e) {
     Path absolutePath = absolutePathFromUri(options, e.getSourceFile());
-    if (absolutePath.startsWith(options.sourceroot)) {
-      Path relativePath = options.sourceroot.relativize(absolutePath);
-      String filename = relativePath.getFileName().toString() + ".semanticdb";
-      Path semanticdbOutputPath =
-          options
-              .targetroot
-              .resolve("META-INF")
-              .resolve("semanticdb")
-              .resolve(relativePath)
-              .resolveSibling(filename);
-      return Result.ok(semanticdbOutputPath);
+    Optional<Path> happyPath =
+        SemanticdbPaths.semanticdbPath(options.targetroot, options.sourceroot, absolutePath);
+    if (happyPath.isPresent()) {
+      return Result.ok(happyPath.get());
     }
 
     switch (options.noRelativePath) {

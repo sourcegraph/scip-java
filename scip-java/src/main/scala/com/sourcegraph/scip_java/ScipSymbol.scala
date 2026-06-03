@@ -1,7 +1,7 @@
 package com.sourcegraph.scip_java
 
 import com.sourcegraph.scip_semanticdb.SymbolDescriptor
-import com.sourcegraph.semanticdb_javac.SemanticdbSymbols
+import com.sourcegraph.semanticdb.SemanticdbSymbols
 
 sealed abstract class ScipSymbol {}
 final case class LocalScipSymbol(identifier: String) extends ScipSymbol

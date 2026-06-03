@@ -1,5 +1,7 @@
 package com.sourcegraph.semanticdb_kotlinc
 
+import com.sourcegraph.semanticdb.Semanticdb
+
 import kotlin.contracts.ExperimentalContracts
 import org.jetbrains.kotlin.backend.common.extensions.IrGenerationExtension
 import org.jetbrains.kotlin.compiler.plugin.CompilerPluginRegistrar

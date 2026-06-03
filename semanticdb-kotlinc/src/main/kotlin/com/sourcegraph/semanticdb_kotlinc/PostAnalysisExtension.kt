@@ -1,8 +1,11 @@
 package com.sourcegraph.semanticdb_kotlinc
 
+import com.sourcegraph.semanticdb.Semanticdb
+import com.sourcegraph.semanticdb.SemanticdbPaths
+import com.sourcegraph.semanticdb.SemanticdbWriter
+
 import java.io.PrintWriter
 import java.io.Writer
-import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
 import kotlin.contracts.ExperimentalContracts
@@ -27,8 +30,8 @@ class PostAnalysisExtension(
             for ((ktSourceFile, visitor) in AnalyzerCheckers.visitors) {
                 try {
                     val document = visitor.build()
-                    semanticdbOutPathForFile(ktSourceFile)?.apply {
-                        Files.write(this, TextDocuments { addDocuments(document) }.toByteArray())
+                    semanticdbOutPathForFile(ktSourceFile)?.let { outPath ->
+                        SemanticdbWriter.writeTextDocument(outPath, document)
                     }
                     callback(document)
                 } catch (e: Exception) {
@@ -42,18 +45,9 @@ class PostAnalysisExtension(
 
     private fun semanticdbOutPathForFile(file: KtSourceFile): Path? {
         val normalizedPath = Paths.get(file.path).normalize()
-        if (normalizedPath.startsWith(sourceRoot)) {
-            val relative = sourceRoot.relativize(normalizedPath)
-            val filename = relative.fileName.toString() + ".semanticdb"
-            val semanticdbOutPath =
-                targetRoot
-                    .resolve("META-INF")
-                    .resolve("semanticdb")
-                    .resolve(relative)
-                    .resolveSibling(filename)
-
-            Files.createDirectories(semanticdbOutPath.parent)
-            return semanticdbOutPath
+        val outPath = SemanticdbPaths.semanticdbPath(targetRoot, sourceRoot, normalizedPath)
+        if (outPath.isPresent) {
+            return outPath.get()
         }
         System.err.println(
             "given file is not under the sourceroot.\n\tSourceroot: $sourceRoot\n\tFile path: ${file.path}\n\tNormalized file path: $normalizedPath")

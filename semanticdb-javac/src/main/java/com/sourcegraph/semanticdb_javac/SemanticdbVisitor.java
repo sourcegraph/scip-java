@@ -1,5 +1,10 @@
 package com.sourcegraph.semanticdb_javac;
 
+import com.sourcegraph.semanticdb.Semanticdb;
+
+import com.sourcegraph.semanticdb.SemanticdbPaths;
+import com.sourcegraph.semanticdb.SemanticdbSymbols;
+
 import com.sun.source.util.SourcePositions;
 import com.sun.source.util.Trees;
 import com.sun.source.util.TreePathScanner;
@@ -33,12 +38,15 @@ import javax.lang.model.type.TypeMirror;
 import javax.lang.model.type.DeclaredType;
 import javax.lang.model.util.Types;
 import javax.lang.model.util.Elements;
-import com.sourcegraph.semanticdb_javac.Semanticdb.SymbolInformation.Kind;
-import com.sourcegraph.semanticdb_javac.Semanticdb.SymbolInformation.Property;
-import com.sourcegraph.semanticdb_javac.Semanticdb.SymbolOccurrence.Role;
+import com.sourcegraph.semanticdb.Semanticdb.SymbolInformation.Kind;
+import com.sourcegraph.semanticdb.Semanticdb.SymbolInformation.Property;
+import com.sourcegraph.semanticdb.Semanticdb.SymbolOccurrence.Role;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -47,11 +55,9 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.Iterator;
-import java.security.NoSuchAlgorithmException;
 import java.util.stream.Collectors;
 
-import static com.sourcegraph.semanticdb_javac.SemanticdbBuilders.*;
+import static com.sourcegraph.semanticdb.SemanticdbBuilders.*;
 
 /** Walks the AST of a typechecked compilation unit and generates a SemanticDB TextDocument. */
 public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
@@ -556,7 +562,16 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
 
   private String semanticdbMd5() {
     try {
-      return MD5.digest(compUnitTree.getSourceFile().getCharContent(true).toString());
+      byte[] bytes =
+          compUnitTree
+              .getSourceFile()
+              .getCharContent(true)
+              .toString()
+              .getBytes(StandardCharsets.UTF_8);
+      byte[] digest = MessageDigest.getInstance("MD5").digest(bytes);
+      StringBuilder sb = new StringBuilder(digest.length * 2);
+      for (byte b : digest) sb.append(String.format("%02X", b));
+      return sb.toString();
     } catch (IOException | NoSuchAlgorithmException e) {
       return "";
     }
@@ -663,18 +678,7 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
       CompilationUnitTree compUnitTree, SemanticdbJavacOptions options) {
     Path absolutePath =
         SemanticdbTaskListener.absolutePathFromUri(options, compUnitTree.getSourceFile());
-    Path uriPath =
-        absolutePath.startsWith(options.sourceroot)
-            ? options.sourceroot.relativize(absolutePath)
-            : absolutePath;
-    StringBuilder out = new StringBuilder();
-    Iterator<Path> it = uriPath.iterator();
-    if (it.hasNext()) out.append(it.next().getFileName().toString());
-    while (it.hasNext()) {
-      Path part = it.next();
-      out.append('/').append(part.getFileName().toString());
-    }
-    return out.toString();
+    return SemanticdbPaths.semanticdbUri(options.sourceroot, absolutePath);
   }
 
   private Semanticdb.Documentation semanticdbDocumentation(Tree tree) {

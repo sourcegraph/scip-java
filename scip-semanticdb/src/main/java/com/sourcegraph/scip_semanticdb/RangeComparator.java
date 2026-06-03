@@ -1,6 +1,6 @@
 package com.sourcegraph.scip_semanticdb;
 
-import com.sourcegraph.semanticdb_javac.Semanticdb.Range;
+import com.sourcegraph.semanticdb.Semanticdb.Range;
 
 /**
  * Comparator that sorts SemanticDB ranges by appearance in the document.

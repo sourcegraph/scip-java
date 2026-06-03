@@ -1,5 +1,7 @@
 package com.sourcegraph.semanticdb_javac;
 
+import com.sourcegraph.semanticdb.Semanticdb;
+
 import javax.lang.model.element.Element;
 import javax.lang.model.util.SimpleTypeVisitor8;
 import javax.lang.model.type.TypeMirror;
@@ -14,7 +16,7 @@ import javax.lang.model.type.NoType;
 import javax.lang.model.util.Types;
 import java.util.ArrayList;
 
-import static com.sourcegraph.semanticdb_javac.SemanticdbBuilders.*;
+import static com.sourcegraph.semanticdb.SemanticdbBuilders.*;
 
 /** A TypeMirror tree visitor that constructs a recursive SemanticDB Type structure. */
 class SemanticdbTypeVisitor extends SimpleTypeVisitor8<Semanticdb.Type, Void> {

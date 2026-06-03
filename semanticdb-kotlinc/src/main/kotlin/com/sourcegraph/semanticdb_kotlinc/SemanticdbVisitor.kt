@@ -1,6 +1,8 @@
 package com.sourcegraph.semanticdb_kotlinc
 
-import com.sourcegraph.semanticdb_kotlinc.Semanticdb.SymbolOccurrence.Role
+import com.sourcegraph.semanticdb.Semanticdb
+
+import com.sourcegraph.semanticdb.Semanticdb.SymbolOccurrence.Role
 import java.nio.file.Path
 import kotlin.contracts.ExperimentalContracts
 import org.jetbrains.kotlin.KtSourceElement

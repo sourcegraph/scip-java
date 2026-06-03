@@ -2,10 +2,15 @@
 // Local modifications:
 // - Removes unused fields to minimize the amount of generated code.
 // - Adds SymbolInformation.documentation that is pending upstream approval.
+// - Adds SymbolOccurrence.enclosing_range to support SCIP's enclosing_range field.
 
 syntax = "proto3";
 
-package com.sourcegraph.semanticdb_javac;
+package com.sourcegraph.semanticdb;
+
+option java_package = "com.sourcegraph.semanticdb";
+option java_multiple_files = false;
+option java_outer_classname = "Semanticdb";
 
 enum Schema {
   LEGACY = 0;

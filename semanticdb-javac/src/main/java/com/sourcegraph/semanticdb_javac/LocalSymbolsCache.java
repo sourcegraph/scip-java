@@ -1,5 +1,7 @@
 package com.sourcegraph.semanticdb_javac;
 
+import com.sourcegraph.semanticdb.SemanticdbSymbols;
+
 import javax.lang.model.element.Element;
 
 import java.util.IdentityHashMap;
