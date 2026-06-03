@@ -1,7 +1,7 @@
 package com.sourcegraph.scip_semanticdb;
 
-import com.sourcegraph.semanticdb_javac.Semanticdb.SymbolInformation.Property;
-import com.sourcegraph.semanticdb_javac.Semanticdb.*;
+import com.sourcegraph.semanticdb.Semanticdb.SymbolInformation.Property;
+import com.sourcegraph.semanticdb.Semanticdb.*;
 
 import com.sourcegraph.semanticdb.SemanticdbSymbols;
 
@@ -9,7 +9,7 @@ import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
-import static com.sourcegraph.semanticdb_javac.SemanticdbBuilders.typeRef;
+import static com.sourcegraph.semanticdb.SemanticdbBuilders.typeRef;
 
 public class SignatureFormatter {
   private static final Type OBJECT_TYPE_REF = typeRef("java/lang/Object#");

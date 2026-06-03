@@ -1,5 +1,7 @@
 package com.sourcegraph.semanticdb_javac;
 
+import com.sourcegraph.semanticdb.Semanticdb;
+
 import com.sun.source.tree.*;
 import com.sun.source.util.Trees;
 import javax.lang.model.element.Element;
@@ -14,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.sourcegraph.semanticdb_javac.SemanticdbBuilders.*;
+import static com.sourcegraph.semanticdb.SemanticdbBuilders.*;
 import static com.sourcegraph.semanticdb_javac.SemanticdbTypeVisitor.ARRAY_SYMBOL;
 
 public class SemanticdbTrees {

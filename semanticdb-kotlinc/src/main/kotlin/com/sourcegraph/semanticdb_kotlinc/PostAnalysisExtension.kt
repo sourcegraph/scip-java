@@ -1,5 +1,7 @@
 package com.sourcegraph.semanticdb_kotlinc
 
+import com.sourcegraph.semanticdb.Semanticdb
+
 import java.io.PrintWriter
 import java.io.Writer
 import java.nio.file.Files

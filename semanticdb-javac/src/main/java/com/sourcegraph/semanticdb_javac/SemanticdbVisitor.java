@@ -1,5 +1,7 @@
 package com.sourcegraph.semanticdb_javac;
 
+import com.sourcegraph.semanticdb.Semanticdb;
+
 import com.sourcegraph.semanticdb.SemanticdbSymbols;
 
 import com.sun.source.util.SourcePositions;
@@ -35,9 +37,9 @@ import javax.lang.model.type.TypeMirror;
 import javax.lang.model.type.DeclaredType;
 import javax.lang.model.util.Types;
 import javax.lang.model.util.Elements;
-import com.sourcegraph.semanticdb_javac.Semanticdb.SymbolInformation.Kind;
-import com.sourcegraph.semanticdb_javac.Semanticdb.SymbolInformation.Property;
-import com.sourcegraph.semanticdb_javac.Semanticdb.SymbolOccurrence.Role;
+import com.sourcegraph.semanticdb.Semanticdb.SymbolInformation.Kind;
+import com.sourcegraph.semanticdb.Semanticdb.SymbolInformation.Property;
+import com.sourcegraph.semanticdb.Semanticdb.SymbolOccurrence.Role;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -53,7 +55,7 @@ import java.util.Iterator;
 import java.security.NoSuchAlgorithmException;
 import java.util.stream.Collectors;
 
-import static com.sourcegraph.semanticdb_javac.SemanticdbBuilders.*;
+import static com.sourcegraph.semanticdb.SemanticdbBuilders.*;
 
 /** Walks the AST of a typechecked compilation unit and generates a SemanticDB TextDocument. */
 public class SemanticdbVisitor extends TreePathScanner<Void, Void> {

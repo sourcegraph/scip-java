@@ -1,5 +1,7 @@
 package com.sourcegraph.semanticdb_javac;
 
+import com.sourcegraph.semanticdb.Semanticdb;
+
 import com.sun.source.util.JavacTask;
 import com.sun.source.util.TaskEvent;
 import com.sun.source.util.TaskListener;

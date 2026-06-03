@@ -1,6 +1,6 @@
 package com.sourcegraph.scip_semanticdb;
 
-import com.sourcegraph.semanticdb_javac.Semanticdb.*;
+import com.sourcegraph.semanticdb.Semanticdb.*;
 
 public abstract class SemanticdbTreeVisitor {
   public void visitTree(Tree tree) {

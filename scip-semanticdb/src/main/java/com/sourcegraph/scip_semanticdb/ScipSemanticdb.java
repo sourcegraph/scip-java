@@ -1,9 +1,9 @@
 package com.sourcegraph.scip_semanticdb;
 
 import com.google.protobuf.CodedInputStream;
-import com.sourcegraph.semanticdb_javac.Semanticdb;
-import com.sourcegraph.semanticdb_javac.Semanticdb.SymbolOccurrence;
-import com.sourcegraph.semanticdb_javac.Semanticdb.SymbolOccurrence.Role;
+import com.sourcegraph.semanticdb.Semanticdb;
+import com.sourcegraph.semanticdb.Semanticdb.SymbolOccurrence;
+import com.sourcegraph.semanticdb.Semanticdb.SymbolOccurrence.Role;
 import com.sourcegraph.semanticdb.SemanticdbSymbols;
 import org.scip_code.scip.Document;
 import org.scip_code.scip.Index;

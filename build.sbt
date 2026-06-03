@@ -72,26 +72,20 @@ commands +=
       "scalafixAll --check" :: "publishLocal" :: s
   }
 
-// Shared, proto-free utility code consumed by both the Java and Kotlin
-// SemanticDB compiler plugins. Kept intentionally small so each plugin's
-// fat-jar pays only for the encoding helpers, not for the full Java proto
-// schema.
+// Shared module that owns the canonical SemanticDB proto schema and the
+// associated symbol/builder utilities. Both the Java compiler plugin
+// (semanticdb-javac) and the Kotlin compiler plugin (semanticdb-kotlinc)
+// depend on it instead of carrying their own divergent copies of the proto.
 lazy val semanticdbShared = project
   .in(file("semanticdb-shared"))
   .settings(
     moduleName := "semanticdb-shared",
-    javaOnlySettings
-  )
-
-lazy val semanticdb = project
-  .in(file("semanticdb-java"))
-  .settings(
-    moduleName := "semanticdb-java",
     javaOnlySettings,
     (Compile / PB.targets) :=
-      Seq(PB.gens.java(V.protobuf) -> (Compile / sourceManaged).value)
+      Seq(PB.gens.java(V.protobuf) -> (Compile / sourceManaged).value),
+    libraryDependencies +=
+      "com.google.protobuf" % "protobuf-java" % V.protobuf
   )
-  .dependsOn(semanticdbShared)
 
 lazy val agent = project
   .in(file("semanticdb-agent"))
@@ -182,7 +176,7 @@ lazy val javacPlugin = project
           .inAll
       )
   )
-  .dependsOn(semanticdb)
+  .dependsOn(semanticdbShared)
 
 lazy val scip = project
   .in(file("scip-semanticdb"))
@@ -196,7 +190,7 @@ lazy val scip = project
       Seq(PB.gens.java(V.protobuf) -> (Compile / sourceManaged).value),
     Compile / PB.protocOptions := Seq("--experimental_allow_proto3_optional")
   )
-  .dependsOn(semanticdb)
+  .dependsOn(semanticdbShared)
 
 lazy val mavenPlugin = project
   .in(file("maven-plugin"))
@@ -365,12 +359,8 @@ lazy val semanticdbKotlinc = project
     // classpath via Provided so the assembled fat-jar does not bundle it.
     libraryDependencies +=
       "org.jetbrains.kotlin" % "kotlin-stdlib" % V.kotlinVersion % Provided,
-    // protobuf java codegen — proto file lives at src/main/proto/...
-    Compile / PB.protoSources :=
-      Seq((Compile / sourceDirectory).value / "proto"),
-    Compile / PB.targets :=
-      Seq(PB.gens.java(V.protobuf) -> (Compile / sourceManaged).value),
-    libraryDependencies += "com.google.protobuf" % "protobuf-java" % V.protobuf,
+    // The SemanticDB proto schema and the generated Java classes live in
+    // semanticdbShared; we get them transitively via .dependsOn below.
     // kotlin-compiler-embeddable is supplied by kotlinc at runtime
     libraryDependencies +=
       "org.jetbrains.kotlin" % "kotlin-compiler-embeddable" % V.kotlinVersion %

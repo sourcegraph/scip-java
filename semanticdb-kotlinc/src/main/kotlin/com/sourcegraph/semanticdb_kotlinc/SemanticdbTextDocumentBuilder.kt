@@ -1,6 +1,8 @@
 package com.sourcegraph.semanticdb_kotlinc
 
-import com.sourcegraph.semanticdb_kotlinc.Semanticdb.SymbolOccurrence.Role
+import com.sourcegraph.semanticdb.Semanticdb
+
+import com.sourcegraph.semanticdb.Semanticdb.SymbolOccurrence.Role
 import java.nio.file.Path
 import java.nio.file.Paths
 import java.security.MessageDigest

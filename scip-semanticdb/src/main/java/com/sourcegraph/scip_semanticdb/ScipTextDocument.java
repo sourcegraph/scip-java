@@ -1,6 +1,6 @@
 package com.sourcegraph.scip_semanticdb;
 
-import com.sourcegraph.semanticdb_javac.Semanticdb;
+import com.sourcegraph.semanticdb.Semanticdb;
 
 import java.nio.file.Path;
 import java.util.ArrayList;

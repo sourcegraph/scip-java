@@ -1,5 +1,7 @@
 package com.sourcegraph.semanticdb_kotlinc.test
 
+import com.sourcegraph.semanticdb.Semanticdb
+
 import com.sourcegraph.semanticdb_kotlinc.*
 import com.sourcegraph.semanticdb_kotlinc.AnalyzerCheckers.Companion.visitors
 import com.tschuchort.compiletesting.KotlinCompilation

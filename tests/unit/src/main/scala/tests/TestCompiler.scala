@@ -13,7 +13,7 @@ import scala.meta.Input
 import scala.meta.internal.io.FileIO
 import scala.meta.io.AbsolutePath
 
-import com.sourcegraph.semanticdb_javac.Semanticdb
+import com.sourcegraph.semanticdb.Semanticdb
 
 object TestCompiler {
   val PROCESSOR_PATH = System.getProperty("java.class.path")
