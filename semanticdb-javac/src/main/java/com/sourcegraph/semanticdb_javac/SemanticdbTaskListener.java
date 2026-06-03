@@ -1,6 +1,7 @@
 package com.sourcegraph.semanticdb_javac;
 
 import com.sourcegraph.semanticdb.Semanticdb;
+import com.sourcegraph.semanticdb.SemanticdbDocumentBuilder;
 import com.sourcegraph.semanticdb.SemanticdbPaths;
 import com.sourcegraph.semanticdb.SemanticdbWriter;
 
@@ -12,15 +13,16 @@ import javax.lang.model.util.Elements;
 import javax.lang.model.util.Types;
 
 import javax.tools.JavaFileObject;
-import java.io.*;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.HashSet;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 /**
  * Callback hook that generates SemanticDB when the compiler has completed typechecking a Java
@@ -33,6 +35,8 @@ public final class SemanticdbTaskListener implements TaskListener {
   private final Types types;
   private final Trees trees;
   private final Elements elements;
+  // Javac fires ANALYZE once per top-level type; accumulate across rounds per output path.
+  private final Map<Path, PerSourceState> perSourceState = new HashMap<>();
   private int noRelativePathCounter = 0;
 
   public SemanticdbTaskListener(
@@ -58,8 +62,10 @@ public final class SemanticdbTaskListener implements TaskListener {
       inferBazelSourceroot(e.getSourceFile());
       Result<Path, String> semanticdbPath = semanticdbOutputPath(options, e);
       if (semanticdbPath.isOk()) {
+        Path output = semanticdbPath.getOrThrow();
+        perSourceState.remove(output);
         try {
-          Files.deleteIfExists(semanticdbPath.getOrThrow());
+          Files.deleteIfExists(output);
         } catch (IOException ex) {
           this.reportException(ex, e);
         }
@@ -116,12 +122,20 @@ public final class SemanticdbTaskListener implements TaskListener {
     Result<Path, String> path = semanticdbOutputPath(options, e);
     if (path != null) {
       if (path.isOk()) {
-        Semanticdb.TextDocument textDocument =
-            new SemanticdbVisitor(globals, e.getCompilationUnit(), options, types, trees, elements)
-                .buildTextDocument(e.getCompilationUnit());
         Path output = path.getOrThrow();
-        if (Files.exists(output)) appendSemanticdb(e, output, textDocument);
-        else writeSemanticdb(e, output, textDocument);
+        PerSourceState state = perSourceState.computeIfAbsent(output, k -> new PerSourceState());
+        Semanticdb.TextDocument textDocument =
+            new SemanticdbVisitor(
+                    globals,
+                    state.locals,
+                    e.getCompilationUnit(),
+                    options,
+                    types,
+                    trees,
+                    elements,
+                    state.documentBuilder)
+                .buildTextDocument(e.getCompilationUnit());
+        writeSemanticdb(e, output, textDocument);
       } else {
         reporter.error(path.getErrorOrThrow(), e);
       }
@@ -136,76 +150,9 @@ public final class SemanticdbTaskListener implements TaskListener {
     }
   }
 
-  private void appendSemanticdb(
-      TaskEvent event, Path output, Semanticdb.TextDocument textDocument) {
-    /*
-     * If there already is a semanticdb file at the given path,
-     * we do the following:
-     * - Read a documents collection
-     * - Try to find the document with the matching relative path (matching the incoming textDocument)
-     * - Then, depending on whether a matching document already exists in the collection:
-     *   - if YES, mutate it in place to only add entries from the incoming document
-     *   - if NO, simply add the incoming text document to the collection
-     * - Write the collection back to disk
-     * */
-    Semanticdb.TextDocument document = null;
-    int documentIndex = -1;
-    Semanticdb.TextDocuments documents = null;
-
-    try (InputStream is = Files.newInputStream(output.toFile().toPath())) {
-      documents = Semanticdb.TextDocuments.parseFrom(is);
-
-      for (int i = 0; i < documents.getDocumentsCount(); i++) {
-        Semanticdb.TextDocument candidate = documents.getDocuments(i);
-        if (document == null && candidate.getUri().equals(textDocument.getUri())) {
-          document = candidate;
-          documentIndex = i;
-        }
-      }
-
-    } catch (IOException e) {
-      this.reportException(e, event);
-      return;
-    }
-
-    if (document != null) {
-      // If there is a previous semanticdb document at this path, we need
-      // to deduplicate symbols and occurrences and mutate the document in place
-      Set<Semanticdb.SymbolInformation> symbols = new HashSet<>(textDocument.getSymbolsList());
-      Set<Semanticdb.SymbolOccurrence> occurrences =
-          new HashSet<>(textDocument.getOccurrencesList());
-      Set<Semanticdb.Synthetic> synthetics = new HashSet<>(textDocument.getSyntheticsList());
-
-      symbols.addAll(document.getSymbolsList());
-      occurrences.addAll(document.getOccurrencesList());
-      synthetics.addAll(document.getSyntheticsList());
-
-      documents
-          .toBuilder()
-          .addDocuments(
-              documentIndex,
-              document
-                  .toBuilder()
-                  .clearOccurrences()
-                  .addAllOccurrences(occurrences)
-                  .clearSymbols()
-                  .addAllSymbols(symbols)
-                  .clearSynthetics()
-                  .addAllSynthetics(synthetics));
-
-    } else {
-      // If no prior document was found, we can just add the incoming one to the collection
-      documents = documents.toBuilder().addDocuments(textDocument).build();
-    }
-
-    byte[] bytes = documents.toByteArray();
-
-    try {
-      Files.createDirectories(output.getParent());
-      Files.write(output, bytes);
-    } catch (IOException e) {
-      this.reportException(e, event);
-    }
+  private static final class PerSourceState {
+    final SemanticdbDocumentBuilder documentBuilder = new SemanticdbDocumentBuilder();
+    final LocalSymbolsCache locals = new LocalSymbolsCache();
   }
 
   public static Path absolutePathFromUri(SemanticdbJavacOptions options, JavaFileObject file) {

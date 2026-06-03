@@ -2,6 +2,7 @@ package com.sourcegraph.semanticdb_javac;
 
 import com.sourcegraph.semanticdb.Semanticdb;
 
+import com.sourcegraph.semanticdb.SemanticdbDocumentBuilder;
 import com.sourcegraph.semanticdb.SemanticdbPaths;
 import com.sourcegraph.semanticdb.SemanticdbSymbols;
 
@@ -69,8 +70,7 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
   private final CompilationUnitTree compUnitTree;
   private final Elements elements;
   private final SemanticdbJavacOptions options;
-  private final ArrayList<Semanticdb.SymbolOccurrence> occurrences;
-  private final ArrayList<Semanticdb.SymbolInformation> symbolInfos;
+  private final SemanticdbDocumentBuilder documentBuilder;
   private String source;
   private String uri;
 
@@ -78,20 +78,21 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
 
   public SemanticdbVisitor(
       GlobalSymbolsCache globals,
+      LocalSymbolsCache locals,
       CompilationUnitTree compUnitTree,
       SemanticdbJavacOptions options,
       Types types,
       Trees trees,
-      Elements elements) {
-    this.globals = globals; // Reused cache between compilation units.
-    this.locals = new LocalSymbolsCache(); // Fresh cache per compilation unit.
+      Elements elements,
+      SemanticdbDocumentBuilder documentBuilder) {
+    this.globals = globals;
+    this.locals = locals;
     this.options = options;
     this.types = types;
     this.elements = elements;
     this.trees = trees;
     this.compUnitTree = compUnitTree;
-    this.occurrences = new ArrayList<>();
-    this.symbolInfos = new ArrayList<>();
+    this.documentBuilder = documentBuilder;
     this.source = semanticdbText();
     this.uri = semanticdbUri(compUnitTree, options);
     this.nodes = new LinkedHashMap<>();
@@ -102,15 +103,8 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
 
     resolveNodes();
 
-    return Semanticdb.TextDocument.newBuilder()
-        .setSchema(Semanticdb.Schema.SEMANTICDB4)
-        .setLanguage(Semanticdb.Language.JAVA)
-        .setUri(uri)
-        .setText(options.includeText ? this.source : "")
-        .setMd5(semanticdbMd5())
-        .addAllOccurrences(occurrences)
-        .addAllSymbols(symbolInfos)
-        .build();
+    return documentBuilder.build(
+        Semanticdb.Language.JAVA, uri, options.includeText ? this.source : "", semanticdbMd5());
   }
 
   private Optional<Semanticdb.Range> emitSymbolOccurrence(
@@ -135,7 +129,7 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
     if (sym == null) return;
     Optional<Semanticdb.SymbolOccurrence> occ =
         semanticdbOccurrence(sym, range, role, enclosingRange);
-    occ.ifPresent(occurrences::add);
+    occ.ifPresent(documentBuilder::addOccurrence);
   }
 
   private void emitSymbolInformation(Element sym, Tree tree) {
@@ -201,7 +195,7 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
 
     Semanticdb.SymbolInformation info = builder.build();
 
-    symbolInfos.add(info);
+    documentBuilder.addSymbol(info);
   }
 
   void resolveNodes() {
