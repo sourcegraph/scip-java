@@ -113,9 +113,6 @@ abstract class BaseBuildToolSuite extends MopedSuite(ScipJava.app) {
           targetroot.toString
         ) ++ extraArguments
       val exit = app().run(arguments)
-      if (extraArguments.contains("--verbose")) {
-        println(app.capturedOutput)
-      }
       expectedError match {
         case Some(fn) =>
           assert(clue(exit) != 0, clues(app.capturedOutput))

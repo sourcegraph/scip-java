@@ -4,7 +4,6 @@ import java.nio.charset.StandardCharsets
 import java.nio.file._
 
 import scala.collection.mutable.ListBuffer
-import scala.jdk.CollectionConverters._
 import scala.util.Properties
 import scala.util.Try
 
@@ -42,19 +41,16 @@ class GradleBuildTool(index: IndexCommand) extends BuildTool("Gradle", index) {
    * error pointing at the two known causes.
    */
   private def reportMissingSemanticdbOutput(): Unit = {
-    val semanticdbFileCount = countSemanticdbFiles(targetroot)
-    if (semanticdbFileCount > 0)
+    if (containsFileWithSuffix(targetroot, ".semanticdb"))
       return
-    val classFileCount = countClassFiles(index.workingDirectory)
-    if (classFileCount == 0)
-      // Project has no compiled JVM output — nothing to index, stay quiet.
+    if (!containsFileWithSuffix(index.workingDirectory, ".class"))
+      // Project produced no compiled JVM output — nothing to index, stay quiet.
       return
     index
       .app
       .reporter
       .error(
-        s"""scip-java: Gradle finished successfully but produced no SemanticDB output.
-           |Compiled $classFileCount .class file(s); expected at least one .semanticdb file in $targetroot.
+        s"""scip-java: Gradle finished successfully but produced no SemanticDB output in $targetroot.
            |
            |This means our SemanticDB compiler plugin was not attached to one or more JavaCompile tasks. Two known causes:
            |
@@ -72,53 +68,17 @@ class GradleBuildTool(index: IndexCommand) extends BuildTool("Gradle", index) {
       )
   }
 
-  private def countSemanticdbFiles(dir: Path): Long = {
-    if (!Files.isDirectory(dir))
-      return 0L
-    Try {
-      val stream = Files.walk(dir)
-      try stream
-        .filter(p =>
-          Files.isRegularFile(p) && p.getFileName.toString.endsWith(".semanticdb")
-        )
-        .count()
+  private def containsFileWithSuffix(root: Path, suffix: String): Boolean =
+    Files.isDirectory(root) && Try {
+      val stream = Files.find(
+        root,
+        Integer.MAX_VALUE,
+        (p, attrs) =>
+          attrs.isRegularFile && p.getFileName.toString.endsWith(suffix)
+      )
+      try stream.findFirst().isPresent
       finally stream.close()
-    }.getOrElse(0L)
-  }
-
-  private def countClassFiles(workingDirectory: Path): Long = {
-    // Gradle places compiled classes under <project>/build/classes/**. Walk
-    // every `build/classes` directory we can find (top-level + immediate
-    // subprojects) and count `.class` files. Bounded so this stays cheap even
-    // on large multi-project builds.
-    val rootBuildClasses = workingDirectory.resolve("build").resolve("classes")
-    val subprojectBuildClasses = Try {
-      val stream = Files.list(workingDirectory)
-      try stream
-        .iterator()
-        .asScala
-        .filter(Files.isDirectory(_))
-        .map(_.resolve("build").resolve("classes"))
-        .toList
-      finally stream.close()
-    }.getOrElse(Nil)
-    (rootBuildClasses :: subprojectBuildClasses)
-      .filter(Files.isDirectory(_))
-      .iterator
-      .map(countClassFilesIn)
-      .sum
-  }
-
-  private def countClassFilesIn(dir: Path): Long =
-    Try {
-      val stream = Files.walk(dir)
-      try stream
-        .filter(p =>
-          Files.isRegularFile(p) && p.getFileName.toString.endsWith(".class")
-        )
-        .count()
-      finally stream.close()
-    }.getOrElse(0L)
+    }.getOrElse(false)
 
   def targetroot: Path = index.finalTargetroot(defaultTargetroot)
 

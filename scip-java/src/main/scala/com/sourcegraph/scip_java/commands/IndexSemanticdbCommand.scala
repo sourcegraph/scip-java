@@ -29,10 +29,6 @@ final case class IndexSemanticdbCommand(
     @Description("Whether to process the SemanticDB files in parallel")
     parallel: Boolean = true,
     @Description(
-      "Whether to infer the location of SemanticDB files based as produced by Bazel"
-    )
-    bazel: Boolean = true,
-    @Description(
       "Whether to emit parent->child relationships for 'Find references' and 'Find implementations'. " +
         "This flag exists as a workaround for the issue https://github.com/sourcegraph/sourcegraph/issues/50927"
     )

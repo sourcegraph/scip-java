@@ -35,14 +35,6 @@ case class IndexCommand(
     )
     targetroot: Option[Path] = None,
     @Description(
-      "Whether to enable the -verbose flag in the SemanticDB compiler plugin."
-    )
-    verbose: Boolean = false,
-    @Description(
-      "Whether to enable the -text:on flag in the SemanticDB compiler plugin."
-    )
-    text: Boolean = false,
-    @Description(
       "Explicitly specify which build tool to use. " +
         "By default, the build tool is automatically detected. " +
         "Use this flag if the automatic build tool detection is not working correctly."
@@ -124,17 +116,6 @@ case class IndexCommand(
         env = env
       )
   }
-
-  def textFlag: String =
-    if (text)
-      "-text:on"
-    else
-      ""
-  def verboseFlag: String =
-    if (verbose)
-      "-verbose:on"
-    else
-      ""
 
   def workingDirectory: Path = AbsolutePath.of(app.env.workingDirectory)
   def finalTargetroot(default: Path): Path = AbsolutePath.of(

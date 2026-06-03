@@ -44,7 +44,7 @@ class MavenBuildTool(index: IndexCommand) extends BuildTool("Maven", index) {
         index.workingDirectory,
         index.finalTargetroot(defaultTargetroot),
         tmp,
-        SystemJavaVersion.isAtLeast(SystemJavaVersion.detect(), "11")
+        SystemJavaVersion.detectMajor() >= 11
       )
       buildCommand ++=
         List(
