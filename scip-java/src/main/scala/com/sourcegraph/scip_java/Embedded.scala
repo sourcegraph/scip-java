@@ -31,8 +31,7 @@ object Embedded {
   def customJavac(
       sourceroot: Path,
       targetroot: Path,
-      tmp: Path,
-      javaAtLeast17: Boolean
+      tmp: Path
   ): Path = {
     val bin = tmp.resolve("bin")
     val javac = bin.resolve("javac")
@@ -49,11 +48,9 @@ object Embedded {
         |""".stripMargin.getBytes(StandardCharsets.UTF_8)
     )
     val newJavacopts = tmp.resolve("javac_newarguments")
-    val javacModuleOptions =
-      if (javaAtLeast17)
-        BuildInfo.javacModuleOptions.mkString(" ")
-      else
-        ""
+    // --add-exports flags required to access internal javac APIs from our
+    // SemanticDB plugin. Always set; Java 11+ is the supported baseline.
+    val javacModuleOptions = BuildInfo.javacModuleOptions.mkString(" ")
     val injectSemanticdbArguments = List[String](
       "java",
       s"-Dsemanticdb.errorpath=$errorpath",

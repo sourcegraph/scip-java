@@ -38,13 +38,11 @@ class MavenBuildTool(index: IndexCommand) extends BuildTool("Maven", index) {
         else {
           "mvn"
         }
-      val start = System.nanoTime()
       val buildCommand = ListBuffer.empty[String]
       val executable = Embedded.customJavac(
         index.workingDirectory,
         index.finalTargetroot(defaultTargetroot),
-        tmp,
-        SystemJavaVersion.detectMajor() >= 11
+        tmp
       )
       buildCommand ++=
         List(

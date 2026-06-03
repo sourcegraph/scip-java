@@ -135,10 +135,6 @@ lazy val javacPlugin = project
             // referenced from META-INF/services/com.sun.source.util.Plugin
             "com.sourcegraph.semanticdb_javac.SemanticdbPlugin" ->
               "com.sourcegraph.semanticdb_javac.SemanticdbPlugin",
-            // Don't rename PrintJavaVersion because we load it via FQN to
-            // detect the Java of a JVM installation.
-            "com.sourcegraph.semanticdb_javac.PrintJavaVersion" ->
-              "com.sourcegraph.semanticdb_javac.PrintJavaVersion",
             // Don't rename InjectSemanticdbOptions because we load it via FQN to
             // process a list of Java compiler options.
             "com.sourcegraph.semanticdb_javac.InjectSemanticdbOptions" ->
