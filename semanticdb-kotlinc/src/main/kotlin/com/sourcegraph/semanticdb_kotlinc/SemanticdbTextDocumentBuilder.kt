@@ -3,6 +3,7 @@ package com.sourcegraph.semanticdb_kotlinc
 import com.sourcegraph.semanticdb.Semanticdb
 
 import com.sourcegraph.semanticdb.Semanticdb.SymbolOccurrence.Role
+import com.sourcegraph.semanticdb.SemanticdbDocumentBuilder
 import com.sourcegraph.semanticdb.SemanticdbPaths
 import java.nio.file.Path
 import java.nio.file.Paths
@@ -33,21 +34,12 @@ class SemanticdbTextDocumentBuilder(
     private val lineMap: LineMap,
     private val cache: SymbolsCache,
 ) {
-    private val occurrences = mutableListOf<Semanticdb.SymbolOccurrence>()
-    private val symbols = mutableListOf<Semanticdb.SymbolInformation>()
+    private val documentBuilder = SemanticdbDocumentBuilder()
     private val fileText = file.getContentsAsStream().reader().readText()
     private val semanticMd5 = semanticdbMD5()
 
-    fun build() = TextDocument {
-        this.text = fileText
-        this.uri = semanticdbURI()
-        this.md5 = semanticMd5
-        this.schema = Semanticdb.Schema.SEMANTICDB4
-        this.language = Semanticdb.Language.KOTLIN
-        occurrences.sortWith(compareBy({ it.range.startLine }, { it.range.startCharacter }))
-        this.addAllOccurrences(occurrences)
-        this.addAllSymbols(symbols)
-    }
+    fun build(): Semanticdb.TextDocument =
+        documentBuilder.build(Semanticdb.Language.KOTLIN, semanticdbURI(), fileText, semanticMd5)
 
     fun emitSemanticdbData(
         firBasedSymbol: FirBasedSymbol<*>?,
@@ -57,14 +49,10 @@ class SemanticdbTextDocumentBuilder(
         context: CheckerContext,
         enclosingSource: KtSourceElement? = null,
     ) {
-        symbolOccurrence(symbol, element, role, enclosingSource).let {
-            if (!occurrences.contains(it)) {
-                occurrences.add(it)
-            }
+        documentBuilder.addOccurrence(symbolOccurrence(symbol, element, role, enclosingSource))
+        if (role == Role.DEFINITION) {
+            documentBuilder.addSymbol(symbolInformation(firBasedSymbol, symbol, element, context))
         }
-        val symbolInformation = symbolInformation(firBasedSymbol, symbol, element, context)
-        if (role == Role.DEFINITION && !symbols.contains(symbolInformation))
-            symbols.add(symbolInformation)
     }
 
     @OptIn(SymbolInternals::class)
