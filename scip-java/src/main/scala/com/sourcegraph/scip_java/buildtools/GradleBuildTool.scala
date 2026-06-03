@@ -69,16 +69,17 @@ class GradleBuildTool(index: IndexCommand) extends BuildTool("Gradle", index) {
   }
 
   private def containsFileWithSuffix(root: Path, suffix: String): Boolean =
-    Files.isDirectory(root) && Try {
-      val stream = Files.find(
-        root,
-        Integer.MAX_VALUE,
-        (p, attrs) =>
-          attrs.isRegularFile && p.getFileName.toString.endsWith(suffix)
-      )
-      try stream.findFirst().isPresent
-      finally stream.close()
-    }.getOrElse(false)
+    Files.isDirectory(root) &&
+      Try {
+        val stream = Files.find(
+          root,
+          Integer.MAX_VALUE,
+          (p, attrs) =>
+            attrs.isRegularFile && p.getFileName.toString.endsWith(suffix)
+        )
+        try stream.findFirst().isPresent
+        finally stream.close()
+      }.getOrElse(false)
 
   def targetroot: Path = index.finalTargetroot(defaultTargetroot)
 

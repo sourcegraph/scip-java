@@ -21,8 +21,12 @@ object ScipPrinters {
 
   // Snapshot comment prefix for each rendered file extension. Languages not
   // listed fall back to `//`.
-  private val commentSyntaxByExtension: Map[String, String] =
-    Map("py" -> "#", "sql" -> "--", "yaml" -> "#", "yml" -> "#")
+  private val commentSyntaxByExtension: Map[String, String] = Map(
+    "py" -> "#",
+    "sql" -> "--",
+    "yaml" -> "#",
+    "yml" -> "#"
+  )
 
   def printTextDocument(doc: Document, text: String): String = {
     val out = new mutable.StringBuilder()

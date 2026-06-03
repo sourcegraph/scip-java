@@ -28,11 +28,7 @@ object Embedded {
 
   private def javacErrorpath(tmp: Path) = tmp.resolve("errorpath.txt")
 
-  def customJavac(
-      sourceroot: Path,
-      targetroot: Path,
-      tmp: Path
-  ): Path = {
+  def customJavac(sourceroot: Path, targetroot: Path, tmp: Path): Path = {
     val bin = tmp.resolve("bin")
     val javac = bin.resolve("javac")
     val java = bin.resolve("java")
