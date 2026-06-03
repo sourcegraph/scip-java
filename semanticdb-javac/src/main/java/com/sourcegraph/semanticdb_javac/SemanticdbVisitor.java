@@ -2,7 +2,6 @@ package com.sourcegraph.semanticdb_javac;
 
 import com.sourcegraph.semanticdb.Semanticdb;
 
-import com.sourcegraph.semanticdb.SemanticdbMd5;
 import com.sourcegraph.semanticdb.SemanticdbPaths;
 import com.sourcegraph.semanticdb.SemanticdbSymbols;
 
@@ -44,7 +43,10 @@ import com.sourcegraph.semanticdb.Semanticdb.SymbolInformation.Property;
 import com.sourcegraph.semanticdb.Semanticdb.SymbolOccurrence.Role;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -560,8 +562,17 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
 
   private String semanticdbMd5() {
     try {
-      return SemanticdbMd5.digest(compUnitTree.getSourceFile().getCharContent(true).toString());
-    } catch (IOException e) {
+      byte[] bytes =
+          compUnitTree
+              .getSourceFile()
+              .getCharContent(true)
+              .toString()
+              .getBytes(StandardCharsets.UTF_8);
+      byte[] digest = MessageDigest.getInstance("MD5").digest(bytes);
+      StringBuilder sb = new StringBuilder(digest.length * 2);
+      for (byte b : digest) sb.append(String.format("%02X", b));
+      return sb.toString();
+    } catch (IOException | NoSuchAlgorithmException e) {
       return "";
     }
   }
