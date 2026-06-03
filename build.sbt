@@ -83,8 +83,7 @@ lazy val semanticdbShared = project
     javaOnlySettings,
     (Compile / PB.targets) :=
       Seq(PB.gens.java(V.protobuf) -> (Compile / sourceManaged).value),
-    libraryDependencies +=
-      "com.google.protobuf" % "protobuf-java" % V.protobuf
+    libraryDependencies += "com.google.protobuf" % "protobuf-java" % V.protobuf
   )
 
 lazy val agent = project
