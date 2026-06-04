@@ -12,7 +12,7 @@ lazy val V =
     val scipBindings = "0.8.0"
     val scalaXml = "2.1.0"
     val moped = "0.2.0"
-    val gradle = "7.0"
+    val gradle = "8.10"
     val scala213 = "2.13.13"
     val scalameta = "4.9.3"
     val kotlinVersion = "2.2.0"
@@ -432,14 +432,7 @@ lazy val semanticdbKotlincMinimized = project
     // Setting javaHome to Some(<current JVM home>) flips
     // ZincUtil.compilers/JavaTools.directOrFork from direct → fork.
     javaHome := Some(file(System.getProperty("java.home"))),
-    Compile / javacOptions ++=
-      Seq(
-        "-J--add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED",
-        "-J--add-exports=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED",
-        "-J--add-exports=jdk.compiler/com.sun.tools.javac.model=ALL-UNNAMED",
-        "-J--add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED",
-        "-J--add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED"
-      ),
+    Compile / javacOptions ++= javacModuleOptions,
     // Attach the assembled kotlinc fat-jar to the compile classpath.
     // sbt-kotlin-plugin's AnalyzingKotlinCompiler partitions the classpath:
     // any jar containing META-INF/services/org.jetbrains.kotlin.compiler.plugin*
@@ -516,14 +509,7 @@ lazy val minimizedSettings = List[Def.Setting[_]](
   // Fork javac so it receives real file paths instead of sbt's `vf://` virtual-file URIs
   // (see the comment on `semanticdbKotlincMinimized` for the long story).
   javaHome := Some(file(System.getProperty("java.home"))),
-  Compile / javacOptions ++=
-    Seq(
-      "-J--add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED",
-      "-J--add-exports=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED",
-      "-J--add-exports=jdk.compiler/com.sun.tools.javac.model=ALL-UNNAMED",
-      "-J--add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED",
-      "-J--add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED"
-    ),
+  Compile / javacOptions ++= javacModuleOptions,
   javacOptions +=
     List(
       s"-Xplugin:semanticdb",
@@ -542,16 +528,11 @@ lazy val minimized = project
   .disablePlugins(JavaFormatterPlugin)
 
 def javacModuleOptions = List(
-  "-J--add-exports",
-  "-Jjdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED",
-  "-J--add-exports",
-  "-Jjdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED",
-  "-J--add-exports",
-  "-Jjdk.compiler/com.sun.tools.javac.model=ALL-UNNAMED",
-  "-J--add-exports",
-  "-Jjdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED",
-  "-J--add-exports",
-  "-Jjdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED"
+  "-J--add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED",
+  "-J--add-exports=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED",
+  "-J--add-exports=jdk.compiler/com.sun.tools.javac.model=ALL-UNNAMED",
+  "-J--add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED",
+  "-J--add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED"
 )
 
 lazy val unit = project

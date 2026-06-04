@@ -3,9 +3,6 @@ package tests
 import tests.Tool._
 
 class Gradle_8_BuildToolSuite extends GradleBuildToolSuite(Gradle8)
-class Gradle_7_BuildToolSuite extends GradleBuildToolSuite(Gradle7)
-class Gradle_6_BuildToolSuite extends GradleBuildToolSuite(Gradle6)
-class Gradle_5_BuildToolSuite extends GradleBuildToolSuite(Gradle5)
 
 abstract class GradleBuildToolSuite(gradle: Tool.Gradle)
     extends GradleBuildToolSuiteBase(gradle) {
@@ -39,8 +36,7 @@ abstract class GradleBuildToolSuite(gradle: Tool.Gradle)
     - build/generated/sources/annotationProcessor/java/main/test/ImmutableWorkflowOptions.java.semanticdb
     - /META-INF/semanticdb/src/main/java/WorkflowOptions.java.semanticdb
      */
-    expectedSemanticdbFiles = 2,
-    gradleVersions = List(Gradle8, Gradle7, Gradle6)
+    expectedSemanticdbFiles = 2
   )
 
   checkGradleBuild(
@@ -71,8 +67,7 @@ abstract class GradleBuildToolSuite(gradle: Tool.Gradle)
     """.stripMargin,
     // See comment about immutable annotation processor above,
     // it explains why we expecte 2 semanticdb files
-    expectedSemanticdbFiles = 2,
-    gradleVersions = List(Gradle8, Gradle7, Gradle6)
+    expectedSemanticdbFiles = 2
   )
 
   checkGradleBuild(
@@ -100,12 +95,9 @@ abstract class GradleBuildToolSuite(gradle: Tool.Gradle)
        |public abstract class ExampleClass {}
     """.stripMargin,
     expectedSemanticdbFiles = 1,
-    gradleVersions = List(Gradle8, Gradle7, Gradle6),
     expectedPackages = "maven:com.sourcegraph:example-library:1.1"
   )
 
-  // This is the most basic test for Java support
-  // We run it for an extended list of Gradle versions
   checkGradleBuild(
     "basic",
     """|/build.gradle
@@ -152,9 +144,7 @@ abstract class GradleBuildToolSuite(gradle: Tool.Gradle)
        |     }
        | }
        |""".stripMargin,
-    expectedSemanticdbFiles = 2,
-    // Only add this test on Gradle 5 in the gradle 6 suite
-    gradleVersions = List(Gradle8, Gradle7, Gradle6, Gradle5)
+    expectedSemanticdbFiles = 2
   )
 
   allJava.foreach { java =>
@@ -170,8 +160,7 @@ abstract class GradleBuildToolSuite(gradle: Tool.Gradle)
           |/src/main/java/Example.java
           |public class Example {}
           |""".stripMargin,
-      expectedSemanticdbFiles = 1,
-      gradleVersions = List(Gradle8, Gradle7, Gradle6)
+      expectedSemanticdbFiles = 1
     )
   }
 
@@ -209,8 +198,7 @@ abstract class GradleBuildToolSuite(gradle: Tool.Gradle)
        |/src/main/java/Example.java
        |public class Example {}
        |""".stripMargin,
-    expectedSemanticdbFiles = 2,
-    gradleVersions = List(Gradle8, Gradle7, Gradle6)
+    expectedSemanticdbFiles = 2
   )
 
   checkGradleBuild(
@@ -225,8 +213,7 @@ abstract class GradleBuildToolSuite(gradle: Tool.Gradle)
        |<hello/>
        |""".stripMargin,
     expectedSemanticdbFiles = 2,
-    extraArguments = List("--build-tool", "gradle"),
-    gradleVersions = List(Gradle8, Gradle7, Gradle6)
+    extraArguments = List("--build-tool", "gradle")
   )
 
   checkGradleBuild(
@@ -239,8 +226,7 @@ abstract class GradleBuildToolSuite(gradle: Tool.Gradle)
        |public class ExampleSuite {}
        |""".stripMargin,
     expectedSemanticdbFiles = 1,
-    extraArguments = List("--", "compileJava"),
-    gradleVersions = List(Gradle8, Gradle7, Gradle6)
+    extraArguments = List("--", "compileJava")
   )
 
   checkGradleBuild(
@@ -265,8 +251,7 @@ abstract class GradleBuildToolSuite(gradle: Tool.Gradle)
        |package foo
        |class ExampleSuite {}
        |""".stripMargin,
-    expectedSemanticdbFiles = 4,
-    gradleVersions = List(Gradle8)
+    expectedSemanticdbFiles = 4
   )
 
   checkGradleBuild(
@@ -311,8 +296,7 @@ abstract class GradleBuildToolSuite(gradle: Tool.Gradle)
          |maven:org.jetbrains.kotlin:kotlin-stdlib:1.6.20
          |maven:org.jetbrains:annotations:13.0
          |maven:org.slf4j:slf4j-api:1.7.36
-         |""".stripMargin,
-    gradleVersions = List(Gradle8, Gradle7, Gradle6)
+         |""".stripMargin
   )
 
   List("11", "17").foreach { java =>
@@ -333,52 +317,9 @@ abstract class GradleBuildToolSuite(gradle: Tool.Gradle)
           |package foo
           |object Example {}
           |""".stripMargin,
-      expectedSemanticdbFiles = 1,
-      gradleVersions = List(Gradle8)
+      expectedSemanticdbFiles = 1
     )
   }
-
-  /*
-   * TODO: Fixing this test for Kotlin 2.1 proved to be difficult.
-    There are some related deprecations in https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-compatibility-guide.html#kotlin-2-0-0-and-later
-    but the test doesn't behave as expected.
-   */
-  // List("jvm()" -> 4, "jvm { withJava() }" -> 4).foreach {
-  //   case (jvmSettings, expectedSemanticdbFiles) =>
-  //     checkGradleBuild(
-  //       s"kotlin-multiplatform-$jvmSettings",
-  //       s"""|/build.gradle
-  //           |plugins {
-  //           |    id 'org.jetbrains.kotlin.multiplatform' version '2.2.0'
-  //           |}
-  //           |repositories {
-  //           |    mavenCentral()
-  //           |}
-  //           |kotlin {
-  //           |  ${jvmSettings}
-  //           |}
-  //           |/gradle.properties
-  //           |kotlin.mpp.stability.nowarn=true
-  //           |kotlin.jvm.target.validation.mode=ignore
-  //           |/src/jvmMain/java/foo/ExampleJ.java
-  //           |package foo;
-  //           |public class ExampleJ {} // ignored by multiplatform
-  //           |/src/jvmMain/kotlin/foo/Example.kt
-  //           |package foo
-  //           |object Example {}
-  //           |/src/jvmTest/java/foo/ExampleJSuite.java
-  //           |package foo;
-  //           |class ExampleJSuite {} // ignored by multiplatform
-  //           |/src/commonTest/kotlin/foo/ExampleJvmSuite.kt
-  //           |package foo
-  //           |class ExampleJvmSuite {}
-  //           |""".stripMargin,
-  //       expectedSemanticdbFiles = expectedSemanticdbFiles,
-  //       // Older Kotlin gradle plugins don't support Gradle 8:
-  //       // https://youtrack.jetbrains.com/issue/KT-55704/Cannot-use-TaskAction-annotation-on-method-AbstractKotlinCompile.execute-error-while-using-Gradle-8.0-rc-with-KGP-1.5.32
-  //       gradleVersions = List(Gradle7, Gradle8)
-  //     )
-  // }
 
   // Regression test: projects that lazily register custom source sets (e.g. intTest)
   // with a Java toolchain would fail because the eager `.all {}` API in the plugin
@@ -409,8 +350,7 @@ abstract class GradleBuildToolSuite(gradle: Tool.Gradle)
         |/src/intTest/java/ExampleIntTest.java
         |public class ExampleIntTest {}
         |""".stripMargin,
-    expectedSemanticdbFiles = 1,
-    gradleVersions = List(Gradle8, Gradle7)
+    expectedSemanticdbFiles = 1
   )
 
 }

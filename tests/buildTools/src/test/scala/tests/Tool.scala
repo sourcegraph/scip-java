@@ -37,8 +37,5 @@ object Tool {
   sealed abstract class Gradle(version: String, support: JVMSupport)
       extends Tool("gradle", version, support)
   case object Gradle8 extends Gradle("8.10", atMostJava(21))
-  case object Gradle7 extends Gradle("7.6.3", atMostJava(17))
-  case object Gradle6 extends Gradle("6.8.3", atMostJava(11))
-  case object Gradle5 extends Gradle("5.6.4", atMostJava(11))
 
 }
