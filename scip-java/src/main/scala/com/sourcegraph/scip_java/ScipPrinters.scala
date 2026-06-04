@@ -114,7 +114,7 @@ object ScipPrinters {
             (o.getRangeList.asScala.toList.map(_.toInt), o.getSymbol)
           )
         occurrences.foreach { occ =>
-          formatOccurrence(input, out, occ, line, symtab, commentSyntax)
+          formatOccurrence(input, out, occ, line, symtab)
           if ((occ.getSymbolRoles & SymbolRole.Definition_VALUE) > 0) {
             syntheticDefinitions
               .getOrElse(occ.getSymbol, Nil)
@@ -125,7 +125,6 @@ object ScipPrinters {
                   occ,
                   line,
                   symtab,
-                  commentSyntax,
                   syntheticDefinition = Some(syntheticDefinition)
                 )
               }
@@ -173,7 +172,6 @@ object ScipPrinters {
       occ: Occurrence,
       line: String,
       symtab: Map[String, SymbolInformation],
-      comment: String,
       syntheticDefinition: Option[SymbolInformation] = None
   ): Unit = {
     val pos = mopedPosition(input, occ)
@@ -195,8 +193,8 @@ object ScipPrinters {
       else
         "reference"
     val indent =
-      if (pos.startColumn + sourceIndent.length > comment.length)
-        " " * (pos.startColumn + sourceIndent.length - comment.length)
+      if (pos.startColumn + sourceIndent.length > commentSyntax.length)
+        " " * (pos.startColumn + sourceIndent.length - commentSyntax.length)
       else
         ""
     val caretCharacter =
@@ -216,7 +214,7 @@ object ScipPrinters {
     val _ = ScipSymbol.parseOrThrowExceptionIfInvalid(symbol)
 
     out
-      .append(comment)
+      .append(commentSyntax)
       .append(indent)
       .append(carets)
       .append(" ")
@@ -231,7 +229,7 @@ object ScipPrinters {
     syntheticDefinition.orElse(symtab.get(occ.getSymbol)) match {
       case Some(info) if isDefinition =>
         val prefix =
-          comment + (" " * indent.length) + (" " * carets.length) + " "
+          commentSyntax + (" " * indent.length) + (" " * carets.length) + " "
         if (!info.getDisplayName.isEmpty) {
           out
             .append(prefix)
