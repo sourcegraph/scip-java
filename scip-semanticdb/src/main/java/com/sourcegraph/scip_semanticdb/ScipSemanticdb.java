@@ -4,9 +4,12 @@ import com.google.protobuf.CodedInputStream;
 import com.sourcegraph.semanticdb.SemanticdbSymbols;
 import java.io.IOException;
 import java.nio.file.FileSystems;
+import java.nio.file.FileVisitResult;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.PathMatcher;
+import java.nio.file.SimpleFileVisitor;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -42,6 +45,8 @@ import org.scip_code.scip.ToolInfo;
 public class ScipSemanticdb {
   private static final PathMatcher JAR_PATTERN =
       FileSystems.getDefault().getPathMatcher("glob:**.jar");
+  private static final PathMatcher SCIP_PATTERN =
+      FileSystems.getDefault().getPathMatcher("glob:**.scip");
 
   private final ScipWriter writer;
   private final ScipSemanticdbOptions options;
@@ -59,7 +64,7 @@ public class ScipSemanticdb {
   private void run() throws IOException {
     PackageTable packages = new PackageTable(options);
     SymbolRewriter rewriter = new SymbolRewriter(packages);
-    List<Path> shards = ScipShardWalker.findShards(options);
+    List<Path> shards = findShards();
     Collections.sort(shards);
     if (options.reporter.hasErrors()) return;
     if (shards.isEmpty() && !options.allowEmptyIndex) {
@@ -79,6 +84,33 @@ public class ScipSemanticdb {
     shardStream(shards).forEach(shard -> processShard(shard, rewriter, inverseReferences));
     writer.build();
     options.reporter.endProcessing();
+  }
+
+  /**
+   * Returns every {@code *.scip} shard under {@code options.targetroots}. A targetroot that happens
+   * to be a {@code .jar} is included as-is so callers can pick out shards stored inside.
+   */
+  private List<Path> findShards() throws IOException {
+    List<Path> shards = new ArrayList<>();
+    SimpleFileVisitor<Path> visitor =
+        new SimpleFileVisitor<Path>() {
+          @Override
+          public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) {
+            if (SCIP_PATTERN.matches(file)) shards.add(file);
+            return FileVisitResult.CONTINUE;
+          }
+
+          @Override
+          public FileVisitResult visitFileFailed(Path file, IOException exc) {
+            options.reporter.error(exc);
+            return FileVisitResult.CONTINUE;
+          }
+        };
+    for (Path root : options.targetroots) {
+      if (JAR_PATTERN.matches(root)) shards.add(root);
+      else if (Files.isDirectory(root)) Files.walkFileTree(root, visitor);
+    }
+    return shards;
   }
 
   private Index metadataIndex() {
