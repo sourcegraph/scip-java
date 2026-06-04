@@ -1,10 +1,12 @@
 package com.sourcegraph.semanticdb_kotlinc.test
 
 import org.scip_code.scip.Occurrence
-import org.scip_code.scip.Relationship
-import org.scip_code.scip.Signature
 import org.scip_code.scip.SymbolInformation
 import org.scip_code.scip.SymbolRole
+import org.scip_code.scip.occurrence
+import org.scip_code.scip.relationship
+import org.scip_code.scip.signature
+import org.scip_code.scip.symbolInformation
 
 /**
  * Tiny DSL for building SCIP [Occurrence] / [SymbolInformation] test fixtures with the same shape
@@ -21,8 +23,8 @@ import org.scip_code.scip.SymbolRole
  * ```
  */
 
-internal const val REFERENCE: Int = 0
-internal const val DEFINITION: Int = SymbolRole.Definition_VALUE
+internal val REFERENCE: Int = SymbolRole.UnspecifiedSymbolRole.number
+internal val DEFINITION: Int = SymbolRole.Definition.number
 
 @DslMarker annotation class ScipBuilderDsl
 
@@ -59,11 +61,11 @@ class ScipOccurrenceBuilder {
         enclosingRange = ScipRangeBuilder().apply(block).toIntList()
     }
 
-    internal fun build(): Occurrence {
-        val builder = Occurrence.newBuilder().setSymbol(symbol).setSymbolRoles(role)
-        range?.forEach { builder.addRange(it) }
-        enclosingRange?.forEach { builder.addEnclosingRange(it) }
-        return builder.build()
+    internal fun build(): Occurrence = occurrence {
+        symbol = this@ScipOccurrenceBuilder.symbol
+        symbolRoles = role
+        this@ScipOccurrenceBuilder.range?.let { range += it }
+        this@ScipOccurrenceBuilder.enclosingRange?.let { enclosingRange += it }
     }
 }
 
@@ -87,19 +89,24 @@ class ScipSymbolInformationBuilder {
         overrides.addAll(symbols)
     }
 
-    internal fun build(): SymbolInformation {
-        val builder = SymbolInformation.newBuilder().setSymbol(symbol)
-        if (displayName.isNotEmpty()) builder.displayName = displayName
-        signatureText?.let {
-            builder.signatureDocumentation =
-                Signature.newBuilder().setLanguage("kotlin").setText(it).build()
+    internal fun build(): SymbolInformation = symbolInformation {
+        symbol = this@ScipSymbolInformationBuilder.symbol
+        if (this@ScipSymbolInformationBuilder.displayName.isNotEmpty()) {
+            displayName = this@ScipSymbolInformationBuilder.displayName
         }
-        for (d in docs) builder.addDocumentation(d)
+        signatureText?.let { sigText ->
+            signatureDocumentation = signature {
+                language = "kotlin"
+                text = sigText
+            }
+        }
+        for (d in docs) documentation += d
         for (s in overrides) {
-            builder.addRelationships(
-                Relationship.newBuilder().setSymbol(s).setIsImplementation(true).build())
+            relationships += relationship {
+                symbol = s
+                isImplementation = true
+            }
         }
-        return builder.build()
     }
 }
 
