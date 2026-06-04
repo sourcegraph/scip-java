@@ -9,6 +9,8 @@ import scala.jdk.CollectionConverters._
 
 import com.sourcegraph.io.DeleteVisitor
 
+import java.util.function.Predicate
+
 class SaveSnapshotHandler extends SnapshotHandler {
   private val writtenTests = new ConcurrentLinkedDeque[Path]()
   override def onSnapshotTest(
@@ -26,9 +28,11 @@ class SaveSnapshotHandler extends SnapshotHandler {
       return
     }
     val isWritten = writtenTests.asScala.toSet
+    val keepWritten: Predicate[Path] =
+      (file: Path) => !isWritten.contains(file)
     Files.walkFileTree(
       context.expectDirectory,
-      new DeleteVisitor(deleteFile = file => !isWritten.contains(file))
+      new DeleteVisitor(keepWritten)
     )
   }
 

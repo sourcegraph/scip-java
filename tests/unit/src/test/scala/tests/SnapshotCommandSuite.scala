@@ -5,10 +5,8 @@ import java.nio.file.Files
 import scala.meta.inputs.Input
 
 import com.sourcegraph.scip_java.ScipJava
-import moped.testkit.FileLayout
-import moped.testkit.MopedSuite
 
-class SnapshotCommandSuite extends MopedSuite(ScipJava.app) {
+class SnapshotCommandSuite extends ScipJavaSuite(ScipJava.app) {
   test("snapshot") {
     FileLayout.fromString(
       """/main/Sample.java
@@ -35,7 +33,7 @@ class SnapshotCommandSuite extends MopedSuite(ScipJava.app) {
 
     val generatedpath = workingDirectory.resolve("generated")
 
-    val indexExit = app().run(
+    val indexExit = app.run(
       List(
         "aggregate",
         "--output",
@@ -46,7 +44,7 @@ class SnapshotCommandSuite extends MopedSuite(ScipJava.app) {
 
     assertEquals(indexExit, 0, clues(app.capturedOutput))
 
-    val snapshotExit = app().run(
+    val snapshotExit = app.run(
       List("snapshot", "--output", generatedpath.toString, targetroot.toString)
     )
     assertEquals(snapshotExit, 0, clues(app.capturedOutput))

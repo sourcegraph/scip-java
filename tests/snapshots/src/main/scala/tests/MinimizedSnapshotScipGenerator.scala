@@ -6,6 +6,7 @@ import java.nio.file.Files
 import java.nio.file.Paths
 
 import scala.jdk.CollectionConverters.CollectionHasAsScala
+import scala.jdk.CollectionConverters.SeqHasAsJava
 
 import scala.meta.internal.io.FileIO
 import scala.meta.io.AbsolutePath
@@ -17,7 +18,7 @@ import org.scip_code.scip.Index
 
 class MinimizedSnapshotScipGenerator {
   def run(args: List[String]): Unit = {
-    val exit = ScipJava.app.run(args)
+    val exit = ScipJava.app.run(args.asJava)
     require(exit == 0)
   }
   def run(context: SnapshotContext, handler: SnapshotHandler): Unit = {
