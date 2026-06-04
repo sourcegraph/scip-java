@@ -82,7 +82,7 @@
                 </plugin>
                 <plugin>
                     <groupId>com.sourcegraph</groupId>
-                    <artifactId>maven-plugin</artifactId>
+                    <artifactId>scip-maven-plugin</artifactId>
                     <version>${scip-java.version}</version>
                     <executions>
                         <execution>

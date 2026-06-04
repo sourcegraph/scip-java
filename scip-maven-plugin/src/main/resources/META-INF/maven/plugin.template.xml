@@ -6,7 +6,7 @@
   <name>Sourcegraph scip-java Maven plugin</name>
   <description>A Maven plugin which exports your project's dependencies in a format scip-java can understand</description>
   <groupId>com.sourcegraph</groupId>
-  <artifactId>maven-plugin</artifactId>
+  <artifactId>scip-maven-plugin</artifactId>
   <version>@VERSION@</version>
   <goalPrefix>sourcegraph</goalPrefix>
   <isolatedRealm>false</isolatedRealm>

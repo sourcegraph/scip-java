@@ -173,7 +173,7 @@ plugin that can dump the project's dependencies in a format that scip-java under
 You can either use it directly from commandline:
 
 ```
-$ mvn com.sourcegraph:maven-plugin:@STABLE_VERSION@:sourcegraphDependencies
+$ mvn com.sourcegraph:scip-maven-plugin:@STABLE_VERSION@:sourcegraphDependencies
 ```
 
 Or add it to your build like any other maven plugin:
@@ -181,7 +181,7 @@ Or add it to your build like any other maven plugin:
 ```xml
 <plugin>
     <groupId>com.sourcegraph</groupId>
-    <artifactId>maven-plugin</artifactId>
+    <artifactId>scip-maven-plugin</artifactId>
     <version>@STABLE_VERSION@</version>
     <executions>
         <execution>
