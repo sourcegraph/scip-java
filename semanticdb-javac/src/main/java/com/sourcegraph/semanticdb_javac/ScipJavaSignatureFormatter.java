@@ -134,6 +134,7 @@ final class ScipJavaSignatureFormatter {
     // Mirror SignatureFormatter's Java extends/implements logic.
     switch (sym.getKind()) {
       case CLASS:
+      case ENUM:
         if (isEnum || !hasNonRedundantParent) {
           printKeyword(s, " implements");
           s.append(nonSynthetic.stream().map(this::formatType).collect(Collectors.joining(", ")));
