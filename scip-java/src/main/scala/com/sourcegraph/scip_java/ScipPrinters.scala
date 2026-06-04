@@ -19,6 +19,9 @@ object ScipPrinters {
    */
   val sourceIndent = "  "
 
+  // scip-java only indexes Java and Kotlin sources, both of which use `//`.
+  private val commentSyntax = "//"
+
   def printTextDocument(doc: Document, text: String): String = {
     val out = new mutable.StringBuilder()
     val occurrencesByLine = doc
@@ -97,7 +100,7 @@ object ScipPrinters {
           .getOrElse(i, Nil)
           .foreach { er =>
             out
-              .append("//")
+              .append(commentSyntax)
               .append(" " * er.startChar)
               .append("⌄ enclosing_range_start ")
               .append(er.symbol)
@@ -111,7 +114,7 @@ object ScipPrinters {
             (o.getRangeList.asScala.toList.map(_.toInt), o.getSymbol)
           )
         occurrences.foreach { occ =>
-          formatOccurrence(input, out, occ, line, symtab, "//")
+          formatOccurrence(input, out, occ, line, symtab, commentSyntax)
           if ((occ.getSymbolRoles & SymbolRole.Definition_VALUE) > 0) {
             syntheticDefinitions
               .getOrElse(occ.getSymbol, Nil)
@@ -122,7 +125,7 @@ object ScipPrinters {
                   occ,
                   line,
                   symtab,
-                  "//",
+                  commentSyntax,
                   syntheticDefinition = Some(syntheticDefinition)
                 )
               }
@@ -133,7 +136,7 @@ object ScipPrinters {
           .foreach { er =>
             val indent = math.max(0, er.endChar - 1)
             out
-              .append("//")
+              .append(commentSyntax)
               .append(" " * indent)
               .append("⌃ enclosing_range_end ")
               .append(er.symbol)
