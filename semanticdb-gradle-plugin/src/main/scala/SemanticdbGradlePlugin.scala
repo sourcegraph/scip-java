@@ -103,27 +103,16 @@ class SemanticdbGradlePlugin extends Plugin[Project] {
           .getTasks()
           .withType(classOf[JavaCompile])
           .configureEach { task =>
-            // On JDK 17+ we need --add-exports flags to allow our compiler
-            // plugin to access javac internals.
-            val toolchainJavaVersion = Option(
-              task.getJavaCompiler().getOrNull()
-            ).map(_.getMetadata().getLanguageVersion().asInt())
-
-            val effectiveJavaVersion = toolchainJavaVersion.getOrElse(
-              Runtime.version().feature()
-            )
-
-            if (effectiveJavaVersion >= 17) {
-              val forkOptions = task.getOptions().getForkOptions()
-              val jvmArgs =
-                BuildInfo.javacModuleOptions.map(_.stripPrefix("-J")).asJava
-
-              forkOptions.getJvmArgs() match {
-                case null =>
-                  forkOptions.setJvmArgs(jvmArgs)
-                case _ =>
-                  forkOptions.getJvmArgs().addAll(jvmArgs)
-              }
+            // Add --add-exports JVM args so our compiler plugin can access
+            // javac internals. Required on JDK 17+ (JEP 403), no-op on 11-16.
+            val forkOptions = task.getOptions().getForkOptions()
+            val jvmArgs =
+              BuildInfo.javacModuleOptions.map(_.stripPrefix("-J")).asJava
+            forkOptions.getJvmArgs() match {
+              case null =>
+                forkOptions.setJvmArgs(jvmArgs)
+              case _ =>
+                forkOptions.getJvmArgs().addAll(jvmArgs)
             }
 
             task.getOptions().setFork(true)
