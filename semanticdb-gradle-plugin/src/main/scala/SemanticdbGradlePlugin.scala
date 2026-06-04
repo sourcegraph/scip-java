@@ -11,7 +11,6 @@ import com.sourcegraph.scip_java.BuildInfo
 import org.gradle.api.DefaultTask
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.gradle.api.provider.Property
 import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.api.tasks.SourceSetContainer
@@ -106,28 +105,11 @@ class SemanticdbGradlePlugin extends Plugin[Project] {
           .configureEach { task =>
             // On JDK 17+ we need --add-exports flags to allow our compiler
             // plugin to access javac internals.
-            type JavaCompiler = {
-              type Metadata = {
-                type LangVersion = {
-                  def asInt(): Int
-                }
-                def getLanguageVersion(): LangVersion
-              }
-              def getMetadata(): Metadata
-            }
-
-            type HasCompilerProperty = {
-              def getJavaCompiler(): Property[JavaCompiler]
-            }
-
-            val toolchainCompiler = Option(
-              task
-                .asInstanceOf[HasCompilerProperty]
-                .getJavaCompiler()
-                .getOrNull()
+            val toolchainJavaVersion = Option(
+              task.getJavaCompiler().getOrNull()
             ).map(_.getMetadata().getLanguageVersion().asInt())
 
-            val effectiveJavaVersion = toolchainCompiler.getOrElse(
+            val effectiveJavaVersion = toolchainJavaVersion.getOrElse(
               Runtime.version().feature()
             )
 
