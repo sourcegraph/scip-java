@@ -85,29 +85,28 @@ lazy val semanticdbShared = project
 
 lazy val gradlePlugin = project
   .in(file("semanticdb-gradle-plugin"))
+  .enablePlugins(KotlinPlugin)
   .settings(
     name := "semanticdb-gradle",
-    buildInfoPackage := "com.sourcegraph.scip_java",
     publish / skip := true,
-    scalacOptions ++= Seq("-target:11", "-release", "11"),
+    kotlinVersion := V.kotlinVersion,
+    kotlincJvmTarget := "11",
+    // The Gradle init script puts only gradle-plugin.jar on the initscript
+    // classpath, so the assembled jar must contain kotlin-stdlib.
+    kotlinLib("stdlib"),
+    // Mark sbt-kotlin-plugin's auto-added kotlin-scripting-compiler-embeddable
+    // as Provided so it does NOT get bundled into our gradle-plugin.jar fat-jar.
+    // (kotlin-compiler-embeddable is already isolated to the KotlinInternal
+    // configuration and will not be picked up by sbt-assembly.)
+    kotlinRuntimeProvided := true,
+    Compile / javacOptions ++= Seq("--release", "11"),
+    Compile / sourceGenerators += gradlePluginBuildInfoGenerator.taskValue,
     libraryDependencies ++=
       List(
         "dev.gradleplugins" % "gradle-api" % V.gradle % Provided,
-        "dev.gradleplugins" % "gradle-test-kit" % V.gradle % Provided,
-        "org.jetbrains.kotlin" % "kotlin-gradle-plugin" % V.kotlinVersion %
-          Provided
-      ),
-    buildInfoKeys :=
-      Seq[BuildInfoKey](
-        version,
-        sbtVersion,
-        scalaVersion,
-        "javacModuleOptions" -> javacModuleOptions,
-        "semanticdbVersion" -> V.scalameta,
-        "scala213" -> V.scala213
+        "dev.gradleplugins" % "gradle-test-kit" % V.gradle % Provided
       )
   )
-  .enablePlugins(BuildInfoPlugin)
 
 lazy val javacPlugin = project
   .in(file("semanticdb-javac"))
@@ -534,6 +533,50 @@ def javacModuleOptions = List(
   "-J--add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED",
   "-J--add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED"
 )
+
+// Source-generator for the Gradle plugin's small build-info Java class.
+// Replaces the previous sbt-buildinfo-generated Scala BuildInfo object so the
+// gradle-plugin module can stay Kotlin-only (and the generated class is easy
+// to consume from Kotlin).
+def javaStringLiteral(value: String): String = {
+  val escaped = value.flatMap {
+    case '\\'             => "\\\\"
+    case '"'              => "\\\""
+    case '\n'             => "\\n"
+    case '\r'             => "\\r"
+    case '\t'             => "\\t"
+    case c if c.isControl => f"\\u${c.toInt}%04x"
+    case c                => c.toString
+  }
+  "\"" + escaped + "\""
+}
+
+lazy val gradlePluginBuildInfoGenerator = Def.task {
+  val out =
+    (Compile / sourceManaged).value / "com" / "sourcegraph" / "scip_java" /
+      "GradlePluginBuildInfo.java"
+  IO.createDirectory(out.getParentFile)
+  val optionsLiteral = javacModuleOptions
+    .map(javaStringLiteral)
+    .mkString("Arrays.asList(", ", ", ")")
+  val versionLiteral = javaStringLiteral(version.value)
+  val contents =
+    s"""package com.sourcegraph.scip_java;
+       |
+       |import java.util.Arrays;
+       |import java.util.Collections;
+       |import java.util.List;
+       |
+       |public final class GradlePluginBuildInfo {
+       |    private GradlePluginBuildInfo() {}
+       |    public static final String version = $versionLiteral;
+       |    public static final List<String> javacModuleOptions =
+       |        Collections.unmodifiableList($optionsLiteral);
+       |}
+       |""".stripMargin
+  IO.write(out, contents)
+  Seq(out)
+}
 
 lazy val unit = project
   .in(file("tests/unit"))
