@@ -11,7 +11,6 @@ import io.kotest.matchers.collections.shouldContainInOrder
 import io.kotest.matchers.shouldBe
 import java.nio.file.Path
 import java.nio.file.Paths
-import kotlin.contracts.ExperimentalContracts
 import org.intellij.lang.annotations.Language
 import org.jetbrains.kotlin.backend.common.extensions.IrGenerationExtension
 import org.jetbrains.kotlin.compiler.plugin.CompilerPluginRegistrar
@@ -55,7 +54,6 @@ fun SourceFile.Companion.testKt(@Language("kotlin") contents: String): SourceFil
     kotlin("Test.kt", contents)
 
 @ExperimentalCompilerApi
-@ExperimentalContracts
 fun List<ExpectedSymbols>.mapCheckExpectedSymbols(): List<DynamicTest> =
     this.flatMap { (testName, source, symbolsData, scipData) ->
         val globals = GlobalSymbolsCache(testing = true)
@@ -85,7 +83,6 @@ fun List<ExpectedSymbols>.mapCheckExpectedSymbols(): List<DynamicTest> =
             })
     }
 
-@ExperimentalContracts
 fun checkContainsExpectedSymbols(
     globals: GlobalSymbolsCache,
     locals: LocalSymbolsCache,
@@ -108,7 +105,6 @@ fun checkContainsExpectedScip(
 }
 
 @OptIn(ExperimentalCompilerApi::class)
-@ExperimentalContracts
 private fun configureTestCompiler(
     source: SourceFile,
     globals: GlobalSymbolsCache,
@@ -127,7 +123,6 @@ private fun configureTestCompiler(
     return compilation
 }
 
-@OptIn(ExperimentalContracts::class)
 private class TestAnalyzerDeclarationCheckers(
     globals: GlobalSymbolsCache,
     locals: LocalSymbolsCache,
@@ -148,7 +143,6 @@ private class TestAnalyzerDeclarationCheckers(
 }
 
 private class TestAnalyzerCheckers(session: FirSession) : AnalyzerCheckers(session) {
-    @OptIn(ExperimentalContracts::class)
     override val declarationCheckers: DeclarationCheckers
         get() =
             TestAnalyzerDeclarationCheckers(
@@ -158,7 +152,6 @@ private class TestAnalyzerCheckers(session: FirSession) : AnalyzerCheckers(sessi
             )
 }
 
-@OptIn(ExperimentalContracts::class)
 class TestAnalyzerParamsProvider(
     session: FirSession,
     var globals: GlobalSymbolsCache,
@@ -180,7 +173,6 @@ val FirSession.testAnalyzerParamsProvider: TestAnalyzerParamsProvider by FirSess
     .sessionComponentAccessor()
 
 @OptIn(ExperimentalCompilerApi::class)
-@ExperimentalContracts
 fun semanticdbVisitorAnalyzer(
     globals: GlobalSymbolsCache,
     locals: LocalSymbolsCache,

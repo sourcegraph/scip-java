@@ -4,14 +4,12 @@ import com.sourcegraph.semanticdb_kotlinc.*
 import com.sourcegraph.semanticdb_kotlinc.test.ExpectedSymbols.ScipData
 import com.sourcegraph.semanticdb_kotlinc.test.ExpectedSymbols.SymbolCacheData
 import com.tschuchort.compiletesting.SourceFile
-import kotlin.contracts.ExperimentalContracts
 import org.jetbrains.kotlin.compiler.plugin.ExperimentalCompilerApi
 import org.junit.jupiter.api.TestFactory
 import org.scip_code.scip.Occurrence
 import org.scip_code.scip.SymbolInformation
 
 @ExperimentalCompilerApi
-@ExperimentalContracts
 class SemanticdbSymbolsTest {
     @TestFactory
     fun `method disambiguator`() =

@@ -4,7 +4,6 @@ import com.sourcegraph.semanticdb.ScipDocumentBuilder
 import com.sourcegraph.semanticdb.ScipShardPaths
 import java.nio.file.Path
 import java.nio.file.Paths
-import kotlin.contracts.ExperimentalContracts
 import org.jetbrains.kotlin.KtSourceElement
 import org.jetbrains.kotlin.KtSourceFile
 import org.jetbrains.kotlin.fir.FirElement
@@ -29,7 +28,6 @@ import org.scip_code.scip.signature
 import org.scip_code.scip.symbolInformation
 
 /** Builds a SCIP [Document] for a single Kotlin source file. */
-@ExperimentalContracts
 class SemanticdbTextDocumentBuilder(
     private val sourceroot: Path,
     private val file: KtSourceFile,

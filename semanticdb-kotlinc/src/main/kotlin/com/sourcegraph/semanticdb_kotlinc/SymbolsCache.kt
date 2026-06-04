@@ -3,8 +3,6 @@ package com.sourcegraph.semanticdb_kotlinc
 import com.sourcegraph.semanticdb.LocalSymbolsCache as SharedLocalSymbolsCache
 import com.sourcegraph.semanticdb_kotlinc.SemanticdbSymbolDescriptor.Kind
 import java.lang.System.err
-import kotlin.contracts.ExperimentalContracts
-import kotlin.contracts.contract
 import org.jetbrains.kotlin.fir.analysis.checkers.declaration.isLocalMember
 import org.jetbrains.kotlin.fir.analysis.checkers.getContainingSymbol
 import org.jetbrains.kotlin.fir.declarations.DirectDeclarationsAccess
@@ -20,7 +18,6 @@ import org.jetbrains.kotlin.fir.symbols.impl.*
 import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.util.capitalizeDecapitalize.capitalizeAsciiOnly
 
-@ExperimentalContracts
 class GlobalSymbolsCache(testing: Boolean = false) : Iterable<Symbol> {
     private val globals =
         if (testing) LinkedHashMap<FirBasedSymbol<*>, Symbol>()
@@ -80,17 +77,12 @@ class GlobalSymbolsCache(testing: Boolean = false) : Iterable<Symbol> {
         return uncachedSymbol(symbol).also { if (it.isGlobal()) packages[symbol] = it }
     }
 
-    private fun skip(symbol: FirBasedSymbol<*>?): Boolean {
-        contract { returns(false) implies (symbol != null) }
-        return symbol == null || symbol is FirAnonymousFunctionSymbol
-    }
-
     @OptIn(SymbolInternals::class)
     private fun uncachedSymbol(
         symbol: FirBasedSymbol<*>?,
         locals: LocalSymbolsCache
     ): Symbol {
-        if (skip(symbol)) return Symbol.NONE
+        if (symbol == null || symbol is FirAnonymousFunctionSymbol) return Symbol.NONE
 
         if (symbol.fir.isLocalMember) return locals + symbol
 
@@ -219,7 +211,6 @@ fun LocalSymbolsCache(): LocalSymbolsCache =
 
 operator fun LocalSymbolsCache.plus(symbol: FirBasedSymbol<*>): Symbol = put(symbol)
 
-@ExperimentalContracts
 class SymbolsCache(private val globals: GlobalSymbolsCache, private val locals: LocalSymbolsCache) {
     operator fun get(symbol: FirBasedSymbol<*>) = globals[symbol, locals]
     operator fun get(symbol: FqName) = globals[symbol]

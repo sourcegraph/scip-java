@@ -6,7 +6,6 @@ import java.io.PrintWriter
 import java.io.Writer
 import java.nio.file.Path
 import java.nio.file.Paths
-import kotlin.contracts.ExperimentalContracts
 import org.jetbrains.kotlin.KtSourceFile
 import org.jetbrains.kotlin.backend.common.extensions.IrGenerationExtension
 import org.jetbrains.kotlin.backend.common.extensions.IrPluginContext
@@ -25,7 +24,6 @@ import org.scip_code.scip.Document
  * file's [Document] and serializes it under `<targetRoot>/META-INF/scip/<relative-path>.scip`.
  * Files outside the source root are skipped with a stderr warning.
  */
-@ExperimentalContracts
 class PostAnalysisExtension(
     private val sourceRoot: Path,
     private val targetRoot: Path,

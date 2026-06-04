@@ -1,7 +1,6 @@
 package com.sourcegraph.semanticdb_kotlinc
 
 import java.nio.file.Path
-import kotlin.contracts.ExperimentalContracts
 import org.jetbrains.kotlin.*
 import org.jetbrains.kotlin.com.intellij.lang.LighterASTNode
 import org.jetbrains.kotlin.com.intellij.util.diff.FlyweightCapableTreeStructure
@@ -31,7 +30,6 @@ import org.jetbrains.kotlin.name.FqName
 
 open class AnalyzerCheckers(session: FirSession) : FirAdditionalCheckersExtension(session) {
     companion object {
-        @OptIn(ExperimentalContracts::class)
         val visitors: MutableMap<KtSourceFile, SemanticdbVisitor> = mutableMapOf()
 
         private fun getIdentifier(element: KtSourceElement): KtSourceElement =
@@ -78,10 +76,9 @@ open class AnalyzerCheckers(session: FirSession) : FirAdditionalCheckersExtensio
     private class SemanticFileChecker(private val sourceroot: Path) :
         FirFileChecker(MppCheckerKind.Common) {
         companion object {
-            @OptIn(ExperimentalContracts::class) val globals = GlobalSymbolsCache()
+            val globals = GlobalSymbolsCache()
         }
 
-        @OptIn(ExperimentalContracts::class)
         context(context: CheckerContext, reporter: DiagnosticReporter)
         override fun check(declaration: FirFile) {
             val ktFile = declaration.sourceFile ?: return
@@ -92,7 +89,6 @@ open class AnalyzerCheckers(session: FirSession) : FirAdditionalCheckersExtensio
     }
 
     class SemanticImportsChecker : FirFileChecker(MppCheckerKind.Common) {
-        @OptIn(ExperimentalContracts::class)
         context(context: CheckerContext, reporter: DiagnosticReporter)
         override fun check(declaration: FirFile) {
             val ktFile = declaration.sourceFile ?: return
@@ -167,7 +163,6 @@ open class AnalyzerCheckers(session: FirSession) : FirAdditionalCheckersExtensio
     }
 
     private class SemanticClassLikeChecker : FirClassLikeChecker(MppCheckerKind.Common) {
-        @OptIn(ExperimentalContracts::class)
         context(context: CheckerContext, reporter: DiagnosticReporter)
         override fun check(declaration: FirClassLikeDeclaration) {
             val source = declaration.source ?: return
@@ -196,7 +191,6 @@ open class AnalyzerCheckers(session: FirSession) : FirAdditionalCheckersExtensio
     }
 
     private class SemanticConstructorChecker : FirConstructorChecker(MppCheckerKind.Common) {
-        @OptIn(ExperimentalContracts::class)
         context(context: CheckerContext, reporter: DiagnosticReporter)
         override fun check(declaration: FirConstructor) {
             val source = declaration.source ?: return
@@ -231,7 +225,6 @@ open class AnalyzerCheckers(session: FirSession) : FirAdditionalCheckersExtensio
     }
 
     private class SemanticSimpleFunctionChecker : FirSimpleFunctionChecker(MppCheckerKind.Common) {
-        @OptIn(ExperimentalContracts::class)
         context(context: CheckerContext, reporter: DiagnosticReporter)
         override fun check(declaration: FirSimpleFunction) {
             val source = declaration.source ?: return
@@ -249,7 +242,6 @@ open class AnalyzerCheckers(session: FirSession) : FirAdditionalCheckersExtensio
 
     private class SemanticAnonymousFunctionChecker :
         FirAnonymousFunctionChecker(MppCheckerKind.Common) {
-        @OptIn(ExperimentalContracts::class)
         context(context: CheckerContext, reporter: DiagnosticReporter)
         override fun check(declaration: FirAnonymousFunction) {
             val source = declaration.source ?: return
@@ -260,7 +252,6 @@ open class AnalyzerCheckers(session: FirSession) : FirAdditionalCheckersExtensio
     }
 
     private class SemanticPropertyChecker : FirPropertyChecker(MppCheckerKind.Common) {
-        @OptIn(ExperimentalContracts::class)
         context(context: CheckerContext, reporter: DiagnosticReporter)
         override fun check(declaration: FirProperty) {
             val source = declaration.source ?: return
@@ -277,7 +268,6 @@ open class AnalyzerCheckers(session: FirSession) : FirAdditionalCheckersExtensio
     }
 
     private class SemanticValueParameterChecker : FirValueParameterChecker(MppCheckerKind.Common) {
-        @OptIn(ExperimentalContracts::class)
         context(context: CheckerContext, reporter: DiagnosticReporter)
         override fun check(declaration: FirValueParameter) {
             val source = declaration.source ?: return
@@ -294,7 +284,6 @@ open class AnalyzerCheckers(session: FirSession) : FirAdditionalCheckersExtensio
     }
 
     private class SemanticTypeParameterChecker : FirTypeParameterChecker(MppCheckerKind.Common) {
-        @OptIn(ExperimentalContracts::class)
         context(context: CheckerContext, reporter: DiagnosticReporter)
         override fun check(declaration: FirTypeParameter) {
             val source = declaration.source ?: return
@@ -305,7 +294,6 @@ open class AnalyzerCheckers(session: FirSession) : FirAdditionalCheckersExtensio
     }
 
     private class SemanticTypeAliasChecker : FirTypeAliasChecker(MppCheckerKind.Common) {
-        @OptIn(ExperimentalContracts::class)
         context(context: CheckerContext, reporter: DiagnosticReporter)
         override fun check(declaration: FirTypeAlias) {
             val source = declaration.source ?: return
@@ -317,7 +305,6 @@ open class AnalyzerCheckers(session: FirSession) : FirAdditionalCheckersExtensio
 
     private class SemanticPropertyAccessorChecker :
         FirPropertyAccessorChecker(MppCheckerKind.Common) {
-        @OptIn(ExperimentalContracts::class)
         context(context: CheckerContext, reporter: DiagnosticReporter)
         override fun check(declaration: FirPropertyAccessor) {
             val source = declaration.source ?: return
@@ -346,7 +333,6 @@ open class AnalyzerCheckers(session: FirSession) : FirAdditionalCheckersExtensio
 
     private class SemanticQualifiedAccessExpressionChecker :
         FirQualifiedAccessExpressionChecker(MppCheckerKind.Common) {
-        @OptIn(ExperimentalContracts::class)
         context(context: CheckerContext, reporter: DiagnosticReporter)
         override fun check(expression: FirQualifiedAccessExpression) {
             val source = expression.source ?: return
@@ -381,7 +367,6 @@ open class AnalyzerCheckers(session: FirSession) : FirAdditionalCheckersExtensio
 
     private class SemanticClassReferenceExpressionChecker :
         FirTypeOperatorCallChecker(MppCheckerKind.Common) {
-        @OptIn(ExperimentalContracts::class)
         context(context: CheckerContext, reporter: DiagnosticReporter)
         override fun check(expression: FirTypeOperatorCall) {
             val typeRef = expression.conversionTypeRef

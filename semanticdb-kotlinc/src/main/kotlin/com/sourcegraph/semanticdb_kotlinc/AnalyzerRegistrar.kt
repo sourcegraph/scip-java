@@ -1,7 +1,6 @@
 package com.sourcegraph.semanticdb_kotlinc
 
 import com.sourcegraph.semanticdb.SemanticdbOptions
-import kotlin.contracts.ExperimentalContracts
 import org.jetbrains.kotlin.backend.common.extensions.IrGenerationExtension
 import org.jetbrains.kotlin.compiler.plugin.CompilerPluginRegistrar
 import org.jetbrains.kotlin.compiler.plugin.ExperimentalCompilerApi
@@ -10,7 +9,6 @@ import org.jetbrains.kotlin.fir.extensions.FirExtensionRegistrarAdapter
 import org.scip_code.scip.Document
 
 @OptIn(ExperimentalCompilerApi::class)
-@ExperimentalContracts
 class AnalyzerRegistrar(private val callback: (Document) -> Unit = {}) :
     CompilerPluginRegistrar() {
     override fun ExtensionStorage.registerExtensions(configuration: CompilerConfiguration) {

@@ -1,7 +1,6 @@
 package com.sourcegraph.semanticdb_kotlinc
 
 import java.nio.file.Path
-import kotlin.contracts.ExperimentalContracts
 import org.jetbrains.kotlin.KtSourceElement
 import org.jetbrains.kotlin.KtSourceFile
 import org.jetbrains.kotlin.fir.analysis.checkers.context.CheckerContext
@@ -18,7 +17,6 @@ import org.scip_code.scip.Document
  * [AnalyzerCheckers] call into this and the resulting [Document] is written as a
  * `.scip` shard at the end of compilation.
  */
-@ExperimentalContracts
 class SemanticdbVisitor(
     sourceroot: Path,
     file: KtSourceFile,

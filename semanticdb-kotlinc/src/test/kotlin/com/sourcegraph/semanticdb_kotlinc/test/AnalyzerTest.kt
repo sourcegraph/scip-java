@@ -13,7 +13,6 @@ import io.kotest.matchers.shouldNotBe
 import java.io.File
 import java.nio.file.Path
 import java.nio.file.Paths
-import kotlin.contracts.ExperimentalContracts
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.intellij.lang.annotations.Language
@@ -24,7 +23,6 @@ import org.scip_code.scip.Occurrence
 import org.scip_code.scip.SymbolInformation
 
 @OptIn(ExperimentalCompilerApi::class)
-@ExperimentalContracts
 class AnalyzerTest {
     fun compileSemanticdb(path: Path, @Language("kotlin") code: String): Document {
         val buildPath = File(path.resolve("build").toString()).apply { mkdir() }
