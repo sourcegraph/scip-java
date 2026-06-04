@@ -18,7 +18,7 @@ RUN git config --global --add safe.directory *
 COPY . .
 
 RUN sbt publishLocal dumpScipJavaVersion
-RUN mkdir -p /app && coursier bootstrap "com.sourcegraph:scip-java_2.13:$(cat VERSION)" -f -o /app/scip-java -M com.sourcegraph.scip_java.ScipJava
+RUN mkdir -p /app && coursier bootstrap "com.sourcegraph:scip-java:$(cat VERSION)" -f -o /app/scip-java -M com.sourcegraph.scip_java.ScipJava
 
 COPY ./bin/scip-java-docker-script.sh /usr/bin/scip-java
 

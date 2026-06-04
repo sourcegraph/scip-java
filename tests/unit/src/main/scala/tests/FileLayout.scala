@@ -75,7 +75,10 @@ object FileLayout {
         row.stripPrefix("\n").split("\n", 2).toList match {
           case path :: contents :: Nil =>
             val withEndOfFileLine =
-              if (contents.endsWith("\n")) contents else contents + "\n"
+              if (contents.endsWith("\n"))
+                contents
+              else
+                contents + "\n"
             path.stripPrefix("/") -> withEndOfFileLine
           case other =>
             throw new IllegalArgumentException(

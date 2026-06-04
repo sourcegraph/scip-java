@@ -298,9 +298,8 @@ lazy val cli = project
 // Kotlin/Java-only (and the generated class is straightforward to consume
 // from Kotlin).
 lazy val scipJavaCliBuildInfoGenerator = Def.task {
-  val out =
-    (Compile / sourceManaged).value / "com" / "sourcegraph" / "scip_java" /
-      "BuildInfo.java"
+  val out = (Compile / sourceManaged).value / "com" / "sourcegraph" /
+    "scip_java" / "BuildInfo.java"
   IO.createDirectory(out.getParentFile)
   val optionsLiteral = javacModuleOptions
     .map(javaStringLiteral)
@@ -326,13 +325,20 @@ lazy val scipJavaCliBuildInfoGenerator = Def.task {
 
 def javaStringLiteral(value: String): String = {
   val escaped = value.flatMap {
-    case '\\'             => "\\\\"
-    case '"'              => "\\\""
-    case '\n'             => "\\n"
-    case '\r'             => "\\r"
-    case '\t'             => "\\t"
-    case c if c.isControl => f"\\u${c.toInt}%04x"
-    case c                => c.toString
+    case '\\' =>
+      "\\\\"
+    case '"' =>
+      "\\\""
+    case '\n' =>
+      "\\n"
+    case '\r' =>
+      "\\r"
+    case '\t' =>
+      "\\t"
+    case c if c.isControl =>
+      f"\\u${c.toInt}%04x"
+    case c =>
+      c.toString
   }
   "\"" + escaped + "\""
 }

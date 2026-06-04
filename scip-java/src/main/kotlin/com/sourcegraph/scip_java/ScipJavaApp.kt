@@ -74,7 +74,7 @@ class ScipJavaApp {
 
     fun run(args: List<String>): Int {
         reporter.reset()
-        val processedArgs = applyGlobalCwd(args)
+        val processedArgs = applyGlobalCwd(rewriteNestedOptions(args))
         val root = RootCommand(this)
         root.subcommands(IndexCommand(), AggregateCommand(), SnapshotCommand())
         return try {
@@ -101,6 +101,30 @@ class ScipJavaApp {
     fun runAndExitIfNonZero(args: List<String>) {
         val exit = run(args)
         if (exit != 0) kotlin.system.exitProcess(exit)
+    }
+
+    /**
+     * The previous moped CLI accepted nested subcommand options written as
+     * `--aggregate.<flag>` on `scip-java index` (e.g. the Bazel aspect
+     * passes `--aggregate.allow-empty-index`). clikt forbids `.` in
+     * option names, so we rewrite the dotted prefix to a `-` separator to match
+     * the options declared on [IndexCommand]. Tokens after a `--` separator are
+     * left untouched.
+     */
+    private fun rewriteNestedOptions(args: List<String>): List<String> {
+        var sawDoubleDash = false
+        return args.map { arg ->
+            when {
+                sawDoubleDash -> arg
+                arg == "--" -> {
+                    sawDoubleDash = true
+                    arg
+                }
+                arg.startsWith("--aggregate.") ->
+                    "--aggregate-" + arg.removePrefix("--aggregate.")
+                else -> arg
+            }
+        }
     }
 
     /**

@@ -55,10 +55,11 @@ abstract class BuildTool(val name: String, protected val index: IndexCommand) {
                 output = index.finalOutput,
                 targetroots = listOf(targetroot),
                 app = index.app,
-                parallel = true,
-                emitInverseRelationships = true,
-                allowEmptyIndex = false,
-                allowExportingGlobalSymbolsFromDirectoryEntries = true,
+                parallel = index.aggregateParallel,
+                emitInverseRelationships = index.aggregateEmitInverseRelationships,
+                allowEmptyIndex = index.aggregateAllowEmptyIndex,
+                allowExportingGlobalSymbolsFromDirectoryEntries =
+                    index.aggregateAllowExportingGlobalSymbolsFromDirectoryEntries,
             )
         }
     }

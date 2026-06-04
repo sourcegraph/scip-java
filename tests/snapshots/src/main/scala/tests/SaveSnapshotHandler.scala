@@ -4,12 +4,11 @@ import java.nio.charset.StandardCharsets
 import java.nio.file.Files
 import java.nio.file.Path
 import java.util.concurrent.ConcurrentLinkedDeque
+import java.util.function.Predicate
 
 import scala.jdk.CollectionConverters._
 
 import com.sourcegraph.io.DeleteVisitor
-
-import java.util.function.Predicate
 
 class SaveSnapshotHandler extends SnapshotHandler {
   private val writtenTests = new ConcurrentLinkedDeque[Path]()
@@ -28,12 +27,8 @@ class SaveSnapshotHandler extends SnapshotHandler {
       return
     }
     val isWritten = writtenTests.asScala.toSet
-    val keepWritten: Predicate[Path] =
-      (file: Path) => !isWritten.contains(file)
-    Files.walkFileTree(
-      context.expectDirectory,
-      new DeleteVisitor(keepWritten)
-    )
+    val keepWritten: Predicate[Path] = (file: Path) => !isWritten.contains(file)
+    Files.walkFileTree(context.expectDirectory, new DeleteVisitor(keepWritten))
   }
 
 }

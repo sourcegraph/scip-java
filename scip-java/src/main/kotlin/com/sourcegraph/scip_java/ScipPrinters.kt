@@ -32,6 +32,7 @@ object ScipPrinters {
             doc.occurrencesList.groupBy { it.getRange(0) }
         val symtab: Map<String, SymbolInformation> =
             doc.symbolsList.associateBy { it.symbol }
+        val input = SourceInput(text)
 
         val syntheticDefinitions: Map<String, List<SymbolInformation>> =
             doc.symbolsList
@@ -68,10 +69,10 @@ object ScipPrinters {
             val occurrences =
                 (occurrencesByLine[i] ?: emptyList()).sortedWith(occurrenceOrdering)
             for (occ in occurrences) {
-                formatOccurrence(out, occ, line, symtab, null)
+                formatOccurrence(input, out, occ, line, symtab, null)
                 if ((occ.symbolRoles and SymbolRole.Definition_VALUE) > 0) {
                     syntheticDefinitions[occ.symbol]?.forEach { syntheticDefinition ->
-                        formatOccurrence(out, occ, line, symtab, syntheticDefinition)
+                        formatOccurrence(input, out, occ, line, symtab, syntheticDefinition)
                     }
                 }
             }
@@ -120,21 +121,57 @@ object ScipPrinters {
         val endColumn: Int,
     )
 
-    private fun positionOf(occ: Occurrence): OccurrencePos =
+    /**
+     * Faithful port of `moped.reporters.Position.range` + `RangePosition`:
+     * the SCIP `(line, column)` pair is converted to a flat character offset
+     * and back. The round-trip matters for occurrences whose end column
+     * overflows its start line (e.g. Kotlin `companion object` definitions),
+     * where the overflow "carries" the end onto a later line, turning a raw
+     * single-line range into a rendered multi-line range.
+     */
+    private fun positionOf(input: SourceInput, occ: Occurrence): OccurrencePos {
+        val rawStartLine: Int
+        val rawStartColumn: Int
+        val rawEndLine: Int
+        val rawEndColumn: Int
         when (occ.rangeCount) {
-            3 -> OccurrencePos(occ.getRange(0), occ.getRange(1), occ.getRange(0), occ.getRange(2))
-            4 -> OccurrencePos(occ.getRange(0), occ.getRange(1), occ.getRange(2), occ.getRange(3))
+            3 -> {
+                rawStartLine = occ.getRange(0)
+                rawStartColumn = occ.getRange(1)
+                rawEndLine = occ.getRange(0)
+                rawEndColumn = occ.getRange(2)
+            }
+            4 -> {
+                rawStartLine = occ.getRange(0)
+                rawStartColumn = occ.getRange(1)
+                rawEndLine = occ.getRange(2)
+                rawEndColumn = occ.getRange(3)
+            }
             else -> throw IllegalArgumentException("Invalid range: $occ")
         }
+        // moped's Position.range returns NoPosition (all -1) for empty input.
+        if (input.isEmpty) return OccurrencePos(-1, -1, -1, -1)
+        val start = input.lineToOffset(rawStartLine) + rawStartColumn
+        val end = input.lineToOffset(rawEndLine) + rawEndColumn
+        val startLine = input.offsetToLine(start)
+        val endLine = input.offsetToLine(end)
+        return OccurrencePos(
+            startLine = startLine,
+            startColumn = start - input.lineToOffset(startLine),
+            endLine = endLine,
+            endColumn = end - input.lineToOffset(endLine),
+        )
+    }
 
     private fun formatOccurrence(
+        input: SourceInput,
         out: StringBuilder,
         occ: Occurrence,
         line: String,
         symtab: Map<String, SymbolInformation>,
         syntheticDefinition: SymbolInformation?,
     ) {
-        val pos = positionOf(occ)
+        val pos = positionOf(input, occ)
         val isMultiline = pos.startLine != pos.endLine
         val width =
             if (isMultiline) line.length - pos.startColumn - 1
@@ -238,5 +275,58 @@ object ScipPrinters {
         }
         if (start < text.length) result += text.substring(start)
         return result
+    }
+
+    /**
+     * Port of `moped.reporters.Input`'s offset/line bookkeeping. Only the
+     * pieces needed by [positionOf] are reproduced ([lineToOffset],
+     * [offsetToLine], [isEmpty]).
+     */
+    private class SourceInput(text: String) {
+        private val chars: CharArray = text.toCharArray()
+
+        val isEmpty: Boolean = text.isEmpty()
+
+        // Offset of the first character of each line; a trailing sentinel
+        // (== chars.size) is appended when the text does not end in '\n'.
+        private val lineIndices: IntArray = run {
+            val buf = ArrayList<Int>()
+            buf.add(0)
+            var i = 0
+            while (i < chars.size) {
+                if (chars[i] == '\n') buf.add(i + 1)
+                i++
+            }
+            if (buf[buf.size - 1] != chars.size) buf.add(chars.size)
+            buf.toIntArray()
+        }
+
+        fun lineToOffset(line: Int): Int {
+            require(line in 0..(lineIndices.size - 1)) {
+                "$line is not a valid line number, allowed [0..${lineIndices.size - 1}]"
+            }
+            return lineIndices[line]
+        }
+
+        fun offsetToLine(offset: Int): Int {
+            require(offset in 0..chars.size) {
+                "$offset is not a valid offset, allowed [0..${chars.size}]"
+            }
+            // File ending in '\n': an offset at EOF is last_line+1:0.
+            if (offset == chars.size && chars.isNotEmpty() && chars[offset - 1] == '\n') {
+                return lineIndices.size - 1
+            }
+            var lo = 0
+            var hi = lineIndices.size - 1
+            while (hi - lo > 1) {
+                val mid = (hi + lo) / 2
+                when {
+                    offset < lineIndices[mid] -> hi = mid
+                    lineIndices[mid] == offset -> return mid
+                    else -> lo = mid
+                }
+            }
+            return lo
+        }
     }
 }

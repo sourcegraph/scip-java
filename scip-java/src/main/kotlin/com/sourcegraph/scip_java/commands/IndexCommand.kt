@@ -139,6 +139,39 @@ class IndexCommand : CliktCommand(name = "index") {
         help = "Optional. The build command to use to compile all sources. Defaults to a build-specific command.",
     ).multiple()
 
+    // Forwarded options for the embedded `aggregate` step. The previous
+    // moped CLI exposed the nested `aggregate` command's flags on
+    // `scip-java index` using the `--aggregate.<flag>` naming (e.g. the
+    // Bazel aspect passes `--aggregate.allow-empty-index`). clikt forbids
+    // `.` in option names, so these are registered with a `-` separator and the
+    // dotted form is rewritten to it during argument preprocessing
+    // (ScipJavaApp.run). Consumed by BuildTool.generateScipFromTargetroot.
+    val aggregateParallel: Boolean by option(
+        "--aggregate-parallel",
+        "--aggregate-no-parallel",
+        hidden = true,
+    ).flag("--aggregate-no-parallel", default = true)
+
+    val aggregateEmitInverseRelationships: Boolean by option(
+        "--aggregate-emit-inverse-relationships",
+        "--aggregate-no-emit-inverse-relationships",
+        hidden = true,
+    ).flag("--aggregate-no-emit-inverse-relationships", default = true)
+
+    val aggregateAllowEmptyIndex: Boolean by option(
+        "--aggregate-allow-empty-index",
+        hidden = true,
+    ).flag()
+
+    val aggregateAllowExportingGlobalSymbolsFromDirectoryEntries: Boolean by option(
+        "--aggregate-allow-exporting-global-symbols-from-directory-entries",
+        "--aggregate-no-allow-exporting-global-symbols-from-directory-entries",
+        hidden = true,
+    ).flag(
+        "--aggregate-no-allow-exporting-global-symbols-from-directory-entries",
+        default = true,
+    )
+
     val workingDirectory: Path
         get() = AbsolutePath.of(app.env.workingDirectory)
 

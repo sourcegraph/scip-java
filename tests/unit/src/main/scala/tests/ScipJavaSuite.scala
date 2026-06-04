@@ -21,9 +21,9 @@ import munit.internal.console.AnsiColors
  * into an in-memory buffer (exposed via [[ApplicationFixture#capturedOutput]])
  * and a fresh per-test working/cache directory layout.
  *
- * Mirrors the surface area of `moped.testkit.MopedSuite` that the test
- * suites in this repository actually use, without requiring the
- * Scala-only moped runtime.
+ * Mirrors the surface area of `moped.testkit.MopedSuite` that the test suites
+ * in this repository actually use, without requiring the Scala-only moped
+ * runtime.
  */
 abstract class ScipJavaSuite(applicationToTest: ScipJavaApp) extends FunSuite {
 
@@ -54,7 +54,10 @@ abstract class ScipJavaSuite(applicationToTest: ScipJavaApp) extends FunSuite {
       extends Fixture[ScipJavaApp]("Application") {
     private val out = new ByteArrayOutputStream
     private val ps =
-      new PrintStream(out, /* autoFlush = */ true, StandardCharsets.UTF_8.name())
+      new PrintStream(
+        out, /* autoFlush = */ true,
+        StandardCharsets.UTF_8.name()
+      )
 
     // NOTE: every invocation gets its own freshly-instrumented [[ScipJavaApp]]
     // (all of them writing into the shared `out` buffer of this fixture) so
@@ -79,8 +82,7 @@ abstract class ScipJavaSuite(applicationToTest: ScipJavaApp) extends FunSuite {
 
     def reset(): Unit = out.reset()
 
-    def capturedRawOutput: String =
-      out.toString(StandardCharsets.UTF_8.name())
+    def capturedRawOutput: String = out.toString(StandardCharsets.UTF_8.name())
 
     def capturedOutput: String = AnsiColors.filterAnsi(capturedRawOutput)
 
@@ -131,7 +133,10 @@ abstract class ScipJavaSuite(applicationToTest: ScipJavaApp) extends FunSuite {
     val sanitized = obtained.replace(temporaryDirectory().toString(), "")
     // Workaround for https://github.com/scalameta/munit/issues/179
     super.assertNoDiff(
-      if (sanitized == "\n") "" else sanitized,
+      if (sanitized == "\n")
+        ""
+      else
+        sanitized,
       expected,
       clue
     )
