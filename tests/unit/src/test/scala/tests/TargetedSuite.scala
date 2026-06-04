@@ -10,7 +10,6 @@ import scala.meta.internal.inputs._
 import munit.FunSuite
 import munit.TestOptions
 import org.scip_code.scip.Document
-import org.scip_code.scip.Occurrence
 
 @nowarn("msg=match may not be exhaustive")
 class TargetedSuite extends FunSuite with TempDirectories {
@@ -76,14 +75,11 @@ class TargetedSuite extends FunSuite with TempDirectories {
     }
   }
 
-  private def rangeOf(pos: Position): List[Integer] =
+  private def rangeOf(pos: Position): List[Int] =
     if (pos.startLine == pos.endLine)
-      List[Integer](pos.startLine, pos.startColumn, pos.endColumn)
+      List(pos.startLine, pos.startColumn, pos.endColumn)
     else
-      List[Integer](pos.startLine, pos.startColumn, pos.endLine, pos.endColumn)
-
-  // Silence the unused-import warning when no test in this suite touches Occurrence.
-  private val _occurrenceTypeHint: Class[_] = classOf[Occurrence]
+      List(pos.startLine, pos.startColumn, pos.endLine, pos.endColumn)
 
   checkDoc(
     "issue-24",
