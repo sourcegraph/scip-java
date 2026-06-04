@@ -12,7 +12,6 @@ import org.jetbrains.kotlin.fir.symbols.impl.FirCallableSymbol
 import org.jetbrains.kotlin.fir.symbols.impl.FirClassLikeSymbol
 import org.jetbrains.kotlin.name.FqName
 import org.scip_code.scip.Document
-import org.scip_code.scip.SymbolRole
 
 /**
  * Per-file accumulator of SCIP occurrences and symbols. The FIR checkers in
@@ -39,12 +38,12 @@ class SemanticdbVisitor(
 
     private fun Sequence<SymbolDescriptorPair>?.emitAll(
         element: KtSourceElement,
-        role: Int,
+        isDefinition: Boolean,
         context: CheckerContext,
         enclosingSource: KtSourceElement? = null,
     ): List<Symbol>? =
         this?.onEach { (firBasedSymbol, symbol) ->
-                documentBuilder.emitSemanticdbData(firBasedSymbol, symbol, element, role, context, enclosingSource)
+                documentBuilder.emitSemanticdbData(firBasedSymbol, symbol, element, isDefinition, context, enclosingSource)
             }
             ?.map { it.symbol }
             ?.toList()
@@ -53,55 +52,55 @@ class SemanticdbVisitor(
         this.map { SymbolDescriptorPair(firBasedSymbol, it) }
 
     fun visitPackage(pkg: FqName, element: KtSourceElement, context: CheckerContext) {
-        cache[pkg].with(null).emitAll(element, SymbolRole.UnspecifiedSymbolRole_VALUE, context)
+        cache[pkg].with(null).emitAll(element, isDefinition = false, context)
     }
 
     fun visitClassReference(firClassSymbol: FirClassLikeSymbol<*>, element: KtSourceElement, context: CheckerContext) {
-        cache[firClassSymbol].with(firClassSymbol).emitAll(element, SymbolRole.UnspecifiedSymbolRole_VALUE, context)
+        cache[firClassSymbol].with(firClassSymbol).emitAll(element, isDefinition = false, context)
     }
 
     fun visitCallableReference(firClassSymbol: FirCallableSymbol<*>, element: KtSourceElement, context: CheckerContext) {
-        cache[firClassSymbol].with(firClassSymbol).emitAll(element, SymbolRole.UnspecifiedSymbolRole_VALUE, context)
+        cache[firClassSymbol].with(firClassSymbol).emitAll(element, isDefinition = false, context)
     }
 
     fun visitClassOrObject(firClass: FirClassLikeDeclaration, element: KtSourceElement, context: CheckerContext, enclosingSource: KtSourceElement? = null) {
-        cache[firClass.symbol].with(firClass.symbol).emitAll(element, SymbolRole.Definition_VALUE, context, enclosingSource)
+        cache[firClass.symbol].with(firClass.symbol).emitAll(element, isDefinition = true, context, enclosingSource)
     }
 
     fun visitPrimaryConstructor(firConstructor: FirConstructor, source: KtSourceElement, context: CheckerContext, enclosingSource: KtSourceElement? = null) {
-        cache[firConstructor.symbol].with(firConstructor.symbol).emitAll(source, SymbolRole.Definition_VALUE, context, enclosingSource)
+        cache[firConstructor.symbol].with(firConstructor.symbol).emitAll(source, isDefinition = true, context, enclosingSource)
     }
 
     fun visitSecondaryConstructor(firConstructor: FirConstructor, source: KtSourceElement, context: CheckerContext, enclosingSource: KtSourceElement? = null) {
-        cache[firConstructor.symbol].with(firConstructor.symbol).emitAll(source, SymbolRole.Definition_VALUE, context, enclosingSource)
+        cache[firConstructor.symbol].with(firConstructor.symbol).emitAll(source, isDefinition = true, context, enclosingSource)
     }
 
     fun visitNamedFunction(firFunction: FirFunction, source: KtSourceElement, context: CheckerContext, enclosingSource: KtSourceElement? = null) {
-        cache[firFunction.symbol].with(firFunction.symbol).emitAll(source, SymbolRole.Definition_VALUE, context, enclosingSource)
+        cache[firFunction.symbol].with(firFunction.symbol).emitAll(source, isDefinition = true, context, enclosingSource)
     }
 
     fun visitProperty(firProperty: FirProperty, source: KtSourceElement, context: CheckerContext, enclosingSource: KtSourceElement? = null) {
-        cache[firProperty.symbol].with(firProperty.symbol).emitAll(source, SymbolRole.Definition_VALUE, context, enclosingSource)
+        cache[firProperty.symbol].with(firProperty.symbol).emitAll(source, isDefinition = true, context, enclosingSource)
     }
 
     fun visitParameter(firParameter: FirValueParameter, source: KtSourceElement, context: CheckerContext, enclosingSource: KtSourceElement? = null) {
-        cache[firParameter.symbol].with(firParameter.symbol).emitAll(source, SymbolRole.Definition_VALUE, context, enclosingSource)
+        cache[firParameter.symbol].with(firParameter.symbol).emitAll(source, isDefinition = true, context, enclosingSource)
     }
 
     fun visitTypeParameter(firTypeParameter: FirTypeParameter, source: KtSourceElement, context: CheckerContext, enclosingSource: KtSourceElement? = null) {
         cache[firTypeParameter.symbol]
             .with(firTypeParameter.symbol)
-            .emitAll(source, SymbolRole.Definition_VALUE, context, enclosingSource)
+            .emitAll(source, isDefinition = true, context, enclosingSource)
     }
 
     fun visitTypeAlias(firTypeAlias: FirTypeAlias, source: KtSourceElement, context: CheckerContext, enclosingSource: KtSourceElement? = null) {
-        cache[firTypeAlias.symbol].with(firTypeAlias.symbol).emitAll(source, SymbolRole.Definition_VALUE, context, enclosingSource)
+        cache[firTypeAlias.symbol].with(firTypeAlias.symbol).emitAll(source, isDefinition = true, context, enclosingSource)
     }
 
     fun visitPropertyAccessor(firPropertyAccessor: FirPropertyAccessor, source: KtSourceElement, context: CheckerContext, enclosingSource: KtSourceElement? = null) {
         cache[firPropertyAccessor.symbol]
             .with(firPropertyAccessor.symbol)
-            .emitAll(source, SymbolRole.Definition_VALUE, context, enclosingSource)
+            .emitAll(source, isDefinition = true, context, enclosingSource)
     }
 
     fun visitSimpleNameExpression(
@@ -110,6 +109,6 @@ class SemanticdbVisitor(
     ) {
         cache[firResolvedNamedReference.resolvedSymbol]
             .with(firResolvedNamedReference.resolvedSymbol)
-            .emitAll(source, SymbolRole.UnspecifiedSymbolRole_VALUE, context)
+            .emitAll(source, isDefinition = false, context)
     }
 }

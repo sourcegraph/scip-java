@@ -46,12 +46,12 @@ class SemanticdbTextDocumentBuilder(
         firBasedSymbol: FirBasedSymbol<*>?,
         symbol: Symbol,
         element: KtSourceElement,
-        role: Int,
+        isDefinition: Boolean,
         context: CheckerContext,
         enclosingSource: KtSourceElement? = null,
     ) {
-        documentBuilder.addOccurrence(occurrence(symbol, element, role, enclosingSource))
-        if (role == SymbolRole.Definition_VALUE) {
+        documentBuilder.addOccurrence(occurrence(symbol, element, isDefinition, enclosingSource))
+        if (isDefinition) {
             documentBuilder.addSymbol(symbolInformation(firBasedSymbol, symbol, element, context))
         }
     }
@@ -101,11 +101,11 @@ class SemanticdbTextDocumentBuilder(
     private fun occurrence(
         symbol: Symbol,
         element: KtSourceElement,
-        role: Int,
+        isDefinition: Boolean,
         enclosingSource: KtSourceElement?,
     ): Occurrence = occurrence {
         this.symbol = symbol.toString()
-        symbolRoles = role
+        if (isDefinition) symbolRoles = SymbolRole.Definition.number
         range += range(element).asIterable()
         if (enclosingSource != null) {
             enclosingRange += enclosingRange(enclosingSource).asIterable()
