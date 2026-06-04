@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 270" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Courier New', monospace">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#111111"/>
+    </marker>
+  </defs>
+
+  <!-- outer container -->
+  <rect x="8" y="8" width="964" height="254" rx="34" ry="34" fill="#fbfbfb" stroke="#111111" stroke-width="2"/>
+
+  <!-- column headers: the tool that performs each step -->
+  <text x="279" y="54" text-anchor="middle" font-size="20" fill="#222222">scip-javac</text>
+  <text x="656" y="54" text-anchor="middle" font-size="20" fill="#222222">index-scip</text>
+
+  <!-- stage 1: a list of Java sources -->
+  <g fill="#cfe2f3" stroke="#1f3a5f" stroke-width="2">
+    <rect x="65" y="106" width="150" height="100" rx="6"/>
+    <rect x="55" y="118" width="150" height="100" rx="6"/>
+    <rect x="45" y="130" width="150" height="100" rx="6"/>
+  </g>
+  <text x="120" y="184" text-anchor="middle" font-size="12" fill="#10243d">RequestHandler.java</text>
+
+  <!-- arrow 1 -->
+  <line x1="220" y1="180" x2="338" y2="180" stroke="#111111" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+  <!-- stage 2: a list of per-file SCIP shards -->
+  <g fill="#cfe2f3" stroke="#1f3a5f" stroke-width="2">
+    <rect x="365" y="106" width="215" height="100" rx="6"/>
+    <rect x="355" y="118" width="215" height="100" rx="6"/>
+    <rect x="345" y="130" width="215" height="100" rx="6"/>
+  </g>
+  <text x="452" y="184" text-anchor="middle" font-size="12" fill="#10243d">RequestHandler.java.scip</text>
+
+  <!-- arrow 2 -->
+  <line x1="585" y1="180" x2="728" y2="180" stroke="#111111" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+  <!-- stage 3: a single merged SCIP index -->
+  <rect x="735" y="130" width="185" height="100" rx="6" fill="#cfe2f3" stroke="#1f3a5f" stroke-width="2"/>
+  <text x="827" y="188" text-anchor="middle" font-size="26" font-weight="bold" fill="#10243d">index.scip</text>
+</svg>

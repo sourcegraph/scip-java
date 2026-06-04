@@ -203,8 +203,8 @@ references" to show results from multiple repositories.
 First, install the `scip-java` command-line tool according to the instructions
 in the [getting started guide](getting-started.md).
 
-Next, run the `scip-java index-scip` command to convert SCIP files
-into SCIP.
+Next, run the `scip-java index-scip` command to merge the per-file SCIP
+files into a single SCIP index.
 
 ```sh
 ❯ scip-java index-scip $TARGETROOT
