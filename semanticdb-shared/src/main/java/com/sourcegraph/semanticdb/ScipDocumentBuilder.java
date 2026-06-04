@@ -28,10 +28,12 @@ public final class ScipDocumentBuilder {
   private final Map<String, SymbolInformation> symbols = new LinkedHashMap<>();
 
   public void addOccurrence(Occurrence occurrence) {
+    if (occurrence.getSymbol().isEmpty()) return;
     occurrences.putIfAbsent(new OccurrenceKey(occurrence), occurrence);
   }
 
   public void addSymbol(SymbolInformation symbol) {
+    if (symbol.getSymbol().isEmpty()) return;
     symbols.putIfAbsent(symbol.getSymbol(), symbol);
   }
 
