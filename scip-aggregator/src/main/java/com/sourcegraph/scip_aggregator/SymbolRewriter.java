@@ -4,7 +4,7 @@ import com.sourcegraph.scip.ScipSymbols;
 
 /**
  * Rewrites bare descriptor symbols emitted by the compiler plugins (e.g. {@code
- * _root_/com/example/Foo#}) into fully-qualified SCIP symbols (e.g. {@code scip maven
+ * _root_/com/example/Foo#}) into fully-qualified SCIP symbols (e.g. {@code scip-java maven
  * com.example:my-lib 1.0 _root_/com/example/Foo#}) by looking up the descriptor's owning package in
  * a {@link PackageTable}.
  *
