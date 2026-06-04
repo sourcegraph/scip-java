@@ -9,7 +9,7 @@ import java.nio.file.Paths
 import scala.annotation.tailrec
 import scala.jdk.CollectionConverters._
 
-import com.sourcegraph.scip_semanticdb.MavenPackage
+import com.sourcegraph.scip_aggregator.MavenPackage
 
 /**
  * Represents a single classpath entry on the classpath of a project, used to
@@ -31,7 +31,7 @@ case class ClasspathEntry(
 object ClasspathEntry {
 
   /**
-   * Parses ClasspathEntry from the SemanticDB targetroot directory.
+   * Parses ClasspathEntry from the SCIP targetroot directory.
    *
    * Two separate formats are supported:
    *

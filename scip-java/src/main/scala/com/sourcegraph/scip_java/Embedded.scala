@@ -11,20 +11,14 @@ import os.CommandResult
 
 object Embedded {
 
-  def semanticdbJar(tmpDir: Path): Path = copyFile(
-    tmpDir,
-    "semanticdb-plugin.jar"
-  )
+  def scipJar(tmpDir: Path): Path = copyFile(tmpDir, "scip-plugin.jar")
 
   def gradlePluginJar(tmpDir: Path): Path = copyFile(
     tmpDir,
     "gradle-plugin.jar"
   )
 
-  def semanticdbKotlincJar(tmpDir: Path): Path = copyFile(
-    tmpDir,
-    "semanticdb-kotlinc.jar"
-  )
+  def scipKotlincJar(tmpDir: Path): Path = copyFile(tmpDir, "scip-kotlinc.jar")
 
   private def javacErrorpath(tmp: Path) = tmp.resolve("errorpath.txt")
 
@@ -32,7 +26,7 @@ object Embedded {
     val bin = tmp.resolve("bin")
     val javac = bin.resolve("javac")
     val java = bin.resolve("java")
-    val pluginpath = Embedded.semanticdbJar(tmp)
+    val pluginpath = Embedded.scipJar(tmp)
     val errorpath = javacErrorpath(tmp)
     val javacopts = targetroot.resolve("javacopts.txt")
     Files.createDirectories(targetroot)
@@ -45,18 +39,18 @@ object Embedded {
     )
     val newJavacopts = tmp.resolve("javac_newarguments")
     // --add-exports flags required to access internal javac APIs from our
-    // SemanticDB plugin. Always set; Java 11+ is the supported baseline.
+    // SCIP plugin. Always set; Java 11+ is the supported baseline.
     val javacModuleOptions = BuildInfo.javacModuleOptions.mkString(" ")
-    val injectSemanticdbArguments = List[String](
+    val injectScipArguments = List[String](
       "java",
-      s"-Dsemanticdb.errorpath=$errorpath",
-      s"-Dsemanticdb.pluginpath=$pluginpath",
-      s"-Dsemanticdb.sourceroot=$sourceroot",
-      s"-Dsemanticdb.targetroot=$targetroot",
-      s"-Dsemanticdb.output=$$NEW_JAVAC_OPTS",
-      s"-Dsemanticdb.old-output=$javacopts",
+      s"-Dscip.errorpath=$errorpath",
+      s"-Dscip.pluginpath=$pluginpath",
+      s"-Dscip.sourceroot=$sourceroot",
+      s"-Dscip.targetroot=$targetroot",
+      s"-Dscip.output=$$NEW_JAVAC_OPTS",
+      s"-Dscip.old-output=$javacopts",
       s"-classpath $pluginpath",
-      "com.sourcegraph.semanticdb_javac.InjectSemanticdbOptions",
+      "com.sourcegraph.scip_javac.InjectScipOptions",
       """"$@""""
     ).mkString(" ")
     val script =
@@ -69,7 +63,7 @@ object Embedded {
          |    LAUNCHER_ARGS+=("$$arg")
          |  fi
          |done
-         |$injectSemanticdbArguments
+         |$injectScipArguments
          |if [ $${#LAUNCHER_ARGS[@]} -eq 0 ]; then
          |  javac $javacModuleOptions "@$$NEW_JAVAC_OPTS"
          |else

@@ -36,7 +36,7 @@ abstract class GradleBuildToolSuite(gradle: Tool.Gradle)
     - build/generated/sources/annotationProcessor/java/main/test/ImmutableWorkflowOptions.java.scip
     - /META-INF/scip/src/main/java/WorkflowOptions.java.scip
      */
-    expectedSemanticdbFiles = 2
+    expectedScipFiles = 2
   )
 
   checkGradleBuild(
@@ -66,8 +66,8 @@ abstract class GradleBuildToolSuite(gradle: Tool.Gradle)
        |}
     """.stripMargin,
     // See comment about immutable annotation processor above,
-    // it explains why we expecte 2 semanticdb files
-    expectedSemanticdbFiles = 2
+    // it explains why we expecte 2 scip files
+    expectedScipFiles = 2
   )
 
   checkGradleBuild(
@@ -94,7 +94,7 @@ abstract class GradleBuildToolSuite(gradle: Tool.Gradle)
        |package test;
        |public abstract class ExampleClass {}
     """.stripMargin,
-    expectedSemanticdbFiles = 1,
+    expectedScipFiles = 1,
     expectedPackages = "maven:com.sourcegraph:example-library:1.1"
   )
 
@@ -144,7 +144,7 @@ abstract class GradleBuildToolSuite(gradle: Tool.Gradle)
        |     }
        | }
        |""".stripMargin,
-    expectedSemanticdbFiles = 2
+    expectedScipFiles = 2
   )
 
   allJava.foreach { java =>
@@ -160,7 +160,7 @@ abstract class GradleBuildToolSuite(gradle: Tool.Gradle)
           |/src/main/java/Example.java
           |public class Example {}
           |""".stripMargin,
-      expectedSemanticdbFiles = 1
+      expectedScipFiles = 1
     )
   }
 
@@ -198,7 +198,7 @@ abstract class GradleBuildToolSuite(gradle: Tool.Gradle)
        |/src/main/java/Example.java
        |public class Example {}
        |""".stripMargin,
-    expectedSemanticdbFiles = 2
+    expectedScipFiles = 2
   )
 
   checkGradleBuild(
@@ -212,7 +212,7 @@ abstract class GradleBuildToolSuite(gradle: Tool.Gradle)
        |/pom.xml
        |<hello/>
        |""".stripMargin,
-    expectedSemanticdbFiles = 2,
+    expectedScipFiles = 2,
     extraArguments = List("--build-tool", "gradle")
   )
 
@@ -225,7 +225,7 @@ abstract class GradleBuildToolSuite(gradle: Tool.Gradle)
        |/src/test/java/ExampleSuite.java
        |public class ExampleSuite {}
        |""".stripMargin,
-    expectedSemanticdbFiles = 1,
+    expectedScipFiles = 1,
     extraArguments = List("--", "compileJava")
   )
 
@@ -251,7 +251,7 @@ abstract class GradleBuildToolSuite(gradle: Tool.Gradle)
        |package foo
        |class ExampleSuite {}
        |""".stripMargin,
-    expectedSemanticdbFiles = 4
+    expectedScipFiles = 4
   )
 
   checkGradleBuild(
@@ -276,7 +276,7 @@ abstract class GradleBuildToolSuite(gradle: Tool.Gradle)
        |  MethodType foo;
        |}
        |""".stripMargin,
-    expectedSemanticdbFiles = 1,
+    expectedScipFiles = 1,
     expectedPackages =
       """|maven:com.fasterxml.jackson.core:jackson-annotations:2.14.1
          |maven:com.fasterxml.jackson.core:jackson-core:2.14.1
@@ -317,7 +317,7 @@ abstract class GradleBuildToolSuite(gradle: Tool.Gradle)
           |package foo
           |object Example {}
           |""".stripMargin,
-      expectedSemanticdbFiles = 1
+      expectedScipFiles = 1
     )
   }
 
@@ -350,7 +350,7 @@ abstract class GradleBuildToolSuite(gradle: Tool.Gradle)
         |/src/intTest/java/ExampleIntTest.java
         |public class ExampleIntTest {}
         |""".stripMargin,
-    expectedSemanticdbFiles = 1
+    expectedScipFiles = 1
   )
 
 }

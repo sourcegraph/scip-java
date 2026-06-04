@@ -86,7 +86,7 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
   override def isHidden: Boolean = true
   override def generateScip(): Int = {
     BuildTool.generateScipFromTargetroot(
-      generateSemanticdb(),
+      runBuild(),
       index.finalTargetroot(defaultTargetroot),
       index
     )
@@ -99,7 +99,7 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
       ScipBuildTool
         .ConfigFileNames
         .map(name => index.workingDirectory.resolve(name))
-  private def generateSemanticdb(): CommandResult = {
+  private def runBuild(): CommandResult = {
     parsedConfig match {
       case ValueResult(value) =>
         if (index.cleanup) {
@@ -145,8 +145,8 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
   }
 
   /**
-   * Shells out to "javac" to compile the sources with the SemanticDB compiler
-   * plugin enabled.
+   * Shells out to "javac" to compile the sources with the SCIP compiler plugin
+   * enabled.
    */
   private def compile(config: Config): CommandResult = {
     if (config.dependencies.nonEmpty) {
@@ -190,23 +190,19 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
     if (index.cleanup) {
       Files.walkFileTree(tmp, new DeleteVisitor)
     }
-    val isSemanticdbGenerated = Files.isDirectory(
-      targetroot.resolve("META-INF")
-    )
-    if (
-      errors.nonEmpty && (index.strictCompilation || !isSemanticdbGenerated)
-    ) {
+    val isScipGenerated = Files.isDirectory(targetroot.resolve("META-INF"))
+    if (errors.nonEmpty && (index.strictCompilation || !isScipGenerated)) {
       errors.foreach { error =>
         index.app.reporter.log(Diagnostic.exception(error))
       }
       CommandResult(Nil, 1, Nil)
     } else {
-      if (errors.nonEmpty && isSemanticdbGenerated) {
+      if (errors.nonEmpty && isScipGenerated) {
         index
           .app
           .reporter
           .info(
-            "Some SemanticDB files got generated even if there were compile errors. " +
+            "Some SCIP files got generated even if there were compile errors. " +
               "In most cases, this means that scip-java managed to index everything " +
               "except the locations that had compile errors and you can ignore the compile errors."
           )
@@ -227,11 +223,11 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
       return Success()
     val filesPaths = allKotlinFiles.map(_.toString)
 
-    // The semanticdb-kotlinc compiler plugin is now built and shipped together
+    // The scip-kotlinc compiler plugin is now built and shipped together
     // with the scip-java CLI as an embedded resource (see Embedded.scala and
     // the cli/resourceGenerators task in build.sbt), so we no longer need to
     // resolve a separately-published artifact from Maven Central.
-    val plugin = Embedded.semanticdbKotlincJar(tmp)
+    val plugin = Embedded.scipKotlincJar(tmp)
 
     val classpath = config
       .classpath
@@ -256,9 +252,9 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
       "-Xallow-kotlin-package",
       s"-Xplugin=$plugin",
       "-P",
-      s"plugin:semanticdb-kotlinc:sourceroot=$sourceroot",
+      s"plugin:scip-kotlinc:sourceroot=$sourceroot",
       "-P",
-      s"plugin:semanticdb-kotlinc:targetroot=$targetroot",
+      s"plugin:scip-kotlinc:targetroot=$targetroot",
       "-classpath",
       classpath
     )
@@ -318,9 +314,9 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
     )
     if (javaFiles.isEmpty)
       return Success(())
-    val semanticdbJar = Embedded.semanticdbJar(tmp)
+    val scipJar = Embedded.scipJar(tmp)
     val actualClasspath = ArrayBuffer.empty[String]
-    actualClasspath += semanticdbJar.toString
+    actualClasspath += scipJar.toString
     actualClasspath ++=
       config
         .classpath
@@ -343,11 +339,11 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
       arguments += actualClasspath.mkString(File.pathSeparator)
     }
     arguments +=
-      s"-Xplugin:semanticdb -targetroot:$targetroot -sourceroot:$sourceroot"
+      s"-Xplugin:scip -targetroot:$targetroot -sourceroot:$sourceroot"
     if (config.processorpath.nonEmpty) {
       arguments += "-processorpath"
       val processorpath =
-        semanticdbJar.toString ::
+        scipJar.toString ::
           config
             .processorpath
             .flatMap(path => guessBazelJar(path, index.workingDirectory))
@@ -415,7 +411,7 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
       case option :: rest =>
         val isIgnored =
           option.startsWith("-Xep") || // ErrorProne flag, which fails the build
-            option.startsWith("-Xplugin:semanticdb") || // Redundant SemanticDB
+            option.startsWith("-Xplugin:scip") || // Redundant SCIP
             option.startsWith("-XD") || // unsure what this one does
             index // User-provided flag
               .scipIgnoredJavacOptionPrefixes

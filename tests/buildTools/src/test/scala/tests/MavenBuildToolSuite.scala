@@ -25,7 +25,7 @@ class MavenBuildToolSuite extends BaseBuildToolSuite {
          |package com;
          |public class ExampleSuite {}
          |""".stripMargin,
-    expectedSemanticdbFiles = 2,
+    expectedScipFiles = 2,
     expectedPackages =
       """|maven:com.sourcegraph:example:1.0-SNAPSHOT
          |maven:junit:junit:4.11

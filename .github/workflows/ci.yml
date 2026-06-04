@@ -68,12 +68,12 @@ jobs:
 
       - uses: DeterminateSystems/magic-nix-cache-action@v13
 
-      - run: nix develop --command bazelisk build //... --//semanticdb-javac:enabled=true
-      - run: nix develop --command bazelisk run scip-semanticdb:bazel -- --sourceroot "$PWD"
+      - run: nix develop --command bazelisk build //... --//scip-javac:enabled=true
+      - run: nix develop --command bazelisk run scip-aggregator:bazel -- --sourceroot "$PWD"
       - run: du -h index.scip
-      - run: nix develop "$GITHUB_WORKSPACE" --command bazelisk build //... --@scip_java//semanticdb-javac:enabled=true
+      - run: nix develop "$GITHUB_WORKSPACE" --command bazelisk build //... --@scip_java//scip-javac:enabled=true
         working-directory: examples/bazel-example
-      - run: nix develop "$GITHUB_WORKSPACE" --command bazelisk run @scip_java//scip-semanticdb:bazel -- --sourceroot "$PWD"
+      - run: nix develop "$GITHUB_WORKSPACE" --command bazelisk run @scip_java//scip-aggregator:bazel -- --sourceroot "$PWD"
         working-directory: examples/bazel-example
       - run: du -h index.scip
         working-directory: examples/bazel-example
@@ -108,7 +108,7 @@ jobs:
 
   kotlin_plugin:
     runs-on: ubuntu-latest
-    name: semanticdb-kotlinc
+    name: scip-kotlinc
     steps:
       - uses: actions/checkout@v4
 
@@ -118,16 +118,16 @@ jobs:
 
       - uses: DeterminateSystems/magic-nix-cache-action@v13
 
-      - name: semanticdb-kotlinc tests
-        run: nix develop --command sbt semanticdbKotlinc/test
+      - name: scip-kotlinc tests
+        run: nix develop --command sbt scipKotlinc/test
 
       - name: Kotlin snapshots
-        run: nix develop --command sbt semanticdbKotlincMinimized/kotlincSnapshots
+        run: nix develop --command sbt scipKotlincMinimized/kotlincSnapshots
 
       - name: Check snapshot drift
         run: |
           git diff --exit-code \
-            semanticdb-kotlinc/minimized/src/generatedSnapshots
+            scip-kotlinc/minimized/src/generatedSnapshots
 
   check:
     runs-on: ubuntu-latest
@@ -169,13 +169,13 @@ jobs:
             mvn clean verify -DskipTests "-Dscip-java.version=$SCIP_JAVA_VERSION" sourcegraph:sourcegraphDependencies
         working-directory: examples/maven-example
 
-      - run: nix develop "$GITHUB_WORKSPACE#jdk${{ matrix.java }}" --command "$SCIP_JAVA_CLI" index-semanticdb target/semanticdb-targetroot
+      - run: nix develop "$GITHUB_WORKSPACE#jdk${{ matrix.java }}" --command "$SCIP_JAVA_CLI" index-scip target/scip-targetroot
         working-directory: examples/maven-example
 
       - run: |
           set -e
-          grep org.hamcrest target/semanticdb-targetroot/*dependencies.txt
-          grep "$PWD/src/main/java" target/semanticdb-targetroot/*dependencies.txt
+          grep org.hamcrest target/scip-targetroot/*dependencies.txt
+          grep "$PWD/src/main/java" target/scip-targetroot/*dependencies.txt
         working-directory: examples/maven-example
 
       - run: du -h index.scip

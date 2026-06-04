@@ -18,18 +18,15 @@ class MavenBuildTool(index: IndexCommand) extends BuildTool("Maven", index) {
 
   override def generateScip(): Int = {
     BuildTool.generateScipFromTargetroot(
-      generateSemanticdb(),
+      runBuild(),
       index.finalTargetroot(defaultTargetroot),
       index
     )
   }
 
-  private def defaultTargetroot: Path = Paths.get(
-    "target",
-    "semanticdb-targetroot"
-  )
+  private def defaultTargetroot: Path = Paths.get("target", "scip-targetroot")
 
-  private def generateSemanticdb(): CommandResult = {
+  private def runBuild(): CommandResult = {
     TemporaryFiles.withDirectory(index) { tmp =>
       val mvnw = index.workingDirectory.resolve("mvnw")
       val mavenScript =

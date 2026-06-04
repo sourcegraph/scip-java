@@ -42,12 +42,12 @@
           <type>java.lang.String</type>
           <required>false</required>
           <editable>true</editable>
-          <description>Location where `dependencies.txt` file will be written (should match the Semanticdb targetroot option)</description>
+          <description>Location where `dependencies.txt` file will be written (should match the Scip targetroot option)</description>
         </parameter>
       </parameters>
       <configuration>
         <project implementation="org.apache.maven.project.MavenProject">${project}</project>
-        <targetRoot implementation="java.lang.String">${session.executionRootDirectory}/target/semanticdb-targetroot</targetRoot>
+        <targetRoot implementation="java.lang.String">${session.executionRootDirectory}/target/scip-targetroot</targetRoot>
       </configuration>
       <requirements>
       </requirements>

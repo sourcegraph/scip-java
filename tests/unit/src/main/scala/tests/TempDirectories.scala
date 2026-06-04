@@ -14,7 +14,7 @@ trait TempDirectories {
     override def apply(): Path = path
 
     override def beforeEach(context: BeforeEach): Unit = {
-      path = Files.createTempDirectory("semanticdb-javac")
+      path = Files.createTempDirectory("scip-javac")
     }
 
     override def afterEach(context: AfterEach): Unit = {

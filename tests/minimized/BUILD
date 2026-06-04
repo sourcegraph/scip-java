@@ -7,9 +7,9 @@ java_library(
 		"@maven//:org_projectlombok_lombok",
 	],
 	plugins = [
-          "//semanticdb-javac:plugin",
+          "//scip-javac:plugin",
 	],
 	javacopts = [
-          "'-Xplugin:semanticdb -build-tool:bazel'",
+          "'-Xplugin:scip -build-tool:bazel'",
 	],
 )

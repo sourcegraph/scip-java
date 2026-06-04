@@ -30,7 +30,7 @@ class JavacClassesDirectorySuite extends FunSuite with TempDirectories {
         )
       ),
       List(
-        s"-Xplugin:semanticdb -sourceroot:${sourceroot()} -targetroot:javac-classes-directory",
+        s"-Xplugin:scip -sourceroot:${sourceroot()} -targetroot:javac-classes-directory",
         "-d",
         sourceroot().toString
       )

@@ -42,7 +42,7 @@ class TargetedSuite extends FunSuite with TempDirectories {
             Position.Range(input, m.start - startOffset, m.end - endOffset)
           })
           .toList
-      val result = compiler.compileSemanticdb(List(input))
+      val result = compiler.compileScip(List(input))
       val document = result.document.orNull
       val occurrences = document.getOccurrencesList.asScala.toList
       val symbols: List[String] = positions.map { pos =>

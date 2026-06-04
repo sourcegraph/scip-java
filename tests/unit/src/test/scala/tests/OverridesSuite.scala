@@ -24,7 +24,7 @@ class OverridesSuite extends FunSuite with TempDirectories {
       val compiler = new TestCompiler(targetroot())
       val relativePath = "example.Parent".replace('.', '/') + ".java"
       val input = Input.VirtualFile(relativePath, source)
-      val result = compiler.compileSemanticdb(List(input))
+      val result = compiler.compileScip(List(input))
       val document = result.document.orNull
       val info = document
         .getSymbolsList
