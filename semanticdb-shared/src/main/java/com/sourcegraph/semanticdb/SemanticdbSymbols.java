@@ -21,13 +21,16 @@ public final class SemanticdbSymbols {
     else return desc.encode();
   }
 
-  /** Creates a new local SemanticDB symbol. */
+  /**
+   * Creates a new local SCIP symbol. The space matches the SCIP wire format and lets {@link
+   * #isLocal} disambiguate from a bare descriptor that happens to start with {@code local}.
+   */
   public static String local(int suffix) {
-    return "local" + suffix;
+    return "local " + suffix;
   }
 
   public static boolean isLocal(String symbol) {
-    return symbol.startsWith("local");
+    return symbol.startsWith("local ");
   }
 
   public static boolean isGlobal(String symbol) {

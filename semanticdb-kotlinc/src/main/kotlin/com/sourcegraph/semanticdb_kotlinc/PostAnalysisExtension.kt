@@ -1,9 +1,7 @@
 package com.sourcegraph.semanticdb_kotlinc
 
-import com.sourcegraph.semanticdb.Semanticdb
-import com.sourcegraph.semanticdb.SemanticdbPaths
-import com.sourcegraph.semanticdb.SemanticdbWriter
-
+import com.sourcegraph.semanticdb.ScipShardPaths
+import com.sourcegraph.semanticdb.ScipShardWriter
 import java.io.PrintWriter
 import java.io.Writer
 import java.nio.file.Path
@@ -18,20 +16,28 @@ import org.jetbrains.kotlin.cli.common.messages.PrintingMessageCollector
 import org.jetbrains.kotlin.config.CommonConfigurationKeys
 import org.jetbrains.kotlin.config.CompilerConfiguration
 import org.jetbrains.kotlin.ir.declarations.IrModuleFragment
+import org.scip_code.scip.Document
 
+/**
+ * Writes per-source SCIP shards once the FIR checkers have finished and the IR phase begins.
+ *
+ * <p>For each source file [AnalyzerCheckers] registered a [SemanticdbVisitor] for, this builds the
+ * file's [Document] and serializes it under `<targetRoot>/META-INF/scip/<relative-path>.scip`.
+ * Files outside the source root are skipped with a stderr warning.
+ */
+@ExperimentalContracts
 class PostAnalysisExtension(
     private val sourceRoot: Path,
     private val targetRoot: Path,
-    private val callback: (Semanticdb.TextDocument) -> Unit
+    private val callback: (Document) -> Unit
 ) : IrGenerationExtension {
-    @OptIn(ExperimentalContracts::class)
     override fun generate(moduleFragment: IrModuleFragment, pluginContext: IrPluginContext) {
         try {
             for ((ktSourceFile, visitor) in AnalyzerCheckers.visitors) {
                 try {
                     val document = visitor.build()
-                    semanticdbOutPathForFile(ktSourceFile)?.let { outPath ->
-                        SemanticdbWriter.writeTextDocument(outPath, document)
+                    scipShardPathForFile(ktSourceFile)?.let { outPath ->
+                        ScipShardWriter.writeShard(outPath, document)
                     }
                     callback(document)
                 } catch (e: Exception) {
@@ -43,9 +49,9 @@ class PostAnalysisExtension(
         }
     }
 
-    private fun semanticdbOutPathForFile(file: KtSourceFile): Path? {
+    private fun scipShardPathForFile(file: KtSourceFile): Path? {
         val normalizedPath = Paths.get(file.path).normalize()
-        val outPath = SemanticdbPaths.semanticdbPath(targetRoot, sourceRoot, normalizedPath)
+        val outPath = ScipShardPaths.shardPath(targetRoot, sourceRoot, normalizedPath)
         if (outPath.isPresent) {
             return outPath.get()
         }

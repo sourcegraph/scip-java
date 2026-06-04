@@ -35,13 +35,13 @@ class GradleBuildTool(index: IndexCommand) extends BuildTool("Gradle", index) {
   }
 
   /**
-   * Diagnose the case where Gradle finished successfully but our SemanticDB
-   * compiler plugin never produced any `.semanticdb` files. This used to be
-   * silently rescued by a `-javaagent` fallback; now it surfaces as a clear
-   * error pointing at the two known causes.
+   * Diagnose the case where Gradle finished successfully but our SCIP compiler
+   * plugin never produced any `.scip` shards. This used to be silently rescued
+   * by a `-javaagent` fallback; now it surfaces as a clear error pointing at
+   * the two known causes.
    */
   private def reportMissingSemanticdbOutput(): Unit = {
-    if (containsFileWithSuffix(targetroot, ".semanticdb"))
+    if (containsFileWithSuffix(targetroot, ".scip"))
       return
     if (!containsFileWithSuffix(index.workingDirectory, ".class"))
       // Project produced no compiled JVM output — nothing to index, stay quiet.
@@ -50,9 +50,9 @@ class GradleBuildTool(index: IndexCommand) extends BuildTool("Gradle", index) {
       .app
       .reporter
       .error(
-        s"""scip-java: Gradle finished successfully but produced no SemanticDB output in $targetroot.
+        s"""scip-java: Gradle finished successfully but produced no SCIP shards in $targetroot.
            |
-           |This means our SemanticDB compiler plugin was not attached to one or more JavaCompile tasks. Two known causes:
+           |This means our SCIP compiler plugin was not attached to one or more JavaCompile tasks. Two known causes:
            |
            |  1. The 'compileOnly' configuration was already resolved before our init script ran.
            |     Check the Gradle output above for warnings of the form:

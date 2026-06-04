@@ -1,17 +1,14 @@
 package com.sourcegraph.semanticdb_kotlinc.test
 
-import com.sourcegraph.semanticdb.Semanticdb
-
 import com.sourcegraph.semanticdb_kotlinc.*
-import com.sourcegraph.semanticdb.Semanticdb.Documentation.Format
-import com.sourcegraph.semanticdb.Semanticdb.Language
-import com.sourcegraph.semanticdb.Semanticdb.SymbolOccurrence.Role
-import com.sourcegraph.semanticdb_kotlinc.test.ExpectedSymbols.SemanticdbData
+import com.sourcegraph.semanticdb_kotlinc.test.ExpectedSymbols.ScipData
 import com.sourcegraph.semanticdb_kotlinc.test.ExpectedSymbols.SymbolCacheData
 import com.tschuchort.compiletesting.SourceFile
 import kotlin.contracts.ExperimentalContracts
 import org.jetbrains.kotlin.compiler.plugin.ExperimentalCompilerApi
 import org.junit.jupiter.api.TestFactory
+import org.scip_code.scip.Occurrence
+import org.scip_code.scip.SymbolInformation
 
 @ExperimentalCompilerApi
 @ExperimentalContracts
@@ -215,12 +212,12 @@ class SemanticdbSymbolsTest {
                         """
                         |var x: Int = 5
                         |""".trimMargin()),
-                    semanticdb =
-                        SemanticdbData(
+                    scip =
+                        ScipData(
                             expectedOccurrences =
                                 listOf(
-                                    SymbolOccurrence {
-                                        role = Role.DEFINITION
+                                    scipOccurrence {
+                                        role = DEFINITION
                                         symbol = "x."
                                         range {
                                             startLine = 0
@@ -232,8 +229,8 @@ class SemanticdbSymbolsTest {
                                             endCharacter = 14
                                         }
                                     },
-                                    SymbolOccurrence {
-                                        role = Role.DEFINITION
+                                    scipOccurrence {
+                                        role = DEFINITION
                                         symbol = "getX()."
                                         range {
                                             startLine = 0
@@ -245,8 +242,8 @@ class SemanticdbSymbolsTest {
                                             endCharacter = 14
                                         }
                                     },
-                                    SymbolOccurrence {
-                                        role = Role.DEFINITION
+                                    scipOccurrence {
+                                        role = DEFINITION
                                         symbol = "setX()."
                                         range {
                                             startLine = 0
@@ -266,12 +263,12 @@ class SemanticdbSymbolsTest {
                         |var x: Int = 5
                         |    get() = field + 10
                         |""".trimMargin()),
-                    semanticdb =
-                        SemanticdbData(
+                    scip =
+                        ScipData(
                             expectedOccurrences =
                                 listOf(
-                                    SymbolOccurrence {
-                                        role = Role.DEFINITION
+                                    scipOccurrence {
+                                        role = DEFINITION
                                         symbol = "x."
                                         range {
                                             startLine = 0
@@ -284,8 +281,8 @@ class SemanticdbSymbolsTest {
                                             endCharacter = 22
                                         }
                                     },
-                                    SymbolOccurrence {
-                                        role = Role.DEFINITION
+                                    scipOccurrence {
+                                        role = DEFINITION
                                         symbol = "setX()."
                                         range {
                                             startLine = 0
@@ -298,8 +295,8 @@ class SemanticdbSymbolsTest {
                                             endCharacter = 22
                                         }
                                     },
-                                    SymbolOccurrence {
-                                        role = Role.DEFINITION
+                                    scipOccurrence {
+                                        role = DEFINITION
                                         symbol = "getX()."
                                         range {
                                             startLine = 1
@@ -322,12 +319,12 @@ class SemanticdbSymbolsTest {
                         |var x: Int = 5
                         |    set(value) { field = value + 5 }
                         |""".trimMargin()),
-                    semanticdb =
-                        SemanticdbData(
+                    scip =
+                        ScipData(
                             expectedOccurrences =
                                 listOf(
-                                    SymbolOccurrence {
-                                        role = Role.DEFINITION
+                                    scipOccurrence {
+                                        role = DEFINITION
                                         symbol = "x."
                                         range {
                                             startLine = 0
@@ -340,8 +337,8 @@ class SemanticdbSymbolsTest {
                                             endCharacter = 36
                                         }
                                     },
-                                    SymbolOccurrence {
-                                        role = Role.DEFINITION
+                                    scipOccurrence {
+                                        role = DEFINITION
                                         symbol = "getX()."
                                         range {
                                             startLine = 0
@@ -354,8 +351,8 @@ class SemanticdbSymbolsTest {
                                             endCharacter = 36
                                         }
                                     },
-                                    SymbolOccurrence {
-                                        role = Role.DEFINITION
+                                    scipOccurrence {
+                                        role = DEFINITION
                                         symbol = "setX()."
                                         range {
                                             startLine = 1
@@ -379,12 +376,12 @@ class SemanticdbSymbolsTest {
                         |    get() = field + 10
                         |    set(value) { field = value + 10 }
                         |""".trimMargin()),
-                    semanticdb =
-                        SemanticdbData(
+                    scip =
+                        ScipData(
                             expectedOccurrences =
                                 listOf(
-                                    SymbolOccurrence {
-                                        role = Role.DEFINITION
+                                    scipOccurrence {
+                                        role = DEFINITION
                                         symbol = "x."
                                         range {
                                             startLine = 0
@@ -397,8 +394,8 @@ class SemanticdbSymbolsTest {
                                             endCharacter = 37
                                         }
                                     },
-                                    SymbolOccurrence {
-                                        role = Role.DEFINITION
+                                    scipOccurrence {
+                                        role = DEFINITION
                                         symbol = "getX()."
                                         range {
                                             startLine = 1
@@ -413,8 +410,8 @@ class SemanticdbSymbolsTest {
                                             endCharacter = 22
                                         }
                                     },
-                                    SymbolOccurrence {
-                                        role = Role.DEFINITION
+                                    scipOccurrence {
+                                        role = DEFINITION
                                         symbol = "setX()."
                                         range {
                                             startLine = 2
@@ -440,12 +437,12 @@ class SemanticdbSymbolsTest {
                         |    }
                         |}
                         |""".trimMargin()),
-                    semanticdb =
-                        SemanticdbData(
+                    scip =
+                        ScipData(
                             expectedOccurrences =
                                 listOf(
-                                    SymbolOccurrence {
-                                        role = Role.DEFINITION
+                                    scipOccurrence {
+                                        role = DEFINITION
                                         symbol = "Test#`<init>`().(sample)"
                                         range {
                                             startLine = 0
@@ -458,8 +455,8 @@ class SemanticdbSymbolsTest {
                                             endCharacter = 26
                                         }
                                     },
-                                    SymbolOccurrence {
-                                        role = Role.DEFINITION
+                                    scipOccurrence {
+                                        role = DEFINITION
                                         symbol = "Test#sample."
                                         range {
                                             startLine = 0
@@ -472,8 +469,8 @@ class SemanticdbSymbolsTest {
                                             endCharacter = 26
                                         }
                                     },
-                                    SymbolOccurrence {
-                                        role = Role.DEFINITION
+                                    scipOccurrence {
+                                        role = DEFINITION
                                         symbol = "Test#getSample()."
                                         range {
                                             startLine = 0
@@ -486,8 +483,8 @@ class SemanticdbSymbolsTest {
                                             endCharacter = 26
                                         }
                                     },
-                                    SymbolOccurrence {
-                                        role = Role.DEFINITION
+                                    scipOccurrence {
+                                        role = DEFINITION
                                         symbol = "Test#setSample()."
                                         range {
                                             startLine = 0
@@ -500,8 +497,8 @@ class SemanticdbSymbolsTest {
                                             endCharacter = 26
                                         }
                                     },
-                                    SymbolOccurrence {
-                                        role = Role.REFERENCE
+                                    scipOccurrence {
+                                        role = REFERENCE
                                         symbol = "Test#`<init>`().(sample)"
                                         range {
                                             startLine = 0
@@ -510,8 +507,8 @@ class SemanticdbSymbolsTest {
                                             endCharacter = 59
                                         }
                                     },
-                                    SymbolOccurrence {
-                                        role = Role.REFERENCE
+                                    scipOccurrence {
+                                        role = REFERENCE
                                         symbol = "Test#sample."
                                         range {
                                             startLine = 2
@@ -520,8 +517,8 @@ class SemanticdbSymbolsTest {
                                             endCharacter = 22
                                         }
                                     },
-                                    SymbolOccurrence {
-                                        role = Role.REFERENCE
+                                    scipOccurrence {
+                                        role = REFERENCE
                                         symbol = "Test#getSample()."
                                         range {
                                             startLine = 2
@@ -542,12 +539,12 @@ class SemanticdbSymbolsTest {
                         """
                         |class Banana
                         |""".trimMargin()),
-                    semanticdb =
-                        SemanticdbData(
+                    scip =
+                        ScipData(
                             expectedOccurrences =
                                 listOf(
-                                    SymbolOccurrence {
-                                        role = Role.DEFINITION
+                                    scipOccurrence {
+                                        role = DEFINITION
                                         symbol = "Banana#"
                                         range {
                                             startLine = 0
@@ -559,8 +556,8 @@ class SemanticdbSymbolsTest {
                                             endCharacter = 12
                                         }
                                     },
-                                    SymbolOccurrence {
-                                        role = Role.DEFINITION
+                                    scipOccurrence {
+                                        role = DEFINITION
                                         symbol = "Banana#`<init>`()."
                                         range {
                                             startLine = 0
@@ -579,12 +576,12 @@ class SemanticdbSymbolsTest {
                         """
                         |class Banana(size: Int)
                         |""".trimMargin()),
-                    semanticdb =
-                        SemanticdbData(
+                    scip =
+                        ScipData(
                             expectedOccurrences =
                                 listOf(
-                                    SymbolOccurrence {
-                                        role = Role.DEFINITION
+                                    scipOccurrence {
+                                        role = DEFINITION
                                         symbol = "Banana#"
                                         range {
                                             startLine = 0
@@ -596,8 +593,8 @@ class SemanticdbSymbolsTest {
                                             endCharacter = 23
                                         }
                                     },
-                                    SymbolOccurrence {
-                                        role = Role.DEFINITION
+                                    scipOccurrence {
+                                        role = DEFINITION
                                         symbol = "Banana#`<init>`()."
                                         range {
                                             startLine = 0
@@ -617,12 +614,12 @@ class SemanticdbSymbolsTest {
                         """
                         |class Banana constructor(size: Int)
                         |""".trimMargin()),
-                    semanticdb =
-                        SemanticdbData(
+                    scip =
+                        ScipData(
                             expectedOccurrences =
                                 listOf(
-                                    SymbolOccurrence {
-                                        role = Role.DEFINITION
+                                    scipOccurrence {
+                                        role = DEFINITION
                                         symbol = "Banana#"
                                         range {
                                             startLine = 0
@@ -634,8 +631,8 @@ class SemanticdbSymbolsTest {
                                             endCharacter = 35
                                         }
                                     },
-                                    SymbolOccurrence {
-                                        role = Role.DEFINITION
+                                    scipOccurrence {
+                                        role = DEFINITION
                                         symbol = "Banana#`<init>`()."
                                         range {
                                             startLine = 0
@@ -660,12 +657,12 @@ class SemanticdbSymbolsTest {
                         """
                         |val x = Runnable { }.run()
                         |""".trimMargin()),
-                    semanticdb =
-                        SemanticdbData(
+                    scip =
+                        ScipData(
                             expectedOccurrences =
                                 listOf(
-                                    SymbolOccurrence {
-                                        role = Role.REFERENCE
+                                    scipOccurrence {
+                                        role = REFERENCE
                                         symbol = "java/lang/Runnable#"
                                         range {
                                             startLine = 0
@@ -674,8 +671,8 @@ class SemanticdbSymbolsTest {
                                             endCharacter = 16
                                         }
                                     },
-                                    SymbolOccurrence {
-                                        role = Role.REFERENCE
+                                    scipOccurrence {
+                                        role = REFERENCE
                                         symbol = "java/lang/Runnable#run()."
                                         range {
                                             startLine = 0
@@ -700,29 +697,21 @@ class SemanticdbSymbolsTest {
                     |*/
                     |val x = ""
                     |""".trimMargin()),
-                    semanticdb =
-                        SemanticdbData(
+                    scip =
+                        ScipData(
                             expectedSymbols =
                                 listOf(
-                                    SymbolInformation {
+                                    scipSymbol {
                                         symbol = "x."
                                         displayName = "x"
-                                        language = Language.KOTLIN
-                                        documentation {
-                                            message =
-                                                "```kotlin\npublic final val x: String\n```\n\n----\n\n\nhello world\n test content\n"
-                                            format = Format.MARKDOWN
-                                        }
+                                        signatureText = "public final val x: String"
+                                        documentation("hello world\n test content")
                                     },
-                                    SymbolInformation {
+                                    scipSymbol {
                                         symbol = "getX()."
                                         displayName = "x"
-                                        language = Language.KOTLIN
-                                        documentation {
-                                            message =
-                                                "```kotlin\npublic get(): String\n```\n\n----\n\n\nhello world\n test content\n"
-                                            format = Format.MARKDOWN
-                                        }
+                                        signatureText = "public get(): String"
+                                        documentation("hello world\n test content")
                                     }))))
             .mapCheckExpectedSymbols()
 }

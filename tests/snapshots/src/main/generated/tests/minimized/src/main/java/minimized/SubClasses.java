@@ -4,7 +4,7 @@
   public class SubClasses extends AbstractClasses implements Interfaces {
 //             ^^^^^^^^^^ definition semanticdb maven . . minimized/SubClasses#
 //                        display_name SubClasses
-//                        signature_documentation java public class SubClasses
+//                        signature_documentation java public class SubClasses extends AbstractClasses implements Interfaces
 //                        kind Class
 //                        relationship is_implementation semanticdb maven . . minimized/AbstractClasses#
 //                        relationship is_implementation semanticdb maven . . minimized/Interfaces#

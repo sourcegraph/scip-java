@@ -7,10 +7,10 @@ import scala.meta.Input
 import scala.meta.Position
 import scala.meta.internal.inputs._
 
-import com.sourcegraph.semanticdb.Semanticdb
-import com.sourcegraph.semanticdb.Semanticdb.TextDocument
 import munit.FunSuite
 import munit.TestOptions
+import org.scip_code.scip.Document
+import org.scip_code.scip.Occurrence
 
 @nowarn("msg=match may not be exhaustive")
 class TargetedSuite extends FunSuite with TempDirectories {
@@ -23,7 +23,7 @@ class TargetedSuite extends FunSuite with TempDirectories {
   def checkDoc(
       options: TestOptions,
       original: String,
-      fn: (TextDocument, List[String]) => Unit,
+      fn: (Document, List[String]) => Unit,
       qualifiedClassName: String = "example.Test"
   )(implicit loc: munit.Location): Unit = {
     test(options) {
@@ -44,18 +44,13 @@ class TargetedSuite extends FunSuite with TempDirectories {
           })
           .toList
       val result = compiler.compileSemanticdb(List(input))
-      val textDocument = result.textDocument.orNull
-      val occurrences = textDocument.getOccurrencesList.asScala.toList
+      val document = result.document.orNull
+      val occurrences = document.getOccurrencesList.asScala.toList
       val symbols: List[String] = positions.map { pos =>
-        val posRange = Semanticdb
-          .Range
-          .newBuilder()
-          .setStartLine(pos.startLine)
-          .setStartCharacter(pos.startColumn)
-          .setEndLine(pos.endLine)
-          .setEndCharacter(pos.endColumn)
-          .build()
-        val matchingOccurrences = occurrences.filter(_.getRange == posRange)
+        val expected = rangeOf(pos)
+        val matchingOccurrences = occurrences.filter(occ =>
+          occ.getRangeList.asScala.toList == expected
+        )
         matchingOccurrences match {
           case Nil =>
             fail(
@@ -63,7 +58,7 @@ class TargetedSuite extends FunSuite with TempDirectories {
                 "error",
                 s"no symbol occurrence for this position."
               ),
-              clues(occurrences, posRange)
+              clues(occurrences, expected)
             )
           case sym :: Nil =>
             sym.getSymbol
@@ -73,13 +68,22 @@ class TargetedSuite extends FunSuite with TempDirectories {
                 "error",
                 s"ambiguous symbols for this position"
               ),
-              clues(many, occurrences, posRange)
+              clues(many, occurrences, expected)
             )
         }
       }
-      fn(textDocument, symbols)
+      fn(document, symbols)
     }
   }
+
+  private def rangeOf(pos: Position): List[Integer] =
+    if (pos.startLine == pos.endLine)
+      List[Integer](pos.startLine, pos.startColumn, pos.endColumn)
+    else
+      List[Integer](pos.startLine, pos.startColumn, pos.endLine, pos.endColumn)
+
+  // Silence the unused-import warning when no test in this suite touches Occurrence.
+  private val _occurrenceTypeHint: Class[_] = classOf[Occurrence]
 
   checkDoc(
     "issue-24",

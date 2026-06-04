@@ -17,7 +17,7 @@ import moped.cli.Command
 import moped.cli.CommandParser
 import org.scip_code.scip.ToolInfo
 
-@Description("Converts SemanticDB files into a single SCIP index file.")
+@Description("Aggregates per-source SCIP shards into a single SCIP index file.")
 @Usage("scip-java index-semanticdb [OPTIONS ...] [POSITIONAL ARGUMENTS ...]")
 @ExampleUsage(
   "scip-java index-semanticdb --out=myindex.scip my/targetroot1 my/targetroot2"
@@ -26,14 +26,14 @@ import org.scip_code.scip.ToolInfo
 final case class IndexSemanticdbCommand(
     @Description("The name of the output file.")
     output: Path = Paths.get("index.scip"),
-    @Description("Whether to process the SemanticDB files in parallel")
+    @Description("Whether to process the SCIP shards in parallel")
     parallel: Boolean = true,
     @Description(
       "Whether to emit parent->child relationships for 'Find references' and 'Find implementations'. " +
         "This flag exists as a workaround for the issue https://github.com/sourcegraph/sourcegraph/issues/50927"
     )
     emitInverseRelationships: Boolean = true,
-    @Description("Directories that contain SemanticDB files.")
+    @Description("Directories that contain SCIP shards.")
     @PositionalArguments()
     targetroot: List[Path] = Nil,
     @Description(

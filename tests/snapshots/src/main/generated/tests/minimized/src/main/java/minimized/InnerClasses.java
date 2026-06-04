@@ -180,7 +180,7 @@
     public class InnerClass implements InnerInterface<Integer, Integer> {
 //               ^^^^^^^^^^ definition semanticdb maven . . minimized/InnerClasses#InnerClass#
 //                          display_name InnerClass
-//                          signature_documentation java public class InnerClass
+//                          signature_documentation java public class InnerClass implements InnerInterface<Integer, Integer>
 //                          kind Class
 //                          relationship is_implementation semanticdb maven . . minimized/InnerClasses#InnerInterface#
 //                                     ^^^^^^^^^^^^^^ reference semanticdb maven . . minimized/InnerClasses#InnerInterface#

@@ -13,7 +13,7 @@ import scala.meta.Input
 import scala.meta.internal.io.FileIO
 import scala.meta.io.AbsolutePath
 
-import com.sourcegraph.semanticdb.Semanticdb
+import org.scip_code.scip.Index
 
 object TestCompiler {
   val PROCESSOR_PATH = System.getProperty("java.class.path")
@@ -23,7 +23,7 @@ class TestCompiler(
     val classpath: String,
     val javacOptions: List[String],
     val targetroot: Path,
-    val sourceroot: Path = Files.createTempDirectory("semanticdb-javac")
+    val sourceroot: Path = Files.createTempDirectory("scip-javac")
 ) {
 
   private val compiler = ToolProvider.getSystemJavaCompiler
@@ -37,11 +37,11 @@ class TestCompiler(
     this(TestCompiler.PROCESSOR_PATH, Nil, targetroot)
   }
 
-  def compileSemanticdbDirectory(dir: Path): CompileResult = {
-    compileSemanticdb(inputsFromDirectory(dir))
-  }
+  def compileSemanticdbDirectory(dir: Path): CompileResult = compileSemanticdb(
+    inputsFromDirectory(dir)
+  )
 
-  def compileSemanticdb(inputs: Seq[Input.VirtualFile]): CompileResult = {
+  def compileSemanticdb(inputs: Seq[Input.VirtualFile]): CompileResult =
     compile(
       inputs,
       List(
@@ -52,7 +52,6 @@ class TestCompiler(
         )
       )
     )
-  }
 
   def compile(
       inputs: Seq[Input.VirtualFile],
@@ -60,9 +59,8 @@ class TestCompiler(
   ): CompileResult = {
     val javacInputs = inputs.filter(_.path.endsWith(".java"))
     val results = ListBuffer.empty[CompileResult]
-    if (javacInputs.nonEmpty) {
+    if (javacInputs.nonEmpty)
       results += compileJavac(javacInputs, extraJavacOptions)
-    }
     results.foldLeft(CompileResult.empty)(_ merge _)
   }
 
@@ -94,23 +92,19 @@ class TestCompiler(
     var bytecode = new Array[Byte](0)
     if (!fileManager.compiled.isEmpty)
       bytecode = fileManager.compiled.iterator.next.getCompiledBinaries
-    val textDocuments = Semanticdb.TextDocuments.newBuilder
-    inputs.map { input =>
-      val outputPath = targetroot
+    val docs = ListBuffer.empty[org.scip_code.scip.Document]
+    inputs.foreach { input =>
+      val shardPath = targetroot
         .resolve("META-INF")
-        .resolve("semanticdb")
-        .resolve(input.path + ".semanticdb")
-      if (Files.isRegularFile(outputPath)) {
-        textDocuments.addAllDocuments(
-          Semanticdb
-            .TextDocuments
-            .parseFrom(Files.readAllBytes(outputPath))
-            .getDocumentsList
-        )
+        .resolve("scip")
+        .resolve(input.path + ".scip")
+      if (Files.isRegularFile(shardPath)) {
+        val shard = Index.parseFrom(Files.readAllBytes(shardPath))
+        docs ++= shard.getDocumentsList.asScala
       }
     }
     val stdout = output.toString
-    CompileResult(bytecode, stdout, textDocuments.build(), isSuccess)
+    CompileResult(bytecode, stdout, docs.toSeq, isSuccess)
   }
 
   private def inputsFromDirectory(dir: Path): Seq[Input.VirtualFile] = {

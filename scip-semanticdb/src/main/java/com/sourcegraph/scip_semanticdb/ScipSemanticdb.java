@@ -1,35 +1,48 @@
 package com.sourcegraph.scip_semanticdb;
 
 import com.google.protobuf.CodedInputStream;
-import com.sourcegraph.semanticdb.Semanticdb;
-import com.sourcegraph.semanticdb.Semanticdb.SymbolOccurrence;
-import com.sourcegraph.semanticdb.Semanticdb.SymbolOccurrence.Role;
 import com.sourcegraph.semanticdb.SemanticdbSymbols;
+import java.io.IOException;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.PathMatcher;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.jar.JarEntry;
+import java.util.jar.JarFile;
+import java.util.stream.Stream;
 import org.scip_code.scip.Document;
 import org.scip_code.scip.Index;
 import org.scip_code.scip.Metadata;
 import org.scip_code.scip.Occurrence;
 import org.scip_code.scip.ProtocolVersion;
 import org.scip_code.scip.Relationship;
-import org.scip_code.scip.Signature;
 import org.scip_code.scip.SymbolInformation;
-import org.scip_code.scip.SymbolRole;
 import org.scip_code.scip.TextEncoding;
 import org.scip_code.scip.ToolInfo;
 
-import java.io.IOException;
-import java.net.URI;
-import java.nio.file.*;
-import java.util.*;
-
-import java.util.jar.JarEntry;
-import java.util.jar.JarFile;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-import java.util.stream.StreamSupport;
-
-/** The core logic that converts SemanticDB into SCIP. */
+/**
+ * Aggregates per-source SCIP shards (one {@link Index} per {@code *.scip} file emitted by the
+ * compiler plugins) into a single SCIP index. The aggregator:
+ *
+ * <ul>
+ *   <li>discovers shards under each requested target root,
+ *   <li>resolves each shard's bare-descriptor symbols to fully-qualified SCIP symbols using a
+ *       {@link PackageTable},
+ *   <li>optionally adds inverse-reference relationships across documents, and
+ *   <li>emits a single {@link Index} with leading {@link Metadata}.
+ * </ul>
+ */
 public class ScipSemanticdb {
+  private static final PathMatcher JAR_PATTERN =
+      FileSystems.getDefault().getPathMatcher("glob:**.jar");
+
   private final ScipWriter writer;
   private final ScipSemanticdbOptions options;
 
@@ -45,12 +58,13 @@ public class ScipSemanticdb {
 
   private void run() throws IOException {
     PackageTable packages = new PackageTable(options);
-    List<Path> files = SemanticdbWalker.findSemanticdbFiles(options);
-    Collections.sort(files);
+    SymbolRewriter rewriter = new SymbolRewriter(packages);
+    List<Path> shards = ScipShardWalker.findShards(options);
+    Collections.sort(shards);
     if (options.reporter.hasErrors()) return;
-    if (files.isEmpty() && !options.allowEmptyIndex) {
+    if (shards.isEmpty() && !options.allowEmptyIndex) {
       options.reporter.error(
-          "No SemanticDB files found. "
+          "No SCIP shards found. "
               + "This typically means that `scip-java` is unable to automatically "
               + "index this codebase. If you are using Gradle or Maven, please report an issue to "
               + "https://github.com/sourcegraph/scip-java and include steps to reproduce. "
@@ -58,243 +72,16 @@ public class ScipSemanticdb {
               + "of the steps from https://sourcegraph.github.io/scip-java/docs/manual-configuration.html");
       return;
     }
-    options.reporter.startProcessing(files.size());
-    runTyped(files, packages);
+    options.reporter.startProcessing(shards.size());
+    writer.emitTyped(metadataIndex());
+
+    Map<String, List<String>> inverseReferences = computeInverseReferences(shards, rewriter);
+    shardStream(shards).forEach(shard -> processShard(shard, rewriter, inverseReferences));
     writer.build();
     options.reporter.endProcessing();
   }
 
-  private void runTyped(List<Path> files, PackageTable packages) {
-    writer.emitTyped(typedMetadata());
-    InverseReferenceRelationships references = inverseReferenceRelationships(files);
-    filesStream(files).forEach(document -> processTypedDocument(document, packages, references));
-  }
-
-  private String typedSymbol(String symbol, Package pkg) {
-    if (symbol.isEmpty()) {
-      return "";
-    }
-    if (symbol.startsWith("local")) {
-      return "local " + symbol.substring("local".length());
-    }
-    return "semanticdb maven " + pkg.repoName() + " " + pkg.version() + " " + symbol;
-  }
-
-  private static SymbolInformation.Kind scipKind(Semanticdb.SymbolInformation info) {
-    Semanticdb.SymbolInformation.Kind kind = info.getKind();
-    int properties = info.getProperties();
-    boolean isStatic = (properties & Semanticdb.SymbolInformation.Property.STATIC_VALUE) > 0;
-    boolean isAbstract = (properties & Semanticdb.SymbolInformation.Property.ABSTRACT_VALUE) > 0;
-    boolean isEnum = (properties & Semanticdb.SymbolInformation.Property.ENUM_VALUE) > 0;
-
-    switch (kind) {
-      case CLASS:
-        if (isEnum) {
-          return SymbolInformation.Kind.Enum;
-        } else {
-          return SymbolInformation.Kind.Class;
-        }
-      case CONSTRUCTOR:
-        return SymbolInformation.Kind.Constructor;
-      case FIELD:
-        if (isStatic) {
-          return SymbolInformation.Kind.StaticField;
-        } else {
-          return SymbolInformation.Kind.Field;
-        }
-      case INTERFACE:
-        return SymbolInformation.Kind.Interface;
-      case LOCAL:
-        if (isStatic) {
-          return SymbolInformation.Kind.StaticVariable;
-        } else {
-          return SymbolInformation.Kind.Variable;
-        }
-      case MACRO:
-        return SymbolInformation.Kind.Macro;
-      case METHOD:
-        if (isStatic) {
-          return SymbolInformation.Kind.StaticMethod;
-        } else if (isAbstract) {
-          return SymbolInformation.Kind.AbstractMethod;
-        } else {
-          return SymbolInformation.Kind.Method;
-        }
-      case OBJECT:
-        return SymbolInformation.Kind.Object;
-      case PACKAGE:
-        return SymbolInformation.Kind.Package;
-      case PACKAGE_OBJECT:
-        return SymbolInformation.Kind.PackageObject;
-      case PARAMETER:
-        return SymbolInformation.Kind.Parameter;
-      case SELF_PARAMETER:
-        return SymbolInformation.Kind.SelfParameter;
-      case TRAIT:
-        return SymbolInformation.Kind.Trait;
-      case TYPE:
-        if (isEnum) {
-          return SymbolInformation.Kind.Enum;
-        } else {
-          return SymbolInformation.Kind.Type;
-        }
-      case TYPE_PARAMETER:
-        return SymbolInformation.Kind.TypeParameter;
-      case UNKNOWN_KIND:
-        return SymbolInformation.Kind.UnspecifiedKind;
-    }
-
-    return SymbolInformation.Kind.UnspecifiedKind;
-  }
-
-  public static boolean isDefinitionRole(Role role) {
-    return role == Role.DEFINITION || role == Role.SYNTHETIC_DEFINITION;
-  }
-
-  private void processTypedDocument(
-      Path path, PackageTable packages, InverseReferenceRelationships references) {
-    for (ScipTextDocument doc : parseTextDocument(path).collect(Collectors.toList())) {
-      if (doc.semanticdb.getOccurrencesCount() == 0) {
-        continue;
-      }
-
-      Path absolutePath = Paths.get(URI.create(doc.semanticdb.getUri()));
-      String relativePath =
-          StreamSupport.stream(options.sourceroot.relativize(absolutePath).spliterator(), false)
-              .map(p -> p.getFileName().toString())
-              .collect(Collectors.joining("/"));
-      Document.Builder tdoc = Document.newBuilder().setRelativePath(relativePath);
-      for (SymbolOccurrence occ : doc.sortedSymbolOccurrences()) {
-        if (occ.getSymbol().isEmpty()) {
-          continue;
-        }
-        int role = 0;
-        if (isDefinitionRole(occ.getRole())) {
-          role |= SymbolRole.Definition_VALUE;
-        }
-        boolean isSingleLineRange = occ.getRange().getStartLine() == occ.getRange().getEndLine();
-        Iterable<Integer> range =
-            isSingleLineRange
-                ? Arrays.asList(
-                    occ.getRange().getStartLine(),
-                    occ.getRange().getStartCharacter(),
-                    occ.getRange().getEndCharacter())
-                : Arrays.asList(
-                    occ.getRange().getStartLine(),
-                    occ.getRange().getStartCharacter(),
-                    occ.getRange().getEndLine(),
-                    occ.getRange().getEndCharacter());
-        Package pkg = packages.packageForSymbol(occ.getSymbol()).orElse(Package.EMPTY);
-        Occurrence.Builder occBuilder =
-            Occurrence.newBuilder()
-                .addAllRange(range)
-                .setSymbol(typedSymbol(occ.getSymbol(), pkg))
-                .setSymbolRoles(role);
-        // Add enclosing_range if it exists
-        if (occ.hasEnclosingRange()) {
-          Semanticdb.Range enclosingRange = occ.getEnclosingRange();
-          boolean isEnclosingSingleLine =
-              enclosingRange.getStartLine() == enclosingRange.getEndLine();
-          Iterable<Integer> enclosingRangeInts =
-              isEnclosingSingleLine
-                  ? Arrays.asList(
-                      enclosingRange.getStartLine(),
-                      enclosingRange.getStartCharacter(),
-                      enclosingRange.getEndCharacter())
-                  : Arrays.asList(
-                      enclosingRange.getStartLine(),
-                      enclosingRange.getStartCharacter(),
-                      enclosingRange.getEndLine(),
-                      enclosingRange.getEndCharacter());
-          occBuilder.addAllEnclosingRange(enclosingRangeInts);
-        }
-        tdoc.addOccurrences(occBuilder);
-      }
-      Symtab symtab = new Symtab(doc.semanticdb);
-      for (Semanticdb.SymbolInformation info : doc.semanticdb.getSymbolsList()) {
-        if (info.getSymbol().isEmpty()) {
-          continue;
-        }
-        Package pkg = packages.packageForSymbol(info.getSymbol()).orElse(Package.EMPTY);
-        SymbolInformation.Builder scipInfo =
-            SymbolInformation.newBuilder().setSymbol(typedSymbol(info.getSymbol(), pkg));
-
-        scipInfo.setDisplayName(info.getDisplayName());
-        if (!info.getEnclosingSymbol().isEmpty()) {
-          scipInfo.setEnclosingSymbol(typedSymbol(info.getEnclosingSymbol(), pkg));
-        }
-
-        scipInfo.setKind(scipKind(info));
-
-        // TODO: this can be removed once https://github.com/sourcegraph/sourcegraph/issues/50927 is
-        // fixed.
-        ArrayList<String> inverseReferences = references.map.get(info.getSymbol());
-        if (inverseReferences != null) {
-          for (String inverseReference : inverseReferences) {
-            Package inverseReferencePkg =
-                packages.packageForSymbol(inverseReference).orElse(Package.EMPTY);
-            scipInfo.addRelationships(
-                Relationship.newBuilder()
-                    .setSymbol(typedSymbol(inverseReference, inverseReferencePkg))
-                    .setIsImplementation(true)
-                    .setIsReference(true));
-          }
-        }
-
-        for (int i = 0; i < info.getDefinitionRelationshipsCount(); i++) {
-          String definitionSymbol = info.getDefinitionRelationships(i);
-          if (definitionSymbol.isEmpty()) {
-            continue;
-          }
-          Package definitionSymbolPkg =
-              packages.packageForSymbol(definitionSymbol).orElse(Package.EMPTY);
-          Semanticdb.SymbolInformation definitionInfo = symtab.symbols.get(definitionSymbol);
-
-          scipInfo.addRelationships(
-              Relationship.newBuilder()
-                  .setSymbol(typedSymbol(definitionSymbol, definitionSymbolPkg))
-                  .setIsDefinition(true)
-                  .setIsReference(
-                      definitionInfo != null
-                          && definitionInfo.getDisplayName().equals(info.getDisplayName())
-                          && supportsReferenceRelationship(info)));
-        }
-
-        for (int i = 0; i < info.getOverriddenSymbolsCount(); i++) {
-          String overriddenSymbol = info.getOverriddenSymbols(i);
-          if (overriddenSymbol.isEmpty()) {
-            continue;
-          }
-          if (isIgnoredOverriddenSymbol(overriddenSymbol)) {
-            continue;
-          }
-          Package overriddenSymbolPkg =
-              packages.packageForSymbol(overriddenSymbol).orElse(Package.EMPTY);
-          scipInfo.addRelationships(
-              Relationship.newBuilder()
-                  .setSymbol(typedSymbol(overriddenSymbol, overriddenSymbolPkg))
-                  .setIsImplementation(true)
-                  .setIsReference(supportsReferenceRelationship(info)));
-        }
-        if (info.hasSignature()) {
-          String language =
-              doc.semanticdb.getLanguage().toString().toLowerCase(Locale.ROOT).intern();
-          String signature = new SignatureFormatter(info, symtab).formatSymbol();
-          Signature.Builder signatureDocumentation =
-              Signature.newBuilder().setLanguage(language).setText(signature);
-          scipInfo.setSignatureDocumentation(signatureDocumentation);
-        }
-        String documentation = info.getDocumentation().getMessage();
-        if (!documentation.isEmpty()) {
-          scipInfo.addDocumentation(documentation);
-        }
-        tdoc.addSymbols(scipInfo);
-      }
-      writer.emitTyped(Index.newBuilder().addDocuments(tdoc).build());
-    }
-  }
-
-  private Index typedMetadata() {
+  private Index metadataIndex() {
     return Index.newBuilder()
         .setMetadata(
             Metadata.newBuilder()
@@ -309,123 +96,145 @@ public class ScipSemanticdb {
         .build();
   }
 
-  private Stream<Path> filesStream(List<Path> files) {
-    return options.parallel ? files.parallelStream() : files.stream();
-  }
-
-  private static class InverseReferenceRelationships {
-    public final Map<String, ArrayList<String>> map;
-
-    private InverseReferenceRelationships(Map<String, ArrayList<String>> map) {
-      this.map = map;
+  private void processShard(
+      Path shardPath, SymbolRewriter rewriter, Map<String, List<String>> inverseReferences) {
+    for (Document shard : readShard(shardPath)) {
+      Document rewritten = rewriteDocument(shard, rewriter, inverseReferences);
+      writer.emitTyped(Index.newBuilder().addDocuments(rewritten).build());
+      options.reporter.processedOneItem();
     }
   }
 
-  private InverseReferenceRelationships inverseReferenceRelationships(List<Path> files) {
-    if (!options.emitInverseRelationships) {
-      return new InverseReferenceRelationships(Collections.emptyMap());
-    }
-    return new InverseReferenceRelationships(
-        filesStream(files)
-            .flatMap(this::parseTextDocument)
-            .flatMap(this::referenceRelationships)
-            .collect(
-                Collectors.groupingBy(
-                    SymbolRelationship::getTo,
-                    Collectors.mapping(
-                        SymbolRelationship::getFrom, Collectors.toCollection(ArrayList::new)))));
-  }
+  private Document rewriteDocument(
+      Document shard, SymbolRewriter rewriter, Map<String, List<String>> inverseReferences) {
+    Document.Builder out =
+        Document.newBuilder()
+            .setLanguage(shard.getLanguage())
+            .setRelativePath(shard.getRelativePath());
+    if (!shard.getText().isEmpty()) out.setText(shard.getText());
 
-  private Stream<SymbolRelationship> referenceRelationships(ScipTextDocument document) {
-    ArrayList<SymbolRelationship> relationships = new ArrayList<>();
-    for (int i = 0; i < document.semanticdb.getSymbolsCount(); i++) {
-      Semanticdb.SymbolInformation info = document.semanticdb.getSymbols(i);
-      if (!supportsReferenceRelationship(info)) {
-        continue;
+    for (Occurrence occ : shard.getOccurrencesList()) {
+      Occurrence.Builder rebuilt =
+          Occurrence.newBuilder()
+              .addAllRange(occ.getRangeList())
+              .setSymbol(rewriter.rewrite(occ.getSymbol()))
+              .setSymbolRoles(occ.getSymbolRoles());
+      if (occ.getEnclosingRangeCount() > 0) {
+        rebuilt.addAllEnclosingRange(occ.getEnclosingRangeList());
       }
-      if (info.getSymbol().isEmpty() || SemanticdbSymbols.isLocal(info.getSymbol())) {
-        continue;
+      out.addOccurrences(rebuilt);
+    }
+
+    for (SymbolInformation info : shard.getSymbolsList()) {
+      SymbolInformation.Builder rebuilt =
+          SymbolInformation.newBuilder()
+              .setSymbol(rewriter.rewrite(info.getSymbol()))
+              .setDisplayName(info.getDisplayName())
+              .setKind(info.getKind());
+      if (info.hasSignatureDocumentation()) {
+        rebuilt.setSignatureDocumentation(info.getSignatureDocumentation());
       }
-      for (int j = 0; j < info.getOverriddenSymbolsCount(); j++) {
-        String overriddenSymbol = info.getOverriddenSymbols(j);
-        if (SemanticdbSymbols.isLocal(overriddenSymbol)) {
-          continue;
+      if (!info.getEnclosingSymbol().isEmpty()) {
+        rebuilt.setEnclosingSymbol(rewriter.rewrite(info.getEnclosingSymbol()));
+      }
+      for (String doc : info.getDocumentationList()) rebuilt.addDocumentation(doc);
+      for (Relationship rel : info.getRelationshipsList()) {
+        rebuilt.addRelationships(
+            Relationship.newBuilder(rel).setSymbol(rewriter.rewrite(rel.getSymbol())));
+      }
+      List<String> inverse = inverseReferences.get(info.getSymbol());
+      if (inverse != null) {
+        for (String overrider : inverse) {
+          rebuilt.addRelationships(
+              Relationship.newBuilder()
+                  .setSymbol(rewriter.rewrite(overrider))
+                  .setIsImplementation(true)
+                  .setIsReference(true));
         }
-        relationships.add(new SymbolRelationship(info.getSymbol(), overriddenSymbol));
       }
+      out.addSymbols(rebuilt);
     }
-    return relationships.stream();
+    return out.build();
   }
 
-  private static boolean supportsReferenceRelationship(Semanticdb.SymbolInformation info) {
+  /**
+   * Builds {@code overridden-symbol → [overriding-symbols]} for every method-style relationship.
+   * Class/interface parent relationships are excluded because they shouldn't surface as
+   * find-references results (TODO: drop once sourcegraph#50927 is fixed).
+   */
+  private Map<String, List<String>> computeInverseReferences(
+      List<Path> shards, SymbolRewriter rewriter) {
+    if (!options.emitInverseRelationships) return Collections.emptyMap();
+    Map<String, List<String>> result = new HashMap<>();
+    for (Path shard : shards) {
+      for (Document doc : readShard(shard)) {
+        for (SymbolInformation info : doc.getSymbolsList()) {
+          if (!supportsReferenceRelationship(info)) continue;
+          if (info.getSymbol().isEmpty() || SemanticdbSymbols.isLocal(info.getSymbol())) continue;
+          for (Relationship rel : info.getRelationshipsList()) {
+            if (!rel.getIsImplementation()) continue;
+            if (SemanticdbSymbols.isLocal(rel.getSymbol())) continue;
+            if (isIgnoredOverriddenSymbol(rel.getSymbol())) continue;
+            result.computeIfAbsent(rel.getSymbol(), k -> new ArrayList<>()).add(info.getSymbol());
+          }
+        }
+      }
+    }
+    return result;
+  }
+
+  private static boolean supportsReferenceRelationship(SymbolInformation info) {
     switch (info.getKind()) {
-      case INTERFACE:
-      case TYPE:
-      case CLASS:
-      case OBJECT:
-      case PACKAGE_OBJECT:
+      case Class:
+      case Enum:
+      case Interface:
+      case Type:
+      case Object:
+      case PackageObject:
         return false;
       default:
         return true;
     }
   }
 
-  private Stream<ScipTextDocument> parseTextDocument(Path semanticdbPath) {
+  private static boolean isIgnoredOverriddenSymbol(String symbol) {
+    // Skip java/lang/Object# from cross-shard reference relationships; it's the parent
+    // of every class and would dominate "find implementations" results.
+    return symbol.endsWith("java/lang/Object#");
+  }
+
+  private Stream<Path> shardStream(List<Path> shards) {
+    return options.parallel ? shards.parallelStream() : shards.stream();
+  }
+
+  private Collection<Document> readShard(Path shardPath) {
     try {
-      return textDocumentsParseFrom(semanticdbPath).getDocumentsList().stream()
-          .filter(sdb -> !sdb.getOccurrencesList().isEmpty())
-          .map(sdb -> new ScipTextDocument(semanticdbPath, sdb, options.sourceroot));
+      if (JAR_PATTERN.matches(shardPath)) return readShardsFromJar(shardPath);
+      return Index.parseFrom(parseFromBytes(Files.readAllBytes(shardPath))).getDocumentsList();
     } catch (IOException e) {
-      options.reporter.error("invalid protobuf: " + semanticdbPath);
+      options.reporter.error("invalid SCIP shard: " + shardPath);
       options.reporter.error(e);
-      return Stream.empty();
+      return Collections.emptyList();
     }
   }
 
-  private static PathMatcher jarPattern = FileSystems.getDefault().getPathMatcher("glob:**.jar");
-
-  private Semanticdb.TextDocuments textDocumentsParseFrom(Path semanticdbPath) throws IOException {
-    if (jarPattern.matches(semanticdbPath)) {
-      return textDocumentsParseJarFile(semanticdbPath);
-    }
-    return textDocumentsParseFromBytes(Files.readAllBytes(semanticdbPath));
-  }
-
-  private Semanticdb.TextDocuments textDocumentsParseJarFile(Path jarFile) throws IOException {
-    Semanticdb.TextDocuments.Builder result = Semanticdb.TextDocuments.newBuilder();
-    try (JarFile file = new JarFile(jarFile.toFile())) {
-      Enumeration<JarEntry> entries = file.entries();
+  private Collection<Document> readShardsFromJar(Path jarFile) throws IOException {
+    List<Document> result = new ArrayList<>();
+    try (JarFile jar = new JarFile(jarFile.toFile())) {
+      Enumeration<JarEntry> entries = jar.entries();
       while (entries.hasMoreElements()) {
-        JarEntry element = entries.nextElement();
-        if (element.getName().endsWith(".semanticdb")) {
-          byte[] bytes = InputStreamBytes.readAll(file.getInputStream(element));
-          result.addAllDocuments(textDocumentsParseFromBytes(bytes).getDocumentsList());
-        }
+        JarEntry entry = entries.nextElement();
+        if (!entry.getName().endsWith(".scip")) continue;
+        byte[] bytes = InputStreamBytes.readAll(jar.getInputStream(entry));
+        result.addAll(Index.parseFrom(parseFromBytes(bytes)).getDocumentsList());
       }
     }
-    return result.build();
+    return result;
   }
 
-  private Semanticdb.TextDocuments textDocumentsParseFromBytes(byte[] bytes) throws IOException {
-    try {
-      CodedInputStream in = CodedInputStream.newInstance(bytes);
-      in.setRecursionLimit(1000);
-      return Semanticdb.TextDocuments.parseFrom(in);
-    } catch (NoSuchMethodError ignored) {
-      // NOTE(olafur): For some reason, NoSuchMethodError gets thrown when running
-      // `snapshots/run`
-      // in the sbt build. I'm unable to reproduce the error in `snapshots/test` or
-      // when running the
-      // published version
-      // of `scip-java index`.
-      return Semanticdb.TextDocuments.parseFrom(bytes);
-    }
-  }
-
-  private boolean isIgnoredOverriddenSymbol(String symbol) {
-    // Skip java/lang/Object# and similar symbols from Scala since it's the parent
-    // of all classes
-    // making it noisy for "find implementations" results.
-    return symbol.equals("java/lang/Object#");
+  private static CodedInputStream parseFromBytes(byte[] bytes) {
+    CodedInputStream in = CodedInputStream.newInstance(bytes);
+    in.setRecursionLimit(1000);
+    return in;
   }
 }

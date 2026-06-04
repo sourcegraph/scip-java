@@ -71,18 +71,16 @@ commands +=
       "scalafixAll --check" :: "publishLocal" :: s
   }
 
-// Shared module that owns the canonical SemanticDB proto schema and the
-// associated symbol/builder utilities. Both the Java compiler plugin
-// (semanticdb-javac) and the Kotlin compiler plugin (semanticdb-kotlinc)
-// depend on it instead of carrying their own divergent copies of the proto.
+// Shared module with the SCIP shard utilities (symbol encoder, document
+// builder, on-disk writer) consumed by both the Java compiler plugin
+// (semanticdb-javac) and the Kotlin compiler plugin (semanticdb-kotlinc).
 lazy val semanticdbShared = project
   .in(file("semanticdb-shared"))
   .settings(
     moduleName := "semanticdb-shared",
     javaOnlySettings,
-    (Compile / PB.targets) :=
-      Seq(PB.gens.java(V.protobuf) -> (Compile / sourceManaged).value),
-    libraryDependencies += "com.google.protobuf" % "protobuf-java" % V.protobuf
+    libraryDependencies +=
+      "org.scip-code" % "scip-java-bindings" % V.scipBindings
   )
 
 lazy val gradlePlugin = project
