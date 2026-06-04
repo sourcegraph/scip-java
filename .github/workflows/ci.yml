@@ -169,7 +169,7 @@ jobs:
             mvn clean verify -DskipTests "-Dscip-java.version=$SCIP_JAVA_VERSION" sourcegraph:sourcegraphDependencies
         working-directory: examples/maven-example
 
-      - run: nix develop "$GITHUB_WORKSPACE#jdk${{ matrix.java }}" --command "$SCIP_JAVA_CLI" index-scip target/scip-targetroot
+      - run: nix develop "$GITHUB_WORKSPACE#jdk${{ matrix.java }}" --command "$SCIP_JAVA_CLI" aggregate target/scip-targetroot
         working-directory: examples/maven-example
 
       - run: |
