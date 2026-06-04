@@ -61,7 +61,7 @@ abstract class BaseBuildToolSuite extends MopedSuite(ScipJava.app) {
   def checkBuild(
       options: TestOptions,
       original: String,
-      expectedSemanticdbFiles: Int = 0,
+      expectedScipFiles: Int = 0,
       extraArguments: List[String] = Nil,
       expectedError: Option[String => Unit] = None,
       expectedPackages: String = "",
@@ -127,9 +127,9 @@ abstract class BaseBuildToolSuite extends MopedSuite(ScipJava.app) {
           FileIO
             .listAllFilesRecursively(AbsolutePath(targetroot))
             .filter(p => scipShardPattern.matches(p.toNIO))
-      if (scipShardFiles.length != expectedSemanticdbFiles) {
+      if (scipShardFiles.length != expectedScipFiles) {
         fail(
-          s"Expected $expectedSemanticdbFiles SCIP shard(s) to be generated.",
+          s"Expected $expectedScipFiles SCIP shard(s) to be generated.",
           clues(scipShardFiles, app.capturedOutput)
         )
       }

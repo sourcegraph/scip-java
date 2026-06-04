@@ -28,7 +28,7 @@
         </dependency>
         <dependency>
             <groupId>com.sourcegraph</groupId>
-            <artifactId>semanticdb-javac</artifactId>
+            <artifactId>scip-javac</artifactId>
             <version>${scip-java.version}</version>
         </dependency>
     </dependencies>
@@ -51,7 +51,7 @@
                     <version>3.8.0</version>
                     <configuration>
                       <compilerArgs>
-                       <arg>-Xplugin:semanticdb -sourceroot:${session.executionRootDirectory} -targetroot:${session.executionRootDirectory}/target/semanticdb-targetroot</arg>
+                       <arg>-Xplugin:scip -sourceroot:${session.executionRootDirectory} -targetroot:${session.executionRootDirectory}/target/scip-targetroot</arg>
                       </compilerArgs>
                     </configuration>
                 </plugin>

@@ -29,7 +29,7 @@ class SnapshotCommandSuite extends MopedSuite(ScipJava.app) {
     val targetroot = workingDirectory.resolve("target/main")
     val sourcepath = workingDirectory.resolve("main/Sample.java")
     val code = new String(Files.readAllBytes(sourcepath))
-    new TestCompiler(targetroot).compileSemanticdb(
+    new TestCompiler(targetroot).compileScip(
       List(Input.VirtualFile("main/Sample.java", code))
     )
 
@@ -37,7 +37,7 @@ class SnapshotCommandSuite extends MopedSuite(ScipJava.app) {
 
     val indexExit = app().run(
       List(
-        "index-semanticdb",
+        "aggregate",
         "--output",
         targetroot.resolve("index.scip").toString,
         targetroot.toString
@@ -57,37 +57,37 @@ class SnapshotCommandSuite extends MopedSuite(ScipJava.app) {
          |   /**
          |    * Sample class
          |    */
-         |//⌄ enclosing_range_start semanticdb maven . . main/Sample#
+         |//⌄ enclosing_range_start scip-java maven . . main/Sample#
          |  public class Sample {
-         |//             ^^^^^^ definition semanticdb maven . . main/Sample#
+         |//             ^^^^^^ definition scip-java maven . . main/Sample#
          |//                    display_name Sample
          |//                    signature_documentation java public class Sample
          |//                    kind Class
          |//                    documentation  Sample class\n
-         |//             ^^^^^^ definition semanticdb maven . . main/Sample#`<init>`().
+         |//             ^^^^^^ definition scip-java maven . . main/Sample#`<init>`().
          |//                    display_name <init>
          |//                    signature_documentation java public Sample()
          |//                    kind Constructor
          |     /**
          |      * Main application entry point
          |      */
-         |//   ⌄ enclosing_range_start semanticdb maven . . main/Sample#main().
+         |//   ⌄ enclosing_range_start scip-java maven . . main/Sample#main().
          |//                           ⌄ enclosing_range_start local 0
          |     public static void main(String[] asdf) {}
-         |//                      ^^^^ definition semanticdb maven . . main/Sample#main().
+         |//                      ^^^^ definition scip-java maven . . main/Sample#main().
          |//                           display_name main
          |//                           signature_documentation java public static void main(String[] asdf)
          |//                           kind StaticMethod
          |//                           documentation  Main application entry point\n
-         |//                           ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
+         |//                           ^^^^^^ reference scip-java maven jdk 11 java/lang/String#
          |//                                    ^^^^ definition local 0
          |//                                         display_name asdf
          |//                                         signature_documentation java String[] asdf
-         |//                                         enclosing_symbol semanticdb maven . . main/Sample#main().
+         |//                                         enclosing_symbol scip-java maven . . main/Sample#main().
          |//                                       ⌃ enclosing_range_end local 0
-         |//                                           ⌃ enclosing_range_end semanticdb maven . . main/Sample#main().
+         |//                                           ⌃ enclosing_range_end scip-java maven . . main/Sample#main().
          |  }
-         |//⌃ enclosing_range_end semanticdb maven . . main/Sample#
+         |//⌃ enclosing_range_end scip-java maven . . main/Sample#
          |""".stripMargin
     )
   }

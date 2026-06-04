@@ -41,19 +41,19 @@ object BuildTool {
     .mkString(", ")
 
   def generateScipFromTargetroot(
-      generateSemanticdbResult: CommandResult,
+      generateScipResult: CommandResult,
       targetroot: Path,
       index: IndexCommand
   ): Int = {
     if (!Files.isDirectory(targetroot)) {
-      generateSemanticdbResult.exitCode
+      generateScipResult.exitCode
     } else if (index.app.reporter.hasErrors()) {
       index.app.reporter.exitCode()
-    } else if (generateSemanticdbResult.exitCode != 0) {
-      generateSemanticdbResult.exitCode
+    } else if (generateScipResult.exitCode != 0) {
+      generateScipResult.exitCode
     } else {
       index
-        .indexSemanticdb
+        .aggregate
         .copy(
           output = index.finalOutput,
           targetroot = List(targetroot),

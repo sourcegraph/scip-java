@@ -1,6 +1,6 @@
 package tests
 
-import com.sourcegraph.scip_semanticdb.JdkPackage
+import com.sourcegraph.scip_aggregator.JdkPackage
 import munit.FunSuite
 import munit.TestOptions
 

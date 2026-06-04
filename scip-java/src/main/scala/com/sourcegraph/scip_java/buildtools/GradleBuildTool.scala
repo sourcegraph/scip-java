@@ -27,9 +27,9 @@ class GradleBuildTool(index: IndexCommand) extends BuildTool("Gradle", index) {
   }
 
   override def generateScip(): Int = {
-    val gradleResult = generateSemanticdb()
+    val gradleResult = runBuild()
     if (gradleResult.exitCode == 0) {
-      reportMissingSemanticdbOutput()
+      reportMissingScipOutput()
     }
     BuildTool.generateScipFromTargetroot(gradleResult, targetroot, index)
   }
@@ -40,7 +40,7 @@ class GradleBuildTool(index: IndexCommand) extends BuildTool("Gradle", index) {
    * by a `-javaagent` fallback; now it surfaces as a clear error pointing at
    * the two known causes.
    */
-  private def reportMissingSemanticdbOutput(): Unit = {
+  private def reportMissingScipOutput(): Unit = {
     if (containsFileWithSuffix(targetroot, ".scip"))
       return
     if (!containsFileWithSuffix(index.workingDirectory, ".class"))
@@ -56,13 +56,13 @@ class GradleBuildTool(index: IndexCommand) extends BuildTool("Gradle", index) {
            |
            |  1. The 'compileOnly' configuration was already resolved before our init script ran.
            |     Check the Gradle output above for warnings of the form:
-           |       "scip-java: failed to attach SemanticDB compiler plugin to project '<name>'"
-           |     Workaround: apply the SemanticDB plugin earlier (e.g. via a settings plugin),
+           |       "scip-java: failed to attach SCIP compiler plugin to project '<name>'"
+           |     Workaround: apply the SCIP plugin earlier (e.g. via a settings plugin),
            |     or restructure the build so that 'compileOnly' is not resolved at evaluation time.
            |
            |  2. Another Gradle plugin is replacing the compiler arguments we add (rather than appending).
-           |     Verify with:  ./gradlew compileJava --info | grep -- '-Xplugin:semanticdb'
-           |     If '-Xplugin:semanticdb' is missing from the printed javac command, another plugin
+           |     Verify with:  ./gradlew compileJava --info | grep -- '-Xplugin:scip'
+           |     If '-Xplugin:scip' is missing from the printed javac command, another plugin
            |     is overwriting JavaCompile.options.compilerArgs.
            |""".stripMargin
       )
@@ -83,11 +83,8 @@ class GradleBuildTool(index: IndexCommand) extends BuildTool("Gradle", index) {
 
   def targetroot: Path = index.finalTargetroot(defaultTargetroot)
 
-  private def defaultTargetroot: Path = Paths.get(
-    "build",
-    "semanticdb-targetroot"
-  )
-  private def generateSemanticdb(): CommandResult = {
+  private def defaultTargetroot: Path = Paths.get("build", "scip-targetroot")
+  private def runBuild(): CommandResult = {
     val gradleWrapper: Path = index
       .workingDirectory
       .resolve(
@@ -120,7 +117,7 @@ class GradleBuildTool(index: IndexCommand) extends BuildTool("Gradle", index) {
     buildCommand += "--init-script"
     buildCommand += script
     buildCommand += "-Pkotlin.compiler.execution.strategy=in-process"
-    buildCommand += s"-Dsemanticdb.targetroot=$targetroot"
+    buildCommand += s"-Dscip.targetroot=$targetroot"
     buildCommand ++=
       index.finalBuildCommand(
         List("clean", "scipPrintDependencies", "scipCompileAll")
@@ -136,9 +133,9 @@ class GradleBuildTool(index: IndexCommand) extends BuildTool("Gradle", index) {
   private def scipJavaDependencies = "scipJavaDependencies"
 
   private def initScript(tmp: Path): Path = {
-    val pluginpath = Embedded.semanticdbJar(tmp)
+    val pluginpath = Embedded.scipJar(tmp)
     val gradlePluginPath = Embedded.gradlePluginJar(tmp)
-    val semanticdbKotlincPath = Embedded.semanticdbKotlincJar(tmp)
+    val scipKotlincPath = Embedded.scipKotlincJar(tmp)
     val dependenciesPath = targetroot.resolve("dependencies.txt")
     Files.deleteIfExists(dependenciesPath)
 
@@ -150,14 +147,14 @@ class GradleBuildTool(index: IndexCommand) extends BuildTool("Gradle", index) {
          |     }
          | }
          |
-         | import com.sourcegraph.gradle.semanticdb.SemanticdbGradlePlugin
+         | import com.sourcegraph.gradle.scip.ScipGradlePlugin
          |
          | allprojects {
-         |   project.ext["semanticdbTarget"] = "$targetroot"
+         |   project.ext["scipTarget"] = "$targetroot"
          |   project.ext["javacPluginJar"] = "$pluginpath"
          |   project.ext["dependenciesOut"] = "$dependenciesPath"
-         |   project.ext["semanticdbKotlincJar"] = "$semanticdbKotlincPath"
-         |   apply plugin: SemanticdbGradlePlugin
+         |   project.ext["scipKotlincJar"] = "$scipKotlincPath"
+         |   apply plugin: ScipGradlePlugin
          | }
       """.stripMargin.trim
 

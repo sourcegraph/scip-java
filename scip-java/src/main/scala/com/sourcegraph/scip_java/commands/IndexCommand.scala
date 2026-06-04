@@ -29,9 +29,9 @@ case class IndexCommand(
     @Description("The path where to generate the SCIP index.")
     output: Path = Paths.get("index.scip"),
     @Description(
-      "The directory where to generate SemanticDB files. " +
+      "The directory where to generate SCIP files. " +
         "Defaults to a build-specific path. " +
-        "For example, the default value for Gradle is 'build/semanticdb-targetroot' and for Maven it's 'target/semanticdb-targetroot'"
+        "For example, the default value for Gradle is 'build/scip-targetroot' and for Maven it's 'target/scip-targetroot'"
     )
     targetroot: Option[Path] = None,
     @Description(
@@ -87,7 +87,7 @@ case class IndexCommand(
     @TrailingArguments()
     buildCommand: List[String] = Nil,
     @Hidden
-    indexSemanticdb: IndexSemanticdbCommand = IndexSemanticdbCommand(),
+    aggregate: AggregateCommand = AggregateCommand(),
     @Inline
     app: Application = Application.default
 ) extends Command {

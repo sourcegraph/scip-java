@@ -27,7 +27,7 @@ abstract class GradleBuildToolSuiteBase(gradle: Tool.Gradle)
   def checkGradleBuild(
       title: TestOptions,
       setup: String,
-      expectedSemanticdbFiles: Int = 0,
+      expectedScipFiles: Int = 0,
       expectedPackages: String = "",
       extraArguments: List[String] = Nil,
       tools: List[Tool] = Nil
@@ -37,7 +37,7 @@ abstract class GradleBuildToolSuiteBase(gradle: Tool.Gradle)
     checkBuild(
       testName,
       setup,
-      expectedSemanticdbFiles = expectedSemanticdbFiles,
+      expectedScipFiles = expectedScipFiles,
       expectedPackages = expectedPackages,
       initCommand = gradleVersion(gradle.version),
       extraArguments = extraArguments,

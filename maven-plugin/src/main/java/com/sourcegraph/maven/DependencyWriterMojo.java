@@ -25,8 +25,8 @@ public class DependencyWriterMojo extends AbstractMojo {
   MavenProject project;
 
   @Parameter(
-      property = "semanticdb.targetRoot",
-      defaultValue = "${session.executionRootDirectory}/target/semanticdb-targetroot")
+      property = "scip.targetRoot",
+      defaultValue = "${session.executionRootDirectory}/target/scip-targetroot")
   private String targetRoot;
 
   public void execute() throws MojoExecutionException, MojoFailureException {

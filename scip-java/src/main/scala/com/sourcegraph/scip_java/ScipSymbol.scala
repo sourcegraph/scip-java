@@ -1,7 +1,7 @@
 package com.sourcegraph.scip_java
 
-import com.sourcegraph.scip_semanticdb.SymbolDescriptor
-import com.sourcegraph.semanticdb.SemanticdbSymbols
+import com.sourcegraph.scip.ScipSymbols
+import com.sourcegraph.scip_aggregator.SymbolDescriptor
 
 sealed abstract class ScipSymbol {}
 final case class LocalScipSymbol(identifier: String) extends ScipSymbol
@@ -42,11 +42,9 @@ object ScipSymbol {
     }
   }
 
-  private def parseDescriptors(
-      semanticdbSymbol: String
-  ): List[SymbolDescriptor] = {
-    val descriptor = SymbolDescriptor.parseFromSymbol(semanticdbSymbol)
-    if (descriptor.owner == SemanticdbSymbols.ROOT_PACKAGE)
+  private def parseDescriptors(scipSymbol: String): List[SymbolDescriptor] = {
+    val descriptor = SymbolDescriptor.parseFromSymbol(scipSymbol)
+    if (descriptor.owner == ScipSymbols.ROOT_PACKAGE)
       Nil
     else
       descriptor :: parseDescriptors(descriptor.owner)

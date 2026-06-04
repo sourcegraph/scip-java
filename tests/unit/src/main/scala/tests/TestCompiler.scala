@@ -37,21 +37,20 @@ class TestCompiler(
     this(TestCompiler.PROCESSOR_PATH, Nil, targetroot)
   }
 
-  def compileSemanticdbDirectory(dir: Path): CompileResult = compileSemanticdb(
+  def compileScipDirectory(dir: Path): CompileResult = compileScip(
     inputsFromDirectory(dir)
   )
 
-  def compileSemanticdb(inputs: Seq[Input.VirtualFile]): CompileResult =
-    compile(
-      inputs,
-      List(
-        String.format(
-          "-Xplugin:semanticdb -verbose -text:on -sourceroot:%s -targetroot:%s",
-          sourceroot,
-          targetroot
-        )
+  def compileScip(inputs: Seq[Input.VirtualFile]): CompileResult = compile(
+    inputs,
+    List(
+      String.format(
+        "-Xplugin:scip -verbose -text:on -sourceroot:%s -targetroot:%s",
+        sourceroot,
+        targetroot
       )
     )
+  )
 
   def compile(
       inputs: Seq[Input.VirtualFile],

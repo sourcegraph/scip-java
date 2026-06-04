@@ -4,7 +4,7 @@ title: Getting started
 ---
 
 By following the instructions on this page, you should be able to generate a
-[SCIP](https://github.com/sourcegraph/scip) index of your Java codebase using
+[SCIP](https://github.com/scip-code/scip) index of your Java codebase using
 Gradle, Maven, or Bazel. See
 [Supported build tools](#supported-build-tools) for an overview of other build
 tools that we're planning to support in the future.
@@ -340,21 +340,21 @@ source.
   configured `java_library` and `java_binary` targets to be indexed with
   scip-java.
 
-Once configured, build the codebase with the SemanticDB compiler plugin.
+Once configured, build the codebase with the SCIP compiler plugin.
 
 ```sh
-bazel build //... --@scip_java//semanticdb-javac:enabled=true
+bazel build //... --@scip_java//scip-javac:enabled=true
 ```
 
 Next, run the following command to generate the SCIP index (`index.scip`).
 
 ```
-bazel run @scip_java//scip-semanticdb:bazel -- --sourceroot $PWD
+bazel run @scip_java//scip-aggregator:bazel -- --sourceroot $PWD
 
-# (optional) Validate that SemanticDB files were generated.
+# (optional) Validate that SCIP files were generated.
 # The command below works for the `examples/bazel-example` directory in the sourcegraph/scip-java repository.
-❯ jar tf bazel-bin/src/main/java/example/libexample.jar | grep semanticdb$
-META-INF/semanticdb/src/main/java/example/Example.java.semanticdb
+❯ jar tf bazel-bin/src/main/java/example/libexample.jar | grep scip$
+META-INF/scip/src/main/java/example/Example.java.scip
 ```
 
 Finally, run the following commands to upload the SCIP index to Sourcegraph.

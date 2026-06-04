@@ -70,15 +70,15 @@ bazel-testlogs
 
 VERSION
 
-semanticdb-gradle-plugin/gradle
+scip-gradle-plugin/gradle
 /aspects/
 
 tests/snapshots/META-INF/
 
-# semanticdb-kotlinc kctfork-based tests run kotlinc with our plugin, which
-# writes META-INF/semanticdb/sources/Test.kt.semanticdb relative to the test
+# scip-kotlinc kctfork-based tests run kotlinc with our plugin, which
+# writes META-INF/scip/sources/Test.kt.scip relative to the test
 # cwd.
-semanticdb-kotlinc/META-INF/
+scip-kotlinc/META-INF/
 
 # Standard sbt project metadata directories.
 project/target/

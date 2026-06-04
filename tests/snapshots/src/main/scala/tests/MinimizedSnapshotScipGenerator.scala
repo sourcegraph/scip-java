@@ -39,7 +39,7 @@ class MinimizedSnapshotScipGenerator {
     val snapshotOutput = AbsolutePath(Files.createTempDirectory("scip-java"))
     run(
       List(
-        "index-semanticdb",
+        "aggregate",
         "--cwd",
         sourceroot.toString(),
         "--output",

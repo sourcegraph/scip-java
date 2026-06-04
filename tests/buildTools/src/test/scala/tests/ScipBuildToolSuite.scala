@@ -32,7 +32,7 @@ class ScipBuildToolSuite extends BaseBuildToolSuite {
        |package foo;
        |public class Example2 {}
        |""".stripMargin,
-    expectedSemanticdbFiles = 2
+    expectedScipFiles = 2
   )
 
   checkBuild(
@@ -46,7 +46,7 @@ class ScipBuildToolSuite extends BaseBuildToolSuite {
        |  public String hello() { return new Greeter().greet(); }
        |}
        |""".stripMargin,
-    expectedSemanticdbFiles = 1,
+    expectedScipFiles = 1,
     prepare =
       () => {
         val libSrcDir = os.temp.dir(prefix = "scip-classpath-lib")

@@ -2,8 +2,8 @@ package tests
 
 import scala.meta.internal.semanticdb.Scala._
 
-import com.sourcegraph.scip_semanticdb.SymbolDescriptor
-import com.sourcegraph.semanticdb.SemanticdbSymbols.Descriptor.Kind
+import com.sourcegraph.scip.ScipSymbols.Descriptor.Kind
+import com.sourcegraph.scip_aggregator.SymbolDescriptor
 import munit.FunSuite
 import munit.TestOptions
 

@@ -73,20 +73,20 @@ commands +=
 
 // Shared module with the SCIP shard utilities (symbol encoder, document
 // builder, on-disk writer) consumed by both the Java compiler plugin
-// (semanticdb-javac) and the Kotlin compiler plugin (semanticdb-kotlinc).
-lazy val semanticdbShared = project
-  .in(file("semanticdb-shared"))
+// (scip-javac) and the Kotlin compiler plugin (scip-kotlinc).
+lazy val scipShared = project
+  .in(file("scip-shared"))
   .settings(
-    moduleName := "semanticdb-shared",
+    moduleName := "scip-shared",
     javaOnlySettings,
     libraryDependencies +=
       "org.scip-code" % "scip-java-bindings" % V.scipBindings
   )
 
 lazy val gradlePlugin = project
-  .in(file("semanticdb-gradle-plugin"))
+  .in(file("scip-gradle-plugin"))
   .settings(
-    name := "semanticdb-gradle",
+    name := "scip-gradle",
     buildInfoPackage := "com.sourcegraph.scip_java",
     publish / skip := true,
     scalacOptions ++= Seq("-target:11", "-release", "11"),
@@ -103,22 +103,22 @@ lazy val gradlePlugin = project
         sbtVersion,
         scalaVersion,
         "javacModuleOptions" -> javacModuleOptions,
-        "semanticdbVersion" -> V.scalameta,
+        "scalametaVersion" -> V.scalameta,
         "scala213" -> V.scala213
       )
   )
   .enablePlugins(BuildInfoPlugin)
 
 lazy val javacPlugin = project
-  .in(file("semanticdb-javac"))
+  .in(file("scip-javac"))
   .settings(
     fatjarPackageSettings,
     javaOnlySettings,
-    moduleName := "semanticdb-javac",
+    moduleName := "scip-javac",
     // Scoped to compile so doc tasks (which reject -g) are unaffected.
     Compile / compile / javacOptions += "-g",
     // JDK 14+ ServiceLoader-scans the classpath for Plugin providers; our
-    // own META-INF/services entry points at SemanticdbPlugin before it's
+    // own META-INF/services entry points at ScipPlugin before it's
     // built. Force an empty processor path so javac skips the scan.
     Compile / compile / javacOptions ++= {
       val empty = target.value / "empty-processorpath"
@@ -129,16 +129,16 @@ lazy val javacPlugin = project
       Seq(
         ShadeRule
           .rename(
-            // Don't rename SemanticdbPlugin since the fully-qualified name is
+            // Don't rename ScipPlugin since the fully-qualified name is
             // referenced from META-INF/services/com.sun.source.util.Plugin
-            "com.sourcegraph.semanticdb_javac.SemanticdbPlugin" ->
-              "com.sourcegraph.semanticdb_javac.SemanticdbPlugin",
-            // Don't rename InjectSemanticdbOptions because we load it via FQN to
+            "com.sourcegraph.scip_javac.ScipPlugin" ->
+              "com.sourcegraph.scip_javac.ScipPlugin",
+            // Don't rename InjectScipOptions because we load it via FQN to
             // process a list of Java compiler options.
-            "com.sourcegraph.semanticdb_javac.InjectSemanticdbOptions" ->
-              "com.sourcegraph.semanticdb_javac.InjectSemanticdbOptions",
+            "com.sourcegraph.scip_javac.InjectScipOptions" ->
+              "com.sourcegraph.scip_javac.InjectScipOptions",
             "com.google.**" -> "com.sourcegraph.shaded.com.google.@1",
-            // Shade everything else in the semanticdb-javac compiler plugin in
+            // Shade everything else in the scip-javac compiler plugin in
             // order to be able to index the plugin code itself. Without this step,
             // we can't add the plugin to the classpath while compiling the source
             // code of the plugin itself because it results in cryptic compile errors.
@@ -149,13 +149,13 @@ lazy val javacPlugin = project
           .inAll
       )
   )
-  .dependsOn(semanticdbShared)
+  .dependsOn(scipShared)
 
 lazy val scip = project
-  .in(file("scip-semanticdb"))
+  .in(file("scip-aggregator"))
   .settings(
     publishMavenStyle := true,
-    moduleName := "scip-semanticdb",
+    moduleName := "scip-aggregator",
     javaOnlySettings,
     libraryDependencies ++=
       Seq("org.scip-code" % "scip-java-bindings" % V.scipBindings),
@@ -163,7 +163,7 @@ lazy val scip = project
       Seq(PB.gens.java(V.protobuf) -> (Compile / sourceManaged).value),
     Compile / PB.protocOptions := Seq("--experimental_allow_proto3_optional")
   )
-  .dependsOn(semanticdbShared)
+  .dependsOn(scipShared)
 
 lazy val mavenPlugin = project
   .in(file("maven-plugin"))
@@ -201,7 +201,7 @@ lazy val cli = project
     (Compile / mainClass) := Some("com.sourcegraph.scip_java.ScipJava"),
     (run / baseDirectory) := (ThisBuild / baseDirectory).value,
     // ScipJava.main can call System.exit, so we always fork the JVM when
-    // sbt invokes it directly (e.g. from the semanticdb-kotlinc snapshots
+    // sbt invokes it directly (e.g. from the scip-kotlinc snapshots
     // task) so it cannot kill the surrounding sbt process.
     Compile / run / fork := true,
     buildInfoKeys :=
@@ -210,7 +210,7 @@ lazy val cli = project
         sbtVersion,
         scalaVersion,
         "javacModuleOptions" -> javacModuleOptions,
-        "semanticdbVersion" -> V.scalameta,
+        "scalametaVersion" -> V.scalameta,
         "scala213" -> V.scala213
       ),
     buildInfoPackage := "com.sourcegraph.scip_java",
@@ -238,12 +238,12 @@ lazy val cli = project
 
           addJar(
             (javacPlugin / Compile / Keys.`package`).value,
-            "semanticdb-plugin.jar"
+            "scip-plugin.jar"
           )
           addJar((gradlePlugin / Compile / assembly).value, "gradle-plugin.jar")
           addJar(
-            (semanticdbKotlinc / Compile / Keys.`package`).value,
-            "semanticdb-kotlinc.jar"
+            (scipKotlinc / Compile / Keys.`package`).value,
+            "scip-kotlinc.jar"
           )
 
           IO.copy(
@@ -292,25 +292,25 @@ lazy val cli = project
   .enablePlugins(PackPlugin, DockerPlugin, BuildInfoPlugin)
   .dependsOn(scip)
 
-// Task key for regenerating the SCIP/SemanticDB golden snapshots emitted by
-// the semanticdb-kotlinc compiler plugin over the Kotlin minimized fixtures.
+// Task key for regenerating the SCIP/SCIP golden snapshots emitted by
+// the scip-kotlinc compiler plugin over the Kotlin minimized fixtures.
 // We deliberately do NOT call this `snapshots` to avoid colliding with the
 // existing top-level `snapshots` test project (`lazy val snapshots = project`).
 lazy val kotlincSnapshots = taskKey[Unit](
-  "Run the SCIP snapshot generator over the semanticdb-kotlinc minimized project"
+  "Run the SCIP snapshot generator over the scip-kotlinc minimized project"
 )
 
-// The semanticdb-kotlinc compiler plugin. Built as a fat-jar that is later
+// The scip-kotlinc compiler plugin. Built as a fat-jar that is later
 // embedded into the scip-java CLI distribution (see cli's resourceGenerators)
-// so the runtime no longer needs to fetch a published semanticdb-kotlinc
+// so the runtime no longer needs to fetch a published scip-kotlinc
 // artifact from Maven.
-lazy val semanticdbKotlinc = project
-  .in(file("semanticdb-kotlinc"))
+lazy val scipKotlinc = project
+  .in(file("scip-kotlinc"))
   .enablePlugins(KotlinPlugin)
   .settings(
-    name := "semanticdb-kotlinc",
-    moduleName := "semanticdb-kotlinc",
-    description := "A kotlinc plugin to emit SemanticDB information",
+    name := "scip-kotlinc",
+    moduleName := "scip-kotlinc",
+    description := "A kotlinc plugin to emit SCIP information",
     crossPaths := false,
     autoScalaLibrary := false,
     // Pin bytecode to major 55 so sbt-assembly's older ASM can shade it.
@@ -327,7 +327,7 @@ lazy val semanticdbKotlinc = project
     // classpath via Provided so the assembled fat-jar does not bundle it.
     libraryDependencies +=
       "org.jetbrains.kotlin" % "kotlin-stdlib" % V.kotlinVersion % Provided,
-    // SCIP message classes come from semanticdbShared (which depends on
+    // SCIP message classes come from scipShared (which depends on
     // scip-java-bindings); this adds the Kotlin DSL extensions on top.
     libraryDependencies +=
       "org.scip-code" % "scip-kotlin-bindings" % V.scipBindings,
@@ -403,16 +403,16 @@ lazy val semanticdbKotlinc = project
       Attributed.blank(dir)
     }
   )
-  .dependsOn(semanticdbShared)
+  .dependsOn(scipShared)
 
-// `semanticdbKotlincMinimized` mirrors the (still-present) Gradle build at
-// semanticdb-kotlinc/minimized/build.gradle.kts. It compiles a small set of
-// Kotlin and Java fixtures with the assembled `semanticdbKotlinc` plugin
-// attached to kotlinc/javac, producing *.semanticdb files under
-// target/semanticdb-targetroot/ which are then converted to SCIP and rendered
+// `scipKotlincMinimized` mirrors the (still-present) Gradle build at
+// scip-kotlinc/minimized/build.gradle.kts. It compiles a small set of
+// Kotlin and Java fixtures with the assembled `scipKotlinc` plugin
+// attached to kotlinc/javac, producing *.scip files under
+// target/scip-targetroot/ which are then converted to SCIP and rendered
 // as the human-readable golden snapshots by the `snapshots` task.
-lazy val semanticdbKotlincMinimized = project
-  .in(file("semanticdb-kotlinc/minimized"))
+lazy val scipKotlincMinimized = project
+  .in(file("scip-kotlinc/minimized"))
   .enablePlugins(KotlinPlugin)
   .settings(
     publish / skip := true,
@@ -422,11 +422,11 @@ lazy val semanticdbKotlincMinimized = project
     kotlincJvmTarget := "1.8",
     kotlinLib("stdlib"),
     // Force javac to fork. Two reasons:
-    //   1. JDK 9+ strongly encapsulates jdk.compiler internals; semanticdb-javac
+    //   1. JDK 9+ strongly encapsulates jdk.compiler internals; scip-javac
     //      reflectively touches them and needs --add-exports flags. With a
     //      forked javac we can pass `-J--add-exports=...` (mirrors scip-java).
     //   2. sbt's in-process javac receives `vf://` virtual-file URIs from the
-    //      MappedFileConverter, which semanticdb-javac cannot resolve via
+    //      MappedFileConverter, which scip-javac cannot resolve via
     //      java.nio.file.Path.of. Forked javac is invoked with absolute file
     //      paths instead, so the plugin sees real paths.
     // Setting javaHome to Some(<current JVM home>) flips
@@ -442,32 +442,32 @@ lazy val semanticdbKotlincMinimized = project
     // don't have to predict the assembled jar's filename. The .value reference
     // also gives us the right task ordering — assembly runs before compile.
     Compile / unmanagedJars +=
-      Attributed.blank((semanticdbKotlinc / Compile / packageBin).value),
-    // Wire the locally-built semanticdb-javac fat jar in place of fetching the
-    // published `com.sourcegraph:semanticdb-javac` artifact at compile time.
+      Attributed.blank((scipKotlinc / Compile / packageBin).value),
+    // Wire the locally-built scip-javac fat jar in place of fetching the
+    // published `com.sourcegraph:scip-javac` artifact at compile time.
     Compile / unmanagedJars +=
       Attributed.blank((javacPlugin / Compile / Keys.`package`).value),
     Compile / kotlincPluginOptions ++= {
       val srcRoot = (ThisBuild / baseDirectory).value.getAbsolutePath
-      val tgtRoot = (target.value / "semanticdb-targetroot").getAbsolutePath
+      val tgtRoot = (target.value / "scip-targetroot").getAbsolutePath
       Seq(
-        s"plugin:semanticdb-kotlinc:sourceroot=$srcRoot",
-        s"plugin:semanticdb-kotlinc:targetroot=$tgtRoot"
+        s"plugin:scip-kotlinc:sourceroot=$srcRoot",
+        s"plugin:scip-kotlinc:targetroot=$tgtRoot"
       )
     },
-    // The semanticdb javac plugin parses its own argument string, so
-    // `-Xplugin:semanticdb -sourceroot:<...> -targetroot:<...>` MUST be passed
+    // The scip javac plugin parses its own argument string, so
+    // `-Xplugin:scip -sourceroot:<...> -targetroot:<...>` MUST be passed
     // as a single javac argument (matches the existing Gradle behavior).
     Compile / javacOptions += {
       val srcRoot = (ThisBuild / baseDirectory).value
-      val tgtRoot = target.value / "semanticdb-targetroot"
-      s"-Xplugin:semanticdb -sourceroot:${srcRoot.getAbsolutePath} " +
+      val tgtRoot = target.value / "scip-targetroot"
+      s"-Xplugin:scip -sourceroot:${srcRoot.getAbsolutePath} " +
         s"-targetroot:${tgtRoot.getAbsolutePath}"
     },
     // ----- snapshots regeneration task -----
     // Invokes `com.sourcegraph.scip_java.ScipJava.main` twice in the cli JVM
     // (forked — ScipJava.main calls System.exit on failure). First pass
-    // converts the *.semanticdb files under target/semanticdb-targetroot/
+    // converts the *.scip files under target/scip-targetroot/
     // into an index.scip; second pass renders that index as the human-readable
     // golden snapshots.
     //
@@ -477,7 +477,7 @@ lazy val semanticdbKotlincMinimized = project
       Def
         .taskDyn {
           val srcRoot = (ThisBuild / baseDirectory).value.getAbsolutePath
-          val tgtRoot = (target.value / "semanticdb-targetroot").getAbsolutePath
+          val tgtRoot = (target.value / "scip-targetroot").getAbsolutePath
           val snapDir =
             (baseDirectory.value / "src" / "generatedSnapshots" / "resources")
               .getAbsolutePath
@@ -486,7 +486,7 @@ lazy val semanticdbKotlincMinimized = project
           Def.sequential(
             Compile / compile,
             (cli / Compile / runMain).toTask(
-              s" $mainCls index-semanticdb --no-emit-inverse-relationships --cwd $srcRoot --output $scipOut $tgtRoot"
+              s" $mainCls aggregate --no-emit-inverse-relationships --cwd $srcRoot --output $scipOut $tgtRoot"
             ),
             (cli / Compile / runMain).toTask(
               s" $mainCls snapshot --cwd $srcRoot --output $snapDir $tgtRoot"
@@ -507,12 +507,12 @@ lazy val minimizedSettings = List[Def.Setting[_]](
   (Compile / unmanagedSourceDirectories) += minimizedSourceDirectory,
   libraryDependencies ++= List("org.projectlombok" % "lombok" % "1.18.22"),
   // Fork javac so it receives real file paths instead of sbt's `vf://` virtual-file URIs
-  // (see the comment on `semanticdbKotlincMinimized` for the long story).
+  // (see the comment on `scipKotlincMinimized` for the long story).
   javaHome := Some(file(System.getProperty("java.home"))),
   Compile / javacOptions ++= javacModuleOptions,
   javacOptions +=
     List(
-      s"-Xplugin:semanticdb",
+      s"-Xplugin:scip",
       s"-text:on",
       s"-verbose",
       s"-sourceroot:${(ThisBuild / baseDirectory).value}",

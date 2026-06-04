@@ -9,13 +9,12 @@ different contents.
 This aspect is needed for scip-java to inspect the structure of the Bazel build
 and register actions to index all java_library/java_test/java_binary targets.
 The result of running this aspect is that your bazel-bin/ directory will contain
-many *.scip (https://github.com/sourcegraph/scip) and
-*.semanticdb (https://scalameta.org/docs/semanticdb/specification.html) files.
+many *.scip (https://github.com/scip-code/scip) files.
 These files encode information about which symbols are referenced from which
 locations in your source code.
 
 This aspect only works on Linux when using the `local` spawn strategy because
-the `run_shell` action writes SemanticDB and SCIP files to the provided
+the `run_shell` action writes SCIP files to the provided
 --targetroot argument. It should be possible to avoid this requirement
 in the future if there's a strong desire to make the aspect work with the
 default (sandboxed) spawn strategy.
@@ -128,7 +127,7 @@ def _scip_java(target, ctx):
     build_config_path = ctx.actions.declare_file(ctx.label.name + ".scip.json")
 
     scip_output = ctx.actions.declare_file(ctx.label.name + ".scip")
-    targetroot = ctx.actions.declare_directory(ctx.label.name + ".semanticdb")
+    targetroot = ctx.actions.declare_directory(ctx.label.name + ".scip-targetroot")
     ctx.actions.write(
         output = build_config_path,
         content = json.encode(build_config),
@@ -140,7 +139,7 @@ def _scip_java(target, ctx):
         # Prefix bazel-out paths with $PWD (the execroot) so they don't depend
         # on the workspace-level bazel-out convenience symlink, which doesn't
         # exist on a cold build.
-        command = "\"{}\" index --no-cleanup --index-semanticdb.allow-empty-index --cwd \"{}\" --targetroot \"$PWD/{}\" --scip-config \"$PWD/{}\" --output \"$PWD/{}\"".format(
+        command = "\"{}\" index --no-cleanup --aggregate.allow-empty-index --cwd \"{}\" --targetroot \"$PWD/{}\" --scip-config \"$PWD/{}\" --output \"$PWD/{}\"".format(
             ctx.var["scip_java_binary"],
             ctx.var["sourceroot"],
             targetroot.path,

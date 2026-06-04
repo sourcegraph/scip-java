@@ -79,7 +79,7 @@ class BazelBuildTool(index: IndexCommand) extends BuildTool("Bazel", index) {
         bazelExecutable,
         "build",
         "--noshow_progress",
-        // The local strategy is required for now because we write SemanticDB and SCIP files
+        // The local strategy is required for now because we write SCIP and SCIP files
         // to the provided targetroot directory.
         "--spawn_strategy=local",
         "--aspects",

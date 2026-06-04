@@ -9,7 +9,7 @@ import javax.tools.ForwardingJavaFileManager;
 import javax.tools.JavaFileObject;
 import javax.tools.StandardJavaFileManager;
 
-import com.sourcegraph.semanticdb_javac.SemanticdbPlugin;
+import com.sourcegraph.scip_javac.ScipPlugin;
 
 public class SimpleFileManager extends ForwardingJavaFileManager<StandardJavaFileManager> {
 
@@ -28,7 +28,7 @@ public class SimpleFileManager extends ForwardingJavaFileManager<StandardJavaFil
       Location location, String className, JavaFileObject.Kind kind, FileObject sibling) {
     URI uri = targetroot.resolve(className).toUri();
     SimpleClassFile result = new SimpleClassFile(uri);
-    if (!className.equals(SemanticdbPlugin.stubClassName)) {
+    if (!className.equals(ScipPlugin.stubClassName)) {
       compiled.add(result);
     }
     return result;
