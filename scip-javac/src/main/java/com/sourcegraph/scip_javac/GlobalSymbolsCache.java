@@ -117,7 +117,7 @@ public final class GlobalSymbolsCache {
   }
 
   /**
-   * Computes the method "disambiguator" according to the SCIP spec.
+   * Computes the method "disambiguator" according to the SemanticDB spec.
    *
    * <p><quote> Concatenation of a left parenthesis ("("), a tag and a right parenthesis (")"). If
    * the definition is not overloaded, the tag is empty. If the definition is overloaded, the tag is
@@ -131,7 +131,8 @@ public final class GlobalSymbolsCache {
    *
    * </quote>
    *
-   * <p><a href="https://scalameta.org/docs/scip/specification.html#symbol-2">Link to SCIP spec</a>.
+   * <p><a href="https://scalameta.org/docs/semanticdb/specification.html#symbol-2">Link to
+   * SemanticDB spec</a>.
    */
   private String methodDisambiguator(ExecutableElement sym) {
     Iterable<? extends Element> elements = sym.getEnclosingElement().getEnclosedElements();

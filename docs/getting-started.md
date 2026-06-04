@@ -4,7 +4,7 @@ title: Getting started
 ---
 
 By following the instructions on this page, you should be able to generate a
-[SCIP](https://github.com/sourcegraph/scip) index of your Java codebase using
+[SCIP](https://github.com/scip-code/scip) index of your Java codebase using
 Gradle, Maven, or Bazel. See
 [Supported build tools](#supported-build-tools) for an overview of other build
 tools that we're planning to support in the future.

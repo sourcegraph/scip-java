@@ -9,7 +9,7 @@ different contents.
 This aspect is needed for scip-java to inspect the structure of the Bazel build
 and register actions to index all java_library/java_test/java_binary targets.
 The result of running this aspect is that your bazel-bin/ directory will contain
-many *.scip (https://github.com/sourcegraph/scip) files.
+many *.scip (https://github.com/scip-code/scip) files.
 These files encode information about which symbols are referenced from which
 locations in your source code.
 

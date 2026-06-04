@@ -1,4 +1,4 @@
-# Java and Kotlin indexer for [SCIP](https://github.com/sourcegraph/scip) ![](https://img.shields.io/badge/status-development-green?style=flat)
+# Java and Kotlin indexer for [SCIP](https://github.com/scip-code/scip) ![](https://img.shields.io/badge/status-development-green?style=flat)
 
 | Documentation        | Link                                                                   |
 | -------------------- | ---------------------------------------------------------------------- |
