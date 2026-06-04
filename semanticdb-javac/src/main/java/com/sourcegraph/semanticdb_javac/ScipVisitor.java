@@ -450,7 +450,7 @@ final class ScipVisitor extends TreePathScanner<Void, Void> {
   // Symbol resolution
   // =======================================
   private String scipSymbol(Element sym) {
-    return globals.semanticdbSymbol(sym, locals);
+    return globals.symbol(sym, locals);
   }
 
   private List<TypeElement> parentTypeElements(TypeElement typeElement) {

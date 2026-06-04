@@ -26,19 +26,19 @@ public final class GlobalSymbolsCache {
     this.options = options;
   }
 
-  public String semanticdbSymbol(Element sym, LocalSymbolsCache<Element, String> locals) {
+  public String symbol(Element sym, LocalSymbolsCache<Element, String> locals) {
     String result = globals.get(sym);
     if (result != null) return result;
     String localResult = locals.get(sym);
     if (localResult != null) return localResult;
-    result = uncachedSemanticdbSymbol(sym, locals);
+    result = uncachedSymbol(sym, locals);
     if (SemanticdbSymbols.isGlobal(result)) {
       globals.put(sym, result);
     }
     return result;
   }
 
-  private String uncachedSemanticdbSymbol(Element sym, LocalSymbolsCache<Element, String> locals) {
+  private String uncachedSymbol(Element sym, LocalSymbolsCache<Element, String> locals) {
     if (sym == null) return SemanticdbSymbols.ROOT_PACKAGE;
 
     if (sym instanceof PackageElement) {
@@ -66,7 +66,7 @@ public final class GlobalSymbolsCache {
 
     if (isAnonymousClass(sym) || isLocalVariable(sym)) return locals.put(sym);
 
-    String owner = semanticdbSymbol(sym.getEnclosingElement(), locals);
+    String owner = symbol(sym.getEnclosingElement(), locals);
     if (SemanticdbSymbols.isLocal(owner)) return locals.put(sym);
 
     SemanticdbSymbols.Descriptor desc = semanticdbDescriptor(sym);
