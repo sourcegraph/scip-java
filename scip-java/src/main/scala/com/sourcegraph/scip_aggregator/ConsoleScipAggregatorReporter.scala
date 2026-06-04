@@ -7,7 +7,7 @@ import moped.cli.Application
 import moped.progressbars.InteractiveProgressBar
 
 /**
- * Console reporter for index-scip command.
+ * Console reporter for the aggregate command.
  */
 class ConsoleScipAggregatorReporter(app: Application)
     extends ScipAggregatorReporter {

@@ -139,7 +139,7 @@ def _scip_java(target, ctx):
         # Prefix bazel-out paths with $PWD (the execroot) so they don't depend
         # on the workspace-level bazel-out convenience symlink, which doesn't
         # exist on a cold build.
-        command = "\"{}\" index --no-cleanup --index-scip.allow-empty-index --cwd \"{}\" --targetroot \"$PWD/{}\" --scip-config \"$PWD/{}\" --output \"$PWD/{}\"".format(
+        command = "\"{}\" index --no-cleanup --aggregate.allow-empty-index --cwd \"{}\" --targetroot \"$PWD/{}\" --scip-config \"$PWD/{}\" --output \"$PWD/{}\"".format(
             ctx.var["scip_java_binary"],
             ctx.var["sourceroot"],
             targetroot.path,

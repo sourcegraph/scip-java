@@ -486,7 +486,7 @@ lazy val scipKotlincMinimized = project
           Def.sequential(
             Compile / compile,
             (cli / Compile / runMain).toTask(
-              s" $mainCls index-scip --no-emit-inverse-relationships --cwd $srcRoot --output $scipOut $tgtRoot"
+              s" $mainCls aggregate --no-emit-inverse-relationships --cwd $srcRoot --output $scipOut $tgtRoot"
             ),
             (cli / Compile / runMain).toTask(
               s" $mainCls snapshot --cwd $srcRoot --output $snapDir $tgtRoot"

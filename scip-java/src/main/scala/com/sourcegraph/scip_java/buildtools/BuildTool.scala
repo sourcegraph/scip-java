@@ -53,7 +53,7 @@ object BuildTool {
       generateScipResult.exitCode
     } else {
       index
-        .indexScip
+        .aggregate
         .copy(
           output = index.finalOutput,
           targetroot = List(targetroot),

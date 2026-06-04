@@ -10,7 +10,7 @@
 
   <!-- column headers: the tool that performs each step -->
   <text x="279" y="54" text-anchor="middle" font-size="20" fill="#222222">scip-javac</text>
-  <text x="656" y="54" text-anchor="middle" font-size="20" fill="#222222">index-scip</text>
+  <text x="656" y="54" text-anchor="middle" font-size="20" fill="#222222">aggregate</text>
 
   <!-- stage 1: a list of Java sources -->
   <g fill="#cfe2f3" stroke="#1f3a5f" stroke-width="2">

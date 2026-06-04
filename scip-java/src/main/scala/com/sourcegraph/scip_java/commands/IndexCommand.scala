@@ -87,7 +87,7 @@ case class IndexCommand(
     @TrailingArguments()
     buildCommand: List[String] = Nil,
     @Hidden
-    indexScip: IndexScipCommand = IndexScipCommand(),
+    aggregate: AggregateCommand = AggregateCommand(),
     @Inline
     app: Application = Application.default
 ) extends Command {

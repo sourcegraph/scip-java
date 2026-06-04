@@ -203,11 +203,11 @@ references" to show results from multiple repositories.
 First, install the `scip-java` command-line tool according to the instructions
 in the [getting started guide](getting-started.md).
 
-Next, run the `scip-java index-scip` command to merge the per-file SCIP
+Next, run the `scip-java aggregate` command to merge the per-file SCIP
 files into a single SCIP index.
 
 ```sh
-❯ scip-java index-scip $TARGETROOT
+❯ scip-java aggregate $TARGETROOT
 ❯ file index.scip
 index.scip: JSON data
 ```

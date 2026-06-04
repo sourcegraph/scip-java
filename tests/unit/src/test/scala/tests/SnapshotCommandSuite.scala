@@ -37,7 +37,7 @@ class SnapshotCommandSuite extends MopedSuite(ScipJava.app) {
 
     val indexExit = app().run(
       List(
-        "index-scip",
+        "aggregate",
         "--output",
         targetroot.resolve("index.scip").toString,
         targetroot.toString

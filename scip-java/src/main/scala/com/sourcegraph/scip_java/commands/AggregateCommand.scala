@@ -18,12 +18,12 @@ import moped.cli.CommandParser
 import org.scip_code.scip.ToolInfo
 
 @Description("Aggregates per-source SCIP shards into a single SCIP index file.")
-@Usage("scip-java index-scip [OPTIONS ...] [POSITIONAL ARGUMENTS ...]")
+@Usage("scip-java aggregate [OPTIONS ...] [POSITIONAL ARGUMENTS ...]")
 @ExampleUsage(
-  "scip-java index-scip --out=myindex.scip my/targetroot1 my/targetroot2"
+  "scip-java aggregate --out=myindex.scip my/targetroot1 my/targetroot2"
 )
-@CommandName("index-scip")
-final case class IndexScipCommand(
+@CommandName("aggregate")
+final case class AggregateCommand(
     @Description("The name of the output file.")
     output: Path = Paths.get("index.scip"),
     @Description("Whether to process the SCIP shards in parallel")
@@ -94,7 +94,7 @@ final case class IndexScipCommand(
   }
 }
 
-object IndexScipCommand {
-  val default = IndexScipCommand()
+object AggregateCommand {
+  val default = AggregateCommand()
   implicit val parser = CommandParser.derive(default)
 }
