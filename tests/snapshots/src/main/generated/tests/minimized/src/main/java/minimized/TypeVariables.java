@@ -69,7 +69,7 @@
     static class CT extends C implements I {
 //               ^^ definition semanticdb maven . . minimized/TypeVariables#CT#
 //                  display_name CT
-//                  signature_documentation java static class CT
+//                  signature_documentation java static class CT extends C implements I
 //                  kind Class
 //                  relationship is_implementation semanticdb maven . . minimized/TypeVariables#C#
 //                  relationship is_implementation semanticdb maven . . minimized/TypeVariables#I#

@@ -1,17 +1,12 @@
 package com.sourcegraph.semanticdb_kotlinc
 
-import com.sourcegraph.semanticdb.Semanticdb
-
-import com.sourcegraph.semanticdb.Semanticdb.SymbolOccurrence.Role
-import com.sourcegraph.semanticdb.SemanticdbDocumentBuilder
-import com.sourcegraph.semanticdb.SemanticdbPaths
+import com.sourcegraph.semanticdb.ScipDocumentBuilder
+import com.sourcegraph.semanticdb.ScipShardPaths
 import java.nio.file.Path
 import java.nio.file.Paths
-import java.security.MessageDigest
 import kotlin.contracts.ExperimentalContracts
 import org.jetbrains.kotlin.KtSourceElement
 import org.jetbrains.kotlin.KtSourceFile
-import org.jetbrains.kotlin.com.intellij.lang.java.JavaLanguage
 import org.jetbrains.kotlin.fir.FirElement
 import org.jetbrains.kotlin.fir.analysis.checkers.context.CheckerContext
 import org.jetbrains.kotlin.fir.analysis.checkers.directOverriddenSymbolsSafe
@@ -22,11 +17,18 @@ import org.jetbrains.kotlin.fir.symbols.FirBasedSymbol
 import org.jetbrains.kotlin.fir.symbols.SymbolInternals
 import org.jetbrains.kotlin.fir.symbols.impl.*
 import org.jetbrains.kotlin.fir.types.impl.FirImplicitAnyTypeRef
-import org.jetbrains.kotlin.idea.KotlinLanguage
 import org.jetbrains.kotlin.lexer.KtTokens
-import org.jetbrains.kotlin.psi
 import org.jetbrains.kotlin.text
+import org.scip_code.scip.Document
+import org.scip_code.scip.Occurrence
+import org.scip_code.scip.SymbolInformation
+import org.scip_code.scip.SymbolRole
+import org.scip_code.scip.occurrence
+import org.scip_code.scip.relationship
+import org.scip_code.scip.signature
+import org.scip_code.scip.symbolInformation
 
+/** Builds a SCIP [Document] for a single Kotlin source file. */
 @ExperimentalContracts
 class SemanticdbTextDocumentBuilder(
     private val sourceroot: Path,
@@ -34,23 +36,22 @@ class SemanticdbTextDocumentBuilder(
     private val lineMap: LineMap,
     private val cache: SymbolsCache,
 ) {
-    private val documentBuilder = SemanticdbDocumentBuilder()
+    private val documentBuilder = ScipDocumentBuilder()
     private val fileText = file.getContentsAsStream().reader().readText()
-    private val semanticMd5 = semanticdbMD5()
 
-    fun build(): Semanticdb.TextDocument =
-        documentBuilder.build(Semanticdb.Language.KOTLIN, semanticdbURI(), fileText, semanticMd5)
+    fun build(): Document =
+        documentBuilder.build("kotlin", relativePath(), fileText)
 
     fun emitSemanticdbData(
         firBasedSymbol: FirBasedSymbol<*>?,
         symbol: Symbol,
         element: KtSourceElement,
-        role: Role,
+        isDefinition: Boolean,
         context: CheckerContext,
         enclosingSource: KtSourceElement? = null,
     ) {
-        documentBuilder.addOccurrence(symbolOccurrence(symbol, element, role, enclosingSource))
-        if (role == Role.DEFINITION) {
+        documentBuilder.addOccurrence(occurrence(symbol, element, isDefinition, enclosingSource))
+        if (isDefinition) {
             documentBuilder.addSymbol(symbolInformation(firBasedSymbol, symbol, element, context))
         }
     }
@@ -61,143 +62,122 @@ class SemanticdbTextDocumentBuilder(
         symbol: Symbol,
         element: KtSourceElement,
         context: CheckerContext,
-    ): Semanticdb.SymbolInformation {
+    ): SymbolInformation {
         val supers =
             when (firBasedSymbol) {
                 is FirClassSymbol ->
                     firBasedSymbol
                         .resolvedSuperTypeRefs
                         .filter { it !is FirImplicitAnyTypeRef }
-                        .map { it.toClassLikeSymbol(firBasedSymbol.moduleData.session) }
-                        .filterNotNull()
+                        .mapNotNull { it.toClassLikeSymbol(firBasedSymbol.moduleData.session) }
                         .flatMap { cache[it] }
                 is FirFunctionSymbol<*> ->
                     firBasedSymbol.directOverriddenSymbolsSafe(context).flatMap { cache[it] }
-                else -> emptyList<Symbol>().asIterable()
+                else -> emptyList()
             }
-        return SymbolInformation {
+        return symbolInformation {
             this.symbol = symbol.toString()
             this.displayName =
-                if (firBasedSymbol != null) {
-                    displayName(firBasedSymbol)
-                } else {
-                    element.text.toString()
-                }
-            this.documentation =
-                if (firBasedSymbol != null) {
-                    semanticdbDocumentation(firBasedSymbol.fir)
-                } else {
-                    Documentation {
-                        format = Semanticdb.Documentation.Format.MARKDOWN
-                        message = ""
+                if (firBasedSymbol != null) displayName(firBasedSymbol)
+                else element.text.toString()
+            if (firBasedSymbol != null) {
+                renderSignature(firBasedSymbol.fir)?.let { rendered ->
+                    signatureDocumentation = signature {
+                        language = "kotlin"
+                        text = rendered
                     }
                 }
-            this.addAllOverriddenSymbols(supers.map { it.toString() })
-            this.language =
-                when (element.psi?.language ?: KotlinLanguage.INSTANCE) {
-                    is KotlinLanguage -> Semanticdb.Language.KOTLIN
-                    is JavaLanguage -> Semanticdb.Language.JAVA
-                    else -> throw IllegalArgumentException("unexpected language")
+                docComment(firBasedSymbol.fir)?.let { documentation += it }
+            }
+            for (parent in supers) {
+                relationships += relationship {
+                    this.symbol = parent.toString()
+                    isImplementation = true
                 }
-        }
-    }
-
-    private fun symbolOccurrence(
-        symbol: Symbol,
-        element: KtSourceElement,
-        role: Role,
-        enclosingSource: KtSourceElement? = null,
-    ): Semanticdb.SymbolOccurrence {
-        return SymbolOccurrence {
-            this.symbol = symbol.toString()
-            this.role = role
-            this.range = semanticdbRange(element)
-            if (enclosingSource != null) {
-                this.enclosingRange = semanticdbEnclosingRange(enclosingSource)
             }
         }
     }
 
-    private fun semanticdbRange(element: KtSourceElement): Semanticdb.Range {
-        return Range {
-            startCharacter = lineMap.startCharacter(element)
-            startLine = lineMap.lineNumber(element) - 1
-            endCharacter = lineMap.endCharacter(element)
-            endLine = lineMap.lineNumber(element) - 1
+    private fun occurrence(
+        symbol: Symbol,
+        element: KtSourceElement,
+        isDefinition: Boolean,
+        enclosingSource: KtSourceElement?,
+    ): Occurrence = occurrence {
+        this.symbol = symbol.toString()
+        if (isDefinition) symbolRoles = SymbolRole.Definition.number
+        range += range(element).asIterable()
+        if (enclosingSource != null) {
+            enclosingRange += enclosingRange(enclosingSource).asIterable()
         }
     }
 
-    private fun semanticdbEnclosingRange(element: KtSourceElement): Semanticdb.Range {
-        return Range {
-            startLine = lineMap.lineNumber(element) - 1
-            startCharacter = lineMap.startCharacter(element)
-            endLine = lineMap.lineNumberForOffset(element.endOffset) - 1
-            endCharacter = lineMap.columnForOffset(element.endOffset)
-        }
+    private fun range(element: KtSourceElement): IntArray {
+        val line = lineMap.lineNumber(element) - 1
+        val startCol = lineMap.startCharacter(element)
+        val endCol = lineMap.endCharacter(element)
+        return intArrayOf(line, startCol, endCol)
     }
 
-    private fun semanticdbURI(): String =
-        SemanticdbPaths.semanticdbUri(sourceroot, Paths.get(file.path))
-
-    private fun semanticdbMD5(): String =
-        MessageDigest.getInstance("MD5")
-            .digest(file.getContentsAsStream().readBytes())
-            .joinToString("") { "%02X".format(it) }
-
-    private fun semanticdbDocumentation(element: FirElement): Semanticdb.Documentation = Documentation {
-        format = Semanticdb.Documentation.Format.MARKDOWN
-        // Like FirRenderer().forReadability, but using FirAllModifierRenderer instead of FirPartialModifierRenderer
-        val renderer = FirRenderer(
-            typeRenderer = ConeTypeRenderer(),
-            idRenderer = ConeIdShortRenderer(),
-            classMemberRenderer = FirNoClassMemberRenderer(),
-            bodyRenderer = null,
-            propertyAccessorRenderer = null,
-            callArgumentsRenderer = FirCallNoArgumentsRenderer(),
-            modifierRenderer = FirAllModifierRenderer(),
-            callableSignatureRenderer = FirCallableSignatureRendererForReadability(),
-            declarationRenderer = FirDeclarationRenderer("local "),
-        )
-        val renderOutput = renderer.renderElementAsString(element)
-        val kdoc = element.source?.getChild(KtTokens.DOC_COMMENT)?.text?.toString() ?: ""
-        message = "```kotlin\n$renderOutput\n```${stripKDocAsterisks(kdoc)}"
+    private fun enclosingRange(element: KtSourceElement): IntArray {
+        val startLine = lineMap.lineNumber(element) - 1
+        val startCol = lineMap.startCharacter(element)
+        val endLine = lineMap.lineNumberForOffset(element.endOffset) - 1
+        val endCol = lineMap.columnForOffset(element.endOffset)
+        return if (startLine == endLine) intArrayOf(startLine, startCol, endCol)
+        else intArrayOf(startLine, startCol, endLine, endCol)
     }
 
-    // Returns the kdoc string with all leading and trailing "/*" tokens removed. Naive
-    // implementation that can
-    // be replaced with a utility method from the compiler in the future, if one exists.
-    private fun stripKDocAsterisks(kdoc: String): String {
+    private fun relativePath(): String =
+        ScipShardPaths.relativePath(sourceroot, Paths.get(file.path))
+
+    /**
+     * Renders [element] as a Kotlin signature using [FirRenderer]'s readability preset, with kdoc
+     * stripped (kdoc is exposed separately via [SymbolInformation.documentation]).
+     */
+    private fun renderSignature(element: FirElement): String? {
+        val renderer =
+            FirRenderer(
+                typeRenderer = ConeTypeRenderer(),
+                idRenderer = ConeIdShortRenderer(),
+                classMemberRenderer = FirNoClassMemberRenderer(),
+                bodyRenderer = null,
+                propertyAccessorRenderer = null,
+                callArgumentsRenderer = FirCallNoArgumentsRenderer(),
+                modifierRenderer = FirAllModifierRenderer(),
+                callableSignatureRenderer = FirCallableSignatureRendererForReadability(),
+                declarationRenderer = FirDeclarationRenderer("local "))
+        val rendered = renderer.renderElementAsString(element)
+        return if (rendered.isEmpty()) null else rendered
+    }
+
+    private fun docComment(element: FirElement): String? {
+        val kdoc = element.source?.getChild(KtTokens.DOC_COMMENT)?.text?.toString() ?: return null
+        return stripKdoc(kdoc).ifEmpty { null }
+    }
+
+    /** Strips the `/**`, leading `*`s, and `*/` from a kdoc block, returning just the body text. */
+    private fun stripKdoc(kdoc: String): String {
         if (kdoc.isEmpty()) return kdoc
-        val out = StringBuilder().append("\n\n").append("----").append("\n")
+        val out = StringBuilder()
+        var first = true
         kdoc.lineSequence().forEach { line ->
             if (line.isEmpty()) return@forEach
             var start = 0
-            while (start < line.length && line[start].isWhitespace()) {
-                start++
-            }
-            if (start < line.length && line[start] == '/') {
-                start++
-            }
-            while (start < line.length && line[start] == '*') {
-                start++
-            }
+            while (start < line.length && line[start].isWhitespace()) start++
+            if (start < line.length && line[start] == '/') start++
+            while (start < line.length && line[start] == '*') start++
             var end = line.length - 1
-            if (end > start && line[end] == '/') {
-                end--
-            }
-            while (end > start && line[end] == '*') {
-                end--
-            }
-            while (end > start && line[end].isWhitespace()) {
-                end--
-            }
+            if (end > start && line[end] == '/') end--
+            while (end > start && line[end] == '*') end--
+            while (end > start && line[end].isWhitespace()) end--
             start = minOf(start, line.length - 1)
-            if (end > start) {
-                end++
-            }
-            out.append("\n").append(line, start, end)
+            if (end > start) end++
+            if (!first) out.append('\n')
+            out.append(line, start, end)
+            first = false
         }
-        return out.toString()
+        return out.toString().trim()
     }
 
     companion object {

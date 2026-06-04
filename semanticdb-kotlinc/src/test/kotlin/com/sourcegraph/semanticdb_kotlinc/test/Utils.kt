@@ -1,8 +1,6 @@
 package com.sourcegraph.semanticdb_kotlinc.test
 
-import com.sourcegraph.semanticdb.Semanticdb
 import com.sourcegraph.semanticdb.SemanticdbOptions
-
 import com.sourcegraph.semanticdb_kotlinc.*
 import com.sourcegraph.semanticdb_kotlinc.AnalyzerCheckers.Companion.visitors
 import com.tschuchort.compiletesting.KotlinCompilation
@@ -31,16 +29,20 @@ import org.jetbrains.kotlin.fir.extensions.FirExtensionRegistrarAdapter
 import org.junit.jupiter.api.Assumptions.assumeFalse
 import org.junit.jupiter.api.DynamicTest
 import org.junit.jupiter.api.DynamicTest.dynamicTest
+import org.scip_code.scip.Document
+import org.scip_code.scip.Occurrence
+import org.scip_code.scip.SymbolInformation
 
 data class ExpectedSymbols(
     val testName: String,
     val source: SourceFile,
     val symbolsCacheData: SymbolCacheData? = null,
-    val semanticdb: SemanticdbData? = null
+    val scip: ScipData? = null
 ) {
-    data class SemanticdbData(
-        val expectedOccurrences: List<Semanticdb.SymbolOccurrence>? = null,
-        val expectedSymbols: List<Semanticdb.SymbolInformation>? = null
+    /** Subset of a SCIP [Document] that a single test wants to assert on. */
+    data class ScipData(
+        val expectedOccurrences: List<Occurrence>? = null,
+        val expectedSymbols: List<SymbolInformation>? = null
     )
 
     data class SymbolCacheData(
@@ -55,10 +57,10 @@ fun SourceFile.Companion.testKt(@Language("kotlin") contents: String): SourceFil
 @ExperimentalCompilerApi
 @ExperimentalContracts
 fun List<ExpectedSymbols>.mapCheckExpectedSymbols(): List<DynamicTest> =
-    this.flatMap { (testName, source, symbolsData, semanticdbData) ->
+    this.flatMap { (testName, source, symbolsData, scipData) ->
         val globals = GlobalSymbolsCache(testing = true)
         val locals = LocalSymbolsCache()
-        lateinit var document: Semanticdb.TextDocument
+        lateinit var document: Document
         val compilation = configureTestCompiler(source, globals, locals) { document = it }
         listOf(
             dynamicTest("$testName - compilation") {
@@ -73,11 +75,11 @@ fun List<ExpectedSymbols>.mapCheckExpectedSymbols(): List<DynamicTest> =
                 }
                     ?: assumeFalse(true)
             },
-            dynamicTest("$testName - semanticdb") {
-                semanticdbData?.apply {
+            dynamicTest("$testName - scip") {
+                scipData?.apply {
                     println(
-                        "checking semanticdb: ${expectedOccurrences?.size ?: 0} occurrences and ${expectedSymbols?.size ?: 0} symbols")
-                    checkContainsExpectedSemanticdb(document, expectedOccurrences, expectedSymbols)
+                        "checking scip: ${expectedOccurrences?.size ?: 0} occurrences and ${expectedSymbols?.size ?: 0} symbols")
+                    checkContainsExpectedScip(document, expectedOccurrences, expectedSymbols)
                 }
                     ?: assumeFalse(true)
             })
@@ -94,11 +96,10 @@ fun checkContainsExpectedSymbols(
     localsCount?.also { locals.size shouldBe it }
 }
 
-@ExperimentalContracts
-fun checkContainsExpectedSemanticdb(
-    document: Semanticdb.TextDocument,
-    expectedOccurrences: List<Semanticdb.SymbolOccurrence>?,
-    expectedSymbols: List<Semanticdb.SymbolInformation>?
+fun checkContainsExpectedScip(
+    document: Document,
+    expectedOccurrences: List<Occurrence>?,
+    expectedSymbols: List<SymbolInformation>?
 ) {
     assertSoftly(document.occurrencesList) {
         expectedOccurrences?.let { this.shouldContainInOrder(it) }
@@ -112,7 +113,7 @@ private fun configureTestCompiler(
     source: SourceFile,
     globals: GlobalSymbolsCache,
     locals: LocalSymbolsCache,
-    hook: (Semanticdb.TextDocument) -> Unit = {}
+    hook: (Document) -> Unit = {}
 ): KotlinCompilation {
     val compilation =
         KotlinCompilation().apply {
@@ -184,7 +185,7 @@ fun semanticdbVisitorAnalyzer(
     globals: GlobalSymbolsCache,
     locals: LocalSymbolsCache,
     sourceroot: Path,
-    hook: (Semanticdb.TextDocument) -> Unit = {}
+    hook: (Document) -> Unit = {}
 ): CompilerPluginRegistrar {
     return object : CompilerPluginRegistrar() {
         override fun ExtensionStorage.registerExtensions(configuration: CompilerConfiguration) {

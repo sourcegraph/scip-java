@@ -92,7 +92,7 @@
   class AnnotationsOnParameterizedTypesImpl implements AnnotationsOnParameterizedTypes {
 //      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . minimized/AnnotationsOnParameterizedTypesImpl#
 //                                          display_name AnnotationsOnParameterizedTypesImpl
-//                                          signature_documentation java class AnnotationsOnParameterizedTypesImpl
+//                                          signature_documentation java class AnnotationsOnParameterizedTypesImpl implements AnnotationsOnParameterizedTypes
 //                                          kind Class
 //                                          relationship is_implementation semanticdb maven . . minimized/AnnotationsOnParameterizedTypes#
 //      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . minimized/AnnotationsOnParameterizedTypesImpl#`<init>`().
@@ -208,7 +208,7 @@
 //                ^ reference semanticdb maven . . minimized/AnnotationsOnParameterizedTypesImpl#getConstructor().[T]
 //                   ^^^^^^^^^^^ definition local 6
 //                               display_name constructor
-//                               signature_documentation java @SuppressWarnings\nConstructor<T> constructor
+//                               signature_documentation java @SuppressWarnings("unchecked")\nConstructor<T> constructor
 //                               enclosing_symbol semanticdb maven . . minimized/AnnotationsOnParameterizedTypesImpl#getConstructor().
 //                               kind Variable
 //                                  ^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/reflect/Constructor#

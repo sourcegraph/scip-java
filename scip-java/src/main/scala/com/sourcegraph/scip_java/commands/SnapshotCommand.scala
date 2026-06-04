@@ -51,27 +51,35 @@ case class SnapshotCommand(
               attrs: BasicFileAttributes
           ): FileVisitResult = {
             if (scipPattern.matches(file)) {
-              foundScipFile = true
               val index = Index.parseFrom(Files.readAllBytes(file))
-              val root = URI.create(index.getMetadata.getProjectRoot)
-              index
-                .getDocumentsList
-                .asScala
-                .foreach { doc =>
-                  val sourcepath = Paths.get(root.resolve(doc.getRelativePath))
-                  val source =
-                    new String(
-                      Files.readAllBytes(sourcepath),
-                      StandardCharsets.UTF_8
+              // Per-source SCIP shards under META-INF/scip/ carry no Metadata;
+              // only the aggregated index does. Skip shards so `scip-java
+              // snapshot <targetroot>` doesn't trip over them.
+              val projectRoot = index.getMetadata.getProjectRoot
+              if (!projectRoot.isEmpty) {
+                foundScipFile = true
+                val root = URI.create(projectRoot)
+                index
+                  .getDocumentsList
+                  .asScala
+                  .foreach { doc =>
+                    val sourcepath = Paths.get(
+                      root.resolve(doc.getRelativePath)
                     )
-                  val document = ScipPrinters.printTextDocument(doc, source)
-                  val snapshotOutput = output.resolve(doc.getRelativePath)
-                  Files.createDirectories(snapshotOutput.getParent)
-                  Files.write(
-                    snapshotOutput,
-                    document.getBytes(StandardCharsets.UTF_8)
-                  )
-                }
+                    val source =
+                      new String(
+                        Files.readAllBytes(sourcepath),
+                        StandardCharsets.UTF_8
+                      )
+                    val document = ScipPrinters.printTextDocument(doc, source)
+                    val snapshotOutput = output.resolve(doc.getRelativePath)
+                    Files.createDirectories(snapshotOutput.getParent)
+                    Files.write(
+                      snapshotOutput,
+                      document.getBytes(StandardCharsets.UTF_8)
+                    )
+                  }
+              }
             }
             super.visitFile(file, attrs)
           }

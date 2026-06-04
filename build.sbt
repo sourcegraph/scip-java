@@ -71,18 +71,16 @@ commands +=
       "scalafixAll --check" :: "publishLocal" :: s
   }
 
-// Shared module that owns the canonical SemanticDB proto schema and the
-// associated symbol/builder utilities. Both the Java compiler plugin
-// (semanticdb-javac) and the Kotlin compiler plugin (semanticdb-kotlinc)
-// depend on it instead of carrying their own divergent copies of the proto.
+// Shared module with the SCIP shard utilities (symbol encoder, document
+// builder, on-disk writer) consumed by both the Java compiler plugin
+// (semanticdb-javac) and the Kotlin compiler plugin (semanticdb-kotlinc).
 lazy val semanticdbShared = project
   .in(file("semanticdb-shared"))
   .settings(
     moduleName := "semanticdb-shared",
     javaOnlySettings,
-    (Compile / PB.targets) :=
-      Seq(PB.gens.java(V.protobuf) -> (Compile / sourceManaged).value),
-    libraryDependencies += "com.google.protobuf" % "protobuf-java" % V.protobuf
+    libraryDependencies +=
+      "org.scip-code" % "scip-java-bindings" % V.scipBindings
   )
 
 lazy val gradlePlugin = project
@@ -329,8 +327,10 @@ lazy val semanticdbKotlinc = project
     // classpath via Provided so the assembled fat-jar does not bundle it.
     libraryDependencies +=
       "org.jetbrains.kotlin" % "kotlin-stdlib" % V.kotlinVersion % Provided,
-    // The SemanticDB proto schema and the generated Java classes live in
-    // semanticdbShared; we get them transitively via .dependsOn below.
+    // SCIP message classes come from semanticdbShared (which depends on
+    // scip-java-bindings); this adds the Kotlin DSL extensions on top.
+    libraryDependencies +=
+      "org.scip-code" % "scip-kotlin-bindings" % V.scipBindings,
     // kotlin-compiler-embeddable is supplied by kotlinc at runtime
     libraryDependencies +=
       "org.jetbrains.kotlin" % "kotlin-compiler-embeddable" % V.kotlinVersion %

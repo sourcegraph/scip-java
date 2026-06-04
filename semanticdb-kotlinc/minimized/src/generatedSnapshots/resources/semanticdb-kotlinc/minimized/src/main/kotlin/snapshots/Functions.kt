@@ -6,10 +6,10 @@
   fun sampleText(x: String = "") {
 //    ^^^^^^^^^^ definition semanticdb maven . . snapshots/sampleText().
 //               display_name sampleText
-//               documentation ```kotlin\npublic final fun sampleText(x: String = ...): Unit\n```
+//               signature_documentation kotlin public final fun sampleText(x: String = ...): Unit
 //               ^ definition semanticdb maven . . snapshots/sampleText().(x)
 //                 display_name x
-//                 documentation ```kotlin\nx: String = ...\n```
+//                 signature_documentation kotlin x: String = ...
 //                  ^^^^^^ reference semanticdb maven . . kotlin/String#
 //                            ⌃ enclosing_range_end semanticdb maven . . snapshots/sampleText().(x)
     println(x)

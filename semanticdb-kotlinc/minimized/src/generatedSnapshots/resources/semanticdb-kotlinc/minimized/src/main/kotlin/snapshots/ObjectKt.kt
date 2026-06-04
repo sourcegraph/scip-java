@@ -11,19 +11,19 @@
   object ObjectKt {
 //       ^^^^^^^^ definition semanticdb maven . . snapshots/ObjectKt#
 //                display_name ObjectKt
-//                documentation ```kotlin\npublic final object ObjectKt : Any\n```
+//                signature_documentation kotlin public final object ObjectKt : Any
 //       ^^^^^^^^ definition semanticdb maven . . snapshots/ObjectKt#`<init>`().
 //                display_name ObjectKt
-//                documentation ```kotlin\nprivate constructor(): ObjectKt\n```
+//                signature_documentation kotlin private constructor(): ObjectKt
 //  ⌄ enclosing_range_start semanticdb maven . . snapshots/ObjectKt#fail().
 //           ⌄ enclosing_range_start semanticdb maven . . snapshots/ObjectKt#fail().(message)
     fun fail(message: String?): Nothing {
 //      ^^^^ definition semanticdb maven . . snapshots/ObjectKt#fail().
 //           display_name fail
-//           documentation ```kotlin\npublic final fun fail(message: String?): Nothing\n```
+//           signature_documentation kotlin public final fun fail(message: String?): Nothing
 //           ^^^^^^^ definition semanticdb maven . . snapshots/ObjectKt#fail().(message)
 //                   display_name message
-//                   documentation ```kotlin\nmessage: String?\n```
+//                   signature_documentation kotlin message: String?
 //                    ^^^^^^^ reference semanticdb maven . . kotlin/String#
 //                              ^^^^^^^ reference semanticdb maven . . kotlin/Nothing#
 //                          ⌃ enclosing_range_end semanticdb maven . . snapshots/ObjectKt#fail().(message)

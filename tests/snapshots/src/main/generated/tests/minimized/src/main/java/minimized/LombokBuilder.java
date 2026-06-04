@@ -1,10 +1,10 @@
   package minimized;
   
-//⌄ enclosing_range_start semanticdb maven . . minimized/Hello#HelloBuilder#build().
-//⌄ enclosing_range_start semanticdb maven . . minimized/Hello#builder().
-//⌄ enclosing_range_start semanticdb maven . . minimized/Hello#HelloBuilder#toString().
 //⌄ enclosing_range_start semanticdb maven . . minimized/Hello#HelloBuilder#
 //⌄ enclosing_range_start semanticdb maven . . minimized/Hello#HelloBuilder#`<init>`().
+//⌄ enclosing_range_start semanticdb maven . . minimized/Hello#HelloBuilder#build().
+//⌄ enclosing_range_start semanticdb maven . . minimized/Hello#HelloBuilder#toString().
+//⌄ enclosing_range_start semanticdb maven . . minimized/Hello#builder().
 //⌄ enclosing_range_start semanticdb maven . . minimized/Hello#
 //⌄ enclosing_range_start semanticdb maven . . minimized/Hello#`<init>`().
 //⌄ enclosing_range_start local 0
@@ -48,11 +48,11 @@
 //                signature_documentation java @SuppressWarnings("all")\nHelloBuilder()
 //                kind Constructor
 //                reference semanticdb maven . . minimized/Hello#HelloBuilder#`<init>`(). 1:11
-//              ⌃ enclosing_range_end semanticdb maven . . minimized/Hello#HelloBuilder#build().
-//              ⌃ enclosing_range_end semanticdb maven . . minimized/Hello#builder().
-//              ⌃ enclosing_range_end semanticdb maven . . minimized/Hello#HelloBuilder#toString().
 //              ⌃ enclosing_range_end semanticdb maven . . minimized/Hello#HelloBuilder#
 //              ⌃ enclosing_range_end semanticdb maven . . minimized/Hello#HelloBuilder#`<init>`().
+//              ⌃ enclosing_range_end semanticdb maven . . minimized/Hello#HelloBuilder#build().
+//              ⌃ enclosing_range_end semanticdb maven . . minimized/Hello#HelloBuilder#toString().
+//              ⌃ enclosing_range_end semanticdb maven . . minimized/Hello#builder().
 //              ⌃ enclosing_range_end semanticdb maven . . minimized/Hello#`<init>`().
 //              ⌃ enclosing_range_end local 0
 //              ⌃ enclosing_range_end semanticdb maven . . minimized/Hello#HelloBuilder#message.

@@ -1,10 +1,9 @@
 package tests
 
-import java.util.stream.Collectors
+import scala.jdk.CollectionConverters._
 
 import scala.meta.Input
 
-import com.sourcegraph.scip_semanticdb.Symtab
 import munit.FunSuite
 import munit.TestOptions
 
@@ -20,24 +19,31 @@ class OverridesSuite extends FunSuite with TempDirectories {
       source: String,
       extractSymbol: String,
       expectedSymbols: String*
-  ): Unit = {
+  ): Unit =
     test(options) {
       val compiler = new TestCompiler(targetroot())
       val relativePath = "example.Parent".replace('.', '/') + ".java"
       val input = Input.VirtualFile(relativePath, source)
       val result = compiler.compileSemanticdb(List(input))
-      val symtab = new Symtab(result.textDocument.orNull)
-
-      val expectedSyms = expectedSymbols.mkString("\n")
-      val syms = symtab
-        .symbols
-        .get(extractSymbol)
-        .getOverriddenSymbolsList
-        .stream
-        .collect(Collectors.joining("\n"))
-      assertNoDiff(syms, expectedSyms)
+      val document = result.document.orNull
+      val info = document
+        .getSymbolsList
+        .asScala
+        .find(_.getSymbol == extractSymbol)
+        .getOrElse(
+          fail(
+            s"no SymbolInformation for $extractSymbol",
+            clues(document.getSymbolsList.asScala.map(_.getSymbol))
+          )
+        )
+      val implementations = info
+        .getRelationshipsList
+        .asScala
+        .filter(_.getIsImplementation)
+        .map(_.getSymbol)
+        .mkString("\n")
+      assertNoDiff(implementations, expectedSymbols.mkString("\n"))
     }
-  }
 
   checkOverrides(
     "same file",

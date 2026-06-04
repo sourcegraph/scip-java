@@ -33,8 +33,8 @@ abstract class GradleBuildToolSuite(gradle: Tool.Gradle)
     """.stripMargin,
     /*
     An immutable version will be generated along with the original class:
-    - build/generated/sources/annotationProcessor/java/main/test/ImmutableWorkflowOptions.java.semanticdb
-    - /META-INF/semanticdb/src/main/java/WorkflowOptions.java.semanticdb
+    - build/generated/sources/annotationProcessor/java/main/test/ImmutableWorkflowOptions.java.scip
+    - /META-INF/scip/src/main/java/WorkflowOptions.java.scip
      */
     expectedSemanticdbFiles = 2
   )

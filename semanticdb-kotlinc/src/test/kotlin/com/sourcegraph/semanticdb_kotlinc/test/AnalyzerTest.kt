@@ -1,11 +1,6 @@
 package com.sourcegraph.semanticdb_kotlinc.test
 
-import com.sourcegraph.semanticdb.Semanticdb
-
 import com.sourcegraph.semanticdb_kotlinc.*
-import com.sourcegraph.semanticdb.Semanticdb.Language.KOTLIN
-import com.sourcegraph.semanticdb.Semanticdb.SymbolOccurrence.Role
-import com.sourcegraph.semanticdb.Semanticdb.TextDocument
 import com.tschuchort.compiletesting.KotlinCompilation
 import com.tschuchort.compiletesting.PluginOption
 import com.tschuchort.compiletesting.SourceFile
@@ -17,21 +12,24 @@ import io.kotest.matchers.shouldBe
 import io.kotest.matchers.shouldNotBe
 import java.io.File
 import java.nio.file.Path
+import java.nio.file.Paths
 import kotlin.contracts.ExperimentalContracts
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.intellij.lang.annotations.Language
 import org.jetbrains.kotlin.compiler.plugin.ExperimentalCompilerApi
 import org.junit.jupiter.api.io.TempDir
-import java.nio.file.Paths
+import org.scip_code.scip.Document
+import org.scip_code.scip.Occurrence
+import org.scip_code.scip.SymbolInformation
 
 @OptIn(ExperimentalCompilerApi::class)
 @ExperimentalContracts
 class AnalyzerTest {
-    fun compileSemanticdb(path: Path, @Language("kotlin") code: String): TextDocument {
+    fun compileSemanticdb(path: Path, @Language("kotlin") code: String): Document {
         val buildPath = File(path.resolve("build").toString()).apply { mkdir() }
         val source = SourceFile.testKt(code)
-        lateinit var document: TextDocument
+        lateinit var document: Document
 
         val result =
             KotlinCompilation()
@@ -68,8 +66,8 @@ class AnalyzerTest {
 
         val occurrences =
             arrayOf(
-                SymbolOccurrence {
-                    role = Role.REFERENCE
+                scipOccurrence {
+                    role = REFERENCE
                     symbol = "sample/"
                     range {
                         startLine = 0
@@ -78,8 +76,8 @@ class AnalyzerTest {
                         endCharacter = 14
                     }
                 },
-                SymbolOccurrence {
-                    role = Role.DEFINITION
+                scipOccurrence {
+                    role = DEFINITION
                     symbol = "sample/Banana#"
                     range {
                         startLine = 1
@@ -93,8 +91,8 @@ class AnalyzerTest {
                         endCharacter = 1
                     }
                 },
-                SymbolOccurrence {
-                    role = Role.DEFINITION
+                scipOccurrence {
+                    role = DEFINITION
                     symbol = "sample/Banana#foo()."
                     range {
                         startLine = 2
@@ -115,25 +113,15 @@ class AnalyzerTest {
 
         val symbols =
             arrayOf(
-                SymbolInformation {
+                scipSymbol {
                     symbol = "sample/Banana#"
-                    language = KOTLIN
                     displayName = "Banana"
-                    documentation =
-                        Documentation {
-                            format = Semanticdb.Documentation.Format.MARKDOWN
-                            message = "```kotlin\npublic final class Banana : Any\n```"
-                        }
+                    signatureText = "public final class Banana : Any"
                 },
-                SymbolInformation {
+                scipSymbol {
                     symbol = "sample/Banana#foo()."
-                    language = KOTLIN
                     displayName = "foo"
-                    documentation =
-                        Documentation {
-                            format = Semanticdb.Documentation.Format.MARKDOWN
-                            message = "```kotlin\npublic final fun foo(): Unit\n```"
-                        }
+                    signatureText = "public final fun foo(): Unit"
                 })
         assertSoftly(document.symbolsList) { withClue(this) { symbols.forEach(::shouldContain) } }
     }
@@ -153,8 +141,8 @@ class AnalyzerTest {
 
         val occurrences =
             arrayOf(
-                SymbolOccurrence {
-                    role = Role.REFERENCE
+                scipOccurrence {
+                    role = REFERENCE
                     symbol = "sample/"
                     range {
                         startLine = 0
@@ -163,8 +151,8 @@ class AnalyzerTest {
                         endCharacter = 14
                     }
                 },
-                SymbolOccurrence {
-                    role = Role.REFERENCE
+                scipOccurrence {
+                    role = REFERENCE
                     symbol = "kotlin/"
                     range {
                         startLine = 2
@@ -173,8 +161,8 @@ class AnalyzerTest {
                         endCharacter = 13
                     }
                 },
-                SymbolOccurrence {
-                    role = Role.REFERENCE
+                scipOccurrence {
+                    role = REFERENCE
                     symbol = "kotlin/Boolean#"
                     range {
                         startLine = 2
@@ -183,8 +171,8 @@ class AnalyzerTest {
                         endCharacter = 21
                     }
                 },
-                SymbolOccurrence {
-                    role = Role.REFERENCE
+                scipOccurrence {
+                    role = REFERENCE
                     symbol = "kotlin/"
                     range {
                         startLine = 3
@@ -193,8 +181,8 @@ class AnalyzerTest {
                         endCharacter = 13
                     }
                 },
-                SymbolOccurrence {
-                    role = Role.REFERENCE
+                scipOccurrence {
+                    role = REFERENCE
                     symbol = "kotlin/Int#"
                     range {
                         startLine = 3
@@ -227,8 +215,8 @@ class AnalyzerTest {
 
         val occurrences =
             arrayOf(
-                SymbolOccurrence {
-                    role = Role.DEFINITION
+                scipOccurrence {
+                    role = DEFINITION
                     symbol = "sample/foo()."
                     range {
                         startLine = 2
@@ -243,9 +231,9 @@ class AnalyzerTest {
                     }
                 },
                 // LocalClass
-                SymbolOccurrence {
-                    role = Role.DEFINITION
-                    symbol = "local0"
+                scipOccurrence {
+                    role = DEFINITION
+                    symbol = "local 0"
                     range {
                         startLine = 3
                         startCharacter = 8
@@ -260,9 +248,9 @@ class AnalyzerTest {
                     }
                 },
                 // LocalClass constructor
-                SymbolOccurrence {
-                    role = Role.DEFINITION
-                    symbol = "local1"
+                scipOccurrence {
+                    role = DEFINITION
+                    symbol = "local 1"
                     range {
                         startLine = 3
                         startCharacter = 8
@@ -277,9 +265,9 @@ class AnalyzerTest {
                     }
                 },
                 // localClassMethod
-                SymbolOccurrence {
-                    role = Role.DEFINITION
-                    symbol = "local2"
+                scipOccurrence {
+                    role = DEFINITION
+                    symbol = "local 2"
                     range {
                         startLine = 4
                         startCharacter = 8
@@ -300,41 +288,25 @@ class AnalyzerTest {
 
         val symbols =
             arrayOf(
-                SymbolInformation {
+                scipSymbol {
                     symbol = "sample/foo()."
                     displayName = "foo"
-                    language = KOTLIN
-                    documentation {
-                        message = "```kotlin\npublic final fun foo(): Unit\n```"
-                        format = Semanticdb.Documentation.Format.MARKDOWN
-                    }
+                    signatureText = "public final fun foo(): Unit"
                 },
-                SymbolInformation {
-                    symbol = "local0"
+                scipSymbol {
+                    symbol = "local 0"
                     displayName = "LocalClass"
-                    language = KOTLIN
-                    documentation {
-                        message = "```kotlin\nlocal final class LocalClass : Any\n```"
-                        format = Semanticdb.Documentation.Format.MARKDOWN
-                    }
+                    signatureText = "local final class LocalClass : Any"
                 },
-                SymbolInformation {
-                    symbol = "local1"
+                scipSymbol {
+                    symbol = "local 1"
                     displayName = "LocalClass"
-                    language = KOTLIN
-                    documentation {
-                        message = "```kotlin\npublic constructor(): LocalClass\n```"
-                        format = Semanticdb.Documentation.Format.MARKDOWN
-                    }
+                    signatureText = "public constructor(): LocalClass"
                 },
-                SymbolInformation {
-                    symbol = "local2"
+                scipSymbol {
+                    symbol = "local 2"
                     displayName = "localClassMethod"
-                    language = KOTLIN
-                    documentation {
-                        message = "```kotlin\npublic final fun localClassMethod(): Unit\n```"
-                        format = Semanticdb.Documentation.Format.MARKDOWN
-                    }
+                    signatureText = "public final fun localClassMethod(): Unit"
                 },
             )
         assertSoftly(document.symbolsList) { withClue(this) { symbols.forEach(::shouldContain) } }
@@ -360,8 +332,8 @@ class AnalyzerTest {
 
         val occurrences =
             arrayOf(
-                SymbolOccurrence {
-                    role = Role.REFERENCE
+                scipOccurrence {
+                    role = REFERENCE
                     symbol = "sample/"
                     range {
                         startLine = 0
@@ -370,8 +342,8 @@ class AnalyzerTest {
                         endCharacter = 14
                     }
                 },
-                SymbolOccurrence {
-                    role = Role.DEFINITION
+                scipOccurrence {
+                    role = DEFINITION
                     symbol = "sample/Interface#"
                     range {
                         startLine = 2
@@ -385,8 +357,8 @@ class AnalyzerTest {
                         endCharacter = 1
                     }
                 },
-                SymbolOccurrence {
-                    role = Role.DEFINITION
+                scipOccurrence {
+                    role = DEFINITION
                     symbol = "sample/Interface#foo()."
                     range {
                         startLine = 3
@@ -401,8 +373,8 @@ class AnalyzerTest {
                         endCharacter = 13
                     }
                 },
-                SymbolOccurrence {
-                    role = Role.DEFINITION
+                scipOccurrence {
+                    role = DEFINITION
                     symbol = "sample/Class#"
                     range {
                         startLine = 6
@@ -416,8 +388,8 @@ class AnalyzerTest {
                         endCharacter = 1
                     }
                 },
-                SymbolOccurrence {
-                    role = Role.REFERENCE
+                scipOccurrence {
+                    role = REFERENCE
                     symbol = "sample/Interface#"
                     range {
                         startLine = 6
@@ -426,8 +398,8 @@ class AnalyzerTest {
                         endCharacter = 23
                     }
                 },
-                SymbolOccurrence {
-                    role = Role.DEFINITION
+                scipOccurrence {
+                    role = DEFINITION
                     symbol = "sample/Class#foo()."
                     range {
                         startLine = 7
@@ -449,42 +421,26 @@ class AnalyzerTest {
 
         val symbols =
             arrayOf(
-                SymbolInformation {
+                scipSymbol {
                     symbol = "sample/Interface#"
                     displayName = "Interface"
-                    language = KOTLIN
-                    documentation {
-                        message = "```kotlin\npublic abstract interface Interface : Any\n```"
-                        format = Semanticdb.Documentation.Format.MARKDOWN
-                    }
+                    signatureText = "public abstract interface Interface : Any"
                 },
-                SymbolInformation {
+                scipSymbol {
                     symbol = "sample/Interface#foo()."
                     displayName = "foo"
-                    language = KOTLIN
-                    documentation {
-                        message = "```kotlin\npublic abstract fun foo(): Unit\n\n```"
-                        format = Semanticdb.Documentation.Format.MARKDOWN
-                    }
+                    signatureText = "public abstract fun foo(): Unit\n"
                 },
-                SymbolInformation {
+                scipSymbol {
                     symbol = "sample/Class#"
                     displayName = "Class"
-                    language = KOTLIN
-                    documentation {
-                        message = "```kotlin\npublic final class Class : Interface\n```"
-                        format = Semanticdb.Documentation.Format.MARKDOWN
-                    }
+                    signatureText = "public final class Class : Interface"
                     addOverriddenSymbols("sample/Interface#")
                 },
-                SymbolInformation {
+                scipSymbol {
                     symbol = "sample/Class#foo()."
                     displayName = "foo"
-                    language = KOTLIN
-                    documentation {
-                        message = "```kotlin\npublic open override fun foo(): Unit\n```"
-                        format = Semanticdb.Documentation.Format.MARKDOWN
-                    }
+                    signatureText = "public open override fun foo(): Unit"
                     addOverriddenSymbols("sample/Interface#foo().")
                 },
             )
@@ -516,8 +472,8 @@ class AnalyzerTest {
 
         val occurrences =
             arrayOf(
-                SymbolOccurrence {
-                    role = Role.REFERENCE
+                scipOccurrence {
+                    role = REFERENCE
                     symbol = "sample/"
                     range {
                         startLine = 0
@@ -526,8 +482,8 @@ class AnalyzerTest {
                         endCharacter = 14
                     }
                 },
-                SymbolOccurrence {
-                    role = Role.DEFINITION
+                scipOccurrence {
+                    role = DEFINITION
                     symbol = "sample/Interface#"
                     range {
                         startLine = 2
@@ -541,8 +497,8 @@ class AnalyzerTest {
                         endCharacter = 1
                     }
                 },
-                SymbolOccurrence {
-                    role = Role.DEFINITION
+                scipOccurrence {
+                    role = DEFINITION
                     symbol = "sample/Interface#foo()."
                     range {
                         startLine = 3
@@ -557,8 +513,8 @@ class AnalyzerTest {
                         endCharacter = 13
                     }
                 },
-                SymbolOccurrence {
-                    role = Role.DEFINITION
+                scipOccurrence {
+                    role = DEFINITION
                     symbol = "sample/`<anonymous object at 80>`#"
                     range {
                         startLine = 7
@@ -573,8 +529,8 @@ class AnalyzerTest {
                         endCharacter = 5
                     }
                 },
-                SymbolOccurrence {
-                    role = Role.DEFINITION
+                scipOccurrence {
+                    role = DEFINITION
                     symbol = "sample/`<anonymous object at 80>`#`<init>`()."
                     range {
                         startLine = 7
@@ -589,8 +545,8 @@ class AnalyzerTest {
                         endCharacter = 5
                     }
                 },
-                SymbolOccurrence {
-                    role = Role.REFERENCE
+                scipOccurrence {
+                    role = REFERENCE
                     symbol = "sample/Interface#"
                     range {
                         startLine = 7
@@ -599,8 +555,8 @@ class AnalyzerTest {
                         endCharacter = 30
                     }
                 },
-                SymbolOccurrence {
-                    role = Role.DEFINITION
+                scipOccurrence {
+                    role = DEFINITION
                     symbol = "sample/`<anonymous object at 80>`#foo()."
                     range {
                         startLine = 8
@@ -615,8 +571,8 @@ class AnalyzerTest {
                         endCharacter = 29
                     }
                 },
-                SymbolOccurrence {
-                    role = Role.DEFINITION
+                scipOccurrence {
+                    role = DEFINITION
                     symbol = "sample/`<anonymous object at 149>`#"
                     range {
                         startLine = 10
@@ -631,8 +587,8 @@ class AnalyzerTest {
                         endCharacter = 5
                     }
                 },
-                SymbolOccurrence {
-                    role = Role.DEFINITION
+                scipOccurrence {
+                    role = DEFINITION
                     symbol = "sample/`<anonymous object at 149>`#`<init>`()."
                     range {
                         startLine = 10
@@ -647,8 +603,8 @@ class AnalyzerTest {
                         endCharacter = 5
                     }
                 },
-                SymbolOccurrence {
-                    role = Role.REFERENCE
+                scipOccurrence {
+                    role = REFERENCE
                     symbol = "sample/Interface#"
                     range {
                         startLine = 10
@@ -657,8 +613,8 @@ class AnalyzerTest {
                         endCharacter = 30
                     }
                 },
-                SymbolOccurrence {
-                    role = Role.DEFINITION
+                scipOccurrence {
+                    role = DEFINITION
                     symbol = "sample/`<anonymous object at 149>`#foo()."
                     range {
                         startLine = 11
@@ -680,53 +636,33 @@ class AnalyzerTest {
 
         val symbols =
             arrayOf(
-                SymbolInformation {
+                scipSymbol {
                     symbol = "sample/Interface#"
                     displayName = "Interface"
-                    language = KOTLIN
-                    documentation {
-                        message = "```kotlin\npublic abstract interface Interface : Any\n```"
-                        format = Semanticdb.Documentation.Format.MARKDOWN
-                    }
+                    signatureText = "public abstract interface Interface : Any"
                 },
-                SymbolInformation {
+                scipSymbol {
                     symbol = "sample/`<anonymous object at 80>`#"
                     displayName = "<anonymous>"
-                    language = KOTLIN
-                    documentation {
-                        message = "```kotlin\nobject : Interface\n```"
-                        format = Semanticdb.Documentation.Format.MARKDOWN
-                    }
+                    signatureText = "object : Interface"
                     addOverriddenSymbols("sample/Interface#")
                 },
-                SymbolInformation {
+                scipSymbol {
                     symbol = "sample/`<anonymous object at 80>`#foo()."
                     displayName = "foo"
-                    language = KOTLIN
-                    documentation {
-                        message = "```kotlin\npublic open override fun foo(): Unit\n```"
-                        format = Semanticdb.Documentation.Format.MARKDOWN
-                    }
+                    signatureText = "public open override fun foo(): Unit"
                     addOverriddenSymbols("sample/Interface#foo().")
                 },
-                SymbolInformation {
+                scipSymbol {
                     symbol = "sample/`<anonymous object at 149>`#"
                     displayName = "<anonymous>"
-                    language = KOTLIN
-                    documentation {
-                        message = "```kotlin\nobject : Interface\n```"
-                        format = Semanticdb.Documentation.Format.MARKDOWN
-                    }
+                    signatureText = "object : Interface"
                     addOverriddenSymbols("sample/Interface#")
                 },
-                SymbolInformation {
+                scipSymbol {
                     symbol = "sample/`<anonymous object at 149>`#foo()."
                     displayName = "foo"
-                    language = KOTLIN
-                    documentation {
-                        message = "```kotlin\npublic open override fun foo(): Unit\n```"
-                        format = Semanticdb.Documentation.Format.MARKDOWN
-                    }
+                    signatureText = "public open override fun foo(): Unit"
                     addOverriddenSymbols("sample/Interface#foo().")
                 },
             )
@@ -747,8 +683,8 @@ class AnalyzerTest {
 
         val occurrences =
             arrayOf(
-                SymbolOccurrence {
-                    role = Role.DEFINITION
+                scipOccurrence {
+                    role = DEFINITION
                     symbol = "sample/foo()."
                     range {
                         startLine = 2
@@ -762,8 +698,8 @@ class AnalyzerTest {
                         endCharacter = 33
                     }
                 },
-                SymbolOccurrence {
-                    role = Role.DEFINITION
+                scipOccurrence {
+                    role = DEFINITION
                     symbol = "sample/foo().(arg)"
                     range {
                         startLine = 2
@@ -778,8 +714,8 @@ class AnalyzerTest {
                         endCharacter = 16
                     }
                 },
-                SymbolOccurrence {
-                    role = Role.REFERENCE
+                scipOccurrence {
+                    role = REFERENCE
                     symbol = "kotlin/Int#"
                     range {
                         startLine = 2
@@ -788,8 +724,8 @@ class AnalyzerTest {
                         endCharacter = 16
                     }
                 },
-                SymbolOccurrence {
-                    role = Role.REFERENCE
+                scipOccurrence {
+                    role = REFERENCE
                     symbol = "kotlin/Boolean#"
                     range {
                         startLine = 2
@@ -822,8 +758,8 @@ class AnalyzerTest {
 
         val occurrences =
             arrayOf(
-                SymbolOccurrence {
-                    role = Role.REFERENCE
+                scipOccurrence {
+                    role = REFERENCE
                     symbol = "kotlin/Int#"
                     range {
                         startLine = 4
@@ -832,8 +768,8 @@ class AnalyzerTest {
                         endCharacter = 14
                     }
                 },
-                SymbolOccurrence {
-                    role = Role.REFERENCE
+                scipOccurrence {
+                    role = REFERENCE
                     symbol = "kotlin/Float#"
                     range {
                         startLine = 5
@@ -1323,8 +1259,8 @@ class AnalyzerTest {
 
         val occurrences =
             arrayOf(
-                SymbolOccurrence {
-                    role = Role.REFERENCE
+                scipOccurrence {
+                    role = REFERENCE
                     symbol = "hello/"
                     range {
                         startLine = 0
@@ -1333,8 +1269,8 @@ class AnalyzerTest {
                         endCharacter = 13
                     }
                 },
-                SymbolOccurrence {
-                    role = Role.REFERENCE
+                scipOccurrence {
+                    role = REFERENCE
                     symbol = "hello/sample/"
                     range {
                         startLine = 0
@@ -1343,8 +1279,8 @@ class AnalyzerTest {
                         endCharacter = 20
                     }
                 },
-                SymbolOccurrence {
-                    role = Role.DEFINITION
+                scipOccurrence {
+                    role = DEFINITION
                     symbol = "hello/sample/Apple#"
                     range {
                         startLine = 1
@@ -1358,8 +1294,8 @@ class AnalyzerTest {
                         endCharacter = 11
                     }
                 },
-                SymbolOccurrence {
-                    role = Role.DEFINITION
+                scipOccurrence {
+                    role = DEFINITION
                     symbol = "hello/sample/Apple#`<init>`()."
                     range {
                         startLine = 1
@@ -1381,15 +1317,10 @@ class AnalyzerTest {
 
         val symbols =
             arrayOf(
-                SymbolInformation {
+                scipSymbol {
                     symbol = "hello/sample/Apple#"
-                    language = KOTLIN
                     displayName = "Apple"
-                    documentation =
-                        Documentation {
-                            format = Semanticdb.Documentation.Format.MARKDOWN
-                            message = "```kotlin\npublic final class Apple : Any\n```"
-                        }
+                    signatureText = "public final class Apple : Any"
                 })
 
         assertSoftly(document.symbolsList) { withClue(this) { symbols.forEach(::shouldContain) } }
@@ -1410,8 +1341,8 @@ class AnalyzerTest {
 
         val occurrences =
             arrayOf(
-                SymbolOccurrence {
-                    role = Role.REFERENCE
+                scipOccurrence {
+                    role = REFERENCE
                     symbol = "sample/"
                     range {
                         startLine = 0
@@ -1420,8 +1351,8 @@ class AnalyzerTest {
                         endCharacter = 14
                     }
                 },
-                SymbolOccurrence {
-                    role = Role.DEFINITION
+                scipOccurrence {
+                    role = DEFINITION
                     symbol = "sample/Banana#"
                     range {
                         startLine = 1
@@ -1435,8 +1366,8 @@ class AnalyzerTest {
                         endCharacter = 1
                     }
                 },
-                SymbolOccurrence {
-                    role = Role.DEFINITION
+                scipOccurrence {
+                    role = DEFINITION
                     symbol = "sample/Banana#foo()."
                     range {
                         startLine = 2
@@ -1451,8 +1382,8 @@ class AnalyzerTest {
                         endCharacter = 17
                     }
                 },
-                SymbolOccurrence {
-                    role = Role.DEFINITION
+                scipOccurrence {
+                    role = DEFINITION
                     symbol = "sample/Banana#"
                     range {
                         startLine = 1
@@ -1473,25 +1404,15 @@ class AnalyzerTest {
 
         val symbols =
             arrayOf(
-                SymbolInformation {
+                scipSymbol {
                     symbol = "sample/Banana#"
-                    language = KOTLIN
                     displayName = "Banana"
-                    documentation =
-                        Documentation {
-                            format = Semanticdb.Documentation.Format.MARKDOWN
-                            message = "```kotlin\npublic final class Banana : Any\n```"
-                        }
+                    signatureText = "public final class Banana : Any"
                 },
-                SymbolInformation {
+                scipSymbol {
                     symbol = "sample/Banana#foo()."
-                    language = KOTLIN
                     displayName = "foo"
-                    documentation =
-                        Documentation {
-                            format = Semanticdb.Documentation.Format.MARKDOWN
-                            message = "```kotlin\npublic final fun foo(): Unit\n```"
-                        }
+                    signatureText = "public final fun foo(): Unit"
                 })
         assertSoftly(document.symbolsList) { withClue(this) { symbols.forEach(::shouldContain) } }
     }
@@ -1520,11 +1441,11 @@ class AnalyzerTest {
         document.assertDocumentation("sample/docstrings().", "Example method docstring")
     }
 
-    private fun TextDocument.assertDocumentation(symbol: String, expectedDocumentation: String) {
-        val markdown =
-            this.symbolsList.find { it.symbol == symbol }?.documentation?.message
-                ?: fail("no documentation for symbol $symbol")
-        val obtainedDocumentation = markdown.split("----").last().trim()
+    private fun Document.assertDocumentation(symbol: String, expectedDocumentation: String) {
+        val info =
+            this.symbolsList.find { it.symbol == symbol }
+                ?: fail("no SymbolInformation for symbol $symbol")
+        val obtainedDocumentation = info.documentationList.joinToString("\n").trim()
         assertEquals(expectedDocumentation, obtainedDocumentation)
     }
 }

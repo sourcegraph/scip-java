@@ -1,38 +1,40 @@
 package tests
 
-import com.sourcegraph.semanticdb.Semanticdb
+import org.scip_code.scip.Document
+import org.scip_code.scip.Index
 
 case class CompileResult(
     byteCode: Array[Byte],
     stdout: String,
-    textDocuments: Semanticdb.TextDocuments,
+    documents: Seq[Document],
     isSuccess: Boolean
 ) {
-  def textDocument: Option[Semanticdb.TextDocument] = {
-    Option.when(textDocuments.getDocumentsCount() > 0) {
-      textDocuments.getDocuments(0)
-    }
-  }
+  def document: Option[Document] = documents.headOption
 
-  def merge(other: CompileResult): CompileResult = {
-    copy(
-      byteCode = this.byteCode ++ other.byteCode,
-      stdout = this.stdout ++ other.stdout,
-      textDocuments = this
-        .textDocuments
-        .toBuilder
-        .addAllDocuments(other.textDocuments.getDocumentsList)
-        .build(),
-      isSuccess = this.isSuccess && other.isSuccess
-    )
-  }
+  def merge(other: CompileResult): CompileResult = copy(
+    byteCode = this.byteCode ++ other.byteCode,
+    stdout = this.stdout ++ other.stdout,
+    documents = this.documents ++ other.documents,
+    isSuccess = this.isSuccess && other.isSuccess
+  )
 }
 
 object CompileResult {
   val empty: CompileResult = CompileResult(
     Array.emptyByteArray,
     "",
-    Semanticdb.TextDocuments.getDefaultInstance,
+    Seq.empty,
     isSuccess = true
   )
+
+  /**
+   * Convenience: builds an empty SCIP {@link Index} from this result's
+   * documents.
+   */
+  def index(documents: Seq[Document]): Index = Index
+    .newBuilder()
+    .addAllDocuments(
+      scala.jdk.CollectionConverters.SeqHasAsJava(documents).asJava
+    )
+    .build()
 }
