@@ -540,21 +540,27 @@ def javacModuleOptions = List(
 // to consume from Kotlin).
 def javaStringLiteral(value: String): String = {
   val escaped = value.flatMap {
-    case '\\'             => "\\\\"
-    case '"'              => "\\\""
-    case '\n'             => "\\n"
-    case '\r'             => "\\r"
-    case '\t'             => "\\t"
-    case c if c.isControl => f"\\u${c.toInt}%04x"
-    case c                => c.toString
+    case '\\' =>
+      "\\\\"
+    case '"' =>
+      "\\\""
+    case '\n' =>
+      "\\n"
+    case '\r' =>
+      "\\r"
+    case '\t' =>
+      "\\t"
+    case c if c.isControl =>
+      f"\\u${c.toInt}%04x"
+    case c =>
+      c.toString
   }
   "\"" + escaped + "\""
 }
 
 lazy val gradlePluginBuildInfoGenerator = Def.task {
-  val out =
-    (Compile / sourceManaged).value / "com" / "sourcegraph" / "scip_java" /
-      "GradlePluginBuildInfo.java"
+  val out = (Compile / sourceManaged).value / "com" / "sourcegraph" /
+    "scip_java" / "GradlePluginBuildInfo.java"
   IO.createDirectory(out.getParentFile)
   val optionsLiteral = javacModuleOptions
     .map(javaStringLiteral)
