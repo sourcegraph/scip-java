@@ -57,7 +57,6 @@ object BuildTool {
         .copy(
           output = index.finalOutput,
           targetroot = List(targetroot),
-          packagehub = index.packagehub,
           app = index.app
         )
         .run()

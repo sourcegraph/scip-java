@@ -4,7 +4,6 @@ import scala.collection.mutable
 import scala.jdk.CollectionConverters.CollectionHasAsScala
 import scala.math.Ordering.Implicits.seqOrdering
 
-import com.sourcegraph.scip_java.commands.CommentSyntax
 import moped.reporters.Input
 import moped.reporters.Position
 import org.scip_code.scip.Document
@@ -20,11 +19,10 @@ object ScipPrinters {
    */
   val sourceIndent = "  "
 
-  def printTextDocument(
-      doc: Document,
-      text: String,
-      comments: CommentSyntax = CommentSyntax.default
-  ): String = {
+  // scip-java only indexes Java and Kotlin sources, both of which use `//`.
+  private val commentSyntax = "//"
+
+  def printTextDocument(doc: Document, text: String): String = {
     val out = new mutable.StringBuilder()
     val occurrencesByLine = doc
       .getOccurrencesList
@@ -56,8 +54,6 @@ object ScipPrinters {
           }
         )
         .toMap
-    val extension = doc.getRelativePath.split("\\.").lastOption.getOrElse("")
-    val commentSyntax = comments.extensionSyntax(extension)
     val input = Input.filename(doc.getRelativePath, text)
 
     // Collect enclosing ranges from all occurrences, grouped by start/end line.
@@ -118,7 +114,7 @@ object ScipPrinters {
             (o.getRangeList.asScala.toList.map(_.toInt), o.getSymbol)
           )
         occurrences.foreach { occ =>
-          formatOccurrence(input, out, occ, line, symtab, commentSyntax)
+          formatOccurrence(input, out, occ, line, symtab)
           if ((occ.getSymbolRoles & SymbolRole.Definition_VALUE) > 0) {
             syntheticDefinitions
               .getOrElse(occ.getSymbol, Nil)
@@ -129,7 +125,6 @@ object ScipPrinters {
                   occ,
                   line,
                   symtab,
-                  commentSyntax,
                   syntheticDefinition = Some(syntheticDefinition)
                 )
               }
@@ -177,7 +172,6 @@ object ScipPrinters {
       occ: Occurrence,
       line: String,
       symtab: Map[String, SymbolInformation],
-      comment: String,
       syntheticDefinition: Option[SymbolInformation] = None
   ): Unit = {
     val pos = mopedPosition(input, occ)
@@ -199,8 +193,8 @@ object ScipPrinters {
       else
         "reference"
     val indent =
-      if (pos.startColumn + sourceIndent.length > comment.length)
-        " " * (pos.startColumn + sourceIndent.length - comment.length)
+      if (pos.startColumn + sourceIndent.length > commentSyntax.length)
+        " " * (pos.startColumn + sourceIndent.length - commentSyntax.length)
       else
         ""
     val caretCharacter =
@@ -220,7 +214,7 @@ object ScipPrinters {
     val _ = ScipSymbol.parseOrThrowExceptionIfInvalid(symbol)
 
     out
-      .append(comment)
+      .append(commentSyntax)
       .append(indent)
       .append(carets)
       .append(" ")
@@ -235,7 +229,7 @@ object ScipPrinters {
     syntheticDefinition.orElse(symtab.get(occ.getSymbol)) match {
       case Some(info) if isDefinition =>
         val prefix =
-          comment + (" " * indent.length) + (" " * carets.length) + " "
+          commentSyntax + (" " * indent.length) + (" " * carets.length) + " "
         if (!info.getDisplayName.isEmpty) {
           out
             .append(prefix)

@@ -256,9 +256,9 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
     // Stop traversal at the package declaration. JDK 17+ TreePathScanner
     // recurses into the package name's identifiers and would emit a
     // self-reference for `package X.Y;`; JDK 11 does not. Skipping the
-    // whole package subtree keeps semanticdb output stable across JDKs and
-    // matches the long-standing JDK 8/11 behavior of not emitting a
-    // reference for the package declaration itself.
+    // whole package subtree keeps semanticdb output stable across JDKs by
+    // matching the JDK 11 behavior of not emitting a reference for the
+    // package declaration itself.
     return null;
   }
 

@@ -49,7 +49,6 @@ class SemanticdbGradlePlugin extends Plugin[Project] {
         .getOrElse(s"com.sourcegraph:semanticdb-javac:${javacPluginVersion}")
 
       val sourceRoot = project.getRootDir()
-      val agentJar = extraProperties.get("javacAgentPath").map(_.toString)
 
       val tasks = project.getTasks()
 
@@ -90,11 +89,15 @@ class SemanticdbGradlePlugin extends Plugin[Project] {
             true
           } catch {
             case exc: Exception =>
-              // If the `compileOnly` configuration has already been evaluated
-              // by the build, we need to fallback on agent injected into javac
+              // The `compileOnly` configuration has likely already been
+              // resolved by another plugin or buildscript, so we can no longer
+              // add new dependencies to it. The project will be skipped (no
+              // SemanticDB output) and the post-build check in
+              // `GradleBuildTool` will surface a clearer error.
               warn(
-                s"Failed to add compiler plugin to javac, will go through the agent route (${exc
-                    .getClass()}): ${exc.getMessage()}"
+                s"scip-java: failed to attach SemanticDB compiler plugin to project '${project
+                    .getName()}' (${exc.getClass().getSimpleName()}: ${exc
+                    .getMessage()}). This subproject will not be indexed."
               )
               false
           }
@@ -181,32 +184,6 @@ class SemanticdbGradlePlugin extends Plugin[Project] {
                 )
               }
             }
-
-            /**
-             * In some yet to be understood cases we see that compiler plugin
-             * can be added successfully, but the correct flags are still not
-             * propagated.
-             *
-             * To work around it, we enable the agent unconditionally, and then
-             * if necessary deduplicate the arguments.
-             *
-             * TODO: figure out why this is necessary
-             */
-            agentJar.foreach { agentpath =>
-              javacPluginJar.foreach { pluginpath =>
-                val jvmArgs = task.getOptions.getForkOptions.getJvmArgs
-
-                jvmArgs.addAll(
-                  List(
-                    s"-javaagent:$agentpath",
-                    s"-Dsemanticdb.pluginpath=$pluginpath",
-                    s"-Dsemanticdb.sourceroot=$sourceRoot",
-                    s"-Dsemanticdb.targetroot=$targetRoot"
-                  ).asJava
-                )
-              }
-            }
-
           }
       }
 

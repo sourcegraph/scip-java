@@ -21,8 +21,6 @@ object Embedded {
     "gradle-plugin.jar"
   )
 
-  def agentJar(tmpDir: Path): Path = copyFile(tmpDir, "semanticdb-agent.jar")
-
   def semanticdbKotlincJar(tmpDir: Path): Path = copyFile(
     tmpDir,
     "semanticdb-kotlinc.jar"
@@ -30,12 +28,7 @@ object Embedded {
 
   private def javacErrorpath(tmp: Path) = tmp.resolve("errorpath.txt")
 
-  def customJavac(
-      sourceroot: Path,
-      targetroot: Path,
-      tmp: Path,
-      javaAtLeast17: Boolean
-  ): Path = {
+  def customJavac(sourceroot: Path, targetroot: Path, tmp: Path): Path = {
     val bin = tmp.resolve("bin")
     val javac = bin.resolve("javac")
     val java = bin.resolve("java")
@@ -51,11 +44,9 @@ object Embedded {
         |""".stripMargin.getBytes(StandardCharsets.UTF_8)
     )
     val newJavacopts = tmp.resolve("javac_newarguments")
-    val javacModuleOptions =
-      if (javaAtLeast17)
-        BuildInfo.javacModuleOptions.mkString(" ")
-      else
-        ""
+    // --add-exports flags required to access internal javac APIs from our
+    // SemanticDB plugin. Always set; Java 11+ is the supported baseline.
+    val javacModuleOptions = BuildInfo.javacModuleOptions.mkString(" ")
     val injectSemanticdbArguments = List[String](
       "java",
       s"-Dsemanticdb.errorpath=$errorpath",
