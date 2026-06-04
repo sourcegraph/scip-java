@@ -21,10 +21,12 @@ import org.jetbrains.kotlin.lexer.KtTokens
 import org.jetbrains.kotlin.text
 import org.scip_code.scip.Document
 import org.scip_code.scip.Occurrence
-import org.scip_code.scip.Relationship
-import org.scip_code.scip.Signature
 import org.scip_code.scip.SymbolInformation
 import org.scip_code.scip.SymbolRole
+import org.scip_code.scip.occurrence
+import org.scip_code.scip.relationship
+import org.scip_code.scip.signature
+import org.scip_code.scip.symbolInformation
 
 /** Builds a SCIP [Document] for a single Kotlin source file. */
 @ExperimentalContracts
@@ -73,28 +75,27 @@ class SemanticdbTextDocumentBuilder(
                     firBasedSymbol.directOverriddenSymbolsSafe(context).flatMap { cache[it] }
                 else -> emptyList()
             }
-        val displayName =
-            if (firBasedSymbol != null) displayName(firBasedSymbol)
-            else element.text.toString()
-        val builder =
-            SymbolInformation.newBuilder()
-                .setSymbol(symbol.toString())
-                .setDisplayName(displayName)
-        if (firBasedSymbol != null) {
-            renderSignature(firBasedSymbol.fir)?.let { text ->
-                builder.signatureDocumentation =
-                    Signature.newBuilder().setLanguage("kotlin").setText(text).build()
+        return symbolInformation {
+            this.symbol = symbol.toString()
+            this.displayName =
+                if (firBasedSymbol != null) displayName(firBasedSymbol)
+                else element.text.toString()
+            if (firBasedSymbol != null) {
+                renderSignature(firBasedSymbol.fir)?.let { rendered ->
+                    signatureDocumentation = signature {
+                        language = "kotlin"
+                        text = rendered
+                    }
+                }
+                docComment(firBasedSymbol.fir)?.let { documentation += it }
             }
-            docComment(firBasedSymbol.fir)?.let { builder.addDocumentation(it) }
+            for (parent in supers) {
+                relationships += relationship {
+                    this.symbol = parent.toString()
+                    isImplementation = true
+                }
+            }
         }
-        for (parent in supers) {
-            builder.addRelationships(
-                Relationship.newBuilder()
-                    .setSymbol(parent.toString())
-                    .setIsImplementation(true)
-                    .build())
-        }
-        return builder.build()
     }
 
     private fun occurrence(
@@ -102,14 +103,13 @@ class SemanticdbTextDocumentBuilder(
         element: KtSourceElement,
         role: Int,
         enclosingSource: KtSourceElement?,
-    ): Occurrence {
-        val builder =
-            Occurrence.newBuilder().setSymbol(symbol.toString()).setSymbolRoles(role)
-        for (v in range(element)) builder.addRange(v)
+    ): Occurrence = occurrence {
+        this.symbol = symbol.toString()
+        symbolRoles = role
+        range += range(element).asIterable()
         if (enclosingSource != null) {
-            for (v in enclosingRange(enclosingSource)) builder.addEnclosingRange(v)
+            enclosingRange += enclosingRange(enclosingSource).asIterable()
         }
-        return builder.build()
     }
 
     private fun range(element: KtSourceElement): IntArray {

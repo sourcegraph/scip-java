@@ -327,8 +327,10 @@ lazy val semanticdbKotlinc = project
     // classpath via Provided so the assembled fat-jar does not bundle it.
     libraryDependencies +=
       "org.jetbrains.kotlin" % "kotlin-stdlib" % V.kotlinVersion % Provided,
-    // The SemanticDB proto schema and the generated Java classes live in
-    // semanticdbShared; we get them transitively via .dependsOn below.
+    // SCIP message classes come from semanticdbShared (which depends on
+    // scip-java-bindings); this adds the Kotlin DSL extensions on top.
+    libraryDependencies +=
+      "org.scip-code" % "scip-kotlin-bindings" % V.scipBindings,
     // kotlin-compiler-embeddable is supplied by kotlinc at runtime
     libraryDependencies +=
       "org.jetbrains.kotlin" % "kotlin-compiler-embeddable" % V.kotlinVersion %
