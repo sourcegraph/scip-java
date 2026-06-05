@@ -166,9 +166,9 @@ lazy val scip = project
   .dependsOn(scipShared)
 
 lazy val mavenPlugin = project
-  .in(file("maven-plugin"))
+  .in(file("scip-maven-plugin"))
   .settings(
-    moduleName := "maven-plugin",
+    moduleName := "scip-maven-plugin",
     javaOnlySettings,
     libraryDependencies ++=
       Seq(

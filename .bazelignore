@@ -1,6 +1,6 @@
 .direnv/
 examples/
-maven-plugin/target/
+scip-maven-plugin/target/
 project/target/
 scip-java/target/
 scip-aggregator/target/
