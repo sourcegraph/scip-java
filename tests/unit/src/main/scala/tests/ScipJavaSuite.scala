@@ -8,7 +8,6 @@ import java.nio.file.Path
 
 import scala.jdk.CollectionConverters._
 
-import com.sourcegraph.io.DeleteVisitor
 import com.sourcegraph.scip_java.CliEnvironment
 import com.sourcegraph.scip_java.ScipJavaApp
 import munit.FunSuite
@@ -46,7 +45,7 @@ abstract class ScipJavaSuite(applicationToTest: ScipJavaApp) extends FunSuite {
       path = createTempDirectory()
     }
     override def afterEach(context: AfterEach): Unit = {
-      DeleteVisitor.deleteRecursively(path)
+      os.remove.all(os.Path(path))
     }
   }
 

@@ -1,6 +1,5 @@
 package com.sourcegraph.scip_java.buildtools
 
-import com.sourcegraph.io.DeleteVisitor
 import com.sourcegraph.scip_java.BuildInfo
 import com.sourcegraph.scip_java.Embedded
 import com.sourcegraph.scip_java.commands.IndexCommand
@@ -139,7 +138,7 @@ class ScipBuildTool(index: IndexCommand) : BuildTool("SCIP", index) {
         compileKotlinFiles(config, kotlinFiles, tmp)?.let { errors += it }
 
         if (index.cleanup) {
-            Files.walkFileTree(tmp, DeleteVisitor())
+            tmp.toFile().deleteRecursively()
         }
         val isScipGenerated = Files.isDirectory(targetroot.resolve("META-INF"))
         return if (errors.isNotEmpty() && (index.strictCompilation || !isScipGenerated)) {
@@ -355,7 +354,7 @@ class ScipBuildTool(index: IndexCommand) : BuildTool("SCIP", index) {
     }
 
     private fun clean() {
-        if (Files.exists(targetroot)) Files.walkFileTree(targetroot, DeleteVisitor())
+        targetroot.toFile().deleteRecursively()
     }
 
     private fun collectAllSourceFiles(dir: Path): List<Path> {

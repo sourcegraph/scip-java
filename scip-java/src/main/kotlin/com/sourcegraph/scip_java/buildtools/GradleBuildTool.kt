@@ -1,6 +1,5 @@
 package com.sourcegraph.scip_java.buildtools
 
-import com.sourcegraph.io.DeleteVisitor
 import com.sourcegraph.scip_java.Embedded
 import com.sourcegraph.scip_java.commands.IndexCommand
 import java.nio.charset.StandardCharsets
@@ -95,9 +94,7 @@ This means our SCIP compiler plugin was not attached to one or more JavaCompile 
         cmd += "-Dscip.targetroot=${targetroot()}"
         cmd += index.finalBuildCommand(listOf("clean", "scipPrintDependencies", "scipCompileAll"))
 
-        if (Files.exists(targetroot())) {
-            Files.walkFileTree(targetroot(), DeleteVisitor())
-        }
+        targetroot().toFile().deleteRecursively()
         val result = index.app.runProcess(cmd, env = mapOf("TERM" to "dumb"))
         return Embedded.reportUnexpectedJavacErrors(index.app.reporter, tmp) ?: result
     }

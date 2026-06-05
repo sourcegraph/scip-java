@@ -10,7 +10,6 @@ import com.github.ajalt.clikt.parameters.options.default
 import com.github.ajalt.clikt.parameters.options.flag
 import com.github.ajalt.clikt.parameters.options.option
 import com.github.ajalt.clikt.parameters.types.path
-import com.sourcegraph.io.DeleteVisitor
 import com.sourcegraph.scip_java.ScipJavaApp
 import com.sourcegraph.scip_java.ScipPrinters
 import java.net.URI
@@ -51,8 +50,8 @@ class SnapshotCommand : CliktCommand(name = "snapshot") {
 
     override fun run() {
         val scipPattern = FileSystems.getDefault().getPathMatcher("glob:**.scip")
-        if (cleanup && Files.exists(output)) {
-            Files.walkFileTree(output, DeleteVisitor())
+        if (cleanup) {
+            output.toFile().deleteRecursively()
         }
         Files.createDirectories(output)
         var foundScipFile = false

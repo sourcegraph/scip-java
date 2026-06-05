@@ -10,7 +10,6 @@ import scala.util.Properties
 import scala.meta.internal.io.FileIO
 import scala.meta.io.AbsolutePath
 
-import com.sourcegraph.io.DeleteVisitor
 import com.sourcegraph.scip_java.ScipJava
 import com.sourcegraph.scip_java.buildtools.ClasspathEntry
 import munit.Tag
@@ -49,7 +48,7 @@ abstract class BaseBuildToolSuite extends ScipJavaSuite(ScipJava.app) {
         path
       }
       override def beforeEach(context: BeforeEach): Unit = {
-        DeleteVisitor.deleteRecursively(path)
+        os.remove.all(os.Path(path))
       }
     }
 

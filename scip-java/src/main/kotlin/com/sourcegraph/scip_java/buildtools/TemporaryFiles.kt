@@ -1,6 +1,5 @@
 package com.sourcegraph.scip_java.buildtools
 
-import com.sourcegraph.io.DeleteVisitor
 import com.sourcegraph.scip_java.commands.IndexCommand
 import java.nio.file.Files
 import java.nio.file.Path
@@ -16,7 +15,7 @@ object TemporaryFiles {
             return fn(tmp)
         } finally {
             if (index.cleanup) {
-                Files.walkFileTree(tmp, DeleteVisitor())
+                tmp.toFile().deleteRecursively()
             }
         }
     }

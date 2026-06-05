@@ -11,7 +11,6 @@ import scala.jdk.CollectionConverters.SeqHasAsJava
 import scala.meta.internal.io.FileIO
 import scala.meta.io.AbsolutePath
 
-import com.sourcegraph.io.DeleteVisitor
 import com.sourcegraph.scip_java.ScipJava
 import com.sourcegraph.scip_java.ScipPrinters
 import org.scip_code.scip.Index
@@ -76,8 +75,8 @@ class MinimizedSnapshotScipGenerator {
           )
         }
     } finally {
-      Files.walkFileTree(scipOutput, new DeleteVisitor())
-      Files.walkFileTree(snapshotOutput.toNIO, new DeleteVisitor())
+      os.remove.all(os.Path(scipOutput))
+      os.remove.all(os.Path(snapshotOutput.toNIO))
     }
   }
 }
