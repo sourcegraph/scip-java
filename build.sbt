@@ -15,7 +15,7 @@ lazy val V =
     val gradle = "8.10"
     val scala213 = "2.13.13"
     val scalameta = "4.9.3"
-    val kotlinVersion = "2.2.0"
+    val kotlinVersion = "2.4.0"
     val kotest = "4.6.3"
     val kctfork = "0.7.1"
   }
