@@ -8,18 +8,14 @@ import java.nio.file.StandardCopyOption
 
 object Embedded {
 
-    @JvmStatic
     fun scipJar(tmpDir: Path): Path = copyFile(tmpDir, "scip-plugin.jar")
 
-    @JvmStatic
     fun gradlePluginJar(tmpDir: Path): Path = copyFile(tmpDir, "gradle-plugin.jar")
 
-    @JvmStatic
     fun scipKotlincJar(tmpDir: Path): Path = copyFile(tmpDir, "scip-kotlinc.jar")
 
     private fun javacErrorpath(tmp: Path): Path = tmp.resolve("errorpath.txt")
 
-    @JvmStatic
     fun customJavac(sourceroot: Path, targetroot: Path, tmp: Path): Path {
         val bin = tmp.resolve("bin")
         val javac = bin.resolve("javac")
@@ -81,7 +77,6 @@ object Embedded {
      * assume the standard output is from javac. This file is used a side-channel
      * to avoid relying on the error reporting from Gradle/Maven.
      */
-    @JvmStatic
     fun reportUnexpectedJavacErrors(reporter: CliReporter, tmp: Path): ProcessResult? {
         val errorpath = javacErrorpath(tmp)
         if (!Files.isRegularFile(errorpath)) return null
@@ -91,7 +86,6 @@ object Embedded {
     }
 
     /** Returns the string contents of the scip_java.bzl file on disk. */
-    @JvmStatic
     fun bazelAspectFile(tmpDir: Path): String {
         val tmpFile = copyFile(tmpDir, "scip-java/scip_java.bzl")
         val contents = String(Files.readAllBytes(tmpFile), StandardCharsets.UTF_8)

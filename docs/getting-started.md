@@ -194,7 +194,7 @@ Run `scip-java index --help` to learn more about the available command-line
 options.
 
 ```scala mdoc:passthrough
-com.sourcegraph.scip_java.ScipJava.printHelp(Console.out)
+com.sourcegraph.scip_java.ScipJava.INSTANCE.printHelp(Console.out)
 ```
 
 ## Supported programming languages

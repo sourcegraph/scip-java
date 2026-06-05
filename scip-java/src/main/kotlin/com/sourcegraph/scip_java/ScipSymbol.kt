@@ -5,7 +5,6 @@ import com.sourcegraph.scip_aggregator.SymbolDescriptor
 
 sealed class ScipSymbol {
     companion object {
-        @JvmStatic
         fun parseOrThrowExceptionIfInvalid(scipSymbol: String): ScipSymbol {
             if (scipSymbol.startsWith("local ")) {
                 return LocalScipSymbol(scipSymbol.removePrefix("local "))

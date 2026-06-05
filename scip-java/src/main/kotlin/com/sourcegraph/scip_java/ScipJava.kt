@@ -16,7 +16,6 @@ object ScipJava {
         app.runAndExitIfNonZero(args.toList())
     }
 
-    @JvmStatic
     fun printHelp(out: PrintStream) {
         out.println("```text")
         out.println("$ scip-java index --help")

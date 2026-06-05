@@ -17,13 +17,11 @@ abstract class BuildTool(val name: String, protected val index: IndexCommand) {
     abstract fun generateScip(): Int
 
     companion object {
-        @JvmStatic
         fun all(index: IndexCommand): List<BuildTool> =
             // We don't support Bazel for auto-indexing, but if it's
             // detected, we should at least give a meaningful error message.
             autoOrdered(index) + BazelBuildTool(index)
 
-        @JvmStatic
         fun autoOrdered(index: IndexCommand): List<BuildTool> =
             // The order in this list is important - first detected build
             // tool will be used in `auto` mode. Bazel is missing because
@@ -34,7 +32,6 @@ abstract class BuildTool(val name: String, protected val index: IndexCommand) {
                 GradleBuildTool(index),
             )
 
-        @JvmStatic
         fun allNames(): String =
             all(IndexCommand()).filterNot { it.isHidden }.joinToString(", ") { it.name }
 
@@ -42,7 +39,6 @@ abstract class BuildTool(val name: String, protected val index: IndexCommand) {
          * After the wrapped build tool finished invoking `javac`/`kotlinc`,
          * convert the resulting SCIP targetroot into a SCIP index.
          */
-        @JvmStatic
         fun generateScipFromTargetroot(
             generateScipResult: ProcessResult,
             targetroot: Path,
