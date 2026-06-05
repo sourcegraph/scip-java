@@ -1,6 +1,5 @@
 package com.sourcegraph.scip_java.commands
 
-import com.sourcegraph.io.AbsolutePath
 import com.sourcegraph.scip_aggregator.ConsoleScipAggregatorReporter
 import com.sourcegraph.scip_aggregator.ScipAggregator
 import com.sourcegraph.scip_aggregator.ScipAggregatorOptions
@@ -29,11 +28,11 @@ object AggregateRunner {
         allowEmptyIndex: Boolean,
         allowExportingGlobalSymbolsFromDirectoryEntries: Boolean,
     ): Int {
-        val sourceroot = AbsolutePath.of(app.env.workingDirectory)
+        val sourceroot = app.env.workingDirectory.toAbsolutePath()
         val absoluteTargetroots =
             if (targetroots.isEmpty()) listOf(sourceroot)
-            else targetroots.map { AbsolutePath.of(it, sourceroot) }
-        val absoluteOutput = AbsolutePath.of(output, sourceroot)
+            else targetroots.map { sourceroot.resolve(it) }
+        val absoluteOutput = sourceroot.resolve(output)
 
         val reporter = ConsoleScipAggregatorReporter(app.reporter)
         val packages =

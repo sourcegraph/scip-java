@@ -1,8 +1,8 @@
 package com.sourcegraph.scip_java
 
-import com.sourcegraph.io.AbsolutePath
 import java.io.PrintStream
 import java.nio.file.Path
+import java.nio.file.Paths
 
 /**
  * Captures the per-invocation environment of a scip-java CLI run.
@@ -12,7 +12,7 @@ import java.nio.file.Path
  * directory, and so on.
  */
 data class CliEnvironment(
-    val workingDirectory: Path = AbsolutePath.systemWorkingDirectory(),
+    val workingDirectory: Path = Paths.get("").toAbsolutePath(),
     val environmentVariables: Map<String, String> = System.getenv(),
     val standardOutput: PrintStream = System.out,
     val standardError: PrintStream = System.err,

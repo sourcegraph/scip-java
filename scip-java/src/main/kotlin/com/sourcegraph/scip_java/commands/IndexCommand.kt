@@ -10,7 +10,6 @@ import com.github.ajalt.clikt.parameters.options.flag
 import com.github.ajalt.clikt.parameters.options.multiple
 import com.github.ajalt.clikt.parameters.options.option
 import com.github.ajalt.clikt.parameters.types.path
-import com.sourcegraph.io.AbsolutePath
 import com.sourcegraph.scip_java.ScipJavaApp
 import com.sourcegraph.scip_java.buildtools.BuildTool
 import com.sourcegraph.scip_java.buildtools.ScipBuildTool
@@ -173,13 +172,13 @@ class IndexCommand : CliktCommand(name = "index") {
     )
 
     val workingDirectory: Path
-        get() = AbsolutePath.of(app.env.workingDirectory)
+        get() = app.env.workingDirectory.toAbsolutePath()
 
     fun finalTargetroot(default: Path): Path =
-        AbsolutePath.of(targetroot ?: default, workingDirectory)
+        workingDirectory.resolve(targetroot ?: default)
 
     val finalOutput: Path
-        get() = AbsolutePath.of(output, workingDirectory)
+        get() = workingDirectory.resolve(output)
 
     fun finalBuildCommand(default: List<String>): List<String> =
         if (buildCommand.isEmpty()) default else buildCommand

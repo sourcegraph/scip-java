@@ -1,6 +1,5 @@
 package com.sourcegraph.scip_java.buildtools
 
-import com.sourcegraph.io.AbsolutePath
 import com.sourcegraph.scip_java.Embedded
 import com.sourcegraph.scip_java.commands.IndexCommand
 import java.io.File
@@ -188,7 +187,7 @@ To narrow the set of targets to index or pass additional flags to Bazel, include
      * aspect/scip_java.bzl file inside the Bazel workspace.
      */
     private fun generateAspectFile(): String? {
-        val aspectPath = AbsolutePath.of(index.bazelAspect, index.workingDirectory)
+        val aspectPath = index.workingDirectory.resolve(index.bazelAspect)
         val aspectContents = TemporaryFiles.withDirectory(index) { tmp -> Embedded.bazelAspectFile(tmp) }
         if (index.bazelOverwriteAspectFile || !Files.exists(aspectPath)) {
             Files.deleteIfExists(aspectPath)

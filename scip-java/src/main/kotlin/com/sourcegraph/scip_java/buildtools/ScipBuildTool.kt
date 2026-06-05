@@ -1,6 +1,5 @@
 package com.sourcegraph.scip_java.buildtools
 
-import com.sourcegraph.io.AbsolutePath
 import com.sourcegraph.io.DeleteVisitor
 import com.sourcegraph.scip_java.BuildInfo
 import com.sourcegraph.scip_java.Embedded
@@ -178,7 +177,7 @@ class ScipBuildTool(index: IndexCommand) : BuildTool("SCIP", index) {
         val classpath =
             config.classpath
                 .joinToString(File.pathSeparator) {
-                    AbsolutePath.of(Paths.get(it), index.workingDirectory).toString()
+                    index.workingDirectory.resolve(it).toString()
                 }
 
         val kargs = K2JVMCompilerArguments()
@@ -254,7 +253,7 @@ class ScipBuildTool(index: IndexCommand) : BuildTool("SCIP", index) {
         val classpath = mutableListOf<String>()
         classpath += scipJar.toString()
         classpath += config.classpath.map {
-            AbsolutePath.of(Paths.get(it), index.workingDirectory).toString()
+            index.workingDirectory.resolve(it).toString()
         }
         val argsfile = targetroot.resolve("javacopts.txt")
         val arguments = mutableListOf<String>()
@@ -382,7 +381,7 @@ class ScipBuildTool(index: IndexCommand) : BuildTool("SCIP", index) {
     private fun collectAllSourceFiles(config: Config, dir: Path): List<Path> {
         return if (config.sourceFiles.isNotEmpty()) {
             config.sourceFiles.flatMap { relativePath ->
-                val path = AbsolutePath.of(Paths.get(relativePath), dir)
+                val path = dir.resolve(relativePath)
                 when {
                     Files.isRegularFile(path) && allPatterns.matches(path) -> listOf(path)
                     Files.isDirectory(path) -> collectAllSourceFiles(path)
@@ -401,11 +400,11 @@ class ScipBuildTool(index: IndexCommand) : BuildTool("SCIP", index) {
      * or header_NAME.jar exists.
      */
     private fun guessBazelJar(pathString: String, workingDirectory: Path): Path? {
-        var path = AbsolutePath.of(Paths.get(pathString), workingDirectory)
+        var path = workingDirectory.resolve(pathString)
         if (Files.isRegularFile(path)) return path
 
         if (!pathString.startsWith("bazel-bin") && !pathString.startsWith("bazel-out")) {
-            path = AbsolutePath.of(Paths.get("bazel-bin", pathString), workingDirectory)
+            path = workingDirectory.resolve(Paths.get("bazel-bin", pathString))
             if (Files.isRegularFile(path)) return path
         }
 
