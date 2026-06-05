@@ -15,7 +15,6 @@ import com.sourcegraph.scip_java.buildtools.ProcessRunner
 import com.sourcegraph.scip_java.commands.IndexCommand
 import com.sourcegraph.scip_java.commands.AggregateCommand
 import com.sourcegraph.scip_java.commands.SnapshotCommand
-import java.io.PrintStream
 import java.nio.file.Paths
 
 /**
@@ -40,12 +39,6 @@ class ScipJavaApp {
 
     val reporter: CliReporter
         get() = currentReporter
-
-    val out: PrintStream
-        get() = env.standardOutput
-
-    val err: PrintStream
-        get() = env.standardError
 
     fun info(message: String) = reporter.info(message)
 

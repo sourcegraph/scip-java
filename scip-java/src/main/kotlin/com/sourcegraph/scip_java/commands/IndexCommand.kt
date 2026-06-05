@@ -35,8 +35,8 @@ class IndexCommand : CliktCommand(name = "index") {
 
     /**
      * Resolved from the clikt context (set by the root command) at run-time.
-     * Build-tool helpers that construct an `IndexCommand` outside of a clikt
-     * parse flow can assign [app] directly via [withApp].
+     * When an `IndexCommand` is constructed outside of a clikt parse flow
+     * (e.g. to enumerate build-tool names), [app] falls back to a fresh app.
      */
     private val sharedApp by requireObject<ScipJavaApp>()
     private var explicitApp: ScipJavaApp? = null
@@ -48,11 +48,6 @@ class IndexCommand : CliktCommand(name = "index") {
             // that only touch `.name` / `.isHidden` don't crash.
             ScipJavaApp().also { explicitApp = it }
         }
-
-    fun withApp(app: ScipJavaApp): IndexCommand {
-        explicitApp = app
-        return this
-    }
 
     val output: Path by option(
         "--output",

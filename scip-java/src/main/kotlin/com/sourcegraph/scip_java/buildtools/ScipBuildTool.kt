@@ -13,7 +13,6 @@ import java.nio.file.Path
 import java.nio.file.Paths
 import java.nio.file.SimpleFileVisitor
 import java.nio.file.attribute.BasicFileAttributes
-import java.util.LinkedList
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonObject
@@ -84,7 +83,7 @@ class ScipBuildTool(index: IndexCommand) : BuildTool("SCIP", index) {
         return try {
             compile(config)
         } catch (e: Exception) {
-            e.printStackTrace(index.app.out)
+            e.printStackTrace(index.app.env.standardOutput)
             ProcessResult(1)
         }
     }
@@ -117,7 +116,6 @@ class ScipBuildTool(index: IndexCommand) : BuildTool("SCIP", index) {
             return ProcessResult(1)
         }
         val tmp = Files.createTempDirectory("scip-java")
-        Files.createDirectories(tmp)
         Files.createDirectories(targetroot)
         val sourceroot = index.workingDirectory
         if (!Files.isDirectory(sourceroot)) throw NoSuchFileException(sourceroot.toString())
@@ -208,11 +206,13 @@ class ScipBuildTool(index: IndexCommand) : BuildTool("SCIP", index) {
         val exit =
             K2JVMCompiler().exec(
                 object : MessageCollector {
-                    private val errors = LinkedList<String>()
+                    private var sawError = false
 
-                    override fun clear() = errors.clear()
+                    override fun clear() {
+                        sawError = false
+                    }
 
-                    override fun hasErrors(): Boolean = errors.isNotEmpty()
+                    override fun hasErrors(): Boolean = sawError
 
                     override fun report(
                         severity: CompilerMessageSeverity,
@@ -234,7 +234,7 @@ class ScipBuildTool(index: IndexCommand) : BuildTool("SCIP", index) {
                         // messages during normal compilation; pushing those onto
                         // `errors` would cause hasErrors to return true.
                         if (severity.isError) {
-                            errors.push(rendered)
+                            sawError = true
                         }
                     }
                 },
@@ -262,10 +262,8 @@ class ScipBuildTool(index: IndexCommand) : BuildTool("SCIP", index) {
         arguments += "-d"; arguments += generatedDir(tmp, "d")
         arguments += "-s"; arguments += generatedDir(tmp, "s")
         arguments += "-h"; arguments += generatedDir(tmp, "h")
-        if (classpath.isNotEmpty()) {
-            arguments += "-classpath"
-            arguments += classpath.joinToString(File.pathSeparator)
-        }
+        arguments += "-classpath"
+        arguments += classpath.joinToString(File.pathSeparator)
         arguments += "-Xplugin:scip -targetroot:$targetroot -sourceroot:$sourceroot"
         if (config.processorpath.isNotEmpty()) {
             arguments += "-processorpath"
@@ -427,12 +425,10 @@ class ScipBuildTool(index: IndexCommand) : BuildTool("SCIP", index) {
         val dependencies: List<String> = emptyList(),
         val sourceFiles: List<String> = emptyList(),
         val classpath: List<String> = emptyList(),
-        val bootclasspath: List<String> = emptyList(),
         val processorpath: List<String> = emptyList(),
         val processors: List<String> = emptyList(),
         val javacOptions: List<String> = emptyList(),
         val jvmOptions: List<String> = emptyList(),
-        val jvm: String = "17",
         val kind: String = "",
     ) {
         companion object {
@@ -444,12 +440,10 @@ class ScipBuildTool(index: IndexCommand) : BuildTool("SCIP", index) {
                     dependencies = obj.stringList("dependencies"),
                     sourceFiles = obj.stringList("sourceFiles"),
                     classpath = obj.stringList("classpath"),
-                    bootclasspath = obj.stringList("bootclasspath"),
                     processorpath = obj.stringList("processorpath"),
                     processors = obj.stringList("processors"),
                     javacOptions = obj.stringList("javacOptions"),
                     jvmOptions = obj.stringList("jvmOptions"),
-                    jvm = obj["jvm"]?.stringOrNull() ?: defaults.jvm,
                     kind = obj["kind"]?.stringOrNull() ?: defaults.kind,
                 )
             }

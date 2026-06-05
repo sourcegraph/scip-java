@@ -23,7 +23,4 @@ data class CliEnvironment(
     fun withStandardOutput(out: PrintStream): CliEnvironment = copy(standardOutput = out)
 
     fun withStandardError(err: PrintStream): CliEnvironment = copy(standardError = err)
-
-    fun withEnvironmentVariables(vars: Map<String, String>): CliEnvironment =
-        copy(environmentVariables = vars)
 }

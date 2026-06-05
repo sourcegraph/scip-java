@@ -17,7 +17,6 @@ import org.w3c.dom.Node
  */
 data class ClasspathEntry(
     val entry: Path,
-    val sources: Path?,
     val groupId: String,
     val artifactId: String,
     val version: String,
@@ -67,7 +66,6 @@ data class ClasspathEntry(
                     val (groupId, artifactId, version, entry) = parts
                     ClasspathEntry(
                         entry = Paths.get(entry),
-                        sources = null,
                         groupId = groupId,
                         artifactId = artifactId,
                         version = version,
@@ -105,7 +103,7 @@ data class ClasspathEntry(
             currentDir: Path? = classesDirectory.parent,
         ): ClasspathEntry? {
             if (currentDir == null || !currentDir.startsWith(sourceroot)) return null
-            val pomEntry = fromPomXml(currentDir.resolve("pom.xml"), classesDirectory, null)
+            val pomEntry = fromPomXml(currentDir.resolve("pom.xml"), classesDirectory)
             if (pomEntry != null) return pomEntry
             return fromClassesDirectory(classesDirectory, sourceroot, currentDir.parent)
         }
@@ -118,12 +116,10 @@ data class ClasspathEntry(
             val fileName = jar.fileName?.toString() ?: return null
             val base = fileName.removeSuffix(".jar")
             val pom = jar.resolveSibling("$base.pom")
-            val candidateSources = jar.resolveSibling("$base.sources")
-            val sources = if (Files.isRegularFile(candidateSources)) candidateSources else null
-            return fromPomXml(pom, jar, sources)
+            return fromPomXml(pom, jar)
         }
 
-        private fun fromPomXml(pom: Path, classpathEntry: Path, sources: Path?): ClasspathEntry? {
+        private fun fromPomXml(pom: Path, classpathEntry: Path): ClasspathEntry? {
             if (!Files.isRegularFile(pom)) return null
             val factory = DocumentBuilderFactory.newInstance().apply {
                 isNamespaceAware = false
@@ -148,7 +144,6 @@ data class ClasspathEntry(
 
             return ClasspathEntry(
                 entry = classpathEntry,
-                sources = sources,
                 groupId = textOf(root, "groupId"),
                 artifactId = textOf(root, "artifactId"),
                 version = textOf(root, "version"),
