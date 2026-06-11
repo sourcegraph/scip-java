@@ -505,7 +505,7 @@ lazy val minimizedSettings = List[Def.Setting[_]](
   (publishLocal / skip) := true,
   (run / fork) := true,
   (Compile / unmanagedSourceDirectories) += minimizedSourceDirectory,
-  libraryDependencies ++= List("org.projectlombok" % "lombok" % "1.18.22"),
+  libraryDependencies ++= List("org.projectlombok" % "lombok" % "1.18.46"),
   // Fork javac so it receives real file paths instead of sbt's `vf://` virtual-file URIs
   // (see the comment on `scipKotlincMinimized` for the long story).
   javaHome := Some(file(System.getProperty("java.home"))),
