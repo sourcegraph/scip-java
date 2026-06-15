@@ -1,13 +1,15 @@
 package tests
 
+import java.io.IOException
 import java.nio.charset.StandardCharsets
+import java.nio.file.FileVisitResult
 import java.nio.file.Files
 import java.nio.file.Path
+import java.nio.file.SimpleFileVisitor
+import java.nio.file.attribute.BasicFileAttributes
 import java.util.concurrent.ConcurrentLinkedDeque
 
 import scala.jdk.CollectionConverters._
-
-import com.sourcegraph.io.DeleteVisitor
 
 class SaveSnapshotHandler extends SnapshotHandler {
   private val writtenTests = new ConcurrentLinkedDeque[Path]()
@@ -28,7 +30,28 @@ class SaveSnapshotHandler extends SnapshotHandler {
     val isWritten = writtenTests.asScala.toSet
     Files.walkFileTree(
       context.expectDirectory,
-      new DeleteVisitor(deleteFile = file => !isWritten.contains(file))
+      new SimpleFileVisitor[Path] {
+        override def visitFile(
+            file: Path,
+            attrs: BasicFileAttributes
+        ): FileVisitResult = {
+          if (!isWritten.contains(file))
+            Files.deleteIfExists(file)
+          FileVisitResult.CONTINUE
+        }
+        override def postVisitDirectory(
+            dir: Path,
+            exc: IOException
+        ): FileVisitResult = {
+          val entries = Files.list(dir)
+          val isEmpty =
+            try !entries.iterator().hasNext()
+            finally entries.close()
+          if (isEmpty)
+            Files.deleteIfExists(dir)
+          FileVisitResult.CONTINUE
+        }
+      }
     )
   }
 
