@@ -14,6 +14,10 @@ import java.util.concurrent.atomic.AtomicInteger
 class CliReporter(private val env: CliEnvironment) : ScipAggregatorReporter() {
     private val errorCount = AtomicInteger()
 
+    private var totalShards = 0
+    private val processedShards = AtomicInteger()
+    private val lastReportedDecile = AtomicInteger()
+
     fun info(message: String) {
         env.standardOutput.println(message)
     }
@@ -44,11 +48,40 @@ class CliReporter(private val env: CliEnvironment) : ScipAggregatorReporter() {
         e.printStackTrace(env.standardError)
     }
 
+    override fun startProcessing(taskSize: Int) {
+        totalShards = taskSize
+        processedShards.set(0)
+        lastReportedDecile.set(0)
+        if (taskSize >= PROGRESS_THRESHOLD) {
+            env.standardError.println("Aggregating $taskSize SCIP shards...")
+        }
+    }
+
+    override fun processedOneItem() {
+        val total = totalShards
+        if (total < PROGRESS_THRESHOLD) return
+        val current = processedShards.incrementAndGet()
+        val decile = current * 10 / total
+        val previous = lastReportedDecile.get()
+        if (decile > previous && lastReportedDecile.compareAndSet(previous, decile)) {
+            env.standardError.println(
+                "Aggregated $current/$total SCIP shards (${current * 100 / total}%)"
+            )
+        }
+    }
+
     override fun hasErrors(): Boolean = errorCount.get() > 0
 
     fun exitCode(): Int = if (hasErrors()) 1 else 0
 
     fun reset() {
         errorCount.set(0)
+        totalShards = 0
+        processedShards.set(0)
+        lastReportedDecile.set(0)
+    }
+
+    private companion object {
+        const val PROGRESS_THRESHOLD = 100
     }
 }

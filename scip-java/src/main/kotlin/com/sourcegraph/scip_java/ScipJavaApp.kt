@@ -10,6 +10,7 @@ import com.github.ajalt.clikt.core.UsageError
 import com.github.ajalt.clikt.core.findOrSetObject
 import com.github.ajalt.clikt.core.parse
 import com.github.ajalt.clikt.core.subcommands
+import com.github.ajalt.clikt.parameters.options.versionOption
 import com.sourcegraph.scip_java.buildtools.ProcessResult
 import com.sourcegraph.scip_java.buildtools.ProcessRunner
 import com.sourcegraph.scip_java.commands.IndexCommand
@@ -69,6 +70,7 @@ class ScipJavaApp {
         reporter.reset()
         val processedArgs = applyGlobalCwd(rewriteNestedOptions(args))
         val root = RootCommand(this)
+        root.versionOption(BuildInfo.version, names = setOf("--version", "-v"))
         root.subcommands(IndexCommand(), AggregateCommand(), SnapshotCommand())
         return try {
             root.parse(processedArgs)
