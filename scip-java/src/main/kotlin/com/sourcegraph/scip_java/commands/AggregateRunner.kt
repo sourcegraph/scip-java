@@ -1,6 +1,5 @@
 package com.sourcegraph.scip_java.commands
 
-import com.sourcegraph.scip_aggregator.ConsoleScipAggregatorReporter
 import com.sourcegraph.scip_aggregator.ScipAggregator
 import com.sourcegraph.scip_aggregator.ScipAggregatorOptions
 import com.sourcegraph.scip_java.BuildInfo
@@ -34,7 +33,6 @@ object AggregateRunner {
             else targetroots.map { sourceroot.resolve(it) }
         val absoluteOutput = sourceroot.resolve(output)
 
-        val reporter = ConsoleScipAggregatorReporter(app.reporter)
         val packages =
             absoluteTargetroots
                 .asSequence()
@@ -47,7 +45,7 @@ object AggregateRunner {
                 absoluteTargetroots,
                 absoluteOutput,
                 sourceroot,
-                reporter,
+                app.reporter,
                 ToolInfo.newBuilder()
                     .setName("scip-java")
                     .setVersion(BuildInfo.version)

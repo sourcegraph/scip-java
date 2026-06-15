@@ -1,5 +1,7 @@
 package com.sourcegraph.scip_java
 
+import com.sourcegraph.scip_aggregator.ScipAggregatorReporter
+import java.nio.file.NoSuchFileException
 import java.util.concurrent.atomic.AtomicInteger
 
 /**
@@ -9,7 +11,7 @@ import java.util.concurrent.atomic.AtomicInteger
  * `info` is written to stdout to match the previous behaviour of the
  * default moped reporter; `warning` and `error` go to stderr.
  */
-class CliReporter(private val env: CliEnvironment) {
+class CliReporter(private val env: CliEnvironment) : ScipAggregatorReporter() {
     private val errorCount = AtomicInteger()
 
     fun info(message: String) {
@@ -20,7 +22,7 @@ class CliReporter(private val env: CliEnvironment) {
         env.standardError.println("warning: $message")
     }
 
-    fun error(message: String) {
+    override fun error(message: String) {
         errorCount.incrementAndGet()
         env.standardError.println("error: $message")
     }
@@ -33,12 +35,16 @@ class CliReporter(private val env: CliEnvironment) {
         // intentional no-op
     }
 
-    fun error(e: Throwable) {
+    override fun error(e: Throwable) {
+        if (e is NoSuchFileException) {
+            error("no such file: ${e.message}")
+            return
+        }
         errorCount.incrementAndGet()
         e.printStackTrace(env.standardError)
     }
 
-    fun hasErrors(): Boolean = errorCount.get() > 0
+    override fun hasErrors(): Boolean = errorCount.get() > 0
 
     fun exitCode(): Int = if (hasErrors()) 1 else 0
 
