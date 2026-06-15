@@ -56,7 +56,10 @@ class SnapshotCommand : CliktCommand(name = "snapshot") {
         Files.createDirectories(output)
         var foundScipFile = false
         for (root in targetroot) {
-            if (!Files.exists(root)) continue
+            if (!Files.exists(root)) {
+                app.warning("ignoring target root that does not exist: $root")
+                continue
+            }
             Files.walkFileTree(
                 root,
                 object : SimpleFileVisitor<Path>() {

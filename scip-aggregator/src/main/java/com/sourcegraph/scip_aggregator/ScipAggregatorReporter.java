@@ -13,6 +13,8 @@ public abstract class ScipAggregatorReporter {
     error(new MessageOnlyException(message));
   }
 
+  public void warning(String message) {}
+
   public void startProcessing(int taskSize) {}
 
   public void processedOneItem() {}

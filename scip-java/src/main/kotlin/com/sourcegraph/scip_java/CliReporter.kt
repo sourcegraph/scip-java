@@ -22,7 +22,7 @@ class CliReporter(private val env: CliEnvironment) : ScipAggregatorReporter() {
         env.standardOutput.println(message)
     }
 
-    fun warning(message: String) {
+    override fun warning(message: String) {
         env.standardError.println("warning: $message")
     }
 
