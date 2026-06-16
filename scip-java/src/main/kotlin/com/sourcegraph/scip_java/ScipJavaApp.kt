@@ -31,8 +31,7 @@ class ScipJavaApp {
     var env: CliEnvironment = CliEnvironment()
         set(value) {
             field = value
-            // Rebind the reporter so subsequent writes hit the new
-            // PrintStreams. Test harnesses swap [env] between invocations.
+            // Rebind the reporter so writes hit the new streams; tests swap [env] between runs.
             currentReporter = CliReporter(value)
         }
 
@@ -74,8 +73,7 @@ class ScipJavaApp {
         root.subcommands(IndexCommand(), AggregateCommand(), SnapshotCommand())
         return try {
             root.parse(processedArgs)
-            // Commands signal failure only by throwing (ProgramResult/CliktError),
-            // so reaching here means a clean exit.
+            // Commands signal failure only by throwing; reaching here is a clean exit.
             0
         } catch (e: PrintHelpMessage) {
             env.standardOutput.println(root.getFormattedHelp(e))
@@ -101,12 +99,10 @@ class ScipJavaApp {
     }
 
     /**
-     * The previous moped CLI accepted nested subcommand options written as
-     * `--aggregate.<flag>` on `scip-java index` (e.g. the Bazel aspect
-     * passes `--aggregate.allow-empty-index`). clikt forbids `.` in
-     * option names, so we rewrite the dotted prefix to a `-` separator to match
-     * the options declared on [IndexCommand]. Tokens after a `--` separator are
-     * left untouched.
+     * The Bazel aspect passes nested options as `--aggregate.<flag>` on
+     * `scip-java index` (e.g. `--aggregate.allow-empty-index`). clikt forbids
+     * `.` in option names, so we rewrite the dotted prefix to `-` to match the
+     * options declared on [IndexCommand]. Tokens after `--` are left untouched.
      */
     private fun rewriteNestedOptions(args: List<String>): List<String> {
         var sawDoubleDash = false
@@ -125,12 +121,10 @@ class ScipJavaApp {
     }
 
     /**
-     * `--cwd` is a global flag that, unlike a regular clikt parent option, may
-     * appear in any position (including after the subcommand name), mirroring
-     * the previous moped-based CLI where `--cwd` was an application-level
-     * parameter. We extract it here before handing the remaining arguments to
-     * clikt, and apply it to the working directory. Tokens after a `--`
-     * separator are passed through untouched so a trailing build command can
+     * `--cwd` may appear in any position (including after the subcommand name),
+     * unlike a regular clikt parent option, so we extract it here before handing
+     * the remaining arguments to clikt and apply it to the working directory.
+     * Tokens after `--` pass through untouched so a trailing build command can
      * legitimately contain `--cwd`.
      */
     private fun applyGlobalCwd(args: List<String>): List<String> {

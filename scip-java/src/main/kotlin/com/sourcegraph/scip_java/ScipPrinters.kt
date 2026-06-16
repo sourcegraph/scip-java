@@ -97,9 +97,8 @@ object ScipPrinters {
     )
 
     /**
-     * Element-wise integer-list comparator for `Occurrence.rangeList`,
-     * matching Scala's `seqOrdering` semantics. Falls back to `symbol`
-     * for a tie-breaker.
+     * Element-wise integer-list comparator for `Occurrence.rangeList`, with
+     * `symbol` as a tie-breaker.
      */
     private val occurrenceOrdering: Comparator<Occurrence> =
         Comparator { a, b ->
@@ -122,12 +121,11 @@ object ScipPrinters {
     )
 
     /**
-     * Faithful port of `moped.reporters.Position.range` + `RangePosition`:
-     * the SCIP `(line, column)` pair is converted to a flat character offset
-     * and back. The round-trip matters for occurrences whose end column
-     * overflows its start line (e.g. Kotlin `companion object` definitions),
-     * where the overflow "carries" the end onto a later line, turning a raw
-     * single-line range into a rendered multi-line range.
+     * Converts the SCIP `(line, column)` pair to a flat character offset and
+     * back. The round-trip matters for occurrences whose end column overflows
+     * its start line (e.g. Kotlin `companion object` definitions), where the
+     * overflow "carries" the end onto a later line, turning a raw single-line
+     * range into a rendered multi-line range.
      */
     private fun positionOf(input: SourceInput, occ: Occurrence): OccurrencePos {
         val rawStartLine: Int
@@ -149,7 +147,7 @@ object ScipPrinters {
             }
             else -> throw IllegalArgumentException("Invalid range: $occ")
         }
-        // moped's Position.range returns NoPosition (all -1) for empty input.
+        // Empty input has no position (all -1).
         if (input.isEmpty) return OccurrencePos(-1, -1, -1, -1)
         val start = input.lineToOffset(rawStartLine) + rawStartColumn
         val end = input.lineToOffset(rawEndLine) + rawEndColumn
@@ -189,15 +187,14 @@ object ScipPrinters {
                 " ".repeat(pos.startColumn + sourceIndent.length - commentSyntax.length)
             else ""
         val caretCharacter = if (syntheticDefinition != null) "_" else "^"
-        // Scala's `"x" * n` returns "" for n <= 0; Kotlin's `String.repeat`
-        // throws on a negative argument. Clamp to 0 to preserve behaviour.
+        // String.repeat throws on a negative argument; clamp to 0.
         val carets =
             if (pos.startColumn == 1) caretCharacter.repeat(max(0, width - 1))
             else caretCharacter.repeat(max(0, width))
 
         val symbol = syntheticDefinition?.symbol ?: occ.symbol
 
-        // Fail the tests if the index contains symbols that don't parse as valid SCIP symbols.
+        // Fail the tests on symbols that aren't valid SCIP.
         ScipSymbol.parseOrThrowExceptionIfInvalid(symbol)
 
         out.append(commentSyntax)
@@ -257,9 +254,8 @@ object ScipPrinters {
     }
 
     /**
-     * Mirrors Scala's `linesWithSeparators`: each yielded element keeps its
-     * trailing line separator (if any) so that `\r\n`/`\n` line endings round-
-     * trip exactly when reassembled.
+     * Splits text into lines, keeping each line's trailing separator (if any)
+     * so `\r\n`/`\n` endings round-trip exactly when reassembled.
      */
     private fun linesWithSeparators(text: String): List<String> {
         val result = mutableListOf<String>()
@@ -277,11 +273,7 @@ object ScipPrinters {
         return result
     }
 
-    /**
-     * Port of `moped.reporters.Input`'s offset/line bookkeeping. Only the
-     * pieces needed by [positionOf] are reproduced ([lineToOffset],
-     * [offsetToLine], [isEmpty]).
-     */
+    /** Offset/line bookkeeping for [positionOf]. */
     private class SourceInput(text: String) {
         private val chars: CharArray = text.toCharArray()
 

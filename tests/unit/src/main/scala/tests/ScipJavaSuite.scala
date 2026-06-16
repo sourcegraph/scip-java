@@ -19,10 +19,6 @@ import munit.internal.console.AnsiColors
  * Test base class that boots a [[ScipJavaApp]] with stdout/stderr redirected
  * into an in-memory buffer (exposed via [[ApplicationFixture#capturedOutput]])
  * and a fresh per-test working/cache directory layout.
- *
- * Mirrors the surface area of `moped.testkit.MopedSuite` that the test suites
- * in this repository actually use, without requiring the Scala-only moped
- * runtime.
  */
 abstract class ScipJavaSuite(applicationToTest: ScipJavaApp) extends FunSuite {
 
@@ -58,10 +54,9 @@ abstract class ScipJavaSuite(applicationToTest: ScipJavaApp) extends FunSuite {
         StandardCharsets.UTF_8.name()
       )
 
-    // NOTE: every invocation gets its own freshly-instrumented [[ScipJavaApp]]
-    // (all of them writing into the shared `out` buffer of this fixture) so
-    // that suites running in parallel never clobber each other's redirected
-    // stdout/stderr. This mirrors `moped.testkit`'s per-invocation app model.
+    // Every invocation gets its own [[ScipJavaApp]] (all writing into this
+    // fixture's shared `out` buffer) so suites running in parallel never
+    // clobber each other's redirected stdout/stderr.
     def apply(): ScipJavaApp = {
       val app = new ScipJavaApp()
       app.setEnv(
@@ -75,7 +70,6 @@ abstract class ScipJavaSuite(applicationToTest: ScipJavaApp) extends FunSuite {
       app
     }
 
-    /** Run the CLI with the given Scala-list arguments. */
     def run(args: List[String]): Int = apply().run(args.asJava)
 
     def reset(): Unit = out.reset()

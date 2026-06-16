@@ -21,10 +21,6 @@ import java.nio.file.Paths
  * `scip-java index`: detects a build tool in the current working directory
  * and shells out to it (Maven/Gradle/Bazel/scip-java.json) to produce a
  * SCIP index in `index.scip`.
- *
- * The public API surface (in particular all the fields read by the
- * per-build-tool implementations) mirrors the old Scala `IndexCommand`
- * so the per-build-tool logic ports straight over.
  */
 class IndexCommand : CliktCommand(name = "index") {
 
@@ -131,13 +127,10 @@ class IndexCommand : CliktCommand(name = "index") {
         help = "Optional. The build command to use to compile all sources. Defaults to a build-specific command.",
     ).multiple()
 
-    // Forwarded options for the embedded `aggregate` step. The previous
-    // moped CLI exposed the nested `aggregate` command's flags on
-    // `scip-java index` using the `--aggregate.<flag>` naming (e.g. the
-    // Bazel aspect passes `--aggregate.allow-empty-index`). clikt forbids
-    // `.` in option names, so these are registered with a `-` separator and the
-    // dotted form is rewritten to it during argument preprocessing
-    // (ScipJavaApp.run). Consumed by BuildTool.generateScipFromTargetroot.
+    // Forwarded options for the embedded `aggregate` step. The Bazel aspect
+    // passes these as `--aggregate.<flag>`; clikt forbids `.` in option names,
+    // so they're registered with `-` and the dotted form is rewritten during
+    // preprocessing (ScipJavaApp.run). Consumed by BuildTool.generateScipFromTargetroot.
     val aggregateParallel: Boolean by option(
         "--aggregate-parallel",
         "--aggregate-no-parallel",

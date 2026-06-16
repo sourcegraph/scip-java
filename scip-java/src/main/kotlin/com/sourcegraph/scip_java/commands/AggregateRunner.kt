@@ -9,13 +9,9 @@ import java.nio.file.Path
 import org.scip_code.scip.ToolInfo
 
 /**
- * Pure logic backing the `aggregate` command.
- *
- * `IndexCommand` shells out to a build tool that drops SCIP shards
- * under a targetroot directory, then calls into this runner to aggregate
- * those shards into a single SCIP index file. The separation makes it
- * possible to invoke the runner directly from in-process callers
- * (build tools) without going through clikt.
+ * Logic backing the `aggregate` command, factored out so build tools can
+ * aggregate their targetroot shards into a single SCIP index in-process
+ * without going through clikt.
  */
 object AggregateRunner {
     fun run(
@@ -57,10 +53,8 @@ object AggregateRunner {
                 allowExportingGlobalSymbolsFromDirectoryEntries,
             )
         ScipAggregator.run(options)
-        // The single seam where the reporter's accumulated error state becomes an
-        // exit code: the scip-aggregator library reports errors (and checks
-        // hasErrors() internally) rather than throwing, so the returned code is
-        // turned into a ProgramResult by the calling command.
+        // The one seam where accumulated reporter errors become an exit code:
+        // the scip-aggregator library reports errors instead of throwing.
         if (!app.reporter.hasErrors()) {
             app.info(options.output.toString())
         }

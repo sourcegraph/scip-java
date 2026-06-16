@@ -25,11 +25,9 @@ class GradleBuildTool(index: IndexCommand) : BuildTool("Gradle", index) {
 
     /**
      * Diagnose the case where Gradle finished successfully but our SCIP
-     * compiler plugin never produced any `.scip` shards. This used to be
-     * silently rescued by a `-javaagent` fallback; now it surfaces as a
-     * clear error pointing at the two known causes. Returns a non-zero exit
-     * code when it reports the error so the failure propagates as a return
-     * value rather than only via the reporter's accumulated error state.
+     * compiler plugin never produced any `.scip` shards, surfacing a clear
+     * error pointing at the two known causes. Returns a non-zero exit code
+     * when it reports the error so the failure propagates as a return value.
      */
     private fun reportMissingScipOutput(): Int {
         if (containsFileWithSuffix(targetroot(), ".scip")) return 0

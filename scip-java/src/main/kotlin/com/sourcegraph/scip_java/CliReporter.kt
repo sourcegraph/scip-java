@@ -5,11 +5,8 @@ import java.nio.file.NoSuchFileException
 import java.util.concurrent.atomic.AtomicInteger
 
 /**
- * Minimal reporter that mirrors the moped `ConsoleReporter` API surface that
- * scip-java actually uses (info/warning/error/debug/hasErrors/exitCode).
- *
- * `info` is written to stdout to match the previous behaviour of the
- * default moped reporter; `warning` and `error` go to stderr.
+ * Console reporter: `info` goes to stdout, `warning`/`error` to stderr.
+ * Doubles as the [ScipAggregatorReporter] consumed by the aggregator.
  */
 class CliReporter(private val env: CliEnvironment) : ScipAggregatorReporter() {
     private val errorCount = AtomicInteger()
@@ -31,13 +28,9 @@ class CliReporter(private val env: CliEnvironment) : ScipAggregatorReporter() {
         env.standardError.println("error: $message")
     }
 
-    /**
-     * Debug messages are dropped to avoid leaking noise into snapshot tests.
-     */
+    /** Dropped to avoid leaking noise into snapshot tests. */
     @Suppress("UNUSED_PARAMETER")
-    fun debug(message: String) {
-        // intentional no-op
-    }
+    fun debug(message: String) {}
 
     override fun error(e: Throwable) {
         if (e is NoSuchFileException) {

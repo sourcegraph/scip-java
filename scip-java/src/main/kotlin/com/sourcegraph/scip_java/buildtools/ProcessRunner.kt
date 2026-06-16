@@ -7,15 +7,11 @@ import java.nio.file.Path
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 
-/** Outcome of running an external process. */
 data class ProcessResult(val exitCode: Int)
 
 /**
  * Tiny `ProcessBuilder` wrapper that streams stdout/stderr line-by-line to
- * caller-provided sinks.
- *
- * Replaces the os-lib `os.proc(...).call(...)` calls from the previous Scala
- * implementation. Stdout and stderr are read on dedicated threads so the
+ * caller-provided sinks. Each stream is drained on its own thread so the
  * spawned process cannot deadlock on a full pipe.
  */
 object ProcessRunner {

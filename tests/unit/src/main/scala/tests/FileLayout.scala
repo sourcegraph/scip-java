@@ -11,10 +11,7 @@ import java.nio.file.attribute.BasicFileAttributes
 
 import scala.collection.mutable
 
-/**
- * Tiny port of `moped.testkit.FileLayout` so the tests no longer have a
- * test-time dependency on the moped runtime.
- */
+/** Converts between a text "file layout" description and real files on disk. */
 object FileLayout {
 
   def asString(
