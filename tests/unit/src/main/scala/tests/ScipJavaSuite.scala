@@ -69,8 +69,7 @@ abstract class ScipJavaSuite(applicationToTest: ScipJavaApp) extends FunSuite {
           workingDirectory,
           environmentVariables.asJava,
           ps,
-          ps,
-          /* isProgressBarEnabled = */ false
+          ps
         )
       )
       app

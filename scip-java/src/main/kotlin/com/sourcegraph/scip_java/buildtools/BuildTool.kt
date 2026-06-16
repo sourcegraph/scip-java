@@ -45,7 +45,6 @@ abstract class BuildTool(val name: String, protected val index: IndexCommand) {
             index: IndexCommand,
         ): Int {
             if (!Files.isDirectory(targetroot)) return generateScipResult.exitCode
-            if (index.app.reporter.hasErrors()) return index.app.reporter.exitCode()
             if (generateScipResult.exitCode != 0) return generateScipResult.exitCode
             return AggregateRunner.run(
                 output = index.finalOutput,

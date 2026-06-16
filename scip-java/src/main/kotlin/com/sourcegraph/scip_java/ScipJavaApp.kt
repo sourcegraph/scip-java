@@ -74,7 +74,9 @@ class ScipJavaApp {
         root.subcommands(IndexCommand(), AggregateCommand(), SnapshotCommand())
         return try {
             root.parse(processedArgs)
-            reporter.exitCode()
+            // Commands signal failure only by throwing (ProgramResult/CliktError),
+            // so reaching here means a clean exit.
+            0
         } catch (e: PrintHelpMessage) {
             env.standardOutput.println(root.getFormattedHelp(e))
             e.statusCode

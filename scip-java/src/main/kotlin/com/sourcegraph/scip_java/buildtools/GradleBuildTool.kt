@@ -17,7 +17,8 @@ class GradleBuildTool(index: IndexCommand) : BuildTool("Gradle", index) {
     override fun generateScip(): Int {
         val gradleResult = runBuild()
         if (gradleResult.exitCode == 0) {
-            reportMissingScipOutput()
+            val missing = reportMissingScipOutput()
+            if (missing != 0) return missing
         }
         return generateScipFromTargetroot(gradleResult, targetroot(), index)
     }
@@ -26,13 +27,15 @@ class GradleBuildTool(index: IndexCommand) : BuildTool("Gradle", index) {
      * Diagnose the case where Gradle finished successfully but our SCIP
      * compiler plugin never produced any `.scip` shards. This used to be
      * silently rescued by a `-javaagent` fallback; now it surfaces as a
-     * clear error pointing at the two known causes.
+     * clear error pointing at the two known causes. Returns a non-zero exit
+     * code when it reports the error so the failure propagates as a return
+     * value rather than only via the reporter's accumulated error state.
      */
-    private fun reportMissingScipOutput() {
-        if (containsFileWithSuffix(targetroot(), ".scip")) return
+    private fun reportMissingScipOutput(): Int {
+        if (containsFileWithSuffix(targetroot(), ".scip")) return 0
         if (!containsFileWithSuffix(index.workingDirectory, ".class")) {
             // Project produced no compiled JVM output — nothing to index, stay quiet.
-            return
+            return 0
         }
         index.app.reporter.error(
             """scip-java: Gradle finished successfully but produced no SCIP shards in ${targetroot()}.
@@ -51,6 +54,7 @@ This means our SCIP compiler plugin was not attached to one or more JavaCompile 
      is overwriting JavaCompile.options.compilerArgs.
 """,
         )
+        return 1
     }
 
     private fun containsFileWithSuffix(root: Path, suffix: String): Boolean {

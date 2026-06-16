@@ -57,6 +57,10 @@ object AggregateRunner {
                 allowExportingGlobalSymbolsFromDirectoryEntries,
             )
         ScipAggregator.run(options)
+        // The single seam where the reporter's accumulated error state becomes an
+        // exit code: the scip-aggregator library reports errors (and checks
+        // hasErrors() internally) rather than throwing, so the returned code is
+        // turned into a ProgramResult by the calling command.
         if (!app.reporter.hasErrors()) {
             app.info(options.output.toString())
         }

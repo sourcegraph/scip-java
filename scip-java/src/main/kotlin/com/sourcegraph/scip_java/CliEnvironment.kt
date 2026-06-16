@@ -16,7 +16,6 @@ data class CliEnvironment(
     val environmentVariables: Map<String, String> = System.getenv(),
     val standardOutput: PrintStream = System.out,
     val standardError: PrintStream = System.err,
-    val isProgressBarEnabled: Boolean = System.console() != null,
 ) {
     fun withWorkingDirectory(cwd: Path): CliEnvironment = copy(workingDirectory = cwd)
 
