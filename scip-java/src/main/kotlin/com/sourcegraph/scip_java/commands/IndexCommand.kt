@@ -16,8 +16,6 @@ import com.sourcegraph.scip_java.buildtools.ScipBuildTool
 import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
-import kotlin.math.abs
-import kotlin.math.min
 
 /**
  * `scip-java index`: detects a build tool in the current working directory
@@ -218,14 +216,10 @@ class IndexCommand : CliktCommand(name = "index") {
 
     private fun unknownBuildTool(explicit: String?, usedBuildTools: List<BuildTool>): Int {
         if (explicit != null && usedBuildTools.isNotEmpty()) {
-            val toFix =
-                closestCandidate(explicit, usedBuildTools.map { it.name })
-                    ?.let { "Did you mean --build-tool=$it?" }
-                    ?: "To fix this problem, run again with the --build-tool flag set to one of the detected build tools."
             val autoDetected = usedBuildTools.joinToString(", ") { it.name }
             app.error(
                 "Automatically detected the build tool(s) $autoDetected but none of them match the explicitly provided flag '--build-tool=$explicit'. " +
-                    toFix,
+                    "To fix this problem, run again with the --build-tool flag set to one of the detected build tools.",
             )
         } else {
             if (Files.isDirectory(workingDirectory)) {
@@ -260,38 +254,5 @@ class IndexCommand : CliktCommand(name = "index") {
             ) { it.name }
         app.info("Auto mode: `${first.name}` will be used in this workspace$restMessage")
         return first.generateScip()
-    }
-
-    /**
-     * Port of `moped.internal.reporters.Levenshtein.closestCandidate`. Returns
-     * the nearest candidate only when it is "close enough" (normalized edit
-     * distance ratio below 0.4); otherwise no suggestion is offered.
-     */
-    private fun closestCandidate(query: String, candidates: List<String>): String? {
-        if (candidates.isEmpty()) return null
-        val candidate = candidates.minByOrNull { levenshtein(query, it) } ?: return null
-        val minDifference = abs(query.length - candidate.length)
-        val difference = levenshtein(candidate, query).toDouble() - minDifference
-        val ratio = difference / min(query.length, candidate.length)
-        return if (ratio < 0.4) candidate else null
-    }
-
-    /**
-     * Port of `moped.internal.reporters.Levenshtein.distance`: the raw
-     * Levenshtein edit distance minus the absolute length difference of the
-     * two strings.
-     */
-    private fun levenshtein(s1: String, s2: String): Int {
-        val m = s1.length
-        val n = s2.length
-        val dist = Array(n + 1) { j -> IntArray(m + 1) { i -> if (j == 0) i else if (i == 0) j else 0 } }
-        for (j in 1..n) {
-            for (i in 1..m) {
-                dist[j][i] =
-                    if (s2[j - 1] == s1[i - 1]) dist[j - 1][i - 1]
-                    else min(dist[j - 1][i], min(dist[j][i - 1], dist[j - 1][i - 1])) + 1
-            }
-        }
-        return dist[n][m] - abs(m - n)
     }
 }
