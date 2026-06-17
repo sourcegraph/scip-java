@@ -211,10 +211,6 @@ lazy val cli = project
     // sbt invokes it directly (e.g. from the scip-kotlinc snapshots
     // task) so it cannot kill the surrounding sbt process.
     Compile / run / fork := true,
-    // Generate a tiny Java `BuildInfo` class replacing the previous
-    // sbt-buildinfo-generated Scala object. Same shape as the Gradle plugin's
-    // `GradlePluginBuildInfo` (introduced in the Gradle plugin Kotlin port).
-    Compile / sourceGenerators += scipJavaCliBuildInfoGenerator.taskValue,
     libraryDependencies ++=
       List(
         "com.github.ajalt.clikt" % "clikt-jvm" % V.clikt,
@@ -261,6 +257,8 @@ lazy val cli = project
           }
           val names = copiedJars.map(_.getName).mkString(";")
           props.put("jarNames", names)
+          // Build version consumed at runtime by BuildInfo.version (Kotlin).
+          props.put("version", version.value)
           IO.write(props, "scip-java", propsFile)
 
           propsFile :: copiedJars.toList
@@ -292,56 +290,6 @@ lazy val cli = project
       NativeDockerfile((ThisBuild / baseDirectory).value / "Dockerfile")
   )
   .dependsOn(scip)
-
-// Source-generator for the CLI's build-info Java class. Replaces the
-// sbt-buildinfo-generated Scala BuildInfo object so the CLI module stays
-// Kotlin/Java-only (and the generated class is straightforward to consume
-// from Kotlin).
-lazy val scipJavaCliBuildInfoGenerator = Def.task {
-  val out = (Compile / sourceManaged).value / "com" / "sourcegraph" /
-    "scip_java" / "BuildInfo.java"
-  IO.createDirectory(out.getParentFile)
-  val optionsLiteral = javacModuleOptions
-    .map(javaStringLiteral)
-    .mkString("Arrays.asList(", ", ", ")")
-  val versionLiteral = javaStringLiteral(version.value)
-  val contents =
-    s"""package com.sourcegraph.scip_java;
-       |
-       |import java.util.Arrays;
-       |import java.util.Collections;
-       |import java.util.List;
-       |
-       |public final class BuildInfo {
-       |    private BuildInfo() {}
-       |    public static final String version = $versionLiteral;
-       |    public static final List<String> javacModuleOptions =
-       |        Collections.unmodifiableList($optionsLiteral);
-       |}
-       |""".stripMargin
-  IO.write(out, contents)
-  Seq(out)
-}
-
-def javaStringLiteral(value: String): String = {
-  val escaped = value.flatMap {
-    case '\\' =>
-      "\\\\"
-    case '"' =>
-      "\\\""
-    case '\n' =>
-      "\\n"
-    case '\r' =>
-      "\\r"
-    case '\t' =>
-      "\\t"
-    case c if c.isControl =>
-      f"\\u${c.toInt}%04x"
-    case c =>
-      c.toString
-  }
-  "\"" + escaped + "\""
-}
 
 // Task key for regenerating the SCIP golden snapshots emitted by
 // the scip-kotlinc compiler plugin over the Kotlin minimized fixtures.
