@@ -1,5 +1,7 @@
 package com.sourcegraph.scip_java
 
+import com.sourcegraph.scip.ScipSymbols
+import com.sourcegraph.scip_aggregator.SymbolDescriptor
 import kotlin.math.max
 import org.scip_code.scip.Document
 import org.scip_code.scip.Occurrence
@@ -195,7 +197,7 @@ object ScipPrinters {
         val symbol = syntheticDefinition?.symbol ?: occ.symbol
 
         // Fail the tests on symbols that aren't valid SCIP.
-        ScipSymbol.parseOrThrowExceptionIfInvalid(symbol)
+        parseOrThrowExceptionIfInvalid(symbol)
 
         out.append(commentSyntax)
             .append(indent)
@@ -250,6 +252,23 @@ object ScipPrinters {
                     if (relationship.isTypeDefinition) out.append(" is_type_definition")
                     out.append(' ').append(relationship.symbol).append('\n')
                 }
+        }
+    }
+
+    /**
+     * Throws if [scipSymbol] is not a syntactically valid SCIP symbol, so the
+     * snapshot tests fail fast on a malformed index. The parsed structure isn't
+     * needed, only the throw-on-invalid behaviour.
+     */
+    private fun parseOrThrowExceptionIfInvalid(scipSymbol: String) {
+        if (scipSymbol.startsWith("local ")) return
+        val parts = scipSymbol.split(" ", limit = 5)
+        require(parts.size == 5) { "Invalid scip symbol: $scipSymbol" }
+        var current = parts[4]
+        while (true) {
+            val descriptor = SymbolDescriptor.parseFromSymbol(current)
+            if (descriptor.owner == ScipSymbols.ROOT_PACKAGE) return
+            current = descriptor.owner
         }
     }
 
