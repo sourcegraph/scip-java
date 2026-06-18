@@ -5,28 +5,12 @@ import org.junit.jupiter.api.TestFactory
 
 class MavenBuildToolTest : BuildToolHarness() {
 
-    private val pomXml: String =
-        MavenBuildToolTest::class
-            .java
-            .getResourceAsStream("/example-maven-pom.xml")!!
-            .readBytes()
-            .toString(Charsets.UTF_8)
-
     @TestFactory
     fun tests(): List<DynamicTest> =
         listOf(
             checkBuild(
                 "basic",
-                """
-                |/pom.xml
-                |$pomXml
-                |/src/main/java/com/Example.java
-                |package com;
-                |public class Example {}
-                |/src/test/java/com/ExampleSuite.java
-                |package com;
-                |public class ExampleSuite {}
-                |""".trimMargin(),
+                fixture = "maven/basic",
                 expectedScipFiles = 2,
                 expectedPackages =
                     """
@@ -37,16 +21,7 @@ class MavenBuildToolTest : BuildToolHarness() {
             ),
             checkBuild(
                 "build-command",
-                """
-                |/pom.xml
-                |$pomXml
-                |/src/main/java/com/Example.java
-                |package com;
-                |public class Example {}
-                |/src/test/java/com/ExampleSuite.java
-                |package com;
-                |public class ExampleSuite {}
-                |""".trimMargin(),
+                fixture = "maven/basic",
                 expectedScipFiles = 1,
                 extraArguments = listOf("--", "compile"),
             ),

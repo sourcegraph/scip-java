@@ -1,0 +1,9 @@
+plugins {
+    id 'java-library'
+}
+repositories {
+    mavenCentral()
+}
+dependencies {
+    implementation 'com.marklogic:marklogic-client-api:6.1.0'
+}

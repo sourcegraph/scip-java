@@ -1,0 +1,17 @@
+plugins {
+    id 'java'
+}
+java {
+  toolchain {
+    languageVersion = JavaLanguageVersion.of(11)
+  }
+}
+sourceSets {
+  intTest {
+    compileClasspath += sourceSets.main.output
+    runtimeClasspath += sourceSets.main.output
+  }
+}
+configurations {
+  intTestImplementation.extendsFrom implementation
+}

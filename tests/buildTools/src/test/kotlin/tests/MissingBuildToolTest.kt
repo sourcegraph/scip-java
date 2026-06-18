@@ -22,13 +22,7 @@ class MissingBuildToolTest : BuildToolHarness() {
                     "error: Multiple build tools detected: Maven, Gradle. To fix this " +
                         "problem, use the '--build-tool=BUILD_TOOL_NAME' flag to specify " +
                         "which build tool to run.",
-                workingDirectoryLayout =
-                    """
-                    |/pom.xml
-                    |<hello/>
-                    |/build.gradle
-                    |def foo= 42
-                    |""".trimMargin(),
+                fixture = "missing/ambiguous",
             ),
             checkErrorOutput(
                 "no-matching-explicit",
@@ -38,11 +32,7 @@ class MissingBuildToolTest : BuildToolHarness() {
                         "them match the explicitly provided flag '--build-tool=Gradle'. To " +
                         "fix this problem, run again with the --build-tool flag set to one " +
                         "of the detected build tools.",
-                workingDirectoryLayout =
-                    """
-                    |/pom.xml
-                    |<hello/>
-                    |""".trimMargin(),
+                fixture = "missing/no-matching-explicit",
             ),
         )
 }

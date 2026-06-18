@@ -8,6 +8,8 @@ import java.io.PrintStream
 import java.nio.charset.StandardCharsets
 import java.nio.file.Files
 import java.nio.file.Path
+import java.nio.file.Paths
+import java.nio.file.StandardCopyOption
 import java.util.stream.Collectors
 import kotlin.test.assertEquals
 import kotlin.test.assertNotEquals
@@ -104,6 +106,44 @@ abstract class BuildToolHarness {
      */
     private fun newTempBase(): Path = Files.createTempDirectory("buildtools").toRealPath()
 
+    /**
+     * Materialize a test project from the `fixtures/<name>` directory on the
+     * test classpath into [target], overwriting existing files (e.g. a stub
+     * `build.gradle` left behind by wrapper generation). When [substitutions]
+     * is non-empty, each token is textually replaced in every file, which lets a
+     * single fixture cover parametrized variants (e.g. the JDK in a toolchain).
+     */
+    private fun copyFixture(
+        fixture: String,
+        target: Path,
+        substitutions: Map<String, String>,
+    ) {
+        val resource = "/fixtures/$fixture"
+        val url =
+            BuildToolHarness::class.java.getResource(resource)
+                ?: error("Fixture not found on test classpath: $resource")
+        val source = Paths.get(url.toURI())
+        Files.walk(source).use { stream ->
+            stream.forEach { path ->
+                val dest = target.resolve(source.relativize(path).toString())
+                if (Files.isDirectory(path)) {
+                    Files.createDirectories(dest)
+                } else {
+                    Files.createDirectories(dest.parent)
+                    if (substitutions.isEmpty()) {
+                        Files.copy(path, dest, StandardCopyOption.REPLACE_EXISTING)
+                    } else {
+                        var text = Files.readString(path)
+                        for ((token, value) in substitutions) {
+                            text = text.replace(token, value)
+                        }
+                        Files.writeString(dest, text)
+                    }
+                }
+            }
+        }
+    }
+
     /** Compare two strings ignoring trailing whitespace. */
     protected fun assertNoDiff(obtained: String, expected: String) {
         if (obtained.trimEnd() != expected.trimEnd()) {
@@ -116,7 +156,7 @@ abstract class BuildToolHarness {
 
     protected fun checkBuild(
         name: String,
-        original: String,
+        fixture: String,
         expectedScipFiles: Int = 0,
         extraArguments: List<String> = emptyList(),
         expectedError: ((String) -> Unit)? = null,
@@ -125,6 +165,7 @@ abstract class BuildToolHarness {
         prepare: (Path) -> Unit = {},
         targetRoot: String? = null,
         maxJdk: Int? = null,
+        substitutions: Map<String, String> = emptyMap(),
     ): DynamicTest =
         dynamicTest(name) {
             val supported =
@@ -144,7 +185,7 @@ abstract class BuildToolHarness {
                 val init = initCommand(workingDirectory)
                 if (init.isNotEmpty()) exec(init, workingDirectory)
 
-                FileLayout.fromString(original, workingDirectory)
+                copyFixture(fixture, workingDirectory, substitutions)
                 prepare(workingDirectory)
 
                 val targetroot = workingDirectory.resolve(targetRoot ?: "targetroot")
@@ -192,14 +233,14 @@ abstract class BuildToolHarness {
         name: String,
         arguments: List<String>,
         expectedOutput: String,
-        workingDirectoryLayout: String = "",
+        fixture: String? = null,
     ): DynamicTest =
         dynamicTest(name) {
             val base = newTempBase()
             try {
                 val workingDirectory = Files.createDirectories(base.resolve("workingDirectory"))
-                if (workingDirectoryLayout.isNotEmpty()) {
-                    FileLayout.fromString(workingDirectoryLayout, workingDirectory)
+                if (fixture != null) {
+                    copyFixture(fixture, workingDirectory, emptyMap())
                 }
                 val (exit, rawOutput) = runScipJava(workingDirectory, arguments)
                 val output = rawOutput.replace(base.toString(), "")

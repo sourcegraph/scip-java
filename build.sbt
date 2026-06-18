@@ -565,9 +565,6 @@ lazy val unit = project
   .dependsOn(javacPlugin, cli)
   .enablePlugins(BuildInfoPlugin)
 
-// Kotlin/JUnit5 integration tests that drive the scip-java CLI against real
-// Maven/Gradle/manual projects. Depends only on `cli` (no munit, no Scala) so
-// the test stack matches the now-Kotlin product.
 lazy val buildTools = project
   .in(file("tests/buildTools"))
   .enablePlugins(KotlinPlugin)

@@ -12,13 +12,7 @@ class ScipBuildToolTest : BuildToolHarness() {
         listOf(
             checkBuild(
                 "rejects-dependencies-field",
-                """
-                |/lsif-java.json
-                |{"dependencies": ["junit:junit:4.13.1"]}
-                |/foo/Example.java
-                |package foo;
-                |public class Example {}
-                |""".trimMargin(),
+                fixture = "scip/rejects-dependencies-field",
                 expectedError = { output ->
                     assertTrue(
                         output.contains(
@@ -31,31 +25,16 @@ class ScipBuildToolTest : BuildToolHarness() {
             ),
             checkBuild(
                 "compiles-with-empty-classpath",
-                """
-                |/lsif-java.json
-                |{}
-                |/foo/Example.java
-                |package foo;
-                |public class Example {}
-                |/foo/Example2.java
-                |package foo;
-                |public class Example2 {}
-                |""".trimMargin(),
+                fixture = "scip/compiles-with-empty-classpath",
                 expectedScipFiles = 2,
             ),
             checkBuild(
                 "compiles-with-classpath",
-                """
-                |/lsif-java.json
-                |{"classpath": ["lib-classes"]}
-                |/foo/Example.java
-                |package foo;
-                |import bar.Greeter;
-                |public class Example {
-                |  public String hello() { return new Greeter().greet(); }
-                |}
-                |""".trimMargin(),
+                fixture = "scip/compiles-with-classpath",
                 expectedScipFiles = 1,
+                // The `lib-classes` entry referenced by lsif-java.json is produced
+                // imperatively: compile a helper class from a directory outside the
+                // workspace so its sources are not themselves indexed.
                 prepare = { workingDirectory ->
                     val libSrcDir = Files.createTempDirectory("scip-classpath-lib")
                     val libSrc = libSrcDir.resolve("bar").resolve("Greeter.java")
