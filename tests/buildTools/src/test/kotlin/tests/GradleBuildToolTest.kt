@@ -45,119 +45,111 @@ class GradleBuildToolTest : BuildToolHarness() {
         )
 
     @TestFactory
-    fun tests(): List<DynamicTest> =
-        buildList {
-            add(
-                checkGradleBuild(
-                    "annotation-path",
-                    "gradle/annotation-path",
-                    // An immutable version is generated alongside the original class,
-                    // so two SCIP shards are produced.
-                    expectedScipFiles = 2,
-                ),
+    fun tests(): List<DynamicTest> = buildList {
+        add(
+            checkGradleBuild(
+                "annotation-path",
+                "gradle/annotation-path",
+                // An immutable version is generated alongside the original class,
+                // so two SCIP shards are produced.
+                expectedScipFiles = 2,
             )
-            add(
-                checkGradleBuild(
-                    "build-with-Werror",
-                    "gradle/build-with-Werror",
-                    expectedScipFiles = 2,
-                ),
+        )
+        add(
+            checkGradleBuild("build-with-Werror", "gradle/build-with-Werror", expectedScipFiles = 2)
+        )
+        add(
+            checkGradleBuild(
+                "publishing",
+                "gradle/publishing",
+                expectedScipFiles = 1,
+                expectedPackages = "maven:com.sourcegraph:example-library:1.1",
             )
+        )
+        add(checkGradleBuild("basic", "gradle/basic", expectedScipFiles = 2))
+        for (java in listOf(11, 17, 21)) {
             add(
                 checkGradleBuild(
-                    "publishing",
-                    "gradle/publishing",
+                    "toolchains-$java",
+                    "gradle/toolchains",
                     expectedScipFiles = 1,
-                    expectedPackages = "maven:com.sourcegraph:example-library:1.1",
-                ),
-            )
-            add(
-                checkGradleBuild("basic", "gradle/basic", expectedScipFiles = 2),
-            )
-            for (java in listOf(11, 17, 21)) {
-                add(
-                    checkGradleBuild(
-                        "toolchains-$java",
-                        "gradle/toolchains",
-                        expectedScipFiles = 1,
-                        substitutions = mapOf("@JAVA@" to "$java"),
-                    ),
+                    substitutions = mapOf("@JAVA@" to "$java"),
                 )
-            }
-            add(
-                checkGradleBuild(
-                    "protobuf-generator",
-                    "gradle/protobuf-generator",
-                    expectedScipFiles = 2,
-                ),
-            )
-            add(
-                checkGradleBuild(
-                    "explicit",
-                    "gradle/explicit",
-                    expectedScipFiles = 2,
-                    extraArguments = listOf("--build-tool", "gradle"),
-                ),
-            )
-            add(
-                checkGradleBuild(
-                    "build-command",
-                    "gradle/build-command",
-                    expectedScipFiles = 1,
-                    extraArguments = listOf("--", "compileJava"),
-                ),
-            )
-            add(
-                checkGradleBuild("kotlin2", "gradle/kotlin2", expectedScipFiles = 4),
-            )
-            add(
-                checkGradleBuild(
-                    "implementation-deps",
-                    "gradle/implementation-deps",
-                    expectedScipFiles = 1,
-                    expectedPackages =
-                        """
-                        |maven:com.fasterxml.jackson.core:jackson-annotations:2.14.1
-                        |maven:com.fasterxml.jackson.core:jackson-core:2.14.1
-                        |maven:com.fasterxml.jackson.core:jackson-databind:2.14.1
-                        |maven:com.fasterxml.jackson.dataformat:jackson-dataformat-csv:2.14.1
-                        |maven:com.marklogic:marklogic-client-api:6.1.0
-                        |maven:com.squareup.okhttp3:logging-interceptor:4.10.0
-                        |maven:com.squareup.okhttp3:okhttp:4.10.0
-                        |maven:com.squareup.okio:okio-jvm:3.0.0
-                        |maven:com.sun.mail:javax.mail:1.6.2
-                        |maven:io.github.rburgst:okhttp-digest:2.7
-                        |maven:javax.activation:activation:1.1
-                        |maven:javax.ws.rs:javax.ws.rs-api:2.1.1
-                        |maven:org.jetbrains.kotlin:kotlin-stdlib-common:1.6.20
-                        |maven:org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.6.10
-                        |maven:org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.6.10
-                        |maven:org.jetbrains.kotlin:kotlin-stdlib:1.6.20
-                        |maven:org.jetbrains:annotations:13.0
-                        |maven:org.slf4j:slf4j-api:1.7.36
-                        |""".trimMargin(),
-                ),
-            )
-            for (java in listOf(11, 17)) {
-                add(
-                    checkGradleBuild(
-                        "kotlin-jvm-toolchains-jdk$java",
-                        "gradle/kotlin-jvm-toolchains",
-                        expectedScipFiles = 1,
-                        substitutions = mapOf("@JAVA@" to "$java"),
-                    ),
-                )
-            }
-            // Regression test: projects that lazily register custom source sets (e.g.
-            // intTest) with a Java toolchain used to fail because the eager `.all {}`
-            // API finalized the javaCompiler property before Gradle finished
-            // configuring the task.
-            add(
-                checkGradleBuild(
-                    "lazy-sourceset-with-toolchain",
-                    "gradle/lazy-sourceset-with-toolchain",
-                    expectedScipFiles = 1,
-                ),
             )
         }
+        add(
+            checkGradleBuild(
+                "protobuf-generator",
+                "gradle/protobuf-generator",
+                expectedScipFiles = 2,
+            )
+        )
+        add(
+            checkGradleBuild(
+                "explicit",
+                "gradle/explicit",
+                expectedScipFiles = 2,
+                extraArguments = listOf("--build-tool", "gradle"),
+            )
+        )
+        add(
+            checkGradleBuild(
+                "build-command",
+                "gradle/build-command",
+                expectedScipFiles = 1,
+                extraArguments = listOf("--", "compileJava"),
+            )
+        )
+        add(checkGradleBuild("kotlin2", "gradle/kotlin2", expectedScipFiles = 4))
+        add(
+            checkGradleBuild(
+                "implementation-deps",
+                "gradle/implementation-deps",
+                expectedScipFiles = 1,
+                expectedPackages =
+                    """
+                    |maven:com.fasterxml.jackson.core:jackson-annotations:2.14.1
+                    |maven:com.fasterxml.jackson.core:jackson-core:2.14.1
+                    |maven:com.fasterxml.jackson.core:jackson-databind:2.14.1
+                    |maven:com.fasterxml.jackson.dataformat:jackson-dataformat-csv:2.14.1
+                    |maven:com.marklogic:marklogic-client-api:6.1.0
+                    |maven:com.squareup.okhttp3:logging-interceptor:4.10.0
+                    |maven:com.squareup.okhttp3:okhttp:4.10.0
+                    |maven:com.squareup.okio:okio-jvm:3.0.0
+                    |maven:com.sun.mail:javax.mail:1.6.2
+                    |maven:io.github.rburgst:okhttp-digest:2.7
+                    |maven:javax.activation:activation:1.1
+                    |maven:javax.ws.rs:javax.ws.rs-api:2.1.1
+                    |maven:org.jetbrains.kotlin:kotlin-stdlib-common:1.6.20
+                    |maven:org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.6.10
+                    |maven:org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.6.10
+                    |maven:org.jetbrains.kotlin:kotlin-stdlib:1.6.20
+                    |maven:org.jetbrains:annotations:13.0
+                    |maven:org.slf4j:slf4j-api:1.7.36
+                    |"""
+                        .trimMargin(),
+            )
+        )
+        for (java in listOf(11, 17)) {
+            add(
+                checkGradleBuild(
+                    "kotlin-jvm-toolchains-jdk$java",
+                    "gradle/kotlin-jvm-toolchains",
+                    expectedScipFiles = 1,
+                    substitutions = mapOf("@JAVA@" to "$java"),
+                )
+            )
+        }
+        // Regression test: projects that lazily register custom source sets (e.g.
+        // intTest) with a Java toolchain used to fail because the eager `.all {}`
+        // API finalized the javaCompiler property before Gradle finished
+        // configuring the task.
+        add(
+            checkGradleBuild(
+                "lazy-sourceset-with-toolchain",
+                "gradle/lazy-sourceset-with-toolchain",
+                expectedScipFiles = 1,
+            )
+        )
+    }
 }

@@ -17,7 +17,7 @@ class ScipBuildToolTest : BuildToolHarness() {
                     assertTrue(
                         output.contains(
                             "scip-java no longer resolves Maven coordinates from " +
-                                "the 'dependencies' field",
+                                "the 'dependencies' field"
                         ),
                         "output: $output",
                     )
@@ -41,10 +41,7 @@ class ScipBuildToolTest : BuildToolHarness() {
                     val libSrc = libSrcDir.resolve("bar").resolve("Greeter.java")
                     val libClasses = workingDirectory.resolve("lib-classes")
                     Files.createDirectories(libClasses)
-                    exec(
-                        listOf("javac", "-d", libClasses.toString(), libSrc.toString()),
-                        libSrcDir,
-                    )
+                    exec(listOf("javac", "-d", libClasses.toString(), libSrc.toString()), libSrcDir)
                 },
             ),
         )

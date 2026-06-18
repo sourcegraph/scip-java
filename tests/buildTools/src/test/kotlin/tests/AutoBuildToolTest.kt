@@ -14,6 +14,6 @@ class AutoBuildToolTest : BuildToolHarness() {
                 expectedOutput =
                     "error: Build tool mode set to `auto`, but no supported build tools " +
                         "were detected",
-            ),
+            )
         )
 }

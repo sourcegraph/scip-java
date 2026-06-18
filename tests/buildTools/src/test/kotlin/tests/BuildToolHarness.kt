@@ -33,8 +33,7 @@ internal fun exec(command: List<String>, cwd: Path) {
 
 /** Run an external command and return its combined stdout/stderr. */
 private fun execOutput(command: List<String>, cwd: Path): String {
-    val process =
-        ProcessBuilder(command).directory(cwd.toFile()).redirectErrorStream(true).start()
+    val process = ProcessBuilder(command).directory(cwd.toFile()).redirectErrorStream(true).start()
     val output = process.inputStream.readBytes().toString(StandardCharsets.UTF_8)
     val exit = process.waitFor()
     check(exit == 0) { "Command failed ($exit): ${command.joinToString(" ")}\n$output" }
@@ -42,8 +41,8 @@ private fun execOutput(command: List<String>, cwd: Path): String {
 }
 
 /**
- * Major version of the JVM that `java` on PATH resolves to. Compiled and
- * executed as a subprocess because the test JVM may differ from PATH.
+ * Major version of the JVM that `java` on PATH resolves to. Compiled and executed as a subprocess
+ * because the test JVM may differ from PATH.
  */
 internal val externalJavaVersion: Int by lazy {
     val tmp = Files.createTempDirectory("PrintJavaVersion")
@@ -56,7 +55,8 @@ internal val externalJavaVersion: Int by lazy {
                 System.out.print(Runtime.version().feature());
               }
             }
-            """.trimIndent(),
+            """
+                .trimIndent(),
         )
         exec(listOf("javac", "PrintJavaVersion.java"), tmp)
         execOutput(listOf("java", "PrintJavaVersion"), tmp).trim().toInt()
@@ -66,16 +66,13 @@ internal val externalJavaVersion: Int by lazy {
 }
 
 /**
- * Base class for build-tool integration tests. Each `check*` helper returns a
- * JUnit 5 [DynamicTest]; suites expose them from a `@TestFactory` method.
+ * Base class for build-tool integration tests. Each `check*` helper returns a JUnit 5
+ * [DynamicTest]; suites expose them from a `@TestFactory` method.
  */
 abstract class BuildToolHarness {
 
     /** Run `scip-java` in-process with stdout/stderr redirected into a buffer. */
-    private fun runScipJava(
-        workingDirectory: Path,
-        arguments: List<String>,
-    ): Pair<Int, String> {
+    private fun runScipJava(workingDirectory: Path, arguments: List<String>): Pair<Int, String> {
         val buffer = ByteArrayOutputStream()
         val stream = PrintStream(buffer, true, StandardCharsets.UTF_8.name())
         val app = ScipJavaApp()
@@ -92,26 +89,23 @@ abstract class BuildToolHarness {
     private fun listScipShards(targetroot: Path): List<Path> {
         if (!Files.isDirectory(targetroot)) return emptyList()
         Files.walk(targetroot).use { stream ->
-            return stream
-                .filter { it.toString().endsWith(".scip") }
-                .collect(Collectors.toList())
+            return stream.filter { it.toString().endsWith(".scip") }.collect(Collectors.toList())
         }
     }
 
     /**
-     * Fresh temp directory for one test, with symlinks resolved. `toRealPath`
-     * matters on macOS where the system temp dir lives under `/var` (a symlink
-     * to `/private/var`): build tools write canonical paths into their output,
-     * so the sourceroot must be canonical too or path prefix checks fail.
+     * Fresh temp directory for one test, with symlinks resolved. `toRealPath` matters on macOS
+     * where the system temp dir lives under `/var` (a symlink to `/private/var`): build tools write
+     * canonical paths into their output, so the sourceroot must be canonical too or path prefix
+     * checks fail.
      */
     private fun newTempBase(): Path = Files.createTempDirectory("buildtools").toRealPath()
 
     /**
-     * Materialize a test project from the `fixtures/<name>` directory on the
-     * test classpath into [target], overwriting existing files (e.g. a stub
-     * `build.gradle` left behind by wrapper generation). When [substitutions]
-     * is non-empty, each token is textually replaced in every file, which lets a
-     * single fixture cover parametrized variants (e.g. the JDK in a toolchain).
+     * Materialize a test project from the `fixtures/<name>` directory on the test classpath into
+     * [target], overwriting existing files (e.g. a stub `build.gradle` left behind by wrapper
+     * generation). When [substitutions] is non-empty, each token is textually replaced in every
+     * file, which lets a single fixture cover parametrized variants (e.g. the JDK in a toolchain).
      */
     protected fun copyFixture(
         fixture: String,
@@ -149,7 +143,7 @@ abstract class BuildToolHarness {
         if (obtained.trimEnd() != expected.trimEnd()) {
             fail(
                 "diff:\n--- obtained ---\n${obtained.trimEnd()}\n" +
-                    "--- expected ---\n${expected.trimEnd()}",
+                    "--- expected ---\n${expected.trimEnd()}"
             )
         }
     }
@@ -211,7 +205,7 @@ abstract class BuildToolHarness {
                 if (shards.size != expectedScipFiles) {
                     fail(
                         "Expected $expectedScipFiles SCIP shard(s), got ${shards.size}: " +
-                            "$shards\noutput:\n$output",
+                            "$shards\noutput:\n$output"
                     )
                 }
 
