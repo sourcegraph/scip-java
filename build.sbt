@@ -72,6 +72,11 @@ commands +=
       "scalafixAll --check" :: "publishLocal" :: s
   }
 
+commands +=
+  Command.command("regenerateSnapshots") { s =>
+    "snapshots/run" :: "scipKotlincMinimized/kotlincSnapshots" :: s
+  }
+
 // Shared module with the SCIP shard utilities (symbol encoder, document
 // builder, on-disk writer) consumed by both the Java compiler plugin
 // (scip-javac) and the Kotlin compiler plugin (scip-kotlinc).

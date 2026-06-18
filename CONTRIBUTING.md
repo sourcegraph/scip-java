@@ -56,7 +56,9 @@ These are the main components of the project.
 | `snapshots/testOnly tests.MinimizedSnapshotSuite`                   | sbt      | Runs fast snapshot tests. Indexes a small set of files under `tests/minimized`.     |
 | `snapshots/testOnly tests.MinimizedSnapshotSuite -- *InnerClasses*` | sbt      | Runs only individual tests cases matching the name "InnerClasses".                  |
 | `snapshots/test`                                                    | sbt      | Runs all snapshot tests.                                                            |
-| `snapshots/run`                                                     | sbt      | Update snapshot tests. Use this command after you have fixed a bug.                 |
+| `snapshots/run`                                                     | sbt      | Update only the Java snapshot goldens under `tests/snapshots`.                      |
+| `scipKotlincMinimized/kotlincSnapshots`                             | sbt      | Update only the Kotlin snapshot goldens under `scip-kotlinc/minimized`.             |
+| `regenerateSnapshots`                                               | sbt      | Regenerate ALL snapshot goldens (Java + Kotlin). Run after fixing a bug.            |
 | `cli/run --cwd DIRECTORY`                                           | sbt      | Run `scip-java` command-line tool against a given Gradle/Maven build.               |
 | `fixAll`                                                            | sbt      | Run Scalafmt, Scalafix and Javafmt on all sources. Run this before opening a PR.    |
 
