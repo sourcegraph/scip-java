@@ -336,9 +336,8 @@ lazy val scipKotlinc = project
     libraryDependencies +=
       "org.scip-code" % "scip-kotlin-bindings" % V.scipBindings,
     // kotlin-compiler-embeddable is supplied by kotlinc at runtime
-    libraryDependencies +=
-      "org.jetbrains.kotlin" % "kotlin-compiler-embeddable" % V.kotlinVersion %
-        Provided,
+    libraryDependencies += "org.jetbrains.kotlin" %
+      "kotlin-compiler-embeddable" % V.kotlinVersion % Provided,
     // ---- sbt-assembly fat-jar ---------------------------------------------
     // Mirrors scip-java's `fatjarPackageSettings`. Produces a shaded jar that
     // replaces the slim `packageBin` so `publishLocal` ships the shaded
