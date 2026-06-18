@@ -70,12 +70,19 @@
           '';
         };
 
-        devShells = {
-          default = mkDevShell pkgs.jdk11;
-          jdk11 = mkDevShell pkgs.jdk11;
-          jdk17 = mkDevShell pkgs.jdk17;
-          jdk21 = mkDevShell pkgs.jdk21;
-        };
+        devShells =
+          let
+            # The source-built openjdk 11 segfaults at runtime (UB in markOop
+            # exposed by the toolchain in nixpkgs 26.05), so use the prebuilt
+            # Temurin binary instead. See NixOS/nixpkgs#526834.
+            jdk11 = pkgs.temurin-bin-11;
+          in
+          {
+            default = mkDevShell jdk11;
+            jdk11 = mkDevShell jdk11;
+            jdk17 = mkDevShell pkgs.jdk17;
+            jdk21 = mkDevShell pkgs.jdk21;
+          };
       }
     );
 }
