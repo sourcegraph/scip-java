@@ -58,14 +58,17 @@ class SnapshotCommandSuite extends ScipJavaSuite(ScipJava.app) {
          |//⌄ enclosing_range_start scip-java maven . . main/Sample#
          |  public class Sample {
          |//             ^^^^^^ definition scip-java maven . . main/Sample#
-         |//                    display_name Sample
-         |//                    signature_documentation java public class Sample
          |//                    kind Class
-         |//                    documentation  Sample class\n
+         |//                    display_name Sample
+         |//                    signature_documentation
+         |//                    > public class Sample
+         |//                    documentation
+         |//                    > Sample class
          |//             ^^^^^^ definition scip-java maven . . main/Sample#`<init>`().
-         |//                    display_name <init>
-         |//                    signature_documentation java public Sample()
          |//                    kind Constructor
+         |//                    display_name <init>
+         |//                    signature_documentation
+         |//                    > public Sample()
          |     /**
          |      * Main application entry point
          |      */
@@ -73,15 +76,17 @@ class SnapshotCommandSuite extends ScipJavaSuite(ScipJava.app) {
          |//                           ⌄ enclosing_range_start local 0
          |     public static void main(String[] asdf) {}
          |//                      ^^^^ definition scip-java maven . . main/Sample#main().
-         |//                           display_name main
-         |//                           signature_documentation java public static void main(String[] asdf)
          |//                           kind StaticMethod
-         |//                           documentation  Main application entry point\n
+         |//                           display_name main
+         |//                           signature_documentation
+         |//                           > public static void main(String[] asdf)
+         |//                           documentation
+         |//                           > Main application entry point
          |//                           ^^^^^^ reference scip-java maven jdk 11 java/lang/String#
          |//                                    ^^^^ definition local 0
          |//                                         display_name asdf
-         |//                                         signature_documentation java String[] asdf
-         |//                                         enclosing_symbol scip-java maven . . main/Sample#main().
+         |//                                         signature_documentation
+         |//                                         > String[] asdf
          |//                                       ⌃ enclosing_range_end local 0
          |//                                           ⌃ enclosing_range_end scip-java maven . . main/Sample#main().
          |  }
