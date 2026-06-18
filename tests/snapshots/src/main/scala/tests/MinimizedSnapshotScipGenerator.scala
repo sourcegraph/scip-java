@@ -6,18 +6,18 @@ import java.nio.file.Files
 import java.nio.file.Paths
 
 import scala.jdk.CollectionConverters.CollectionHasAsScala
+import scala.jdk.CollectionConverters.SeqHasAsJava
 
 import scala.meta.internal.io.FileIO
 import scala.meta.io.AbsolutePath
 
-import com.sourcegraph.io.DeleteVisitor
 import com.sourcegraph.scip_java.ScipJava
 import com.sourcegraph.scip_java.ScipPrinters
 import org.scip_code.scip.Index
 
 class MinimizedSnapshotScipGenerator {
   def run(args: List[String]): Unit = {
-    val exit = ScipJava.app.run(args)
+    val exit = ScipJava.app.run(args.asJava)
     require(exit == 0)
   }
   def run(context: SnapshotContext, handler: SnapshotHandler): Unit = {
@@ -75,8 +75,8 @@ class MinimizedSnapshotScipGenerator {
           )
         }
     } finally {
-      Files.walkFileTree(scipOutput, new DeleteVisitor())
-      Files.walkFileTree(snapshotOutput.toNIO, new DeleteVisitor())
+      os.remove.all(os.Path(scipOutput))
+      os.remove.all(os.Path(snapshotOutput.toNIO))
     }
   }
 }

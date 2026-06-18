@@ -4,6 +4,7 @@ import java.nio.file.FileSystems
 import java.nio.file.Files
 import java.nio.file.Path
 
+import scala.jdk.CollectionConverters._
 import scala.util.Properties
 
 import scala.meta.internal.io.FileIO
@@ -11,14 +12,11 @@ import scala.meta.io.AbsolutePath
 
 import com.sourcegraph.scip_java.ScipJava
 import com.sourcegraph.scip_java.buildtools.ClasspathEntry
-import moped.testkit.DeleteVisitor
-import moped.testkit.FileLayout
-import moped.testkit.MopedSuite
 import munit.Tag
 import munit.TestOptions
 import os.Shellable
 
-abstract class BaseBuildToolSuite extends MopedSuite(ScipJava.app) {
+abstract class BaseBuildToolSuite extends ScipJavaSuite(ScipJava.app) {
   self =>
   override def environmentVariables: Map[String, String] = sys.env
 
@@ -50,7 +48,7 @@ abstract class BaseBuildToolSuite extends MopedSuite(ScipJava.app) {
         path
       }
       override def beforeEach(context: BeforeEach): Unit = {
-        DeleteVisitor.deleteRecursively(path)
+        os.remove.all(os.Path(path))
       }
     }
 
@@ -112,7 +110,7 @@ abstract class BaseBuildToolSuite extends MopedSuite(ScipJava.app) {
           "--targetroot",
           targetroot.toString
         ) ++ extraArguments
-      val exit = app().run(arguments)
+      val exit = app.run(arguments)
       expectedError match {
         case Some(fn) =>
           assert(clue(exit) != 0, clues(app.capturedOutput))
@@ -136,7 +134,8 @@ abstract class BaseBuildToolSuite extends MopedSuite(ScipJava.app) {
       if (expectedPackages.nonEmpty) {
         val obtainedPackages = ClasspathEntry
           .fromTargetroot(targetroot, workingDirectory)
-          .map(_.mavenCoordinate)
+          .asScala
+          .map(_.mavenCoordinate())
           .sorted
           .distinct
           .mkString("\n")

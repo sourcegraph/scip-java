@@ -109,6 +109,9 @@ public class ScipAggregator {
     for (Path root : options.targetroots) {
       if (JAR_PATTERN.matches(root)) shards.add(root);
       else if (Files.isDirectory(root)) Files.walkFileTree(root, visitor);
+      else
+        options.reporter.warning(
+            "ignoring target root that does not exist or is not a directory: " + root);
     }
     return shards;
   }

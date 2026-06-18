@@ -11,13 +11,14 @@ lazy val V =
     val protobuf = "4.34.2"
     val scipBindings = "0.8.0"
     val scalaXml = "2.1.0"
-    val moped = "0.2.0"
     val gradle = "8.10"
     val scala213 = "2.13.13"
     val scalameta = "4.9.3"
     val kotlinVersion = "2.2.0"
     val kotest = "4.6.3"
     val kctfork = "0.7.1"
+    val clikt = "5.0.3"
+    val kotlinxSerialization = "1.9.0"
   }
 
 // sbt-git's bundled JGit can't read linked worktrees; shell out to
@@ -196,28 +197,25 @@ lazy val mavenPlugin = project
 
 lazy val cli = project
   .in(file("scip-java"))
+  .enablePlugins(KotlinPlugin, PackPlugin, DockerPlugin)
   .settings(
     moduleName := "scip-java",
+    crossPaths := false,
+    autoScalaLibrary := false,
+    kotlinVersion := V.kotlinVersion,
+    kotlincJvmTarget := "11",
+    Compile / javacOptions ++= Seq("--release", "11"),
     (Compile / mainClass) := Some("com.sourcegraph.scip_java.ScipJava"),
     (run / baseDirectory) := (ThisBuild / baseDirectory).value,
     // ScipJava.main can call System.exit, so we always fork the JVM when
     // sbt invokes it directly (e.g. from the scip-kotlinc snapshots
     // task) so it cannot kill the surrounding sbt process.
     Compile / run / fork := true,
-    buildInfoKeys :=
-      Seq[BuildInfoKey](
-        version,
-        sbtVersion,
-        scalaVersion,
-        "javacModuleOptions" -> javacModuleOptions,
-        "scalametaVersion" -> V.scalameta,
-        "scala213" -> V.scala213
-      ),
-    buildInfoPackage := "com.sourcegraph.scip_java",
     libraryDependencies ++=
       List(
-        "org.scala-lang.modules" %% "scala-xml" % V.scalaXml,
-        "org.scalameta" %% "moped" % V.moped,
+        "com.github.ajalt.clikt" % "clikt-jvm" % V.clikt,
+        "org.jetbrains.kotlinx" % "kotlinx-serialization-json-jvm" %
+          V.kotlinxSerialization,
         "org.jetbrains.kotlin" % "kotlin-compiler-embeddable" % V.kotlinVersion,
         "org.jetbrains.kotlin" % "kotlin-scripting-common" % V.kotlinVersion,
         "org.jetbrains.kotlin" % "kotlin-scripting-jvm" % V.kotlinVersion,
@@ -259,6 +257,8 @@ lazy val cli = project
           }
           val names = copiedJars.map(_.getName).mkString(";")
           props.put("jarNames", names)
+          // Build version consumed at runtime by BuildInfo.version (Kotlin).
+          props.put("version", version.value)
           IO.write(props, "scip-java", propsFile)
 
           propsFile :: copiedJars.toList
@@ -289,10 +289,9 @@ lazy val cli = project
     docker / dockerfile :=
       NativeDockerfile((ThisBuild / baseDirectory).value / "Dockerfile")
   )
-  .enablePlugins(PackPlugin, DockerPlugin, BuildInfoPlugin)
   .dependsOn(scip)
 
-// Task key for regenerating the SCIP/SCIP golden snapshots emitted by
+// Task key for regenerating the SCIP golden snapshots emitted by
 // the scip-kotlinc compiler plugin over the Kotlin minimized fixtures.
 // We deliberately do NOT call this `snapshots` to avoid colliding with the
 // existing top-level `snapshots` test project (`lazy val snapshots = project`).
@@ -615,8 +614,8 @@ val testSettings = List(
   libraryDependencies ++=
     List(
       "org.scalameta" %% "munit" % "0.7.29",
-      "org.scalameta" %% "moped-testkit" % V.moped,
       "org.scalameta" %% "scalameta" % V.scalameta,
+      "com.lihaoyi" %% "os-lib" % "0.9.3",
       "com.lihaoyi" %% "pprint" % "0.6.6"
     )
 )

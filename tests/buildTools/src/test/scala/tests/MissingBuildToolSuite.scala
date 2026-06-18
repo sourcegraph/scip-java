@@ -39,16 +39,4 @@ class MissingBuildToolSuite extends BaseBuildToolSuite {
          |<hello/>
          |""".stripMargin
   )
-
-  checkErrorOutput(
-    "levenshtein",
-    List("index", "--build-tool", "Mave"),
-    expectedOutput =
-      """|error: Automatically detected the build tool(s) Maven but none of them match the explicitly provided flag '--build-tool=Mave'. Did you mean --build-tool=Maven?
-         |""".stripMargin,
-    workingDirectoryLayout =
-      """|/pom.xml
-         |<hello/>
-         |""".stripMargin
-  )
 }

@@ -3,7 +3,6 @@ package tests
 import java.nio.file.Files
 import java.nio.file.Path
 
-import com.sourcegraph.io.DeleteVisitor
 import munit.FunSuite
 
 trait TempDirectories {
@@ -18,7 +17,7 @@ trait TempDirectories {
     }
 
     override def afterEach(context: AfterEach): Unit = {
-      Files.walkFileTree(path, new DeleteVisitor())
+      os.remove.all(os.Path(path))
     }
   }
 
