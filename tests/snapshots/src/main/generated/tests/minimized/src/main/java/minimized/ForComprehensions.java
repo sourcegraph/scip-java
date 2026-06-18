@@ -12,34 +12,37 @@
 //⌄ enclosing_range_start scip-java maven . . minimized/ForComprehensions#
   public class ForComprehensions {
 //             ^^^^^^^^^^^^^^^^^ definition scip-java maven . . minimized/ForComprehensions#
-//                               display_name ForComprehensions
-//                               signature_documentation java public class ForComprehensions
 //                               kind Class
+//                               display_name ForComprehensions
+//                               signature_documentation
+//                               > public class ForComprehensions
 //             ^^^^^^^^^^^^^^^^^ definition scip-java maven . . minimized/ForComprehensions#`<init>`().
-//                               display_name <init>
-//                               signature_documentation java public ForComprehensions()
 //                               kind Constructor
+//                               display_name <init>
+//                               signature_documentation
+//                               > public ForComprehensions()
 //  ⌄ enclosing_range_start scip-java maven . . minimized/ForComprehensions#app().
 //                        ⌄ enclosing_range_start local 0
     public static int app(int n) {
 //                    ^^^ definition scip-java maven . . minimized/ForComprehensions#app().
-//                        display_name app
-//                        signature_documentation java public static int app(int n)
 //                        kind StaticMethod
+//                        display_name app
+//                        signature_documentation
+//                        > public static int app(int n)
 //                            ^ definition local 0
 //                              display_name n
-//                              signature_documentation java int n
-//                              enclosing_symbol scip-java maven . . minimized/ForComprehensions#app().
+//                              signature_documentation
+//                              > int n
 //                            ⌃ enclosing_range_end local 0
 //    ⌄ enclosing_range_start local 1
       List<Integer> integers = Collections.singletonList(n);
 //    ^^^^ reference scip-java maven jdk 11 java/util/List#
 //         ^^^^^^^ reference scip-java maven jdk 11 java/lang/Integer#
 //                  ^^^^^^^^ definition local 1
-//                           display_name integers
-//                           signature_documentation java List<Integer> integers
-//                           enclosing_symbol scip-java maven . . minimized/ForComprehensions#app().
 //                           kind Variable
+//                           display_name integers
+//                           signature_documentation
+//                           > List<Integer> integers
 //                             ^^^^^^^^^^^ reference scip-java maven jdk 11 java/util/Collections#
 //                                         ^^^^^^^^^^^^^ reference scip-java maven jdk 11 java/util/Collections#singletonList().
 //                                                       ^ reference local 0
@@ -47,18 +50,18 @@
 //    ⌄ enclosing_range_start local 2
       int result = 0;
 //        ^^^^^^ definition local 2
-//               display_name result
-//               signature_documentation java int result
-//               enclosing_symbol scip-java maven . . minimized/ForComprehensions#app().
 //               kind Variable
+//               display_name result
+//               signature_documentation
+//               > int result
 //                  ⌃ enclosing_range_end local 2
 //         ⌄ enclosing_range_start local 3
       for (int i : integers) {
 //             ^ definition local 3
-//               display_name i
-//               signature_documentation java int i
-//               enclosing_symbol scip-java maven . . minimized/ForComprehensions#app().
 //               kind Variable
+//               display_name i
+//               signature_documentation
+//               > int i
 //                 ^^^^^^^^ reference local 1
 //             ⌃ enclosing_range_end local 3
         result += i;
@@ -71,3 +74,4 @@
 //  ⌃ enclosing_range_end scip-java maven . . minimized/ForComprehensions#app().
   }
 //⌃ enclosing_range_end scip-java maven . . minimized/ForComprehensions#
+  

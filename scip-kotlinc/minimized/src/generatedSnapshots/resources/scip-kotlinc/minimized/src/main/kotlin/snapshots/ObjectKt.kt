@@ -11,19 +11,23 @@
   object ObjectKt {
 //       ^^^^^^^^ definition scip-java maven . . snapshots/ObjectKt#
 //                display_name ObjectKt
-//                signature_documentation kotlin public final object ObjectKt : Any
+//                signature_documentation
+//                > public final object ObjectKt : Any
 //       ^^^^^^^^ definition scip-java maven . . snapshots/ObjectKt#`<init>`().
 //                display_name ObjectKt
-//                signature_documentation kotlin private constructor(): ObjectKt
+//                signature_documentation
+//                > private constructor(): ObjectKt
 //  ⌄ enclosing_range_start scip-java maven . . snapshots/ObjectKt#fail().
 //           ⌄ enclosing_range_start scip-java maven . . snapshots/ObjectKt#fail().(message)
     fun fail(message: String?): Nothing {
 //      ^^^^ definition scip-java maven . . snapshots/ObjectKt#fail().
 //           display_name fail
-//           signature_documentation kotlin public final fun fail(message: String?): Nothing
+//           signature_documentation
+//           > public final fun fail(message: String?): Nothing
 //           ^^^^^^^ definition scip-java maven . . snapshots/ObjectKt#fail().(message)
 //                   display_name message
-//                   signature_documentation kotlin message: String?
+//                   signature_documentation
+//                   > message: String?
 //                    ^^^^^^^ reference scip-java maven . . kotlin/String#
 //                              ^^^^^^^ reference scip-java maven . . kotlin/Nothing#
 //                          ⌃ enclosing_range_end scip-java maven . . snapshots/ObjectKt#fail().(message)
@@ -35,3 +39,4 @@
   }
 //⌃ enclosing_range_end scip-java maven . . snapshots/ObjectKt#
 //⌃ enclosing_range_end scip-java maven . . snapshots/ObjectKt#`<init>`().
+  

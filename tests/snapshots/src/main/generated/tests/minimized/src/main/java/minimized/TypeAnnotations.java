@@ -13,21 +13,24 @@
   
 //⌄ enclosing_range_start scip-java maven . . minimized/TypeAnnotation#
   @Target({ ElementType.TYPE_USE })
-// ^^^^^ reference scip-java maven jdk 11 java/lang/annotation/Target#
+// ^^^^^^ reference scip-java maven jdk 11 java/lang/annotation/Target#
 //          ^^^^^^^^^^^ reference scip-java maven jdk 11 java/lang/annotation/ElementType#
 //                      ^^^^^^^^ reference scip-java maven jdk 11 java/lang/annotation/ElementType#TYPE_USE.
   @interface TypeAnnotation {
 //           ^^^^^^^^^^^^^^ definition scip-java maven . . minimized/TypeAnnotation#
-//                          display_name TypeAnnotation
-//                          signature_documentation java @Target({ElementType.TYPE_USE})\n@interface TypeAnnotation
 //                          kind Interface
-//                          relationship is_implementation scip-java maven jdk 11 java/lang/annotation/Annotation#
+//                          display_name TypeAnnotation
+//                          signature_documentation
+//                          > @Target({ElementType.TYPE_USE})
+//                          > @interface TypeAnnotation
+//                          relationship scip-java maven jdk 11 java/lang/annotation/Annotation# implementation
 //    ⌄ enclosing_range_start scip-java maven . . minimized/TypeAnnotation#integer().
       int integer() default 1;
 //        ^^^^^^^ definition scip-java maven . . minimized/TypeAnnotation#integer().
-//                display_name integer
-//                signature_documentation java public abstract int integer()
 //                kind AbstractMethod
+//                display_name integer
+//                signature_documentation
+//                > public abstract int integer()
 //                           ⌃ enclosing_range_end scip-java maven . . minimized/TypeAnnotation#integer().
   }
 //⌃ enclosing_range_end scip-java maven . . minimized/TypeAnnotation#
@@ -37,36 +40,40 @@
 //⌄ enclosing_range_start scip-java maven . . minimized/ClassProcessed#[T]
   class ClassProcessed<@TypeAnnotation T extends Number> {
 //      ^^^^^^^^^^^^^^ definition scip-java maven . . minimized/ClassProcessed#
-//                     display_name ClassProcessed
-//                     signature_documentation java class ClassProcessed<T extends Number>
 //                     kind Class
+//                     display_name ClassProcessed
+//                     signature_documentation
+//                     > class ClassProcessed<T extends Number>
 //                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition scip-java maven . . minimized/ClassProcessed#[T]
-//                                                      display_name T
-//                                                      signature_documentation java T extends Number
 //                                                      kind TypeParameter
+//                                                      display_name T
+//                                                      signature_documentation
+//                                                      > T extends Number
 //                      ^^^^^^^^^^^^^^ reference scip-java maven . . minimized/TypeAnnotation#
 //                                               ^^^^^^ reference scip-java maven jdk 11 java/lang/Number#
   
 //    ⌄ enclosing_range_start scip-java maven . . minimized/ClassProcessed#`<init>`().
       public ClassProcessed() {
 //           ^^^^^^^^^^^^^^ definition scip-java maven . . minimized/ClassProcessed#`<init>`().
-//                          display_name <init>
-//                          signature_documentation java public ClassProcessed()
 //                          kind Constructor
+//                          display_name <init>
+//                          signature_documentation
+//                          > public ClassProcessed()
 //        ⌄ enclosing_range_start local 0
           String s = new @TypeAnnotation String();
 //        ^^^^^^ reference scip-java maven jdk 11 java/lang/String#
 //               ^ definition local 0
-//                 display_name s
-//                 signature_documentation java String s
-//                 enclosing_symbol scip-java maven . . minimized/ClassProcessed#`<init>`().
 //                 kind Variable
+//                 display_name s
+//                 signature_documentation
+//                 > String s
 //                        ^^^^^^^^^^^^^^ reference scip-java maven . . minimized/TypeAnnotation#
-//                                       ^^^^^^ reference scip-java maven jdk 11 java/lang/String#
 //                                       ^^^^^^ reference scip-java maven jdk 11 java/lang/String#`<init>`().
+//                                       ^^^^^^ reference scip-java maven jdk 11 java/lang/String#
 //                                               ⌃ enclosing_range_end local 0
       }
 //    ⌃ enclosing_range_end scip-java maven . . minimized/ClassProcessed#`<init>`().
   }
 //⌃ enclosing_range_end scip-java maven . . minimized/ClassProcessed#
 //⌃ enclosing_range_end scip-java maven . . minimized/ClassProcessed#[T]
+  

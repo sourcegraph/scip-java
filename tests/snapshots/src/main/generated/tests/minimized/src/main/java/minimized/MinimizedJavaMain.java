@@ -2,30 +2,34 @@
   
 //⌄ enclosing_range_start scip-java maven . . minimized/MinimizedJavaMain#
   @Annotations(value = "value", format = "format")
-// ^^^^^^^^^^ reference scip-java maven . . minimized/Annotations#
+// ^^^^^^^^^^^ reference scip-java maven . . minimized/Annotations#
 //             ^^^^^ reference scip-java maven . . minimized/Annotations#value().
 //                              ^^^^^^ reference scip-java maven . . minimized/Annotations#format().
   public class MinimizedJavaMain {
 //             ^^^^^^^^^^^^^^^^^ definition scip-java maven . . minimized/MinimizedJavaMain#
-//                               display_name MinimizedJavaMain
-//                               signature_documentation java @Annotations(value = "value", format = "format")\npublic class MinimizedJavaMain
 //                               kind Class
+//                               display_name MinimizedJavaMain
+//                               signature_documentation
+//                               > @Annotations(value = "value", format = "format")
+//                               > public class MinimizedJavaMain
 //             ^^^^^^^^^^^^^^^^^ definition scip-java maven . . minimized/MinimizedJavaMain#`<init>`().
-//                               display_name <init>
-//                               signature_documentation java public MinimizedJavaMain()
 //                               kind Constructor
+//                               display_name <init>
+//                               signature_documentation
+//                               > public MinimizedJavaMain()
 //  ⌄ enclosing_range_start scip-java maven . . minimized/MinimizedJavaMain#main().
 //                          ⌄ enclosing_range_start local 0
     public static void main(String[] args) {
 //                     ^^^^ definition scip-java maven . . minimized/MinimizedJavaMain#main().
-//                          display_name main
-//                          signature_documentation java public static void main(String[] args)
 //                          kind StaticMethod
+//                          display_name main
+//                          signature_documentation
+//                          > public static void main(String[] args)
 //                          ^^^^^^ reference scip-java maven jdk 11 java/lang/String#
 //                                   ^^^^ definition local 0
 //                                        display_name args
-//                                        signature_documentation java String[] args
-//                                        enclosing_symbol scip-java maven . . minimized/MinimizedJavaMain#main().
+//                                        signature_documentation
+//                                        > String[] args
 //                                      ⌃ enclosing_range_end local 0
       TypeVariables.app(new TypeVariables.CT());
 //    ^^^^^^^^^^^^^ reference scip-java maven . . minimized/TypeVariables#
@@ -79,3 +83,4 @@
 //  ⌃ enclosing_range_end scip-java maven . . minimized/MinimizedJavaMain#main().
   }
 //⌃ enclosing_range_end scip-java maven . . minimized/MinimizedJavaMain#
+  

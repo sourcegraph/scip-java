@@ -3,15 +3,17 @@
 //⌄ enclosing_range_start scip-java maven . . minimized/SubClasses#
   public class SubClasses extends AbstractClasses implements Interfaces {
 //             ^^^^^^^^^^ definition scip-java maven . . minimized/SubClasses#
-//                        display_name SubClasses
-//                        signature_documentation java public class SubClasses extends AbstractClasses implements Interfaces
 //                        kind Class
-//                        relationship is_implementation scip-java maven . . minimized/AbstractClasses#
-//                        relationship is_implementation scip-java maven . . minimized/Interfaces#
+//                        display_name SubClasses
+//                        signature_documentation
+//                        > public class SubClasses extends AbstractClasses implements Interfaces
+//                        relationship scip-java maven . . minimized/AbstractClasses# implementation
+//                        relationship scip-java maven . . minimized/Interfaces# implementation
 //             ^^^^^^^^^^ definition scip-java maven . . minimized/SubClasses#`<init>`().
-//                        display_name <init>
-//                        signature_documentation java public SubClasses()
 //                        kind Constructor
+//                        display_name <init>
+//                        signature_documentation
+//                        > public SubClasses()
 //                                ^^^^^^^^^^^^^^^ reference scip-java maven . . minimized/AbstractClasses#
 //                                                           ^^^^^^^^^^ reference scip-java maven . . minimized/Interfaces#
   
@@ -21,10 +23,12 @@
     public String abstractImplementation() {
 //         ^^^^^^ reference scip-java maven jdk 11 java/lang/String#
 //                ^^^^^^^^^^^^^^^^^^^^^^ definition scip-java maven . . minimized/SubClasses#abstractImplementation().
-//                                       display_name abstractImplementation
-//                                       signature_documentation java @Override\npublic String abstractImplementation()
 //                                       kind Method
-//                                       relationship is_reference is_implementation scip-java maven . . minimized/AbstractClasses#abstractImplementation().
+//                                       display_name abstractImplementation
+//                                       signature_documentation
+//                                       > @Override
+//                                       > public String abstractImplementation()
+//                                       relationship scip-java maven . . minimized/AbstractClasses#abstractImplementation(). implementation reference
       return "abstract";
     }
 //  ⌃ enclosing_range_end scip-java maven . . minimized/SubClasses#abstractImplementation().
@@ -35,10 +39,12 @@
     public String abstractInterfaceMethod() {
 //         ^^^^^^ reference scip-java maven jdk 11 java/lang/String#
 //                ^^^^^^^^^^^^^^^^^^^^^^^ definition scip-java maven . . minimized/SubClasses#abstractInterfaceMethod().
-//                                        display_name abstractInterfaceMethod
-//                                        signature_documentation java @Override\npublic String abstractInterfaceMethod()
 //                                        kind Method
-//                                        relationship is_reference is_implementation scip-java maven . . minimized/Interfaces#abstractInterfaceMethod().
+//                                        display_name abstractInterfaceMethod
+//                                        signature_documentation
+//                                        > @Override
+//                                        > public String abstractInterfaceMethod()
+//                                        relationship scip-java maven . . minimized/Interfaces#abstractInterfaceMethod(). implementation reference
       return "abstractInterface";
     }
 //  ⌃ enclosing_range_end scip-java maven . . minimized/SubClasses#abstractInterfaceMethod().
@@ -47,17 +53,18 @@
     public static String app() {
 //                ^^^^^^ reference scip-java maven jdk 11 java/lang/String#
 //                       ^^^ definition scip-java maven . . minimized/SubClasses#app().
-//                           display_name app
-//                           signature_documentation java public static String app()
 //                           kind StaticMethod
+//                           display_name app
+//                           signature_documentation
+//                           > public static String app()
 //    ⌄ enclosing_range_start local 0
       SubClasses s = new SubClasses();
 //    ^^^^^^^^^^ reference scip-java maven . . minimized/SubClasses#
 //               ^ definition local 0
-//                 display_name s
-//                 signature_documentation java SubClasses s
-//                 enclosing_symbol scip-java maven . . minimized/SubClasses#app().
 //                 kind Variable
+//                 display_name s
+//                 signature_documentation
+//                 > SubClasses s
 //                       ^^^^^^^^^^ reference scip-java maven . . minimized/SubClasses#`<init>`().
 //                                   ⌃ enclosing_range_end local 0
       return s.abstractImplementation()
@@ -76,3 +83,4 @@
 //  ⌃ enclosing_range_end scip-java maven . . minimized/SubClasses#app().
   }
 //⌃ enclosing_range_end scip-java maven . . minimized/SubClasses#
+  

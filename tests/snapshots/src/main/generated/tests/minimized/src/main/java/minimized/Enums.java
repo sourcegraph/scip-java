@@ -13,40 +13,45 @@
 //⌄ enclosing_range_start scip-java maven . . minimized/Enums#
   enum Enums {
 //     ^^^^^ definition scip-java maven . . minimized/Enums#
-//           display_name Enums
-//           signature_documentation java enum Enums
 //           kind Enum
-//           relationship is_implementation scip-java maven jdk 11 java/io/Serializable#
-//           relationship is_implementation scip-java maven jdk 11 java/lang/Comparable#
-//           relationship is_implementation scip-java maven jdk 11 java/lang/Enum#
+//           display_name Enums
+//           signature_documentation
+//           > enum Enums
+//           relationship scip-java maven jdk 11 java/io/Serializable# implementation
+//           relationship scip-java maven jdk 11 java/lang/Comparable# implementation
+//           relationship scip-java maven jdk 11 java/lang/Enum# implementation
 //  ⌄ enclosing_range_start scip-java maven . . minimized/Enums#A.
     A("A", 420),
 //  ^ definition scip-java maven . . minimized/Enums#A.
 //    display_name A("A", 420)
-//    signature_documentation java Enums.A("A", 420) /* ordinal 0 */
+//    signature_documentation
+//    > Enums.A("A", 420) /* ordinal 0 */
 //  ^ reference scip-java maven . . minimized/Enums#`<init>`().
 //            ⌃ enclosing_range_end scip-java maven . . minimized/Enums#A.
 //  ⌄ enclosing_range_start scip-java maven . . minimized/Enums#B.
     B("B", 1),
 //  ^ definition scip-java maven . . minimized/Enums#B.
 //    display_name B("B", 1)
-//    signature_documentation java Enums.B("B", 1) /* ordinal 1 */
+//    signature_documentation
+//    > Enums.B("B", 1) /* ordinal 1 */
 //  ^ reference scip-java maven . . minimized/Enums#`<init>`().
 //          ⌃ enclosing_range_end scip-java maven . . minimized/Enums#B.
 //  ⌄ enclosing_range_start scip-java maven . . minimized/Enums#C.
     C("C", 5);
 //  ^ definition scip-java maven . . minimized/Enums#C.
 //    display_name C("C", 5)
-//    signature_documentation java Enums.C("C", 5) /* ordinal 2 */
+//    signature_documentation
+//    > Enums.C("C", 5) /* ordinal 2 */
 //  ^ reference scip-java maven . . minimized/Enums#`<init>`().
 //          ⌃ enclosing_range_end scip-java maven . . minimized/Enums#C.
 //  ⌄ enclosing_range_start scip-java maven . . minimized/Enums#value.
     public String value;
 //         ^^^^^^ reference scip-java maven jdk 11 java/lang/String#
 //                ^^^^^ definition scip-java maven . . minimized/Enums#value.
-//                      display_name value
-//                      signature_documentation java public String value
 //                      kind Field
+//                      display_name value
+//                      signature_documentation
+//                      > public String value
 //                     ⌃ enclosing_range_end scip-java maven . . minimized/Enums#value.
   
 //  ⌄ enclosing_range_start scip-java maven . . minimized/Enums#`<init>`().
@@ -54,18 +59,19 @@
 //                      ⌄ enclosing_range_start local 1
     Enums(String value, int a) {
 //  ^^^^^ definition scip-java maven . . minimized/Enums#`<init>`().
-//        display_name <init>
-//        signature_documentation java private Enums(String value, int a)
 //        kind Constructor
+//        display_name <init>
+//        signature_documentation
+//        > private Enums(String value, int a)
 //        ^^^^^^ reference scip-java maven jdk 11 java/lang/String#
 //               ^^^^^ definition local 0
 //                     display_name value
-//                     signature_documentation java String value
-//                     enclosing_symbol scip-java maven . . minimized/Enums#`<init>`().
+//                     signature_documentation
+//                     > String value
 //                          ^ definition local 1
 //                            display_name a
-//                            signature_documentation java int a
-//                            enclosing_symbol scip-java maven . . minimized/Enums#`<init>`().
+//                            signature_documentation
+//                            > int a
 //                   ⌃ enclosing_range_end local 0
 //                          ⌃ enclosing_range_end local 1
       this.value = value;
@@ -78,26 +84,27 @@
     public static String app() {
 //                ^^^^^^ reference scip-java maven jdk 11 java/lang/String#
 //                       ^^^ definition scip-java maven . . minimized/Enums#app().
-//                           display_name app
-//                           signature_documentation java public static String app()
 //                           kind StaticMethod
+//                           display_name app
+//                           signature_documentation
+//                           > public static String app()
 //    ⌄ enclosing_range_start local 2
 //                                             ⌄ enclosing_range_start local 3
       String all = Arrays.stream(values()).map(e -> e.value).map(Enums::valueOf).collect(Collectors.toList()).toString();
 //    ^^^^^^ reference scip-java maven jdk 11 java/lang/String#
 //           ^^^ definition local 2
-//               display_name all
-//               signature_documentation java String all
-//               enclosing_symbol scip-java maven . . minimized/Enums#app().
 //               kind Variable
+//               display_name all
+//               signature_documentation
+//               > String all
 //                 ^^^^^^ reference scip-java maven jdk 11 java/util/Arrays#
 //                        ^^^^^^ reference scip-java maven jdk 11 java/util/Arrays#stream().
 //                               ^^^^^^ reference scip-java maven . . minimized/Enums#values().
 //                                         ^^^ reference scip-java maven jdk 11 java/util/stream/Stream#map().
 //                                             ^ definition local 3
 //                                               display_name e
-//                                               signature_documentation java Enums e
-//                                               enclosing_symbol scip-java maven . . minimized/Enums#app().
+//                                               signature_documentation
+//                                               > Enums e
 //                                                  ^ reference local 3
 //                                                    ^^^^^ reference scip-java maven . . minimized/Enums#value.
 //                                                           ^^^ reference scip-java maven jdk 11 java/util/stream/Stream#map().
@@ -121,3 +128,4 @@
 //  ⌃ enclosing_range_end scip-java maven . . minimized/Enums#app().
   }
 //⌃ enclosing_range_end scip-java maven . . minimized/Enums#
+  

@@ -3,19 +3,22 @@
 //⌄ enclosing_range_start scip-java maven . . snapshots/ClassConsumer#
   public class ClassConsumer {
 //             ^^^^^^^^^^^^^ definition scip-java maven . . snapshots/ClassConsumer#
-//                           display_name ClassConsumer
-//                           signature_documentation java public class ClassConsumer
 //                           kind Class
+//                           display_name ClassConsumer
+//                           signature_documentation
+//                           > public class ClassConsumer
 //             ^^^^^^^^^^^^^ definition scip-java maven . . snapshots/ClassConsumer#`<init>`().
-//                           display_name <init>
-//                           signature_documentation java public ClassConsumer()
 //                           kind Constructor
+//                           display_name <init>
+//                           signature_documentation
+//                           > public ClassConsumer()
 //  ⌄ enclosing_range_start scip-java maven . . snapshots/ClassConsumer#run().
     public static void run() {
 //                     ^^^ definition scip-java maven . . snapshots/ClassConsumer#run().
-//                         display_name run
-//                         signature_documentation java public static void run()
 //                         kind StaticMethod
+//                         display_name run
+//                         signature_documentation
+//                         > public static void run()
       System.out.println(new Class().getAsdf());
 //    ^^^^^^ reference scip-java maven jdk 11 java/lang/System#
 //           ^^^ reference scip-java maven jdk 11 java/lang/System#out.
@@ -26,3 +29,4 @@
 //  ⌃ enclosing_range_end scip-java maven . . snapshots/ClassConsumer#run().
   }
 //⌃ enclosing_range_end scip-java maven . . snapshots/ClassConsumer#
+  

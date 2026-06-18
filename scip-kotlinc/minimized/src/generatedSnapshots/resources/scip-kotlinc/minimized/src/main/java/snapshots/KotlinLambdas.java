@@ -12,19 +12,22 @@
 //⌄ enclosing_range_start scip-java maven . . snapshots/KotlinLambdas#
   public class KotlinLambdas {
 //             ^^^^^^^^^^^^^ definition scip-java maven . . snapshots/KotlinLambdas#
-//                           display_name KotlinLambdas
-//                           signature_documentation java public class KotlinLambdas
 //                           kind Class
+//                           display_name KotlinLambdas
+//                           signature_documentation
+//                           > public class KotlinLambdas
 //             ^^^^^^^^^^^^^ definition scip-java maven . . snapshots/KotlinLambdas#`<init>`().
-//                           display_name <init>
-//                           signature_documentation java public KotlinLambdas()
 //                           kind Constructor
+//                           display_name <init>
+//                           signature_documentation
+//                           > public KotlinLambdas()
 //  ⌄ enclosing_range_start scip-java maven . . snapshots/KotlinLambdas#test().
     public void test() {
 //              ^^^^ definition scip-java maven . . snapshots/KotlinLambdas#test().
-//                   display_name test
-//                   signature_documentation java public void test()
 //                   kind Method
+//                   display_name test
+//                   signature_documentation
+//                   > public void test()
       LambdasKt.getX(); // TODO figure out emit getX on kotlin side
 //    ^^^^^^^^^ reference scip-java maven . . snapshots/LambdasKt#
 //              ^^^^ reference scip-java maven . . snapshots/LambdasKt#getX().
@@ -41,3 +44,4 @@
 //  ⌃ enclosing_range_end scip-java maven . . snapshots/KotlinLambdas#test().
   }
 //⌃ enclosing_range_end scip-java maven . . snapshots/KotlinLambdas#
+  

@@ -8,27 +8,31 @@
   
 //⌄ enclosing_range_start scip-java maven . . minimized/AnonymousClasses#
   @SuppressWarnings("ALL")
-// ^^^^^^^^^^^^^^^ reference scip-java maven jdk 11 java/lang/SuppressWarnings#
+// ^^^^^^^^^^^^^^^^ reference scip-java maven jdk 11 java/lang/SuppressWarnings#
   public class AnonymousClasses {
 //             ^^^^^^^^^^^^^^^^ definition scip-java maven . . minimized/AnonymousClasses#
-//                              display_name AnonymousClasses
-//                              signature_documentation java @SuppressWarnings("ALL")\npublic class AnonymousClasses
 //                              kind Class
+//                              display_name AnonymousClasses
+//                              signature_documentation
+//                              > @SuppressWarnings("ALL")
+//                              > public class AnonymousClasses
 //             ^^^^^^^^^^^^^^^^ definition scip-java maven . . minimized/AnonymousClasses#`<init>`().
-//                              display_name <init>
-//                              signature_documentation java public AnonymousClasses()
 //                              kind Constructor
+//                              display_name <init>
+//                              signature_documentation
+//                              > public AnonymousClasses()
 //  ⌄ enclosing_range_start scip-java maven . . minimized/AnonymousClasses#app().
 //                        ⌄ enclosing_range_start local 0
     public static int app(int n) {
 //                    ^^^ definition scip-java maven . . minimized/AnonymousClasses#app().
-//                        display_name app
-//                        signature_documentation java public static int app(int n)
 //                        kind StaticMethod
+//                        display_name app
+//                        signature_documentation
+//                        > public static int app(int n)
 //                            ^ definition local 0
 //                              display_name n
-//                              signature_documentation java int n
-//                              enclosing_symbol scip-java maven . . minimized/AnonymousClasses#app().
+//                              signature_documentation
+//                              > int n
 //                            ⌃ enclosing_range_end local 0
 //    ⌄ enclosing_range_start local 1
       Function<Integer, Integer> fn =
@@ -36,10 +40,10 @@
 //             ^^^^^^^ reference scip-java maven jdk 11 java/lang/Integer#
 //                      ^^^^^^^ reference scip-java maven jdk 11 java/lang/Integer#
 //                               ^^ definition local 1
-//                                  display_name fn
-//                                  signature_documentation java Function<Integer, Integer> fn
-//                                  enclosing_symbol scip-java maven . . minimized/AnonymousClasses#app().
 //                                  kind Variable
+//                                  display_name fn
+//                                  signature_documentation
+//                                  > Function<Integer, Integer> fn
           new Function<Integer, Integer>() {
 //            ^^^^^^^^ reference scip-java maven jdk 11 java/util/function/Function#
 //                     ^^^^^^^ reference scip-java maven jdk 11 java/lang/Integer#
@@ -51,16 +55,17 @@
             public Integer apply(Integer integer) {
 //                 ^^^^^^^ reference scip-java maven jdk 11 java/lang/Integer#
 //                         ^^^^^ definition local 3
-//                               display_name apply
-//                               signature_documentation java @Override\npublic Integer apply(Integer integer)
-//                               enclosing_symbol local 2
 //                               kind Method
-//                               relationship is_reference is_implementation scip-java maven jdk 11 java/util/function/Function#apply().
+//                               display_name apply
+//                               signature_documentation
+//                               > @Override
+//                               > public Integer apply(Integer integer)
+//                               relationship scip-java maven jdk 11 java/util/function/Function#apply(). implementation reference
 //                               ^^^^^^^ reference scip-java maven jdk 11 java/lang/Integer#
 //                                       ^^^^^^^ definition local 4
 //                                               display_name integer
-//                                               signature_documentation java Integer integer
-//                                               enclosing_symbol local 3
+//                                               signature_documentation
+//                                               > Integer integer
 //                                             ⌃ enclosing_range_end local 4
               return integer + n;
 //                   ^^^^^^^ reference local 4
@@ -78,3 +83,4 @@
 //  ⌃ enclosing_range_end scip-java maven . . minimized/AnonymousClasses#app().
   }
 //⌃ enclosing_range_end scip-java maven . . minimized/AnonymousClasses#
+  

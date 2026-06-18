@@ -6,6 +6,9 @@
     nixpkgs = {
       url = "github:NixOS/nixpkgs/nixos-26.05";
     };
+    scip = {
+      url = "github:scip-code/scip";
+    };
   };
 
   outputs =
@@ -13,11 +16,13 @@
       self,
       flake-utils,
       nixpkgs,
+      scip,
     }:
     flake-utils.lib.eachDefaultSystem (
       system:
       let
         pkgs = import nixpkgs { inherit system; };
+        scipCli = scip.packages.${system}.default;
         mkDevShell =
           jdk:
           pkgs.mkShellNoCC {
@@ -32,6 +37,7 @@
               nodejs
               (sbt.override ({ jre = jdk; }))
               scalafmt
+              scipCli
               yarn
             ];
           };

@@ -22,44 +22,50 @@
 //⌄ enclosing_range_start scip-java maven . . minimized/ParameterizedTypes#[B]
   public class ParameterizedTypes<A, B extends String> {
 //             ^^^^^^^^^^^^^^^^^^ definition scip-java maven . . minimized/ParameterizedTypes#
-//                                display_name ParameterizedTypes
-//                                signature_documentation java public class ParameterizedTypes<A, B extends String>
 //                                kind Class
+//                                display_name ParameterizedTypes
+//                                signature_documentation
+//                                > public class ParameterizedTypes<A, B extends String>
 //             ^^^^^^^^^^^^^^^^^^ definition scip-java maven . . minimized/ParameterizedTypes#`<init>`().
-//                                display_name <init>
-//                                signature_documentation java public ParameterizedTypes()
 //                                kind Constructor
+//                                display_name <init>
+//                                signature_documentation
+//                                > public ParameterizedTypes()
 //                                ^ definition scip-java maven . . minimized/ParameterizedTypes#[A]
-//                                  display_name A
-//                                  signature_documentation java A
 //                                  kind TypeParameter
+//                                  display_name A
+//                                  signature_documentation
+//                                  > A
 //                                   ^ definition scip-java maven . . minimized/ParameterizedTypes#[B]
-//                                     display_name B
-//                                     signature_documentation java B extends String
 //                                     kind TypeParameter
+//                                     display_name B
+//                                     signature_documentation
+//                                     > B extends String
 //                                             ^^^^^^ reference scip-java maven jdk 11 java/lang/String#
 //  ⌄ enclosing_range_start scip-java maven . . minimized/ParameterizedTypes#iteratorable().[T]
 //  ⌄ enclosing_range_start scip-java maven . . minimized/ParameterizedTypes#iteratorable().
 //                                                                 ⌄ enclosing_range_start local 0
     public <T extends Iterable<A> & Iterator<B>> void iteratorable(List<T> list) {}
 //          ^ definition scip-java maven . . minimized/ParameterizedTypes#iteratorable().[T]
-//            display_name T
-//            signature_documentation java T extends Iterable<A> & Iterator<B>
 //            kind TypeParameter
+//            display_name T
+//            signature_documentation
+//            > T extends Iterable<A> & Iterator<B>
 //                    ^^^^^^^^ reference scip-java maven jdk 11 java/lang/Iterable#
 //                             ^ reference scip-java maven . . minimized/ParameterizedTypes#[A]
 //                                  ^^^^^^^^ reference scip-java maven jdk 11 java/util/Iterator#
 //                                           ^ reference scip-java maven . . minimized/ParameterizedTypes#[B]
 //                                                    ^^^^^^^^^^^^ definition scip-java maven . . minimized/ParameterizedTypes#iteratorable().
-//                                                                 display_name iteratorable
-//                                                                 signature_documentation java public <T extends Iterable<A> & Iterator<B>> void iteratorable(List<T> list)
 //                                                                 kind Method
+//                                                                 display_name iteratorable
+//                                                                 signature_documentation
+//                                                                 > public <T extends Iterable<A> & Iterator<B>> void iteratorable(List<T> list)
 //                                                                 ^^^^ reference scip-java maven jdk 11 java/util/List#
 //                                                                      ^ reference scip-java maven . . minimized/ParameterizedTypes#iteratorable().[T]
 //                                                                         ^^^^ definition local 0
 //                                                                              display_name list
-//                                                                              signature_documentation java List<T> list
-//                                                                              enclosing_symbol scip-java maven . . minimized/ParameterizedTypes#iteratorable().
+//                                                                              signature_documentation
+//                                                                              > List<T> list
 //                                                                            ⌃ enclosing_range_end local 0
 //                                                                                ⌃ enclosing_range_end scip-java maven . . minimized/ParameterizedTypes#iteratorable().[T]
 //                                                                                ⌃ enclosing_range_end scip-java maven . . minimized/ParameterizedTypes#iteratorable().
@@ -70,19 +76,20 @@
     public String app(A a, B b) {
 //         ^^^^^^ reference scip-java maven jdk 11 java/lang/String#
 //                ^^^ definition scip-java maven . . minimized/ParameterizedTypes#app().
-//                    display_name app
-//                    signature_documentation java public String app(A a, B b)
 //                    kind Method
+//                    display_name app
+//                    signature_documentation
+//                    > public String app(A a, B b)
 //                    ^ reference scip-java maven . . minimized/ParameterizedTypes#[A]
 //                      ^ definition local 1
 //                        display_name a
-//                        signature_documentation java A a
-//                        enclosing_symbol scip-java maven . . minimized/ParameterizedTypes#app().
+//                        signature_documentation
+//                        > A a
 //                         ^ reference scip-java maven . . minimized/ParameterizedTypes#[B]
 //                           ^ definition local 2
 //                             display_name b
-//                             signature_documentation java B b
-//                             enclosing_symbol scip-java maven . . minimized/ParameterizedTypes#app().
+//                             signature_documentation
+//                             > B b
 //                      ⌃ enclosing_range_end local 1
 //                           ⌃ enclosing_range_end local 2
       return a.toString() + b;
@@ -97,9 +104,10 @@
 //         ^^^ reference scip-java maven jdk 11 java/util/Map#
 //                       ^^^^^^ reference scip-java maven jdk 11 java/lang/String#
 //                                  ^^^^^^^ definition scip-java maven . . minimized/ParameterizedTypes#doStuff().
-//                                          display_name doStuff
-//                                          signature_documentation java public Map<? extends String, ?> doStuff()
 //                                          kind Method
+//                                          display_name doStuff
+//                                          signature_documentation
+//                                          > public Map<? extends String, ?> doStuff()
 //                                                           ⌃ enclosing_range_end scip-java maven . . minimized/ParameterizedTypes#doStuff().
   
 //  ⌄ enclosing_range_start scip-java maven . . minimized/ParameterizedTypes#createQuadruplet().
@@ -109,9 +117,10 @@
 //                               ^^^^^^ reference scip-java maven jdk 11 java/lang/Object#
 //                                               ^^^^^^^ reference scip-java maven jdk 11 java/lang/Integer#
 //                                                        ^^^^^^^^^^^^^^^^ definition scip-java maven . . minimized/ParameterizedTypes#createQuadruplet().
-//                                                                         display_name createQuadruplet
-//                                                                         signature_documentation java public Quadruplet<String, ?, Object, ? super Integer> createQuadruplet()
 //                                                                         kind Method
+//                                                                         display_name createQuadruplet
+//                                                                         signature_documentation
+//                                                                         > public Quadruplet<String, ?, Object, ? super Integer> createQuadruplet()
 //                                                                                          ⌃ enclosing_range_end scip-java maven . . minimized/ParameterizedTypes#createQuadruplet().
   
 //  ⌄ enclosing_range_start scip-java maven . . minimized/ParameterizedTypes#Quadruplet#
@@ -121,29 +130,35 @@
 //  ⌄ enclosing_range_start scip-java maven . . minimized/ParameterizedTypes#Quadruplet#[Y]
     public static class Quadruplet<T, S, X, Y> {}
 //                      ^^^^^^^^^^ definition scip-java maven . . minimized/ParameterizedTypes#Quadruplet#
-//                                 display_name Quadruplet
-//                                 signature_documentation java public static class Quadruplet<T, S, X, Y>
 //                                 kind Class
+//                                 display_name Quadruplet
+//                                 signature_documentation
+//                                 > public static class Quadruplet<T, S, X, Y>
 //                      ^^^^^^^^^^ definition scip-java maven . . minimized/ParameterizedTypes#Quadruplet#`<init>`().
-//                                 display_name <init>
-//                                 signature_documentation java public Quadruplet()
 //                                 kind Constructor
+//                                 display_name <init>
+//                                 signature_documentation
+//                                 > public Quadruplet()
 //                                 ^ definition scip-java maven . . minimized/ParameterizedTypes#Quadruplet#[T]
-//                                   display_name T
-//                                   signature_documentation java T
 //                                   kind TypeParameter
+//                                   display_name T
+//                                   signature_documentation
+//                                   > T
 //                                    ^ definition scip-java maven . . minimized/ParameterizedTypes#Quadruplet#[S]
-//                                      display_name S
-//                                      signature_documentation java S
 //                                      kind TypeParameter
+//                                      display_name S
+//                                      signature_documentation
+//                                      > S
 //                                       ^ definition scip-java maven . . minimized/ParameterizedTypes#Quadruplet#[X]
-//                                         display_name X
-//                                         signature_documentation java X
 //                                         kind TypeParameter
+//                                         display_name X
+//                                         signature_documentation
+//                                         > X
 //                                          ^ definition scip-java maven . . minimized/ParameterizedTypes#Quadruplet#[Y]
-//                                            display_name Y
-//                                            signature_documentation java Y
 //                                            kind TypeParameter
+//                                            display_name Y
+//                                            signature_documentation
+//                                            > Y
 //                                              ⌃ enclosing_range_end scip-java maven . . minimized/ParameterizedTypes#Quadruplet#
 //                                              ⌃ enclosing_range_end scip-java maven . . minimized/ParameterizedTypes#Quadruplet#[T]
 //                                              ⌃ enclosing_range_end scip-java maven . . minimized/ParameterizedTypes#Quadruplet#[S]
@@ -153,3 +168,4 @@
 //⌃ enclosing_range_end scip-java maven . . minimized/ParameterizedTypes#
 //⌃ enclosing_range_end scip-java maven . . minimized/ParameterizedTypes#[A]
 //⌃ enclosing_range_end scip-java maven . . minimized/ParameterizedTypes#[B]
+  

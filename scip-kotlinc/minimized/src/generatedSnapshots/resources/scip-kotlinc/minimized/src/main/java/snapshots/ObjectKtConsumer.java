@@ -3,19 +3,22 @@
 //⌄ enclosing_range_start scip-java maven . . snapshots/ObjectKtConsumer#
   public class ObjectKtConsumer {
 //             ^^^^^^^^^^^^^^^^ definition scip-java maven . . snapshots/ObjectKtConsumer#
-//                              display_name ObjectKtConsumer
-//                              signature_documentation java public class ObjectKtConsumer
 //                              kind Class
+//                              display_name ObjectKtConsumer
+//                              signature_documentation
+//                              > public class ObjectKtConsumer
 //             ^^^^^^^^^^^^^^^^ definition scip-java maven . . snapshots/ObjectKtConsumer#`<init>`().
-//                              display_name <init>
-//                              signature_documentation java public ObjectKtConsumer()
 //                              kind Constructor
+//                              display_name <init>
+//                              signature_documentation
+//                              > public ObjectKtConsumer()
 //  ⌄ enclosing_range_start scip-java maven . . snapshots/ObjectKtConsumer#run().
     public static void run() {
 //                     ^^^ definition scip-java maven . . snapshots/ObjectKtConsumer#run().
-//                         display_name run
-//                         signature_documentation java public static void run()
 //                         kind StaticMethod
+//                         display_name run
+//                         signature_documentation
+//                         > public static void run()
       ObjectKt.INSTANCE.fail("boom");
 //    ^^^^^^^^ reference scip-java maven . . snapshots/ObjectKt#
 //             ^^^^^^^^ reference scip-java maven . . snapshots/ObjectKt#INSTANCE.
@@ -24,3 +27,4 @@
 //  ⌃ enclosing_range_end scip-java maven . . snapshots/ObjectKtConsumer#run().
   }
 //⌃ enclosing_range_end scip-java maven . . snapshots/ObjectKtConsumer#
+  
