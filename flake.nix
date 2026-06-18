@@ -4,7 +4,7 @@
       url = "github:numtide/flake-utils";
     };
     nixpkgs = {
-      url = "github:NixOS/nixpkgs/nixos-25.11";
+      url = "github:NixOS/nixpkgs/nixos-26.05";
     };
   };
 
