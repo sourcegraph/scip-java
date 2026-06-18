@@ -616,7 +616,7 @@ val testSettings = List(
       "org.scalameta" %% "munit" % "0.7.29",
       "org.scalameta" %% "scalameta" % V.scalameta,
       "com.lihaoyi" %% "os-lib" % "0.9.3",
-      "com.lihaoyi" %% "pprint" % "0.6.6"
+      "com.lihaoyi" %% "pprint" % "0.9.6"
     )
 )
 
