@@ -37,17 +37,8 @@ class ScipBuildToolTest : BuildToolHarness() {
                 // workspace so its sources are not themselves indexed.
                 prepare = { workingDirectory ->
                     val libSrcDir = Files.createTempDirectory("scip-classpath-lib")
+                    copyFixture("scip/compiles-with-classpath-lib", libSrcDir)
                     val libSrc = libSrcDir.resolve("bar").resolve("Greeter.java")
-                    Files.createDirectories(libSrc.parent)
-                    Files.writeString(
-                        libSrc,
-                        """
-                        |package bar;
-                        |public class Greeter {
-                        |  public String greet() { return "hi"; }
-                        |}
-                        |""".trimMargin(),
-                    )
                     val libClasses = workingDirectory.resolve("lib-classes")
                     Files.createDirectories(libClasses)
                     exec(

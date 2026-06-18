@@ -113,10 +113,10 @@ abstract class BuildToolHarness {
      * is non-empty, each token is textually replaced in every file, which lets a
      * single fixture cover parametrized variants (e.g. the JDK in a toolchain).
      */
-    private fun copyFixture(
+    protected fun copyFixture(
         fixture: String,
         target: Path,
-        substitutions: Map<String, String>,
+        substitutions: Map<String, String> = emptyMap(),
     ) {
         val resource = "/fixtures/$fixture"
         val url =
