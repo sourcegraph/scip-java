@@ -576,6 +576,38 @@ lazy val buildTools = project
   )
   .dependsOn(unit)
 
+// Kotlin/JUnit5 rewrite of `buildTools`, aligned with the now-Kotlin CLI.
+// Depends only on `cli` (no munit, no Scala) so the test stack matches the
+// product. Coexists with `buildTools` during the migration.
+lazy val buildToolsKotlin = project
+  .in(file("tests/buildtools-kotlin"))
+  .enablePlugins(KotlinPlugin)
+  .settings(
+    moduleName := "buildtools-kotlin",
+    crossPaths := false,
+    autoScalaLibrary := false,
+    publish / skip := true,
+    kotlinVersion := V.kotlinVersion,
+    kotlincJvmTarget := "11",
+    Test / fork := true,
+    // Our CI set up is a couple of measly vCPUs so parallelising tests there makes
+    // everything worse
+    Test / testForkedParallel := !sys.env.contains("CI"),
+    // The SCIP build tool drives javac in-process; on JDK 17+ this requires
+    // opening the JDK-internal javac packages.
+    Test / javaOptions ++= javacModuleOptions.map(_.stripPrefix("-J")),
+    // Pin the JDK version embedded in stdlib SCIP symbols so output is stable.
+    Test / javaOptions += "-Dscip.jdk.version=11",
+    libraryDependencies ++=
+      Seq(
+        "org.jetbrains.kotlin" % "kotlin-test" % V.kotlinVersion % Test,
+        "org.jetbrains.kotlin" % "kotlin-test-junit5" % V.kotlinVersion % Test,
+        "com.github.sbt.junit" % "jupiter-interface" %
+          JupiterKeys.jupiterVersion.value % Test
+      )
+  )
+  .dependsOn(cli)
+
 lazy val snapshots = project
   .in(file("tests/snapshots"))
   .settings(
