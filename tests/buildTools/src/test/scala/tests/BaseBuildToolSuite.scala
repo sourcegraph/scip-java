@@ -5,35 +5,18 @@ import java.nio.file.Files
 import java.nio.file.Path
 
 import scala.jdk.CollectionConverters._
-import scala.util.Properties
 
 import scala.meta.internal.io.FileIO
 import scala.meta.io.AbsolutePath
 
 import com.sourcegraph.scip_java.ScipJava
 import com.sourcegraph.scip_java.buildtools.ClasspathEntry
-import munit.Tag
 import munit.TestOptions
 import os.Shellable
 
 abstract class BaseBuildToolSuite extends ScipJavaSuite(ScipJava.app) {
   self =>
   override def environmentVariables: Map[String, String] = sys.env
-
-  def tags = List.empty[Tag]
-
-  override def munitTestTransforms: List[TestTransform] =
-    super.munitTestTransforms ++
-      List(
-        new TestTransform(
-          "SkipWindows",
-          t =>
-            if (Properties.isWin && t.tags(SkipWindows))
-              t.tag(munit.Ignore)
-            else
-              t
-        )
-      )
 
   // NOTE(olafur): workaround for https://github.com/scalameta/moped/issues/18
   override val temporaryDirectory: DirectoryFixture =
@@ -79,7 +62,7 @@ abstract class BaseBuildToolSuite extends ScipJavaSuite(ScipJava.app) {
         s"$externalJDKVersion is outside the supported range " +
         s"[${BaseBuildToolSuite.minExternalJdk}, ${maxJdk.getOrElse("∞")}]"
 
-    test(options.withTags(options.tags ++ tags)) {
+    test(options) {
       // Unfortunately, MUnit doesn't seem to handle the ignore messages the
       // way we'd want: https://github.com/scalameta/munit/issues/549#issuecomment-2056751821
       // So instead, to give some indication that the test was actually ignored,

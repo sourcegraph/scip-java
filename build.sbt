@@ -569,10 +569,6 @@ lazy val buildTools = project
   .in(file("tests/buildTools"))
   .settings(
     testSettings,
-    Test / envVars ++=
-      Map(
-        "SCIP_JAVA_CLI" -> ((cli / pack).value / "bin" / "scip-java").toString
-      ),
     Test / fork := true,
     // Our CI set up is a couple of measly vCPUs so parallelising tests there makes
     // everything worse

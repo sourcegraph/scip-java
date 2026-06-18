@@ -3,7 +3,6 @@ package tests
 import scala.meta.internal.io.InputStreamIO
 
 class MavenBuildToolSuite extends BaseBuildToolSuite {
-  override def tags = List(SkipWindows)
 
   lazy val pomXml =
     new String(

@@ -1,7 +1,6 @@
 package tests
 
 class ScipBuildToolSuite extends BaseBuildToolSuite {
-  override def tags = List(SkipWindows)
 
   checkBuild(
     "rejects-dependencies-field",

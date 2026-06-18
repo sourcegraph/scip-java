@@ -16,15 +16,11 @@ public class ScipWriter implements AutoCloseable {
   private final ScipAggregatorOptions options;
 
   public ScipWriter(ScipAggregatorOptions options) throws IOException {
-    if (OperatingSystem.isWindows()) {
-      this.tmp = Files.createTempFile("scip-aggregator", "index.scip");
-    } else {
-      this.tmp =
-          Files.createTempFile(
-              "scip-aggregator",
-              "index.scip",
-              PosixFilePermissions.asFileAttribute(PosixFilePermissions.fromString("rw-r--r--")));
-    }
+    this.tmp =
+        Files.createTempFile(
+            "scip-aggregator",
+            "index.scip",
+            PosixFilePermissions.asFileAttribute(PosixFilePermissions.fromString("rw-r--r--")));
     this.output = new ScipOutputStream(new BufferedOutputStream(Files.newOutputStream(tmp)));
     this.options = options;
   }

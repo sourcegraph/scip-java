@@ -68,11 +68,6 @@ curl -fLo coursier https://git.io/coursier-cli \
   && chmod +x coursier \
   && ./coursier launch com.sourcegraph:scip-java_2.13:@STABLE_VERSION@ -- --help
 
-# Windows
-bitsadmin /transfer downloadCoursierCli https://git.io/coursier-cli "%cd%\coursier"
-bitsadmin /transfer downloadCoursierBat https://git.io/coursier-bat "%cd%\coursier.bat"
-./coursier launch com.sourcegraph:scip-java_2.13:@STABLE_VERSION@ -- --help
-
 # macOS Homebrew
 brew install coursier/formulas/coursier \
  && coursier launch com.sourcegraph:scip-java_2.13:@STABLE_VERSION@ -- --help
@@ -98,12 +93,6 @@ you still need a Java installation to run the `scip-java` binary.
 curl -fLo coursier https://git.io/coursier-cli \
   && chmod +x coursier \
   && ./coursier bootstrap --standalone -o scip-java com.sourcegraph:scip-java_2.13:@STABLE_VERSION@ --main com.sourcegraph.scip_java.ScipJava
-./scip-java --help
-
-# Windows
-bitsadmin /transfer downloadCoursierCli https://git.io/coursier-cli "%cd%\coursier"
-bitsadmin /transfer downloadCoursierBat https://git.io/coursier-bat "%cd%\coursier.bat"
-./coursier bootstrap --standalone -o scip-java com.sourcegraph:scip-java_2.13:@STABLE_VERSION@
 ./scip-java --help
 ```
 
