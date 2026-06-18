@@ -59,7 +59,6 @@
               -not -path './examples/*' \
               -not -path './tests/minimized/*' \
               -not -path './tests/snapshots/*' \
-              -not -path './tests/gradle-example/*' \
               -not -path './scip-kotlinc/minimized/*' \
               -exec ${pkgs.google-java-format}/bin/google-java-format --dry-run --set-exit-if-changed {} +
             touch $out
