@@ -1,42 +1,42 @@
   package snapshots
-//        ^^^^^^^^^ reference scip-java maven . . scip-java maven . . snapshots/
+//        ^^^^^^^^^ reference scip-java maven . . snapshots/
   
   import java.lang.RuntimeException
-//       ^^^^ reference scip-java maven . . scip-java maven . . java/
-//            ^^^^ reference scip-java maven . . scip-java maven . . java/lang/
-//                 ^^^^^^^^^^^^^^^^ reference scip-java maven . . scip-java maven jdk 11 java/lang/RuntimeException#
+//       ^^^^ reference scip-java maven . . java/
+//            ^^^^ reference scip-java maven . . java/lang/
+//                 ^^^^^^^^^^^^^^^^ reference scip-java maven jdk 11 java/lang/RuntimeException#
   
-//⌄ enclosing_range_start scip-java maven . . scip-java maven . . snapshots/ObjectKt#
-//⌄ enclosing_range_start scip-java maven . . scip-java maven . . snapshots/ObjectKt#`<init>`().
+//⌄ enclosing_range_start scip-java maven . . snapshots/ObjectKt#
+//⌄ enclosing_range_start scip-java maven . . snapshots/ObjectKt#`<init>`().
   object ObjectKt {
-//       ^^^^^^^^ definition scip-java maven . . scip-java maven . . snapshots/ObjectKt#
+//       ^^^^^^^^ definition scip-java maven . . snapshots/ObjectKt#
 //                display_name ObjectKt
 //                signature_documentation
 //                > public final object ObjectKt : Any
-//       ^^^^^^^^ definition scip-java maven . . scip-java maven . . snapshots/ObjectKt#`<init>`().
+//       ^^^^^^^^ definition scip-java maven . . snapshots/ObjectKt#`<init>`().
 //                display_name ObjectKt
 //                signature_documentation
 //                > private constructor(): ObjectKt
-//  ⌄ enclosing_range_start scip-java maven . . scip-java maven . . snapshots/ObjectKt#fail().
-//           ⌄ enclosing_range_start scip-java maven . . scip-java maven . . snapshots/ObjectKt#fail().(message)
+//  ⌄ enclosing_range_start scip-java maven . . snapshots/ObjectKt#fail().
+//           ⌄ enclosing_range_start scip-java maven . . snapshots/ObjectKt#fail().(message)
     fun fail(message: String?): Nothing {
-//      ^^^^ definition scip-java maven . . scip-java maven . . snapshots/ObjectKt#fail().
+//      ^^^^ definition scip-java maven . . snapshots/ObjectKt#fail().
 //           display_name fail
 //           signature_documentation
 //           > public final fun fail(message: String?): Nothing
-//           ^^^^^^^ definition scip-java maven . . scip-java maven . . snapshots/ObjectKt#fail().(message)
+//           ^^^^^^^ definition scip-java maven . . snapshots/ObjectKt#fail().(message)
 //                   display_name message
 //                   signature_documentation
 //                   > message: String?
-//                    ^^^^^^^ reference scip-java maven . . scip-java maven . . kotlin/String#
-//                              ^^^^^^^ reference scip-java maven . . scip-java maven . . kotlin/Nothing#
-//                          ⌃ enclosing_range_end scip-java maven . . scip-java maven . . snapshots/ObjectKt#fail().(message)
+//                    ^^^^^^^ reference scip-java maven . . kotlin/String#
+//                              ^^^^^^^ reference scip-java maven . . kotlin/Nothing#
+//                          ⌃ enclosing_range_end scip-java maven . . snapshots/ObjectKt#fail().(message)
       throw RuntimeException(message)
-//          ^^^^^^^^^^^^^^^^ reference scip-java maven . . scip-java maven jdk 11 java/lang/RuntimeException#`<init>`().
-//                           ^^^^^^^ reference scip-java maven . . scip-java maven . . snapshots/ObjectKt#fail().(message)
+//          ^^^^^^^^^^^^^^^^ reference scip-java maven jdk 11 java/lang/RuntimeException#`<init>`().
+//                           ^^^^^^^ reference scip-java maven . . snapshots/ObjectKt#fail().(message)
     }
-//  ⌃ enclosing_range_end scip-java maven . . scip-java maven . . snapshots/ObjectKt#fail().
+//  ⌃ enclosing_range_end scip-java maven . . snapshots/ObjectKt#fail().
   }
-//⌃ enclosing_range_end scip-java maven . . scip-java maven . . snapshots/ObjectKt#
-//⌃ enclosing_range_end scip-java maven . . scip-java maven . . snapshots/ObjectKt#`<init>`().
+//⌃ enclosing_range_end scip-java maven . . snapshots/ObjectKt#
+//⌃ enclosing_range_end scip-java maven . . snapshots/ObjectKt#`<init>`().
   

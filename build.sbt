@@ -480,7 +480,14 @@ lazy val scipKotlincMinimized = project
           val snapDir =
             (baseDirectory.value / "src" / "generatedSnapshots" / "resources")
               .getAbsolutePath
-          val scipOut = s"$tgtRoot/index.scip"
+          // Write the aggregated index OUTSIDE the scanned targetroot. If it
+          // lived under `tgtRoot`, a second `kotlincSnapshots` run would feed
+          // the previous index.scip back into `aggregate`, which re-applies the
+          // package prefix and yields doubled symbols
+          // (e.g. `scip-java maven . . scip-java maven . . kotlin/`).
+          val indexDir = target.value / "scip-index"
+          IO.createDirectory(indexDir)
+          val scipOut = (indexDir / "index.scip").getAbsolutePath
           val mainCls = "com.sourcegraph.scip_java.ScipJava"
           Def.sequential(
             Compile / compile,
@@ -488,7 +495,8 @@ lazy val scipKotlincMinimized = project
               s" $mainCls aggregate --no-emit-inverse-relationships --cwd $srcRoot --output $scipOut $tgtRoot"
             ),
             (cli / Compile / runMain).toTask(
-              s" $mainCls snapshot --cwd $srcRoot --output $snapDir $tgtRoot"
+              s" $mainCls snapshot --cwd $srcRoot --output $snapDir ${indexDir
+                  .getAbsolutePath}"
             )
           )
         }

@@ -1,21 +1,21 @@
   package snapshots
-//        ^^^^^^^^^ reference scip-java maven . . scip-java maven . . snapshots/
+//        ^^^^^^^^^ reference scip-java maven . . snapshots/
   
-//⌄ enclosing_range_start scip-java maven . . scip-java maven . . snapshots/x.
-//⌄ enclosing_range_start scip-java maven . . scip-java maven . . snapshots/getX().
+//⌄ enclosing_range_start scip-java maven . . snapshots/x.
+//⌄ enclosing_range_start scip-java maven . . snapshots/getX().
 //                                               ⌄ enclosing_range_start local 0
 //                                                  ⌄ enclosing_range_start local 1
   val x = arrayListOf<String>().forEachIndexed { i, s -> println("$i $s") }
-//    ^ definition scip-java maven . . scip-java maven . . snapshots/x.
+//    ^ definition scip-java maven . . snapshots/x.
 //      display_name x
 //      signature_documentation
 //      > public final val x: Unit
-//    ^ definition scip-java maven . . scip-java maven . . snapshots/getX().
+//    ^ definition scip-java maven . . snapshots/getX().
 //      display_name x
 //      signature_documentation
 //      > public get(): Unit
-//        ^^^^^^^^^^^ reference scip-java maven . . scip-java maven . . kotlin/collections/arrayListOf().
-//                              ^^^^^^^^^^^^^^ reference scip-java maven . . scip-java maven . . kotlin/collections/forEachIndexed(+9).
+//        ^^^^^^^^^^^ reference scip-java maven . . kotlin/collections/arrayListOf().
+//                              ^^^^^^^^^^^^^^ reference scip-java maven . . kotlin/collections/forEachIndexed(+9).
 //                                               ^ definition local 0
 //                                                 display_name i
 //                                                 signature_documentation
@@ -24,53 +24,53 @@
 //                                                    display_name s
 //                                                    signature_documentation
 //                                                    > s: String
-//                                                       ^^^^^^^ reference scip-java maven . . scip-java maven . . kotlin/io/println().
+//                                                       ^^^^^^^ reference scip-java maven . . kotlin/io/println().
 //                                                                 ^ reference local 0
 //                                                                    ^ reference local 1
 //                                               ⌃ enclosing_range_end local 0
 //                                                  ⌃ enclosing_range_end local 1
-//                                                                        ⌃ enclosing_range_end scip-java maven . . scip-java maven . . snapshots/x.
-//                                                                        ⌃ enclosing_range_end scip-java maven . . scip-java maven . . snapshots/getX().
+//                                                                        ⌃ enclosing_range_end scip-java maven . . snapshots/x.
+//                                                                        ⌃ enclosing_range_end scip-java maven . . snapshots/getX().
   
-//⌄ enclosing_range_start scip-java maven . . scip-java maven . . snapshots/y.
-//⌄ enclosing_range_start scip-java maven . . scip-java maven . . snapshots/getY().
+//⌄ enclosing_range_start scip-java maven . . snapshots/y.
+//⌄ enclosing_range_start scip-java maven . . snapshots/getY().
   val y = "fdsa".run { this.toByteArray() }
-//    ^ definition scip-java maven . . scip-java maven . . snapshots/y.
+//    ^ definition scip-java maven . . snapshots/y.
 //      display_name y
 //      signature_documentation
 //      > public final val y: ByteArray
-//    ^ definition scip-java maven . . scip-java maven . . snapshots/getY().
+//    ^ definition scip-java maven . . snapshots/getY().
 //      display_name y
 //      signature_documentation
 //      > public get(): ByteArray
-//               ^^^ reference scip-java maven . . scip-java maven . . kotlin/run(+1).
-//                          ^^^^^^^^^^^ reference scip-java maven . . scip-java maven . . kotlin/text/toByteArray().
-//                                        ⌃ enclosing_range_end scip-java maven . . scip-java maven . . snapshots/y.
-//                                        ⌃ enclosing_range_end scip-java maven . . scip-java maven . . snapshots/getY().
+//               ^^^ reference scip-java maven . . kotlin/run(+1).
+//                          ^^^^^^^^^^^ reference scip-java maven . . kotlin/text/toByteArray().
+//                                        ⌃ enclosing_range_end scip-java maven . . snapshots/y.
+//                                        ⌃ enclosing_range_end scip-java maven . . snapshots/getY().
   
-//⌄ enclosing_range_start scip-java maven . . scip-java maven . . snapshots/z.
-//⌄ enclosing_range_start scip-java maven . . scip-java maven . . snapshots/getZ().
+//⌄ enclosing_range_start scip-java maven . . snapshots/z.
+//⌄ enclosing_range_start scip-java maven . . snapshots/getZ().
 //              ⌄ enclosing_range_start local 2
   val z = y.let { it.size }
-//    ^ definition scip-java maven . . scip-java maven . . snapshots/z.
+//    ^ definition scip-java maven . . snapshots/z.
 //      display_name z
 //      signature_documentation
 //      > public final val z: Int
-//    ^ definition scip-java maven . . scip-java maven . . snapshots/getZ().
+//    ^ definition scip-java maven . . snapshots/getZ().
 //      display_name z
 //      signature_documentation
 //      > public get(): Int
-//        ^ reference scip-java maven . . scip-java maven . . snapshots/y.
-//        ^ reference scip-java maven . . scip-java maven . . snapshots/getY().
-//          ^^^ reference scip-java maven . . scip-java maven . . kotlin/let().
+//        ^ reference scip-java maven . . snapshots/y.
+//        ^ reference scip-java maven . . snapshots/getY().
+//          ^^^ reference scip-java maven . . kotlin/let().
 //              ^^^^^^^^^^^ definition local 2
 //                          display_name it
 //                          signature_documentation
 //                          > it: ByteArray
 //                ^^ reference local 2
-//                   ^^^^ reference scip-java maven . . scip-java maven . . kotlin/ByteArray#size.
-//                   ^^^^ reference scip-java maven . . scip-java maven . . kotlin/ByteArray#getSize().
-//                        ⌃ enclosing_range_end scip-java maven . . scip-java maven . . snapshots/z.
-//                        ⌃ enclosing_range_end scip-java maven . . scip-java maven . . snapshots/getZ().
+//                   ^^^^ reference scip-java maven . . kotlin/ByteArray#size.
+//                   ^^^^ reference scip-java maven . . kotlin/ByteArray#getSize().
+//                        ⌃ enclosing_range_end scip-java maven . . snapshots/z.
+//                        ⌃ enclosing_range_end scip-java maven . . snapshots/getZ().
 //                        ⌃ enclosing_range_end local 2
   
