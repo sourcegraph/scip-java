@@ -49,31 +49,16 @@
             ${pkgs.actionlint}/bin/actionlint ${./.github/workflows}/*.yml
             touch $out
           '';
-          ktfmt =
-            pkgs.runCommand "check-ktfmt"
-              {
-                nativeBuildInputs = [
-                  pkgs.findutils
-                  pkgs.git
-                  pkgs.gnugrep
-                ];
-              }
-              ''
-                cp -r ${./.}/. .
-                chmod -R u+w .
-                git init -q
-                git add -A
-                # Exclude minimized Kotlin snapshots: the input fixtures are
-                # coupled to generated SCIP goldens with exact line/column
-                # annotations, so their layout must not be reformatted here.
-                git ls-files -z -- '*.kt' '*.kts' \
-                  | grep -zv '^scip-kotlinc/minimized/' \
-                  | xargs -0 -r ${pkgs.ktfmt}/bin/ktfmt \
-                      --kotlinlang-style \
-                      --dry-run \
-                      --set-exit-if-changed
-                touch $out
-              '';
+          ktfmt = pkgs.runCommand "check-ktfmt" { } ''
+            cd ${./.}
+            # Exclude minimized Kotlin snapshots: the input fixtures are coupled
+            # to generated SCIP goldens with exact line/column annotations, so
+            # their layout must not be reformatted here.
+            find . -name '*.kt' \
+              -not -path './scip-kotlinc/minimized/*' \
+              -exec ${pkgs.ktfmt}/bin/ktfmt --kotlinlang-style --dry-run --set-exit-if-changed {} +
+            touch $out
+          '';
           nixfmt = pkgs.runCommand "check-nixfmt" { } ''
             ${pkgs.nixfmt}/bin/nixfmt --check ${./flake.nix}
             touch $out
