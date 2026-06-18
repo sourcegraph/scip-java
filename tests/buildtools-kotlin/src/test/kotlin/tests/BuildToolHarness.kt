@@ -96,6 +96,14 @@ abstract class BuildToolHarness {
         }
     }
 
+    /**
+     * Fresh temp directory for one test, with symlinks resolved. `toRealPath`
+     * matters on macOS where the system temp dir lives under `/var` (a symlink
+     * to `/private/var`): build tools write canonical paths into their output,
+     * so the sourceroot must be canonical too or path prefix checks fail.
+     */
+    private fun newTempBase(): Path = Files.createTempDirectory("buildtools").toRealPath()
+
     /** Compare two strings ignoring trailing whitespace. */
     protected fun assertNoDiff(obtained: String, expected: String) {
         if (obtained.trimEnd() != expected.trimEnd()) {
@@ -128,7 +136,7 @@ abstract class BuildToolHarness {
                     "[$MIN_EXTERNAL_JDK, ${maxJdk ?: "infinity"}]",
             )
 
-            val base = Files.createTempDirectory("buildtools")
+            val base = newTempBase()
             try {
                 val workingDirectory = Files.createDirectories(base.resolve("workingDirectory"))
                 val cacheDirectory = Files.createDirectories(base.resolve("cache"))
@@ -187,7 +195,7 @@ abstract class BuildToolHarness {
         workingDirectoryLayout: String = "",
     ): DynamicTest =
         dynamicTest(name) {
-            val base = Files.createTempDirectory("buildtools")
+            val base = newTempBase()
             try {
                 val workingDirectory = Files.createDirectories(base.resolve("workingDirectory"))
                 if (workingDirectoryLayout.isNotEmpty()) {
