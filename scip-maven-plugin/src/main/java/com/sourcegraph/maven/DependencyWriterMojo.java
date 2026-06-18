@@ -1,12 +1,5 @@
 package com.sourcegraph.maven;
 
-import org.apache.maven.artifact.Artifact;
-import org.apache.maven.plugin.AbstractMojo;
-import org.apache.maven.plugin.MojoExecutionException;
-import org.apache.maven.plugin.MojoFailureException;
-import org.apache.maven.plugins.annotations.*;
-import org.apache.maven.project.MavenProject;
-
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -14,6 +7,12 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Set;
+import org.apache.maven.artifact.Artifact;
+import org.apache.maven.plugin.AbstractMojo;
+import org.apache.maven.plugin.MojoExecutionException;
+import org.apache.maven.plugin.MojoFailureException;
+import org.apache.maven.plugins.annotations.*;
+import org.apache.maven.project.MavenProject;
 
 @Mojo(
     name = "sourcegraphDependencies",
@@ -44,9 +43,12 @@ public class DependencyWriterMojo extends AbstractMojo {
           .warn(
               "Failed to extract groupID and artifactID from the project.\n"
                   + "This will not prevent a SCIP index from being created, but the symbols \n"
-                  + "extracted from this project won't be available for cross-repository navigation,\n"
-                  + "as this project doesn't define any Maven coordinates by which it can be referred back to.\n"
-                  + "See here for more details: https://sourcegraph.github.io/scip-java/docs/manual-configuration.html#step-5-optional-enable-cross-repository-navigation\n");
+                  + "extracted from this project won't be available for cross-repository"
+                  + " navigation,\n"
+                  + "as this project doesn't define any Maven coordinates by which it can be"
+                  + " referred back to.\n"
+                  + "See here for more details:"
+                  + " https://sourcegraph.github.io/scip-java/docs/manual-configuration.html#step-5-optional-enable-cross-repository-navigation\n");
     } else {
       for (Object root : sourceRoots) {
         if (root instanceof String) {
@@ -73,7 +75,8 @@ public class DependencyWriterMojo extends AbstractMojo {
               .warn(
                   "Dependency "
                       + summariseArtifact(artifact)
-                      + " does not have a resolved file, so it won't be added to the dependencies.txt");
+                      + " does not have a resolved file, so it won't be added to the"
+                      + " dependencies.txt");
         }
       }
     }

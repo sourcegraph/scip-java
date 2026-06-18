@@ -1,9 +1,8 @@
 package com.sourcegraph.scip_javac;
 
-import javax.tools.Diagnostic;
-
-import javax.lang.model.element.Element;
 import java.util.Optional;
+import javax.lang.model.element.Element;
+import javax.tools.Diagnostic;
 
 public class RangeFinder {
   public static class StartEndRange {

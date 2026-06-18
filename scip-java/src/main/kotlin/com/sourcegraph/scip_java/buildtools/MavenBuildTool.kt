@@ -13,11 +13,7 @@ class MavenBuildTool(index: IndexCommand) : BuildTool("Maven", index) {
 
     override fun generateScip(): Int {
         val result = runBuild()
-        return generateScipFromTargetroot(
-            result,
-            index.finalTargetroot(defaultTargetroot),
-            index,
-        )
+        return generateScipFromTargetroot(result, index.finalTargetroot(defaultTargetroot), index)
     }
 
     private val defaultTargetroot: Path = Paths.get("target", "scip-targetroot")
@@ -44,16 +40,17 @@ class MavenBuildTool(index: IndexCommand) : BuildTool("Maven", index) {
             command += "-Dmaven.compiler.compilerId=javac"
             command += "-Dmaven.compiler.executable=$executable"
             command += "-Dmaven.compiler.fork=true"
-            command += index.finalBuildCommand(
-                listOf(
-                    "--batch-mode",
-                    "clean",
-                    // Default to the "verify" command, as recommended by the official docs
-                    // https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html#usual-command-line-calls
-                    "verify",
-                    "-DskipTests",
-                ),
-            )
+            command +=
+                index.finalBuildCommand(
+                    listOf(
+                        "--batch-mode",
+                        "clean",
+                        // Default to the "verify" command, as recommended by the official docs
+                        // https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html#usual-command-line-calls
+                        "verify",
+                        "-DskipTests",
+                    )
+                )
 
             val exit = index.app.runProcess(command)
             Embedded.reportUnexpectedJavacErrors(index.app.reporter, tmp) ?: exit

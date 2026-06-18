@@ -63,13 +63,13 @@ name := "root"
 
 commands +=
   Command.command("fixAll") { s =>
-    "scalafixAll" :: "scalafmtAll" :: "scalafmtSbt" :: "javafmtAll" :: s
+    "scalafixAll" :: "scalafmtAll" :: "scalafmtSbt" :: s
   }
 
 commands +=
   Command.command("checkAll") { s =>
-    "javafmtCheckAll" :: "scalafmtCheckAll" :: "scalafmtSbtCheck" ::
-      "scalafixAll --check" :: "publishLocal" :: s
+    "scalafmtCheckAll" :: "scalafmtSbtCheck" :: "scalafixAll --check" ::
+      "publishLocal" :: s
   }
 
 commands +=
@@ -336,9 +336,8 @@ lazy val scipKotlinc = project
     libraryDependencies +=
       "org.scip-code" % "scip-kotlin-bindings" % V.scipBindings,
     // kotlin-compiler-embeddable is supplied by kotlinc at runtime
-    libraryDependencies +=
-      "org.jetbrains.kotlin" % "kotlin-compiler-embeddable" % V.kotlinVersion %
-        Provided,
+    libraryDependencies += "org.jetbrains.kotlin" %
+      "kotlin-compiler-embeddable" % V.kotlinVersion % Provided,
     // ---- sbt-assembly fat-jar ---------------------------------------------
     // Mirrors scip-java's `fatjarPackageSettings`. Produces a shaded jar that
     // replaces the slim `packageBin` so `publishLocal` ships the shaded
@@ -537,7 +536,6 @@ lazy val minimized = project
   .in(file("tests/minimized/.j11"))
   .settings(minimizedSettings, javaOnlySettings)
   .dependsOn(javacPlugin)
-  .disablePlugins(JavaFormatterPlugin)
 
 def javacModuleOptions = List(
   "-J--add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED",
@@ -596,7 +594,6 @@ lazy val snapshots = project
   .enablePlugins(BuildInfoPlugin)
 
 lazy val javaOnlySettings = List[Def.Setting[_]](
-  javafmtOnCompile := false,
   autoScalaLibrary := false,
   incOptions ~= { old =>
     old.withEnabled(false).withApiDebug(true)

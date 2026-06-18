@@ -69,12 +69,12 @@ public class ScipAggregator {
     if (options.reporter.hasErrors()) return;
     if (shards.isEmpty() && !options.allowEmptyIndex) {
       options.reporter.error(
-          "No SCIP shards found. "
-              + "This typically means that `scip-java` is unable to automatically "
-              + "index this codebase. If you are using Gradle or Maven, please report an issue to "
-              + "https://github.com/sourcegraph/scip-java and include steps to reproduce. "
-              + "If you are using a different build tool, make sure that you have followed all "
-              + "of the steps from https://sourcegraph.github.io/scip-java/docs/manual-configuration.html");
+          "No SCIP shards found. This typically means that `scip-java` is unable to automatically"
+              + " index this codebase. If you are using Gradle or Maven, please report an issue to"
+              + " https://github.com/sourcegraph/scip-java and include steps to reproduce. If you"
+              + " are using a different build tool, make sure that you have followed all of the"
+              + " steps from"
+              + " https://sourcegraph.github.io/scip-java/docs/manual-configuration.html");
       return;
     }
     options.reporter.startProcessing(shards.size());

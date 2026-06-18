@@ -37,7 +37,7 @@ data class ScipSymbolDescriptor(
     // Default differs from `SharedSymbols.Descriptor` (which is "") because
     // Kotlin call sites — getters/setters in particular — rely on the no-arg
     // overload producing `name().` rather than `name.` for METHOD kinds.
-    val disambiguator: String = "()"
+    val disambiguator: String = "()",
 ) {
     companion object {
         val NONE = ScipSymbolDescriptor(Kind.NONE, "")

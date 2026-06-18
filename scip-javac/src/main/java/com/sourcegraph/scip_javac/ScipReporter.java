@@ -2,12 +2,11 @@ package com.sourcegraph.scip_javac;
 
 import com.sun.source.tree.CompilationUnitTree;
 import com.sun.source.tree.Tree;
-import com.sun.source.util.Trees;
 import com.sun.source.util.TaskEvent;
-
-import javax.tools.Diagnostic;
+import com.sun.source.util.Trees;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintWriter;
+import javax.tools.Diagnostic;
 
 /**
  * Utilities to report error messages.
@@ -27,7 +26,8 @@ public class ScipReporter {
     PrintWriter writer = new PrintWriter(baos);
     e.printStackTrace(writer);
     writer.println(
-        "Please report a bug to https://github.com/sourcegraph/scip-java with the stack trace above.");
+        "Please report a bug to https://github.com/sourcegraph/scip-java with the stack trace"
+            + " above.");
     trees.printMessage(Diagnostic.Kind.ERROR, baos.toString(), tree, root);
   }
 

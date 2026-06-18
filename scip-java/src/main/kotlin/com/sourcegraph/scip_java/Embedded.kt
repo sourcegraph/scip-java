@@ -27,8 +27,7 @@ object Embedded {
         Files.createDirectories(bin)
         Files.write(
             java,
-            ("#!/usr/bin/env bash\n" +
-                "java \"\$@\"\n").toByteArray(StandardCharsets.UTF_8),
+            ("#!/usr/bin/env bash\n" + "java \"\$@\"\n").toByteArray(StandardCharsets.UTF_8),
         )
         val newJavacopts = tmp.resolve("javac_newarguments")
         // --add-exports flags required to access internal javac APIs from our
@@ -36,17 +35,18 @@ object Embedded {
         val javacModuleOptions = BuildInfo.javacModuleOptions.joinToString(" ")
         val injectScipArguments =
             listOf(
-                "java",
-                "-Dscip.errorpath=$errorpath",
-                "-Dscip.pluginpath=$pluginpath",
-                "-Dscip.sourceroot=$sourceroot",
-                "-Dscip.targetroot=$targetroot",
-                "-Dscip.output=\$NEW_JAVAC_OPTS",
-                "-Dscip.old-output=$javacopts",
-                "-classpath $pluginpath",
-                "com.sourcegraph.scip_javac.InjectScipOptions",
-                "\"\$@\"",
-            ).joinToString(" ")
+                    "java",
+                    "-Dscip.errorpath=$errorpath",
+                    "-Dscip.pluginpath=$pluginpath",
+                    "-Dscip.sourceroot=$sourceroot",
+                    "-Dscip.targetroot=$targetroot",
+                    "-Dscip.output=\$NEW_JAVAC_OPTS",
+                    "-Dscip.old-output=$javacopts",
+                    "-classpath $pluginpath",
+                    "com.sourcegraph.scip_javac.InjectScipOptions",
+                    "\"\$@\"",
+                )
+                .joinToString(" ")
         val script = buildString {
             append("#!/usr/bin/env bash\n")
             append("set -eu\n")
@@ -71,11 +71,10 @@ object Embedded {
     }
 
     /**
-     * The custom javac wrapper reports errors to a specific file if unexpected
-     * errors happen. The javac wrapper gets invoked by builds tools like
-     * Gradle/Maven, which hide the actual errors from the script because they
-     * assume the standard output is from javac. This file is used a side-channel
-     * to avoid relying on the error reporting from Gradle/Maven.
+     * The custom javac wrapper reports errors to a specific file if unexpected errors happen. The
+     * javac wrapper gets invoked by builds tools like Gradle/Maven, which hide the actual errors
+     * from the script because they assume the standard output is from javac. This file is used a
+     * side-channel to avoid relying on the error reporting from Gradle/Maven.
      */
     fun reportUnexpectedJavacErrors(reporter: CliReporter, tmp: Path): ProcessResult? {
         val errorpath = javacErrorpath(tmp)

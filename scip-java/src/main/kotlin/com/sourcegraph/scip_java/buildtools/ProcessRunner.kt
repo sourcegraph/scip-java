@@ -10,9 +10,8 @@ import java.util.concurrent.TimeUnit
 data class ProcessResult(val exitCode: Int)
 
 /**
- * Tiny `ProcessBuilder` wrapper that streams stdout/stderr line-by-line to
- * caller-provided sinks. Each stream is drained on its own thread so the
- * spawned process cannot deadlock on a full pipe.
+ * Tiny `ProcessBuilder` wrapper that streams stdout/stderr line-by-line to caller-provided sinks.
+ * Each stream is drained on its own thread so the spawned process cannot deadlock on a full pipe.
  */
 object ProcessRunner {
     fun run(

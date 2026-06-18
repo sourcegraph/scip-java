@@ -6,11 +6,10 @@ import org.jetbrains.kotlin.fir.FirSession
 import org.jetbrains.kotlin.fir.extensions.FirExtensionSessionComponent
 import org.jetbrains.kotlin.fir.extensions.FirExtensionSessionComponent.Factory
 
-open class AnalyzerParamsProvider(
-    session: FirSession,
-    val options: ScipOptions,
-) : FirExtensionSessionComponent(session) {
-    val sourceroot: Path get() = options.sourceroot
+open class AnalyzerParamsProvider(session: FirSession, val options: ScipOptions) :
+    FirExtensionSessionComponent(session) {
+    val sourceroot: Path
+        get() = options.sourceroot
 
     companion object {
         fun getFactory(options: ScipOptions): Factory {
@@ -19,5 +18,5 @@ open class AnalyzerParamsProvider(
     }
 }
 
-val FirSession.analyzerParamsProvider: AnalyzerParamsProvider by FirSession
-    .sessionComponentAccessor()
+val FirSession.analyzerParamsProvider: AnalyzerParamsProvider by
+    FirSession.sessionComponentAccessor()

@@ -11,9 +11,8 @@ import org.w3c.dom.Element
 import org.w3c.dom.Node
 
 /**
- * Represents a single classpath entry on the classpath of a project, used to
- * emit SCIP "packageInformation" nodes. A classpath entry can either be a jar
- * file or a directory path.
+ * Represents a single classpath entry on the classpath of a project, used to emit SCIP
+ * "packageInformation" nodes. A classpath entry can either be a jar file or a directory path.
  */
 data class ClasspathEntry(
     val entry: Path,
@@ -30,12 +29,11 @@ data class ClasspathEntry(
          * Parses ClasspathEntry from the SCIP targetroot directory.
          *
          * Two separate formats are supported:
-         *   - javacopts.txt: line-separated list of Java compiler options.
-         *   - dependencies.txt: line-separated list of dependency information.
+         * - javacopts.txt: line-separated list of Java compiler options.
+         * - dependencies.txt: line-separated list of dependency information.
          *
-         * Note that the targetroot can contain several files with names
-         * ending in "dependencies.txt" - for example if they come from a
-         * multi-module build.
+         * Note that the targetroot can contain several files with names ending in
+         * "dependencies.txt" - for example if they come from a multi-module build.
          */
         @JvmStatic
         fun fromTargetroot(targetroot: Path, sourceroot: Path): List<ClasspathEntry> {
@@ -51,7 +49,10 @@ data class ClasspathEntry(
             if (!Files.isDirectory(targetroot)) return emptyList()
             return Files.list(targetroot).use { stream ->
                 stream
-                    .filter { Files.isRegularFile(it) && it.fileName.toString().endsWith("dependencies.txt") }
+                    .filter {
+                        Files.isRegularFile(it) &&
+                            it.fileName.toString().endsWith("dependencies.txt")
+                    }
                     .toArray()
                     .map { it as Path }
                     .flatMap { fromDependencies(it) }
@@ -74,9 +75,10 @@ data class ClasspathEntry(
             }
 
         private fun fromJavacopts(javacopts: Path, sourceroot: Path): List<ClasspathEntry> {
-            val lines = Files.readAllLines(javacopts, StandardCharsets.UTF_8).map {
-                it.removePrefix("\"").removeSuffix("\"")
-            }
+            val lines =
+                Files.readAllLines(javacopts, StandardCharsets.UTF_8).map {
+                    it.removePrefix("\"").removeSuffix("\"")
+                }
             val result = mutableListOf<ClasspathEntry>()
             for (i in 0 until lines.size - 1) {
                 val key = lines[i]
@@ -86,7 +88,8 @@ data class ClasspathEntry(
                         val entry = fromClassesDirectory(Paths.get(value), sourceroot)
                         if (entry != null) result += entry
                     }
-                    "-cp", "-classpath" -> {
+                    "-cp",
+                    "-classpath" -> {
                         value.split(File.pathSeparator).forEach { jarPath ->
                             val entry = fromClasspathJarFile(Paths.get(jarPath))
                             if (entry != null) result += entry
@@ -109,8 +112,7 @@ data class ClasspathEntry(
         }
 
         /**
-         * Tries to parse a ClasspathEntry from the POM file that lies next
-         * to the given jar file.
+         * Tries to parse a ClasspathEntry from the POM file that lies next to the given jar file.
          */
         private fun fromClasspathJarFile(jar: Path): ClasspathEntry? {
             val fileName = jar.fileName?.toString() ?: return null
@@ -121,17 +123,18 @@ data class ClasspathEntry(
 
         private fun fromPomXml(pom: Path, classpathEntry: Path): ClasspathEntry? {
             if (!Files.isRegularFile(pom)) return null
-            val factory = DocumentBuilderFactory.newInstance().apply {
-                isNamespaceAware = false
-                isValidating = false
-                // Defensive: disable external entity resolution to avoid
-                // accidental XXE against attacker-controlled pom.xml files.
-                setFeature("http://apache.org/xml/features/disallow-doctype-decl", true)
-                setFeature("http://xml.org/sax/features/external-general-entities", false)
-                setFeature("http://xml.org/sax/features/external-parameter-entities", false)
-                isXIncludeAware = false
-                isExpandEntityReferences = false
-            }
+            val factory =
+                DocumentBuilderFactory.newInstance().apply {
+                    isNamespaceAware = false
+                    isValidating = false
+                    // Defensive: disable external entity resolution to avoid
+                    // accidental XXE against attacker-controlled pom.xml files.
+                    setFeature("http://apache.org/xml/features/disallow-doctype-decl", true)
+                    setFeature("http://xml.org/sax/features/external-general-entities", false)
+                    setFeature("http://xml.org/sax/features/external-parameter-entities", false)
+                    isXIncludeAware = false
+                    isExpandEntityReferences = false
+                }
             val document = factory.newDocumentBuilder().parse(Files.newInputStream(pom))
             val root = document.documentElement ?: return null
 

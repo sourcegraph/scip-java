@@ -1,20 +1,19 @@
 package com.sourcegraph.scip_javac;
 
+import static com.sourcegraph.scip_javac.Debugging.pprint;
+
 import com.sourcegraph.scip.LocalSymbolsCache;
 import com.sourcegraph.scip.ScipSymbols;
-
+import java.util.ArrayList;
+import java.util.IdentityHashMap;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ExecutableElement;
-import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.PackageElement;
+import javax.lang.model.element.QualifiedNameable;
+import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.TypeParameterElement;
 import javax.lang.model.element.VariableElement;
-import javax.lang.model.element.QualifiedNameable;
 import javax.lang.model.type.NoType;
-import java.util.IdentityHashMap;
-import java.util.ArrayList;
-
-import static com.sourcegraph.scip_javac.Debugging.pprint;
 
 /** Cache of SCIP symbols that can be referenced between files. */
 public final class GlobalSymbolsCache {

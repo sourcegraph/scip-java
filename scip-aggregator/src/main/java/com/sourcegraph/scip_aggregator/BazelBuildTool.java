@@ -1,8 +1,6 @@
 package com.sourcegraph.scip_aggregator;
 
 import com.sourcegraph.scip_java.Bazelbuild;
-import org.scip_code.scip.ToolInfo;
-
 import java.io.*;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
@@ -11,6 +9,7 @@ import java.nio.file.PathMatcher;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import org.scip_code.scip.ToolInfo;
 
 public class BazelBuildTool {
 
@@ -26,7 +25,8 @@ public class BazelBuildTool {
     }
     if (options.isVersion) {
       System.out.println(
-          "This command-line tool has no version because it is supposed to be compiled from source.");
+          "This command-line tool has no version because it is supposed to be compiled from"
+              + " source.");
       return 0;
     }
 

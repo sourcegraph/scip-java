@@ -6,8 +6,6 @@ import com.sourcegraph.scip_kotlinc.test.ExpectedSymbols.SymbolCacheData
 import com.tschuchort.compiletesting.SourceFile
 import org.jetbrains.kotlin.compiler.plugin.ExperimentalCompilerApi
 import org.junit.jupiter.api.TestFactory
-import org.scip_code.scip.Occurrence
-import org.scip_code.scip.SymbolInformation
 
 @ExperimentalCompilerApi
 class ScipSymbolsTest {
@@ -22,18 +20,24 @@ class ScipSymbolsTest {
                         |    fun sample() {}
                         |    fun sample(x: Int) {}
                         |}
-                        |""".trimMargin()),
+                        |"""
+                            .trimMargin()
+                    ),
                     symbolsCacheData =
                         SymbolCacheData(
-                            listOf("Test#sample().".symbol(), "Test#sample(+1).".symbol()),
-                        )),
+                            listOf("Test#sample().".symbol(), "Test#sample(+1).".symbol())
+                        ),
+                ),
                 ExpectedSymbols(
                     "Inline class constructor",
                     SourceFile.testKt(
                         """
                         |class Test(val x: Int)
-                        |""".trimMargin()),
-                    symbolsCacheData = SymbolCacheData(listOf("Test#`<init>`().(x)".symbol()))),
+                        |"""
+                            .trimMargin()
+                    ),
+                    symbolsCacheData = SymbolCacheData(listOf("Test#`<init>`().(x)".symbol())),
+                ),
                 ExpectedSymbols(
                     "Inline + secondary class constructors",
                     SourceFile.testKt(
@@ -42,13 +46,18 @@ class ScipSymbolsTest {
                         |    constructor(y: Long): this(y.toInt())
                         |    constructor(z: String): this(z.toInt())
                         |}
-                        |""".trimMargin()),
+                        |"""
+                            .trimMargin()
+                    ),
                     symbolsCacheData =
                         SymbolCacheData(
                             listOf(
                                 "Test#`<init>`().(x)".symbol(),
                                 "Test#`<init>`(+1).(y)".symbol(),
-                                "Test#`<init>`(+2).(z)".symbol()))),
+                                "Test#`<init>`(+2).(z)".symbol(),
+                            )
+                        ),
+                ),
                 ExpectedSymbols(
                     "Disambiguator number is not affected by different named methods",
                     SourceFile.testKt(
@@ -58,19 +67,24 @@ class ScipSymbolsTest {
                         |    fun test() {}
                         |    fun test(x: Int) {}
                         |}
-                        |""".trimMargin()),
+                        |"""
+                            .trimMargin()
+                    ),
                     symbolsCacheData =
-                        SymbolCacheData(
-                            listOf("Test#test().".symbol(), "Test#test(+1).".symbol()))),
+                        SymbolCacheData(listOf("Test#test().".symbol(), "Test#test(+1).".symbol())),
+                ),
                 ExpectedSymbols(
                     "Top level overloaded functions",
                     SourceFile.testKt(
                         """
                         |fun test() {}
                         |fun test(x: Int) {}
-                        |""".trimMargin()),
+                        |"""
+                            .trimMargin()
+                    ),
                     symbolsCacheData =
-                        SymbolCacheData(listOf("test().".symbol(), "test(+1).(x)".symbol()))),
+                        SymbolCacheData(listOf("test().".symbol(), "test(+1).(x)".symbol())),
+                ),
                 ExpectedSymbols(
                     "Annotations incl annotation type alias",
                     SourceFile.testKt(
@@ -83,12 +97,17 @@ class ScipSymbolsTest {
                         |    @Test
                         |    fun test() {}
                         |}
-                        |""".trimMargin()),
+                        |"""
+                            .trimMargin()
+                    ),
                     symbolsCacheData =
                         SymbolCacheData(
                             listOf(
                                 "kotlin/contracts/ExperimentalContracts#".symbol(),
-                                "kotlin/test/Test#".symbol()))),
+                                "kotlin/test/Test#".symbol(),
+                            )
+                        ),
+                ),
                 // https://kotlinlang.slack.com/archives/C7L3JB43G/p1624995376114900
                 /*ExpectedSymbols(
                     "Method call with type parameters",
@@ -100,9 +119,8 @@ class ScipSymbolsTest {
                         listOf("kotlin/collection/TypeAliasesKt#LinkedHashMap#`<init>`().".symbol())
                     )
                 )*/
-                )
+            )
             .mapCheckExpectedSymbols()
-
 
     @TestFactory
     fun `check package symbols`() =
@@ -114,8 +132,11 @@ class ScipSymbolsTest {
                         |package main
                         |
                         |class Test
-                        |""".trimMargin()),
-                    symbolsCacheData = SymbolCacheData(listOf("main/Test#".symbol()), 0)),
+                        |"""
+                            .trimMargin()
+                    ),
+                    symbolsCacheData = SymbolCacheData(listOf("main/Test#".symbol()), 0),
+                ),
                 ExpectedSymbols(
                     "multi component package name",
                     SourceFile.testKt(
@@ -123,16 +144,22 @@ class ScipSymbolsTest {
                         |package test.sample.main
                         |
                         |class Test
-                        |""".trimMargin()),
-                    symbolsCacheData =
-                        SymbolCacheData(listOf("test/sample/main/Test#".symbol()), 0)),
+                        |"""
+                            .trimMargin()
+                    ),
+                    symbolsCacheData = SymbolCacheData(listOf("test/sample/main/Test#".symbol()), 0),
+                ),
                 ExpectedSymbols(
                     "no package name",
                     SourceFile.testKt(
                         """
                         |class Test
-                        |""".trimMargin()),
-                    symbolsCacheData = SymbolCacheData(listOf("Test#".symbol()), 0)))
+                        |"""
+                            .trimMargin()
+                    ),
+                    symbolsCacheData = SymbolCacheData(listOf("Test#".symbol()), 0),
+                ),
+            )
             .mapCheckExpectedSymbols()
 
     @TestFactory
@@ -146,8 +173,12 @@ class ScipSymbolsTest {
                         |    val x = "hello"
                         |    println(x)
                         |}
-                        |""".trimMargin()),
-                    symbolsCacheData = SymbolCacheData(localsCount = 1)))
+                        |"""
+                            .trimMargin()
+                    ),
+                    symbolsCacheData = SymbolCacheData(localsCount = 1),
+                )
+            )
             .mapCheckExpectedSymbols()
 
     @TestFactory
@@ -161,14 +192,19 @@ class ScipSymbolsTest {
                         |lateinit var y: Unit
                         |lateinit var z: Any
                         |lateinit var w: Nothing
-                        |""".trimMargin()),
+                        |"""
+                            .trimMargin()
+                    ),
                     symbolsCacheData =
                         SymbolCacheData(
                             listOf(
                                 "kotlin/Int#".symbol(),
                                 "kotlin/Unit#".symbol(),
                                 "kotlin/Any#".symbol(),
-                                "kotlin/Nothing#".symbol()))),
+                                "kotlin/Nothing#".symbol(),
+                            )
+                        ),
+                ),
                 ExpectedSymbols(
                     "functions",
                     SourceFile.testKt(
@@ -177,12 +213,18 @@ class ScipSymbolsTest {
                         |fun main() {
                         |    println()
                         |}
-                        |""".trimMargin()),
+                        |"""
+                            .trimMargin()
+                    ),
                     symbolsCacheData =
                         SymbolCacheData(
                             listOf(
                                 "kotlin/collections/mapOf(+2).".symbol(),
-                                "kotlin/io/println(+10).".symbol()))))
+                                "kotlin/io/println(+10).".symbol(),
+                            )
+                        ),
+                ),
+            )
             .mapCheckExpectedSymbols()
 
     @TestFactory
@@ -197,8 +239,12 @@ class ScipSymbolsTest {
                         |fun main() {
                         |    System.err
                         |}
-                        |""".trimMargin()),
-                    symbolsCacheData = SymbolCacheData(listOf("java/lang/System#err.".symbol()))))
+                        |"""
+                            .trimMargin()
+                    ),
+                    symbolsCacheData = SymbolCacheData(listOf("java/lang/System#err.".symbol())),
+                )
+            )
             .mapCheckExpectedSymbols()
 
     @TestFactory
@@ -209,7 +255,9 @@ class ScipSymbolsTest {
                     SourceFile.testKt(
                         """
                         |var x: Int = 5
-                        |""".trimMargin()),
+                        |"""
+                            .trimMargin()
+                    ),
                     scip =
                         ScipData(
                             expectedOccurrences =
@@ -223,9 +271,7 @@ class ScipSymbolsTest {
                                             endLine = 0
                                             endCharacter = 5
                                         }
-                                        enclosingRange {
-                                            endCharacter = 14
-                                        }
+                                        enclosingRange { endCharacter = 14 }
                                     },
                                     scipOccurrence {
                                         role = DEFINITION
@@ -236,9 +282,7 @@ class ScipSymbolsTest {
                                             endLine = 0
                                             endCharacter = 5
                                         }
-                                        enclosingRange {
-                                            endCharacter = 14
-                                        }
+                                        enclosingRange { endCharacter = 14 }
                                     },
                                     scipOccurrence {
                                         role = DEFINITION
@@ -249,10 +293,10 @@ class ScipSymbolsTest {
                                             endLine = 0
                                             endCharacter = 5
                                         }
-                                        enclosingRange {
-                                            endCharacter = 14
-                                        }
-                                    })),
+                                        enclosingRange { endCharacter = 14 }
+                                    },
+                                )
+                        ),
                 ),
                 ExpectedSymbols(
                     "top level properties - explicit getter",
@@ -260,7 +304,9 @@ class ScipSymbolsTest {
                         """
                         |var x: Int = 5
                         |    get() = field + 10
-                        |""".trimMargin()),
+                        |"""
+                            .trimMargin()
+                    ),
                     scip =
                         ScipData(
                             expectedOccurrences =
@@ -308,7 +354,9 @@ class ScipSymbolsTest {
                                             endLine = 1
                                             endCharacter = 22
                                         }
-                                    })),
+                                    },
+                                )
+                        ),
                 ),
                 ExpectedSymbols(
                     "top level properties - explicit setter",
@@ -316,7 +364,9 @@ class ScipSymbolsTest {
                         """
                         |var x: Int = 5
                         |    set(value) { field = value + 5 }
-                        |""".trimMargin()),
+                        |"""
+                            .trimMargin()
+                    ),
                     scip =
                         ScipData(
                             expectedOccurrences =
@@ -364,7 +414,9 @@ class ScipSymbolsTest {
                                             endLine = 1
                                             endCharacter = 36
                                         }
-                                    })),
+                                    },
+                                )
+                        ),
                 ),
                 ExpectedSymbols(
                     "top level properties - explicit getter & setter",
@@ -373,7 +425,9 @@ class ScipSymbolsTest {
                         |var x: Int = 5
                         |    get() = field + 10
                         |    set(value) { field = value + 10 }
-                        |""".trimMargin()),
+                        |"""
+                            .trimMargin()
+                    ),
                     scip =
                         ScipData(
                             expectedOccurrences =
@@ -423,7 +477,9 @@ class ScipSymbolsTest {
                                             endLine = 2
                                             endCharacter = 37
                                         }
-                                    })),
+                                    },
+                                )
+                        ),
                 ),
                 ExpectedSymbols(
                     "class constructor properties",
@@ -434,7 +490,9 @@ class ScipSymbolsTest {
                         |        println(sample)
                         |    }
                         |}
-                        |""".trimMargin()),
+                        |"""
+                            .trimMargin()
+                    ),
                     scip =
                         ScipData(
                             expectedOccurrences =
@@ -525,7 +583,10 @@ class ScipSymbolsTest {
                                             endCharacter = 22
                                         }
                                     },
-                                ))))
+                                )
+                        ),
+                ),
+            )
             .mapCheckExpectedSymbols()
 
     @TestFactory
@@ -536,7 +597,9 @@ class ScipSymbolsTest {
                     SourceFile.testKt(
                         """
                         |class Banana
-                        |""".trimMargin()),
+                        |"""
+                            .trimMargin()
+                    ),
                     scip =
                         ScipData(
                             expectedOccurrences =
@@ -550,9 +613,7 @@ class ScipSymbolsTest {
                                             endLine = 0
                                             endCharacter = 12
                                         }
-                                        enclosingRange {
-                                            endCharacter = 12
-                                        }
+                                        enclosingRange { endCharacter = 12 }
                                     },
                                     scipOccurrence {
                                         role = DEFINITION
@@ -563,17 +624,19 @@ class ScipSymbolsTest {
                                             endLine = 0
                                             endCharacter = 12
                                         }
-                                        enclosingRange {
-                                            endCharacter = 12
-                                        }
+                                        enclosingRange { endCharacter = 12 }
                                     },
-                                ))),
+                                )
+                        ),
+                ),
                 ExpectedSymbols(
                     "explicit primary constructor without keyword",
                     SourceFile.testKt(
                         """
                         |class Banana(size: Int)
-                        |""".trimMargin()),
+                        |"""
+                            .trimMargin()
+                    ),
                     scip =
                         ScipData(
                             expectedOccurrences =
@@ -587,9 +650,7 @@ class ScipSymbolsTest {
                                             endLine = 0
                                             endCharacter = 12
                                         }
-                                        enclosingRange {
-                                            endCharacter = 23
-                                        }
+                                        enclosingRange { endCharacter = 23 }
                                     },
                                     scipOccurrence {
                                         role = DEFINITION
@@ -605,13 +666,17 @@ class ScipSymbolsTest {
                                             endCharacter = 23
                                         }
                                     },
-                                ))),
+                                )
+                        ),
+                ),
                 ExpectedSymbols(
                     "explicit primary constructor with keyword",
                     SourceFile.testKt(
                         """
                         |class Banana constructor(size: Int)
-                        |""".trimMargin()),
+                        |"""
+                            .trimMargin()
+                    ),
                     scip =
                         ScipData(
                             expectedOccurrences =
@@ -625,9 +690,7 @@ class ScipSymbolsTest {
                                             endLine = 0
                                             endCharacter = 12
                                         }
-                                        enclosingRange {
-                                            endCharacter = 35
-                                        }
+                                        enclosingRange { endCharacter = 35 }
                                     },
                                     scipOccurrence {
                                         role = DEFINITION
@@ -643,7 +706,10 @@ class ScipSymbolsTest {
                                             endCharacter = 35
                                         }
                                     },
-                                ))))
+                                )
+                        ),
+                ),
+            )
             .mapCheckExpectedSymbols()
 
     @TestFactory
@@ -654,7 +720,9 @@ class ScipSymbolsTest {
                     SourceFile.testKt(
                         """
                         |val x = Runnable { }.run()
-                        |""".trimMargin()),
+                        |"""
+                            .trimMargin()
+                    ),
                     scip =
                         ScipData(
                             expectedOccurrences =
@@ -678,7 +746,11 @@ class ScipSymbolsTest {
                                             endLine = 0
                                             endCharacter = 24
                                         }
-                                    }))))
+                                    },
+                                )
+                        ),
+                )
+            )
             .mapCheckExpectedSymbols()
 
     @TestFactory
@@ -688,13 +760,15 @@ class ScipSymbolsTest {
                     "empty kdoc line",
                     SourceFile.testKt(
                         """
-                    |/**
-                    |
-                    |hello world
-                    |* test content
-                    |*/
-                    |val x = ""
-                    |""".trimMargin()),
+                        |/**
+                        |
+                        |hello world
+                        |* test content
+                        |*/
+                        |val x = ""
+                        |"""
+                            .trimMargin()
+                    ),
                     scip =
                         ScipData(
                             expectedSymbols =
@@ -710,6 +784,10 @@ class ScipSymbolsTest {
                                         displayName = "x"
                                         signatureText = "public get(): String"
                                         documentation("hello world\n test content")
-                                    }))))
+                                    },
+                                )
+                        ),
+                )
+            )
             .mapCheckExpectedSymbols()
 }
