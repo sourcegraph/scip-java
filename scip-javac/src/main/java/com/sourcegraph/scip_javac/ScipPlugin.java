@@ -1,7 +1,7 @@
 package com.sourcegraph.scip_javac;
 
-import com.sun.source.util.Plugin;
 import com.sun.source.util.JavacTask;
+import com.sun.source.util.Plugin;
 import com.sun.source.util.Trees;
 
 /** Entrypoint of the scip-javac compiler plugin. */

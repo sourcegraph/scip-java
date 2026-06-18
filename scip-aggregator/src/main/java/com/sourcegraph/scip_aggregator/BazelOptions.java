@@ -27,7 +27,8 @@ public class BazelOptions {
     System.out.println(
         "  --sourceroot <path> the absolute path to the root directory of the Bazel codebase");
     System.out.println(
-        "                      TIP: use --sourceroot \"$PWD\" to pass the current working directory");
+        "                      TIP: use --sourceroot \"$PWD\" to pass the current working"
+            + " directory");
     System.out.println("  --output <path> the absolute path to the file that should be generated");
     System.out.println("  --parallel whether to process files in parallel");
     System.out.println(
@@ -95,7 +96,9 @@ public class BazelOptions {
     if (options.sourceroot == null) {
       if (args.length == 0) {
         errors.add(
-            "missing required flag --sourceroot <path>. To fix this problem, pass in the `--sourceroot` flag like this: bazel run @scip_java//scip-aggregator:bazel -- --sourceroot \"$PWD\"");
+            "missing required flag --sourceroot <path>. To fix this problem, pass in the"
+                + " `--sourceroot` flag like this: bazel run @scip_java//scip-aggregator:bazel --"
+                + " --sourceroot \"$PWD\"");
       } else {
         errors.add("missing required flag --sourceroot <path>");
       }

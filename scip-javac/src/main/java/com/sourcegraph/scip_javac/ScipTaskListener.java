@@ -225,20 +225,22 @@ public final class ScipTaskListener implements TaskListener {
                 "Skipping file '%s' because it is not under the sourceroot '%s'",
                 absolutePath, options.sourceroot),
             e);
-        // fall through
+      // fall through
       case SKIP:
         return null;
       case ERROR:
       default:
         String baseMessage =
             String.format(
-                "Unable to detect the relative path of '%s'. A common reason for this error is that the file is auto-generated. "
-                    + "To fix this problem update the flag -no-relative-path:VALUE to have one of the following values: %s.",
+                "Unable to detect the relative path of '%s'. A common reason for this error is that"
+                    + " the file is auto-generated. To fix this problem update the flag"
+                    + " -no-relative-path:VALUE to have one of the following values: %s.",
                 absolutePath, NoRelativePathMode.validStringValuesWithoutError());
         if (options.uriScheme == UriScheme.BAZEL) return Result.error(baseMessage);
         return Result.error(
             baseMessage
-                + " Alternatively, configure the -sourceroot:PATH flag to point to a directory path that is the parent of all indexed files.");
+                + " Alternatively, configure the -sourceroot:PATH flag to point to a directory path"
+                + " that is the parent of all indexed files.");
     }
   }
 }

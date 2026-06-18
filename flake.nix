@@ -29,6 +29,7 @@
             buildInputs = with pkgs; [
               bazelisk
               git
+              google-java-format
               (gradle.override ({ java = jdk; }))
               jdk
               jq
@@ -47,6 +48,20 @@
         checks = {
           actionlint = pkgs.runCommand "check-actionlint" { } ''
             ${pkgs.actionlint}/bin/actionlint ${./.github/workflows}/*.yml
+            touch $out
+          '';
+          javafmt = pkgs.runCommand "check-javafmt" { } ''
+            cd ${./.}
+            # Exclude minimized fixtures and generated SCIP snapshot goldens
+            # (coupled to exact line/column annotations) plus the standalone
+            # example projects: their layout must not be reformatted here.
+            find . -name '*.java' \
+              -not -path './examples/*' \
+              -not -path './tests/minimized/*' \
+              -not -path './tests/snapshots/*' \
+              -not -path './tests/gradle-example/*' \
+              -not -path './scip-kotlinc/minimized/*' \
+              -exec ${pkgs.google-java-format}/bin/google-java-format --dry-run --set-exit-if-changed {} +
             touch $out
           '';
           ktfmt = pkgs.runCommand "check-ktfmt" { } ''

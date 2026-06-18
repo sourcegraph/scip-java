@@ -1,9 +1,12 @@
 package com.sourcegraph.scip_javac;
 
+import static javax.tools.StandardLocation.CLASS_OUTPUT;
+import static javax.tools.StandardLocation.SOURCE_OUTPUT;
+
 import com.sourcegraph.scip.NoRelativePathMode;
 import com.sourcegraph.scip.ScipOptions;
 import com.sourcegraph.scip.UriScheme;
-
+import com.sun.source.util.JavacTask;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.lang.reflect.Method;
@@ -13,11 +16,6 @@ import java.util.ArrayList;
 import javax.tools.FileObject;
 import javax.tools.JavaFileManager;
 import javax.tools.JavaFileObject;
-
-import com.sun.source.util.JavacTask;
-
-import static javax.tools.StandardLocation.CLASS_OUTPUT;
-import static javax.tools.StandardLocation.SOURCE_OUTPUT;
 
 /** Settings that can be configured alongside the -Xplugin compiler option. */
 public class ScipJavacOptions extends ScipOptions {

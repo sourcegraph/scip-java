@@ -60,7 +60,9 @@ These are the main components of the project.
 | `scipKotlincMinimized/kotlincSnapshots`                             | sbt      | Update only the Kotlin snapshot goldens under `scip-kotlinc/minimized`.             |
 | `regenerateSnapshots`                                               | sbt      | Regenerate ALL snapshot goldens (Java + Kotlin). Run after fixing a bug.            |
 | `cli/run --cwd DIRECTORY`                                           | sbt      | Run `scip-java` command-line tool against a given Gradle/Maven build.               |
-| `fixAll`                                                            | sbt      | Run Scalafmt, Scalafix and Javafmt on all sources. Run this before opening a PR.    |
+| `fixAll`                                                            | sbt      | Run Scalafmt and Scalafix on all Scala sources. Run this before opening a PR.       |
+| `google-java-format --replace $(git ls-files '*.java')`             | terminal | Format Java sources (from `nix develop`). Enforced by `nix flake check`.            |
+| `ktfmt --kotlinlang-style $(git ls-files '*.kt')`                   | terminal | Format Kotlin sources (from `nix develop`). Enforced by `nix flake check`.          |
 
 ## Import the project into IntelliJ
 

@@ -1,5 +1,6 @@
 package tests;
 
+import com.sourcegraph.scip_javac.ScipPlugin;
 import java.net.URI;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -8,8 +9,6 @@ import javax.tools.FileObject;
 import javax.tools.ForwardingJavaFileManager;
 import javax.tools.JavaFileObject;
 import javax.tools.StandardJavaFileManager;
-
-import com.sourcegraph.scip_javac.ScipPlugin;
 
 public class SimpleFileManager extends ForwardingJavaFileManager<StandardJavaFileManager> {
 

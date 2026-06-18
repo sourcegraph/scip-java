@@ -18,8 +18,8 @@ import com.sun.source.tree.Tree;
 import com.sun.source.tree.TypeCastTree;
 import com.sun.source.tree.UnaryTree;
 import com.sun.source.tree.VariableTree;
-import com.sun.source.util.Trees;
 import com.sun.source.util.TreePath;
+import com.sun.source.util.Trees;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -526,8 +526,8 @@ final class ScipJavaSignatureFormatter {
   private static String unaryOperator(Tree.Kind kind, String value) {
     switch (kind) {
       case UNARY_MINUS:
-        // The old SignatureFormatter.formatUnaryOperation rendered UNARY_PLUS as "-value".
-        // Preserve that behavior to keep snapshots stable.
+      // The old SignatureFormatter.formatUnaryOperation rendered UNARY_PLUS as "-value".
+      // Preserve that behavior to keep snapshots stable.
       case UNARY_PLUS:
         return "-" + value;
       case POSTFIX_INCREMENT:

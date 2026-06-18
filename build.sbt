@@ -63,13 +63,13 @@ name := "root"
 
 commands +=
   Command.command("fixAll") { s =>
-    "scalafixAll" :: "scalafmtAll" :: "scalafmtSbt" :: "javafmtAll" :: s
+    "scalafixAll" :: "scalafmtAll" :: "scalafmtSbt" :: s
   }
 
 commands +=
   Command.command("checkAll") { s =>
-    "javafmtCheckAll" :: "scalafmtCheckAll" :: "scalafmtSbtCheck" ::
-      "scalafixAll --check" :: "publishLocal" :: s
+    "scalafmtCheckAll" :: "scalafmtSbtCheck" :: "scalafixAll --check" ::
+      "publishLocal" :: s
   }
 
 commands +=
@@ -536,7 +536,6 @@ lazy val minimized = project
   .in(file("tests/minimized/.j11"))
   .settings(minimizedSettings, javaOnlySettings)
   .dependsOn(javacPlugin)
-  .disablePlugins(JavaFormatterPlugin)
 
 def javacModuleOptions = List(
   "-J--add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED",
@@ -595,7 +594,6 @@ lazy val snapshots = project
   .enablePlugins(BuildInfoPlugin)
 
 lazy val javaOnlySettings = List[Def.Setting[_]](
-  javafmtOnCompile := false,
   autoScalaLibrary := false,
   incOptions ~= { old =>
     old.withEnabled(false).withApiDebug(true)

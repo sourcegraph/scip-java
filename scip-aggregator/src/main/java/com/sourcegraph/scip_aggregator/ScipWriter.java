@@ -1,13 +1,12 @@
 package com.sourcegraph.scip_aggregator;
 
-import org.scip_code.scip.Index;
-
 import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.nio.file.attribute.PosixFilePermissions;
+import org.scip_code.scip.Index;
 
 /** High-level utility methods to write SCIP index into the SCIP output stream. */
 public class ScipWriter implements AutoCloseable {
