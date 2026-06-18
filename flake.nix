@@ -4,7 +4,7 @@
       url = "github:numtide/flake-utils";
     };
     nixpkgs = {
-      url = "github:NixOS/nixpkgs/nixos-25.11";
+      url = "github:NixOS/nixpkgs/nixos-26.05";
     };
   };
 
@@ -71,8 +71,9 @@
         };
 
         devShells = {
-          default = mkDevShell pkgs.jdk11;
-          jdk11 = mkDevShell pkgs.jdk11;
+          default = mkDevShell pkgs.temurin-bin-11;
+          # https://github.com/NixOS/nixpkgs/issues/526834
+          jdk11 = mkDevShell pkgs.temurin-bin-11;
           jdk17 = mkDevShell pkgs.jdk17;
           jdk21 = mkDevShell pkgs.jdk21;
         };
