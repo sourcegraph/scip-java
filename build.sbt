@@ -565,25 +565,13 @@ lazy val unit = project
   .dependsOn(javacPlugin, cli)
   .enablePlugins(BuildInfoPlugin)
 
+// Kotlin/JUnit5 integration tests that drive the scip-java CLI against real
+// Maven/Gradle/manual projects. Depends only on `cli` (no munit, no Scala) so
+// the test stack matches the now-Kotlin product.
 lazy val buildTools = project
   .in(file("tests/buildTools"))
-  .settings(
-    testSettings,
-    Test / fork := true,
-    // Our CI set up is a couple of measly vCPUs so parallelising tests there makes
-    // everything worse
-    Test / testForkedParallel := !sys.env.contains("CI")
-  )
-  .dependsOn(unit)
-
-// Kotlin/JUnit5 rewrite of `buildTools`, aligned with the now-Kotlin CLI.
-// Depends only on `cli` (no munit, no Scala) so the test stack matches the
-// product. Coexists with `buildTools` during the migration.
-lazy val buildToolsKotlin = project
-  .in(file("tests/buildtools-kotlin"))
   .enablePlugins(KotlinPlugin)
   .settings(
-    moduleName := "buildtools-kotlin",
     crossPaths := false,
     autoScalaLibrary := false,
     publish / skip := true,
