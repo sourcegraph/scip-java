@@ -13,18 +13,17 @@ import com.github.ajalt.clikt.core.subcommands
 import com.github.ajalt.clikt.parameters.options.versionOption
 import com.sourcegraph.scip_java.buildtools.ProcessResult
 import com.sourcegraph.scip_java.buildtools.ProcessRunner
-import com.sourcegraph.scip_java.commands.IndexCommand
 import com.sourcegraph.scip_java.commands.AggregateCommand
+import com.sourcegraph.scip_java.commands.IndexCommand
 import com.sourcegraph.scip_java.commands.SnapshotCommand
 import java.nio.file.Paths
 
 /**
- * Stateful, mutable container for the scip-java CLI runtime. Tests inject
- * a fresh environment (with redirected stdout/stderr, a temp working
- * directory, etc.) before invoking [run].
+ * Stateful, mutable container for the scip-java CLI runtime. Tests inject a fresh environment (with
+ * redirected stdout/stderr, a temp working directory, etc.) before invoking [run].
  *
- * Each invocation of [run] builds a fresh root clikt command tree so option
- * state from a previous run never leaks into the next one.
+ * Each invocation of [run] builds a fresh root clikt command tree so option state from a previous
+ * run never leaks into the next one.
  */
 class ScipJavaApp {
 
@@ -47,13 +46,10 @@ class ScipJavaApp {
     fun error(message: String) = reporter.error(message)
 
     /**
-     * Spawn an external process using the current working directory.
-     * Stdout and stderr are streamed to the env's PrintStreams line-by-line.
+     * Spawn an external process using the current working directory. Stdout and stderr are streamed
+     * to the env's PrintStreams line-by-line.
      */
-    fun runProcess(
-        command: List<String>,
-        env: Map<String, String> = emptyMap(),
-    ): ProcessResult {
+    fun runProcess(command: List<String>, env: Map<String, String> = emptyMap()): ProcessResult {
         val syntax = command.joinToString(" ") { if (' ' in it) "'$it'" else it }
         this.env.standardOutput.println("$ $syntax")
         return ProcessRunner.run(
@@ -99,10 +95,10 @@ class ScipJavaApp {
     }
 
     /**
-     * The Bazel aspect passes nested options as `--aggregate.<flag>` on
-     * `scip-java index` (e.g. `--aggregate.allow-empty-index`). clikt forbids
-     * `.` in option names, so we rewrite the dotted prefix to `-` to match the
-     * options declared on [IndexCommand]. Tokens after `--` are left untouched.
+     * The Bazel aspect passes nested options as `--aggregate.<flag>` on `scip-java index` (e.g.
+     * `--aggregate.allow-empty-index`). clikt forbids `.` in option names, so we rewrite the dotted
+     * prefix to `-` to match the options declared on [IndexCommand]. Tokens after `--` are left
+     * untouched.
      */
     private fun rewriteNestedOptions(args: List<String>): List<String> {
         var sawDoubleDash = false
@@ -113,19 +109,17 @@ class ScipJavaApp {
                     sawDoubleDash = true
                     arg
                 }
-                arg.startsWith("--aggregate.") ->
-                    "--aggregate-" + arg.removePrefix("--aggregate.")
+                arg.startsWith("--aggregate.") -> "--aggregate-" + arg.removePrefix("--aggregate.")
                 else -> arg
             }
         }
     }
 
     /**
-     * `--cwd` may appear in any position (including after the subcommand name),
-     * unlike a regular clikt parent option, so we extract it here before handing
-     * the remaining arguments to clikt and apply it to the working directory.
-     * Tokens after `--` pass through untouched so a trailing build command can
-     * legitimately contain `--cwd`.
+     * `--cwd` may appear in any position (including after the subcommand name), unlike a regular
+     * clikt parent option, so we extract it here before handing the remaining arguments to clikt
+     * and apply it to the working directory. Tokens after `--` pass through untouched so a trailing
+     * build command can legitimately contain `--cwd`.
      */
     private fun applyGlobalCwd(args: List<String>): List<String> {
         val result = ArrayList<String>(args.size)
@@ -163,14 +157,12 @@ class ScipJavaApp {
     }
 
     /**
-     * Root clikt command that plumbs the parent [ScipJavaApp] into the
-     * clikt context so subcommands can pick it up via
-     * `currentContext.findObject`.
+     * Root clikt command that plumbs the parent [ScipJavaApp] into the clikt context so subcommands
+     * can pick it up via `currentContext.findObject`.
      */
     private class RootCommand(val app: ScipJavaApp) : CliktCommand(name = "scip-java") {
 
-        override fun help(context: Context) =
-            "scip-java: index Java/Kotlin codebases into SCIP."
+        override fun help(context: Context) = "scip-java: index Java/Kotlin codebases into SCIP."
 
         private val sharedApp by findOrSetObject { app }
 

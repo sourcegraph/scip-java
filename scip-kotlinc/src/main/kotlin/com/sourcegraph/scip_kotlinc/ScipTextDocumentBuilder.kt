@@ -37,8 +37,7 @@ class ScipTextDocumentBuilder(
     private val documentBuilder = ScipDocumentBuilder()
     private val fileText = file.getContentsAsStream().reader().readText()
 
-    fun build(): Document =
-        documentBuilder.build("kotlin", relativePath(), fileText)
+    fun build(): Document = documentBuilder.build("kotlin", relativePath(), fileText)
 
     fun emitScipData(
         firBasedSymbol: FirBasedSymbol<*>?,
@@ -64,8 +63,7 @@ class ScipTextDocumentBuilder(
         val supers =
             when (firBasedSymbol) {
                 is FirClassSymbol ->
-                    firBasedSymbol
-                        .resolvedSuperTypeRefs
+                    firBasedSymbol.resolvedSuperTypeRefs
                         .filter { it !is FirImplicitAnyTypeRef }
                         .mapNotNull { it.toClassLikeSymbol(firBasedSymbol.moduleData.session) }
                         .flatMap { cache[it] }
@@ -76,8 +74,7 @@ class ScipTextDocumentBuilder(
         return symbolInformation {
             this.symbol = symbol.toString()
             this.displayName =
-                if (firBasedSymbol != null) displayName(firBasedSymbol)
-                else element.text.toString()
+                if (firBasedSymbol != null) displayName(firBasedSymbol) else element.text.toString()
             if (firBasedSymbol != null) {
                 renderSignature(firBasedSymbol.fir)?.let { rendered ->
                     signatureDocumentation = signature {
@@ -144,7 +141,8 @@ class ScipTextDocumentBuilder(
                 callArgumentsRenderer = FirCallNoArgumentsRenderer(),
                 modifierRenderer = FirAllModifierRenderer(),
                 callableSignatureRenderer = FirCallableSignatureRendererForReadability(),
-                declarationRenderer = FirDeclarationRenderer("local "))
+                declarationRenderer = FirDeclarationRenderer("local "),
+            )
         val rendered = renderer.renderElementAsString(element)
         return if (rendered.isEmpty()) null else rendered
     }

@@ -20,14 +20,14 @@ import org.scip_code.scip.Document
 /**
  * Writes per-source SCIP shards once the FIR checkers have finished and the IR phase begins.
  *
- * <p>For each source file [AnalyzerCheckers] registered a [ScipVisitor] for, this builds the
- * file's [Document] and serializes it under `<targetRoot>/META-INF/scip/<relative-path>.scip`.
- * Files outside the source root are skipped with a stderr warning.
+ * <p>For each source file [AnalyzerCheckers] registered a [ScipVisitor] for, this builds the file's
+ * [Document] and serializes it under `<targetRoot>/META-INF/scip/<relative-path>.scip`. Files
+ * outside the source root are skipped with a stderr warning.
  */
 class PostAnalysisExtension(
     private val sourceRoot: Path,
     private val targetRoot: Path,
-    private val callback: (Document) -> Unit
+    private val callback: (Document) -> Unit,
 ) : IrGenerationExtension {
     override fun generate(moduleFragment: IrModuleFragment, pluginContext: IrPluginContext) {
         try {
@@ -54,7 +54,8 @@ class PostAnalysisExtension(
             return outPath.get()
         }
         System.err.println(
-            "given file is not under the sourceroot.\n\tSourceroot: $sourceRoot\n\tFile path: ${file.path}\n\tNormalized file path: $normalizedPath")
+            "given file is not under the sourceroot.\n\tSourceroot: $sourceRoot\n\tFile path: ${file.path}\n\tNormalized file path: $normalizedPath"
+        )
         return null
     }
 
@@ -62,26 +63,31 @@ class PostAnalysisExtension(
         CompilerConfiguration()
             .get(
                 CommonConfigurationKeys.MESSAGE_COLLECTOR_KEY,
-                PrintingMessageCollector(System.err, MessageRenderer.PLAIN_FULL_PATHS, false))
+                PrintingMessageCollector(System.err, MessageRenderer.PLAIN_FULL_PATHS, false),
+            )
 
     private fun handleException(e: Exception) {
         val writer =
             PrintWriter(
                 object : Writer() {
                     val buf = StringBuffer()
+
                     override fun close() =
                         messageCollector.report(CompilerMessageSeverity.EXCEPTION, buf.toString())
 
                     override fun flush() = Unit
+
                     override fun write(data: CharArray, offset: Int, len: Int) {
                         buf.append(data, offset, len)
                     }
                 },
-                false)
+                false,
+            )
         writer.println("Exception in scip-kotlin compiler plugin:")
         e.printStackTrace(writer)
         writer.println(
-            "Please report a bug to https://github.com/sourcegraph/scip-kotlin with the stack trace above.")
+            "Please report a bug to https://github.com/sourcegraph/scip-kotlin with the stack trace above."
+        )
         writer.close()
     }
 }

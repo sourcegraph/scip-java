@@ -22,7 +22,6 @@ import org.scip_code.scip.symbolInformation
  * }
  * ```
  */
-
 internal val REFERENCE: Int = SymbolRole.UnspecifiedSymbolRole.number
 internal val DEFINITION: Int = SymbolRole.Definition.number
 
@@ -33,8 +32,8 @@ class ScipRangeBuilder {
     var startLine: Int = 0
     var startCharacter: Int = 0
     /**
-     * Default sentinel: when [endLine] is left untouched, the produced range is
-     * single-line at [startLine].
+     * Default sentinel: when [endLine] is left untouched, the produced range is single-line at
+     * [startLine].
      */
     var endLine: Int = -1
     var endCharacter: Int = 0

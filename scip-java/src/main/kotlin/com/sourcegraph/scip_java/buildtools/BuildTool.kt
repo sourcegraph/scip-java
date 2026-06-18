@@ -26,18 +26,14 @@ abstract class BuildTool(val name: String, protected val index: IndexCommand) {
             // The order in this list is important - first detected build
             // tool will be used in `auto` mode. Bazel is missing because
             // it isn't supported by auto-indexing.
-            listOf(
-                ScipBuildTool(index),
-                MavenBuildTool(index),
-                GradleBuildTool(index),
-            )
+            listOf(ScipBuildTool(index), MavenBuildTool(index), GradleBuildTool(index))
 
         fun allNames(): String =
             all(IndexCommand()).filterNot { it.isHidden }.joinToString(", ") { it.name }
 
         /**
-         * After the wrapped build tool finished invoking `javac`/`kotlinc`,
-         * convert the resulting SCIP targetroot into a SCIP index.
+         * After the wrapped build tool finished invoking `javac`/`kotlinc`, convert the resulting
+         * SCIP targetroot into a SCIP index.
          */
         fun generateScipFromTargetroot(
             generateScipResult: ProcessResult,

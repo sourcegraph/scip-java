@@ -24,10 +24,10 @@ class GradleBuildTool(index: IndexCommand) : BuildTool("Gradle", index) {
     }
 
     /**
-     * Diagnose the case where Gradle finished successfully but our SCIP
-     * compiler plugin never produced any `.scip` shards, surfacing a clear
-     * error pointing at the two known causes. Returns a non-zero exit code
-     * when it reports the error so the failure propagates as a return value.
+     * Diagnose the case where Gradle finished successfully but our SCIP compiler plugin never
+     * produced any `.scip` shards, surfacing a clear error pointing at the two known causes.
+     * Returns a non-zero exit code when it reports the error so the failure propagates as a return
+     * value.
      */
     private fun reportMissingScipOutput(): Int {
         if (containsFileWithSuffix(targetroot(), ".scip")) return 0
@@ -50,7 +50,7 @@ This means our SCIP compiler plugin was not attached to one or more JavaCompile 
      Verify with:  ./gradlew compileJava --info | grep -- '-Xplugin:scip'
      If '-Xplugin:scip' is missing from the printed javac command, another plugin
      is overwriting JavaCompile.options.compilerArgs.
-""",
+"""
         )
         return 1
     }
@@ -59,10 +59,11 @@ This means our SCIP compiler plugin was not attached to one or more JavaCompile 
         if (!Files.isDirectory(root)) return false
         return try {
             Files.find(
-                root,
-                Integer.MAX_VALUE,
-                { p, attrs -> attrs.isRegularFile && p.fileName.toString().endsWith(suffix) },
-            ).use { stream -> stream.findFirst().isPresent }
+                    root,
+                    Integer.MAX_VALUE,
+                    { p, attrs -> attrs.isRegularFile && p.fileName.toString().endsWith(suffix) },
+                )
+                .use { stream -> stream.findFirst().isPresent }
         } catch (_: Exception) {
             false
         }
@@ -74,15 +75,14 @@ This means our SCIP compiler plugin was not attached to one or more JavaCompile 
 
     private fun runBuild(): ProcessResult {
         val gradleWrapperName =
-            if (System.getProperty("os.name").lowercase().contains("win")) "gradlew.bat" else "gradlew"
+            if (System.getProperty("os.name").lowercase().contains("win")) "gradlew.bat"
+            else "gradlew"
         val gradleWrapper = index.workingDirectory.resolve(gradleWrapperName)
         val gradleCommand =
             if (Files.isRegularFile(gradleWrapper) && Files.isExecutable(gradleWrapper))
                 gradleWrapper.toString()
             else "gradle"
-        return TemporaryFiles.withDirectory(index) { tmp ->
-            runCompileCommand(tmp, gradleCommand)
-        }
+        return TemporaryFiles.withDirectory(index) { tmp -> runCompileCommand(tmp, gradleCommand) }
     }
 
     private fun runCompileCommand(tmp: Path, gradleCommand: String): ProcessResult {
@@ -125,7 +125,8 @@ This means our SCIP compiler plugin was not attached to one or more JavaCompile 
                project.ext["scipKotlincJar"] = "$scipKotlincPath"
                apply plugin: ScipGradlePlugin
              }
-            """.trimIndent()
+            """
+                .trimIndent()
 
         val out = tmp.resolve("init-script.gradle")
         Files.write(out, script.toByteArray(StandardCharsets.UTF_8))

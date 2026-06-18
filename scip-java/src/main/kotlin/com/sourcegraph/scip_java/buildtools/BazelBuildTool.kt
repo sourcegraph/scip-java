@@ -28,9 +28,8 @@ class BazelBuildTool(index: IndexCommand) : BuildTool("Bazel", index) {
         get() = if (index.buildCommand.isEmpty()) listOf("//...") else index.buildCommand
 
     /**
-     * Prefer `bazelisk` over `bazel` when both are available: `bazelisk`
-     * respects the project's `.bazelversion`, while `bazel` may be a pinned
-     * system version.
+     * Prefer `bazelisk` over `bazel` when both are available: `bazelisk` respects the project's
+     * `.bazelversion`, while `bazel` may be a pinned system version.
      */
     private val bazelExecutable: String
         get() {
@@ -47,7 +46,7 @@ class BazelBuildTool(index: IndexCommand) : BuildTool("Bazel", index) {
         if (scipJavaBinary.isEmpty()) {
             index.app.error(
                 "the flag --bazel-scip-java-binary is required to index Bazel codebases. " +
-                    "To fix this problem, run scip-java index again with the flag --scip-java-binary=/path/to/scip-java",
+                    "To fix this problem, run scip-java index again with the flag --scip-java-binary=/path/to/scip-java"
             )
             return 1
         }
@@ -56,7 +55,7 @@ class BazelBuildTool(index: IndexCommand) : BuildTool("Bazel", index) {
         if (javaHome.isEmpty()) {
             index.app.error(
                 "environment variable JAVA_HOME is not set. " +
-                    "To fix this problem run `export JAVA_HOME=/path/to/java` and run scip-java index again.",
+                    "To fix this problem run `export JAVA_HOME=/path/to/java` and run scip-java index again."
             )
             return 1
         }
@@ -113,7 +112,7 @@ class BazelBuildTool(index: IndexCommand) : BuildTool("Bazel", index) {
 To narrow the set of targets to index or pass additional flags to Bazel, include extra arguments index after -- like below:
 
   scip-java index --bazel-scip-java-binary=... -- //custom/target --sandbox_debug
-""",
+"""
         )
         return result.exitCode
     }
@@ -134,7 +133,7 @@ To narrow the set of targets to index or pass additional flags to Bazel, include
                 "doing nothing, the directory $bazelOut does not exist. " +
                     "The most likely cause for this problem is that there are no Java targets in this Bazel workspace. " +
                     "Please report an issue to the scip-java issue tracker if the command " +
-                    "`bazel query 'kind(java_*, //...)'` returns non-empty output.",
+                    "`bazel query 'kind(java_*, //...)'` returns non-empty output."
             )
             return
         }
@@ -159,10 +158,9 @@ To narrow the set of targets to index or pass additional flags to Bazel, include
     }
 
     /**
-     * Processes Bazel's stderr line-by-line to extract the sandbox command.
-     * When `--sandbox_debug` is enabled Bazel prints the sandbox command that
-     * failed but it doesn't show the stdout/stderr of that command. This
-     * extractor captures the command so it can be re-run after the fact.
+     * Processes Bazel's stderr line-by-line to extract the sandbox command. When `--sandbox_debug`
+     * is enabled Bazel prints the sandbox command that failed but it doesn't show the stdout/stderr
+     * of that command. This extractor captures the command so it can be re-run after the fact.
      */
     private inner class SandboxCommandExtractor {
         private var isSandboxCommandPrinting = false
@@ -171,7 +169,11 @@ To narrow the set of targets to index or pass additional flags to Bazel, include
         fun commandLines(): List<String> = lines.toList()
 
         fun accept(line: String) {
-            if (!isSandboxCommandPrinting && line.startsWith("ERROR:") && line.contains("error executing command")) {
+            if (
+                !isSandboxCommandPrinting &&
+                    line.startsWith("ERROR:") &&
+                    line.contains("error executing command")
+            ) {
                 isSandboxCommandPrinting = true
             } else if (isSandboxCommandPrinting && !line.startsWith("  ")) {
                 isSandboxCommandPrinting = false
@@ -183,12 +185,13 @@ To narrow the set of targets to index or pass additional flags to Bazel, include
     }
 
     /**
-     * Reads the scip_java.bzl file from resources and writes it to the
-     * aspect/scip_java.bzl file inside the Bazel workspace.
+     * Reads the scip_java.bzl file from resources and writes it to the aspect/scip_java.bzl file
+     * inside the Bazel workspace.
      */
     private fun generateAspectFile(): String? {
         val aspectPath = index.workingDirectory.resolve(index.bazelAspect)
-        val aspectContents = TemporaryFiles.withDirectory(index) { tmp -> Embedded.bazelAspectFile(tmp) }
+        val aspectContents =
+            TemporaryFiles.withDirectory(index) { tmp -> Embedded.bazelAspectFile(tmp) }
         if (index.bazelOverwriteAspectFile || !Files.exists(aspectPath)) {
             Files.deleteIfExists(aspectPath)
             Files.createDirectories(aspectPath.parent)
@@ -199,13 +202,13 @@ To narrow the set of targets to index or pass additional flags to Bazel, include
                 index.app.reporter.error(
                     "Outdated Bazel aspect file found at $aspectPath. To fix this problem, " +
                         "either run again with the flag --bazel-overwrite-aspect-file or update " +
-                        "the contents of the file to the following:\n\n$aspectContents\n\n",
+                        "the contents of the file to the following:\n\n$aspectContents\n\n"
                 )
                 return null
             }
         } else if (Files.exists(aspectPath)) {
             index.app.reporter.error(
-                "path $aspectPath already exists and is not a file. To fix this problem, remove this path and try again.",
+                "path $aspectPath already exists and is not a file. To fix this problem, remove this path and try again."
             )
             return null
         }

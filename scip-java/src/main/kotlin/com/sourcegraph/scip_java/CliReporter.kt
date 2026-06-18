@@ -5,8 +5,8 @@ import java.nio.file.NoSuchFileException
 import java.util.concurrent.atomic.AtomicInteger
 
 /**
- * Console reporter: `info` goes to stdout, `warning`/`error` to stderr.
- * Doubles as the [ScipAggregatorReporter] consumed by the aggregator.
+ * Console reporter: `info` goes to stdout, `warning`/`error` to stderr. Doubles as the
+ * [ScipAggregatorReporter] consumed by the aggregator.
  */
 class CliReporter(private val env: CliEnvironment) : ScipAggregatorReporter() {
     private val errorCount = AtomicInteger()
@@ -29,8 +29,7 @@ class CliReporter(private val env: CliEnvironment) : ScipAggregatorReporter() {
     }
 
     /** Dropped to avoid leaking noise into snapshot tests. */
-    @Suppress("UNUSED_PARAMETER")
-    fun debug(message: String) {}
+    @Suppress("UNUSED_PARAMETER") fun debug(message: String) {}
 
     override fun error(e: Throwable) {
         if (e is NoSuchFileException) {

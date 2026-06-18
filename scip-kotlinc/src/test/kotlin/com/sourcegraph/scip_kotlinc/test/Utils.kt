@@ -36,17 +36,17 @@ data class ExpectedSymbols(
     val testName: String,
     val source: SourceFile,
     val symbolsCacheData: SymbolCacheData? = null,
-    val scip: ScipData? = null
+    val scip: ScipData? = null,
 ) {
     /** Subset of a SCIP [Document] that a single test wants to assert on. */
     data class ScipData(
         val expectedOccurrences: List<Occurrence>? = null,
-        val expectedSymbols: List<SymbolInformation>? = null
+        val expectedSymbols: List<SymbolInformation>? = null,
     )
 
     data class SymbolCacheData(
         val expectedGlobals: List<Symbol>? = null,
-        val localsCount: Int? = null
+        val localsCount: Int? = null,
     )
 }
 
@@ -68,26 +68,27 @@ fun List<ExpectedSymbols>.mapCheckExpectedSymbols(): List<DynamicTest> =
             dynamicTest("$testName - symbols") {
                 symbolsData?.apply {
                     println(
-                        "checking symbols: ${expectedGlobals?.size ?: 0} globals and presence of $localsCount locals")
+                        "checking symbols: ${expectedGlobals?.size ?: 0} globals and presence of $localsCount locals"
+                    )
                     checkContainsExpectedSymbols(globals, locals, expectedGlobals, localsCount)
-                }
-                    ?: assumeFalse(true)
+                } ?: assumeFalse(true)
             },
             dynamicTest("$testName - scip") {
                 scipData?.apply {
                     println(
-                        "checking scip: ${expectedOccurrences?.size ?: 0} occurrences and ${expectedSymbols?.size ?: 0} symbols")
+                        "checking scip: ${expectedOccurrences?.size ?: 0} occurrences and ${expectedSymbols?.size ?: 0} symbols"
+                    )
                     checkContainsExpectedScip(document, expectedOccurrences, expectedSymbols)
-                }
-                    ?: assumeFalse(true)
-            })
+                } ?: assumeFalse(true)
+            },
+        )
     }
 
 fun checkContainsExpectedSymbols(
     globals: GlobalSymbolsCache,
     locals: LocalSymbolsCache,
     expectedGlobals: List<Symbol>?,
-    localsCount: Int? = null
+    localsCount: Int? = null,
 ) {
     assertSoftly(globals) { expectedGlobals?.let { this.shouldContainInOrder(it) } }
     localsCount?.also { locals.size shouldBe it }
@@ -96,7 +97,7 @@ fun checkContainsExpectedSymbols(
 fun checkContainsExpectedScip(
     document: Document,
     expectedOccurrences: List<Occurrence>?,
-    expectedSymbols: List<SymbolInformation>?
+    expectedSymbols: List<SymbolInformation>?,
 ) {
     assertSoftly(document.occurrencesList) {
         expectedOccurrences?.let { this.shouldContainInOrder(it) }
@@ -109,7 +110,7 @@ private fun configureTestCompiler(
     source: SourceFile,
     globals: GlobalSymbolsCache,
     locals: LocalSymbolsCache,
-    hook: (Document) -> Unit = {}
+    hook: (Document) -> Unit = {},
 ): KotlinCompilation {
     val compilation =
         KotlinCompilation().apply {
@@ -126,7 +127,7 @@ private fun configureTestCompiler(
 private class TestAnalyzerDeclarationCheckers(
     globals: GlobalSymbolsCache,
     locals: LocalSymbolsCache,
-    sourceRoot: Path
+    sourceRoot: Path,
 ) : AnalyzerCheckers.AnalyzerDeclarationCheckers(sourceRoot) {
     override val fileCheckers: Set<FirFileChecker> =
         setOf(
@@ -139,7 +140,8 @@ private class TestAnalyzerDeclarationCheckers(
                     visitors[ktFile] = visitor
                 }
             },
-            AnalyzerCheckers.SemanticImportsChecker())
+            AnalyzerCheckers.SemanticImportsChecker(),
+        )
 }
 
 private class TestAnalyzerCheckers(session: FirSession) : AnalyzerCheckers(session) {
@@ -148,7 +150,7 @@ private class TestAnalyzerCheckers(session: FirSession) : AnalyzerCheckers(sessi
             TestAnalyzerDeclarationCheckers(
                 session.testAnalyzerParamsProvider.globals,
                 session.testAnalyzerParamsProvider.locals,
-                session.testAnalyzerParamsProvider.sourceroot
+                session.testAnalyzerParamsProvider.sourceroot,
             )
 }
 
@@ -169,15 +171,15 @@ class TestAnalyzerParamsProvider(
     }
 }
 
-val FirSession.testAnalyzerParamsProvider: TestAnalyzerParamsProvider by FirSession
-    .sessionComponentAccessor()
+val FirSession.testAnalyzerParamsProvider: TestAnalyzerParamsProvider by
+    FirSession.sessionComponentAccessor()
 
 @OptIn(ExperimentalCompilerApi::class)
 fun scipVisitorAnalyzer(
     globals: GlobalSymbolsCache,
     locals: LocalSymbolsCache,
     sourceroot: Path,
-    hook: (Document) -> Unit = {}
+    hook: (Document) -> Unit = {},
 ): CompilerPluginRegistrar {
     return object : CompilerPluginRegistrar() {
         override fun ExtensionStorage.registerExtensions(configuration: CompilerConfiguration) {
@@ -187,10 +189,15 @@ fun scipVisitorAnalyzer(
                         +TestAnalyzerParamsProvider.getFactory(globals, locals, sourceroot)
                         +::TestAnalyzerCheckers
                     }
-                })
+                }
+            )
             IrGenerationExtension.registerExtension(
                 PostAnalysisExtension(
-                    sourceRoot = sourceroot, targetRoot = Paths.get(""), callback = hook))
+                    sourceRoot = sourceroot,
+                    targetRoot = Paths.get(""),
+                    callback = hook,
+                )
+            )
         }
 
         override val supportsK2: Boolean

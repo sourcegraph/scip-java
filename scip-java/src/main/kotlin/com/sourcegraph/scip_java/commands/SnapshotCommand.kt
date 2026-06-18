@@ -22,8 +22,8 @@ import java.nio.file.attribute.BasicFileAttributes
 import org.scip_code.scip.Index
 
 /**
- * `scip-java snapshot`: generates annotated snapshots for each `*.scip`
- * file in the given target roots.
+ * `scip-java snapshot`: generates annotated snapshots for each `*.scip` file in the given target
+ * roots.
  */
 class SnapshotCommand : CliktCommand(name = "snapshot") {
 
@@ -32,19 +32,16 @@ class SnapshotCommand : CliktCommand(name = "snapshot") {
 
     private val app: ScipJavaApp by requireObject()
 
-    private val targetroot: List<Path> by argument(
-        help = "List of directories containing SCIP files",
-    ).path().multiple()
+    private val targetroot: List<Path> by
+        argument(help = "List of directories containing SCIP files").path().multiple()
 
-    private val output: Path by option(
-        "--output",
-        help = "Output directory for the annotated snapshots",
-    ).path().default(Paths.get("generated"))
+    private val output: Path by
+        option("--output", help = "Output directory for the annotated snapshots")
+            .path()
+            .default(Paths.get("generated"))
 
-    private val cleanup: Boolean by option(
-        "--cleanup",
-        "--no-cleanup",
-    ).flag("--no-cleanup", default = true)
+    private val cleanup: Boolean by
+        option("--cleanup", "--no-cleanup").flag("--no-cleanup", default = true)
 
     override fun run() {
         val scipPattern = FileSystems.getDefault().getPathMatcher("glob:**.scip")
@@ -61,7 +58,10 @@ class SnapshotCommand : CliktCommand(name = "snapshot") {
             Files.walkFileTree(
                 root,
                 object : SimpleFileVisitor<Path>() {
-                    override fun visitFile(file: Path, attrs: BasicFileAttributes): FileVisitResult {
+                    override fun visitFile(
+                        file: Path,
+                        attrs: BasicFileAttributes,
+                    ): FileVisitResult {
                         if (scipPattern.matches(file)) {
                             val index = Index.parseFrom(Files.readAllBytes(file))
                             // Per-source SCIP shards under META-INF/scip/ carry no Metadata;
@@ -80,22 +80,21 @@ class SnapshotCommand : CliktCommand(name = "snapshot") {
         if (!foundScipFile) {
             app.error(
                 "no SCIP files found. To fix this problem, make sure that one of the directories " +
-                    "in ${targetroot.joinToString(", ")} contains a `*.scip` file.",
+                    "in ${targetroot.joinToString(", ")} contains a `*.scip` file."
             )
             throw ProgramResult(1)
         }
     }
 
     /**
-     * Renders [scipFile] into per-document snapshot files by shelling out to
-     * the `scip` CLI (expected on `PATH`; provided by the nix devShell). scip
-     * reads each document's source from disk via the project root recorded in
-     * the index and writes one annotated snapshot file per document.
+     * Renders [scipFile] into per-document snapshot files by shelling out to the `scip` CLI
+     * (expected on `PATH`; provided by the nix devShell). scip reads each document's source from
+     * disk via the project root recorded in the index and writes one annotated snapshot file per
+     * document.
      *
-     * `scip snapshot --to` wipes its output directory on each run, so render
-     * into a temp directory and copy the per-document files into [output]. That
-     * keeps snapshots from sibling indexes (across multiple target roots)
-     * intact and preserves the previous command's output layout.
+     * `scip snapshot --to` wipes its output directory on each run, so render into a temp directory
+     * and copy the per-document files into [output]. That keeps snapshots from sibling indexes
+     * (across multiple target roots) intact and preserves the previous command's output layout.
      */
     private fun renderSnapshots(scipFile: Path, index: Index) {
         val tmp = Files.createTempDirectory("scip-snapshot")
@@ -119,7 +118,7 @@ class SnapshotCommand : CliktCommand(name = "snapshot") {
             if (result.exitCode != 0) {
                 app.error(
                     "`scip snapshot` exited with code ${result.exitCode} for $scipFile. " +
-                        "Make sure the `scip` CLI is installed and on your PATH.",
+                        "Make sure the `scip` CLI is installed and on your PATH."
                 )
                 throw ProgramResult(1)
             }

@@ -9,9 +9,8 @@ import java.nio.file.Path
 import org.scip_code.scip.ToolInfo
 
 /**
- * Logic backing the `aggregate` command, factored out so build tools can
- * aggregate their targetroot shards into a single SCIP index in-process
- * without going through clikt.
+ * Logic backing the `aggregate` command, factored out so build tools can aggregate their targetroot
+ * shards into a single SCIP index in-process without going through clikt.
  */
 object AggregateRunner {
     fun run(
@@ -42,10 +41,7 @@ object AggregateRunner {
                 absoluteOutput,
                 sourceroot,
                 app.reporter,
-                ToolInfo.newBuilder()
-                    .setName("scip-java")
-                    .setVersion(BuildInfo.version)
-                    .build(),
+                ToolInfo.newBuilder().setName("scip-java").setVersion(BuildInfo.version).build(),
                 parallel,
                 packages.map { it.toPackageInformation() },
                 emitInverseRelationships,

@@ -20,8 +20,6 @@ import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.boolean
 import kotlinx.serialization.json.contentOrNull
 import kotlinx.serialization.json.jsonArray
-import kotlinx.serialization.json.jsonObject
-import kotlinx.serialization.json.jsonPrimitive
 import org.jetbrains.kotlin.cli.common.arguments.K2JVMCompilerArguments
 import org.jetbrains.kotlin.cli.common.arguments.parseCommandLineArguments
 import org.jetbrains.kotlin.cli.common.messages.CompilerMessageSeverity
@@ -34,11 +32,10 @@ import org.jetbrains.kotlin.config.Services
 /**
  * A custom build tool that is specifically made for scip-java.
  *
- * The purpose of this build tool is to SCIP-index source code defined by an
- * external JSON config (`scip-java.json`) instead of by Maven/Gradle/Bazel.
- * Callers are expected to pre-resolve dependencies and pass the resulting
- * classpath via the `classpath` field. `scip-java` does not fetch anything
- * from the network.
+ * The purpose of this build tool is to SCIP-index source code defined by an external JSON config
+ * (`scip-java.json`) instead of by Maven/Gradle/Bazel. Callers are expected to pre-resolve
+ * dependencies and pass the resulting classpath via the `classpath` field. `scip-java` does not
+ * fetch anything from the network.
  */
 class ScipBuildTool(index: IndexCommand) : BuildTool("SCIP", index) {
 
@@ -90,10 +87,11 @@ class ScipBuildTool(index: IndexCommand) : BuildTool("SCIP", index) {
 
     /** Parses the lsif-java.json file into a Config object. */
     private fun parseConfig(): Config {
-        val configFile = configFiles().firstOrNull { Files.isRegularFile(it) }
-            ?: throw IOException(
-                "no config file found. To fix this problem, create a config file in the path '${configFiles().first()}'",
-            )
+        val configFile =
+            configFiles().firstOrNull { Files.isRegularFile(it) }
+                ?: throw IOException(
+                    "no config file found. To fix this problem, create a config file in the path '${configFiles().first()}'"
+                )
         val raw = Files.readString(configFile)
         val element = Json.parseToJsonElement(raw)
         if (element !is JsonObject) {
@@ -103,15 +101,15 @@ class ScipBuildTool(index: IndexCommand) : BuildTool("SCIP", index) {
     }
 
     /**
-     * Shells out to "javac" (and runs `kotlinc` in-process) to compile the
-     * sources with the SCIP compiler plugin enabled.
+     * Shells out to "javac" (and runs `kotlinc` in-process) to compile the sources with the SCIP
+     * compiler plugin enabled.
      */
     private fun compile(config: Config): ProcessResult {
         if (config.dependencies.isNotEmpty()) {
             index.app.error(
                 "scip-java no longer resolves Maven coordinates from the 'dependencies' field " +
                     "of scip-java.json. Pre-resolve dependencies and populate the 'classpath' " +
-                    "field with absolute JAR paths instead.",
+                    "field with absolute JAR paths instead."
             )
             return ProcessResult(1)
         }
@@ -125,7 +123,7 @@ class ScipBuildTool(index: IndexCommand) : BuildTool("SCIP", index) {
         if (javaFiles.isEmpty() && kotlinFiles.isEmpty()) {
             if (config.reportWarningOnEmptyIndex) {
                 index.app.warning(
-                    "doing nothing, no files matching pattern '$sourceroot/**.{java,kt}'",
+                    "doing nothing, no files matching pattern '$sourceroot/**.{java,kt}'"
                 )
             }
             return ProcessResult(0)
@@ -147,7 +145,7 @@ class ScipBuildTool(index: IndexCommand) : BuildTool("SCIP", index) {
                 index.app.reporter.info(
                     "Some SCIP files got generated even if there were compile errors. " +
                         "In most cases, this means that scip-java managed to index everything except " +
-                        "the locations that had compile errors and you can ignore the compile errors.",
+                        "the locations that had compile errors and you can ignore the compile errors."
                 )
                 for (error in errors) {
                     index.app.reporter.info(error.message ?: error.toString())
@@ -172,75 +170,77 @@ class ScipBuildTool(index: IndexCommand) : BuildTool("SCIP", index) {
         val plugin = Embedded.scipKotlincJar(tmp)
 
         val classpath =
-            config.classpath
-                .joinToString(File.pathSeparator) {
-                    index.workingDirectory.resolve(it).toString()
-                }
+            config.classpath.joinToString(File.pathSeparator) {
+                index.workingDirectory.resolve(it).toString()
+            }
 
         val kargs = K2JVMCompilerArguments()
-        val args = mutableListOf(
-            "-nowarn",
-            "-no-reflect",
-            "-no-stdlib",
-            "-Xmulti-platform",
-            "-Xno-check-actual",
-            "-verbose:class",
-            "-opt-in=kotlin.RequiresOptIn",
-            "-opt-in=kotlin.ExperimentalUnsignedTypes",
-            "-opt-in=kotlin.ExperimentalStdlibApi",
-            "-opt-in=kotlin.ExperimentalMultiplatform",
-            "-opt-in=kotlin.contracts.ExperimentalContracts",
-            "-Xallow-kotlin-package",
-            "-Xplugin=$plugin",
-            "-P",
-            "plugin:scip-kotlinc:sourceroot=$sourceroot",
-            "-P",
-            "plugin:scip-kotlinc:targetroot=$targetroot",
-            "-classpath",
-            classpath,
-        )
+        val args =
+            mutableListOf(
+                "-nowarn",
+                "-no-reflect",
+                "-no-stdlib",
+                "-Xmulti-platform",
+                "-Xno-check-actual",
+                "-verbose:class",
+                "-opt-in=kotlin.RequiresOptIn",
+                "-opt-in=kotlin.ExperimentalUnsignedTypes",
+                "-opt-in=kotlin.ExperimentalStdlibApi",
+                "-opt-in=kotlin.ExperimentalMultiplatform",
+                "-opt-in=kotlin.contracts.ExperimentalContracts",
+                "-Xallow-kotlin-package",
+                "-Xplugin=$plugin",
+                "-P",
+                "plugin:scip-kotlinc:sourceroot=$sourceroot",
+                "-P",
+                "plugin:scip-kotlinc:targetroot=$targetroot",
+                "-classpath",
+                classpath,
+            )
         args += filesPaths
 
         parseCommandLineArguments(args, kargs)
 
         val exit =
-            K2JVMCompiler().exec(
-                object : MessageCollector {
-                    private var sawError = false
+            K2JVMCompiler()
+                .exec(
+                    object : MessageCollector {
+                        private var sawError = false
 
-                    override fun clear() {
-                        sawError = false
-                    }
+                        override fun clear() {
+                            sawError = false
+                        }
 
-                    override fun hasErrors(): Boolean = sawError
+                        override fun hasErrors(): Boolean = sawError
 
-                    override fun report(
-                        severity: CompilerMessageSeverity,
-                        message: String,
-                        location: CompilerMessageSourceLocation?,
-                    ) {
-                        if (
-                            message.endsWith("without a body must be abstract") ||
-                            message.endsWith("must have a body")
+                        override fun report(
+                            severity: CompilerMessageSeverity,
+                            message: String,
+                            location: CompilerMessageSourceLocation?,
                         ) {
-                            // We get these when indexing the stdlib;
-                            // no other solution found yet.
-                            return
+                            if (
+                                message.endsWith("without a body must be abstract") ||
+                                    message.endsWith("must have a body")
+                            ) {
+                                // We get these when indexing the stdlib;
+                                // no other solution found yet.
+                                return
+                            }
+                            val rendered =
+                                MessageRenderer.PLAIN_FULL_PATHS.render(severity, message, location)
+                            index.app.reporter.debug(rendered)
+                            // Only treat ERROR / EXCEPTION as failures.
+                            // Kotlin 2.2.0's K2JVMCompiler emits LOGGING/INFO/WARNING
+                            // messages during normal compilation; pushing those onto
+                            // `errors` would cause hasErrors to return true.
+                            if (severity.isError) {
+                                sawError = true
+                            }
                         }
-                        val rendered = MessageRenderer.PLAIN_FULL_PATHS.render(severity, message, location)
-                        index.app.reporter.debug(rendered)
-                        // Only treat ERROR / EXCEPTION as failures.
-                        // Kotlin 2.2.0's K2JVMCompiler emits LOGGING/INFO/WARNING
-                        // messages during normal compilation; pushing those onto
-                        // `errors` would cause hasErrors to return true.
-                        if (severity.isError) {
-                            sawError = true
-                        }
-                    }
-                },
-                Services.EMPTY,
-                kargs,
-            )
+                    },
+                    Services.EMPTY,
+                    kargs,
+                )
         return if (exit.code == 0) null else Exception(exit.toString())
     }
 
@@ -251,17 +251,18 @@ class ScipBuildTool(index: IndexCommand) : BuildTool("SCIP", index) {
         val scipJar = Embedded.scipJar(tmp)
         val classpath = mutableListOf<String>()
         classpath += scipJar.toString()
-        classpath += config.classpath.map {
-            index.workingDirectory.resolve(it).toString()
-        }
+        classpath += config.classpath.map { index.workingDirectory.resolve(it).toString() }
         val argsfile = targetroot.resolve("javacopts.txt")
         val arguments = mutableListOf<String>()
         arguments += "-encoding"
         arguments += "utf8"
         arguments += "-nowarn"
-        arguments += "-d"; arguments += generatedDir(tmp, "d")
-        arguments += "-s"; arguments += generatedDir(tmp, "s")
-        arguments += "-h"; arguments += generatedDir(tmp, "h")
+        arguments += "-d"
+        arguments += generatedDir(tmp, "d")
+        arguments += "-s"
+        arguments += generatedDir(tmp, "s")
+        arguments += "-h"
+        arguments += generatedDir(tmp, "h")
         arguments += "-classpath"
         arguments += classpath.joinToString(File.pathSeparator)
         arguments += "-Xplugin:scip -targetroot:$targetroot -sourceroot:$sourceroot"
@@ -269,8 +270,9 @@ class ScipBuildTool(index: IndexCommand) : BuildTool("SCIP", index) {
             arguments += "-processorpath"
             val processorpath =
                 listOf(scipJar.toString()) +
-                    config.processorpath
-                        .mapNotNull { guessBazelJar(it, index.workingDirectory)?.toString() }
+                    config.processorpath.mapNotNull {
+                        guessBazelJar(it, index.workingDirectory)?.toString()
+                    }
             arguments += processorpath.joinToString(File.pathSeparator)
         }
         val isIgnoredAnnotationProcessor =
@@ -313,7 +315,8 @@ class ScipBuildTool(index: IndexCommand) : BuildTool("SCIP", index) {
                 onStdout = { index.app.reporter.info(it) },
                 onStderr = { index.app.reporter.info(it) },
             )
-        return if (result.exitCode == 0) null else Exception("javac exited with code ${result.exitCode}")
+        return if (result.exitCode == 0) null
+        else Exception("javac exited with code ${result.exitCode}")
     }
 
     private fun fixJavacOptions(options: List<String>): List<String> {
@@ -346,7 +349,7 @@ class ScipBuildTool(index: IndexCommand) : BuildTool("SCIP", index) {
                 ?: index.app.env.environmentVariables["JAVA_HOME"]
                 ?: throw RuntimeException(
                     "scip-java requires either the 'javaHome' field in scip-java.json or the " +
-                        "JAVA_HOME environment variable to be set to a JDK installation.",
+                        "JAVA_HOME environment variable to be set to a JDK installation."
                 )
         return Paths.get(home, "bin", "javac")
     }
@@ -360,7 +363,10 @@ class ScipBuildTool(index: IndexCommand) : BuildTool("SCIP", index) {
         Files.walkFileTree(
             dir,
             object : SimpleFileVisitor<Path>() {
-                override fun preVisitDirectory(d: Path, attrs: BasicFileAttributes): FileVisitResult =
+                override fun preVisitDirectory(
+                    d: Path,
+                    attrs: BasicFileAttributes,
+                ): FileVisitResult =
                     if (d == targetroot) FileVisitResult.SKIP_SUBTREE else FileVisitResult.CONTINUE
 
                 override fun visitFile(file: Path, attrs: BasicFileAttributes): FileVisitResult {
@@ -391,10 +397,9 @@ class ScipBuildTool(index: IndexCommand) : BuildTool("SCIP", index) {
     }
 
     /**
-     * HACK: We haven't figured out a reliable way to get annotation processor
-     * jars on the processorpath. The Bazel aspect sometimes says a NAME.jar
-     * file is on the processorpath when it doesn't exist but processed_NAME.jar
-     * or header_NAME.jar exists.
+     * HACK: We haven't figured out a reliable way to get annotation processor jars on the
+     * processorpath. The Bazel aspect sometimes says a NAME.jar file is on the processorpath when
+     * it doesn't exist but processed_NAME.jar or header_NAME.jar exists.
      */
     private fun guessBazelJar(pathString: String, workingDirectory: Path): Path? {
         var path = workingDirectory.resolve(pathString)
@@ -435,7 +440,11 @@ class ScipBuildTool(index: IndexCommand) : BuildTool("SCIP", index) {
             fun fromJson(obj: JsonObject): Config {
                 val defaults = Config()
                 return Config(
-                    reportWarningOnEmptyIndex = obj.boolean("reportWarningOnEmptyIndex", defaults.reportWarningOnEmptyIndex),
+                    reportWarningOnEmptyIndex =
+                        obj.boolean(
+                            "reportWarningOnEmptyIndex",
+                            defaults.reportWarningOnEmptyIndex,
+                        ),
                     javaHome = obj["javaHome"]?.stringOrNull(),
                     dependencies = obj.stringList("dependencies"),
                     sourceFiles = obj.stringList("sourceFiles"),

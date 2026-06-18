@@ -24,17 +24,20 @@ class AnalyzerCommandLineProcessor : CommandLineProcessor {
                 VAL_SOURCES,
                 "<path>",
                 "the absolute path to the root of the Kotlin sources",
-                required = true),
+                required = true,
+            ),
             CliOption(
                 VAL_TARGET,
                 "<path>",
                 "the absolute path to the directory where to generate SCIP files.",
-                required = true))
+                required = true,
+            ),
+        )
 
     override fun processOption(
         option: AbstractCliOption,
         value: String,
-        configuration: CompilerConfiguration
+        configuration: CompilerConfiguration,
     ) {
         when (option.optionName) {
             VAL_SOURCES -> configuration.put(KEY_SOURCES, Paths.get(value))

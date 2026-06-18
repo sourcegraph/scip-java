@@ -13,23 +13,22 @@ import org.jetbrains.kotlin.name.FqName
 import org.scip_code.scip.Document
 
 /**
- * Per-file accumulator of SCIP occurrences and symbols. The FIR checkers in
- * [AnalyzerCheckers] call into this and the resulting [Document] is written as a
- * `.scip` shard at the end of compilation.
+ * Per-file accumulator of SCIP occurrences and symbols. The FIR checkers in [AnalyzerCheckers] call
+ * into this and the resulting [Document] is written as a `.scip` shard at the end of compilation.
  */
 class ScipVisitor(
     sourceroot: Path,
     file: KtSourceFile,
     lineMap: LineMap,
     globals: GlobalSymbolsCache,
-    locals: LocalSymbolsCache = LocalSymbolsCache()
+    locals: LocalSymbolsCache = LocalSymbolsCache(),
 ) {
     private val cache = SymbolsCache(globals, locals)
     private val documentBuilder = ScipTextDocumentBuilder(sourceroot, file, lineMap, cache)
 
     private data class SymbolDescriptorPair(
         val firBasedSymbol: FirBasedSymbol<*>?,
-        val symbol: Symbol
+        val symbol: Symbol,
     )
 
     fun build(): Document = documentBuilder.build()
@@ -41,7 +40,14 @@ class ScipVisitor(
         enclosingSource: KtSourceElement? = null,
     ): List<Symbol>? =
         this?.onEach { (firBasedSymbol, symbol) ->
-                documentBuilder.emitScipData(firBasedSymbol, symbol, element, isDefinition, context, enclosingSource)
+                documentBuilder.emitScipData(
+                    firBasedSymbol,
+                    symbol,
+                    element,
+                    isDefinition,
+                    context,
+                    enclosingSource,
+                )
             }
             ?.map { it.symbol }
             ?.toList()
@@ -53,49 +59,116 @@ class ScipVisitor(
         cache[pkg].with(null).emitAll(element, isDefinition = false, context)
     }
 
-    fun visitClassReference(firClassSymbol: FirClassLikeSymbol<*>, element: KtSourceElement, context: CheckerContext) {
+    fun visitClassReference(
+        firClassSymbol: FirClassLikeSymbol<*>,
+        element: KtSourceElement,
+        context: CheckerContext,
+    ) {
         cache[firClassSymbol].with(firClassSymbol).emitAll(element, isDefinition = false, context)
     }
 
-    fun visitCallableReference(firClassSymbol: FirCallableSymbol<*>, element: KtSourceElement, context: CheckerContext) {
+    fun visitCallableReference(
+        firClassSymbol: FirCallableSymbol<*>,
+        element: KtSourceElement,
+        context: CheckerContext,
+    ) {
         cache[firClassSymbol].with(firClassSymbol).emitAll(element, isDefinition = false, context)
     }
 
-    fun visitClassOrObject(firClass: FirClassLikeDeclaration, element: KtSourceElement, context: CheckerContext, enclosingSource: KtSourceElement? = null) {
-        cache[firClass.symbol].with(firClass.symbol).emitAll(element, isDefinition = true, context, enclosingSource)
+    fun visitClassOrObject(
+        firClass: FirClassLikeDeclaration,
+        element: KtSourceElement,
+        context: CheckerContext,
+        enclosingSource: KtSourceElement? = null,
+    ) {
+        cache[firClass.symbol]
+            .with(firClass.symbol)
+            .emitAll(element, isDefinition = true, context, enclosingSource)
     }
 
-    fun visitPrimaryConstructor(firConstructor: FirConstructor, source: KtSourceElement, context: CheckerContext, enclosingSource: KtSourceElement? = null) {
-        cache[firConstructor.symbol].with(firConstructor.symbol).emitAll(source, isDefinition = true, context, enclosingSource)
+    fun visitPrimaryConstructor(
+        firConstructor: FirConstructor,
+        source: KtSourceElement,
+        context: CheckerContext,
+        enclosingSource: KtSourceElement? = null,
+    ) {
+        cache[firConstructor.symbol]
+            .with(firConstructor.symbol)
+            .emitAll(source, isDefinition = true, context, enclosingSource)
     }
 
-    fun visitSecondaryConstructor(firConstructor: FirConstructor, source: KtSourceElement, context: CheckerContext, enclosingSource: KtSourceElement? = null) {
-        cache[firConstructor.symbol].with(firConstructor.symbol).emitAll(source, isDefinition = true, context, enclosingSource)
+    fun visitSecondaryConstructor(
+        firConstructor: FirConstructor,
+        source: KtSourceElement,
+        context: CheckerContext,
+        enclosingSource: KtSourceElement? = null,
+    ) {
+        cache[firConstructor.symbol]
+            .with(firConstructor.symbol)
+            .emitAll(source, isDefinition = true, context, enclosingSource)
     }
 
-    fun visitNamedFunction(firFunction: FirFunction, source: KtSourceElement, context: CheckerContext, enclosingSource: KtSourceElement? = null) {
-        cache[firFunction.symbol].with(firFunction.symbol).emitAll(source, isDefinition = true, context, enclosingSource)
+    fun visitNamedFunction(
+        firFunction: FirFunction,
+        source: KtSourceElement,
+        context: CheckerContext,
+        enclosingSource: KtSourceElement? = null,
+    ) {
+        cache[firFunction.symbol]
+            .with(firFunction.symbol)
+            .emitAll(source, isDefinition = true, context, enclosingSource)
     }
 
-    fun visitProperty(firProperty: FirProperty, source: KtSourceElement, context: CheckerContext, enclosingSource: KtSourceElement? = null) {
-        cache[firProperty.symbol].with(firProperty.symbol).emitAll(source, isDefinition = true, context, enclosingSource)
+    fun visitProperty(
+        firProperty: FirProperty,
+        source: KtSourceElement,
+        context: CheckerContext,
+        enclosingSource: KtSourceElement? = null,
+    ) {
+        cache[firProperty.symbol]
+            .with(firProperty.symbol)
+            .emitAll(source, isDefinition = true, context, enclosingSource)
     }
 
-    fun visitParameter(firParameter: FirValueParameter, source: KtSourceElement, context: CheckerContext, enclosingSource: KtSourceElement? = null) {
-        cache[firParameter.symbol].with(firParameter.symbol).emitAll(source, isDefinition = true, context, enclosingSource)
+    fun visitParameter(
+        firParameter: FirValueParameter,
+        source: KtSourceElement,
+        context: CheckerContext,
+        enclosingSource: KtSourceElement? = null,
+    ) {
+        cache[firParameter.symbol]
+            .with(firParameter.symbol)
+            .emitAll(source, isDefinition = true, context, enclosingSource)
     }
 
-    fun visitTypeParameter(firTypeParameter: FirTypeParameter, source: KtSourceElement, context: CheckerContext, enclosingSource: KtSourceElement? = null) {
+    fun visitTypeParameter(
+        firTypeParameter: FirTypeParameter,
+        source: KtSourceElement,
+        context: CheckerContext,
+        enclosingSource: KtSourceElement? = null,
+    ) {
         cache[firTypeParameter.symbol]
             .with(firTypeParameter.symbol)
             .emitAll(source, isDefinition = true, context, enclosingSource)
     }
 
-    fun visitTypeAlias(firTypeAlias: FirTypeAlias, source: KtSourceElement, context: CheckerContext, enclosingSource: KtSourceElement? = null) {
-        cache[firTypeAlias.symbol].with(firTypeAlias.symbol).emitAll(source, isDefinition = true, context, enclosingSource)
+    fun visitTypeAlias(
+        firTypeAlias: FirTypeAlias,
+        source: KtSourceElement,
+        context: CheckerContext,
+        enclosingSource: KtSourceElement? = null,
+    ) {
+        cache[firTypeAlias.symbol]
+            .with(firTypeAlias.symbol)
+            .emitAll(source, isDefinition = true, context, enclosingSource)
     }
 
-    fun visitPropertyAccessor(firPropertyAccessor: FirPropertyAccessor, source: KtSourceElement, context: CheckerContext, enclosingSource: KtSourceElement? = null) {
+    fun visitPropertyAccessor(
+        firPropertyAccessor: FirPropertyAccessor,
+        source: KtSourceElement,
+        context: CheckerContext,
+        enclosingSource: KtSourceElement? = null,
+    ) {
         cache[firPropertyAccessor.symbol]
             .with(firPropertyAccessor.symbol)
             .emitAll(source, isDefinition = true, context, enclosingSource)
@@ -103,7 +176,8 @@ class ScipVisitor(
 
     fun visitSimpleNameExpression(
         firResolvedNamedReference: FirResolvedNamedReference,
-        source: KtSourceElement, context: CheckerContext,
+        source: KtSourceElement,
+        context: CheckerContext,
     ) {
         cache[firResolvedNamedReference.resolvedSymbol]
             .with(firResolvedNamedReference.resolvedSymbol)

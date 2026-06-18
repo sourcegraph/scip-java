@@ -12,15 +12,12 @@ import io.kotest.matchers.shouldBe
 import io.kotest.matchers.shouldNotBe
 import java.io.File
 import java.nio.file.Path
-import java.nio.file.Paths
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.intellij.lang.annotations.Language
 import org.jetbrains.kotlin.compiler.plugin.ExperimentalCompilerApi
 import org.junit.jupiter.api.io.TempDir
 import org.scip_code.scip.Document
-import org.scip_code.scip.Occurrence
-import org.scip_code.scip.SymbolInformation
 
 @OptIn(ExperimentalCompilerApi::class)
 class AnalyzerTest {
@@ -38,7 +35,7 @@ class AnalyzerTest {
                     pluginOptions =
                         listOf(
                             PluginOption("scip-kotlinc", "sourceroot", path.toString()),
-                            PluginOption("scip-kotlinc", "targetroot", buildPath.toString())
+                            PluginOption("scip-kotlinc", "targetroot", buildPath.toString()),
                         )
                     commandLineProcessors = listOf(AnalyzerCommandLineProcessor())
                     workingDir = path.toFile()
@@ -59,7 +56,7 @@ class AnalyzerTest {
             package sample
             class Banana {
                 fun foo() { }
-            }"""
+            }""",
             )
 
         val occurrences =
@@ -104,7 +101,8 @@ class AnalyzerTest {
                         endLine = 2
                         endCharacter = 17
                     }
-                })
+                },
+            )
         assertSoftly(document.occurrencesList) {
             withClue(this) { occurrences.forEach(::shouldContain) }
         }
@@ -120,7 +118,8 @@ class AnalyzerTest {
                     symbol = "sample/Banana#foo()."
                     displayName = "foo"
                     signatureText = "public final fun foo(): Unit"
-                })
+                },
+            )
         assertSoftly(document.symbolsList) { withClue(this) { symbols.forEach(::shouldContain) } }
     }
 
@@ -134,7 +133,7 @@ class AnalyzerTest {
 
                     import kotlin.Boolean
                     import kotlin.Int as KInt
-                """
+                """,
             )
 
         val occurrences =
@@ -208,7 +207,7 @@ class AnalyzerTest {
                         fun localClassMethod() {}
                       }
                     }
-                """
+                """,
             )
 
         val occurrences =
@@ -325,7 +324,7 @@ class AnalyzerTest {
             class Class : Interface {
                 override fun foo() {}
             }
-            """
+            """,
             )
 
         val occurrences =
@@ -465,7 +464,7 @@ class AnalyzerTest {
                     override fun foo() {}
                 }
             }
-            """
+            """,
             )
 
         val occurrences =
@@ -676,7 +675,7 @@ class AnalyzerTest {
             package sample
 
             fun foo(arg: Int): Boolean = true
-            """
+            """,
             )
 
         val occurrences =
@@ -752,7 +751,8 @@ class AnalyzerTest {
                     else -> x as Float
                 }
             }
-            """)
+            """,
+            )
 
         val occurrences =
             arrayOf(
@@ -795,7 +795,7 @@ class AnalyzerTest {
                     pluginOptions =
                         listOf(
                             PluginOption("scip-kotlinc", "sourceroot", path.toString()),
-                            PluginOption("scip-kotlinc", "targetroot", buildPath.toString())
+                            PluginOption("scip-kotlinc", "targetroot", buildPath.toString()),
                         )
                     commandLineProcessors = listOf(AnalyzerCommandLineProcessor())
                     workingDir = path.toFile()
@@ -1234,7 +1234,7 @@ class AnalyzerTest {
                     pluginOptions =
                         listOf(
                             PluginOption("scip-kotlinc", "sourceroot", path.toString()),
-                            PluginOption("scip-kotlinc", "targetroot", buildPath.toString())
+                            PluginOption("scip-kotlinc", "targetroot", buildPath.toString()),
                         )
                     commandLineProcessors = listOf(AnalyzerCommandLineProcessor())
                     workingDir = path.toFile()
@@ -1244,15 +1244,16 @@ class AnalyzerTest {
         result.exitCode shouldBe KotlinCompilation.ExitCode.OK
     }
 
-
     @Test
     fun `compound package name semicolon test`(@TempDir path: Path) {
         val document =
             compileScip(
-                path, """
-            package hello.sample;
-            class Apple
-            """.trimIndent()
+                path,
+                """
+                package hello.sample;
+                class Apple
+                """
+                    .trimIndent(),
             )
 
         val occurrences =
@@ -1319,11 +1320,11 @@ class AnalyzerTest {
                     symbol = "hello/sample/Apple#"
                     displayName = "Apple"
                     signatureText = "public final class Apple : Any"
-                })
+                }
+            )
 
         assertSoftly(document.symbolsList) { withClue(this) { symbols.forEach(::shouldContain) } }
     }
-
 
     @Test
     fun `simple package name semicolon test`(@TempDir path: Path) {
@@ -1334,7 +1335,7 @@ class AnalyzerTest {
             package sample;
             class Banana {
                 fun foo() { }
-            }"""
+            }""",
             )
 
         val occurrences =
@@ -1411,7 +1412,8 @@ class AnalyzerTest {
                     symbol = "sample/Banana#foo()."
                     displayName = "foo"
                     signatureText = "public final fun foo(): Unit"
-                })
+                },
+            )
         assertSoftly(document.symbolsList) { withClue(this) { symbols.forEach(::shouldContain) } }
     }
 
@@ -1421,19 +1423,20 @@ class AnalyzerTest {
             compileScip(
                 path,
                 """
-               package sample
-               import java.io.Serializable
-               abstract class DocstringSuperclass
+                package sample
+                import java.io.Serializable
+                abstract class DocstringSuperclass
 
-               /** Example class docstring */
-               class Docstrings: DocstringSuperclass(), Serializable
+                /** Example class docstring */
+                class Docstrings: DocstringSuperclass(), Serializable
 
-               /**
-                 * Example method docstring
-                 *
-                 **/
-               inline fun docstrings(msg: String): Int { return msg.length }
-        """.trimIndent()
+                /**
+                  * Example method docstring
+                  *
+                  **/
+                inline fun docstrings(msg: String): Int { return msg.length }
+                """
+                    .trimIndent(),
             )
         document.assertDocumentation("sample/Docstrings#", "Example class docstring")
         document.assertDocumentation("sample/docstrings().", "Example method docstring")

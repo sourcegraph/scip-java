@@ -9,8 +9,7 @@ import org.jetbrains.kotlin.fir.extensions.FirExtensionRegistrarAdapter
 import org.scip_code.scip.Document
 
 @OptIn(ExperimentalCompilerApi::class)
-class AnalyzerRegistrar(private val callback: (Document) -> Unit = {}) :
-    CompilerPluginRegistrar() {
+class AnalyzerRegistrar(private val callback: (Document) -> Unit = {}) : CompilerPluginRegistrar() {
     override fun ExtensionStorage.registerExtensions(configuration: CompilerConfiguration) {
         val options =
             ScipOptions().apply {
@@ -22,7 +21,9 @@ class AnalyzerRegistrar(private val callback: (Document) -> Unit = {}) :
             PostAnalysisExtension(
                 sourceRoot = options.sourceroot,
                 targetRoot = options.targetroot,
-                callback = callback))
+                callback = callback,
+            )
+        )
     }
 
     override val supportsK2: Boolean
