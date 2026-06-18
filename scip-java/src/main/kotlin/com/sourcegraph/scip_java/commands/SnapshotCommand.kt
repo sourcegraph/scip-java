@@ -11,16 +11,17 @@ import com.github.ajalt.clikt.parameters.options.flag
 import com.github.ajalt.clikt.parameters.options.option
 import com.github.ajalt.clikt.parameters.types.path
 import com.sourcegraph.scip_java.ScipJavaApp
-import com.sourcegraph.scip_java.ScipPrinters
-import java.net.URI
-import java.nio.charset.StandardCharsets
+import com.sourcegraph.scip_java.buildtools.ProcessRunner
 import java.nio.file.FileSystems
 import java.nio.file.FileVisitResult
 import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
 import java.nio.file.SimpleFileVisitor
+import java.nio.file.StandardCopyOption
 import java.nio.file.attribute.BasicFileAttributes
+import java.nio.file.attribute.PosixFileAttributeView
+import java.nio.file.attribute.PosixFilePermissions
 import org.scip_code.scip.Index
 
 /**
@@ -69,22 +70,9 @@ class SnapshotCommand : CliktCommand(name = "snapshot") {
                             // Per-source SCIP shards under META-INF/scip/ carry no Metadata;
                             // only the aggregated index does. Skip shards so `scip-java
                             // snapshot <targetroot>` doesn't trip over them.
-                            val projectRoot = index.metadata.projectRoot
-                            if (projectRoot.isNotEmpty()) {
+                            if (index.metadata.projectRoot.isNotEmpty()) {
                                 foundScipFile = true
-                                val rootUri = URI.create(projectRoot)
-                                for (doc in index.documentsList) {
-                                    val sourcepath = Paths.get(rootUri.resolve(doc.relativePath))
-                                    val source =
-                                        String(Files.readAllBytes(sourcepath), StandardCharsets.UTF_8)
-                                    val document = ScipPrinters.printTextDocument(doc, source)
-                                    val snapshotOutput = output.resolve(doc.relativePath)
-                                    Files.createDirectories(snapshotOutput.parent)
-                                    Files.write(
-                                        snapshotOutput,
-                                        document.toByteArray(StandardCharsets.UTF_8),
-                                    )
-                                }
+                                renderSnapshots(file, index)
                             }
                         }
                         return super.visitFile(file, attrs)
@@ -98,6 +86,62 @@ class SnapshotCommand : CliktCommand(name = "snapshot") {
                     "in ${targetroot.joinToString(", ")} contains a `*.scip` file.",
             )
             throw ProgramResult(1)
+        }
+    }
+
+    /**
+     * Renders [scipFile] into per-document snapshot files by shelling out to
+     * the `scip` CLI (expected on `PATH`; provided by the nix devShell). scip
+     * reads each document's source from disk via the project root recorded in
+     * the index and writes one annotated snapshot file per document.
+     *
+     * `scip snapshot --to` wipes its output directory on each run, so render
+     * into a temp directory and copy the per-document files into [output]. That
+     * keeps snapshots from sibling indexes (across multiple target roots)
+     * intact and preserves the previous command's output layout.
+     */
+    private fun renderSnapshots(scipFile: Path, index: Index) {
+        val tmp = Files.createTempDirectory("scip-snapshot")
+        try {
+            val result =
+                ProcessRunner.run(
+                    command =
+                        listOf(
+                            "scip",
+                            "snapshot",
+                            "--from",
+                            scipFile.toString(),
+                            "--to",
+                            tmp.toString(),
+                            "--strict=false",
+                        ),
+                    cwd = output,
+                    onStdout = { app.info(it) },
+                    onStderr = { app.warning(it) },
+                )
+            if (result.exitCode != 0) {
+                app.error(
+                    "`scip snapshot` exited with code ${result.exitCode} for $scipFile. " +
+                        "Make sure the `scip` CLI is installed and on your PATH.",
+                )
+                throw ProgramResult(1)
+            }
+            for (doc in index.documentsList) {
+                val rendered = tmp.resolve(doc.relativePath)
+                if (Files.exists(rendered)) {
+                    val snapshotOutput = output.resolve(doc.relativePath)
+                    Files.createDirectories(snapshotOutput.parent)
+                    Files.copy(rendered, snapshotOutput, StandardCopyOption.REPLACE_EXISTING)
+                    // scip writes snapshot files with the executable bit set
+                    // (0755); golden text files shouldn't be executable, so
+                    // normalize the mode where the filesystem supports POSIX
+                    // permissions.
+                    Files.getFileAttributeView(snapshotOutput, PosixFileAttributeView::class.java)
+                        ?.setPermissions(PosixFilePermissions.fromString("rw-r--r--"))
+                }
+            }
+        } finally {
+            tmp.toFile().deleteRecursively()
         }
     }
 }

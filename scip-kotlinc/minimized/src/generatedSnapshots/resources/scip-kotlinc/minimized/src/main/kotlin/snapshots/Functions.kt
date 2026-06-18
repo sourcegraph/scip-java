@@ -1,19 +1,22 @@
   package snapshots
-//        ^^^^^^^^^ reference scip-java maven . . snapshots/
+//        ^^^^^^^^^ reference scip-java maven . . scip-java maven . . snapshots/
   
-//⌄ enclosing_range_start scip-java maven . . snapshots/sampleText().
-//               ⌄ enclosing_range_start scip-java maven . . snapshots/sampleText().(x)
+//⌄ enclosing_range_start scip-java maven . . scip-java maven . . snapshots/sampleText().
+//               ⌄ enclosing_range_start scip-java maven . . scip-java maven . . snapshots/sampleText().(x)
   fun sampleText(x: String = "") {
-//    ^^^^^^^^^^ definition scip-java maven . . snapshots/sampleText().
+//    ^^^^^^^^^^ definition scip-java maven . . scip-java maven . . snapshots/sampleText().
 //               display_name sampleText
-//               signature_documentation kotlin public final fun sampleText(x: String = ...): Unit
-//               ^ definition scip-java maven . . snapshots/sampleText().(x)
+//               signature_documentation
+//               > public final fun sampleText(x: String = ...): Unit
+//               ^ definition scip-java maven . . scip-java maven . . snapshots/sampleText().(x)
 //                 display_name x
-//                 signature_documentation kotlin x: String = ...
-//                  ^^^^^^ reference scip-java maven . . kotlin/String#
-//                            ⌃ enclosing_range_end scip-java maven . . snapshots/sampleText().(x)
+//                 signature_documentation
+//                 > x: String = ...
+//                  ^^^^^^ reference scip-java maven . . scip-java maven . . kotlin/String#
+//                            ⌃ enclosing_range_end scip-java maven . . scip-java maven . . snapshots/sampleText().(x)
     println(x)
-//  ^^^^^^^ reference scip-java maven . . kotlin/io/println().
-//          ^ reference scip-java maven . . snapshots/sampleText().(x)
+//  ^^^^^^^ reference scip-java maven . . scip-java maven . . kotlin/io/println().
+//          ^ reference scip-java maven . . scip-java maven . . snapshots/sampleText().(x)
   }
-//⌃ enclosing_range_end scip-java maven . . snapshots/sampleText().
+//⌃ enclosing_range_end scip-java maven . . scip-java maven . . snapshots/sampleText().
+  

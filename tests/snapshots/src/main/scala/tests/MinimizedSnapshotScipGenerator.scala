@@ -1,6 +1,5 @@
 package tests
 
-import java.net.URI
 import java.nio.charset.StandardCharsets
 import java.nio.file.Files
 import java.nio.file.Paths
@@ -8,11 +7,9 @@ import java.nio.file.Paths
 import scala.jdk.CollectionConverters.CollectionHasAsScala
 import scala.jdk.CollectionConverters.SeqHasAsJava
 
-import scala.meta.internal.io.FileIO
 import scala.meta.io.AbsolutePath
 
 import com.sourcegraph.scip_java.ScipJava
-import com.sourcegraph.scip_java.ScipPrinters
 import org.scip_code.scip.Index
 
 class MinimizedSnapshotScipGenerator {
@@ -49,6 +46,20 @@ class MinimizedSnapshotScipGenerator {
       )
     )
     val index = Index.parseFrom(Files.readAllBytes(scipOutput))
+    // Render the index into golden snapshots with the `scip` CLI (provided on
+    // PATH by the nix devShell). scip reads each document's source from disk
+    // via the project root recorded in the index metadata and writes one
+    // annotated snapshot file per document under `snapshotOutput`.
+    os.proc(
+        "scip",
+        "snapshot",
+        "--from",
+        scipOutput.toString,
+        "--to",
+        snapshotOutput.toString,
+        "--strict=false"
+      )
+      .call(stdout = os.Inherit, stderr = os.Inherit)
     try {
       index
         .getDocumentsList
@@ -57,22 +68,17 @@ class MinimizedSnapshotScipGenerator {
           val expectOutput = context
             .expectDirectory
             .resolve(Paths.get(document.getRelativePath))
-          handler.onSnapshotTest(
-            context,
-            expectOutput,
-            () => {
-              val uri = URI.create(
-                List(
-                  index.getMetadata.getProjectRoot.stripSuffix("/"),
-                  document.getRelativePath
-                ).mkString("/")
-              )
-
-              val absolutePath = AbsolutePath(Paths.get(uri))
-              val text = FileIO.slurp(absolutePath, StandardCharsets.UTF_8)
-              ScipPrinters.printTextDocument(document, text)
-            }
-          )
+          // Read the rendered snapshot eagerly: some handlers evaluate
+          // `obtainedOutput` lazily (the assertion suite defers it to munit),
+          // and by then the `finally` block below has deleted the temp dir.
+          val obtained =
+            new String(
+              Files.readAllBytes(
+                snapshotOutput.toNIO.resolve(document.getRelativePath)
+              ),
+              StandardCharsets.UTF_8
+            )
+          handler.onSnapshotTest(context, expectOutput, () => obtained)
         }
     } finally {
       os.remove.all(os.Path(scipOutput))

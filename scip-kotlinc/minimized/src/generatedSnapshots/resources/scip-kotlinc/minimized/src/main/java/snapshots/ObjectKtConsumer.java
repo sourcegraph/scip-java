@@ -1,26 +1,30 @@
   package snapshots;
   
-//⌄ enclosing_range_start scip-java maven . . snapshots/ObjectKtConsumer#
+//⌄ enclosing_range_start scip-java maven . . scip-java maven . . snapshots/ObjectKtConsumer#
   public class ObjectKtConsumer {
-//             ^^^^^^^^^^^^^^^^ definition scip-java maven . . snapshots/ObjectKtConsumer#
-//                              display_name ObjectKtConsumer
-//                              signature_documentation java public class ObjectKtConsumer
+//             ^^^^^^^^^^^^^^^^ definition scip-java maven . . scip-java maven . . snapshots/ObjectKtConsumer#
 //                              kind Class
-//             ^^^^^^^^^^^^^^^^ definition scip-java maven . . snapshots/ObjectKtConsumer#`<init>`().
-//                              display_name <init>
-//                              signature_documentation java public ObjectKtConsumer()
+//                              display_name ObjectKtConsumer
+//                              signature_documentation
+//                              > public class ObjectKtConsumer
+//             ^^^^^^^^^^^^^^^^ definition scip-java maven . . scip-java maven . . snapshots/ObjectKtConsumer#`<init>`().
 //                              kind Constructor
-//  ⌄ enclosing_range_start scip-java maven . . snapshots/ObjectKtConsumer#run().
+//                              display_name <init>
+//                              signature_documentation
+//                              > public ObjectKtConsumer()
+//  ⌄ enclosing_range_start scip-java maven . . scip-java maven . . snapshots/ObjectKtConsumer#run().
     public static void run() {
-//                     ^^^ definition scip-java maven . . snapshots/ObjectKtConsumer#run().
-//                         display_name run
-//                         signature_documentation java public static void run()
+//                     ^^^ definition scip-java maven . . scip-java maven . . snapshots/ObjectKtConsumer#run().
 //                         kind StaticMethod
+//                         display_name run
+//                         signature_documentation
+//                         > public static void run()
       ObjectKt.INSTANCE.fail("boom");
-//    ^^^^^^^^ reference scip-java maven . . snapshots/ObjectKt#
-//             ^^^^^^^^ reference scip-java maven . . snapshots/ObjectKt#INSTANCE.
-//                      ^^^^ reference scip-java maven . . snapshots/ObjectKt#fail().
+//    ^^^^^^^^ reference scip-java maven . . scip-java maven . . snapshots/ObjectKt#
+//             ^^^^^^^^ reference scip-java maven . . scip-java maven . . snapshots/ObjectKt#INSTANCE.
+//                      ^^^^ reference scip-java maven . . scip-java maven . . snapshots/ObjectKt#fail().
     }
-//  ⌃ enclosing_range_end scip-java maven . . snapshots/ObjectKtConsumer#run().
+//  ⌃ enclosing_range_end scip-java maven . . scip-java maven . . snapshots/ObjectKtConsumer#run().
   }
-//⌃ enclosing_range_end scip-java maven . . snapshots/ObjectKtConsumer#
+//⌃ enclosing_range_end scip-java maven . . scip-java maven . . snapshots/ObjectKtConsumer#
+  

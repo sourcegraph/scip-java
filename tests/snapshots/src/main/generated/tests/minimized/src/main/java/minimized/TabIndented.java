@@ -3,27 +3,30 @@
 //⌄ enclosing_range_start scip-java maven . . minimized/TabIndented#
   public class TabIndented {
 //             ^^^^^^^^^^^ definition scip-java maven . . minimized/TabIndented#
-//                         display_name TabIndented
-//                         signature_documentation java public class TabIndented
 //                         kind Class
+//                         display_name TabIndented
+//                         signature_documentation
+//                         > public class TabIndented
 //             ^^^^^^^^^^^ definition scip-java maven . . minimized/TabIndented#`<init>`().
-//                         display_name <init>
-//                         signature_documentation java public TabIndented()
 //                         kind Constructor
+//                         display_name <init>
+//                         signature_documentation
+//                         > public TabIndented()
 //  ⌄ enclosing_range_start scip-java maven . . minimized/TabIndented#app().
     public void app() {
 //              ^^^ definition scip-java maven . . minimized/TabIndented#app().
-//                  display_name app
-//                  signature_documentation java public void app()
 //                  kind Method
+//                  display_name app
+//                  signature_documentation
+//                  > public void app()
 //    ⌄ enclosing_range_start local 0
       Object o = new Object() {
 //    ^^^^^^ reference scip-java maven jdk 11 java/lang/Object#
 //           ^ definition local 0
-//             display_name o
-//             signature_documentation java Object o
-//             enclosing_symbol scip-java maven . . minimized/TabIndented#app().
 //             kind Variable
+//             display_name o
+//             signature_documentation
+//             > Object o
 //                   ^^^^^^ reference scip-java maven jdk 11 java/lang/Object#
 //      ⌄ enclosing_range_start local 2
         @Override
@@ -31,16 +34,17 @@
 //                            ⌄ enclosing_range_start local 3
         public boolean equals(Object other) {
 //                     ^^^^^^ definition local 2
-//                            display_name equals
-//                            signature_documentation java @Override\npublic boolean equals(Object other)
-//                            enclosing_symbol local 1
 //                            kind Method
-//                            relationship is_reference is_implementation scip-java maven jdk 11 java/lang/Object#equals().
+//                            display_name equals
+//                            signature_documentation
+//                            > @Override
+//                            > public boolean equals(Object other)
+//                            relationship scip-java maven jdk 11 java/lang/Object#equals(). implementation reference
 //                            ^^^^^^ reference scip-java maven jdk 11 java/lang/Object#
 //                                   ^^^^^ definition local 3
 //                                         display_name other
-//                                         signature_documentation java Object other
-//                                         enclosing_symbol local 2
+//                                         signature_documentation
+//                                         > Object other
 //                                       ⌃ enclosing_range_end local 3
           return false;
         }
@@ -51,11 +55,12 @@
 //       ^^^^^^^^ reference scip-java maven jdk 11 java/lang/Override#
         public int hashCode() {
 //                 ^^^^^^^^ definition local 4
-//                          display_name hashCode
-//                          signature_documentation java @Override\npublic int hashCode()
-//                          enclosing_symbol local 1
 //                          kind Method
-//                          relationship is_reference is_implementation scip-java maven jdk 11 java/lang/Object#hashCode().
+//                          display_name hashCode
+//                          signature_documentation
+//                          > @Override
+//                          > public int hashCode()
+//                          relationship scip-java maven jdk 11 java/lang/Object#hashCode(). implementation reference
           return System.identityHashCode(this);
 //               ^^^^^^ reference scip-java maven jdk 11 java/lang/System#
 //                      ^^^^^^^^^^^^^^^^ reference scip-java maven jdk 11 java/lang/System#identityHashCode().
@@ -68,11 +73,12 @@
         public String toString() {
 //             ^^^^^^ reference scip-java maven jdk 11 java/lang/String#
 //                    ^^^^^^^^ definition local 5
-//                             display_name toString
-//                             signature_documentation java @Override\npublic String toString()
-//                             enclosing_symbol local 1
 //                             kind Method
-//                             relationship is_reference is_implementation scip-java maven jdk 11 java/lang/Object#toString().
+//                             display_name toString
+//                             signature_documentation
+//                             > @Override
+//                             > public String toString()
+//                             relationship scip-java maven jdk 11 java/lang/Object#toString(). implementation reference
           return "";
         }
 //      ⌃ enclosing_range_end local 5
@@ -82,3 +88,4 @@
 //  ⌃ enclosing_range_end scip-java maven . . minimized/TabIndented#app().
   }
 //⌃ enclosing_range_end scip-java maven . . minimized/TabIndented#
+  

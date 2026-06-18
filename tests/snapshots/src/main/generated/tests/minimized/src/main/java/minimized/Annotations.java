@@ -29,13 +29,13 @@
   
 //⌄ enclosing_range_start scip-java maven . . minimized/Annotations#
   @Documented
-// ^^^^^^^^^ reference scip-java maven jdk 11 java/lang/annotation/Documented#
+// ^^^^^^^^^^ reference scip-java maven jdk 11 java/lang/annotation/Documented#
   @Retention(RetentionPolicy.RUNTIME)
-// ^^^^^^^^ reference scip-java maven jdk 11 java/lang/annotation/Retention#
+// ^^^^^^^^^ reference scip-java maven jdk 11 java/lang/annotation/Retention#
 //           ^^^^^^^^^^^^^^^ reference scip-java maven jdk 11 java/lang/annotation/RetentionPolicy#
 //                           ^^^^^^^ reference scip-java maven jdk 11 java/lang/annotation/RetentionPolicy#RUNTIME.
   @Target(value = {CONSTRUCTOR,
-// ^^^^^ reference scip-java maven jdk 11 java/lang/annotation/Target#
+// ^^^^^^ reference scip-java maven jdk 11 java/lang/annotation/Target#
 //        ^^^^^ reference scip-java maven jdk 11 java/lang/annotation/Target#value().
 //                 ^^^^^^^^^^^ reference scip-java maven jdk 11 java/lang/annotation/ElementType#CONSTRUCTOR.
           FIELD,
@@ -53,27 +53,34 @@
   )
   public @interface Annotations {
 //                  ^^^^^^^^^^^ definition scip-java maven . . minimized/Annotations#
-//                              display_name Annotations
-//                              signature_documentation java @Documented\n@Retention(RetentionPolicy.RUNTIME)\n@Target({CONSTRUCTOR, FIELD, LOCAL_VARIABLE, METHOD, PACKAGE, PARAMETER, TYPE})\npublic @interface Annotations
 //                              kind Interface
-//                              relationship is_implementation scip-java maven jdk 11 java/lang/annotation/Annotation#
+//                              display_name Annotations
+//                              signature_documentation
+//                              > @Documented
+//                              > @Retention(RetentionPolicy.RUNTIME)
+//                              > @Target({CONSTRUCTOR, FIELD, LOCAL_VARIABLE, METHOD, PACKAGE, PARAMETER, TYPE})
+//                              > public @interface Annotations
+//                              relationship scip-java maven jdk 11 java/lang/annotation/Annotation# implementation
   
 //  ⌄ enclosing_range_start scip-java maven . . minimized/Annotations#value().
     String value() default "";
 //  ^^^^^^ reference scip-java maven jdk 11 java/lang/String#
 //         ^^^^^ definition scip-java maven . . minimized/Annotations#value().
-//               display_name value
-//               signature_documentation java public abstract String value()
 //               kind AbstractMethod
+//               display_name value
+//               signature_documentation
+//               > public abstract String value()
 //                           ⌃ enclosing_range_end scip-java maven . . minimized/Annotations#value().
   
 //  ⌄ enclosing_range_start scip-java maven . . minimized/Annotations#format().
     String format() default "";
 //  ^^^^^^ reference scip-java maven jdk 11 java/lang/String#
 //         ^^^^^^ definition scip-java maven . . minimized/Annotations#format().
-//                display_name format
-//                signature_documentation java public abstract String format()
 //                kind AbstractMethod
+//                display_name format
+//                signature_documentation
+//                > public abstract String format()
 //                            ⌃ enclosing_range_end scip-java maven . . minimized/Annotations#format().
   }
 //⌃ enclosing_range_end scip-java maven . . minimized/Annotations#
+  

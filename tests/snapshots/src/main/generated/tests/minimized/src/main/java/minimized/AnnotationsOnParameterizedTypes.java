@@ -29,17 +29,19 @@
 //⌄ enclosing_range_start scip-java maven . . minimized/AnnotationsOnParameterizedTypes#
   public interface AnnotationsOnParameterizedTypes {
 //                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition scip-java maven . . minimized/AnnotationsOnParameterizedTypes#
-//                                                 display_name AnnotationsOnParameterizedTypes
-//                                                 signature_documentation java public interface AnnotationsOnParameterizedTypes
 //                                                 kind Interface
+//                                                 display_name AnnotationsOnParameterizedTypes
+//                                                 signature_documentation
+//                                                 > public interface AnnotationsOnParameterizedTypes
   
 //  ⌄ enclosing_range_start scip-java maven . . minimized/AnnotationsOnParameterizedTypes#getInstance().
     public static AnnotationsOnParameterizedTypes getInstance() {
 //                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference scip-java maven . . minimized/AnnotationsOnParameterizedTypes#
 //                                                ^^^^^^^^^^^ definition scip-java maven . . minimized/AnnotationsOnParameterizedTypes#getInstance().
-//                                                            display_name getInstance
-//                                                            signature_documentation java public static AnnotationsOnParameterizedTypes getInstance()
 //                                                            kind StaticMethod
+//                                                            display_name getInstance
+//                                                            signature_documentation
+//                                                            > public static AnnotationsOnParameterizedTypes getInstance()
       return new AnnotationsOnParameterizedTypesImpl();
 //               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference scip-java maven . . minimized/AnnotationsOnParameterizedTypesImpl#`<init>`().
     }
@@ -52,33 +54,36 @@
 //                                                   ⌄ enclosing_range_start local 1
     <C, W> Function<W, C> adapter(Class<C> contract, Class<W> wrappedClass);
 //   ^ definition scip-java maven . . minimized/AnnotationsOnParameterizedTypes#adapter().[C]
-//     display_name C
-//     signature_documentation java C
 //     kind TypeParameter
+//     display_name C
+//     signature_documentation
+//     > C
 //      ^ definition scip-java maven . . minimized/AnnotationsOnParameterizedTypes#adapter().[W]
-//        display_name W
-//        signature_documentation java W
 //        kind TypeParameter
+//        display_name W
+//        signature_documentation
+//        > W
 //         ^^^^^^^^ reference scip-java maven jdk 11 java/util/function/Function#
 //                  ^ reference scip-java maven . . minimized/AnnotationsOnParameterizedTypes#adapter().[W]
 //                     ^ reference scip-java maven . . minimized/AnnotationsOnParameterizedTypes#adapter().[C]
 //                        ^^^^^^^ definition scip-java maven . . minimized/AnnotationsOnParameterizedTypes#adapter().
-//                                display_name adapter
-//                                signature_documentation java public abstract <C, W> Function<W, C> adapter(Class<C> contract, Class<W> wrappedClass)
 //                                kind AbstractMethod
-//                                relationship is_reference is_implementation scip-java maven . . minimized/AnnotationsOnParameterizedTypesImpl#adapter().
+//                                display_name adapter
+//                                signature_documentation
+//                                > public abstract <C, W> Function<W, C> adapter(Class<C> contract, Class<W> wrappedClass)
+//                                relationship scip-java maven . . minimized/AnnotationsOnParameterizedTypesImpl#adapter(). implementation reference
 //                                ^^^^^ reference scip-java maven jdk 11 java/lang/Class#
 //                                      ^ reference scip-java maven . . minimized/AnnotationsOnParameterizedTypes#adapter().[C]
 //                                         ^^^^^^^^ definition local 0
 //                                                  display_name contract
-//                                                  signature_documentation java Class<C> contract
-//                                                  enclosing_symbol scip-java maven . . minimized/AnnotationsOnParameterizedTypes#adapter().
+//                                                  signature_documentation
+//                                                  > Class<C> contract
 //                                                   ^^^^^ reference scip-java maven jdk 11 java/lang/Class#
 //                                                         ^ reference scip-java maven . . minimized/AnnotationsOnParameterizedTypes#adapter().[W]
 //                                                            ^^^^^^^^^^^^ definition local 1
 //                                                                         display_name wrappedClass
-//                                                                         signature_documentation java Class<W> wrappedClass
-//                                                                         enclosing_symbol scip-java maven . . minimized/AnnotationsOnParameterizedTypes#adapter().
+//                                                                         signature_documentation
+//                                                                         > Class<W> wrappedClass
 //                                                ⌃ enclosing_range_end local 0
 //                                                                       ⌃ enclosing_range_end local 1
 //                                                                         ⌃ enclosing_range_end scip-java maven . . minimized/AnnotationsOnParameterizedTypes#adapter().[C]
@@ -91,14 +96,16 @@
 //⌄ enclosing_range_start scip-java maven . . minimized/AnnotationsOnParameterizedTypesImpl#
   class AnnotationsOnParameterizedTypesImpl implements AnnotationsOnParameterizedTypes {
 //      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition scip-java maven . . minimized/AnnotationsOnParameterizedTypesImpl#
-//                                          display_name AnnotationsOnParameterizedTypesImpl
-//                                          signature_documentation java class AnnotationsOnParameterizedTypesImpl implements AnnotationsOnParameterizedTypes
 //                                          kind Class
-//                                          relationship is_implementation scip-java maven . . minimized/AnnotationsOnParameterizedTypes#
+//                                          display_name AnnotationsOnParameterizedTypesImpl
+//                                          signature_documentation
+//                                          > class AnnotationsOnParameterizedTypesImpl implements AnnotationsOnParameterizedTypes
+//                                          relationship scip-java maven . . minimized/AnnotationsOnParameterizedTypes# implementation
 //      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition scip-java maven . . minimized/AnnotationsOnParameterizedTypesImpl#`<init>`().
-//                                          display_name <init>
-//                                          signature_documentation java AnnotationsOnParameterizedTypesImpl()
 //                                          kind Constructor
+//                                          display_name <init>
+//                                          signature_documentation
+//                                          > AnnotationsOnParameterizedTypesImpl()
 //                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference scip-java maven . . minimized/AnnotationsOnParameterizedTypes#
 //  ⌄ enclosing_range_start scip-java maven . . minimized/AnnotationsOnParameterizedTypesImpl#proxyConstructors.
     private ConcurrentMap<Class<?>, Constructor<?>> proxyConstructors = new ConcurrentHashMap<>();
@@ -106,9 +113,10 @@
 //                        ^^^^^ reference scip-java maven jdk 11 java/lang/Class#
 //                                  ^^^^^^^^^^^ reference scip-java maven jdk 11 java/lang/reflect/Constructor#
 //                                                  ^^^^^^^^^^^^^^^^^ definition scip-java maven . . minimized/AnnotationsOnParameterizedTypesImpl#proxyConstructors.
-//                                                                    display_name proxyConstructors
-//                                                                    signature_documentation java private ConcurrentMap<Class<?>, Constructor<?>> proxyConstructors
 //                                                                    kind Field
+//                                                                    display_name proxyConstructors
+//                                                                    signature_documentation
+//                                                                    > private ConcurrentMap<Class<?>, Constructor<?>> proxyConstructors
 //                                                                          ^^^^^^^^^^^^^^^^^ reference scip-java maven jdk 11 java/util/concurrent/ConcurrentHashMap#`<init>`().
 //                                                                                               ⌃ enclosing_range_end scip-java maven . . minimized/AnnotationsOnParameterizedTypesImpl#proxyConstructors.
   
@@ -121,33 +129,37 @@
 //                                                          ⌄ enclosing_range_start local 3
     public <C, W> Function<W, C> adapter(Class<C> contract, Class<W> wrappedClass) {
 //          ^ definition scip-java maven . . minimized/AnnotationsOnParameterizedTypesImpl#adapter().[C]
-//            display_name C
-//            signature_documentation java C
 //            kind TypeParameter
+//            display_name C
+//            signature_documentation
+//            > C
 //             ^ definition scip-java maven . . minimized/AnnotationsOnParameterizedTypesImpl#adapter().[W]
-//               display_name W
-//               signature_documentation java W
 //               kind TypeParameter
+//               display_name W
+//               signature_documentation
+//               > W
 //                ^^^^^^^^ reference scip-java maven jdk 11 java/util/function/Function#
 //                         ^ reference scip-java maven . . minimized/AnnotationsOnParameterizedTypesImpl#adapter().[W]
 //                            ^ reference scip-java maven . . minimized/AnnotationsOnParameterizedTypesImpl#adapter().[C]
 //                               ^^^^^^^ definition scip-java maven . . minimized/AnnotationsOnParameterizedTypesImpl#adapter().
-//                                       display_name adapter
-//                                       signature_documentation java @Override\npublic <C, W> Function<W, C> adapter(Class<C> contract, Class<W> wrappedClass)
 //                                       kind Method
-//                                       relationship is_reference is_implementation scip-java maven . . minimized/AnnotationsOnParameterizedTypes#adapter().
+//                                       display_name adapter
+//                                       signature_documentation
+//                                       > @Override
+//                                       > public <C, W> Function<W, C> adapter(Class<C> contract, Class<W> wrappedClass)
+//                                       relationship scip-java maven . . minimized/AnnotationsOnParameterizedTypes#adapter(). implementation reference
 //                                       ^^^^^ reference scip-java maven jdk 11 java/lang/Class#
 //                                             ^ reference scip-java maven . . minimized/AnnotationsOnParameterizedTypesImpl#adapter().[C]
 //                                                ^^^^^^^^ definition local 2
 //                                                         display_name contract
-//                                                         signature_documentation java Class<C> contract
-//                                                         enclosing_symbol scip-java maven . . minimized/AnnotationsOnParameterizedTypesImpl#adapter().
+//                                                         signature_documentation
+//                                                         > Class<C> contract
 //                                                          ^^^^^ reference scip-java maven jdk 11 java/lang/Class#
 //                                                                ^ reference scip-java maven . . minimized/AnnotationsOnParameterizedTypesImpl#adapter().[W]
 //                                                                   ^^^^^^^^^^^^ definition local 3
 //                                                                                display_name wrappedClass
-//                                                                                signature_documentation java Class<W> wrappedClass
-//                                                                                enclosing_symbol scip-java maven . . minimized/AnnotationsOnParameterizedTypesImpl#adapter().
+//                                                                                signature_documentation
+//                                                                                > Class<W> wrappedClass
 //                                                       ⌃ enclosing_range_end local 2
 //                                                                              ⌃ enclosing_range_end local 3
   
@@ -157,10 +169,10 @@
 //             ^^^^^^^^^^^^^^^^^ reference scip-java maven jdk 11 java/lang/reflect/InvocationHandler#
 //                                ^ reference scip-java maven . . minimized/AnnotationsOnParameterizedTypesImpl#adapter().[C]
 //                                   ^^^^^^^^^^^ definition local 4
-//                                               display_name constructor
-//                                               signature_documentation java Function<InvocationHandler, C> constructor
-//                                               enclosing_symbol scip-java maven . . minimized/AnnotationsOnParameterizedTypesImpl#adapter().
 //                                               kind Variable
+//                                               display_name constructor
+//                                               signature_documentation
+//                                               > Function<InvocationHandler, C> constructor
 //                                                 ^^^^^^^^^^^^^^ reference scip-java maven . . minimized/AnnotationsOnParameterizedTypesImpl#getConstructor().
 //                                                                ^^^^^^^^ reference local 2
 //                                                                         ⌃ enclosing_range_end local 4
@@ -182,22 +194,24 @@
 //                                                            ⌄ enclosing_range_start local 5
     private <T> Function<InvocationHandler, T> getConstructor(Class<T> contract) {
 //           ^ definition scip-java maven . . minimized/AnnotationsOnParameterizedTypesImpl#getConstructor().[T]
-//             display_name T
-//             signature_documentation java T
 //             kind TypeParameter
+//             display_name T
+//             signature_documentation
+//             > T
 //              ^^^^^^^^ reference scip-java maven jdk 11 java/util/function/Function#
 //                       ^^^^^^^^^^^^^^^^^ reference scip-java maven jdk 11 java/lang/reflect/InvocationHandler#
 //                                          ^ reference scip-java maven . . minimized/AnnotationsOnParameterizedTypesImpl#getConstructor().[T]
 //                                             ^^^^^^^^^^^^^^ definition scip-java maven . . minimized/AnnotationsOnParameterizedTypesImpl#getConstructor().
-//                                                            display_name getConstructor
-//                                                            signature_documentation java private <T> Function<InvocationHandler, T> getConstructor(Class<T> contract)
 //                                                            kind Method
+//                                                            display_name getConstructor
+//                                                            signature_documentation
+//                                                            > private <T> Function<InvocationHandler, T> getConstructor(Class<T> contract)
 //                                                            ^^^^^ reference scip-java maven jdk 11 java/lang/Class#
 //                                                                  ^ reference scip-java maven . . minimized/AnnotationsOnParameterizedTypesImpl#getConstructor().[T]
 //                                                                     ^^^^^^^^ definition local 5
 //                                                                              display_name contract
-//                                                                              signature_documentation java Class<T> contract
-//                                                                              enclosing_symbol scip-java maven . . minimized/AnnotationsOnParameterizedTypesImpl#getConstructor().
+//                                                                              signature_documentation
+//                                                                              > Class<T> contract
 //                                                                            ⌃ enclosing_range_end local 5
 //    ⌄ enclosing_range_start local 6
       @SuppressWarnings("unchecked")
@@ -207,10 +221,11 @@
 //    ^^^^^^^^^^^ reference scip-java maven jdk 11 java/lang/reflect/Constructor#
 //                ^ reference scip-java maven . . minimized/AnnotationsOnParameterizedTypesImpl#getConstructor().[T]
 //                   ^^^^^^^^^^^ definition local 6
-//                               display_name constructor
-//                               signature_documentation java @SuppressWarnings("unchecked")\nConstructor<T> constructor
-//                               enclosing_symbol scip-java maven . . minimized/AnnotationsOnParameterizedTypesImpl#getConstructor().
 //                               kind Variable
+//                               display_name constructor
+//                               signature_documentation
+//                               > @SuppressWarnings("unchecked")
+//                               > Constructor<T> constructor
 //                                  ^^^^^^^^^^^ reference scip-java maven jdk 11 java/lang/reflect/Constructor#
 //                                              ^ reference scip-java maven . . minimized/AnnotationsOnParameterizedTypesImpl#getConstructor().[T]
 //                                                  ^^^^^^^^^^^^^^^^^ reference scip-java maven . . minimized/AnnotationsOnParameterizedTypesImpl#proxyConstructors.
@@ -218,8 +233,8 @@
 //                                                                                    ^^^^^^^^ reference local 5
 //                                                                                              ^ definition local 7
 //                                                                                                display_name c
-//                                                                                                signature_documentation java Class<?> c
-//                                                                                                enclosing_symbol scip-java maven . . minimized/AnnotationsOnParameterizedTypesImpl#getConstructor().
+//                                                                                                signature_documentation
+//                                                                                                > Class<?> c
 //                                                                                              ⌃ enclosing_range_end local 7
         return null;
       });
@@ -235,4 +250,5 @@
     }
 //  ⌃ enclosing_range_end scip-java maven . . minimized/AnnotationsOnParameterizedTypesImpl#getConstructor().[T]
 //  ⌃ enclosing_range_end scip-java maven . . minimized/AnnotationsOnParameterizedTypesImpl#getConstructor().
-  }//⌃ enclosing_range_end scip-java maven . . minimized/AnnotationsOnParameterizedTypesImpl#
+  }
+//⌃ enclosing_range_end scip-java maven . . minimized/AnnotationsOnParameterizedTypesImpl#
