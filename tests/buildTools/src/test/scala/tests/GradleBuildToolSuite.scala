@@ -1,12 +1,53 @@
 package tests
 
-import tests.Tool._
+import java.nio.file.Files
+import java.nio.file.StandardOpenOption
 
-class Gradle_8_BuildToolSuite extends GradleBuildToolSuite(Gradle8)
+import munit.TestOptions
 
-abstract class GradleBuildToolSuite(gradle: Tool.Gradle)
-    extends GradleBuildToolSuiteBase(gradle) {
+object GradleBuildToolSuite {
+  val version = "8.10"
+  // Gradle 8.10 runs on JDK 8 through 21.
+  // See https://docs.gradle.org/current/userguide/compatibility.html
+  val maxJdk = 21
+}
+
+class GradleBuildToolSuite extends BaseBuildToolSuite {
+  import GradleBuildToolSuite._
+
   val allJava = List(11, 17, 21)
+
+  private def gradleWrapperCommand: List[String] = {
+    createEmptyBuildScript()
+    List("gradle", "wrapper", "--gradle-version", version)
+  }
+
+  private def createEmptyBuildScript(): Unit = {
+    val script = workingDirectory.resolve("build.gradle")
+    Files.createDirectories(script.getParent)
+    Files.write(
+      script,
+      Array.emptyByteArray,
+      StandardOpenOption.TRUNCATE_EXISTING,
+      StandardOpenOption.CREATE
+    )
+  }
+
+  def checkGradleBuild(
+      title: TestOptions,
+      setup: String,
+      expectedScipFiles: Int = 0,
+      expectedPackages: String = "",
+      extraArguments: List[String] = Nil
+  ): Unit = checkBuild(
+    title.withName(title.name + s"-gradle-$version"),
+    setup,
+    expectedScipFiles = expectedScipFiles,
+    expectedPackages = expectedPackages,
+    initCommand = gradleWrapperCommand,
+    extraArguments = extraArguments,
+    maxJdk = Some(maxJdk)
+  )
 
   checkGradleBuild(
     "annotation-path",

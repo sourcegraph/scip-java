@@ -66,19 +66,18 @@ abstract class BaseBuildToolSuite extends ScipJavaSuite(ScipJava.app) {
       initCommand: => List[String] = Nil,
       prepare: () => Unit = () => (),
       targetRoot: Option[String] = None,
-      tools: List[Tool] = Nil
+      maxJdk: Option[Int] = None
   ): Unit = {
-    val minJDK = Tool.minimumSupportedJdk(tools)
-    val maxJDK = Tool.maximumSupportedJdk(tools).getOrElse(Int.MaxValue)
     val externalJDKVersion = BaseBuildToolSuite.externalJavaVersion
 
     val JDKSupported =
-      externalJDKVersion >= minJDK && externalJDKVersion <= maxJDK
+      externalJDKVersion >= BaseBuildToolSuite.minExternalJdk &&
+        maxJdk.forall(externalJDKVersion <= _)
 
     val ignoreMsg =
-      s"Test ${options
-          .name} was ignored because the external JDK version doesn't match the toolset requirements: " +
-        s"Tools: $tools, min JDK = $minJDK, max JDK = $maxJDK, detected JDK = $externalJDKVersion"
+      s"Test ${options.name} was ignored because the external JDK version " +
+        s"$externalJDKVersion is outside the supported range " +
+        s"[${BaseBuildToolSuite.minExternalJdk}, ${maxJdk.getOrElse("∞")}]"
 
     test(options.withTags(options.tags ++ tags)) {
       // Unfortunately, MUnit doesn't seem to handle the ignore messages the
@@ -147,6 +146,9 @@ abstract class BaseBuildToolSuite extends ScipJavaSuite(ScipJava.app) {
 }
 
 object BaseBuildToolSuite {
+  // Minimum major version of the JVM on PATH required to run these tests.
+  val minExternalJdk = 11
+
   // Major version of the JVM that `java` on PATH resolves to. Compiled and
   // executed as a subprocess because the test JVM may differ from PATH.
   lazy val externalJavaVersion: Int = {
