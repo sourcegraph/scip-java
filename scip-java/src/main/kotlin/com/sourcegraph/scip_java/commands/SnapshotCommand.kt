@@ -18,10 +18,7 @@ import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
 import java.nio.file.SimpleFileVisitor
-import java.nio.file.StandardCopyOption
 import java.nio.file.attribute.BasicFileAttributes
-import java.nio.file.attribute.PosixFileAttributeView
-import java.nio.file.attribute.PosixFilePermissions
 import org.scip_code.scip.Index
 
 /**
@@ -131,13 +128,7 @@ class SnapshotCommand : CliktCommand(name = "snapshot") {
                 if (Files.exists(rendered)) {
                     val snapshotOutput = output.resolve(doc.relativePath)
                     Files.createDirectories(snapshotOutput.parent)
-                    Files.copy(rendered, snapshotOutput, StandardCopyOption.REPLACE_EXISTING)
-                    // scip writes snapshot files with the executable bit set
-                    // (0755); golden text files shouldn't be executable, so
-                    // normalize the mode where the filesystem supports POSIX
-                    // permissions.
-                    Files.getFileAttributeView(snapshotOutput, PosixFileAttributeView::class.java)
-                        ?.setPermissions(PosixFilePermissions.fromString("rw-r--r--"))
+                    Files.write(snapshotOutput, Files.readAllBytes(rendered))
                 }
             }
         } finally {
