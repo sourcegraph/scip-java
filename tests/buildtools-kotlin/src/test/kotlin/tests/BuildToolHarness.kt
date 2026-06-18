@@ -121,7 +121,7 @@ abstract class BuildToolHarness {
         extraArguments: List<String> = emptyList(),
         expectedError: ((String) -> Unit)? = null,
         expectedPackages: String = "",
-        initCommand: () -> List<String> = { emptyList() },
+        initCommand: (Path) -> List<String> = { emptyList() },
         prepare: (Path) -> Unit = {},
         targetRoot: String? = null,
         maxJdk: Int? = null,
@@ -141,7 +141,7 @@ abstract class BuildToolHarness {
                 val workingDirectory = Files.createDirectories(base.resolve("workingDirectory"))
                 val cacheDirectory = Files.createDirectories(base.resolve("cache"))
 
-                val init = initCommand()
+                val init = initCommand(workingDirectory)
                 if (init.isNotEmpty()) exec(init, workingDirectory)
 
                 FileLayout.fromString(original, workingDirectory)
