@@ -18,53 +18,6 @@ import org.junit.jupiter.api.Assumptions.assumeTrue
 import org.junit.jupiter.api.DynamicTest
 import org.junit.jupiter.api.DynamicTest.dynamicTest
 
-/** Minimum major version of the JVM on PATH required to run these tests. */
-private const val MIN_EXTERNAL_JDK = 11
-
-private val ANSI = Regex("\u001B\\[[;\\d]*m")
-
-private fun stripAnsi(s: String): String = ANSI.replace(s, "")
-
-/** Run an external command, inheriting stdio. Throws if it exits non-zero. */
-internal fun exec(command: List<String>, cwd: Path) {
-    val exit = ProcessBuilder(command).directory(cwd.toFile()).inheritIO().start().waitFor()
-    check(exit == 0) { "Command failed ($exit): ${command.joinToString(" ")}" }
-}
-
-/** Run an external command and return its combined stdout/stderr. */
-private fun execOutput(command: List<String>, cwd: Path): String {
-    val process = ProcessBuilder(command).directory(cwd.toFile()).redirectErrorStream(true).start()
-    val output = process.inputStream.readBytes().toString(StandardCharsets.UTF_8)
-    val exit = process.waitFor()
-    check(exit == 0) { "Command failed ($exit): ${command.joinToString(" ")}\n$output" }
-    return output
-}
-
-/**
- * Major version of the JVM that `java` on PATH resolves to. Compiled and executed as a subprocess
- * because the test JVM may differ from PATH.
- */
-internal val externalJavaVersion: Int by lazy {
-    val tmp = Files.createTempDirectory("PrintJavaVersion")
-    try {
-        Files.writeString(
-            tmp.resolve("PrintJavaVersion.java"),
-            """
-            public class PrintJavaVersion {
-              public static void main(String[] args) {
-                System.out.print(Runtime.version().feature());
-              }
-            }
-            """
-                .trimIndent(),
-        )
-        exec(listOf("javac", "PrintJavaVersion.java"), tmp)
-        execOutput(listOf("java", "PrintJavaVersion"), tmp).trim().toInt()
-    } finally {
-        tmp.toFile().deleteRecursively()
-    }
-}
-
 /**
  * Base class for build-tool integration tests. Each `check*` helper returns a JUnit 5
  * [DynamicTest]; suites expose them from a `@TestFactory` method.
@@ -83,7 +36,7 @@ abstract class BuildToolHarness {
                 standardError = stream,
             )
         val exit = app.run(arguments)
-        return exit to stripAnsi(buffer.toString(StandardCharsets.UTF_8.name()))
+        return exit to buffer.toString(StandardCharsets.UTF_8.name())
     }
 
     private fun listScipShards(targetroot: Path): List<Path> {
@@ -162,13 +115,11 @@ abstract class BuildToolHarness {
         substitutions: Map<String, String> = emptyMap(),
     ): DynamicTest =
         dynamicTest(name) {
-            val supported =
-                externalJavaVersion >= MIN_EXTERNAL_JDK &&
-                    (maxJdk == null || externalJavaVersion <= maxJdk)
+            // Some build tools cap the JDK they support (e.g. Gradle 8.10 tops
+            // out at JDK 21); skip rather than fail when the JDK is too new.
             assumeTrue(
-                supported,
-                "Test $name ignored: external JDK $externalJavaVersion outside range " +
-                    "[$MIN_EXTERNAL_JDK, ${maxJdk ?: "infinity"}]",
+                maxJdk == null || currentJavaVersion <= maxJdk,
+                "Test $name ignored: JDK $currentJavaVersion exceeds max $maxJdk",
             )
 
             val base = newTempBase()
@@ -244,4 +195,15 @@ abstract class BuildToolHarness {
                 base.toFile().deleteRecursively()
             }
         }
+
+    companion object {
+        /** Major version of the JVM running these tests (e.g. 17, 21). */
+        private val currentJavaVersion: Int = Runtime.version().feature()
+
+        /** Run an external command, inheriting stdio. Throws if it exits non-zero. */
+        internal fun exec(command: List<String>, cwd: Path) {
+            val exit = ProcessBuilder(command).directory(cwd.toFile()).inheritIO().start().waitFor()
+            check(exit == 0) { "Command failed ($exit): ${command.joinToString(" ")}" }
+        }
+    }
 }
