@@ -553,10 +553,7 @@ def javacModuleOptions = List(
 
 lazy val unit = project
   .in(file("tests/unit"))
-  .settings(
-    javaOnlySettings,
-    javaJUnitTestSettings
-  )
+  .settings(javaOnlySettings, javaJUnitTestSettings)
   .dependsOn(javacPlugin)
 
 lazy val buildTools = project
@@ -621,9 +618,8 @@ lazy val javaJUnitTestSettings = List[Def.Setting[_]](
   // Pin the JDK version embedded in stdlib SCIP symbols (e.g. `jdk 11
   // java/lang/String#`) so snapshots are stable across JDK 11/17/21.
   Test / javaOptions += "-Dscip.jdk.version=11",
-  libraryDependencies +=
-    "com.github.sbt.junit" % "jupiter-interface" %
-      JupiterKeys.jupiterVersion.value % Test
+  libraryDependencies += "com.github.sbt.junit" % "jupiter-interface" %
+    JupiterKeys.jupiterVersion.value % Test
 )
 
 // Runtime paths for the snapshot generator, passed as -D system properties
@@ -633,9 +629,14 @@ lazy val javaJUnitTestSettings = List[Def.Setting[_]](
 def snapshotPathOptions = Def.task {
   val _ = (minimized / Compile / compile).value
   Seq(
-    s"-Dsnapshot.expectDir=${((Compile / sourceDirectory).value / "generated").getAbsolutePath}",
-    s"-Dsnapshot.minimizedTargetroot=${(minimized / Compile / semanticdbTargetRoot).value.getAbsolutePath}",
-    s"-Dsnapshot.sourceroot=${(ThisBuild / baseDirectory).value.getAbsolutePath}"
+    s"-Dsnapshot.expectDir=${((Compile / sourceDirectory).value / "generated")
+        .getAbsolutePath}",
+    s"-Dsnapshot.minimizedTargetroot=${(
+        minimized / Compile / semanticdbTargetRoot
+      ).value.getAbsolutePath}",
+    s"-Dsnapshot.sourceroot=${(ThisBuild / baseDirectory)
+        .value
+        .getAbsolutePath}"
   )
 }
 
