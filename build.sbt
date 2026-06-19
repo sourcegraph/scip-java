@@ -164,7 +164,13 @@ lazy val scip = project
     moduleName := "scip-aggregator",
     javaOnlySettings,
     libraryDependencies ++=
-      Seq("org.scip-code" % "scip-java-bindings" % V.scipBindings),
+      Seq(
+        "org.scip-code" % "scip-java-bindings" % V.scipBindings,
+        // JUnit 5 for the colocated Java unit tests (test scope only, so it is
+        // excluded from the published POM and keeps this a Java-only module).
+        "com.github.sbt.junit" % "jupiter-interface" %
+          JupiterKeys.jupiterVersion.value % Test
+      ),
     (Compile / PB.targets) :=
       Seq(PB.gens.java(V.protobuf) -> (Compile / sourceManaged).value),
     Compile / PB.protocOptions := Seq("--experimental_allow_proto3_optional")
