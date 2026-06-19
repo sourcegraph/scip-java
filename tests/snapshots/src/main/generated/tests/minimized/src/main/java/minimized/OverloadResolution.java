@@ -13,9 +13,9 @@
 //                                signature_documentation
 //                                > public class OverloadResolution
 //                                documentation
-//                                > Reference-side overload disambiguation migrated from the former TargetedSuite
-//                                >  "issue-24" test: references to the four String#lastIndexOf overloads must
-//                                >  resolve to distinct disambiguated symbols (lastIndexOf(), (+1), (+2), (+3)).
+//                                > Reference-side overload disambiguation migrated from the former TargetedSuite "issue-24" test:
+//                                >  references to the four String#lastIndexOf overloads must resolve to distinct disambiguated
+//                                >  symbols (lastIndexOf(), (+1), (+2), (+3)).
 //             ^^^^^^^^^^^^^^^^^^ definition scip-java maven . . minimized/OverloadResolution#`<init>`().
 //                                kind Constructor
 //                                display_name <init>

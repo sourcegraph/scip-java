@@ -13,9 +13,9 @@
 //                       signature_documentation
 //                       > public class Overrides
 //                       documentation
-//                       > Override relationships migrated from the former OverridesSuite unit test:
-//                       >  same-file overrides and transitive ("multiple") overrides that record more
-//                       >  than one `implementation` relationship on a single symbol.
+//                       > Override relationships migrated from the former OverridesSuite unit test: same-file overrides and
+//                       >  transitive ("multiple") overrides that record more than one `implementation` relationship on a
+//                       >  single symbol.
 //             ^^^^^^^^^ definition scip-java maven . . minimized/Overrides#`<init>`().
 //                       kind Constructor
 //                       display_name <init>

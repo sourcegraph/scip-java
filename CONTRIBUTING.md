@@ -53,8 +53,7 @@ These are the main components of the project.
 | `unit/test`                                                         | sbt      | Run fast unit tests.                                                                |
 | `~unit/test`                                                        | sbt      | Start watch mode to run tests on file save, good for local edit-and-test workflows. |
 | `buildTools/test`                                                   | sbt      | Run slow build tool tests (Gradle, Maven).                                          |
-| `snapshots/testOnly tests.MinimizedSnapshotSuite`                   | sbt      | Runs fast snapshot tests. Indexes a small set of files under `tests/minimized`.     |
-| `snapshots/testOnly tests.MinimizedSnapshotSuite -- *InnerClasses*` | sbt      | Runs only individual tests cases matching the name "InnerClasses".                  |
+| `snapshots/testOnly tests.MinimizedSnapshotScipTest`                | sbt      | Runs fast snapshot tests. Indexes a small set of files under `tests/minimized`.     |
 | `snapshots/test`                                                    | sbt      | Runs all snapshot tests.                                                            |
 | `snapshots/run`                                                     | sbt      | Update only the Java snapshot goldens under `tests/snapshots`.                      |
 | `scipKotlincMinimized/kotlincSnapshots`                             | sbt      | Update only the Kotlin snapshot goldens under `scip-kotlinc/minimized`.             |
@@ -88,14 +87,13 @@ sbt/BSP/Bloop.
 
 It's best to run tests from the sbt shell, not from the IntelliJ UI.
 
-## Tests are written in Scala
+## Tests are written in Java with JUnit 5
 
-This codebases uses the Scala library [MUnit](https://scalameta.org/munit/) to
-write tests because:
-
-- MUnit has built-in assertions that print readable multiline diffs in color.
-- MUnit makes it easy to implement
-  [snapshot testing](https://jestjs.io/docs/en/snapshot-testing), which is a
-  testing technique that's heavily used in this codebase.
-- Multiline literal strings in Scala make it easy to write unit tests for source
-  code (which is always multiline).
+The unit tests (`tests/unit`) and snapshot tests (`tests/snapshots`) are plain
+Java using [JUnit 5](https://junit.org/junit5/), wired into sbt via
+[sbt-jupiter-interface](https://github.com/sbt/sbt-jupiter-interface). The
+snapshot suite is a JUnit `@TestFactory` that emits one dynamic test per
+generated document, comparing it against the committed goldens under
+`tests/snapshots/src/main/generated`
+([snapshot testing](https://jestjs.io/docs/en/snapshot-testing) is heavily used
+in this codebase). Build-tool tests (`tests/buildTools`) are written in Kotlin.
