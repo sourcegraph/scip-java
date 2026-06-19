@@ -74,10 +74,7 @@ This means our SCIP compiler plugin was not attached to one or more JavaCompile 
     private val defaultTargetroot: Path = Paths.get("build", "scip-targetroot")
 
     private fun runBuild(): ProcessResult {
-        val gradleWrapperName =
-            if (System.getProperty("os.name").lowercase().contains("win")) "gradlew.bat"
-            else "gradlew"
-        val gradleWrapper = index.workingDirectory.resolve(gradleWrapperName)
+        val gradleWrapper = index.workingDirectory.resolve("gradlew")
         val gradleCommand =
             if (Files.isRegularFile(gradleWrapper) && Files.isExecutable(gradleWrapper))
                 gradleWrapper.toString()

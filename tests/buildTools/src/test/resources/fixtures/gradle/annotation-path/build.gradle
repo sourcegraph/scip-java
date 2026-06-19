@@ -1,0 +1,10 @@
+plugins {
+    id 'java'
+}
+repositories {
+    mavenCentral()
+}
+dependencies {
+  compileOnly 'org.immutables:value:2.9.2'
+  annotationProcessor 'org.immutables:value:2.9.2'
+}

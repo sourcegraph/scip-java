@@ -1,0 +1,21 @@
+plugins {
+  id "java"
+  id "com.google.protobuf" version "0.9.4"
+}
+dependencies {
+  implementation 'com.google.protobuf:protobuf-javalite:3.8.0'
+}
+protobuf {
+  protoc {
+    artifact = 'com.google.protobuf:protoc:3.23.4'
+  }
+  generateProtoTasks {
+    all().configureEach { task ->
+      task.builtins {
+        java {
+          option "lite"
+        }
+      }
+    }
+  }
+}

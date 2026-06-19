@@ -1,0 +1,13 @@
+plugins {
+    id 'java-library'
+}
+repositories {
+    mavenCentral()
+}
+dependencies {
+  compileOnly 'org.immutables:value:2.9.2'
+  annotationProcessor 'org.immutables:value:2.9.2'
+}
+compileJava {
+ options.compilerArgs << "-Werror"
+}
