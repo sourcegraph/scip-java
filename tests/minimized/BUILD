@@ -11,5 +11,8 @@ java_library(
 	],
 	javacopts = [
           "'-Xplugin:scip -build-tool:bazel'",
+          # These are deliberately minimal SCIP indexer inputs (e.g. ignored
+          # return values), not production code, so skip Error Prone linting.
+          "-XepDisableAllChecks",
 	],
 )
