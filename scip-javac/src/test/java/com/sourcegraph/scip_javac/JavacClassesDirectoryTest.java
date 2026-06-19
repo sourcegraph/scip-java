@@ -1,4 +1,4 @@
-package tests;
+package com.sourcegraph.scip_javac;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 

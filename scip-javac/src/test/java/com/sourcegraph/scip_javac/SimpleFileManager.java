@@ -1,6 +1,5 @@
-package tests;
+package com.sourcegraph.scip_javac;
 
-import com.sourcegraph.scip_javac.ScipPlugin;
 import java.net.URI;
 import java.nio.file.Path;
 import java.util.ArrayList;

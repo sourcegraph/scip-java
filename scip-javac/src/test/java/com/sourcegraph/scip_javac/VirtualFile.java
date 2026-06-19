@@ -1,4 +1,4 @@
-package tests;
+package com.sourcegraph.scip_javac;
 
 /**
  * Minimal in-memory source file (relative path + text), replacing the former use of scalameta's

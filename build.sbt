@@ -153,7 +153,15 @@ lazy val javacPlugin = project
             "org.relaxng.**" -> "com.sourcegraph.shaded.relaxng.@1"
           )
           .inAll
-      )
+      ),
+    // JUnit 5 for the colocated in-process javac tests (test scope only, so it
+    // stays out of the published scip-javac POM).
+    libraryDependencies += "com.github.sbt.junit" % "jupiter-interface" %
+      JupiterKeys.jupiterVersion.value % Test,
+    Test / fork := true,
+    // The tests drive javac in-process via ScipPlugin; on JDK 17+ this requires
+    // the JDK-internal javac packages to be opened.
+    Test / javaOptions ++= javacModuleOptions.map(_.stripPrefix("-J"))
   )
   .dependsOn(scipShared)
 
@@ -550,11 +558,6 @@ def javacModuleOptions = List(
   "-J--add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED",
   "-J--add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED"
 )
-
-lazy val unit = project
-  .in(file("tests/unit"))
-  .settings(javaOnlySettings, javaJUnitTestSettings)
-  .dependsOn(javacPlugin)
 
 lazy val buildTools = project
   .in(file("tests/buildTools"))

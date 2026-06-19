@@ -1,4 +1,4 @@
-package tests;
+package com.sourcegraph.scip_javac;
 
 import java.nio.file.Path;
 import javax.tools.SimpleJavaFileObject;
