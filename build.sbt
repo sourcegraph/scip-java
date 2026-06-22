@@ -99,19 +99,7 @@ lazy val gradlePlugin = project
       List(
         "dev.gradleplugins" % "gradle-api" % V.gradle % Provided,
         "dev.gradleplugins" % "gradle-test-kit" % V.gradle % Provided
-      ),
-    // The plugin's BuildInfo.version (the scip-javac Maven coordinate used as a
-    // fallback when no jar is provided) is read at runtime from this generated
-    // properties resource, mirroring the scip-java CLI's scip-java.properties.
-    (Compile / resourceGenerators) +=
-      Def.task {
-        val file = (Compile / resourceManaged).value / "scip-gradle.properties"
-        IO.createDirectory(file.getParentFile)
-        val props = new Properties()
-        props.put("version", version.value)
-        IO.write(props, "scip-gradle", file)
-        Seq(file)
-      }.taskValue
+      )
   )
 
 lazy val javacPlugin = project

@@ -87,29 +87,31 @@ public class WriteDependencies extends DefaultTask {
                   publication.getGroupId(),
                   publication.getArtifactId(),
                   publication.getVersion());
-          Logging.warn(
-              "Failed to extract `main` source set from publication `"
-                  + publicationName
-                  + "` in project `"
-                  + projectName
-                  + "`.\n"
-                  + CROSS_REPO_BANNER
-                  + "\nHere's the raw error message:\n  \""
-                  + exception.getMessage()
-                  + "\"\nContinuing without cross-repository support.");
+          getLogger()
+              .warn(
+                  "Failed to extract `main` source set from publication `"
+                      + publicationName
+                      + "` in project `"
+                      + projectName
+                      + "`.\n"
+                      + CROSS_REPO_BANNER
+                      + "\nHere's the raw error message:\n  \""
+                      + exception.getMessage()
+                      + "\"\nContinuing without cross-repository support.");
         }
       }
     } catch (Exception exception) {
-      Logging.warn(
-          "Failed to extract Maven publication from the project `"
-              + projectName
-              + "`.\n"
-              + CROSS_REPO_BANNER
-              + "\nHere's the raw error message ("
-              + exception.getClass()
-              + "):\n  \""
-              + exception.getMessage()
-              + "\"\nContinuing without cross-repository support.");
+      getLogger()
+          .warn(
+              "Failed to extract Maven publication from the project `"
+                  + projectName
+                  + "`.\n"
+                  + CROSS_REPO_BANNER
+                  + "\nHere's the raw error message ("
+                  + exception.getClass()
+                  + "):\n  \""
+                  + exception.getMessage()
+                  + "\"\nContinuing without cross-repository support.");
     }
 
     project

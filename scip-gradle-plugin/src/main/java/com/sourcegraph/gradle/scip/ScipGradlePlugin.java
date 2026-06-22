@@ -15,6 +15,17 @@ import org.gradle.api.tasks.compile.JavaCompile;
 
 public class ScipGradlePlugin implements Plugin<Project> {
 
+  // `--add-exports` flags required so our compiler plugin can access javac
+  // internals. Required on JDK 17+ (JEP 403), no-op on 11-16. Kept in sync with
+  // `javacModuleOptions` in build.sbt.
+  private static final List<String> JAVAC_MODULE_OPTIONS =
+      List.of(
+          "-J--add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED",
+          "-J--add-exports=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED",
+          "-J--add-exports=jdk.compiler/com.sun.tools.javac.model=ALL-UNNAMED",
+          "-J--add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED",
+          "-J--add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED");
+
   @Override
   public void apply(Project project) {
     project.afterEvaluate(this::configureProject);
@@ -28,17 +39,6 @@ public class ScipGradlePlugin implements Plugin<Project> {
     Map<String, Object> extraProperties = extra.getProperties();
 
     Object targetRoot = extraProperties.getOrDefault("scipTarget", project.getBuildDir());
-
-    String javacPluginVersion = BuildInfo.version;
-
-    Object javacPluginJar = extraProperties.get("javacPluginJar");
-
-    // We fall back to the javac plugin published to Maven if there is no jar
-    // specified. The JAR would usually be provided by the auto-indexer.
-    Object javacPluginDep =
-        javacPluginJar != null
-            ? project.files(javacPluginJar)
-            : "com.sourcegraph:scip-javac:" + javacPluginVersion;
 
     File sourceRoot = project.getRootDir();
 
@@ -61,6 +61,16 @@ public class ScipGradlePlugin implements Plugin<Project> {
 
       boolean compilerPluginAdded;
       try {
+        // The CLI's init script writes the absolute path of the embedded
+        // scip-javac jar into the `javacPluginJar` extra property.
+        Object javacPluginJar = extraProperties.get("javacPluginJar");
+        if (javacPluginJar == null) {
+          throw new IllegalStateException(
+              "javacPluginJar extra property must be set by the "
+                  + "scip-java init script when indexing Java sources");
+        }
+        Object javacPluginDep = project.files(javacPluginJar);
+
         project.getDependencies().add("compileOnly", javacPluginDep);
 
         if (hasAnnotationPath) {
@@ -76,14 +86,16 @@ public class ScipGradlePlugin implements Plugin<Project> {
         // dependencies to it. The project will be skipped (no SCIP output) and
         // the post-build check in `GradleBuildTool` will surface a clearer
         // error.
-        Logging.warn(
-            "scip-java: failed to attach SCIP compiler plugin to project '"
-                + project.getName()
-                + "' ("
-                + exc.getClass().getSimpleName()
-                + ": "
-                + exc.getMessage()
-                + "). This subproject will not be indexed.");
+        project
+            .getLogger()
+            .warn(
+                "scip-java: failed to attach SCIP compiler plugin to project '"
+                    + project.getName()
+                    + "' ("
+                    + exc.getClass().getSimpleName()
+                    + ": "
+                    + exc.getMessage()
+                    + "). This subproject will not be indexed.");
         compilerPluginAdded = false;
       }
 
@@ -98,7 +110,7 @@ public class ScipGradlePlugin implements Plugin<Project> {
                 // 11-16.
                 ForkOptions forkOptions = task.getOptions().getForkOptions();
                 List<String> jvmArgs =
-                    BuildInfo.javacModuleOptions.stream()
+                    JAVAC_MODULE_OPTIONS.stream()
                         .map(arg -> arg.startsWith("-J") ? arg.substring(2) : arg)
                         .collect(Collectors.toList());
                 if (forkOptions.getJvmArgs() == null) {
