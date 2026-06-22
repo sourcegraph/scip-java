@@ -22,9 +22,7 @@ public class WriteDependencies extends DefaultTask {
       "This will not prevent a SCIP index from being created, but the symbols\n"
           + "extracted from this project won't be available for cross-repository navigation,\n"
           + "as this project doesn't define any Maven coordinates by which it can be referred back"
-          + " to.\n"
-          + "See here for more details:"
-          + " https://sourcegraph.github.io/scip-java/docs/manual-configuration.html#step-5-optional-enable-cross-repository-navigation";
+          + " to.";
 
   @TaskAction
   public void printResolvedDependencies() throws IOException {

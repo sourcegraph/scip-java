@@ -73,8 +73,7 @@ public class ScipAggregator {
               + " index this codebase. If you are using Gradle or Maven, please report an issue to"
               + " https://github.com/sourcegraph/scip-java and include steps to reproduce. If you"
               + " are using a different build tool, make sure that you have followed all of the"
-              + " steps from"
-              + " https://sourcegraph.github.io/scip-java/docs/manual-configuration.html");
+              + " manual configuration steps.");
       return;
     }
     options.reporter.startProcessing(shards.size());

@@ -46,9 +46,7 @@ public class DependencyWriterMojo extends AbstractMojo {
                   + "extracted from this project won't be available for cross-repository"
                   + " navigation,\n"
                   + "as this project doesn't define any Maven coordinates by which it can be"
-                  + " referred back to.\n"
-                  + "See here for more details:"
-                  + " https://sourcegraph.github.io/scip-java/docs/manual-configuration.html#step-5-optional-enable-cross-repository-navigation\n");
+                  + " referred back to.\n");
     } else {
       for (Object root : sourceRoots) {
         if (root instanceof String) {
