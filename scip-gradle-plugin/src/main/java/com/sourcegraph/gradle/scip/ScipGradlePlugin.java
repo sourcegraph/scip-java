@@ -4,27 +4,14 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
 import org.gradle.api.Task;
 import org.gradle.api.artifacts.Configuration;
 import org.gradle.api.plugins.ExtraPropertiesExtension;
-import org.gradle.api.tasks.compile.ForkOptions;
 import org.gradle.api.tasks.compile.JavaCompile;
 
 public class ScipGradlePlugin implements Plugin<Project> {
-
-  // `--add-exports` flags required so our compiler plugin can access javac
-  // internals. Required on JDK 17+ (JEP 403), no-op on 11-16. Kept in sync with
-  // `javacModuleOptions` in build.sbt.
-  private static final List<String> JAVAC_MODULE_OPTIONS =
-      List.of(
-          "-J--add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED",
-          "-J--add-exports=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED",
-          "-J--add-exports=jdk.compiler/com.sun.tools.javac.model=ALL-UNNAMED",
-          "-J--add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED",
-          "-J--add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED");
 
   @Override
   public void apply(Project project) {
@@ -105,21 +92,9 @@ public class ScipGradlePlugin implements Plugin<Project> {
           .withType(JavaCompile.class)
           .configureEach(
               task -> {
-                // Add --add-exports JVM args so our compiler plugin can access
-                // javac internals. Required on JDK 17+ (JEP 403), no-op on
-                // 11-16.
-                ForkOptions forkOptions = task.getOptions().getForkOptions();
-                List<String> jvmArgs =
-                    JAVAC_MODULE_OPTIONS.stream()
-                        .map(arg -> arg.startsWith("-J") ? arg.substring(2) : arg)
-                        .collect(Collectors.toList());
-                if (forkOptions.getJvmArgs() == null) {
-                  forkOptions.setJvmArgs(jvmArgs);
-                } else {
-                  forkOptions.getJvmArgs().addAll(jvmArgs);
-                }
-
-                task.getOptions().setFork(true);
+                // Disable incremental compilation so the random timestamp added
+                // below forces a full recompile and Gradle doesn't cache stale
+                // SCIP state.
                 task.getOptions().setIncremental(false);
 
                 if (pluginAdded) {
