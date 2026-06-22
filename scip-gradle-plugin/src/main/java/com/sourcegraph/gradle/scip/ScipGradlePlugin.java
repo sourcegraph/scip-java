@@ -1,6 +1,5 @@
 package com.sourcegraph.gradle.scip;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -8,7 +7,6 @@ import org.gradle.api.Plugin;
 import org.gradle.api.Project;
 import org.gradle.api.Task;
 import org.gradle.api.artifacts.Configuration;
-import org.gradle.api.plugins.ExtraPropertiesExtension;
 import org.gradle.api.tasks.compile.JavaCompile;
 
 public class ScipGradlePlugin implements Plugin<Project> {
@@ -19,19 +17,20 @@ public class ScipGradlePlugin implements Plugin<Project> {
   }
 
   private void configureProject(Project project) {
+    // Inject Maven Central/local so the indexer (and plugins like protobuf that
+    // resolve their own artifacts) can resolve dependencies even when the build
+    // being indexed doesn't declare any repositories of its own.
     project.getRepositories().add(project.getRepositories().mavenCentral());
     project.getRepositories().add(project.getRepositories().mavenLocal());
 
-    ExtraPropertiesExtension extra = project.getExtensions().getExtraProperties();
-    Map<String, Object> extraProperties = extra.getProperties();
+    Map<String, Object> extraProperties =
+        project.getExtensions().getExtraProperties().getProperties();
 
-    Object targetRoot = extraProperties.getOrDefault("scipTarget", project.getBuildDir());
+    String targetRoot = requiredExtra(extraProperties, "scipTarget").toString();
+    String sourceRoot = project.getRootDir().toString();
 
-    File sourceRoot = project.getRootDir();
-
-    // List of compilation commands that we will need to trigger to index all
-    // the sources in the project we care about. This list is built
-    // progressively as we check for java and kotlin plugins.
+    // Compilation tasks we need to trigger to index all the sources we care
+    // about. Built up as we detect the java and kotlin plugins.
     List<String> triggers = new ArrayList<>();
 
     if (project.getPlugins().hasPlugin("java")) {
@@ -46,47 +45,9 @@ public class ScipGradlePlugin implements Plugin<Project> {
         hasAnnotationPath = false;
       }
 
-      boolean compilerPluginAdded;
-      try {
-        // The CLI's init script writes the absolute path of the embedded
-        // scip-javac jar into the `javacPluginJar` extra property.
-        Object javacPluginJar = extraProperties.get("javacPluginJar");
-        if (javacPluginJar == null) {
-          throw new IllegalStateException(
-              "javacPluginJar extra property must be set by the "
-                  + "scip-java init script when indexing Java sources");
-        }
-        Object javacPluginDep = project.files(javacPluginJar);
+      Object javacPluginDep = project.files(requiredExtra(extraProperties, "javacPluginJar"));
+      boolean pluginAdded = tryAddJavacPlugin(project, javacPluginDep, hasAnnotationPath);
 
-        project.getDependencies().add("compileOnly", javacPluginDep);
-
-        if (hasAnnotationPath) {
-          project.getDependencies().add("annotationProcessor", javacPluginDep);
-        }
-
-        project.getDependencies().add("testCompileOnly", javacPluginDep);
-
-        compilerPluginAdded = true;
-      } catch (Exception exc) {
-        // The `compileOnly` configuration has likely already been resolved by
-        // another plugin or buildscript, so we can no longer add new
-        // dependencies to it. The project will be skipped (no SCIP output) and
-        // the post-build check in `GradleBuildTool` will surface a clearer
-        // error.
-        project
-            .getLogger()
-            .warn(
-                "scip-java: failed to attach SCIP compiler plugin to project '"
-                    + project.getName()
-                    + "' ("
-                    + exc.getClass().getSimpleName()
-                    + ": "
-                    + exc.getMessage()
-                    + "). This subproject will not be indexed.");
-        compilerPluginAdded = false;
-      }
-
-      boolean pluginAdded = compilerPluginAdded;
       project
           .getTasks()
           .withType(JavaCompile.class)
@@ -105,9 +66,8 @@ public class ScipGradlePlugin implements Plugin<Project> {
                   boolean alreadyAdded =
                       args.stream().anyMatch(arg -> arg.startsWith("-Xplugin:scip"));
                   if (!alreadyAdded) {
-                    // We add the random timestamp to ensure that the sources
-                    // are _always_ recompiled, so that Gradle doesn't cache any
-                    // state.
+                    // The random timestamp ensures the sources are _always_
+                    // recompiled, so Gradle doesn't cache any state.
                     // TODO: before this plugin is published to Maven Central, we
                     // will need to revert this change - as it can have
                     // detrimental effect on people's builds.
@@ -140,52 +100,58 @@ public class ScipGradlePlugin implements Plugin<Project> {
         triggers.add("compileTestKotlin");
       }
 
+      // The CLI's init script provides the path of the embedded scip-kotlinc jar.
+      Object scipKotlinc = requiredExtra(extraProperties, "scipKotlincJar");
       project
           .getTasks()
           .configureEach(
-              task -> configureKotlinCompileTask(task, extraProperties, sourceRoot, targetRoot));
+              task -> configureKotlinCompileTask(task, scipKotlinc, sourceRoot, targetRoot));
     }
 
-    project
-        .getTasks()
-        .create(
-            "scipCompileAll",
-            task -> {
-              for (String trigger : triggers) {
-                task.dependsOn(project.getTasks().getByName(trigger));
-              }
-            });
+    project.getTasks().create("scipCompileAll").dependsOn(triggers);
 
     project.getTasks().create("scipPrintDependencies", WriteDependencies.class);
   }
 
+  private static boolean tryAddJavacPlugin(
+      Project project, Object javacPluginDep, boolean hasAnnotationPath) {
+    try {
+      project.getDependencies().add("compileOnly", javacPluginDep);
+      if (hasAnnotationPath) {
+        project.getDependencies().add("annotationProcessor", javacPluginDep);
+      }
+      project.getDependencies().add("testCompileOnly", javacPluginDep);
+      return true;
+    } catch (Exception exc) {
+      // The `compileOnly` configuration has likely already been resolved by
+      // another plugin or buildscript, so we can no longer add new dependencies
+      // to it. The project will be skipped (no SCIP output) and the post-build
+      // check in `GradleBuildTool` will surface a clearer error.
+      project
+          .getLogger()
+          .warn(
+              "scip-java: failed to attach SCIP compiler plugin to project '"
+                  + project.getName()
+                  + "' ("
+                  + exc.getClass().getSimpleName()
+                  + ": "
+                  + exc.getMessage()
+                  + "). This subproject will not be indexed.");
+      return false;
+    }
+  }
+
   private static void configureKotlinCompileTask(
-      Task task, Map<String, Object> extraProperties, Object sourceRoot, Object targetRoot) {
+      Task task, Object scipKotlinc, String sourceRoot, String targetRoot) {
     if (!task.getClass().getSimpleName().contains("KotlinCompile")) {
       return;
     }
 
-    // If we actually refer to KotlinCompile at _any_ point here, then the
-    // plugin fails with NoClassDefFoundError - because the plugin classpath is
-    // murky.
-    //
-    // We also don't want to bundle the kotlin plugin with this one as it can
-    // cause all sorts of troubles.
-    //
-    // Instead, we commit the sins of reflection for our limited needs.
+    // Referring to KotlinCompile directly here triggers NoClassDefFoundError -
+    // the plugin classpath is murky and we deliberately don't bundle the Kotlin
+    // Gradle plugin. So we commit the sins of reflection for our limited needs.
     try {
       Object kotlinOptions = task.getClass().getMethod("getKotlinOptions").invoke(task);
-
-      // The scip-kotlinc compiler plugin is now built and shipped together with
-      // the scip-java CLI. The CLI's init script writes the absolute path of
-      // the embedded jar into the `scipKotlincJar` extra property so we no
-      // longer need to resolve a separately-published artifact at apply-time.
-      Object scipKotlinc = extraProperties.get("scipKotlincJar");
-      if (scipKotlinc == null) {
-        throw new IllegalStateException(
-            "scipKotlincJar extra property must be set by the "
-                + "scip-java init script when indexing Kotlin sources");
-      }
 
       @SuppressWarnings("unchecked")
       List<String> freeCompilerArgs =
@@ -208,5 +174,14 @@ public class ScipGradlePlugin implements Plugin<Project> {
       throw new RuntimeException(
           "scip-java: failed to configure Kotlin compile task '" + task.getName() + "'", exc);
     }
+  }
+
+  private static Object requiredExtra(Map<String, Object> extraProperties, String name) {
+    Object value = extraProperties.get(name);
+    if (value == null) {
+      throw new IllegalStateException(
+          name + " extra property must be set by the scip-java Gradle init script");
+    }
+    return value;
   }
 }

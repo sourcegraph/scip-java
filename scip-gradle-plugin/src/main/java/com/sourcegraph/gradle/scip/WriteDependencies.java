@@ -6,10 +6,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
+import java.util.LinkedHashSet;
+import java.util.Set;
 import org.gradle.api.DefaultTask;
 import org.gradle.api.Project;
 import org.gradle.api.publish.PublishingExtension;
@@ -32,72 +30,68 @@ public class WriteDependencies extends DefaultTask {
   public void printResolvedDependencies() throws IOException {
     Project project = getProject();
 
-    Optional<Path> depsOut =
-        Optional.ofNullable(project.getExtensions().getExtraProperties().get("dependenciesOut"))
-            .map(Object::toString)
-            .map(Paths::get);
+    // Always set by the scip-java Gradle init script.
+    Path depsOut =
+        Paths.get(project.getExtensions().getExtraProperties().get("dependenciesOut").toString());
+    Files.createDirectories(depsOut.getParent());
 
-    if (depsOut.isPresent()) {
-      Files.createDirectories(depsOut.get().getParent());
-    }
-
-    List<String> deps = new ArrayList<>();
     String projectName = project.getName();
     String projectPath = project.getPath().replaceAll("[^a-z0-9A-Z_-]", "_");
 
-    // List the project itself as a dependency so that we can assign project
-    // name/version to symbols that are defined in this project.
-    Optional<Path> dependenciesPath =
-        depsOut.map(
-            path -> {
-              Path filename = path.getFileName();
-              if (filename.endsWith("dependencies.txt")) {
-                String last = projectPath + "." + filename.toString();
-                return path.getParent().resolve(last);
-              } else {
-                return path;
-              }
-            });
+    // Write to a per-project file so multi-module builds don't collide or
+    // corrupt each other via parallel appends. The CLI globs every file whose
+    // name ends with "dependencies.txt".
+    Path dependenciesPath =
+        depsOut.getFileName().toString().endsWith("dependencies.txt")
+            ? depsOut.resolveSibling(projectPath + "." + depsOut.getFileName())
+            : depsOut;
 
+    // LinkedHashSet keeps first-seen order while dropping duplicates.
+    Set<String> deps = new LinkedHashSet<>();
+
+    // List the project itself as a dependency so we can assign its Maven
+    // coordinates to the symbols it defines.
     try {
       PublishingExtension publishing =
           project.getExtensions().findByType(PublishingExtension.class);
-      for (MavenPublication publication :
-          publishing.getPublications().withType(MavenPublication.class)) {
-        try {
-          SourceSet main =
-              project.getExtensions().getByType(SourceSetContainer.class).getByName("main");
-          main.getOutput().getClassesDirs().getFiles().stream()
-              .map(File::getAbsolutePath)
-              .sorted()
-              .limit(1)
-              .forEach(
-                  classesDirectory ->
-                      deps.add(
-                          String.join(
-                              "\t",
-                              publication.getGroupId(),
-                              publication.getArtifactId(),
-                              publication.getVersion(),
-                              classesDirectory)));
-        } catch (Exception exception) {
-          String publicationName =
-              String.join(
-                  ":",
-                  publication.getGroupId(),
-                  publication.getArtifactId(),
-                  publication.getVersion());
-          getLogger()
-              .warn(
-                  "Failed to extract `main` source set from publication `"
-                      + publicationName
-                      + "` in project `"
-                      + projectName
-                      + "`.\n"
-                      + CROSS_REPO_BANNER
-                      + "\nHere's the raw error message:\n  \""
-                      + exception.getMessage()
-                      + "\"\nContinuing without cross-repository support.");
+      if (publishing != null) {
+        for (MavenPublication publication :
+            publishing.getPublications().withType(MavenPublication.class)) {
+          try {
+            SourceSet main =
+                project.getExtensions().getByType(SourceSetContainer.class).getByName("main");
+            main.getOutput().getClassesDirs().getFiles().stream()
+                .map(File::getAbsolutePath)
+                .sorted()
+                .limit(1)
+                .forEach(
+                    classesDirectory ->
+                        deps.add(
+                            String.join(
+                                "\t",
+                                publication.getGroupId(),
+                                publication.getArtifactId(),
+                                publication.getVersion(),
+                                classesDirectory)));
+          } catch (Exception exception) {
+            String publicationName =
+                String.join(
+                    ":",
+                    publication.getGroupId(),
+                    publication.getArtifactId(),
+                    publication.getVersion());
+            getLogger()
+                .warn(
+                    "Failed to extract `main` source set from publication `"
+                        + publicationName
+                        + "` in project `"
+                        + projectName
+                        + "`.\n"
+                        + CROSS_REPO_BANNER
+                        + "\nHere's the raw error message:\n  \""
+                        + exception.getMessage()
+                        + "\"\nContinuing without cross-repository support.");
+          }
         }
       }
     } catch (Exception exception) {
@@ -132,25 +126,16 @@ public class WriteDependencies extends DefaultTask {
                                       artifact.getModuleVersion().getId().getVersion(),
                                       artifact.getFile().getAbsolutePath())));
                 } catch (Exception exc) {
-                  System.out.println(
-                      "Skipping configuration '"
-                          + conf.getName()
-                          + "' due to resolution failure: "
-                          + exc.getMessage());
+                  getLogger()
+                      .warn(
+                          "Skipping configuration '"
+                              + conf.getName()
+                              + "' due to resolution failure: "
+                              + exc.getMessage());
                 }
               }
             });
 
-    List<String> dependencies = deps.stream().distinct().collect(Collectors.toList());
-
-    if (dependenciesPath.isPresent()) {
-      Files.write(
-          dependenciesPath.get(),
-          dependencies,
-          StandardOpenOption.APPEND,
-          StandardOpenOption.CREATE);
-    } else {
-      dependencies.forEach(System.out::println);
-    }
+    Files.write(dependenciesPath, deps, StandardOpenOption.APPEND, StandardOpenOption.CREATE);
   }
 }
