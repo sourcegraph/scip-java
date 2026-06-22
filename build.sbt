@@ -591,7 +591,7 @@ lazy val snapshots = project
   .in(file("tests/snapshots"))
   .settings(
     javaOnlySettings,
-    javaJUnitTestSettings,
+    javaTestSettings,
     Compile / mainClass := Some("tests.SaveSnapshots"),
     Compile / run / fork := true,
     Test / javaOptions ++= snapshotPathOptions.value,
@@ -609,14 +609,13 @@ lazy val javaOnlySettings = List[Def.Setting[_]](
   Compile / javacOptions ++= Seq("--release", "11")
 )
 
-lazy val javaJUnitTestSettings = List[Def.Setting[_]](
+lazy val javaTestSettings = List[Def.Setting[_]](
   (publish / skip) := true,
   autoScalaLibrary := false,
   crossPaths := false,
   Test / fork := true,
-  // Open the JDK-internal javac packages to in-process tests that drive
-  // javac via reflection (e.g. JavacClassesDirectoryTest, TestCompiler).
-  // On JDK 17+ this is required or the reflective access fails.
+  // Open the JDK-internal javac packages to the in-process javac the tests
+  // drive; on JDK 17+ this is required or the reflective access fails.
   Test / javaOptions ++= javacModuleOptions.map(_.stripPrefix("-J")),
   // Pin the JDK version embedded in stdlib SCIP symbols (e.g. `jdk 11
   // java/lang/String#`) so snapshots are stable across JDK 11/17/21.

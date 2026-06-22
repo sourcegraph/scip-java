@@ -22,6 +22,4 @@ public class SimpleClassFile extends SimpleJavaFileObject {
   public byte[] getCompiledBinaries() {
     return out.toByteArray();
   }
-
-  // getters
 }

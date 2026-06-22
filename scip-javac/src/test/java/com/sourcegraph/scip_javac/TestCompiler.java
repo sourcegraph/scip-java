@@ -3,14 +3,11 @@ package com.sourcegraph.scip_javac;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.io.UncheckedIOException;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import javax.tools.JavaCompiler;
 import javax.tools.JavaFileObject;
 import javax.tools.ToolProvider;
@@ -37,31 +34,6 @@ public class TestCompiler {
     this.sourceroot = sourceroot;
     this.fileManager =
         new SimpleFileManager(compiler.getStandardFileManager(null, null, null), targetroot);
-  }
-
-  public TestCompiler(String classpath, List<String> javacOptions, Path targetroot) {
-    this(classpath, javacOptions, targetroot, createTempDir());
-  }
-
-  public TestCompiler(Path targetroot) {
-    this(PROCESSOR_PATH, Collections.emptyList(), targetroot);
-  }
-
-  public CompileResult compileScipDirectory(Path dir) {
-    return compileScip(inputsFromDirectory(dir));
-  }
-
-  public CompileResult compileScip(List<VirtualFile> inputs) {
-    return compile(
-        inputs,
-        Collections.singletonList(
-            String.format(
-                "-Xplugin:scip -verbose -text:on -sourceroot:%s -targetroot:%s",
-                sourceroot, targetroot)));
-  }
-
-  public CompileResult compile(List<VirtualFile> inputs) {
-    return compile(inputs, Collections.emptyList());
   }
 
   public CompileResult compile(List<VirtualFile> inputs, List<String> extraJavacOptions) {
@@ -107,34 +79,5 @@ public class TestCompiler {
       }
     }
     return new CompileResult(bytecode, output.toString(), docs, isSuccess);
-  }
-
-  private List<VirtualFile> inputsFromDirectory(Path dir) {
-    try (Stream<Path> paths = Files.walk(dir)) {
-      return paths
-          .filter(Files::isRegularFile)
-          .filter(p -> p.getFileName().toString().endsWith(".java"))
-          .map(
-              p -> {
-                try {
-                  return new VirtualFile(
-                      dir.relativize(p).toString(),
-                      new String(Files.readAllBytes(p), StandardCharsets.UTF_8));
-                } catch (IOException e) {
-                  throw new UncheckedIOException(e);
-                }
-              })
-          .collect(Collectors.toList());
-    } catch (IOException e) {
-      throw new UncheckedIOException(e);
-    }
-  }
-
-  private static Path createTempDir() {
-    try {
-      return Files.createTempDirectory("scip-javac");
-    } catch (IOException e) {
-      throw new UncheckedIOException(e);
-    }
   }
 }
