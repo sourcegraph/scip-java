@@ -6,10 +6,10 @@ package minimized;
  * symbols (lastIndexOf(), (+1), (+2), (+3)).
  */
 public class OverloadResolution {
-  public static void app() {
-    "".lastIndexOf('a');
-    "".lastIndexOf('b', 0);
-    "".lastIndexOf("c");
-    "".lastIndexOf("d", 0);
+  public static int app() {
+    return "".lastIndexOf('a')
+        + "".lastIndexOf('b', 0)
+        + "".lastIndexOf("c")
+        + "".lastIndexOf("d", 0);
   }
 }
