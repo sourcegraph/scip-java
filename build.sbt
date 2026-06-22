@@ -93,27 +93,26 @@ lazy val gradlePlugin = project
   .in(file("scip-gradle-plugin"))
   .settings(
     name := "scip-gradle",
-    buildInfoPackage := "com.sourcegraph.scip_java",
+    javaOnlySettings,
     publish / skip := true,
-    scalacOptions ++= Seq("-target:11", "-release", "11"),
     libraryDependencies ++=
       List(
         "dev.gradleplugins" % "gradle-api" % V.gradle % Provided,
-        "dev.gradleplugins" % "gradle-test-kit" % V.gradle % Provided,
-        "org.jetbrains.kotlin" % "kotlin-gradle-plugin" % V.kotlinVersion %
-          Provided
+        "dev.gradleplugins" % "gradle-test-kit" % V.gradle % Provided
       ),
-    buildInfoKeys :=
-      Seq[BuildInfoKey](
-        version,
-        sbtVersion,
-        scalaVersion,
-        "javacModuleOptions" -> javacModuleOptions,
-        "scalametaVersion" -> V.scalameta,
-        "scala213" -> V.scala213
-      )
+    // The plugin's BuildInfo.version (the scip-javac Maven coordinate used as a
+    // fallback when no jar is provided) is read at runtime from this generated
+    // properties resource, mirroring the scip-java CLI's scip-java.properties.
+    (Compile / resourceGenerators) +=
+      Def.task {
+        val file = (Compile / resourceManaged).value / "scip-gradle.properties"
+        IO.createDirectory(file.getParentFile)
+        val props = new Properties()
+        props.put("version", version.value)
+        IO.write(props, "scip-gradle", file)
+        Seq(file)
+      }.taskValue
   )
-  .enablePlugins(BuildInfoPlugin)
 
 lazy val javacPlugin = project
   .in(file("scip-javac"))
