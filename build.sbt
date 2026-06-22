@@ -153,7 +153,15 @@ lazy val javacPlugin = project
             "org.relaxng.**" -> "com.sourcegraph.shaded.relaxng.@1"
           )
           .inAll
-      )
+      ),
+    // JUnit 5 for the colocated in-process javac tests (test scope only, so it
+    // stays out of the published scip-javac POM).
+    libraryDependencies += "com.github.sbt.junit" % "jupiter-interface" %
+      JupiterKeys.jupiterVersion.value % Test,
+    Test / fork := true,
+    // The tests drive javac in-process via ScipPlugin; on JDK 17+ this requires
+    // the JDK-internal javac packages to be opened.
+    Test / javaOptions ++= javacModuleOptions.map(_.stripPrefix("-J"))
   )
   .dependsOn(scipShared)
 
@@ -164,7 +172,13 @@ lazy val scip = project
     moduleName := "scip-aggregator",
     javaOnlySettings,
     libraryDependencies ++=
-      Seq("org.scip-code" % "scip-java-bindings" % V.scipBindings),
+      Seq(
+        "org.scip-code" % "scip-java-bindings" % V.scipBindings,
+        // JUnit 5 for the colocated Java unit tests (test scope only, so it is
+        // excluded from the published POM and keeps this a Java-only module).
+        "com.github.sbt.junit" % "jupiter-interface" %
+          JupiterKeys.jupiterVersion.value % Test
+      ),
     (Compile / PB.targets) :=
       Seq(PB.gens.java(V.protobuf) -> (Compile / sourceManaged).value),
     Compile / PB.protocOptions := Seq("--experimental_allow_proto3_optional")
@@ -545,26 +559,6 @@ def javacModuleOptions = List(
   "-J--add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED"
 )
 
-lazy val unit = project
-  .in(file("tests/unit"))
-  .settings(
-    testSettings,
-    // javaOptions ++= Seq(   "-Xdebug",   "-Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5005"),
-    buildInfoKeys :=
-      Seq[BuildInfoKey](
-        version,
-        scalaVersion,
-        "temporaryDirectory" -> target.value / "tmpdir",
-        "sourceroot" -> (ThisBuild / baseDirectory).value,
-        "minimizedJavaSourceDirectory" -> minimizedSourceDirectory,
-        "minimizedJavaTargetroot" ->
-          (minimized / Compile / semanticdbTargetRoot).value
-      ),
-    buildInfoPackage := "tests"
-  )
-  .dependsOn(javacPlugin, cli)
-  .enablePlugins(BuildInfoPlugin)
-
 lazy val buildTools = project
   .in(file("tests/buildTools"))
   .enablePlugins(KotlinPlugin)
@@ -596,15 +590,14 @@ lazy val buildTools = project
 lazy val snapshots = project
   .in(file("tests/snapshots"))
   .settings(
-    testSettings,
-    buildInfoKeys :=
-      Seq[BuildInfoKey](
-        "snapshotDirectory" -> (Compile / sourceDirectory).value / "generated"
-      ),
-    buildInfoPackage := "tests.snapshots"
+    javaOnlySettings,
+    javaTestSettings,
+    Compile / mainClass := Some("tests.SaveSnapshots"),
+    Compile / run / fork := true,
+    Test / javaOptions ++= snapshotPathOptions.value,
+    Compile / run / javaOptions ++= snapshotPathOptions.value
   )
-  .dependsOn(unit)
-  .enablePlugins(BuildInfoPlugin)
+  .dependsOn(cli)
 
 lazy val javaOnlySettings = List[Def.Setting[_]](
   autoScalaLibrary := false,
@@ -616,32 +609,38 @@ lazy val javaOnlySettings = List[Def.Setting[_]](
   Compile / javacOptions ++= Seq("--release", "11")
 )
 
-val testSettings = List(
+lazy val javaTestSettings = List[Def.Setting[_]](
   (publish / skip) := true,
-  autoScalaLibrary := true,
+  autoScalaLibrary := false,
+  crossPaths := false,
   Test / fork := true,
-  // Open the JDK-internal javac packages to in-process tests that drive
-  // javac via reflection (e.g. JavacClassesDirectorySuite, TestCompiler).
-  // On JDK 17+ this is required or the reflective access fails.
+  // Open the JDK-internal javac packages to the in-process javac the tests
+  // drive; on JDK 17+ this is required or the reflective access fails.
   Test / javaOptions ++= javacModuleOptions.map(_.stripPrefix("-J")),
   // Pin the JDK version embedded in stdlib SCIP symbols (e.g. `jdk 11
   // java/lang/String#`) so snapshots are stable across JDK 11/17/21.
   Test / javaOptions += "-Dscip.jdk.version=11",
-  testFrameworks := List(TestFrameworks.MUnit),
-  testOptions ++= {
-    if (!(Test / testForkedParallel).value)
-      List(Tests.Argument(TestFrameworks.MUnit, "-b"))
-    else
-      Nil
-  },
-  libraryDependencies ++=
-    List(
-      "org.scalameta" %% "munit" % "0.7.29",
-      "org.scalameta" %% "scalameta" % V.scalameta,
-      "com.lihaoyi" %% "os-lib" % "0.9.3",
-      "com.lihaoyi" %% "pprint" % "0.6.6"
-    )
+  libraryDependencies += "com.github.sbt.junit" % "jupiter-interface" %
+    JupiterKeys.jupiterVersion.value % Test
 )
+
+// Runtime paths for the snapshot generator, passed as -D system properties
+// (replacing the former sbt-buildinfo values). Depending on `minimized/compile`
+// here guarantees a fresh targetroot whenever `snapshots/test` or `snapshots/run`
+// evaluate javaOptions.
+def snapshotPathOptions = Def.task {
+  val _ = (minimized / Compile / compile).value
+  Seq(
+    s"-Dsnapshot.expectDir=${((Compile / sourceDirectory).value / "generated")
+        .getAbsolutePath}",
+    s"-Dsnapshot.minimizedTargetroot=${(
+        minimized / Compile / semanticdbTargetRoot
+      ).value.getAbsolutePath}",
+    s"-Dsnapshot.sourceroot=${(ThisBuild / baseDirectory)
+        .value
+        .getAbsolutePath}"
+  )
+}
 
 lazy val fatjarPackageSettings = List[Def.Setting[_]](
   (assembly / assemblyMergeStrategy) := {
