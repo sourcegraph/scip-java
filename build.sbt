@@ -93,27 +93,14 @@ lazy val gradlePlugin = project
   .in(file("scip-gradle-plugin"))
   .settings(
     name := "scip-gradle",
-    buildInfoPackage := "com.sourcegraph.scip_java",
+    javaOnlySettings,
     publish / skip := true,
-    scalacOptions ++= Seq("-target:11", "-release", "11"),
     libraryDependencies ++=
       List(
         "dev.gradleplugins" % "gradle-api" % V.gradle % Provided,
-        "dev.gradleplugins" % "gradle-test-kit" % V.gradle % Provided,
-        "org.jetbrains.kotlin" % "kotlin-gradle-plugin" % V.kotlinVersion %
-          Provided
-      ),
-    buildInfoKeys :=
-      Seq[BuildInfoKey](
-        version,
-        sbtVersion,
-        scalaVersion,
-        "javacModuleOptions" -> javacModuleOptions,
-        "scalametaVersion" -> V.scalameta,
-        "scala213" -> V.scala213
+        "dev.gradleplugins" % "gradle-test-kit" % V.gradle % Provided
       )
   )
-  .enablePlugins(BuildInfoPlugin)
 
 lazy val javacPlugin = project
   .in(file("scip-javac"))
