@@ -182,6 +182,15 @@ lazy val cli = project
     // sbt invokes it directly (e.g. from the scip-kotlinc snapshots
     // task) so it cannot kill the surrounding sbt process.
     Compile / run / fork := true,
+    Test / fork := true,
+    // Our CI set up is a couple of measly vCPUs so parallelising tests there makes
+    // everything worse.
+    Test / testForkedParallel := !sys.env.contains("CI"),
+    // The SCIP build tool drives javac in-process; on JDK 17+ this requires
+    // opening the JDK-internal javac packages.
+    Test / javaOptions ++= javacModuleOptions.map(_.stripPrefix("-J")),
+    // Pin the JDK version embedded in stdlib SCIP symbols so output is stable.
+    Test / javaOptions += "-Dscip.jdk.version=11",
     libraryDependencies ++=
       List(
         "com.github.ajalt.clikt" % "clikt-jvm" % V.clikt,
@@ -194,6 +203,13 @@ lazy val cli = project
           V.kotlinVersion,
         "org.jetbrains.kotlin" % "kotlin-scripting-dependencies-maven" %
           V.kotlinVersion
+      ),
+    libraryDependencies ++=
+      Seq(
+        "org.jetbrains.kotlin" % "kotlin-test" % V.kotlinVersion % Test,
+        "org.jetbrains.kotlin" % "kotlin-test-junit5" % V.kotlinVersion % Test,
+        "com.github.sbt.junit" % "jupiter-interface" %
+          JupiterKeys.jupiterVersion.value % Test
       ),
     (Compile / resourceGenerators) +=
       Def
@@ -449,32 +465,6 @@ def javacModuleOptions = List(
   "-J--add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED",
   "-J--add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED"
 )
-
-lazy val buildTools = project
-  .in(file("tests/buildTools"))
-  .enablePlugins(KotlinPlugin)
-  .settings(
-    publish / skip := true,
-    kotlinVersion := V.kotlinVersion,
-    kotlincJvmTarget := "11",
-    Test / fork := true,
-    // Our CI set up is a couple of measly vCPUs so parallelising tests there makes
-    // everything worse
-    Test / testForkedParallel := !sys.env.contains("CI"),
-    // The SCIP build tool drives javac in-process; on JDK 17+ this requires
-    // opening the JDK-internal javac packages.
-    Test / javaOptions ++= javacModuleOptions.map(_.stripPrefix("-J")),
-    // Pin the JDK version embedded in stdlib SCIP symbols so output is stable.
-    Test / javaOptions += "-Dscip.jdk.version=11",
-    libraryDependencies ++=
-      Seq(
-        "org.jetbrains.kotlin" % "kotlin-test" % V.kotlinVersion % Test,
-        "org.jetbrains.kotlin" % "kotlin-test-junit5" % V.kotlinVersion % Test,
-        "com.github.sbt.junit" % "jupiter-interface" %
-          JupiterKeys.jupiterVersion.value % Test
-      )
-  )
-  .dependsOn(cli)
 
 lazy val snapshots = project
   .in(file("tests/snapshots"))

@@ -41,6 +41,8 @@ These are the main components of the project.
   corpus of published Java libraries.
 - `scip-java/src/main/kotlin`: implementation of the `scip-java` command-line
   interface.
+- `scip-java/src/test`: build-tool integration tests and fixtures for the
+  `scip-java` command-line interface.
 - `build.sbt`: the sbt build definition.
 - `project/plugins.sbt`: plugins for the sbt build.
 
@@ -51,7 +53,7 @@ These are the main components of the project.
 | `sbt`                                                               | terminal | Start interactive sbt shell with Java 11 (run from `nix develop`). Takes a while to load on the first run. |
 | `unit/test`                                                         | sbt      | Run fast unit tests.                                                                |
 | `~unit/test`                                                        | sbt      | Start watch mode to run tests on file save, good for local edit-and-test workflows. |
-| `buildTools/test`                                                   | sbt      | Run slow build tool tests (Gradle, Maven).                                          |
+| `cli/test`                                                          | sbt      | Run slow build tool tests (Gradle, Maven).                                          |
 | `snapshots/testOnly tests.MinimizedSnapshotScipTest`                | sbt      | Runs fast snapshot tests. Indexes a small set of files under `tests/minimized`.     |
 | `snapshots/test`                                                    | sbt      | Runs all snapshot tests.                                                            |
 | `snapshots/run`                                                     | sbt      | Update only the Java snapshot goldens under `tests/snapshots`.                      |
@@ -93,4 +95,5 @@ snapshot suite is a JUnit `@TestFactory` that emits one dynamic test per
 generated document, comparing it against the committed goldens under
 `tests/snapshots/src/main/generated`
 ([snapshot testing](https://jestjs.io/docs/en/snapshot-testing) is heavily used
-in this codebase). Build-tool tests (`tests/buildTools`) are written in Kotlin.
+in this codebase). Build-tool tests (`scip-java/src/test`) are written in
+Kotlin.
