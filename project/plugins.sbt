@@ -1,4 +1,4 @@
-addSbtPlugin("org.xerial.sbt" % "sbt-pack" % "0.16")
+addSbtPlugin("org.xerial.sbt" % "sbt-pack" % "0.23")
 addSbtPlugin("com.github.sbt" % "sbt-ci-release" % "1.11.1")
 addSbtPlugin("com.thesamet" % "sbt-protoc" % "1.0.6")
 addSbtPlugin("com.eed3si9n" % "sbt-assembly" % "0.15.0")
