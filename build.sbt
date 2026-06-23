@@ -25,6 +25,13 @@ inThisBuild(
     homepage := Some(url("https://github.com/sourcegraph/scip-java")),
     dynverSeparator := "-",
     PB.protocVersion := V.protobuf,
+    autoScalaLibrary := false,
+    crossPaths := false,
+    // Pin bytecode to major 55 so sbt-assembly's older ASM can shade it.
+    Compile / javacOptions ++= Seq("--release", "11"),
+    incOptions ~= { old =>
+      old.withEnabled(false).withApiDebug(true)
+    },
     licenses :=
       List("Apache-2.0" -> url("http://www.apache.org/licenses/LICENSE-2.0")),
     developers :=
@@ -55,7 +62,6 @@ lazy val scipShared = project
   .in(file("scip-shared"))
   .settings(
     moduleName := "scip-shared",
-    javaOnlySettings,
     libraryDependencies +=
       "org.scip-code" % "scip-java-bindings" % V.scipBindings
   )
@@ -64,7 +70,6 @@ lazy val gradlePlugin = project
   .in(file("scip-gradle-plugin"))
   .settings(
     name := "scip-gradle",
-    javaOnlySettings,
     publish / skip := true,
     libraryDependencies ++=
       List(
@@ -76,7 +81,6 @@ lazy val gradlePlugin = project
 lazy val javacPlugin = project
   .in(file("scip-javac"))
   .settings(
-    javaOnlySettings,
     moduleName := "scip-javac",
     // Scoped to compile so doc tasks (which reject -g) are unaffected.
     Compile / compile / javacOptions += "-g",
@@ -138,9 +142,7 @@ lazy val javacPlugin = project
 lazy val scip = project
   .in(file("scip-aggregator"))
   .settings(
-    publishMavenStyle := true,
     moduleName := "scip-aggregator",
-    javaOnlySettings,
     libraryDependencies ++=
       Seq(
         "org.scip-code" % "scip-java-bindings" % V.scipBindings,
@@ -159,7 +161,6 @@ lazy val mavenPlugin = project
   .in(file("scip-maven-plugin"))
   .settings(
     moduleName := "scip-maven-plugin",
-    javaOnlySettings,
     libraryDependencies ++=
       Seq(
         "org.apache.maven" % "maven-plugin-api" % "3.6.3",
@@ -189,11 +190,8 @@ lazy val cli = project
   .enablePlugins(KotlinPlugin, PackPlugin)
   .settings(
     moduleName := "scip-java",
-    crossPaths := false,
-    autoScalaLibrary := false,
     kotlinVersion := V.kotlinVersion,
     kotlincJvmTarget := "11",
-    Compile / javacOptions ++= Seq("--release", "11"),
     (Compile / mainClass) := Some("com.sourcegraph.scip_java.ScipJava"),
     (run / baseDirectory) := (ThisBuild / baseDirectory).value,
     // ScipJava.main can call System.exit, so we always fork the JVM when
@@ -235,11 +233,10 @@ lazy val cli = project
             preserveExecutable = true
           )
           val propsFile = out.resolve("scip-java.properties").toFile
-          val copiedJars = outs.map { case (_, out) => out }
           // Build version consumed at runtime by BuildInfo.version (Kotlin).
           IO.write(propsFile, s"version=${version.value}\n")
 
-          propsFile +: copiedJars
+          propsFile +: outs.map(_._2)
         }
         .taskValue
   )
@@ -264,10 +261,6 @@ lazy val scipKotlinc = project
     name := "scip-kotlinc",
     moduleName := "scip-kotlinc",
     description := "A kotlinc plugin to emit SCIP information",
-    crossPaths := false,
-    autoScalaLibrary := false,
-    // Pin bytecode to major 55 so sbt-assembly's older ASM can shade it.
-    Compile / javacOptions ++= Seq("--release", "11"),
     kotlinVersion := V.kotlinVersion,
     kotlincJvmTarget := "1.8",
     kotlincOptions ++= Seq("-Xinline-classes", "-Xcontext-parameters"),
@@ -353,8 +346,6 @@ lazy val scipKotlincMinimized = project
   .enablePlugins(KotlinPlugin)
   .settings(
     publish / skip := true,
-    crossPaths := false,
-    autoScalaLibrary := false,
     kotlinVersion := V.kotlinVersion,
     kotlincJvmTarget := "1.8",
     kotlinLib("stdlib"),
@@ -441,34 +432,28 @@ lazy val scipKotlincMinimized = project
         .value
   )
 
-def minimizedSourceDirectory =
-  file("tests/minimized/src/main/java").getAbsoluteFile
-
-lazy val minimizedSettings = List[Def.Setting[_]](
-  autoScalaLibrary := false,
-  (publish / skip) := true,
-  (publishLocal / skip) := true,
-  (run / fork) := true,
-  (Compile / unmanagedSourceDirectories) += minimizedSourceDirectory,
-  libraryDependencies ++= List("org.projectlombok" % "lombok" % "1.18.22"),
-  // Fork javac so it receives real file paths instead of sbt's `vf://` virtual-file URIs
-  // (see the comment on `scipKotlincMinimized` for the long story).
-  javaHome := Some(file(System.getProperty("java.home"))),
-  Compile / javacOptions ++= javacModuleOptions,
-  javacOptions +=
-    List(
-      s"-Xplugin:scip",
-      s"-text:on",
-      s"-verbose",
-      s"-sourceroot:${(ThisBuild / baseDirectory).value}",
-      s"-targetroot:${(Compile / semanticdbTargetRoot).value}",
-      s"-randomtimestamp=${System.nanoTime()}"
-    ).mkString(" ")
-)
-
 lazy val minimized = project
   .in(file("tests/minimized/.j11"))
-  .settings(minimizedSettings, javaOnlySettings)
+  .settings(
+    publish / skip := true,
+    run / fork := true,
+    (Compile / unmanagedSourceDirectories) +=
+      file("tests/minimized/src/main/java").getAbsoluteFile,
+    libraryDependencies += "org.projectlombok" % "lombok" % "1.18.22",
+    // Fork javac so it receives real file paths instead of sbt's `vf://` virtual-file URIs
+    // (see the comment on `scipKotlincMinimized` for the long story).
+    javaHome := Some(file(System.getProperty("java.home"))),
+    Compile / javacOptions ++= javacModuleOptions,
+    javacOptions +=
+      List(
+        s"-Xplugin:scip",
+        s"-text:on",
+        s"-verbose",
+        s"-sourceroot:${(ThisBuild / baseDirectory).value}",
+        s"-targetroot:${(Compile / semanticdbTargetRoot).value}",
+        s"-randomtimestamp=${System.nanoTime()}"
+      ).mkString(" ")
+  )
   .dependsOn(javacPlugin)
 
 def javacModuleOptions = List(
@@ -483,8 +468,6 @@ lazy val buildTools = project
   .in(file("tests/buildTools"))
   .enablePlugins(KotlinPlugin)
   .settings(
-    crossPaths := false,
-    autoScalaLibrary := false,
     publish / skip := true,
     kotlinVersion := V.kotlinVersion,
     kotlincJvmTarget := "11",
@@ -510,39 +493,22 @@ lazy val buildTools = project
 lazy val snapshots = project
   .in(file("tests/snapshots"))
   .settings(
-    javaOnlySettings,
-    javaTestSettings,
+    publish / skip := true,
+    Test / fork := true,
+    // Open the JDK-internal javac packages to the in-process javac the tests
+    // drive; on JDK 17+ this is required or the reflective access fails.
+    Test / javaOptions ++= javacModuleOptions.map(_.stripPrefix("-J")),
+    // Pin the JDK version embedded in stdlib SCIP symbols (e.g. `jdk 11
+    // java/lang/String#`) so snapshots are stable across JDK 11/17/21.
+    Test / javaOptions += "-Dscip.jdk.version=11",
+    libraryDependencies += "com.github.sbt.junit" % "jupiter-interface" %
+      JupiterKeys.jupiterVersion.value % Test,
     Compile / mainClass := Some("tests.SaveSnapshots"),
     Compile / run / fork := true,
     Test / javaOptions ++= snapshotPathOptions.value,
     Compile / run / javaOptions ++= snapshotPathOptions.value
   )
   .dependsOn(cli)
-
-lazy val javaOnlySettings = List[Def.Setting[_]](
-  autoScalaLibrary := false,
-  incOptions ~= { old =>
-    old.withEnabled(false).withApiDebug(true)
-  },
-  crossPaths := false,
-  // Pin bytecode to major 55 so sbt-assembly's older ASM can shade it.
-  Compile / javacOptions ++= Seq("--release", "11")
-)
-
-lazy val javaTestSettings = List[Def.Setting[_]](
-  (publish / skip) := true,
-  autoScalaLibrary := false,
-  crossPaths := false,
-  Test / fork := true,
-  // Open the JDK-internal javac packages to the in-process javac the tests
-  // drive; on JDK 17+ this is required or the reflective access fails.
-  Test / javaOptions ++= javacModuleOptions.map(_.stripPrefix("-J")),
-  // Pin the JDK version embedded in stdlib SCIP symbols (e.g. `jdk 11
-  // java/lang/String#`) so snapshots are stable across JDK 11/17/21.
-  Test / javaOptions += "-Dscip.jdk.version=11",
-  libraryDependencies += "com.github.sbt.junit" % "jupiter-interface" %
-    JupiterKeys.jupiterVersion.value % Test
-)
 
 // Runtime paths for the snapshot generator, passed as -D system properties.
 // Depending on `minimized/compile` here guarantees a fresh targetroot whenever
