@@ -33,22 +33,7 @@ inThisBuild(
       old.withEnabled(false).withApiDebug(true)
     },
     licenses :=
-      List("Apache-2.0" -> url("http://www.apache.org/licenses/LICENSE-2.0")),
-    developers :=
-      List(
-        Developer(
-          "jupblb",
-          "Michal Kielbowicz",
-          "michal.kielbowicz@sourcegraph.com",
-          url("https://github.com/jupblb")
-        ),
-        Developer(
-          "chrapkowski-sg",
-          "Adam Chrapkowski",
-          "adam.chrapkowski@sourcegraph.com",
-          url("https://github.com/chrapkowski-sg")
-        )
-      )
+      List("Apache-2.0" -> url("http://www.apache.org/licenses/LICENSE-2.0"))
   )
 )
 
@@ -152,8 +137,7 @@ lazy val scip = project
           JupiterKeys.jupiterVersion.value % Test
       ),
     (Compile / PB.targets) :=
-      Seq(PB.gens.java(V.protobuf) -> (Compile / sourceManaged).value),
-    Compile / PB.protocOptions := Seq("--experimental_allow_proto3_optional")
+      Seq(PB.gens.java(V.protobuf) -> (Compile / sourceManaged).value)
   )
   .dependsOn(scipShared)
 
