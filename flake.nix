@@ -53,13 +53,13 @@
             cd ${./.}
             # Exclude minimized fixtures and generated SCIP snapshot goldens
             # (coupled to exact line/column annotations), the standalone example
-            # projects, and the buildTools test fixtures: these all mirror
+            # projects, and the scip-java build-tool test fixtures: these all mirror
             # real-world project layouts that must not be reformatted here.
             find . -name '*.java' \
               -not -path './examples/*' \
               -not -path './tests/minimized/*' \
               -not -path './tests/snapshots/*' \
-              -not -path './tests/buildTools/src/test/resources/fixtures/*' \
+              -not -path './scip-java/src/test/resources/fixtures/*' \
               -not -path './scip-kotlinc/minimized/*' \
               -exec ${pkgs.google-java-format}/bin/google-java-format --dry-run --set-exit-if-changed {} +
             touch $out
@@ -67,11 +67,12 @@
           ktfmt = pkgs.runCommand "check-ktfmt" { } ''
             cd ${./.}
             # Exclude minimized Kotlin snapshots (coupled to generated SCIP
-            # goldens with exact line/column annotations) and the buildTools test
-            # fixtures (real-world project layouts): neither may be reformatted.
+            # goldens with exact line/column annotations) and the scip-java
+            # build-tool test fixtures (real-world project layouts): neither may
+            # be reformatted.
             find . -name '*.kt' \
               -not -path './scip-kotlinc/minimized/*' \
-              -not -path './tests/buildTools/src/test/resources/fixtures/*' \
+              -not -path './scip-java/src/test/resources/fixtures/*' \
               -exec ${pkgs.ktfmt}/bin/ktfmt --kotlinlang-style --dry-run --set-exit-if-changed {} +
             touch $out
           '';
