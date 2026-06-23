@@ -1,9 +1,6 @@
 import _root_.kotlin.Keys._
-import scala.xml.{Node => XmlNode, NodeSeq => XmlNodeSeq, _}
-import scala.xml.transform.{RewriteRule, RuleTransformer}
 import java.io.File
 import java.util.Properties
-import scala.collection.mutable.ListBuffer
 
 lazy val V =
   new {
@@ -86,7 +83,6 @@ lazy val gradlePlugin = project
 lazy val javacPlugin = project
   .in(file("scip-javac"))
   .settings(
-    fatjarPackageSettings,
     javaOnlySettings,
     moduleName := "scip-javac",
     // Scoped to compile so doc tasks (which reject -g) are unaffected.
@@ -98,6 +94,19 @@ lazy val javacPlugin = project
       val empty = target.value / "empty-processorpath"
       IO.createDirectory(empty)
       Seq("-processorpath", empty.getAbsolutePath)
+    },
+    (assembly / assemblyMergeStrategy) := {
+      case PathList("javax", _ @_*) =>
+        MergeStrategy.discard
+      case PathList("com", "sun", _ @_*) =>
+        MergeStrategy.discard
+      case PathList("sun", _ @_*) =>
+        MergeStrategy.discard
+      case PathList("META-INF", "versions", "9", "module-info.class") =>
+        MergeStrategy.discard
+      case x =>
+        val oldStrategy = (assembly / assemblyMergeStrategy).value
+        oldStrategy(x)
     },
     (assembly / assemblyShadeRules) :=
       Seq(
@@ -214,21 +223,16 @@ lazy val cli = project
     (Compile / resourceGenerators) +=
       Def
         .task[Seq[File]] {
-          val outs = ListBuffer.empty[(File, File)]
           val out = (Compile / resourceManaged).value.toPath
           IO.delete(out.toFile)
-          def addJar(jar: File, filename: String): Unit = {
-            outs += jar -> out.resolve(filename).toFile
-          }
 
-          addJar(
-            (javacPlugin / Compile / Keys.`package`).value,
-            "scip-plugin.jar"
-          )
-          addJar((gradlePlugin / Compile / assembly).value, "gradle-plugin.jar")
-          addJar(
-            (scipKotlinc / Compile / Keys.`package`).value,
-            "scip-kotlinc.jar"
+          val outs = Seq(
+            (javacPlugin / Compile / assembly).value ->
+              out.resolve("scip-plugin.jar").toFile,
+            (gradlePlugin / Compile / assembly).value ->
+              out.resolve("gradle-plugin.jar").toFile,
+            (scipKotlinc / Compile / assembly).value ->
+              out.resolve("scip-kotlinc.jar").toFile
           )
 
           IO.copy(
@@ -239,16 +243,14 @@ lazy val cli = project
           )
           val props = new Properties()
           val propsFile = out.resolve("scip-java.properties").toFile
-          val copiedJars = outs.collect { case (_, out) =>
-            out
-          }
+          val copiedJars = outs.map { case (_, out) => out }
           val names = copiedJars.map(_.getName).mkString(";")
           props.put("jarNames", names)
           // Build version consumed at runtime by BuildInfo.version (Kotlin).
           props.put("version", version.value)
           IO.write(props, "scip-java", propsFile)
 
-          propsFile :: copiedJars.toList
+          propsFile +: copiedJars
         }
         .taskValue
   )
@@ -297,9 +299,8 @@ lazy val scipKotlinc = project
     libraryDependencies += "org.jetbrains.kotlin" %
       "kotlin-compiler-embeddable" % V.kotlinVersion % Provided,
     // ---- sbt-assembly fat-jar ---------------------------------------------
-    // Mirrors scip-java's `fatjarPackageSettings`. Produces a shaded jar that
-    // replaces the slim `packageBin` so `publishLocal` ships the shaded
-    // artifact (the same artifact Gradle's shadowJar produced previously).
+    // Produces a shaded jar for consumers that need a self-contained compiler
+    // plugin, such as the CLI resource embedding and minimized fixture build.
     assembly / assemblyShadeRules :=
       Seq(
         // Relocate any IntelliJ classes the same way kotlin-compiler-embeddable
@@ -309,20 +310,6 @@ lazy val scipKotlinc = project
           .rename("com.intellij.**" -> "org.jetbrains.kotlin.com.intellij.@1")
           .inAll
       ),
-    Compile / packageBin := assembly.value,
-    // Strip every <dependency> from the POM — the fat-jar absorbs the
-    // protobuf runtime, and the kotlin-* deps are Provided by kotlinc.
-    pomPostProcess := { node =>
-      new RuleTransformer(
-        new RewriteRule {
-          override def transform(n: XmlNode): XmlNodeSeq =
-            if (n.label == "dependency")
-              XmlNodeSeq.Empty
-            else
-              n
-        }
-      ).transform(node).head
-    },
     // tests
     libraryDependencies ++=
       Seq(
@@ -403,11 +390,11 @@ lazy val scipKotlincMinimized = project
     // don't have to predict the assembled jar's filename. The .value reference
     // also gives us the right task ordering — assembly runs before compile.
     Compile / unmanagedJars +=
-      Attributed.blank((scipKotlinc / Compile / packageBin).value),
+      Attributed.blank((scipKotlinc / Compile / assembly).value),
     // Wire the locally-built scip-javac fat jar in place of fetching the
     // published `com.sourcegraph:scip-javac` artifact at compile time.
     Compile / unmanagedJars +=
-      Attributed.blank((javacPlugin / Compile / Keys.`package`).value),
+      Attributed.blank((javacPlugin / Compile / assembly).value),
     Compile / kotlincPluginOptions ++= {
       val srcRoot = (ThisBuild / baseDirectory).value.getAbsolutePath
       val tgtRoot = (target.value / "scip-targetroot").getAbsolutePath
@@ -584,48 +571,6 @@ def snapshotPathOptions = Def.task {
         .getAbsolutePath}"
   )
 }
-
-lazy val fatjarPackageSettings = List[Def.Setting[_]](
-  (assembly / assemblyMergeStrategy) := {
-    case PathList("javax", _ @_*) =>
-      MergeStrategy.discard
-    case PathList("com", "sun", _ @_*) =>
-      MergeStrategy.discard
-    case PathList("sun", _ @_*) =>
-      MergeStrategy.discard
-    case PathList("META-INF", "versions", "9", "module-info.class") =>
-      MergeStrategy.discard
-    case x =>
-      val oldStrategy = (assembly / assemblyMergeStrategy).value
-      oldStrategy(x)
-  },
-  (Compile / Keys.`package`) := {
-    assembly.value
-  },
-  (Compile / packageBin / packagedArtifact) := {
-    val (artifact, _) = (Compile / packageBin / packagedArtifact).value
-    (artifact, assembly.value)
-  },
-  pomPostProcess := { node =>
-    new RuleTransformer(
-      new RewriteRule {
-        private def isAbsorbedDependency(node: XmlNode): Boolean = {
-          node.label == "dependency" &&
-          node.child.exists(child => child.label == "artifactId")
-        }
-        override def transform(node: XmlNode): XmlNodeSeq =
-          node match {
-            case e: Elem if isAbsorbedDependency(node) =>
-              Comment(
-                "the dependency that was here has been absorbed via sbt-assembly"
-              )
-            case _ =>
-              node
-          }
-      }
-    ).transform(node).head
-  }
-)
 
 lazy val dumpScipJavaVersion = taskKey[Unit](
   "Dump the version of scip-java tool to a VERSION file"
