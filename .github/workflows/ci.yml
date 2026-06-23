@@ -83,8 +83,8 @@ jobs:
 
       - uses: DeterminateSystems/magic-nix-cache-action@v13
 
-      - run: nix develop --command sbt build
-      - run: echo "$PWD/out/bin" >> "$GITHUB_PATH"
+      - run: nix develop --command sbt cli/pack
+      - run: echo "$PWD/scip-java/target/pack/bin" >> "$GITHUB_PATH"
       - name: Auto-index scip-java codebase
         run: |
           # shellcheck disable=SC2016
@@ -140,9 +140,10 @@ jobs:
       - uses: DeterminateSystems/magic-nix-cache-action@v13
 
       - run: |
-          nix develop .#jdk${{ matrix.java }} --command sbt build publishM2 publishLocal dumpScipJavaVersion
-          echo "SCIP_JAVA_VERSION=$(cat VERSION)" >> "$GITHUB_ENV"
-          echo "SCIP_JAVA_CLI=$PWD/out/bin/scip-java" >> "$GITHUB_ENV"
+          nix develop .#jdk${{ matrix.java }} --command sbt cli/pack publishM2 publishLocal
+          SCIP_JAVA_VERSION="$(nix develop .#jdk${{ matrix.java }} --command sbt --error 'print cli/version')"
+          printf 'SCIP_JAVA_VERSION=%s\n' "$SCIP_JAVA_VERSION" >> "$GITHUB_ENV"
+          printf 'SCIP_JAVA_CLI=%s\n' "$PWD/scip-java/target/pack/bin/scip-java" >> "$GITHUB_ENV"
 
       - run: |
           nix develop "$GITHUB_WORKSPACE#jdk${{ matrix.java }}" --command \

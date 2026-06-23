@@ -1,6 +1,4 @@
 import _root_.kotlin.Keys._
-import java.io.File
-import java.util.Properties
 
 lazy val V =
   new {
@@ -49,11 +47,6 @@ inThisBuild(
 
 name := "root"
 (publish / skip) := true
-
-commands +=
-  Command.command("regenerateSnapshots") { s =>
-    "snapshots/run" :: "scipKotlincMinimized/kotlincSnapshots" :: s
-  }
 
 // Shared module with the SCIP shard utilities (symbol encoder, document
 // builder, on-disk writer) consumed by both the Java compiler plugin
@@ -222,7 +215,7 @@ lazy val cli = project
       ),
     (Compile / resourceGenerators) +=
       Def
-        .task[Seq[File]] {
+        .task {
           val out = (Compile / resourceManaged).value.toPath
           IO.delete(out.toFile)
 
@@ -241,14 +234,10 @@ lazy val cli = project
             preserveLastModified = false,
             preserveExecutable = true
           )
-          val props = new Properties()
           val propsFile = out.resolve("scip-java.properties").toFile
           val copiedJars = outs.map { case (_, out) => out }
-          val names = copiedJars.map(_.getName).mkString(";")
-          props.put("jarNames", names)
           // Build version consumed at runtime by BuildInfo.version (Kotlin).
-          props.put("version", version.value)
-          IO.write(props, "scip-java", propsFile)
+          IO.write(propsFile, s"version=${version.value}\n")
 
           propsFile +: copiedJars
         }
@@ -570,23 +559,4 @@ def snapshotPathOptions = Def.task {
         .value
         .getAbsolutePath}"
   )
-}
-
-lazy val dumpScipJavaVersion = taskKey[Unit](
-  "Dump the version of scip-java tool to a VERSION file"
-)
-dumpScipJavaVersion := {
-  val versionValue = (cli / version).value
-
-  IO.write((ThisBuild / baseDirectory).value / "VERSION", versionValue)
-}
-
-lazy val build = taskKey[Unit](
-  "Build `scip-java` CLI and place it in the out/bin/scip-java. "
-)
-
-build := {
-  val source = (cli / pack).value
-  val destination = (ThisBuild / baseDirectory).value / "out"
-  IO.copyDirectory(source, destination)
 }
