@@ -143,7 +143,11 @@ jobs:
           sbt_output="$(mktemp)"
           nix develop .#jdk${{ matrix.java }} --command \
             sbt --error cli/pack publishM2 publishLocal 'print cli/version' | tee "$sbt_output"
-          SCIP_JAVA_VERSION="$(awk 'NF { value = $0 } END { print value }' "$sbt_output")"
+          SCIP_JAVA_VERSION="$(
+            sed -E $'s/\x1B\[[0-9;?]*[ -/]*[@-~]//g' "$sbt_output" |
+              grep -E '^[0-9]+[.][0-9]+[.][0-9]+' |
+              tail -n 1
+          )"
           test -n "$SCIP_JAVA_VERSION"
           printf 'SCIP_JAVA_VERSION=%s\n' "$SCIP_JAVA_VERSION" >> "$GITHUB_ENV"
           printf 'SCIP_JAVA_CLI=%s\n' "$PWD/scip-java/target/pack/bin/scip-java" >> "$GITHUB_ENV"
