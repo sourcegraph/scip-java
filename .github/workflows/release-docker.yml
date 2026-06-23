@@ -11,14 +11,25 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - uses: DeterminateSystems/nix-installer-action@v22
-        with:
-          summarize: false
-      - uses: DeterminateSystems/magic-nix-cache-action@v13
       - uses: docker/setup-buildx-action@v3
       - name: Login to DockerHub
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-      - run: nix develop --command bash -c "DOCKER_BUILDKIT=0 sbt cli/dockerBuildAndPush"
+      - name: Build and push Docker image
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          tags=(--tag sourcegraph/scip-java:latest-snapshot)
+
+          if [[ "${GITHUB_REF_TYPE}" == "tag" ]]; then
+            version="${GITHUB_REF_NAME#v}"
+            tags=(
+              --tag sourcegraph/scip-java:latest
+              --tag "sourcegraph/scip-java:${version}"
+            )
+          fi
+
+          docker buildx build --push "${tags[@]}" .

@@ -30,14 +30,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: DeterminateSystems/nix-installer-action@v22
-        with:
-          summarize: false
-
-      - uses: DeterminateSystems/magic-nix-cache-action@v13
-
       - name: Build Dockerised CLI
-        run: nix develop --command bash -c "DOCKER_BUILDKIT=0 sbt cli/docker"
+        run: docker build -t sourcegraph/scip-java:latest .
 
       - name: Test repos
         shell: bash

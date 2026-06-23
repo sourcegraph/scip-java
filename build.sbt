@@ -184,7 +184,7 @@ lazy val mavenPlugin = project
 
 lazy val cli = project
   .in(file("scip-java"))
-  .enablePlugins(KotlinPlugin, PackPlugin, DockerPlugin)
+  .enablePlugins(KotlinPlugin, PackPlugin)
   .settings(
     moduleName := "scip-java",
     crossPaths := false,
@@ -250,31 +250,7 @@ lazy val cli = project
 
           propsFile :: copiedJars.toList
         }
-        .taskValue,
-    docker / imageNames := {
-      val latest = {
-        val label =
-          if (isSnapshot.value)
-            "latest-snapshot"
-          else
-            "latest"
-
-        List(ImageName(s"sourcegraph/scip-java:$label"))
-      }
-
-      // Don't publish a separately tagged image for snapshots -
-      // only latest-snapshot
-      val versioned =
-        if (isSnapshot.value)
-          Nil
-        else
-          List(ImageName(s"sourcegraph/scip-java:${version.value}"))
-
-      latest ++ versioned
-
-    },
-    docker / dockerfile :=
-      NativeDockerfile((ThisBuild / baseDirectory).value / "Dockerfile")
+        .taskValue
   )
   .dependsOn(scip)
 
