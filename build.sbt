@@ -2,7 +2,6 @@ import _root_.kotlin.Keys._
 import scala.xml.{Node => XmlNode, NodeSeq => XmlNodeSeq, _}
 import scala.xml.transform.{RewriteRule, RuleTransformer}
 import java.io.File
-import java.nio.file.Files
 import java.util.Properties
 import scala.collection.mutable.ListBuffer
 
@@ -10,10 +9,7 @@ lazy val V =
   new {
     val protobuf = "4.34.2"
     val scipBindings = "0.8.0"
-    val scalaXml = "2.1.0"
     val gradle = "8.10"
-    val scala213 = "2.13.13"
-    val scalameta = "4.9.3"
     val kotlinVersion = "2.2.0"
     val kotest = "4.6.3"
     val kctfork = "0.7.1"
@@ -30,10 +26,6 @@ else
 
 inThisBuild(
   List(
-    scalaVersion := V.scala213,
-    scalacOptions ++= List("-Wunused:imports"),
-    semanticdbEnabled := true,
-    semanticdbVersion := V.scalameta,
     organization := "com.sourcegraph",
     homepage := Some(url("https://github.com/sourcegraph/scip-java")),
     dynverSeparator := "-",
@@ -60,17 +52,6 @@ inThisBuild(
 
 name := "root"
 (publish / skip) := true
-
-commands +=
-  Command.command("fixAll") { s =>
-    "scalafixAll" :: "scalafmtAll" :: "scalafmtSbt" :: s
-  }
-
-commands +=
-  Command.command("checkAll") { s =>
-    "scalafmtCheckAll" :: "scalafmtSbtCheck" :: "scalafixAll --check" ::
-      "publishLocal" :: s
-  }
 
 commands +=
   Command.command("regenerateSnapshots") { s =>
@@ -611,10 +592,9 @@ lazy val javaTestSettings = List[Def.Setting[_]](
     JupiterKeys.jupiterVersion.value % Test
 )
 
-// Runtime paths for the snapshot generator, passed as -D system properties
-// (replacing the former sbt-buildinfo values). Depending on `minimized/compile`
-// here guarantees a fresh targetroot whenever `snapshots/test` or `snapshots/run`
-// evaluate javaOptions.
+// Runtime paths for the snapshot generator, passed as -D system properties.
+// Depending on `minimized/compile` here guarantees a fresh targetroot whenever
+// `snapshots/test` or `snapshots/run` evaluate javaOptions.
 def snapshotPathOptions = Def.task {
   val _ = (minimized / Compile / compile).value
   Seq(

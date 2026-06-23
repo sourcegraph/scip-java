@@ -38,7 +38,6 @@
               nixfmt
               nodejs
               (sbt.override ({ jre = jdk; }))
-              scalafmt
               scipCli
               yarn
             ];
@@ -85,19 +84,6 @@
               ${./.github/renovate.json}
             touch $out
           '';
-          scalafmt =
-            pkgs.runCommand "check-scalafmt"
-              {
-                buildInputs = [ pkgs.git ];
-              }
-              ''
-                cp -r ${./.}/. .
-                chmod -R u+w .
-                git init -q
-                git add -A
-                ${pkgs.scalafmt}/bin/scalafmt --check --non-interactive
-                touch $out
-              '';
           shellcheck = pkgs.runCommand "check-shellcheck" { } ''
             ${pkgs.shellcheck}/bin/shellcheck ${./bin}/*.sh
             touch $out

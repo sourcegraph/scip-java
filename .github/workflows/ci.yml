@@ -129,20 +129,6 @@ jobs:
           git diff --exit-code \
             scip-kotlinc/minimized/src/generatedSnapshots
 
-  check:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - uses: DeterminateSystems/nix-installer-action@v22
-        with:
-          summarize: false
-
-      - uses: DeterminateSystems/magic-nix-cache-action@v13
-
-      - run: nix develop --command sbt --client checkAll
-
-
   maven:
     runs-on: ubuntu-latest
     name: Maven tests
