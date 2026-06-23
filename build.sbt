@@ -1,19 +1,10 @@
 import _root_.kotlin.Keys._
-import scala.xml.{Node => XmlNode, NodeSeq => XmlNodeSeq, _}
-import scala.xml.transform.{RewriteRule, RuleTransformer}
-import java.io.File
-import java.nio.file.Files
-import java.util.Properties
-import scala.collection.mutable.ListBuffer
 
 lazy val V =
   new {
     val protobuf = "4.34.2"
     val scipBindings = "0.8.0"
-    val scalaXml = "2.1.0"
     val gradle = "8.10"
-    val scala213 = "2.13.13"
-    val scalameta = "4.9.3"
     val kotlinVersion = "2.2.0"
     val kotest = "4.6.3"
     val kctfork = "0.7.1"
@@ -30,52 +21,24 @@ else
 
 inThisBuild(
   List(
-    scalaVersion := V.scala213,
-    scalacOptions ++= List("-Wunused:imports"),
-    semanticdbEnabled := true,
-    semanticdbVersion := V.scalameta,
     organization := "com.sourcegraph",
     homepage := Some(url("https://github.com/sourcegraph/scip-java")),
     dynverSeparator := "-",
     PB.protocVersion := V.protobuf,
+    autoScalaLibrary := false,
+    crossPaths := false,
+    // Pin bytecode to major 55 so compiler plugins can run on Java 11.
+    Compile / javacOptions ++= Seq("--release", "11"),
+    incOptions ~= { old =>
+      old.withEnabled(false).withApiDebug(true)
+    },
     licenses :=
-      List("Apache-2.0" -> url("http://www.apache.org/licenses/LICENSE-2.0")),
-    developers :=
-      List(
-        Developer(
-          "jupblb",
-          "Michal Kielbowicz",
-          "michal.kielbowicz@sourcegraph.com",
-          url("https://github.com/jupblb")
-        ),
-        Developer(
-          "chrapkowski-sg",
-          "Adam Chrapkowski",
-          "adam.chrapkowski@sourcegraph.com",
-          url("https://github.com/chrapkowski-sg")
-        )
-      )
+      List("Apache-2.0" -> url("http://www.apache.org/licenses/LICENSE-2.0"))
   )
 )
 
 name := "root"
 (publish / skip) := true
-
-commands +=
-  Command.command("fixAll") { s =>
-    "scalafixAll" :: "scalafmtAll" :: "scalafmtSbt" :: s
-  }
-
-commands +=
-  Command.command("checkAll") { s =>
-    "scalafmtCheckAll" :: "scalafmtSbtCheck" :: "scalafixAll --check" ::
-      "publishLocal" :: s
-  }
-
-commands +=
-  Command.command("regenerateSnapshots") { s =>
-    "snapshots/run" :: "scipKotlincMinimized/kotlincSnapshots" :: s
-  }
 
 // Shared module with the SCIP shard utilities (symbol encoder, document
 // builder, on-disk writer) consumed by both the Java compiler plugin
@@ -84,7 +47,6 @@ lazy val scipShared = project
   .in(file("scip-shared"))
   .settings(
     moduleName := "scip-shared",
-    javaOnlySettings,
     libraryDependencies +=
       "org.scip-code" % "scip-java-bindings" % V.scipBindings
   )
@@ -93,7 +55,6 @@ lazy val gradlePlugin = project
   .in(file("scip-gradle-plugin"))
   .settings(
     name := "scip-gradle",
-    javaOnlySettings,
     publish / skip := true,
     libraryDependencies ++=
       List(
@@ -105,8 +66,6 @@ lazy val gradlePlugin = project
 lazy val javacPlugin = project
   .in(file("scip-javac"))
   .settings(
-    fatjarPackageSettings,
-    javaOnlySettings,
     moduleName := "scip-javac",
     // Scoped to compile so doc tasks (which reject -g) are unaffected.
     Compile / compile / javacOptions += "-g",
@@ -117,6 +76,19 @@ lazy val javacPlugin = project
       val empty = target.value / "empty-processorpath"
       IO.createDirectory(empty)
       Seq("-processorpath", empty.getAbsolutePath)
+    },
+    (assembly / assemblyMergeStrategy) := {
+      case PathList("javax", _ @_*) =>
+        MergeStrategy.discard
+      case PathList("com", "sun", _ @_*) =>
+        MergeStrategy.discard
+      case PathList("sun", _ @_*) =>
+        MergeStrategy.discard
+      case PathList("META-INF", "versions", "9", "module-info.class") =>
+        MergeStrategy.discard
+      case x =>
+        val oldStrategy = (assembly / assemblyMergeStrategy).value
+        oldStrategy(x)
     },
     (assembly / assemblyShadeRules) :=
       Seq(
@@ -155,9 +127,7 @@ lazy val javacPlugin = project
 lazy val scip = project
   .in(file("scip-aggregator"))
   .settings(
-    publishMavenStyle := true,
     moduleName := "scip-aggregator",
-    javaOnlySettings,
     libraryDependencies ++=
       Seq(
         "org.scip-code" % "scip-java-bindings" % V.scipBindings,
@@ -167,8 +137,7 @@ lazy val scip = project
           JupiterKeys.jupiterVersion.value % Test
       ),
     (Compile / PB.targets) :=
-      Seq(PB.gens.java(V.protobuf) -> (Compile / sourceManaged).value),
-    Compile / PB.protocOptions := Seq("--experimental_allow_proto3_optional")
+      Seq(PB.gens.java(V.protobuf) -> (Compile / sourceManaged).value)
   )
   .dependsOn(scipShared)
 
@@ -176,7 +145,6 @@ lazy val mavenPlugin = project
   .in(file("scip-maven-plugin"))
   .settings(
     moduleName := "scip-maven-plugin",
-    javaOnlySettings,
     libraryDependencies ++=
       Seq(
         "org.apache.maven" % "maven-plugin-api" % "3.6.3",
@@ -203,14 +171,11 @@ lazy val mavenPlugin = project
 
 lazy val cli = project
   .in(file("scip-java"))
-  .enablePlugins(KotlinPlugin, PackPlugin, DockerPlugin)
+  .enablePlugins(KotlinPlugin, PackPlugin)
   .settings(
     moduleName := "scip-java",
-    crossPaths := false,
-    autoScalaLibrary := false,
     kotlinVersion := V.kotlinVersion,
     kotlincJvmTarget := "11",
-    Compile / javacOptions ++= Seq("--release", "11"),
     (Compile / mainClass) := Some("com.sourcegraph.scip_java.ScipJava"),
     (run / baseDirectory) := (ThisBuild / baseDirectory).value,
     // ScipJava.main can call System.exit, so we always fork the JVM when
@@ -232,22 +197,17 @@ lazy val cli = project
       ),
     (Compile / resourceGenerators) +=
       Def
-        .task[Seq[File]] {
-          val outs = ListBuffer.empty[(File, File)]
+        .task {
           val out = (Compile / resourceManaged).value.toPath
           IO.delete(out.toFile)
-          def addJar(jar: File, filename: String): Unit = {
-            outs += jar -> out.resolve(filename).toFile
-          }
 
-          addJar(
-            (javacPlugin / Compile / Keys.`package`).value,
-            "scip-plugin.jar"
-          )
-          addJar((gradlePlugin / Compile / assembly).value, "gradle-plugin.jar")
-          addJar(
-            (scipKotlinc / Compile / Keys.`package`).value,
-            "scip-kotlinc.jar"
+          val outs = Seq(
+            (javacPlugin / Compile / assembly).value ->
+              out.resolve("scip-plugin.jar").toFile,
+            (gradlePlugin / Compile / assembly).value ->
+              out.resolve("gradle-plugin.jar").toFile,
+            (scipKotlinc / Compile / assembly).value ->
+              out.resolve("scip-kotlinc.jar").toFile
           )
 
           IO.copy(
@@ -256,44 +216,13 @@ lazy val cli = project
             preserveLastModified = false,
             preserveExecutable = true
           )
-          val props = new Properties()
           val propsFile = out.resolve("scip-java.properties").toFile
-          val copiedJars = outs.collect { case (_, out) =>
-            out
-          }
-          val names = copiedJars.map(_.getName).mkString(";")
-          props.put("jarNames", names)
           // Build version consumed at runtime by BuildInfo.version (Kotlin).
-          props.put("version", version.value)
-          IO.write(props, "scip-java", propsFile)
+          IO.write(propsFile, s"version=${version.value}\n")
 
-          propsFile :: copiedJars.toList
+          propsFile +: outs.map(_._2)
         }
-        .taskValue,
-    docker / imageNames := {
-      val latest = {
-        val label =
-          if (isSnapshot.value)
-            "latest-snapshot"
-          else
-            "latest"
-
-        List(ImageName(s"sourcegraph/scip-java:$label"))
-      }
-
-      // Don't publish a separately tagged image for snapshots -
-      // only latest-snapshot
-      val versioned =
-        if (isSnapshot.value)
-          Nil
-        else
-          List(ImageName(s"sourcegraph/scip-java:${version.value}"))
-
-      latest ++ versioned
-
-    },
-    docker / dockerfile :=
-      NativeDockerfile((ThisBuild / baseDirectory).value / "Dockerfile")
+        .taskValue
   )
   .dependsOn(scip)
 
@@ -316,10 +245,6 @@ lazy val scipKotlinc = project
     name := "scip-kotlinc",
     moduleName := "scip-kotlinc",
     description := "A kotlinc plugin to emit SCIP information",
-    crossPaths := false,
-    autoScalaLibrary := false,
-    // Pin bytecode to major 55 so sbt-assembly's older ASM can shade it.
-    Compile / javacOptions ++= Seq("--release", "11"),
     kotlinVersion := V.kotlinVersion,
     kotlincJvmTarget := "1.8",
     kotlincOptions ++= Seq("-Xinline-classes", "-Xcontext-parameters"),
@@ -340,9 +265,8 @@ lazy val scipKotlinc = project
     libraryDependencies += "org.jetbrains.kotlin" %
       "kotlin-compiler-embeddable" % V.kotlinVersion % Provided,
     // ---- sbt-assembly fat-jar ---------------------------------------------
-    // Mirrors scip-java's `fatjarPackageSettings`. Produces a shaded jar that
-    // replaces the slim `packageBin` so `publishLocal` ships the shaded
-    // artifact (the same artifact Gradle's shadowJar produced previously).
+    // Produces a shaded jar for consumers that need a self-contained compiler
+    // plugin, such as the CLI resource embedding and minimized fixture build.
     assembly / assemblyShadeRules :=
       Seq(
         // Relocate any IntelliJ classes the same way kotlin-compiler-embeddable
@@ -352,20 +276,6 @@ lazy val scipKotlinc = project
           .rename("com.intellij.**" -> "org.jetbrains.kotlin.com.intellij.@1")
           .inAll
       ),
-    Compile / packageBin := assembly.value,
-    // Strip every <dependency> from the POM — the fat-jar absorbs the
-    // protobuf runtime, and the kotlin-* deps are Provided by kotlinc.
-    pomPostProcess := { node =>
-      new RuleTransformer(
-        new RewriteRule {
-          override def transform(n: XmlNode): XmlNodeSeq =
-            if (n.label == "dependency")
-              XmlNodeSeq.Empty
-            else
-              n
-        }
-      ).transform(node).head
-    },
     // tests
     libraryDependencies ++=
       Seq(
@@ -420,8 +330,6 @@ lazy val scipKotlincMinimized = project
   .enablePlugins(KotlinPlugin)
   .settings(
     publish / skip := true,
-    crossPaths := false,
-    autoScalaLibrary := false,
     kotlinVersion := V.kotlinVersion,
     kotlincJvmTarget := "1.8",
     kotlinLib("stdlib"),
@@ -446,11 +354,11 @@ lazy val scipKotlincMinimized = project
     // don't have to predict the assembled jar's filename. The .value reference
     // also gives us the right task ordering — assembly runs before compile.
     Compile / unmanagedJars +=
-      Attributed.blank((scipKotlinc / Compile / packageBin).value),
+      Attributed.blank((scipKotlinc / Compile / assembly).value),
     // Wire the locally-built scip-javac fat jar in place of fetching the
     // published `com.sourcegraph:scip-javac` artifact at compile time.
     Compile / unmanagedJars +=
-      Attributed.blank((javacPlugin / Compile / Keys.`package`).value),
+      Attributed.blank((javacPlugin / Compile / assembly).value),
     Compile / kotlincPluginOptions ++= {
       val srcRoot = (ThisBuild / baseDirectory).value.getAbsolutePath
       val tgtRoot = (target.value / "scip-targetroot").getAbsolutePath
@@ -508,34 +416,30 @@ lazy val scipKotlincMinimized = project
         .value
   )
 
-def minimizedSourceDirectory =
-  file("tests/minimized/src/main/java").getAbsoluteFile
-
-lazy val minimizedSettings = List[Def.Setting[_]](
-  autoScalaLibrary := false,
-  (publish / skip) := true,
-  (publishLocal / skip) := true,
-  (run / fork) := true,
-  (Compile / unmanagedSourceDirectories) += minimizedSourceDirectory,
-  libraryDependencies ++= List("org.projectlombok" % "lombok" % "1.18.22"),
-  // Fork javac so it receives real file paths instead of sbt's `vf://` virtual-file URIs
-  // (see the comment on `scipKotlincMinimized` for the long story).
-  javaHome := Some(file(System.getProperty("java.home"))),
-  Compile / javacOptions ++= javacModuleOptions,
-  javacOptions +=
-    List(
-      s"-Xplugin:scip",
-      s"-text:on",
-      s"-verbose",
-      s"-sourceroot:${(ThisBuild / baseDirectory).value}",
-      s"-targetroot:${(Compile / semanticdbTargetRoot).value}",
-      s"-randomtimestamp=${System.nanoTime()}"
-    ).mkString(" ")
-)
-
 lazy val minimized = project
   .in(file("tests/minimized/.j11"))
-  .settings(minimizedSettings, javaOnlySettings)
+  .settings(
+    publish / skip := true,
+    run / fork := true,
+    (Compile / unmanagedSourceDirectories) +=
+      file("tests/minimized/src/main/java").getAbsoluteFile,
+    libraryDependencies += "org.projectlombok" % "lombok" % "1.18.22",
+    // Fork javac so it receives real file paths instead of sbt's `vf://` virtual-file URIs
+    // (see the comment on `scipKotlincMinimized` for the long story).
+    javaHome := Some(file(System.getProperty("java.home"))),
+    // Keep minimized snapshots stable across JDK 11/17/21.
+    Compile / javacOptions ++= Seq("--release", "11"),
+    Compile / javacOptions ++= javacModuleOptions,
+    javacOptions +=
+      List(
+        s"-Xplugin:scip",
+        s"-text:on",
+        s"-verbose",
+        s"-sourceroot:${(ThisBuild / baseDirectory).value}",
+        s"-targetroot:${(Compile / semanticdbTargetRoot).value}",
+        s"-randomtimestamp=${System.nanoTime()}"
+      ).mkString(" ")
+  )
   .dependsOn(javacPlugin)
 
 def javacModuleOptions = List(
@@ -550,8 +454,6 @@ lazy val buildTools = project
   .in(file("tests/buildTools"))
   .enablePlugins(KotlinPlugin)
   .settings(
-    crossPaths := false,
-    autoScalaLibrary := false,
     publish / skip := true,
     kotlinVersion := V.kotlinVersion,
     kotlincJvmTarget := "11",
@@ -577,8 +479,16 @@ lazy val buildTools = project
 lazy val snapshots = project
   .in(file("tests/snapshots"))
   .settings(
-    javaOnlySettings,
-    javaTestSettings,
+    publish / skip := true,
+    Test / fork := true,
+    // Open the JDK-internal javac packages to the in-process javac the tests
+    // drive; on JDK 17+ this is required or the reflective access fails.
+    Test / javaOptions ++= javacModuleOptions.map(_.stripPrefix("-J")),
+    // Pin the JDK version embedded in stdlib SCIP symbols (e.g. `jdk 11
+    // java/lang/String#`) so snapshots are stable across JDK 11/17/21.
+    Test / javaOptions += "-Dscip.jdk.version=11",
+    libraryDependencies += "com.github.sbt.junit" % "jupiter-interface" %
+      JupiterKeys.jupiterVersion.value % Test,
     Compile / mainClass := Some("tests.SaveSnapshots"),
     Compile / run / fork := true,
     Test / javaOptions ++= snapshotPathOptions.value,
@@ -586,35 +496,9 @@ lazy val snapshots = project
   )
   .dependsOn(cli)
 
-lazy val javaOnlySettings = List[Def.Setting[_]](
-  autoScalaLibrary := false,
-  incOptions ~= { old =>
-    old.withEnabled(false).withApiDebug(true)
-  },
-  crossPaths := false,
-  // Pin bytecode to major 55 so sbt-assembly's older ASM can shade it.
-  Compile / javacOptions ++= Seq("--release", "11")
-)
-
-lazy val javaTestSettings = List[Def.Setting[_]](
-  (publish / skip) := true,
-  autoScalaLibrary := false,
-  crossPaths := false,
-  Test / fork := true,
-  // Open the JDK-internal javac packages to the in-process javac the tests
-  // drive; on JDK 17+ this is required or the reflective access fails.
-  Test / javaOptions ++= javacModuleOptions.map(_.stripPrefix("-J")),
-  // Pin the JDK version embedded in stdlib SCIP symbols (e.g. `jdk 11
-  // java/lang/String#`) so snapshots are stable across JDK 11/17/21.
-  Test / javaOptions += "-Dscip.jdk.version=11",
-  libraryDependencies += "com.github.sbt.junit" % "jupiter-interface" %
-    JupiterKeys.jupiterVersion.value % Test
-)
-
-// Runtime paths for the snapshot generator, passed as -D system properties
-// (replacing the former sbt-buildinfo values). Depending on `minimized/compile`
-// here guarantees a fresh targetroot whenever `snapshots/test` or `snapshots/run`
-// evaluate javaOptions.
+// Runtime paths for the snapshot generator, passed as -D system properties.
+// Depending on `minimized/compile` here guarantees a fresh targetroot whenever
+// `snapshots/test` or `snapshots/run` evaluate javaOptions.
 def snapshotPathOptions = Def.task {
   val _ = (minimized / Compile / compile).value
   Seq(
@@ -627,65 +511,4 @@ def snapshotPathOptions = Def.task {
         .value
         .getAbsolutePath}"
   )
-}
-
-lazy val fatjarPackageSettings = List[Def.Setting[_]](
-  (assembly / assemblyMergeStrategy) := {
-    case PathList("javax", _ @_*) =>
-      MergeStrategy.discard
-    case PathList("com", "sun", _ @_*) =>
-      MergeStrategy.discard
-    case PathList("sun", _ @_*) =>
-      MergeStrategy.discard
-    case PathList("META-INF", "versions", "9", "module-info.class") =>
-      MergeStrategy.discard
-    case x =>
-      val oldStrategy = (assembly / assemblyMergeStrategy).value
-      oldStrategy(x)
-  },
-  (Compile / Keys.`package`) := {
-    assembly.value
-  },
-  (Compile / packageBin / packagedArtifact) := {
-    val (artifact, _) = (Compile / packageBin / packagedArtifact).value
-    (artifact, assembly.value)
-  },
-  pomPostProcess := { node =>
-    new RuleTransformer(
-      new RewriteRule {
-        private def isAbsorbedDependency(node: XmlNode): Boolean = {
-          node.label == "dependency" &&
-          node.child.exists(child => child.label == "artifactId")
-        }
-        override def transform(node: XmlNode): XmlNodeSeq =
-          node match {
-            case e: Elem if isAbsorbedDependency(node) =>
-              Comment(
-                "the dependency that was here has been absorbed via sbt-assembly"
-              )
-            case _ =>
-              node
-          }
-      }
-    ).transform(node).head
-  }
-)
-
-lazy val dumpScipJavaVersion = taskKey[Unit](
-  "Dump the version of scip-java tool to a VERSION file"
-)
-dumpScipJavaVersion := {
-  val versionValue = (cli / version).value
-
-  IO.write((ThisBuild / baseDirectory).value / "VERSION", versionValue)
-}
-
-lazy val build = taskKey[Unit](
-  "Build `scip-java` CLI and place it in the out/bin/scip-java. "
-)
-
-build := {
-  val source = (cli / pack).value
-  val destination = (ThisBuild / baseDirectory).value / "out"
-  IO.copyDirectory(source, destination)
 }

@@ -15,8 +15,7 @@ nix develop .#jdk21      # JDK 21
 ```
 
 This drops you into a shell with `sbt`, `maven`, `gradle`, `bazelisk`,
-`scalafmt`, `nodejs`, `yarn`, `git`, `jq`, etc. all pinned to the versions used
-in CI.
+`nodejs`, `yarn`, `git`, `jq`, etc. all pinned to the versions used in CI.
 
 If you'd rather install tools manually, you'll need at least:
 
@@ -40,7 +39,7 @@ These are the main components of the project.
 - `tests/snapshots`: slow running
   ["snapshot tests"](https://jestjs.io/docs/en/snapshot-testing) that index a
   corpus of published Java libraries.
-- `cli/src/main/scala`: implementation of the `scip-java` command-line
+- `scip-java/src/main/kotlin`: implementation of the `scip-java` command-line
   interface.
 - `build.sbt`: the sbt build definition.
 - `project/plugins.sbt`: plugins for the sbt build.
@@ -59,7 +58,6 @@ These are the main components of the project.
 | `scipKotlincMinimized/kotlincSnapshots`                             | sbt      | Update only the Kotlin snapshot goldens under `scip-kotlinc/minimized`.             |
 | `regenerateSnapshots`                                               | sbt      | Regenerate ALL snapshot goldens (Java + Kotlin). Run after fixing a bug.            |
 | `cli/run --cwd DIRECTORY`                                           | sbt      | Run `scip-java` command-line tool against a given Gradle/Maven build.               |
-| `fixAll`                                                            | sbt      | Run Scalafmt and Scalafix on all Scala sources. Run this before opening a PR.       |
 | `google-java-format --replace $(git ls-files '*.java')`             | terminal | Format Java sources (from `nix develop`). Enforced by `nix flake check`.            |
 | `ktfmt --kotlinlang-style $(git ls-files '*.kt')`                   | terminal | Format Kotlin sources (from `nix develop`). Enforced by `nix flake check`.          |
 
@@ -74,7 +72,6 @@ community edition is
 
 Next, install the following IntelliJ plugins:
 
-- IntelliJ Scala plugin.
 - Google Java Format
 
 Next, follow
