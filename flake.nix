@@ -57,10 +57,9 @@
             # real-world project layouts that must not be reformatted here.
             find . -name '*.java' \
               -not -path './examples/*' \
-              -not -path './tests/minimized/*' \
-              -not -path './tests/snapshots/*' \
+              -not -path './scip-snapshots/cases/*' \
+              -not -path './scip-snapshots/expected/*' \
               -not -path './scip-java/src/test/resources/fixtures/*' \
-              -not -path './scip-kotlinc/minimized/*' \
               -exec ${pkgs.google-java-format}/bin/google-java-format --dry-run --set-exit-if-changed {} +
             touch $out
           '';
@@ -71,7 +70,8 @@
             # build-tool test fixtures (real-world project layouts): neither may
             # be reformatted.
             find . -name '*.kt' \
-              -not -path './scip-kotlinc/minimized/*' \
+              -not -path './scip-snapshots/cases/*' \
+              -not -path './scip-snapshots/expected/*' \
               -not -path './scip-java/src/test/resources/fixtures/*' \
               -exec ${pkgs.ktfmt}/bin/ktfmt --kotlinlang-style --dry-run --set-exit-if-changed {} +
             touch $out
