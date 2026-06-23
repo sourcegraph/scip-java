@@ -27,7 +27,7 @@ inThisBuild(
     PB.protocVersion := V.protobuf,
     autoScalaLibrary := false,
     crossPaths := false,
-    // Pin bytecode to major 55 so sbt-assembly's older ASM can shade it.
+    // Pin bytecode to major 55 so compiler plugins can run on Java 11.
     Compile / javacOptions ++= Seq("--release", "11"),
     incOptions ~= { old =>
       old.withEnabled(false).withApiDebug(true)
@@ -427,6 +427,8 @@ lazy val minimized = project
     // Fork javac so it receives real file paths instead of sbt's `vf://` virtual-file URIs
     // (see the comment on `scipKotlincMinimized` for the long story).
     javaHome := Some(file(System.getProperty("java.home"))),
+    // Keep minimized snapshots stable across JDK 11/17/21.
+    Compile / javacOptions ++= Seq("--release", "11"),
     Compile / javacOptions ++= javacModuleOptions,
     javacOptions +=
       List(
