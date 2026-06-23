@@ -140,13 +140,10 @@ jobs:
       - uses: DeterminateSystems/magic-nix-cache-action@v13
 
       - run: |
-          sbt_output="$(mktemp)"
           nix develop .#jdk${{ matrix.java }} --command \
-            sbt --error cli/pack publishM2 publishLocal 'print cli/version' | tee "$sbt_output"
+            sbt --error cli/pack publishM2 publishLocal
           SCIP_JAVA_VERSION="$(
-            sed -E $'s/\x1B\[[0-9;?]*[ -/]*[@-~]//g' "$sbt_output" |
-              grep -E '^[0-9]+[.][0-9]+[.][0-9]+' |
-              tail -n 1
+            sed -n 's/^version:=//p' scip-java/target/pack/VERSION
           )"
           test -n "$SCIP_JAVA_VERSION"
           printf 'SCIP_JAVA_VERSION=%s\n' "$SCIP_JAVA_VERSION" >> "$GITHUB_ENV"
