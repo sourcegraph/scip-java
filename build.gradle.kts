@@ -4,9 +4,7 @@ import com.google.protobuf.gradle.proto
 import java.nio.charset.StandardCharsets
 import java.util.Base64
 import org.gradle.api.JavaVersion
-import org.gradle.api.artifacts.VersionCatalogsExtension
 import org.gradle.api.distribution.DistributionContainer
-import org.gradle.api.plugins.BasePluginExtension
 import org.gradle.api.plugins.JavaApplication
 import org.gradle.api.plugins.JavaPlugin
 import org.gradle.api.plugins.JavaPluginExtension
@@ -62,9 +60,8 @@ val javacModuleOptions =
         "-J--add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED",
     )
 val javacTestJvmOptions = javacModuleOptions.map { it.removePrefix("-J") }
-val versionCatalog = extensions.getByType<VersionCatalogsExtension>().named("libs")
-val protobufVersion = versionCatalog.findVersion("protobuf").get().requiredVersion
-fun library(alias: String) = versionCatalog.findLibrary(alias).get()
+val catalog = libs
+val protobufVersion = catalog.versions.protobuf.asProvider().get()
 
 allprojects {
     group = rootProject.group
@@ -100,6 +97,12 @@ subprojects {
             testLogging {
                 events("failed", "skipped")
             }
+        }
+    }
+
+    plugins.withId("org.jetbrains.kotlin.jvm") {
+        tasks.withType<KotlinCompile>().configureEach {
+            compilerOptions.jvmTarget.set(JvmTarget.JVM_11)
         }
     }
 }
@@ -170,7 +173,7 @@ project(":scip-shared") {
     apply(plugin = "java-library")
 
     dependencies {
-        "api"(library("scip-java-bindings"))
+        "api"(catalog.scip.java.bindings)
     }
 
     configureMavenPublishing(
@@ -185,9 +188,9 @@ project(":scip-javac") {
 
     dependencies {
         "api"(project(":scip-shared"))
-        "testImplementation"(library("junit-jupiter-api"))
-        "testRuntimeOnly"(library("junit-jupiter-engine"))
-        "testRuntimeOnly"(library("junit-platform-launcher"))
+        "testImplementation"(catalog.junit.jupiter.api)
+        "testRuntimeOnly"(catalog.junit.jupiter.engine)
+        "testRuntimeOnly"(catalog.junit.platform.launcher)
     }
 
     tasks.named<JavaCompile>("compileJava") {
@@ -228,22 +231,21 @@ project(":scip-kotlinc") {
 
     dependencies {
         "implementation"(project(":scip-shared"))
-        "implementation"(library("scip-kotlin-bindings"))
-        "compileOnly"(library("kotlin-stdlib"))
-        "compileOnly"(library("kotlin-compiler-embeddable"))
+        "implementation"(catalog.scip.kotlin.bindings)
+        "compileOnly"(catalog.kotlin.stdlib)
+        "compileOnly"(catalog.kotlin.compiler.embeddable)
 
-        "testImplementation"(library("kotlin-compiler-embeddable"))
-        "testImplementation"(library("kotlin-test"))
-        "testImplementation"(library("kotlin-test-junit5"))
-        "testImplementation"(library("kotlin-reflect"))
-        "testImplementation"(library("kotest-assertions-core"))
-        "testImplementation"(library("kctfork-core"))
-        "testRuntimeOnly"(library("junit-jupiter-engine"))
-        "testRuntimeOnly"(library("junit-platform-launcher"))
+        "testImplementation"(catalog.kotlin.compiler.embeddable)
+        "testImplementation"(catalog.kotlin.test)
+        "testImplementation"(catalog.kotlin.test.junit5)
+        "testImplementation"(catalog.kotlin.reflect)
+        "testImplementation"(catalog.kotest.assertions.core)
+        "testImplementation"(catalog.kctfork.core)
+        "testRuntimeOnly"(catalog.junit.jupiter.engine)
+        "testRuntimeOnly"(catalog.junit.platform.launcher)
     }
 
     tasks.withType<KotlinCompile>().configureEach {
-        compilerOptions.jvmTarget.set(JvmTarget.JVM_11)
         compilerOptions.freeCompilerArgs.addAll("-Xinline-classes", "-Xcontext-parameters")
     }
 
@@ -266,24 +268,19 @@ project(":scip-gradle-plugin") {
     apply(plugin = "java-library")
     apply(plugin = "com.github.johnrengelman.shadow")
 
-    extensions.configure<BasePluginExtension> {
-        archivesName.set("scip-gradle")
-    }
-
     dependencies {
-        "compileOnly"(library("gradle-api"))
-        "compileOnly"(library("gradle-test-kit"))
+        "compileOnly"(catalog.gradle.api)
+        "compileOnly"(catalog.gradle.test.kit)
     }
-
 }
 
 project(":scip-maven-plugin") {
     apply(plugin = "java-library")
 
     dependencies {
-        "implementation"(library("maven-plugin-api"))
-        "implementation"(library("maven-project"))
-        "compileOnly"(library("maven-plugin-annotations"))
+        "implementation"(catalog.maven.plugin.api)
+        "implementation"(catalog.maven.project)
+        "compileOnly"(catalog.maven.plugin.annotations)
     }
 
     tasks.named<ProcessResources>("processResources") {
@@ -307,11 +304,11 @@ project(":scip-aggregator") {
     apply(plugin = "com.google.protobuf")
 
     dependencies {
-        "api"(library("scip-java-bindings"))
+        "api"(catalog.scip.java.bindings)
         "implementation"(project(":scip-shared"))
-        "testImplementation"(library("junit-jupiter-api"))
-        "testRuntimeOnly"(library("junit-jupiter-engine"))
-        "testRuntimeOnly"(library("junit-platform-launcher"))
+        "testImplementation"(catalog.junit.jupiter.api)
+        "testRuntimeOnly"(catalog.junit.jupiter.engine)
+        "testRuntimeOnly"(catalog.junit.platform.launcher)
     }
 
     extensions.configure<ProtobufExtension>("protobuf") {
@@ -340,23 +337,19 @@ project(":scip-java") {
 
     dependencies {
         "implementation"(project(":scip-aggregator"))
-        "implementation"(library("clikt-jvm"))
-        "implementation"(library("kotlin-stdlib"))
-        "implementation"(library("kotlin-compiler-embeddable"))
-        "implementation"(library("kotlin-scripting-common"))
-        "implementation"(library("kotlin-scripting-jvm"))
-        "implementation"(library("kotlin-scripting-dependencies"))
-        "implementation"(library("kotlin-scripting-dependencies-maven"))
-        "implementation"(library("kotlinx-serialization-json-jvm"))
+        "implementation"(catalog.clikt.jvm)
+        "implementation"(catalog.kotlin.stdlib)
+        "implementation"(catalog.kotlin.compiler.embeddable)
+        "implementation"(catalog.kotlin.scripting.common)
+        "implementation"(catalog.kotlin.scripting.jvm)
+        "implementation"(catalog.kotlin.scripting.dependencies)
+        "implementation"(catalog.kotlin.scripting.dependencies.maven)
+        "implementation"(catalog.kotlinx.serialization.json.jvm)
 
-        "testImplementation"(library("kotlin-test"))
-        "testImplementation"(library("kotlin-test-junit5"))
-        "testRuntimeOnly"(library("junit-jupiter-engine"))
-        "testRuntimeOnly"(library("junit-platform-launcher"))
-    }
-
-    tasks.withType<KotlinCompile>().configureEach {
-        compilerOptions.jvmTarget.set(JvmTarget.JVM_11)
+        "testImplementation"(catalog.kotlin.test)
+        "testImplementation"(catalog.kotlin.test.junit5)
+        "testRuntimeOnly"(catalog.junit.jupiter.engine)
+        "testRuntimeOnly"(catalog.junit.platform.launcher)
     }
 
     tasks.named<Test>("test") {
@@ -422,8 +415,8 @@ project(":scip-snapshots-java-common") {
     apply(plugin = "java-library")
 
     dependencies {
-        "compileOnly"(library("lombok"))
-        "annotationProcessor"(library("lombok"))
+        "compileOnly"(catalog.lombok)
+        "annotationProcessor"(catalog.lombok)
     }
 
     val annotationProcessorClasspath = configurations.named("annotationProcessor")
@@ -454,7 +447,7 @@ project(":scip-snapshots-kotlin-common") {
     apply(plugin = "org.jetbrains.kotlin.jvm")
 
     dependencies {
-        "implementation"(library("kotlin-stdlib"))
+        "implementation"(catalog.kotlin.stdlib)
     }
 
     val scipTargetroot = layout.buildDirectory.dir("scip-targetroot")
@@ -465,7 +458,6 @@ project(":scip-snapshots-kotlin-common") {
         dependsOn(kotlincShadow)
         inputs.file(kotlincShadow.flatMap { it.archiveFile })
         outputs.dir(scipTargetroot)
-        compilerOptions.jvmTarget.set(JvmTarget.JVM_11)
         compilerOptions.freeCompilerArgs.addAll(
             "-Xplugin=${kotlincShadow.flatMap { it.archiveFile }.get().asFile.absolutePath}",
             "-P",
@@ -498,10 +490,10 @@ project(":scip-snapshots") {
 
     dependencies {
         "implementation"(project(":scip-java"))
-        "implementation"(library("scip-java-bindings"))
-        "testImplementation"(library("junit-jupiter-api"))
-        "testRuntimeOnly"(library("junit-jupiter-engine"))
-        "testRuntimeOnly"(library("junit-platform-launcher"))
+        "implementation"(catalog.scip.java.bindings)
+        "testImplementation"(catalog.junit.jupiter.api)
+        "testRuntimeOnly"(catalog.junit.jupiter.engine)
+        "testRuntimeOnly"(catalog.junit.platform.launcher)
     }
 
     val javaCase = project(":scip-snapshots-java-common")
