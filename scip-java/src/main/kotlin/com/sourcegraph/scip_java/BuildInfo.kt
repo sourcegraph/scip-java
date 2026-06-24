@@ -14,8 +14,8 @@ object BuildInfo {
      * `--add-exports` flags required to access internal javac APIs from the SCIP compiler plugin.
      * Java 11+ is the supported baseline.
      *
-     * Kept in sync with `javacModuleOptions` in build.gradle.kts, which applies the same flags when
-     * compiling the plugin and the test fixtures.
+     * Kept in sync with `javacJvmOptions` in build.gradle.kts, which applies the same flags without
+     * the `-J` prefix when running forked JVMs directly.
      */
     val javacModuleOptions: List<String> =
         listOf(

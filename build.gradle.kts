@@ -25,15 +25,14 @@ plugins {
     alias(libs.plugins.vanniktech.maven.publish) apply false
 }
 
-val javacModuleOptions =
+val javacJvmOptions =
     listOf(
-        "-J--add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED",
-        "-J--add-exports=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED",
-        "-J--add-exports=jdk.compiler/com.sun.tools.javac.model=ALL-UNNAMED",
-        "-J--add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED",
-        "-J--add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED",
+        "--add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED",
+        "--add-exports=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED",
+        "--add-exports=jdk.compiler/com.sun.tools.javac.model=ALL-UNNAMED",
+        "--add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED",
+        "--add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED",
     )
-val javacTestJvmOptions = javacModuleOptions.map { it.removePrefix("-J") }
 val catalog = libs
 val protobufVersion = catalog.versions.protobuf.asProvider().get()
 val repositoryUrl = "https://github.com/sourcegraph/scip-java"
@@ -147,7 +146,7 @@ project(":scip-javac") {
     }
 
     tasks.named<Test>("test") {
-        jvmArgs(javacTestJvmOptions)
+        jvmArgs(javacJvmOptions)
     }
 
     tasks.named<ShadowJar>("shadowJar") {
@@ -289,7 +288,7 @@ project(":scip-java") {
     }
 
     tasks.named<Test>("test") {
-        jvmArgs(javacTestJvmOptions)
+        jvmArgs(javacJvmOptions)
         systemProperty("scip.jdk.version", "11")
     }
 
@@ -363,7 +362,7 @@ project(":scip-snapshots-java-common") {
             annotationProcessorClasspath.get().plus(files(javacShadow.flatMap { it.archiveFile }))
         outputs.dir(scipTargetroot)
         options.isFork = true
-        options.forkOptions.jvmArgs = (options.forkOptions.jvmArgs ?: emptyList()) + javacTestJvmOptions
+        options.forkOptions.jvmArgs = (options.forkOptions.jvmArgs ?: emptyList()) + javacJvmOptions
         options.compilerArgs.add(
             "-Xplugin:scip -text:on -verbose -sourceroot:${rootProject.rootDir.absolutePath} " +
                 "-targetroot:${scipTargetroot.get().asFile.absolutePath} -randomtimestamp=${System.nanoTime()}"
@@ -410,7 +409,7 @@ project(":scip-snapshots-kotlin-common") {
         options.annotationProcessorPath = files(javacShadow.flatMap { it.archiveFile })
         outputs.dir(scipTargetroot)
         options.isFork = true
-        options.forkOptions.jvmArgs = (options.forkOptions.jvmArgs ?: emptyList()) + javacTestJvmOptions
+        options.forkOptions.jvmArgs = (options.forkOptions.jvmArgs ?: emptyList()) + javacJvmOptions
         options.compilerArgs.add(
             "-Xplugin:scip -sourceroot:${rootProject.rootDir.absolutePath} " +
                 "-targetroot:${scipTargetroot.get().asFile.absolutePath}"
@@ -451,7 +450,7 @@ project(":scip-snapshots") {
 
     tasks.named<Test>("test") {
         dependsOn(javaCaseClasses, kotlinCaseClasses)
-        jvmArgs(javacTestJvmOptions)
+        jvmArgs(javacJvmOptions)
         systemProperties(snapshotProperties)
     }
 
@@ -462,7 +461,7 @@ project(":scip-snapshots") {
         val sourceSets = project.extensions.getByType<SourceSetContainer>()
         classpath = sourceSets.named("main").get().runtimeClasspath
         mainClass.set("tests.SaveSnapshots")
-        jvmArgs(javacTestJvmOptions)
+        jvmArgs(javacJvmOptions)
         systemProperties(snapshotProperties)
     }
 }
