@@ -12,7 +12,6 @@ import org.gradle.api.plugins.JavaPlugin
 import org.gradle.api.plugins.JavaPluginExtension
 import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.publish.maven.MavenPublication
-import org.gradle.api.tasks.Copy
 import org.gradle.api.tasks.JavaExec
 import org.gradle.api.tasks.SourceSetContainer
 import org.gradle.api.tasks.Sync
@@ -20,6 +19,7 @@ import org.gradle.api.tasks.compile.JavaCompile
 import org.gradle.api.tasks.javadoc.Javadoc
 import org.gradle.api.tasks.testing.Test
 import org.gradle.external.javadoc.StandardJavadocDocletOptions
+import org.gradle.language.jvm.tasks.ProcessResources
 import org.gradle.plugins.signing.SigningExtension
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
@@ -306,19 +306,14 @@ project(":scip-maven-plugin") {
         "compileOnly"(library("maven-plugin-annotations"))
     }
 
-    val generatePluginXml = tasks.register<Copy>("generatePluginXml") {
+    tasks.named<ProcessResources>("processResources") {
+        exclude("META-INF/maven/plugin.template.xml")
         from("src/main/resources/META-INF/maven/plugin.template.xml") {
+            into("META-INF/maven")
             rename { "plugin.xml" }
             filter { line: String -> line.replace("@VERSION@", project.version.toString()) }
         }
-        into(layout.buildDirectory.dir("generated/resources/pluginXml/META-INF/maven"))
         inputs.property("version", project.version.toString())
-    }
-
-    extensions.configure<SourceSetContainer> {
-        named("main") {
-            resources.srcDir(generatePluginXml)
-        }
     }
 
     configureMavenPublishing(
