@@ -5,9 +5,8 @@ import java.util.Properties
 /**
  * Build metadata for the scip-java CLI.
  *
- * Replaces the previously sbt-generated `BuildInfo.java`. The static [javacModuleOptions] live here
- * directly; the build-time [version] is injected by sbt into the `scip-java.properties` classpath
- * resource (see the `resourceGenerators` for the `cli` project in build.sbt).
+ * The static [javacModuleOptions] live here directly; the build-time [version] is injected by
+ * Gradle into the `scip-java.properties` classpath resource.
  */
 object BuildInfo {
 
@@ -15,7 +14,7 @@ object BuildInfo {
      * `--add-exports` flags required to access internal javac APIs from the SCIP compiler plugin.
      * Java 11+ is the supported baseline.
      *
-     * Kept in sync with `javacModuleOptions` in build.sbt, which applies the same flags when
+     * Kept in sync with `javacModuleOptions` in build.gradle.kts, which applies the same flags when
      * compiling the plugin and the test fixtures.
      */
     val javacModuleOptions: List<String> =
@@ -28,7 +27,7 @@ object BuildInfo {
         )
 
     /**
-     * The scip-java release version. Read from the `scip-java.properties` resource that sbt
+     * The scip-java release version. Read from the `scip-java.properties` resource that Gradle
      * generates into the jar. Falls back to a placeholder when running without the generated
      * resource on the classpath.
      */

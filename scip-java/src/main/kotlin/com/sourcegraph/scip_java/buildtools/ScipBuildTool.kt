@@ -166,7 +166,7 @@ class ScipBuildTool(index: IndexCommand) : BuildTool("SCIP", index) {
 
         // The scip-kotlinc compiler plugin is built and shipped together
         // with the scip-java CLI as an embedded resource (see Embedded.kt and
-        // the cli/resourceGenerators task in build.sbt).
+        // the :scip-java Gradle resources wiring).
         val plugin = Embedded.scipKotlincJar(tmp)
 
         val classpath =

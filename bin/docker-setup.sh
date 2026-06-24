@@ -3,14 +3,14 @@ set -eux
 curl -fLo /usr/local/bin/cs https://github.com/coursier/coursier/releases/download/v2.1.5/coursier
 chmod +x /usr/local/bin/cs
 ln -sf /usr/local/bin/cs /usr/local/bin/coursier
-cs setup --yes --apps cs,coursier,sbt
+cs setup --yes --apps cs,coursier
 
 curl -fLo maven.zip https://archive.apache.org/dist/maven/maven-3/3.9.1/binaries/apache-maven-3.9.1-bin.zip 
 unzip -d /opt/maven maven.zip
 rm maven.zip
 mv /opt/maven/*/* /opt/maven
 
-curl -fLo gradle.zip https://services.gradle.org/distributions/gradle-7.6.1-bin.zip
+curl -fLo gradle.zip https://services.gradle.org/distributions/gradle-8.10-bin.zip
 unzip -d /opt/gradle gradle.zip 
 rm gradle.zip
 mv /opt/gradle/*/* /opt/gradle

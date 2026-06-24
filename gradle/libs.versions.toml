@@ -1,0 +1,48 @@
+[versions]
+clikt = "5.0.3"
+gradle-api = "8.10"
+junit-jupiter = "5.11.4"
+junit-platform = "1.11.4"
+kctfork = "0.7.1"
+kotest = "4.6.3"
+kotlin = "2.2.0"
+kotlinx-serialization = "1.9.0"
+lombok = "1.18.22"
+maven-plugin-annotations = "3.6.4"
+maven-plugin-api = "3.6.3"
+maven-project = "2.2.1"
+protobuf = "4.34.2"
+protobuf-plugin = "0.9.4"
+scip-bindings = "0.8.0"
+shadow = "8.1.1"
+
+[libraries]
+clikt-jvm = { module = "com.github.ajalt.clikt:clikt-jvm", version.ref = "clikt" }
+gradle-api = { module = "dev.gradleplugins:gradle-api", version.ref = "gradle-api" }
+gradle-test-kit = { module = "dev.gradleplugins:gradle-test-kit", version.ref = "gradle-api" }
+junit-jupiter-api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "junit-jupiter" }
+junit-jupiter-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junit-jupiter" }
+junit-platform-launcher = { module = "org.junit.platform:junit-platform-launcher", version.ref = "junit-platform" }
+kctfork-core = { module = "dev.zacsweers.kctfork:core", version.ref = "kctfork" }
+kotest-assertions-core = { module = "io.kotest:kotest-assertions-core-jvm", version.ref = "kotest" }
+kotlin-compiler-embeddable = { module = "org.jetbrains.kotlin:kotlin-compiler-embeddable", version.ref = "kotlin" }
+kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlin" }
+kotlin-scripting-common = { module = "org.jetbrains.kotlin:kotlin-scripting-common", version.ref = "kotlin" }
+kotlin-scripting-dependencies = { module = "org.jetbrains.kotlin:kotlin-scripting-dependencies", version.ref = "kotlin" }
+kotlin-scripting-dependencies-maven = { module = "org.jetbrains.kotlin:kotlin-scripting-dependencies-maven", version.ref = "kotlin" }
+kotlin-scripting-jvm = { module = "org.jetbrains.kotlin:kotlin-scripting-jvm", version.ref = "kotlin" }
+kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin" }
+kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
+kotlin-test-junit5 = { module = "org.jetbrains.kotlin:kotlin-test-junit5", version.ref = "kotlin" }
+kotlinx-serialization-json-jvm = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json-jvm", version.ref = "kotlinx-serialization" }
+lombok = { module = "org.projectlombok:lombok", version.ref = "lombok" }
+maven-plugin-annotations = { module = "org.apache.maven.plugin-tools:maven-plugin-annotations", version.ref = "maven-plugin-annotations" }
+maven-plugin-api = { module = "org.apache.maven:maven-plugin-api", version.ref = "maven-plugin-api" }
+maven-project = { module = "org.apache.maven:maven-project", version.ref = "maven-project" }
+scip-java-bindings = { module = "org.scip-code:scip-java-bindings", version.ref = "scip-bindings" }
+scip-kotlin-bindings = { module = "org.scip-code:scip-kotlin-bindings", version.ref = "scip-bindings" }
+
+[plugins]
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+protobuf = { id = "com.google.protobuf", version.ref = "protobuf-plugin" }
+shadow = { id = "com.github.johnrengelman.shadow", version.ref = "shadow" }

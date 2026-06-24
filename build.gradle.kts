@@ -1,0 +1,582 @@
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+import com.google.protobuf.gradle.ProtobufExtension
+import com.google.protobuf.gradle.proto
+import java.nio.charset.StandardCharsets
+import java.util.Base64
+import org.gradle.api.JavaVersion
+import org.gradle.api.artifacts.VersionCatalogsExtension
+import org.gradle.api.distribution.DistributionContainer
+import org.gradle.api.plugins.BasePluginExtension
+import org.gradle.api.plugins.JavaApplication
+import org.gradle.api.plugins.JavaPlugin
+import org.gradle.api.plugins.JavaPluginExtension
+import org.gradle.api.publish.PublishingExtension
+import org.gradle.api.publish.maven.MavenPublication
+import org.gradle.api.tasks.Copy
+import org.gradle.api.tasks.JavaExec
+import org.gradle.api.tasks.SourceSetContainer
+import org.gradle.api.tasks.Sync
+import org.gradle.api.tasks.compile.JavaCompile
+import org.gradle.api.tasks.javadoc.Javadoc
+import org.gradle.api.tasks.testing.Test
+import org.gradle.external.javadoc.StandardJavadocDocletOptions
+import org.gradle.plugins.signing.SigningExtension
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
+plugins {
+    id("io.github.gradle-nexus.publish-plugin") version "2.0.0"
+    alias(libs.plugins.kotlin.jvm) apply false
+    alias(libs.plugins.protobuf) apply false
+    alias(libs.plugins.shadow) apply false
+}
+
+fun decodePgpSecret(raw: String): String =
+    if (raw.contains("BEGIN PGP")) {
+        raw
+    } else {
+        runCatching { String(Base64.getDecoder().decode(raw), StandardCharsets.UTF_8) }.getOrElse { raw }
+    }
+
+val computedVersion =
+    providers
+        .gradleProperty("releaseVersion")
+        .orElse(providers.environmentVariable("VERSION").map { it.removePrefix("v") })
+        .orElse(
+            providers.provider {
+                rootProject.file("VERSION").takeIf { it.isFile }?.readText()?.trim()?.takeIf {
+                    it.isNotEmpty()
+                } ?: "0.0.0-SNAPSHOT"
+            }
+        )
+
+group = "com.sourcegraph"
+version = computedVersion.get()
+
+val javacModuleOptions =
+    listOf(
+        "-J--add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED",
+        "-J--add-exports=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED",
+        "-J--add-exports=jdk.compiler/com.sun.tools.javac.model=ALL-UNNAMED",
+        "-J--add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED",
+        "-J--add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED",
+    )
+val javacTestJvmOptions = javacModuleOptions.map { it.removePrefix("-J") }
+val versionCatalog = extensions.getByType<VersionCatalogsExtension>().named("libs")
+val protobufVersion = versionCatalog.findVersion("protobuf").get().requiredVersion
+fun library(alias: String) = versionCatalog.findLibrary(alias).get()
+
+allprojects {
+    group = rootProject.group
+    version = rootProject.version
+}
+
+subprojects {
+    // Several modules also have Bazel `BUILD` files. On the default macOS
+    // case-insensitive filesystem, Gradle's default `build/` directory collides
+    // with those files, so keep Gradle outputs under the already-ignored target/.
+    if (file("BUILD").isFile) {
+        layout.buildDirectory.set(layout.projectDirectory.dir("target/gradle"))
+    }
+
+    plugins.withType<JavaPlugin> {
+        extensions.configure<JavaPluginExtension> {
+            sourceCompatibility = JavaVersion.VERSION_11
+            targetCompatibility = JavaVersion.VERSION_11
+            withSourcesJar()
+            withJavadocJar()
+        }
+
+        tasks.withType<JavaCompile>().configureEach {
+            options.encoding = "UTF-8"
+            options.release.set(11)
+        }
+
+        tasks.withType<Javadoc>().configureEach {
+            options.encoding = "UTF-8"
+            (options as StandardJavadocDocletOptions).addStringOption("Xdoclint:none", "-quiet")
+        }
+
+        tasks.withType<Test>().configureEach {
+            useJUnitPlatform()
+            testLogging {
+                events("failed", "skipped")
+            }
+        }
+    }
+}
+
+fun Project.configureMavenPublishing(displayName: String, descriptionText: String) {
+    apply(plugin = "maven-publish")
+    apply(plugin = "signing")
+
+    extensions.configure<PublishingExtension> {
+        publications {
+            create<MavenPublication>("mavenJava") {
+                from(components["java"])
+                pom {
+                    name.set(displayName)
+                    description.set(descriptionText)
+                    url.set("https://github.com/sourcegraph/scip-java")
+                    licenses {
+                        license {
+                            name.set("Apache-2.0")
+                            url.set("http://www.apache.org/licenses/LICENSE-2.0")
+                        }
+                    }
+                    developers {
+                        developer {
+                            id.set("sourcegraph")
+                            name.set("Sourcegraph")
+                        }
+                    }
+                    scm {
+                        connection.set("scm:git:https://github.com/sourcegraph/scip-java.git")
+                        developerConnection.set("scm:git:ssh://git@github.com/sourcegraph/scip-java.git")
+                        url.set("https://github.com/sourcegraph/scip-java")
+                    }
+                }
+            }
+        }
+    }
+
+    val publishing = extensions.getByType<PublishingExtension>()
+    val signingKey = providers.environmentVariable("PGP_SECRET").map(::decodePgpSecret)
+    val signingPassword = providers.environmentVariable("PGP_PASSPHRASE")
+    extensions.configure<SigningExtension> {
+        isRequired = signingKey.isPresent && !project.version.toString().endsWith("SNAPSHOT")
+        if (signingKey.isPresent) {
+            useInMemoryPgpKeys(signingKey.get(), signingPassword.orNull)
+            sign(publishing.publications)
+        }
+    }
+}
+
+nexusPublishing {
+    repositories {
+        sonatype {
+            username.set(providers.environmentVariable("SONATYPE_USERNAME"))
+            password.set(providers.environmentVariable("SONATYPE_PASSWORD"))
+            nexusUrl.set(uri("https://s01.oss.sonatype.org/service/local/"))
+            snapshotRepositoryUrl.set(uri("https://s01.oss.sonatype.org/content/repositories/snapshots/"))
+        }
+    }
+}
+
+project(":scip-shared") {
+    apply(plugin = "java-library")
+
+    extensions.configure<JavaPluginExtension> {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    dependencies {
+        "api"(library("scip-java-bindings"))
+    }
+
+    tasks.withType<JavaCompile>().configureEach {
+        options.release.set(8)
+    }
+
+    configureMavenPublishing(
+        displayName = "scip-shared",
+        descriptionText = "Shared SCIP utilities used by scip-java compiler plugins",
+    )
+}
+
+project(":scip-javac") {
+    apply(plugin = "java-library")
+    apply(plugin = "com.github.johnrengelman.shadow")
+
+    dependencies {
+        "api"(project(":scip-shared"))
+        "testImplementation"(library("junit-jupiter-api"))
+        "testRuntimeOnly"(library("junit-jupiter-engine"))
+        "testRuntimeOnly"(library("junit-platform-launcher"))
+    }
+
+    tasks.named<JavaCompile>("compileJava") {
+        options.isDebug = true
+        val emptyProcessorPath = layout.buildDirectory.dir("empty-processorpath")
+        options.annotationProcessorPath = files(emptyProcessorPath)
+        doFirst {
+            emptyProcessorPath.get().asFile.mkdirs()
+        }
+    }
+
+    tasks.named<Test>("test") {
+        jvmArgs(javacTestJvmOptions)
+    }
+
+    tasks.named<ShadowJar>("shadowJar") {
+        archiveClassifier.set("all")
+        mergeServiceFiles()
+        exclude("javax/**", "com/sun/**", "sun/**", "META-INF/versions/9/module-info.class")
+        relocate("com.google", "com.sourcegraph.shaded.com.google")
+        relocate("google", "com.sourcegraph.shaded.google")
+        relocate("org.relaxng", "com.sourcegraph.shaded.relaxng")
+        relocate("com.sourcegraph", "com.sourcegraph.shaded.com.sourcegraph") {
+            exclude("com.sourcegraph.scip_javac.ScipPlugin")
+            exclude("com.sourcegraph.scip_javac.InjectScipOptions")
+        }
+    }
+
+    configureMavenPublishing(
+        displayName = "scip-javac",
+        descriptionText = "A javac plugin to emit SCIP information",
+    )
+}
+
+project(":scip-kotlinc") {
+    apply(plugin = "java-library")
+    apply(plugin = "org.jetbrains.kotlin.jvm")
+    apply(plugin = "com.github.johnrengelman.shadow")
+
+    extensions.configure<JavaPluginExtension> {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    dependencies {
+        "implementation"(project(":scip-shared"))
+        "implementation"(library("scip-kotlin-bindings"))
+        "compileOnly"(library("kotlin-stdlib"))
+        "compileOnly"(library("kotlin-compiler-embeddable"))
+
+        "testImplementation"(library("kotlin-compiler-embeddable"))
+        "testImplementation"(library("kotlin-test"))
+        "testImplementation"(library("kotlin-test-junit5"))
+        "testImplementation"(library("kotlin-reflect"))
+        "testImplementation"(library("kotest-assertions-core"))
+        "testImplementation"(library("kctfork-core"))
+        "testRuntimeOnly"(library("junit-jupiter-engine"))
+        "testRuntimeOnly"(library("junit-platform-launcher"))
+    }
+
+    tasks.withType<KotlinCompile>().configureEach {
+        compilerOptions.jvmTarget.set(JvmTarget.JVM_1_8)
+        compilerOptions.freeCompilerArgs.addAll("-Xinline-classes", "-Xcontext-parameters")
+    }
+
+    tasks.withType<JavaCompile>().configureEach {
+        options.release.set(8)
+    }
+
+    tasks.named<Test>("test") {
+        jvmArgs("-Xmx2g")
+    }
+
+    tasks.named<ShadowJar>("shadowJar") {
+        archiveClassifier.set("all")
+        mergeServiceFiles()
+        relocate("com.intellij", "org.jetbrains.kotlin.com.intellij")
+    }
+
+    configureMavenPublishing(
+        displayName = "scip-kotlinc",
+        descriptionText = "A kotlinc plugin to emit SCIP information",
+    )
+}
+
+project(":scip-gradle-plugin") {
+    apply(plugin = "java-library")
+    apply(plugin = "com.github.johnrengelman.shadow")
+
+    extensions.configure<BasePluginExtension> {
+        archivesName.set("scip-gradle")
+    }
+
+    dependencies {
+        "compileOnly"(library("gradle-api"))
+        "compileOnly"(library("gradle-test-kit"))
+    }
+
+    tasks.named<ShadowJar>("shadowJar") {
+        archiveClassifier.set("all")
+    }
+}
+
+project(":scip-maven-plugin") {
+    apply(plugin = "java-library")
+
+    dependencies {
+        "implementation"(library("maven-plugin-api"))
+        "implementation"(library("maven-project"))
+        "compileOnly"(library("maven-plugin-annotations"))
+    }
+
+    val generatePluginXml = tasks.register<Copy>("generatePluginXml") {
+        from("src/main/resources/META-INF/maven/plugin.template.xml") {
+            rename { "plugin.xml" }
+            filter { line: String -> line.replace("@VERSION@", project.version.toString()) }
+        }
+        into(layout.buildDirectory.dir("generated/resources/pluginXml/META-INF/maven"))
+        inputs.property("version", project.version.toString())
+    }
+
+    extensions.configure<SourceSetContainer> {
+        named("main") {
+            resources.srcDir(generatePluginXml)
+        }
+    }
+
+    configureMavenPublishing(
+        displayName = "scip-maven-plugin",
+        descriptionText = "A Maven plugin that exports dependency metadata for scip-java",
+    )
+}
+
+project(":scip-aggregator") {
+    apply(plugin = "java-library")
+    apply(plugin = "com.google.protobuf")
+
+    dependencies {
+        "api"(library("scip-java-bindings"))
+        "implementation"(project(":scip-shared"))
+        "testImplementation"(library("junit-jupiter-api"))
+        "testRuntimeOnly"(library("junit-jupiter-engine"))
+        "testRuntimeOnly"(library("junit-platform-launcher"))
+    }
+
+    extensions.configure<ProtobufExtension>("protobuf") {
+        protoc {
+            artifact = "com.google.protobuf:protoc:$protobufVersion"
+        }
+    }
+
+    extensions.configure<SourceSetContainer> {
+        named("main") {
+            proto {
+                srcDir("src/main/protobuf")
+            }
+        }
+    }
+
+    configureMavenPublishing(
+        displayName = "scip-aggregator",
+        descriptionText = "Aggregates compiler-plugin SCIP shards into a single SCIP index",
+    )
+}
+
+project(":scip-java") {
+    apply(plugin = "org.jetbrains.kotlin.jvm")
+    apply(plugin = "application")
+
+    dependencies {
+        "implementation"(project(":scip-aggregator"))
+        "implementation"(library("clikt-jvm"))
+        "implementation"(library("kotlin-stdlib"))
+        "implementation"(library("kotlin-compiler-embeddable"))
+        "implementation"(library("kotlin-scripting-common"))
+        "implementation"(library("kotlin-scripting-jvm"))
+        "implementation"(library("kotlin-scripting-dependencies"))
+        "implementation"(library("kotlin-scripting-dependencies-maven"))
+        "implementation"(library("kotlinx-serialization-json-jvm"))
+
+        "testImplementation"(library("kotlin-test"))
+        "testImplementation"(library("kotlin-test-junit5"))
+        "testRuntimeOnly"(library("junit-jupiter-engine"))
+        "testRuntimeOnly"(library("junit-platform-launcher"))
+    }
+
+    tasks.withType<KotlinCompile>().configureEach {
+        compilerOptions.jvmTarget.set(JvmTarget.JVM_11)
+    }
+
+    tasks.named<Test>("test") {
+        jvmArgs(javacTestJvmOptions)
+        systemProperty("scip.jdk.version", "11")
+    }
+
+    extensions.configure<JavaApplication> {
+        mainClass.set("com.sourcegraph.scip_java.ScipJava")
+    }
+
+    val generateEmbeddedResources = tasks.register<Sync>("generateEmbeddedResources") {
+        val javacShadow = project(":scip-javac").tasks.named<ShadowJar>("shadowJar")
+        val gradleShadow = project(":scip-gradle-plugin").tasks.named<ShadowJar>("shadowJar")
+        val kotlincShadow = project(":scip-kotlinc").tasks.named<ShadowJar>("shadowJar")
+
+        from(javacShadow.flatMap { it.archiveFile }) {
+            rename { "scip-plugin.jar" }
+        }
+        from(gradleShadow.flatMap { it.archiveFile }) {
+            rename { "gradle-plugin.jar" }
+        }
+        from(kotlincShadow.flatMap { it.archiveFile }) {
+            rename { "scip-kotlinc.jar" }
+        }
+        into(layout.buildDirectory.dir("generated/resources/embedded"))
+        inputs.property("version", project.version.toString())
+        doLast {
+            destinationDir.resolve("scip-java.properties").writeText("version=${project.version}\n")
+        }
+    }
+
+    extensions.configure<SourceSetContainer> {
+        named("main") {
+            resources.srcDir(generateEmbeddedResources)
+        }
+    }
+
+    val generateDistributionVersion = tasks.register("generateDistributionVersion") {
+        val output = layout.buildDirectory.file("generated/distribution/VERSION")
+        inputs.property("version", project.version.toString())
+        outputs.file(output)
+        doLast {
+            val file = output.get().asFile
+            file.parentFile.mkdirs()
+            file.writeText("version:=${project.version}\n")
+        }
+    }
+
+    extensions.configure<DistributionContainer> {
+        named("main") {
+            contents {
+                from(generateDistributionVersion)
+            }
+        }
+    }
+
+    configureMavenPublishing(
+        displayName = "scip-java",
+        descriptionText = "Java and Kotlin indexer for SCIP",
+    )
+}
+
+project(":scip-snapshots-java-common") {
+    apply(plugin = "java-library")
+
+    dependencies {
+        "compileOnly"(library("lombok"))
+        "annotationProcessor"(library("lombok"))
+    }
+
+    val annotationProcessorClasspath = configurations.named("annotationProcessor")
+
+    tasks.named<JavaCompile>("compileJava") {
+        val javacShadow = project(":scip-javac").tasks.named<ShadowJar>("shadowJar")
+        val scipTargetroot = layout.buildDirectory.dir("scip-targetroot")
+        dependsOn(javacShadow)
+        classpath = classpath.plus(files(javacShadow.flatMap { it.archiveFile }))
+        options.annotationProcessorPath =
+            annotationProcessorClasspath.get().plus(files(javacShadow.flatMap { it.archiveFile }))
+        outputs.dir(scipTargetroot)
+        options.isFork = true
+        options.forkOptions.jvmArgs = (options.forkOptions.jvmArgs ?: emptyList()) + javacTestJvmOptions
+        options.compilerArgs.add(
+            "-Xplugin:scip -text:on -verbose -sourceroot:${rootProject.rootDir.absolutePath} " +
+                "-targetroot:${scipTargetroot.get().asFile.absolutePath} -randomtimestamp=${System.nanoTime()}"
+        )
+        doFirst {
+            scipTargetroot.get().asFile.deleteRecursively()
+            scipTargetroot.get().asFile.mkdirs()
+        }
+    }
+}
+
+project(":scip-snapshots-kotlin-common") {
+    apply(plugin = "java-library")
+    apply(plugin = "org.jetbrains.kotlin.jvm")
+
+    extensions.configure<JavaPluginExtension> {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    dependencies {
+        "implementation"(library("kotlin-stdlib"))
+    }
+
+    val scipTargetroot = layout.buildDirectory.dir("scip-targetroot")
+    val javacShadow = project(":scip-javac").tasks.named<ShadowJar>("shadowJar")
+    val kotlincShadow = project(":scip-kotlinc").tasks.named<ShadowJar>("shadowJar")
+
+    tasks.named<KotlinCompile>("compileKotlin") {
+        dependsOn(kotlincShadow)
+        inputs.file(kotlincShadow.flatMap { it.archiveFile })
+        outputs.dir(scipTargetroot)
+        compilerOptions.jvmTarget.set(JvmTarget.JVM_1_8)
+        compilerOptions.freeCompilerArgs.addAll(
+            "-Xplugin=${kotlincShadow.flatMap { it.archiveFile }.get().asFile.absolutePath}",
+            "-P",
+            "plugin:scip-kotlinc:sourceroot=${rootProject.rootDir.absolutePath}",
+            "-P",
+            "plugin:scip-kotlinc:targetroot=${scipTargetroot.get().asFile.absolutePath}",
+        )
+        doFirst {
+            scipTargetroot.get().asFile.deleteRecursively()
+            scipTargetroot.get().asFile.mkdirs()
+        }
+    }
+
+    tasks.named<JavaCompile>("compileJava") {
+        dependsOn(javacShadow)
+        classpath = classpath.plus(files(javacShadow.flatMap { it.archiveFile }))
+        options.annotationProcessorPath = files(javacShadow.flatMap { it.archiveFile })
+        outputs.dir(scipTargetroot)
+        options.isFork = true
+        options.release.set(8)
+        options.forkOptions.jvmArgs = (options.forkOptions.jvmArgs ?: emptyList()) + javacTestJvmOptions
+        options.compilerArgs.add(
+            "-Xplugin:scip -sourceroot:${rootProject.rootDir.absolutePath} " +
+                "-targetroot:${scipTargetroot.get().asFile.absolutePath}"
+        )
+    }
+}
+
+project(":scip-snapshots") {
+    apply(plugin = "java-library")
+
+    dependencies {
+        "implementation"(project(":scip-java"))
+        "implementation"(library("scip-java-bindings"))
+        "testImplementation"(library("junit-jupiter-api"))
+        "testRuntimeOnly"(library("junit-jupiter-engine"))
+        "testRuntimeOnly"(library("junit-platform-launcher"))
+    }
+
+    val javaCase = project(":scip-snapshots-java-common")
+    val kotlinCase = project(":scip-snapshots-kotlin-common")
+    val javaCaseClasses = javaCase.tasks.named("classes")
+    val kotlinCaseClasses = kotlinCase.tasks.named("classes")
+    val javaTargetroot = javaCase.layout.buildDirectory.dir("scip-targetroot")
+    val kotlinTargetroot = kotlinCase.layout.buildDirectory.dir("scip-targetroot")
+    val snapshotProperties =
+        mapOf(
+            "snapshot.sourceroot" to rootProject.rootDir.absolutePath,
+            "snapshot.cases" to "java-common,kotlin-common",
+            "snapshot.case.java-common.expectDir" to
+                rootProject.layout.projectDirectory.dir("scip-snapshots/expected/java/common").asFile.absolutePath,
+            "snapshot.case.java-common.targetroot" to javaTargetroot.get().asFile.absolutePath,
+            "snapshot.case.kotlin-common.expectDir" to
+                rootProject.layout.projectDirectory.dir("scip-snapshots/expected/kotlin/common").asFile.absolutePath,
+            "snapshot.case.kotlin-common.targetroot" to kotlinTargetroot.get().asFile.absolutePath,
+            "snapshot.case.kotlin-common.aggregateNoEmitInverseRelationships" to "true",
+            "scip.jdk.version" to "11",
+        )
+
+    tasks.named<Test>("test") {
+        dependsOn(javaCaseClasses, kotlinCaseClasses)
+        jvmArgs(javacTestJvmOptions)
+        systemProperties(snapshotProperties)
+    }
+
+    tasks.register<JavaExec>("saveSnapshots") {
+        group = "verification"
+        description = "Regenerates Java and Kotlin SCIP snapshot goldens."
+        dependsOn(tasks.named("classes"), javaCaseClasses, kotlinCaseClasses)
+        val sourceSets = project.extensions.getByType<SourceSetContainer>()
+        classpath = sourceSets.named("main").get().runtimeClasspath
+        mainClass.set("tests.SaveSnapshots")
+        jvmArgs(javacTestJvmOptions)
+        systemProperties(snapshotProperties)
+    }
+}
+
+tasks.register("saveSnapshots") {
+    group = "verification"
+    description = "Regenerates all SCIP snapshot goldens."
+    dependsOn(":scip-snapshots:saveSnapshots")
+}
