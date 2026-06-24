@@ -5,7 +5,9 @@
 result
 result-*
 
-# sbt specific
+# build tool output
+.gradle/
+build/
 .cache
 .history
 .lib/
@@ -13,8 +15,6 @@ dist/*
 target/
 lib_managed/
 src_managed/
-project/boot/
-project/plugins/project/
 .bloop
 
 _site/
@@ -79,7 +79,3 @@ scip-snapshots/META-INF/
 # writes META-INF/scip/sources/Test.kt.scip relative to the test
 # cwd.
 scip-kotlinc/META-INF/
-
-# Standard sbt project metadata directories.
-project/target/
-project/project/

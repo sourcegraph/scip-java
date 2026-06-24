@@ -66,11 +66,11 @@ Docker image with a pre-installed Java version.
 # macOS/Linux
 curl -fLo coursier https://git.io/coursier-cli \
   && chmod +x coursier \
-  && ./coursier launch com.sourcegraph:scip-java_2.13:@STABLE_VERSION@ -- --help
+  && ./coursier launch com.sourcegraph:scip-java:@STABLE_VERSION@ -- --help
 
 # macOS Homebrew
 brew install coursier/formulas/coursier \
- && coursier launch com.sourcegraph:scip-java_2.13:@STABLE_VERSION@ -- --help
+ && coursier launch com.sourcegraph:scip-java:@STABLE_VERSION@ -- --help
 ```
 
 The Java launcher uses
@@ -92,7 +92,7 @@ you still need a Java installation to run the `scip-java` binary.
 # macOS/Linux
 curl -fLo coursier https://git.io/coursier-cli \
   && chmod +x coursier \
-  && ./coursier bootstrap --standalone -o scip-java com.sourcegraph:scip-java_2.13:@STABLE_VERSION@ --main com.sourcegraph.scip_java.ScipJava
+  && ./coursier bootstrap --standalone -o scip-java com.sourcegraph:scip-java:@STABLE_VERSION@ --main com.sourcegraph.scip_java.ScipJava
 ./scip-java --help
 ```
 
@@ -107,12 +107,12 @@ The `scip-java` command-line interface is published to Maven Central. You can
 run the command-line interface as a library by directly invoking the `main()`
 method on the `com.sourcegraph.scip_java.ScipJava` class.
 
-[![](https://img.shields.io/maven-central/v/com.sourcegraph/scip-java_2.13)](https://repo1.maven.org/maven2/com/sourcegraph/scip-java_2.13/)
+[![](https://img.shields.io/maven-central/v/com.sourcegraph/scip-java)](https://repo1.maven.org/maven2/com/sourcegraph/scip-java/)
 
 If you're using Gradle.
 
 ```groovy
-implementation group: 'com.sourcegraph', name: 'scip-java_2.13', version: '@STABLE_VERSION@'
+implementation group: 'com.sourcegraph', name: 'scip-java', version: '@STABLE_VERSION@'
 ```
 
 If you're using Maven.
@@ -120,7 +120,7 @@ If you're using Maven.
 ```xml
 <dependency>
     <groupId>com.sourcegraph</groupId>
-    <artifactId>scip-java_2.13</artifactId>
+    <artifactId>scip-java</artifactId>
     <version>@STABLE_VERSION@</version>
 </dependency>
 ```

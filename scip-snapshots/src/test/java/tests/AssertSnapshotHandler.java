@@ -40,7 +40,8 @@ final class AssertSnapshotHandler extends SnapshotHandler {
                 fail(
                     "no snapshot file for "
                         + relativePath
-                        + ". To fix this problem, execute the command 'sbt scipSnapshots/run'");
+                        + ". To fix this problem, execute the command 'gradle"
+                        + " :scip-snapshots:saveSnapshots'");
               }
               String expected;
               try {

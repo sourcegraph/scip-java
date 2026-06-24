@@ -2,7 +2,7 @@ package com.sourcegraph.scip_java.commands
 
 import com.sourcegraph.scip_aggregator.ScipAggregator
 import com.sourcegraph.scip_aggregator.ScipAggregatorOptions
-import com.sourcegraph.scip_java.BuildInfo
+import com.sourcegraph.scip_java.ScipJava
 import com.sourcegraph.scip_java.ScipJavaApp
 import com.sourcegraph.scip_java.buildtools.ClasspathEntry
 import java.nio.file.Path
@@ -41,7 +41,7 @@ object AggregateRunner {
                 absoluteOutput,
                 sourceroot,
                 app.reporter,
-                ToolInfo.newBuilder().setName("scip-java").setVersion(BuildInfo.version).build(),
+                ToolInfo.newBuilder().setName("scip-java").setVersion(ScipJava.version).build(),
                 parallel,
                 packages.map { it.toPackageInformation() },
                 emitInverseRelationships,

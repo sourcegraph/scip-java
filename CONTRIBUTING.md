@@ -14,8 +14,8 @@ nix develop .#jdk17      # JDK 17
 nix develop .#jdk21      # JDK 21
 ```
 
-This drops you into a shell with `sbt`, `maven`, `gradle`, `bazelisk`,
-`nodejs`, `yarn`, `git`, `jq`, etc. all pinned to the versions used in CI.
+This drops you into a shell with `gradle`, `maven`, `bazelisk`, `nodejs`,
+`yarn`, `git`, `jq`, etc. all pinned to the versions used in CI.
 
 If you'd rather install tools manually, you'll need at least:
 
@@ -43,25 +43,23 @@ These are the main components of the project.
   interface.
 - `scip-java/src/test`: build-tool integration tests and fixtures for the
   `scip-java` command-line interface.
-- `build.sbt`: the sbt build definition.
-- `project/plugins.sbt`: plugins for the sbt build.
+- `settings.gradle.kts`: Gradle project layout.
+- `build.gradle.kts`: Gradle build definition.
+- `gradle/libs.versions.toml`: dependency and plugin versions.
 
 ## Helpful commands
 
-| Command                                                             | Where    | Description                                                                         |
-| ------------------------------------------------------------------- | -------- | ----------------------------------------------------------------------------------- |
-| `sbt`                                                               | terminal | Start interactive sbt shell with Java 11 (run from `nix develop`). Takes a while to load on the first run. |
-| `unit/test`                                                         | sbt      | Run fast unit tests.                                                                |
-| `~unit/test`                                                        | sbt      | Start watch mode to run tests on file save, good for local edit-and-test workflows. |
-| `cli/test`                                                          | sbt      | Run slow build tool tests (Gradle, Maven).                                          |
-| `snapshots/testOnly tests.MinimizedSnapshotScipTest`                | sbt      | Runs fast snapshot tests. Indexes a small set of files under `tests/minimized`.     |
-| `snapshots/test`                                                    | sbt      | Runs all snapshot tests.                                                            |
-| `snapshots/run`                                                     | sbt      | Update only the Java snapshot goldens under `tests/snapshots`.                      |
-| `scipKotlincMinimized/kotlincSnapshots`                             | sbt      | Update only the Kotlin snapshot goldens under `scip-kotlinc/minimized`.             |
-| `regenerateSnapshots`                                               | sbt      | Regenerate ALL snapshot goldens (Java + Kotlin). Run after fixing a bug.            |
-| `cli/run --cwd DIRECTORY`                                           | sbt      | Run `scip-java` command-line tool against a given Gradle/Maven build.               |
-| `google-java-format --replace $(git ls-files '*.java')`             | terminal | Format Java sources (from `nix develop`). Enforced by `nix flake check`.            |
-| `ktfmt --kotlinlang-style $(git ls-files '*.kt')`                   | terminal | Format Kotlin sources (from `nix develop`). Enforced by `nix flake check`.          |
+| Command                                                 | Where    | Description                                                             |
+| ------------------------------------------------------- | -------- | ----------------------------------------------------------------------- |
+| `gradle test --no-daemon`                               | terminal | Run all Gradle tests.                                                    |
+| `gradle :scip-java:test --no-daemon`                    | terminal | Run CLI build-tool integration tests (Gradle, Maven, SCIP config).       |
+| `gradle :scip-kotlinc:test --no-daemon`                 | terminal | Run Kotlin compiler-plugin tests.                                        |
+| `gradle :scip-snapshots:test --no-daemon`               | terminal | Compare Java and Kotlin snapshot goldens.                                |
+| `gradle :scip-snapshots:saveSnapshots --no-daemon`      | terminal | Regenerate Java and Kotlin snapshot goldens.                             |
+| `gradle :scip-java:installDist --no-daemon`             | terminal | Build a local `scip-java` distribution under `scip-java/build/install/`. |
+| `gradle :scip-java:run --args='--cwd DIRECTORY'`        | terminal | Run `scip-java` against a given Gradle/Maven build.                      |
+| `google-java-format --replace $(git ls-files '*.java')` | terminal | Format Java sources (from `nix develop`). Enforced by `nix flake check`. |
+| `ktfmt --kotlinlang-style $(git ls-files '*.kt')`       | terminal | Format Kotlin sources (from `nix develop`). Enforced by `nix flake check`. |
 
 ## Import the project into IntelliJ
 
@@ -80,20 +78,16 @@ Next, follow
 [these instructions](https://github.com/HPI-Information-Systems/Metanome/wiki/Installing-the-google-styleguide-settings-in-intellij-and-eclipse)
 here to configure the Google Java formatter.
 
-Finally, run "File > Project From Existing Sources" to import the sbt build into
-IntelliJ. Select the "sbt" option if it asks you to choose between
-sbt/BSP/Bloop.
+Finally, run "File > Project From Existing Sources" to import the Gradle build
+into IntelliJ. Select the "Gradle" option if it asks you to choose a build
+model.
 
-It's best to run tests from the sbt shell, not from the IntelliJ UI.
+It's best to run tests from Gradle, not from the IntelliJ UI.
 
 ## Tests are written in Java with JUnit 5
 
-The unit tests (`tests/unit`) and snapshot tests (`tests/snapshots`) are plain
-Java using [JUnit 5](https://junit.org/junit5/), wired into sbt via
-[sbt-jupiter-interface](https://github.com/sbt/sbt-jupiter-interface). The
-snapshot suite is a JUnit `@TestFactory` that emits one dynamic test per
-generated document, comparing it against the committed goldens under
-`tests/snapshots/src/main/generated`
-([snapshot testing](https://jestjs.io/docs/en/snapshot-testing) is heavily used
-in this codebase). Build-tool tests (`scip-java/src/test`) are written in
-Kotlin.
+The Java tests use [JUnit 5](https://junit.org/junit5/) through Gradle's JUnit
+Platform support. The snapshot suite is a JUnit `@TestFactory` that emits one
+dynamic test per generated document, comparing it against the committed goldens
+under `scip-snapshots/expected`. Build-tool tests (`scip-java/src/test`) are
+written in Kotlin.

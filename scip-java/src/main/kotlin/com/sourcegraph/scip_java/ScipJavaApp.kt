@@ -65,7 +65,7 @@ class ScipJavaApp {
         reporter.reset()
         val processedArgs = applyGlobalCwd(rewriteNestedOptions(args))
         val root = RootCommand(this)
-        root.versionOption(BuildInfo.version, names = setOf("--version", "-v"))
+        root.versionOption(ScipJava.version, names = setOf("--version", "-v"))
         root.subcommands(IndexCommand(), AggregateCommand(), SnapshotCommand())
         return try {
             root.parse(processedArgs)

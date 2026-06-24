@@ -37,7 +37,7 @@ jobs:
           cd "$OUT_DIR"
 
           VERSION=${VERSION#v}
-          ARTIFACT="com.sourcegraph:scip-java_2.13:${VERSION}"
+          ARTIFACT="com.sourcegraph:scip-java:${VERSION}"
 
           for attempt in {1..10}; do
             if cs resolve "$ARTIFACT" >/dev/null 2>&1; then

@@ -37,7 +37,6 @@
               (maven.override ({ jdk_headless = jdk; }))
               nixfmt
               nodejs
-              (sbt.override ({ jre = jdk; }))
               scipCli
               yarn
             ];

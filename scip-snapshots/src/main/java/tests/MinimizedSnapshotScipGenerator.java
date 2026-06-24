@@ -18,8 +18,7 @@ import org.scip_code.scip.Index;
 
 /**
  * Indexes the {@code scip-snapshots/cases} corpora and renders golden SCIP snapshots. Runtime paths
- * are supplied as {@code -Dsnapshot.*} system properties by the sbt build (see build.sbt),
- * replacing the former sbt-buildinfo generated values.
+ * are supplied as {@code -Dsnapshot.*} system properties by the Gradle build.
  */
 public class MinimizedSnapshotScipGenerator {
   public static final class SnapshotCase {
@@ -140,7 +139,9 @@ public class MinimizedSnapshotScipGenerator {
     String value = System.getProperty(name);
     if (value == null || value.trim().isEmpty()) {
       throw new IllegalStateException(
-          "Missing -D" + name + ". Run via sbt scipSnapshots/test or scipSnapshots/run.");
+          "Missing -D"
+              + name
+              + ". Run via gradle :scip-snapshots:test or :scip-snapshots:saveSnapshots.");
     }
     return value;
   }

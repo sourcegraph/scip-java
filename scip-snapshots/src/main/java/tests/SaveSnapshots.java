@@ -1,15 +1,15 @@
 package tests;
 
 /**
- * Regenerates all snapshot goldens (invoked by {@code sbt scipSnapshots/run}). Snapshot cases are
- * supplied via {@code -Dsnapshot.*} system properties by the sbt build.
+ * Regenerates all snapshot goldens (invoked by {@code gradle :scip-snapshots:saveSnapshots}).
+ * Snapshot cases are supplied via {@code -Dsnapshot.*} system properties by the Gradle build.
  */
 public final class SaveSnapshots {
   private SaveSnapshots() {}
 
   public static void main(String[] args) {
     // Keep regenerated goldens stable across JDK 11/17/21 by pinning the JDK version embedded in
-    // stdlib SCIP symbols. Matches the `-Dscip.jdk.version=11` set on the test JVM in build.sbt.
+    // stdlib SCIP symbols. Matches the `-Dscip.jdk.version=11` set on the test JVM in Gradle.
     System.setProperty("scip.jdk.version", "11");
     MinimizedSnapshotScipGenerator generator = new MinimizedSnapshotScipGenerator();
     for (MinimizedSnapshotScipGenerator.SnapshotCase snapshotCase :

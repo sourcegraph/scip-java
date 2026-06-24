@@ -20,5 +20,5 @@ expected/
 version-specific cases when a fixture needs newer language features, for example
 `cases/java/release-17`, `cases/java/release-21`, or `cases/kotlin/kotlin-2.2`.
 
-Run `sbt scipSnapshots/test` to compare goldens and `sbt scipSnapshots/run` to
-regenerate them.
+Run `gradle :scip-snapshots:test` to compare goldens and
+`gradle :scip-snapshots:saveSnapshots` to regenerate them.

@@ -5,8 +5,21 @@ import java.nio.charset.StandardCharsets
 import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.StandardCopyOption
+import java.util.Properties
 
 object Embedded {
+
+    val javacLauncherJvmOptions: List<String> by lazy {
+        val properties = Properties()
+        val input =
+            Embedded::class.java.getResourceAsStream("/javac-internals.properties")
+                ?: error("missing embedded resource: /javac-internals.properties")
+        input.use { properties.load(it) }
+        val jvmOptions =
+            properties.getProperty("javac.jvmOptions")
+                ?: error("missing javac.jvmOptions in /javac-internals.properties")
+        jvmOptions.split(',').map { it.trim() }.filter { it.isNotEmpty() }.map { "-J$it" }
+    }
 
     fun scipJar(tmpDir: Path): Path = copyFile(tmpDir, "scip-plugin.jar")
 
@@ -16,7 +29,9 @@ object Embedded {
 
     private fun javacErrorpath(tmp: Path): Path = tmp.resolve("errorpath.txt")
 
-    fun customJavac(sourceroot: Path, targetroot: Path, tmp: Path): Path {
+    data class CustomJavac(val executable: Path, val environment: Map<String, String>)
+
+    fun customJavac(sourceroot: Path, targetroot: Path, tmp: Path): CustomJavac {
         val bin = tmp.resolve("bin")
         val javac = bin.resolve("javac")
         val java = bin.resolve("java")
@@ -25,49 +40,22 @@ object Embedded {
         val javacopts = targetroot.resolve("javacopts.txt")
         Files.createDirectories(targetroot)
         Files.createDirectories(bin)
-        Files.write(
-            java,
-            ("#!/usr/bin/env bash\n" + "java \"\$@\"\n").toByteArray(StandardCharsets.UTF_8),
-        )
-        val newJavacopts = tmp.resolve("javac_newarguments")
-        // --add-exports flags required to access internal javac APIs from our
-        // SCIP plugin. Always set; Java 11+ is the supported baseline.
-        val javacModuleOptions = BuildInfo.javacModuleOptions.joinToString(" ")
-        val injectScipArguments =
-            listOf(
-                    "java",
-                    "-Dscip.errorpath=$errorpath",
-                    "-Dscip.pluginpath=$pluginpath",
-                    "-Dscip.sourceroot=$sourceroot",
-                    "-Dscip.targetroot=$targetroot",
-                    "-Dscip.output=\$NEW_JAVAC_OPTS",
-                    "-Dscip.old-output=$javacopts",
-                    "-classpath $pluginpath",
-                    "com.sourcegraph.scip_javac.InjectScipOptions",
-                    "\"\$@\"",
-                )
-                .joinToString(" ")
-        val script = buildString {
-            append("#!/usr/bin/env bash\n")
-            append("set -eu\n")
-            append("LAUNCHER_ARGS=()\n")
-            append("NEW_JAVAC_OPTS=\"$newJavacopts-\$RANDOM\"\n")
-            append("for arg in \"\$@\"; do\n")
-            append("  if [[ \$arg == -J* ]]; then\n")
-            append("    LAUNCHER_ARGS+=(\"\$arg\")\n")
-            append("  fi\n")
-            append("done\n")
-            append(injectScipArguments).append('\n')
-            append("if [ \${#LAUNCHER_ARGS[@]} -eq 0 ]; then\n")
-            append("  javac $javacModuleOptions \"@\$NEW_JAVAC_OPTS\"\n")
-            append("else\n")
-            append("  javac $javacModuleOptions \"@\$NEW_JAVAC_OPTS\" \"\${LAUNCHER_ARGS[@]}\"\n")
-            append("fi\n")
-        }
-        Files.write(javac, script.toByteArray(StandardCharsets.UTF_8))
+        copyResource(java, "scip-java/java-forwarder.sh")
+        copyResource(javac, "scip-java/custom-javac.sh")
         javac.toFile().setExecutable(true)
         java.toFile().setExecutable(true)
-        return javac
+        return CustomJavac(
+            javac,
+            mapOf(
+                "SCIP_ERRORPATH" to errorpath.toString(),
+                "SCIP_JAVAC_LAUNCHER_JVM_OPTIONS" to javacLauncherJvmOptions.joinToString("\n"),
+                "SCIP_JAVAC_OPTIONS_PREFIX" to tmp.resolve("javac_newarguments").toString(),
+                "SCIP_OLD_JAVAC_OPTS" to javacopts.toString(),
+                "SCIP_PLUGINPATH" to pluginpath.toString(),
+                "SCIP_SOURCEROOT" to sourceroot.toString(),
+                "SCIP_TARGETROOT" to targetroot.toString(),
+            ),
+        )
     }
 
     /**
@@ -93,12 +81,16 @@ object Embedded {
     }
 
     private fun copyFile(tmpDir: Path, filename: String): Path {
-        val input =
-            Embedded::class.java.getResourceAsStream("/$filename")
-                ?: error("missing embedded resource: /$filename")
         val out = tmpDir.resolve(filename)
+        copyResource(out, filename)
+        return out
+    }
+
+    private fun copyResource(out: Path, resource: String) {
+        val input =
+            Embedded::class.java.getResourceAsStream("/$resource")
+                ?: error("missing embedded resource: /$resource")
         Files.createDirectories(out.parent)
         input.use { Files.copy(it, out, StandardCopyOption.REPLACE_EXISTING) }
-        return out
     }
 }
