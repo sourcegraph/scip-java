@@ -27,8 +27,8 @@ jobs:
         if: ${{ startsWith(github.ref, 'refs/tags/') }}
         run: |
           version="${GITHUB_REF_NAME#v}"
-          nix develop --command env VERSION="$version" \
-            gradle --no-daemon publishAndReleaseToMavenCentral
+          nix develop --command gradle --no-daemon \
+            "-PreleaseVersion=$version" publishAndReleaseToMavenCentral
         env:
           ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.SONATYPE_PASSWORD }}
           ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.SONATYPE_USERNAME }}

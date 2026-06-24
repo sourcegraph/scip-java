@@ -25,20 +25,8 @@ plugins {
     alias(libs.plugins.vanniktech.maven.publish) apply false
 }
 
-val computedVersion =
-    providers
-        .gradleProperty("releaseVersion")
-        .orElse(providers.environmentVariable("VERSION").map { it.removePrefix("v") })
-        .orElse(
-            providers.provider {
-                rootProject.file("VERSION").takeIf { it.isFile }?.readText()?.trim()?.takeIf {
-                    it.isNotEmpty()
-                } ?: "0.0.0-SNAPSHOT"
-            }
-        )
-
 group = "com.sourcegraph"
-version = computedVersion.get()
+version = providers.gradleProperty("releaseVersion").orElse("0.0.0-SNAPSHOT").get()
 
 val javacModuleOptions =
     listOf(
