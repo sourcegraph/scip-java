@@ -5,18 +5,21 @@ import java.nio.charset.StandardCharsets
 import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.StandardCopyOption
+import java.util.Properties
 
 object Embedded {
 
-    /** `javac` launcher flags required by the SCIP plugin to access internal javac APIs. */
-    val javacModuleOptions: List<String> =
-        listOf(
-            "-J--add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED",
-            "-J--add-exports=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED",
-            "-J--add-exports=jdk.compiler/com.sun.tools.javac.model=ALL-UNNAMED",
-            "-J--add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED",
-            "-J--add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED",
-        )
+    val javacLauncherJvmOptions: List<String> by lazy {
+        val properties = Properties()
+        val input =
+            Embedded::class.java.getResourceAsStream("/javac-internals.properties")
+                ?: error("missing embedded resource: /javac-internals.properties")
+        input.use { properties.load(it) }
+        val jvmOptions =
+            properties.getProperty("javac.jvmOptions")
+                ?: error("missing javac.jvmOptions in /javac-internals.properties")
+        jvmOptions.split(',').map { it.trim() }.filter { it.isNotEmpty() }.map { "-J$it" }
+    }
 
     fun scipJar(tmpDir: Path): Path = copyFile(tmpDir, "scip-plugin.jar")
 
@@ -42,7 +45,7 @@ object Embedded {
         val newJavacopts = tmp.resolve("javac_newarguments")
         // --add-exports flags required to access internal javac APIs from our
         // SCIP plugin. Always set; Java 11+ is the supported baseline.
-        val javacModuleOptionsText = javacModuleOptions.joinToString(" ")
+        val javacLauncherJvmOptionsText = javacLauncherJvmOptions.joinToString(" ")
         val injectScipArguments =
             listOf(
                     "java",
@@ -69,10 +72,10 @@ object Embedded {
             append("done\n")
             append(injectScipArguments).append('\n')
             append("if [ \${#LAUNCHER_ARGS[@]} -eq 0 ]; then\n")
-            append("  javac $javacModuleOptionsText \"@\$NEW_JAVAC_OPTS\"\n")
+            append("  javac $javacLauncherJvmOptionsText \"@\$NEW_JAVAC_OPTS\"\n")
             append("else\n")
             append(
-                "  javac $javacModuleOptionsText \"@\$NEW_JAVAC_OPTS\" \"\${LAUNCHER_ARGS[@]}\"\n"
+                "  javac $javacLauncherJvmOptionsText \"@\$NEW_JAVAC_OPTS\" \"\${LAUNCHER_ARGS[@]}\"\n"
             )
             append("fi\n")
         }

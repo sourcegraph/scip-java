@@ -2,6 +2,7 @@ import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import com.google.protobuf.gradle.ProtobufExtension
 import com.google.protobuf.gradle.proto
 import com.vanniktech.maven.publish.MavenPublishBaseExtension
+import java.util.Properties
 import org.gradle.api.JavaVersion
 import org.gradle.api.distribution.DistributionContainer
 import org.gradle.api.plugins.JavaApplication
@@ -26,14 +27,19 @@ plugins {
     alias(libs.plugins.vanniktech.maven.publish) apply false
 }
 
+val javacInternalsFile = layout.projectDirectory.file("gradle/javac-internals.properties")
 val javacJvmOptions =
-    listOf(
-        "--add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED",
-        "--add-exports=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED",
-        "--add-exports=jdk.compiler/com.sun.tools.javac.model=ALL-UNNAMED",
-        "--add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED",
-        "--add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED",
+    (
+        Properties()
+            .apply {
+                javacInternalsFile.asFile.inputStream().use { load(it) }
+            }
+            .getProperty("javac.jvmOptions")
+            ?: error("Missing javac.jvmOptions in gradle/javac-internals.properties")
     )
+        .split(',')
+        .map { it.trim() }
+        .filter { it.isNotEmpty() }
 val catalog = libs
 val protobufVersion = catalog.versions.protobuf.asProvider().get()
 val repositoryUrl = "https://github.com/sourcegraph/scip-java"
@@ -315,6 +321,7 @@ project(":scip-java") {
     }
 
     tasks.named<ProcessResources>("processResources") {
+        from(javacInternalsFile)
         from(generateEmbeddedResources)
     }
 

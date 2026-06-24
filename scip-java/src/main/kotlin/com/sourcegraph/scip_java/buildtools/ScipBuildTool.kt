@@ -304,7 +304,7 @@ class ScipBuildTool(index: IndexCommand) : BuildTool("SCIP", index) {
         val cmd = mutableListOf<String>()
         cmd += javac.toString()
         cmd += "@$argsfile"
-        cmd += Embedded.javacModuleOptions
+        cmd += Embedded.javacLauncherJvmOptions
         cmd += jvmOptions
         val result =
             ProcessRunner.run(
