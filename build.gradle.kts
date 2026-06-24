@@ -1,8 +1,6 @@
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import com.google.protobuf.gradle.ProtobufExtension
 import com.google.protobuf.gradle.proto
-import java.nio.charset.StandardCharsets
-import java.util.Base64
 import org.gradle.api.JavaVersion
 import org.gradle.api.distribution.DistributionContainer
 import org.gradle.api.plugins.JavaApplication
@@ -28,13 +26,6 @@ plugins {
     alias(libs.plugins.protobuf) apply false
     alias(libs.plugins.shadow) apply false
 }
-
-fun decodePgpSecret(raw: String): String =
-    if (raw.contains("BEGIN PGP")) {
-        raw
-    } else {
-        runCatching { String(Base64.getDecoder().decode(raw), StandardCharsets.UTF_8) }.getOrElse { raw }
-    }
 
 val computedVersion =
     providers
@@ -63,7 +54,7 @@ val javacTestJvmOptions = javacModuleOptions.map { it.removePrefix("-J") }
 val catalog = libs
 val protobufVersion = catalog.versions.protobuf.asProvider().get()
 val repositoryUrl = "https://github.com/sourcegraph/scip-java"
-val signingKey = providers.environmentVariable("PGP_SECRET").map(::decodePgpSecret)
+val signingKey = providers.environmentVariable("PGP_SECRET")
 val signingPassword = providers.environmentVariable("PGP_PASSPHRASE")
 
 allprojects {
