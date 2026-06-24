@@ -73,7 +73,7 @@ VERSION
 scip-gradle-plugin/gradle
 /aspects/
 
-tests/snapshots/META-INF/
+scip-snapshots/META-INF/
 
 # scip-kotlinc kctfork-based tests run kotlinc with our plugin, which
 # writes META-INF/scip/sources/Test.kt.scip relative to the test

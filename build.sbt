@@ -179,8 +179,7 @@ lazy val cli = project
     (Compile / mainClass) := Some("com.sourcegraph.scip_java.ScipJava"),
     (run / baseDirectory) := (ThisBuild / baseDirectory).value,
     // ScipJava.main can call System.exit, so we always fork the JVM when
-    // sbt invokes it directly (e.g. from the scip-kotlinc snapshots
-    // task) so it cannot kill the surrounding sbt process.
+    // sbt invokes it directly so it cannot kill the surrounding sbt process.
     Compile / run / fork := true,
     Test / fork := true,
     // Our CI set up is a couple of measly vCPUs so parallelising tests there makes
@@ -241,14 +240,6 @@ lazy val cli = project
         .taskValue
   )
   .dependsOn(scip)
-
-// Task key for regenerating the SCIP golden snapshots emitted by
-// the scip-kotlinc compiler plugin over the Kotlin minimized fixtures.
-// We deliberately do NOT call this `snapshots` to avoid colliding with the
-// existing top-level `snapshots` test project (`lazy val snapshots = project`).
-lazy val kotlincSnapshots = taskKey[Unit](
-  "Run the SCIP snapshot generator over the scip-kotlinc minimized project"
-)
 
 // The scip-kotlinc compiler plugin. Built as a fat-jar that is later
 // embedded into the scip-java CLI distribution (see cli's resourceGenerators)
@@ -335,14 +326,12 @@ lazy val scipKotlinc = project
   )
   .dependsOn(scipShared)
 
-// `scipKotlincMinimized` mirrors the (still-present) Gradle build at
-// scip-kotlinc/minimized/build.gradle.kts. It compiles a small set of
-// Kotlin and Java fixtures with the assembled `scipKotlinc` plugin
-// attached to kotlinc/javac, producing *.scip files under
-// target/scip-targetroot/ which are then converted to SCIP and rendered
-// as the human-readable golden snapshots by the `snapshots` task.
-lazy val scipKotlincMinimized = project
-  .in(file("scip-kotlinc/minimized"))
+// Kotlin snapshot case. The fixture includes Java sources as interop
+// consumers, but the case is still keyed by the Kotlin compiler/plugin version
+// axis. It writes *.scip shards under target/scip-targetroot/ for the central
+// scipSnapshots project to aggregate and compare with goldens.
+lazy val scipSnapshotsKotlinCommon = project
+  .in(file("scip-snapshots/cases/kotlin/common"))
   .enablePlugins(KotlinPlugin)
   .settings(
     publish / skip := true,
@@ -391,57 +380,17 @@ lazy val scipKotlincMinimized = project
       val tgtRoot = target.value / "scip-targetroot"
       s"-Xplugin:scip -sourceroot:${srcRoot.getAbsolutePath} " +
         s"-targetroot:${tgtRoot.getAbsolutePath}"
-    },
-    // ----- snapshots regeneration task -----
-    // Invokes `com.sourcegraph.scip_java.ScipJava.main` twice in the cli JVM
-    // (forked — ScipJava.main calls System.exit on failure). First pass
-    // converts the *.scip files under target/scip-targetroot/
-    // into an index.scip; second pass renders that index as the human-readable
-    // golden snapshots.
-    //
-    // We use `kotlincSnapshots` instead of `snapshots` to avoid colliding
-    // with the existing top-level `snapshots` test project.
-    kotlincSnapshots :=
-      Def
-        .taskDyn {
-          val srcRoot = (ThisBuild / baseDirectory).value.getAbsolutePath
-          val tgtRoot = (target.value / "scip-targetroot").getAbsolutePath
-          val snapDir =
-            (baseDirectory.value / "src" / "generatedSnapshots" / "resources")
-              .getAbsolutePath
-          // Write the aggregated index OUTSIDE the scanned targetroot. If it
-          // lived under `tgtRoot`, a second `kotlincSnapshots` run would feed
-          // the previous index.scip back into `aggregate`, which re-applies the
-          // package prefix and yields doubled symbols
-          // (e.g. `scip-java maven . . scip-java maven . . kotlin/`).
-          val indexDir = target.value / "scip-index"
-          IO.createDirectory(indexDir)
-          val scipOut = (indexDir / "index.scip").getAbsolutePath
-          val mainCls = "com.sourcegraph.scip_java.ScipJava"
-          Def.sequential(
-            Compile / compile,
-            (cli / Compile / runMain).toTask(
-              s" $mainCls aggregate --no-emit-inverse-relationships --cwd $srcRoot --output $scipOut $tgtRoot"
-            ),
-            (cli / Compile / runMain).toTask(
-              s" $mainCls snapshot --cwd $srcRoot --output $snapDir ${indexDir
-                  .getAbsolutePath}"
-            )
-          )
-        }
-        .value
+    }
   )
 
-lazy val minimized = project
-  .in(file("tests/minimized/.j11"))
+lazy val scipSnapshotsJavaCommon = project
+  .in(file("scip-snapshots/cases/java/common"))
   .settings(
     publish / skip := true,
     run / fork := true,
-    (Compile / unmanagedSourceDirectories) +=
-      file("tests/minimized/src/main/java").getAbsoluteFile,
     libraryDependencies += "org.projectlombok" % "lombok" % "1.18.22",
     // Fork javac so it receives real file paths instead of sbt's `vf://` virtual-file URIs
-    // (see the comment on `scipKotlincMinimized` for the long story).
+    // (see the comment on `scipSnapshotsKotlinCommon` for the long story).
     javaHome := Some(file(System.getProperty("java.home"))),
     // Keep minimized snapshots stable across JDK 11/17/21.
     Compile / javacOptions ++= Seq("--release", "11"),
@@ -466,8 +415,8 @@ def javacModuleOptions = List(
   "-J--add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED"
 )
 
-lazy val snapshots = project
-  .in(file("tests/snapshots"))
+lazy val scipSnapshots = project
+  .in(file("scip-snapshots"))
   .settings(
     publish / skip := true,
     Test / fork := true,
@@ -487,18 +436,27 @@ lazy val snapshots = project
   .dependsOn(cli)
 
 // Runtime paths for the snapshot generator, passed as -D system properties.
-// Depending on `minimized/compile` here guarantees a fresh targetroot whenever
-// `snapshots/test` or `snapshots/run` evaluate javaOptions.
+// Depending on each snapshot case's compile task guarantees fresh targetroots
+// whenever `scipSnapshots/test` or `scipSnapshots/run` evaluate javaOptions.
 def snapshotPathOptions = Def.task {
-  val _ = (minimized / Compile / compile).value
+  val _java = (scipSnapshotsJavaCommon / Compile / compile).value
+  val _kotlin = (scipSnapshotsKotlinCommon / Compile / compile).value
+  val snapshotRoot = (ThisBuild / baseDirectory).value / "scip-snapshots"
   Seq(
-    s"-Dsnapshot.expectDir=${((Compile / sourceDirectory).value / "generated")
-        .getAbsolutePath}",
-    s"-Dsnapshot.minimizedTargetroot=${(
-        minimized / Compile / semanticdbTargetRoot
+    s"-Dsnapshot.sourceroot=${(ThisBuild / baseDirectory).value.getAbsolutePath}",
+    "-Dsnapshot.cases=java-common,kotlin-common",
+    s"-Dsnapshot.case.java-common.expectDir=${(
+        snapshotRoot / "expected" / "java" / "common"
+      ).getAbsolutePath}",
+    s"-Dsnapshot.case.java-common.targetroot=${(
+        scipSnapshotsJavaCommon / Compile / semanticdbTargetRoot
       ).value.getAbsolutePath}",
-    s"-Dsnapshot.sourceroot=${(ThisBuild / baseDirectory)
-        .value
-        .getAbsolutePath}"
+    s"-Dsnapshot.case.kotlin-common.expectDir=${(
+        snapshotRoot / "expected" / "kotlin" / "common"
+      ).getAbsolutePath}",
+    s"-Dsnapshot.case.kotlin-common.targetroot=${((
+        scipSnapshotsKotlinCommon / target
+      ).value / "scip-targetroot").getAbsolutePath}",
+    "-Dsnapshot.case.kotlin-common.aggregateNoEmitInverseRelationships=true"
   )
 }

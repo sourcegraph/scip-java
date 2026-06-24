@@ -9,8 +9,9 @@ scip-gradle-plugin/target/
 scip-java/target/
 scip-javac/target/
 scip-kotlinc/target/
+scip-snapshots/target/
+scip-snapshots/cases/java/common/target/
+scip-snapshots/cases/kotlin/common/target/
 target/
 tests/buildTools/target/
-tests/minimized/target/
-tests/snapshots/target/
 tests/unit/target/

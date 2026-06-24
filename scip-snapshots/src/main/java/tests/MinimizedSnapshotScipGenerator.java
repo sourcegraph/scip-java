@@ -7,19 +7,42 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.scip_code.scip.Document;
 import org.scip_code.scip.Index;
 
 /**
- * Indexes the {@code tests/minimized} corpus and renders golden SCIP snapshots. Runtime paths are
- * supplied as {@code -Dsnapshot.*} system properties by the sbt build (see build.sbt), replacing
- * the former sbt-buildinfo generated values.
+ * Indexes the {@code scip-snapshots/cases} corpora and renders golden SCIP snapshots. Runtime paths
+ * are supplied as {@code -Dsnapshot.*} system properties by the sbt build (see build.sbt),
+ * replacing the former sbt-buildinfo generated values.
  */
 public class MinimizedSnapshotScipGenerator {
+  public static final class SnapshotCase {
+    public final String id;
+    public final Path expectDirectory;
+    public final Path targetroot;
+    public final boolean aggregateNoEmitInverseRelationships;
+
+    private SnapshotCase(
+        String id,
+        Path expectDirectory,
+        Path targetroot,
+        boolean aggregateNoEmitInverseRelationships) {
+      this.id = id;
+      this.expectDirectory = expectDirectory;
+      this.targetroot = targetroot;
+      this.aggregateNoEmitInverseRelationships = aggregateNoEmitInverseRelationships;
+    }
+
+    public SnapshotContext context() {
+      return new SnapshotContext(id, expectDirectory);
+    }
+  }
 
   public void run(List<String> args) {
     int exit = ScipJava.app.run(args);
@@ -28,25 +51,34 @@ public class MinimizedSnapshotScipGenerator {
     }
   }
 
-  public void run(SnapshotContext context, SnapshotHandler handler) {
-    onTargetroot(context, handler, requiredPathProperty("snapshot.minimizedTargetroot"));
+  public void run(SnapshotCase snapshotCase, SnapshotHandler handler) {
+    onTargetroot(
+        snapshotCase.context(),
+        handler,
+        snapshotCase.targetroot,
+        snapshotCase.aggregateNoEmitInverseRelationships);
   }
 
-  public void onTargetroot(SnapshotContext context, SnapshotHandler handler, Path targetroot) {
+  public void onTargetroot(
+      SnapshotContext context,
+      SnapshotHandler handler,
+      Path targetroot,
+      boolean aggregateNoEmitInverseRelationships) {
     Path sourceroot = requiredPathProperty("snapshot.sourceroot");
     Path scipTempDir = createTempDirectory();
     Path snapshotOutput = createTempDirectory();
     try {
       Path scipOutput = scipTempDir.resolve("index.scip");
-      run(
-          Arrays.asList(
-              "aggregate",
-              "--cwd",
-              sourceroot.toString(),
-              "--output",
-              scipOutput.toString(),
-              "--targetroot",
-              targetroot.toString()));
+      List<String> aggregateArgs =
+          new ArrayList<>(
+              Arrays.asList(
+                  "aggregate", "--cwd", sourceroot.toString(), "--output", scipOutput.toString()));
+      if (aggregateNoEmitInverseRelationships) {
+        aggregateArgs.add("--no-emit-inverse-relationships");
+      }
+      aggregateArgs.add("--targetroot");
+      aggregateArgs.add(targetroot.toString());
+      run(aggregateArgs);
       Index index;
       try {
         index = Index.parseFrom(Files.readAllBytes(scipOutput));
@@ -78,13 +110,39 @@ public class MinimizedSnapshotScipGenerator {
     }
   }
 
+  public static List<SnapshotCase> snapshotCases() {
+    List<SnapshotCase> cases =
+        Arrays.stream(requiredProperty("snapshot.cases").split(","))
+            .map(String::trim)
+            .filter(id -> !id.isEmpty())
+            .map(MinimizedSnapshotScipGenerator::snapshotCase)
+            .collect(Collectors.toList());
+    if (cases.isEmpty()) {
+      throw new IllegalStateException("Missing snapshot cases in -Dsnapshot.cases");
+    }
+    return cases;
+  }
+
+  private static SnapshotCase snapshotCase(String id) {
+    String prefix = "snapshot.case." + id + ".";
+    return new SnapshotCase(
+        id,
+        requiredPathProperty(prefix + "expectDir"),
+        requiredPathProperty(prefix + "targetroot"),
+        Boolean.parseBoolean(System.getProperty(prefix + "aggregateNoEmitInverseRelationships")));
+  }
+
   public static Path requiredPathProperty(String name) {
+    return Paths.get(requiredProperty(name));
+  }
+
+  private static String requiredProperty(String name) {
     String value = System.getProperty(name);
     if (value == null || value.trim().isEmpty()) {
       throw new IllegalStateException(
-          "Missing -D" + name + ". Run via sbt snapshots/test or snapshots/run.");
+          "Missing -D" + name + ". Run via sbt scipSnapshots/test or scipSnapshots/run.");
     }
-    return Paths.get(value);
+    return value;
   }
 
   private static void runScipSnapshot(Path from, Path to) {

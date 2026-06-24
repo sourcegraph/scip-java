@@ -29,7 +29,8 @@ final class AssertSnapshotHandler extends SnapshotHandler {
   @Override
   public void onSnapshotTest(
       SnapshotContext context, Path expectFile, Supplier<String> obtainedOutput) {
-    String relativePath = context.expectDirectory.relativize(expectFile).toString();
+    String relativePath =
+        context.caseId + "/" + context.expectDirectory.relativize(expectFile).toString();
     String obtained = obtainedOutput.get();
     tests.add(
         dynamicTest(
@@ -39,7 +40,7 @@ final class AssertSnapshotHandler extends SnapshotHandler {
                 fail(
                     "no snapshot file for "
                         + relativePath
-                        + ". To fix this problem, execute the command 'sbt snapshots/run'");
+                        + ". To fix this problem, execute the command 'sbt scipSnapshots/run'");
               }
               String expected;
               try {
