@@ -1,13 +1,12 @@
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import com.google.protobuf.gradle.ProtobufExtension
 import com.google.protobuf.gradle.proto
+import com.vanniktech.maven.publish.MavenPublishBaseExtension
 import org.gradle.api.JavaVersion
 import org.gradle.api.distribution.DistributionContainer
 import org.gradle.api.plugins.JavaApplication
 import org.gradle.api.plugins.JavaPlugin
 import org.gradle.api.plugins.JavaPluginExtension
-import org.gradle.api.publish.PublishingExtension
-import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.api.tasks.JavaExec
 import org.gradle.api.tasks.SourceSetContainer
 import org.gradle.api.tasks.Sync
@@ -16,15 +15,14 @@ import org.gradle.api.tasks.javadoc.Javadoc
 import org.gradle.api.tasks.testing.Test
 import org.gradle.external.javadoc.StandardJavadocDocletOptions
 import org.gradle.language.jvm.tasks.ProcessResources
-import org.gradle.plugins.signing.SigningExtension
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    id("io.github.gradle-nexus.publish-plugin") version "2.0.0"
     alias(libs.plugins.kotlin.jvm) apply false
     alias(libs.plugins.protobuf) apply false
     alias(libs.plugins.shadow) apply false
+    alias(libs.plugins.vanniktech.maven.publish) apply false
 }
 
 val computedVersion =
@@ -54,8 +52,6 @@ val javacTestJvmOptions = javacModuleOptions.map { it.removePrefix("-J") }
 val catalog = libs
 val protobufVersion = catalog.versions.protobuf.asProvider().get()
 val repositoryUrl = "https://github.com/sourcegraph/scip-java"
-val signingKey = providers.environmentVariable("PGP_SECRET")
-val signingPassword = providers.environmentVariable("PGP_PASSPHRASE")
 
 allprojects {
     group = rootProject.group
@@ -102,61 +98,33 @@ subprojects {
 }
 
 fun Project.configureMavenPublishing() {
-    apply(plugin = "maven-publish")
-    apply(plugin = "signing")
+    apply(plugin = "com.vanniktech.maven.publish")
 
-    extensions.configure<JavaPluginExtension> {
-        withSourcesJar()
-        withJavadocJar()
-    }
+    extensions.configure<MavenPublishBaseExtension>("mavenPublishing") {
+        publishToMavenCentral()
+        signAllPublications()
 
-    extensions.configure<PublishingExtension> {
-        publications {
-            create<MavenPublication>("mavenJava") {
-                from(components["java"])
-                pom {
-                    name.set(project.name)
-                    description.set(project.description ?: project.name)
-                    url.set(repositoryUrl)
-                    licenses {
-                        license {
-                            name.set("Apache-2.0")
-                            url.set("http://www.apache.org/licenses/LICENSE-2.0")
-                        }
-                    }
-                    developers {
-                        developer {
-                            id.set("sourcegraph")
-                            name.set("Sourcegraph")
-                        }
-                    }
-                    scm {
-                        connection.set("scm:git:$repositoryUrl.git")
-                        developerConnection.set("scm:git:ssh://git@github.com/sourcegraph/scip-java.git")
-                        url.set(repositoryUrl)
-                    }
+        pom {
+            name.set(project.name)
+            description.set(project.description ?: project.name)
+            url.set(repositoryUrl)
+            licenses {
+                license {
+                    name.set("Apache-2.0")
+                    url.set("http://www.apache.org/licenses/LICENSE-2.0")
                 }
             }
-        }
-    }
-
-    val publishing = extensions.getByType<PublishingExtension>()
-    extensions.configure<SigningExtension> {
-        isRequired = signingKey.isPresent && !project.version.toString().endsWith("SNAPSHOT")
-        if (signingKey.isPresent) {
-            useInMemoryPgpKeys(signingKey.get(), signingPassword.orNull)
-            sign(publishing.publications)
-        }
-    }
-}
-
-nexusPublishing {
-    repositories {
-        sonatype {
-            username.set(providers.environmentVariable("SONATYPE_USERNAME"))
-            password.set(providers.environmentVariable("SONATYPE_PASSWORD"))
-            nexusUrl.set(uri("https://s01.oss.sonatype.org/service/local/"))
-            snapshotRepositoryUrl.set(uri("https://s01.oss.sonatype.org/content/repositories/snapshots/"))
+            developers {
+                developer {
+                    id.set("sourcegraph")
+                    name.set("Sourcegraph")
+                }
+            }
+            scm {
+                connection.set("scm:git:$repositoryUrl.git")
+                developerConnection.set("scm:git:ssh://git@github.com/sourcegraph/scip-java.git")
+                url.set(repositoryUrl)
+            }
         }
     }
 }
