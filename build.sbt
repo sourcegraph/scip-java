@@ -51,18 +51,6 @@ lazy val scipShared = project
       "org.scip-code" % "scip-java-bindings" % V.scipBindings
   )
 
-lazy val gradlePlugin = project
-  .in(file("scip-gradle-plugin"))
-  .settings(
-    name := "scip-gradle",
-    publish / skip := true,
-    libraryDependencies ++=
-      List(
-        "dev.gradleplugins" % "gradle-api" % V.gradle % Provided,
-        "dev.gradleplugins" % "gradle-test-kit" % V.gradle % Provided
-      )
-  )
-
 lazy val javacPlugin = project
   .in(file("scip-javac"))
   .settings(
@@ -123,123 +111,6 @@ lazy val javacPlugin = project
     Test / javaOptions ++= javacModuleOptions.map(_.stripPrefix("-J"))
   )
   .dependsOn(scipShared)
-
-lazy val scip = project
-  .in(file("scip-aggregator"))
-  .settings(
-    moduleName := "scip-aggregator",
-    libraryDependencies ++=
-      Seq(
-        "org.scip-code" % "scip-java-bindings" % V.scipBindings,
-        // JUnit 5 for the colocated Java unit tests (test scope only, so it is
-        // excluded from the published POM and keeps this a Java-only module).
-        "com.github.sbt.junit" % "jupiter-interface" %
-          JupiterKeys.jupiterVersion.value % Test
-      ),
-    (Compile / PB.targets) :=
-      Seq(PB.gens.java(V.protobuf) -> (Compile / sourceManaged).value)
-  )
-  .dependsOn(scipShared)
-
-lazy val mavenPlugin = project
-  .in(file("scip-maven-plugin"))
-  .settings(
-    moduleName := "scip-maven-plugin",
-    libraryDependencies ++=
-      Seq(
-        "org.apache.maven" % "maven-plugin-api" % "3.6.3",
-        "org.apache.maven.plugin-tools" % "maven-plugin-annotations" % "3.6.4" %
-          Provided,
-        "org.apache.maven" % "maven-project" % "2.2.1"
-      ),
-    Compile / resourceGenerators +=
-      Def.task {
-        val dir = (Compile / managedResourceDirectories).value.head /
-          "META-INF" / "maven"
-        IO.createDirectory(dir)
-        val file = dir / "plugin.xml"
-        val template = IO.read(
-          (Compile / resourceDirectory).value / "META-INF" / "maven" /
-            "plugin.template.xml"
-        )
-
-        IO.write(file, template.replace("@VERSION@", version.value))
-
-        Seq(file)
-      }
-  )
-
-lazy val cli = project
-  .in(file("scip-java"))
-  .enablePlugins(KotlinPlugin, PackPlugin)
-  .settings(
-    moduleName := "scip-java",
-    kotlinVersion := V.kotlinVersion,
-    kotlincJvmTarget := "11",
-    (Compile / mainClass) := Some("com.sourcegraph.scip_java.ScipJava"),
-    (run / baseDirectory) := (ThisBuild / baseDirectory).value,
-    // ScipJava.main can call System.exit, so we always fork the JVM when
-    // sbt invokes it directly so it cannot kill the surrounding sbt process.
-    Compile / run / fork := true,
-    Test / fork := true,
-    // Our CI set up is a couple of measly vCPUs so parallelising tests there makes
-    // everything worse.
-    Test / testForkedParallel := !sys.env.contains("CI"),
-    // The SCIP build tool drives javac in-process; on JDK 17+ this requires
-    // opening the JDK-internal javac packages.
-    Test / javaOptions ++= javacModuleOptions.map(_.stripPrefix("-J")),
-    // Pin the JDK version embedded in stdlib SCIP symbols so output is stable.
-    Test / javaOptions += "-Dscip.jdk.version=11",
-    libraryDependencies ++=
-      List(
-        "com.github.ajalt.clikt" % "clikt-jvm" % V.clikt,
-        "org.jetbrains.kotlinx" % "kotlinx-serialization-json-jvm" %
-          V.kotlinxSerialization,
-        "org.jetbrains.kotlin" % "kotlin-compiler-embeddable" % V.kotlinVersion,
-        "org.jetbrains.kotlin" % "kotlin-scripting-common" % V.kotlinVersion,
-        "org.jetbrains.kotlin" % "kotlin-scripting-jvm" % V.kotlinVersion,
-        "org.jetbrains.kotlin" % "kotlin-scripting-dependencies" %
-          V.kotlinVersion,
-        "org.jetbrains.kotlin" % "kotlin-scripting-dependencies-maven" %
-          V.kotlinVersion
-      ),
-    libraryDependencies ++=
-      Seq(
-        "org.jetbrains.kotlin" % "kotlin-test" % V.kotlinVersion % Test,
-        "org.jetbrains.kotlin" % "kotlin-test-junit5" % V.kotlinVersion % Test,
-        "com.github.sbt.junit" % "jupiter-interface" %
-          JupiterKeys.jupiterVersion.value % Test
-      ),
-    (Compile / resourceGenerators) +=
-      Def
-        .task {
-          val out = (Compile / resourceManaged).value.toPath
-          IO.delete(out.toFile)
-
-          val outs = Seq(
-            (javacPlugin / Compile / assembly).value ->
-              out.resolve("scip-plugin.jar").toFile,
-            (gradlePlugin / Compile / assembly).value ->
-              out.resolve("gradle-plugin.jar").toFile,
-            (scipKotlinc / Compile / assembly).value ->
-              out.resolve("scip-kotlinc.jar").toFile
-          )
-
-          IO.copy(
-            outs,
-            overwrite = true,
-            preserveLastModified = false,
-            preserveExecutable = true
-          )
-          val propsFile = out.resolve("scip-java.properties").toFile
-          // Build version consumed at runtime by BuildInfo.version (Kotlin).
-          IO.write(propsFile, s"version=${version.value}\n")
-
-          propsFile +: outs.map(_._2)
-        }
-        .taskValue
-  )
-  .dependsOn(scip)
 
 // The scip-kotlinc compiler plugin. Built as a fat-jar that is later
 // embedded into the scip-java CLI distribution (see cli's resourceGenerators)
@@ -325,6 +196,136 @@ lazy val scipKotlinc = project
     }
   )
   .dependsOn(scipShared)
+
+lazy val gradlePlugin = project
+  .in(file("scip-gradle-plugin"))
+  .settings(
+    name := "scip-gradle",
+    publish / skip := true,
+    libraryDependencies ++=
+      List(
+        "dev.gradleplugins" % "gradle-api" % V.gradle % Provided,
+        "dev.gradleplugins" % "gradle-test-kit" % V.gradle % Provided
+      )
+  )
+
+lazy val mavenPlugin = project
+  .in(file("scip-maven-plugin"))
+  .settings(
+    moduleName := "scip-maven-plugin",
+    libraryDependencies ++=
+      Seq(
+        "org.apache.maven" % "maven-plugin-api" % "3.6.3",
+        "org.apache.maven.plugin-tools" % "maven-plugin-annotations" % "3.6.4" %
+          Provided,
+        "org.apache.maven" % "maven-project" % "2.2.1"
+      ),
+    Compile / resourceGenerators +=
+      Def.task {
+        val dir = (Compile / managedResourceDirectories).value.head /
+          "META-INF" / "maven"
+        IO.createDirectory(dir)
+        val file = dir / "plugin.xml"
+        val template = IO.read(
+          (Compile / resourceDirectory).value / "META-INF" / "maven" /
+            "plugin.template.xml"
+        )
+
+        IO.write(file, template.replace("@VERSION@", version.value))
+
+        Seq(file)
+      }
+  )
+
+// Aggregates compiler-plugin shards into the final SCIP index consumed by the CLI.
+lazy val scipAggregator = project
+  .in(file("scip-aggregator"))
+  .settings(
+    moduleName := "scip-aggregator",
+    libraryDependencies ++=
+      Seq(
+        "org.scip-code" % "scip-java-bindings" % V.scipBindings,
+        // JUnit 5 for the colocated Java unit tests (test scope only, so it is
+        // excluded from the published POM and keeps this a Java-only module).
+        "com.github.sbt.junit" % "jupiter-interface" %
+          JupiterKeys.jupiterVersion.value % Test
+      ),
+    (Compile / PB.targets) :=
+      Seq(PB.gens.java(V.protobuf) -> (Compile / sourceManaged).value)
+  )
+  .dependsOn(scipShared)
+
+lazy val cli = project
+  .in(file("scip-java"))
+  .enablePlugins(KotlinPlugin, PackPlugin)
+  .settings(
+    moduleName := "scip-java",
+    kotlinVersion := V.kotlinVersion,
+    kotlincJvmTarget := "11",
+    (Compile / mainClass) := Some("com.sourcegraph.scip_java.ScipJava"),
+    (run / baseDirectory) := (ThisBuild / baseDirectory).value,
+    // ScipJava.main can call System.exit, so we always fork the JVM when
+    // sbt invokes it directly so it cannot kill the surrounding sbt process.
+    Compile / run / fork := true,
+    Test / fork := true,
+    // Our CI set up is a couple of measly vCPUs so parallelising tests there makes
+    // everything worse.
+    Test / testForkedParallel := !sys.env.contains("CI"),
+    // The SCIP build tool drives javac in-process; on JDK 17+ this requires
+    // opening the JDK-internal javac packages.
+    Test / javaOptions ++= javacModuleOptions.map(_.stripPrefix("-J")),
+    // Pin the JDK version embedded in stdlib SCIP symbols so output is stable.
+    Test / javaOptions += "-Dscip.jdk.version=11",
+    libraryDependencies ++=
+      List(
+        "com.github.ajalt.clikt" % "clikt-jvm" % V.clikt,
+        "org.jetbrains.kotlinx" % "kotlinx-serialization-json-jvm" %
+          V.kotlinxSerialization,
+        "org.jetbrains.kotlin" % "kotlin-compiler-embeddable" % V.kotlinVersion,
+        "org.jetbrains.kotlin" % "kotlin-scripting-common" % V.kotlinVersion,
+        "org.jetbrains.kotlin" % "kotlin-scripting-jvm" % V.kotlinVersion,
+        "org.jetbrains.kotlin" % "kotlin-scripting-dependencies" %
+          V.kotlinVersion,
+        "org.jetbrains.kotlin" % "kotlin-scripting-dependencies-maven" %
+          V.kotlinVersion
+      ),
+    libraryDependencies ++=
+      Seq(
+        "org.jetbrains.kotlin" % "kotlin-test" % V.kotlinVersion % Test,
+        "org.jetbrains.kotlin" % "kotlin-test-junit5" % V.kotlinVersion % Test,
+        "com.github.sbt.junit" % "jupiter-interface" %
+          JupiterKeys.jupiterVersion.value % Test
+      ),
+    (Compile / resourceGenerators) +=
+      Def
+        .task {
+          val out = (Compile / resourceManaged).value.toPath
+          IO.delete(out.toFile)
+
+          val outs = Seq(
+            (javacPlugin / Compile / assembly).value ->
+              out.resolve("scip-plugin.jar").toFile,
+            (gradlePlugin / Compile / assembly).value ->
+              out.resolve("gradle-plugin.jar").toFile,
+            (scipKotlinc / Compile / assembly).value ->
+              out.resolve("scip-kotlinc.jar").toFile
+          )
+
+          IO.copy(
+            outs,
+            overwrite = true,
+            preserveLastModified = false,
+            preserveExecutable = true
+          )
+          val propsFile = out.resolve("scip-java.properties").toFile
+          // Build version consumed at runtime by BuildInfo.version (Kotlin).
+          IO.write(propsFile, s"version=${version.value}\n")
+
+          propsFile +: outs.map(_._2)
+        }
+        .taskValue
+  )
+  .dependsOn(scipAggregator)
 
 // Kotlin snapshot case. The fixture includes Java sources as interop
 // consumers, but the case is still keyed by the Kotlin compiler/plugin version
