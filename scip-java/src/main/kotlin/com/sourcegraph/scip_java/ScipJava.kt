@@ -10,6 +10,10 @@ object ScipJava {
 
     @JvmField val app: ScipJavaApp = ScipJavaApp()
 
+    val version: String by lazy {
+        ScipJava::class.java.`package`?.implementationVersion ?: "0.0.0-SNAPSHOT"
+    }
+
     @JvmStatic
     fun main(args: Array<String>) {
         app.runAndExitIfNonZero(args.toList())

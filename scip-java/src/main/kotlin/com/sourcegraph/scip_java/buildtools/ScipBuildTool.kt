@@ -1,6 +1,5 @@
 package com.sourcegraph.scip_java.buildtools
 
-import com.sourcegraph.scip_java.BuildInfo
 import com.sourcegraph.scip_java.Embedded
 import com.sourcegraph.scip_java.commands.IndexCommand
 import java.io.File
@@ -300,13 +299,12 @@ class ScipBuildTool(index: IndexCommand) : BuildTool("SCIP", index) {
         }
         val javac = javacPath(config)
         index.app.reporter.info("$ $javac @$argsfile")
-        val javacModuleOptions = BuildInfo.javacModuleOptions
         val jvmOptions = config.jvmOptions.map { "-J$it" }
 
         val cmd = mutableListOf<String>()
         cmd += javac.toString()
         cmd += "@$argsfile"
-        cmd += javacModuleOptions
+        cmd += Embedded.javacModuleOptions
         cmd += jvmOptions
         val result =
             ProcessRunner.run(

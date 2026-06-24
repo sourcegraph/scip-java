@@ -8,6 +8,16 @@ import java.nio.file.StandardCopyOption
 
 object Embedded {
 
+    /** `javac` launcher flags required by the SCIP plugin to access internal javac APIs. */
+    val javacModuleOptions: List<String> =
+        listOf(
+            "-J--add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED",
+            "-J--add-exports=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED",
+            "-J--add-exports=jdk.compiler/com.sun.tools.javac.model=ALL-UNNAMED",
+            "-J--add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED",
+            "-J--add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED",
+        )
+
     fun scipJar(tmpDir: Path): Path = copyFile(tmpDir, "scip-plugin.jar")
 
     fun gradlePluginJar(tmpDir: Path): Path = copyFile(tmpDir, "gradle-plugin.jar")
@@ -32,7 +42,7 @@ object Embedded {
         val newJavacopts = tmp.resolve("javac_newarguments")
         // --add-exports flags required to access internal javac APIs from our
         // SCIP plugin. Always set; Java 11+ is the supported baseline.
-        val javacModuleOptions = BuildInfo.javacModuleOptions.joinToString(" ")
+        val javacModuleOptionsText = javacModuleOptions.joinToString(" ")
         val injectScipArguments =
             listOf(
                     "java",
@@ -59,9 +69,11 @@ object Embedded {
             append("done\n")
             append(injectScipArguments).append('\n')
             append("if [ \${#LAUNCHER_ARGS[@]} -eq 0 ]; then\n")
-            append("  javac $javacModuleOptions \"@\$NEW_JAVAC_OPTS\"\n")
+            append("  javac $javacModuleOptionsText \"@\$NEW_JAVAC_OPTS\"\n")
             append("else\n")
-            append("  javac $javacModuleOptions \"@\$NEW_JAVAC_OPTS\" \"\${LAUNCHER_ARGS[@]}\"\n")
+            append(
+                "  javac $javacModuleOptionsText \"@\$NEW_JAVAC_OPTS\" \"\${LAUNCHER_ARGS[@]}\"\n"
+            )
             append("fi\n")
         }
         Files.write(javac, script.toByteArray(StandardCharsets.UTF_8))

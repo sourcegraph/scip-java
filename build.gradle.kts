@@ -14,6 +14,7 @@ import org.gradle.api.tasks.compile.JavaCompile
 import org.gradle.api.tasks.javadoc.Javadoc
 import org.gradle.api.tasks.testing.Test
 import org.gradle.external.javadoc.StandardJavadocDocletOptions
+import org.gradle.jvm.tasks.Jar
 import org.gradle.language.jvm.tasks.ProcessResources
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
@@ -311,14 +312,16 @@ project(":scip-java") {
             rename { "scip-kotlinc.jar" }
         }
         into(layout.buildDirectory.dir("generated/resources/embedded"))
-        inputs.property("version", project.version.toString())
-        doLast {
-            destinationDir.resolve("scip-java.properties").writeText("version=${project.version}\n")
-        }
     }
 
     tasks.named<ProcessResources>("processResources") {
         from(generateEmbeddedResources)
+    }
+
+    tasks.named<Jar>("jar") {
+        manifest {
+            attributes("Implementation-Version" to project.version)
+        }
     }
 
     val generateDistributionVersion = tasks.register("generateDistributionVersion") {
