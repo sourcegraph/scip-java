@@ -41,8 +41,6 @@ val javacJvmOptions =
         .map { it.trim() }
         .filter { it.isNotEmpty() }
 val catalog = libs
-val protobufVersion = catalog.versions.protobuf.asProvider().get()
-val repositoryUrl = "https://github.com/sourcegraph/scip-java"
 
 allprojects {
     group = "com.sourcegraph"
@@ -92,6 +90,7 @@ fun Project.configureMavenPublishing() {
     apply(plugin = "com.vanniktech.maven.publish")
 
     extensions.configure<MavenPublishBaseExtension>("mavenPublishing") {
+        val repositoryUrl = "https://github.com/sourcegraph/scip-java"
         publishToMavenCentral()
         signAllPublications()
 
@@ -194,11 +193,11 @@ project(":scip-kotlinc") {
     }
 
     tasks.withType<KotlinCompile>().configureEach {
-        compilerOptions.freeCompilerArgs.addAll("-Xinline-classes", "-Xcontext-parameters")
+        compilerOptions.freeCompilerArgs.add("-Xcontext-parameters")
     }
 
     tasks.named<Test>("test") {
-        jvmArgs("-Xmx2g")
+        maxHeapSize = "2g"
     }
 
     tasks.named<ShadowJar>("shadowJar") {
@@ -256,6 +255,7 @@ project(":scip-aggregator") {
     }
 
     extensions.configure<ProtobufExtension>("protobuf") {
+        val protobufVersion = catalog.versions.protobuf.asProvider().get()
         protoc {
             artifact = "com.google.protobuf:protoc:$protobufVersion"
         }
