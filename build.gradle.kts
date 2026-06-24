@@ -62,6 +62,9 @@ val javacModuleOptions =
 val javacTestJvmOptions = javacModuleOptions.map { it.removePrefix("-J") }
 val catalog = libs
 val protobufVersion = catalog.versions.protobuf.asProvider().get()
+val repositoryUrl = "https://github.com/sourcegraph/scip-java"
+val signingKey = providers.environmentVariable("PGP_SECRET").map(::decodePgpSecret)
+val signingPassword = providers.environmentVariable("PGP_PASSPHRASE")
 
 allprojects {
     group = rootProject.group
@@ -107,7 +110,7 @@ subprojects {
     }
 }
 
-fun Project.configureMavenPublishing(displayName: String, descriptionText: String) {
+fun Project.configureMavenPublishing() {
     apply(plugin = "maven-publish")
     apply(plugin = "signing")
 
@@ -121,9 +124,9 @@ fun Project.configureMavenPublishing(displayName: String, descriptionText: Strin
             create<MavenPublication>("mavenJava") {
                 from(components["java"])
                 pom {
-                    name.set(displayName)
-                    description.set(descriptionText)
-                    url.set("https://github.com/sourcegraph/scip-java")
+                    name.set(project.name)
+                    description.set(project.description ?: project.name)
+                    url.set(repositoryUrl)
                     licenses {
                         license {
                             name.set("Apache-2.0")
@@ -137,9 +140,9 @@ fun Project.configureMavenPublishing(displayName: String, descriptionText: Strin
                         }
                     }
                     scm {
-                        connection.set("scm:git:https://github.com/sourcegraph/scip-java.git")
+                        connection.set("scm:git:$repositoryUrl.git")
                         developerConnection.set("scm:git:ssh://git@github.com/sourcegraph/scip-java.git")
-                        url.set("https://github.com/sourcegraph/scip-java")
+                        url.set(repositoryUrl)
                     }
                 }
             }
@@ -147,8 +150,6 @@ fun Project.configureMavenPublishing(displayName: String, descriptionText: Strin
     }
 
     val publishing = extensions.getByType<PublishingExtension>()
-    val signingKey = providers.environmentVariable("PGP_SECRET").map(::decodePgpSecret)
-    val signingPassword = providers.environmentVariable("PGP_PASSPHRASE")
     extensions.configure<SigningExtension> {
         isRequired = signingKey.isPresent && !project.version.toString().endsWith("SNAPSHOT")
         if (signingKey.isPresent) {
@@ -171,20 +172,19 @@ nexusPublishing {
 
 project(":scip-shared") {
     apply(plugin = "java-library")
+    description = "Shared SCIP utilities used by scip-java compiler plugins"
 
     dependencies {
         "api"(catalog.scip.java.bindings)
     }
 
-    configureMavenPublishing(
-        displayName = "scip-shared",
-        descriptionText = "Shared SCIP utilities used by scip-java compiler plugins",
-    )
+    configureMavenPublishing()
 }
 
 project(":scip-javac") {
     apply(plugin = "java-library")
     apply(plugin = "com.github.johnrengelman.shadow")
+    description = "A javac plugin to emit SCIP information"
 
     dependencies {
         "api"(project(":scip-shared"))
@@ -218,16 +218,14 @@ project(":scip-javac") {
         }
     }
 
-    configureMavenPublishing(
-        displayName = "scip-javac",
-        descriptionText = "A javac plugin to emit SCIP information",
-    )
+    configureMavenPublishing()
 }
 
 project(":scip-kotlinc") {
     apply(plugin = "java-library")
     apply(plugin = "org.jetbrains.kotlin.jvm")
     apply(plugin = "com.github.johnrengelman.shadow")
+    description = "A kotlinc plugin to emit SCIP information"
 
     dependencies {
         "implementation"(project(":scip-shared"))
@@ -258,10 +256,7 @@ project(":scip-kotlinc") {
         relocate("com.intellij", "org.jetbrains.kotlin.com.intellij")
     }
 
-    configureMavenPublishing(
-        displayName = "scip-kotlinc",
-        descriptionText = "A kotlinc plugin to emit SCIP information",
-    )
+    configureMavenPublishing()
 }
 
 project(":scip-gradle-plugin") {
@@ -276,6 +271,7 @@ project(":scip-gradle-plugin") {
 
 project(":scip-maven-plugin") {
     apply(plugin = "java-library")
+    description = "A Maven plugin that exports dependency metadata for scip-java"
 
     dependencies {
         "implementation"(catalog.maven.plugin.api)
@@ -293,15 +289,13 @@ project(":scip-maven-plugin") {
         inputs.property("version", project.version.toString())
     }
 
-    configureMavenPublishing(
-        displayName = "scip-maven-plugin",
-        descriptionText = "A Maven plugin that exports dependency metadata for scip-java",
-    )
+    configureMavenPublishing()
 }
 
 project(":scip-aggregator") {
     apply(plugin = "java-library")
     apply(plugin = "com.google.protobuf")
+    description = "Aggregates compiler-plugin SCIP shards into a single SCIP index"
 
     dependencies {
         "api"(catalog.scip.java.bindings)
@@ -325,15 +319,13 @@ project(":scip-aggregator") {
         }
     }
 
-    configureMavenPublishing(
-        displayName = "scip-aggregator",
-        descriptionText = "Aggregates compiler-plugin SCIP shards into a single SCIP index",
-    )
+    configureMavenPublishing()
 }
 
 project(":scip-java") {
     apply(plugin = "org.jetbrains.kotlin.jvm")
     apply(plugin = "application")
+    description = "Java and Kotlin indexer for SCIP"
 
     dependencies {
         "implementation"(project(":scip-aggregator"))
@@ -405,10 +397,7 @@ project(":scip-java") {
         }
     }
 
-    configureMavenPublishing(
-        displayName = "scip-java",
-        descriptionText = "Java and Kotlin indexer for SCIP",
-    )
+    configureMavenPublishing()
 }
 
 project(":scip-snapshots-java-common") {
