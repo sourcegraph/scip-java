@@ -24,7 +24,7 @@ class MavenBuildTool(index: IndexCommand) : BuildTool("Maven", index) {
             val mavenScript =
                 if (Files.isRegularFile(mvnw) && Files.isExecutable(mvnw)) mvnw.toString()
                 else "mvn"
-            val executable =
+            val javac =
                 Embedded.customJavac(
                     index.workingDirectory,
                     index.finalTargetroot(defaultTargetroot),
@@ -38,7 +38,7 @@ class MavenBuildTool(index: IndexCommand) : BuildTool("Maven", index) {
             // '-Dmaven.compiler.executable' setting. Forcing the compilerId to
             // 'javac' fixes the issue for this repo.
             command += "-Dmaven.compiler.compilerId=javac"
-            command += "-Dmaven.compiler.executable=$executable"
+            command += "-Dmaven.compiler.executable=${javac.executable}"
             command += "-Dmaven.compiler.fork=true"
             command +=
                 index.finalBuildCommand(
@@ -52,7 +52,7 @@ class MavenBuildTool(index: IndexCommand) : BuildTool("Maven", index) {
                     )
                 )
 
-            val exit = index.app.runProcess(command)
+            val exit = index.app.runProcess(command, env = javac.environment)
             Embedded.reportUnexpectedJavacErrors(index.app.reporter, tmp) ?: exit
         }
 }
