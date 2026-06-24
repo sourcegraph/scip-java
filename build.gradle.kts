@@ -83,8 +83,6 @@ subprojects {
         extensions.configure<JavaPluginExtension> {
             sourceCompatibility = JavaVersion.VERSION_11
             targetCompatibility = JavaVersion.VERSION_11
-            withSourcesJar()
-            withJavadocJar()
         }
 
         tasks.withType<JavaCompile>().configureEach {
@@ -109,6 +107,11 @@ subprojects {
 fun Project.configureMavenPublishing(displayName: String, descriptionText: String) {
     apply(plugin = "maven-publish")
     apply(plugin = "signing")
+
+    extensions.configure<JavaPluginExtension> {
+        withSourcesJar()
+        withJavadocJar()
+    }
 
     extensions.configure<PublishingExtension> {
         publications {
@@ -166,17 +169,8 @@ nexusPublishing {
 project(":scip-shared") {
     apply(plugin = "java-library")
 
-    extensions.configure<JavaPluginExtension> {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
-
     dependencies {
         "api"(library("scip-java-bindings"))
-    }
-
-    tasks.withType<JavaCompile>().configureEach {
-        options.release.set(8)
     }
 
     configureMavenPublishing(
@@ -210,7 +204,6 @@ project(":scip-javac") {
     }
 
     tasks.named<ShadowJar>("shadowJar") {
-        archiveClassifier.set("all")
         mergeServiceFiles()
         exclude("javax/**", "com/sun/**", "sun/**", "META-INF/versions/9/module-info.class")
         relocate("com.google", "com.sourcegraph.shaded.com.google")
@@ -233,11 +226,6 @@ project(":scip-kotlinc") {
     apply(plugin = "org.jetbrains.kotlin.jvm")
     apply(plugin = "com.github.johnrengelman.shadow")
 
-    extensions.configure<JavaPluginExtension> {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
-
     dependencies {
         "implementation"(project(":scip-shared"))
         "implementation"(library("scip-kotlin-bindings"))
@@ -255,12 +243,8 @@ project(":scip-kotlinc") {
     }
 
     tasks.withType<KotlinCompile>().configureEach {
-        compilerOptions.jvmTarget.set(JvmTarget.JVM_1_8)
+        compilerOptions.jvmTarget.set(JvmTarget.JVM_11)
         compilerOptions.freeCompilerArgs.addAll("-Xinline-classes", "-Xcontext-parameters")
-    }
-
-    tasks.withType<JavaCompile>().configureEach {
-        options.release.set(8)
     }
 
     tasks.named<Test>("test") {
@@ -268,7 +252,6 @@ project(":scip-kotlinc") {
     }
 
     tasks.named<ShadowJar>("shadowJar") {
-        archiveClassifier.set("all")
         mergeServiceFiles()
         relocate("com.intellij", "org.jetbrains.kotlin.com.intellij")
     }
@@ -292,9 +275,6 @@ project(":scip-gradle-plugin") {
         "compileOnly"(library("gradle-test-kit"))
     }
 
-    tasks.named<ShadowJar>("shadowJar") {
-        archiveClassifier.set("all")
-    }
 }
 
 project(":scip-maven-plugin") {
@@ -409,10 +389,8 @@ project(":scip-java") {
         }
     }
 
-    extensions.configure<SourceSetContainer> {
-        named("main") {
-            resources.srcDir(generateEmbeddedResources)
-        }
+    tasks.named<ProcessResources>("processResources") {
+        from(generateEmbeddedResources)
     }
 
     val generateDistributionVersion = tasks.register("generateDistributionVersion") {
@@ -475,11 +453,6 @@ project(":scip-snapshots-kotlin-common") {
     apply(plugin = "java-library")
     apply(plugin = "org.jetbrains.kotlin.jvm")
 
-    extensions.configure<JavaPluginExtension> {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
-
     dependencies {
         "implementation"(library("kotlin-stdlib"))
     }
@@ -492,7 +465,7 @@ project(":scip-snapshots-kotlin-common") {
         dependsOn(kotlincShadow)
         inputs.file(kotlincShadow.flatMap { it.archiveFile })
         outputs.dir(scipTargetroot)
-        compilerOptions.jvmTarget.set(JvmTarget.JVM_1_8)
+        compilerOptions.jvmTarget.set(JvmTarget.JVM_11)
         compilerOptions.freeCompilerArgs.addAll(
             "-Xplugin=${kotlincShadow.flatMap { it.archiveFile }.get().asFile.absolutePath}",
             "-P",
@@ -512,7 +485,6 @@ project(":scip-snapshots-kotlin-common") {
         options.annotationProcessorPath = files(javacShadow.flatMap { it.archiveFile })
         outputs.dir(scipTargetroot)
         options.isFork = true
-        options.release.set(8)
         options.forkOptions.jvmArgs = (options.forkOptions.jvmArgs ?: emptyList()) + javacTestJvmOptions
         options.compilerArgs.add(
             "-Xplugin:scip -sourceroot:${rootProject.rootDir.absolutePath} " +
