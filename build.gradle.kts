@@ -25,9 +25,6 @@ plugins {
     alias(libs.plugins.vanniktech.maven.publish) apply false
 }
 
-group = "com.sourcegraph"
-version = providers.gradleProperty("releaseVersion").orElse("0.0.0-SNAPSHOT").get()
-
 val javacModuleOptions =
     listOf(
         "-J--add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED",
@@ -42,8 +39,8 @@ val protobufVersion = catalog.versions.protobuf.asProvider().get()
 val repositoryUrl = "https://github.com/sourcegraph/scip-java"
 
 allprojects {
-    group = rootProject.group
-    version = rootProject.version
+    group = "com.sourcegraph"
+    version = providers.gradleProperty("releaseVersion").orElse("0.0.0-SNAPSHOT").get()
 }
 
 subprojects {
