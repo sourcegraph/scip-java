@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.sourcegraph</groupId>
-  <artifactId>scip-java-parent</artifactId>
+  <artifactId>scip-java-root</artifactId>
   <version>${revision}</version>
   <packaging>pom</packaging>
 

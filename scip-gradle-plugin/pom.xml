@@ -6,7 +6,7 @@
 
   <parent>
     <groupId>com.sourcegraph</groupId>
-    <artifactId>scip-java-parent</artifactId>
+    <artifactId>scip-java-root</artifactId>
     <version>${revision}</version>
     <relativePath>../pom.xml</relativePath>
   </parent>

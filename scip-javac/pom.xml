@@ -6,7 +6,7 @@
 
   <parent>
     <groupId>com.sourcegraph</groupId>
-    <artifactId>scip-java-parent</artifactId>
+    <artifactId>scip-java-root</artifactId>
     <version>${revision}</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
@@ -42,10 +42,32 @@
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>create-empty-processorpath</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <configuration>
+              <target>
+                <mkdir dir="${project.build.directory}/empty-processorpath" />
+              </target>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
         <configuration>
           <debug>true</debug>
           <proc>none</proc>
+          <compilerArgs>
+            <arg>-processorpath</arg>
+            <arg>${project.build.directory}/empty-processorpath</arg>
+          </compilerArgs>
         </configuration>
       </plugin>
       <plugin>
