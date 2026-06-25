@@ -115,14 +115,6 @@ jobs:
       - name: scip-kotlinc tests
         run: nix develop --command gradle :scip-kotlinc:test --no-daemon
 
-      - name: Regenerate snapshots
-        run: nix develop --command gradle :scip-snapshots:saveSnapshots --no-daemon
-
-      - name: Check snapshot drift
-        run: |
-          git diff --exit-code \
-            scip-snapshots/expected
-
   maven:
     runs-on: ubuntu-latest
     name: Maven tests

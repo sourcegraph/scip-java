@@ -1,0 +1,27 @@
+name: Snapshots
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  snapshots:
+    runs-on: ubuntu-latest
+    name: Snapshots
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: DeterminateSystems/nix-installer-action@v22
+        with:
+          summarize: false
+
+      - uses: DeterminateSystems/magic-nix-cache-action@v13
+
+      - name: Regenerate snapshots
+        run: nix develop --command gradle :scip-snapshots:saveSnapshots --no-daemon
+
+      - name: Check snapshot drift
+        run: |
+          git diff --exit-code \
+            scip-snapshots/expected
