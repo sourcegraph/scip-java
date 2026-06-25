@@ -45,7 +45,7 @@
       {
         checks = {
           actionlint = pkgs.runCommand "check-actionlint" { } ''
-            ${pkgs.actionlint}/bin/actionlint ${./.github/workflows}/*.yml
+            ${pkgs.actionlint}/bin/actionlint ${./.github/workflows}/*.yaml
             touch $out
           '';
           javafmt = pkgs.runCommand "check-javafmt" { } ''
