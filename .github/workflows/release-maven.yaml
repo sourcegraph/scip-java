@@ -38,6 +38,6 @@ jobs:
     needs: publish
     permissions:
       contents: write
-    uses: ./.github/workflows/release-cli.yml
+    uses: ./.github/workflows/release-cli.yaml
     with:
       tag: ${{ github.ref_name }}
