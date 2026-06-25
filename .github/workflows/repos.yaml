@@ -86,6 +86,18 @@ jobs:
             bazel_version: ""
             covers: Maven, multi-module Java, Java 11 runtime
 
+          - name: maven-kotlin-json-kotlin-maven
+            repository: pwall567/json-kotlin-maven
+            ref: 523f4fd624c3abca4a083c96be596d6f4799b705
+            directory: .
+            build_tool: scip
+            build_command: ""
+            java: 17
+            bazel_version: ""
+            scip_config: maven-kotlin
+            expected_language: kotlin
+            covers: Maven Kotlin project, manual SCIP config, Kotlin source, Java 17 runtime
+
           - name: gradle-java21-readiness
             repository: ePages-de/spring-boot-readiness
             ref: 8a91762e723e5204c69339ebbfc2517a48a8651a
@@ -187,8 +199,24 @@ jobs:
           BUILD_TOOL: ${{ matrix.build_tool }}
           BUILD_COMMAND: ${{ matrix.build_command }}
           BAZEL_VERSION: ${{ matrix.bazel_version }}
+          SCIP_CONFIG: ${{ matrix.scip_config }}
         run: |
           cd "$REPO_WORKDIR"
+
+          if [[ "$SCIP_CONFIG" == "maven-kotlin" ]]; then
+            mkdir -p target
+            mvn --batch-mode -q dependency:build-classpath -Dmdep.outputFile=target/scip-java-classpath.txt
+            jq -Rn '
+              input
+              | split(":")
+              | map(select(length > 0))
+              | {
+                  sourceFiles: ["src/main/kotlin"],
+                  classpath: .,
+                  javacOptions: ["-source", "1.8", "-target", "1.8"]
+                }
+            ' < target/scip-java-classpath.txt > scip-java.json
+          fi
 
           index_args=(--build-tool="$BUILD_TOOL")
           if [[ "$BUILD_TOOL" == "bazel" ]]; then
@@ -208,6 +236,8 @@ jobs:
           fi
 
       - name: Validate SCIP index data
+        env:
+          EXPECTED_LANGUAGE: ${{ matrix.expected_language }}
         run: |
           cd "$REPO_WORKDIR"
 
@@ -232,10 +262,10 @@ jobs:
               source_documents=$((source_documents + 1))
             fi
           done < <(
-            jq -r '
+            jq -r --arg expected_language "$EXPECTED_LANGUAGE" '
               .documents[]?
-              | select((.language == "java" or .language == "kotlin")
-                  and ((.relative_path // .relativePath // "") | test("\\.(java|kt)$"))
+              | select((if $expected_language == "" then (.language == "java" or .language == "kotlin") else .language == $expected_language end)
+                  and ((.relative_path // .relativePath // "") | test(if $expected_language == "kotlin" then "\\.kt$" elif $expected_language == "java" then "\\.java$" else "\\.(java|kt)$" end))
                   and ((.occurrences // []) | length > 0)
                   and ((.symbols // []) | length > 0))
               | .relative_path // .relativePath
@@ -243,6 +273,10 @@ jobs:
           )
 
           if (( source_documents < 1 )); then
-            echo "SCIP index did not contain any checked-out Java/Kotlin source documents with occurrences and symbols" >&2
+            if [[ -n "$EXPECTED_LANGUAGE" ]]; then
+              echo "SCIP index did not contain any checked-out $EXPECTED_LANGUAGE source documents with occurrences and symbols" >&2
+            else
+              echo "SCIP index did not contain any checked-out Java/Kotlin source documents with occurrences and symbols" >&2
+            fi
             exit 1
           fi
