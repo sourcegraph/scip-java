@@ -59,25 +59,35 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - name: maven-java-junit4
-            repository: junit-team/junit4
-            ref: 300468b1efd48d76fac2f7bd6d576846dcbbf5ed
-            directory: .
-            build_tool: maven
-            build_command: ""
-            java: 11
-            bazel_version: ""
-            covers: Maven, Java, Java 11 runtime
-
-          - name: gradle-java-iwf-sdk
-            repository: indeedeng/iwf-java-sdk
-            ref: 8fa04457c0abcc4473300f17ea0a033d8f93ed88
+          - name: gradle-java11-pusher
+            repository: pusher/pusher-http-java
+            ref: 94f25a2848e5939cf27dafad8ed25aeaa2d83274
             directory: .
             build_tool: gradle
             build_command: ""
+            java: 11
+            bazel_version: ""
+            covers: Gradle, Java project target 11, Java 11 runtime
+
+          - name: maven-java17-spring-boot
+            repository: spring-guides/gs-spring-boot
+            ref: 2ffad4f418c3052b534184228a45d062f566096f
+            directory: complete
+            build_tool: maven
+            build_command: ""
             java: 17
             bazel_version: ""
-            covers: Gradle, Java, Java 17 runtime
+            covers: Maven, Java project target 17, Java 17 runtime
+
+          - name: gradle-java21-readiness
+            repository: ePages-de/spring-boot-readiness
+            ref: 8a91762e723e5204c69339ebbfc2517a48a8651a
+            directory: .
+            build_tool: gradle
+            build_command: "clean compileJava"
+            java: 21
+            bazel_version: ""
+            covers: Gradle, Java project target 21, Java 21 runtime
 
           - name: gradle-kotlin-okio
             repository: square/okio
