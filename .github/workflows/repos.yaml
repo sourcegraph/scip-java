@@ -6,9 +6,6 @@ on:
       - main
   pull_request:
   workflow_dispatch:
-  schedule:
-    # Exercise real-world repositories regularly so dependency/toolchain drift is visible.
-    - cron: "0 6 * * 1"
 
 permissions:
   contents: read
