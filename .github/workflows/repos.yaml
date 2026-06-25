@@ -59,9 +59,9 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - name: maven-java-javapoet
-            repository: square/javapoet
-            ref: javapoet-1.13.0
+          - name: maven-java-junit4
+            repository: junit-team/junit4
+            ref: 300468b1efd48d76fac2f7bd6d576846dcbbf5ed
             directory: .
             build_tool: maven
             build_command: ""
@@ -69,32 +69,42 @@ jobs:
             bazel_version: ""
             covers: Maven, Java, Java 11 runtime
 
-          - name: gradle-kotlin-kotlinpoet
-            repository: square/kotlinpoet
-            ref: 1.18.1
+          - name: gradle-java-iwf-sdk
+            repository: indeedeng/iwf-java-sdk
+            ref: 8fa04457c0abcc4473300f17ea0a033d8f93ed88
             directory: .
             build_tool: gradle
-            build_command: "clean :kotlinpoet:scipPrintDependencies :kotlinpoet:scipCompileAll"
+            build_command: ""
             java: 17
             bazel_version: ""
-            covers: Gradle, Kotlin, Java 17 runtime
+            covers: Gradle, Java, Java 17 runtime
 
-          - name: gradle-mixed-moshi
-            repository: square/moshi
-            ref: 1.15.2
+          - name: gradle-kotlin-okio
+            repository: square/okio
+            ref: parent-3.16.0
             directory: .
             build_tool: gradle
-            build_command: "clean :moshi:scipPrintDependencies :moshi:scipCompileAll :moshi-kotlin:scipPrintDependencies :moshi-kotlin:scipCompileAll"
+            build_command: "-Dkjs=false -Dkwasm=false :okio:compileKotlinJvm"
             java: 17
             bazel_version: ""
-            covers: Gradle, mixed Java/Kotlin, Java 17 runtime
+            covers: Gradle, Kotlin, Kotlin 2.2.0
+
+          - name: gradle-mixed-okio-jmh
+            repository: square/okio
+            ref: parent-3.16.0
+            directory: .
+            build_tool: gradle
+            build_command: "-Dkjs=false -Dkwasm=false :okio:jvm:jmh:jmhClasses"
+            java: 21
+            bazel_version: ""
+            covers: Gradle, mixed Java/Kotlin, Java 21 runtime
 
           - name: bazel-java-examples
             repository: bazelbuild/examples
             ref: dbf3399037ae65f901d46147804749fae1409ef2
             directory: java-tutorial
             build_tool: bazel
-            build_command: "//..."
+            build_command: "//:ProjectRunner"
             java: 21
             bazel_version: 7.6.1
             covers: Bazel, Java, Java 21 runtime
