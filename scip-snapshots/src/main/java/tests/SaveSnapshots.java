@@ -1,8 +1,9 @@
 package tests;
 
 /**
- * Regenerates all snapshot goldens (invoked by {@code gradle :scip-snapshots:saveSnapshots}).
- * Snapshot cases are supplied via {@code -Dsnapshot.*} system properties by the Gradle build.
+ * Regenerates all snapshot goldens (invoked by {@code mvn -pl scip-snapshots -am -DskipTests
+ * -PsaveSnapshots verify}). Snapshot cases are supplied via {@code -Dsnapshot.*} system properties
+ * by the Maven build.
  */
 public final class SaveSnapshots {
   private SaveSnapshots() {}

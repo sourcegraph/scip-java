@@ -17,7 +17,7 @@ RUN git config --global --add safe.directory *
 
 COPY . .
 
-RUN gradle --no-daemon :scip-java:installDist && mkdir -p /app/scip-java && cp -R scip-java/build/install/scip-java/. /app/scip-java/
+RUN mvn --batch-mode -pl scip-java -am -DskipTests package && mkdir -p /app/scip-java && cp -R scip-java/target/install/scip-java/. /app/scip-java/
 
 COPY ./bin/scip-java-docker-script.sh /usr/bin/scip-java
 

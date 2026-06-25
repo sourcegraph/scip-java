@@ -13,6 +13,7 @@ build/
 .lib/
 dist/*
 target/
+.flattened-pom.xml
 lib_managed/
 src_managed/
 .bloop

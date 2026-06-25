@@ -18,7 +18,7 @@ import org.scip_code.scip.Index;
 
 /**
  * Indexes the {@code scip-snapshots/cases} corpora and renders golden SCIP snapshots. Runtime paths
- * are supplied as {@code -Dsnapshot.*} system properties by the Gradle build.
+ * are supplied as {@code -Dsnapshot.*} system properties by the Maven build.
  */
 public class MinimizedSnapshotScipGenerator {
   public static final class SnapshotCase {
@@ -141,7 +141,8 @@ public class MinimizedSnapshotScipGenerator {
       throw new IllegalStateException(
           "Missing -D"
               + name
-              + ". Run via gradle :scip-snapshots:test or :scip-snapshots:saveSnapshots.");
+              + ". Run via mvn -pl scip-snapshots -am test or mvn -pl scip-snapshots -am"
+              + " -DskipTests -PsaveSnapshots verify.");
     }
     return value;
   }

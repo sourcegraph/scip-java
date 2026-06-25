@@ -22,7 +22,7 @@ jobs:
       - uses: DeterminateSystems/magic-nix-cache-action@v13
 
       - name: Main project tests
-        run: nix develop .#jdk${{ matrix.java }} --command gradle test --no-daemon
+        run: nix develop .#jdk${{ matrix.java }} --command mvn --batch-mode test
 
   docker_test:
     runs-on: ubuntu-latest
@@ -83,8 +83,8 @@ jobs:
 
       - uses: DeterminateSystems/magic-nix-cache-action@v13
 
-      - run: nix develop --command gradle :scip-java:installDist --no-daemon
-      - run: echo "$PWD/scip-java/build/install/scip-java/bin" >> "$GITHUB_PATH"
+      - run: nix develop --command mvn --batch-mode -pl scip-java -am -DskipTests package
+      - run: echo "$PWD/scip-java/target/install/scip-java/bin" >> "$GITHUB_PATH"
       - name: Auto-index scip-java codebase
         run: |
           # shellcheck disable=SC2016
@@ -113,10 +113,10 @@ jobs:
       - uses: DeterminateSystems/magic-nix-cache-action@v13
 
       - name: scip-kotlinc tests
-        run: nix develop --command gradle :scip-kotlinc:test --no-daemon
+        run: nix develop --command mvn --batch-mode -pl scip-kotlinc -am test
 
       - name: Regenerate snapshots
-        run: nix develop --command gradle :scip-snapshots:saveSnapshots --no-daemon
+        run: nix develop --command mvn --batch-mode -pl scip-snapshots -am -DskipTests -PsaveSnapshots verify
 
       - name: Check snapshot drift
         run: |
@@ -141,13 +141,13 @@ jobs:
 
       - run: |
           nix develop .#jdk${{ matrix.java }} --command \
-            gradle --no-daemon :scip-java:installDist publishToMavenLocal
+            mvn --batch-mode -DskipTests install
           SCIP_JAVA_VERSION="$(
-            sed -n 's/^version:=//p' scip-java/build/install/scip-java/VERSION
+            sed -n 's/^version:=//p' scip-java/target/install/scip-java/VERSION
           )"
           test -n "$SCIP_JAVA_VERSION"
           printf 'SCIP_JAVA_VERSION=%s\n' "$SCIP_JAVA_VERSION" >> "$GITHUB_ENV"
-          printf 'SCIP_JAVA_CLI=%s\n' "$PWD/scip-java/build/install/scip-java/bin/scip-java" >> "$GITHUB_ENV"
+          printf 'SCIP_JAVA_CLI=%s\n' "$PWD/scip-java/target/install/scip-java/bin/scip-java" >> "$GITHUB_ENV"
 
       - run: |
           nix develop "$GITHUB_WORKSPACE#jdk${{ matrix.java }}" --command \

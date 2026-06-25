@@ -16,9 +16,10 @@ import org.apache.maven.project.MavenProject;
 
 @Mojo(
     name = "sourcegraphDependencies",
-    defaultPhase = LifecyclePhase.COMPILE,
+    defaultPhase = LifecyclePhase.GENERATE_RESOURCES,
     requiresDependencyResolution = ResolutionScope.TEST,
-    requiresProject = true)
+    requiresProject = true,
+    threadSafe = true)
 public class DependencyWriterMojo extends AbstractMojo {
   @Parameter(defaultValue = "${project}", required = true, readonly = true)
   MavenProject project;
