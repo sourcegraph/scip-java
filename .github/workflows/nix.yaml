@@ -14,7 +14,7 @@ env:
 
 defaults:
   run:
-    shell: bash --noprofile --norc -eo pipefail -c 'nix develop "$NIX_DEVELOP" --command bash --noprofile --norc -eo pipefail "$1"' -- {0}
+    shell: bash --noprofile --norc -eo pipefail -c "nix develop $NIX_DEVELOP --command bash --noprofile --norc -eo pipefail $1" -- {0}
 
 jobs:
   flake-check:
