@@ -190,5 +190,19 @@ jobs:
             "$SCIP_JAVA_CLI" index "${index_args[@]}"
           fi
 
+      - name: Validate SCIP index data
+        run: |
+          cd "$REPO_WORKDIR"
+
           test -s index.scip
           du -h index.scip
+          scip stats --from index.scip | tee index.stats.json
+
+          documents="$(jq -r '.documents' index.stats.json)"
+          occurrences="$(jq -r '.occurrences' index.stats.json)"
+          definitions="$(jq -r '.definitions' index.stats.json)"
+
+          if (( documents < 1 || occurrences < 1 || definitions < 1 )); then
+            echo "SCIP index did not contain enough generated data: documents=$documents occurrences=$occurrences definitions=$definitions" >&2
+            exit 1
+          fi
