@@ -76,6 +76,16 @@ jobs:
             bazel_version: ""
             covers: Maven, Java project target 17, Java 17 runtime
 
+          - name: maven-java11-wagon-multimodule
+            repository: apache/maven-wagon
+            ref: 20b847446bb60f49af0428d592eadee774b5bff2
+            directory: .
+            build_tool: maven
+            build_command: "-DskipTests compile"
+            java: 11
+            bazel_version: ""
+            covers: Maven, multi-module Java, Java 11 runtime
+
           - name: gradle-java21-readiness
             repository: ePages-de/spring-boot-readiness
             ref: 8a91762e723e5204c69339ebbfc2517a48a8651a
@@ -85,6 +95,16 @@ jobs:
             java: 21
             bazel_version: ""
             covers: Gradle, Java project target 21, Java 21 runtime
+
+          - name: gradle-java11-mapstruct-lombok
+            repository: mapstruct/mapstruct-examples
+            ref: 3f9fd5ffe9e2272b6219a4216e842f8c009d1005
+            directory: mapstruct-lombok
+            build_tool: gradle
+            build_command: "compileJava"
+            java: 11
+            bazel_version: ""
+            covers: Gradle, Java annotation processors, Lombok, MapStruct, generated sources, Java 11 runtime
 
           - name: gradle-kotlin-okio
             repository: square/okio
@@ -201,5 +221,28 @@ jobs:
 
           if (( documents < 1 || occurrences < 1 || definitions < 1 )); then
             echo "SCIP index did not contain enough generated data: documents=$documents occurrences=$occurrences definitions=$definitions" >&2
+            exit 1
+          fi
+
+          scip print --json index.scip > index.print.json
+
+          source_documents=0
+          while IFS= read -r path; do
+            if [[ -f "$path" ]]; then
+              source_documents=$((source_documents + 1))
+            fi
+          done < <(
+            jq -r '
+              .documents[]?
+              | select((.language == "java" or .language == "kotlin")
+                  and ((.relative_path // .relativePath // "") | test("\\.(java|kt)$"))
+                  and ((.occurrences // []) | length > 0)
+                  and ((.symbols // []) | length > 0))
+              | .relative_path // .relativePath
+            ' index.print.json
+          )
+
+          if (( source_documents < 1 )); then
+            echo "SCIP index did not contain any checked-out Java/Kotlin source documents with occurrences and symbols" >&2
             exit 1
           fi
