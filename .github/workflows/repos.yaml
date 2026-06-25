@@ -1,0 +1,174 @@
+name: Repository indexing
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+  schedule:
+    # Exercise real-world repositories regularly so dependency/toolchain drift is visible.
+    - cron: "0 6 * * 1"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
+
+env:
+  NIX_DEVELOP: ${{ github.workspace }}#jdk21
+
+defaults:
+  run:
+    shell: bash --noprofile --norc -eo pipefail -c "nix develop $NIX_DEVELOP --command bash --noprofile --norc -eo pipefail $1" -- {0}
+
+jobs:
+  build-cli:
+    runs-on: ubuntu-latest
+    name: Build scip-java CLI
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: DeterminateSystems/nix-installer-action@v22
+        with:
+          summarize: false
+
+      - uses: DeterminateSystems/magic-nix-cache-action@v13
+
+      - name: Build distribution
+        run: gradle :scip-java:installDist --no-daemon
+
+      - name: Package distribution
+        run: tar -C scip-java/build/install -czf scip-java-dist.tgz scip-java
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: scip-java-dist
+          path: scip-java-dist.tgz
+          retention-days: 1
+
+  index-repo:
+    runs-on: ubuntu-latest
+    needs: build-cli
+    name: ${{ matrix.name }}
+    env:
+      NIX_DEVELOP: ${{ github.workspace }}#jdk${{ matrix.java }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: maven-java-javapoet
+            repository: square/javapoet
+            ref: javapoet-1.13.0
+            directory: .
+            build_tool: maven
+            build_command: ""
+            java: 11
+            bazel_version: ""
+            covers: Maven, Java, Java 11 runtime
+
+          - name: gradle-kotlin-kotlinpoet
+            repository: square/kotlinpoet
+            ref: 1.18.1
+            directory: .
+            build_tool: gradle
+            build_command: "clean :kotlinpoet:scipPrintDependencies :kotlinpoet:scipCompileAll"
+            java: 17
+            bazel_version: ""
+            covers: Gradle, Kotlin, Java 17 runtime
+
+          - name: gradle-mixed-moshi
+            repository: square/moshi
+            ref: 1.15.2
+            directory: .
+            build_tool: gradle
+            build_command: "clean :moshi:scipPrintDependencies :moshi:scipCompileAll :moshi-kotlin:scipPrintDependencies :moshi-kotlin:scipCompileAll"
+            java: 17
+            bazel_version: ""
+            covers: Gradle, mixed Java/Kotlin, Java 17 runtime
+
+          - name: bazel-java-examples
+            repository: bazelbuild/examples
+            ref: dbf3399037ae65f901d46147804749fae1409ef2
+            directory: java-tutorial
+            build_tool: bazel
+            build_command: "//..."
+            java: 21
+            bazel_version: 7.6.1
+            covers: Bazel, Java, Java 21 runtime
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: DeterminateSystems/nix-installer-action@v22
+        with:
+          summarize: false
+
+      - uses: DeterminateSystems/magic-nix-cache-action@v13
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: scip-java-dist
+          path: scip-java-dist
+
+      - name: Install scip-java CLI
+        run: |
+          mkdir -p "$RUNNER_TEMP/scip-java"
+          tar -xzf scip-java-dist/scip-java-dist.tgz -C "$RUNNER_TEMP/scip-java"
+          cli="$RUNNER_TEMP/scip-java/scip-java/bin/scip-java"
+          chmod +x "$cli"
+          "$cli" --help >/dev/null
+          printf 'SCIP_JAVA_CLI=%s\n' "$cli" >> "$GITHUB_ENV"
+
+      - name: Clone repository
+        env:
+          REPOSITORY: ${{ matrix.repository }}
+          REF: ${{ matrix.ref }}
+          DIRECTORY: ${{ matrix.directory }}
+          COVERS: ${{ matrix.covers }}
+        run: |
+          repo_dir="$RUNNER_TEMP/repos/${REPOSITORY//\//-}"
+          mkdir -p "$(dirname "$repo_dir")"
+          git init "$repo_dir"
+          git -C "$repo_dir" remote add origin "https://github.com/$REPOSITORY.git"
+          git -C "$repo_dir" fetch --depth=1 origin "$REF"
+          git -C "$repo_dir" checkout --detach FETCH_HEAD
+          git -C "$repo_dir" submodule update --init --recursive --depth 1
+
+          find "$repo_dir" -maxdepth 3 \( -name gradlew -o -name mvnw \) -type f -exec chmod +x {} +
+
+          workdir="$repo_dir/$DIRECTORY"
+          test -d "$workdir"
+
+          echo "Covers: $COVERS"
+          git -C "$repo_dir" rev-parse HEAD
+          printf 'REPO_WORKDIR=%s\n' "$workdir" >> "$GITHUB_ENV"
+
+      - name: Run scip-java index
+        env:
+          BUILD_TOOL: ${{ matrix.build_tool }}
+          BUILD_COMMAND: ${{ matrix.build_command }}
+          BAZEL_VERSION: ${{ matrix.bazel_version }}
+        run: |
+          cd "$REPO_WORKDIR"
+
+          index_args=(--build-tool="$BUILD_TOOL")
+          if [[ "$BUILD_TOOL" == "bazel" ]]; then
+            index_args+=(--bazel-scip-java-binary="$SCIP_JAVA_CLI" --bazel-overwrite-aspect-file)
+          fi
+
+          if [[ -n "$BAZEL_VERSION" ]]; then
+            export USE_BAZEL_VERSION="$BAZEL_VERSION"
+          fi
+
+          if [[ -n "$BUILD_COMMAND" ]]; then
+            # shellcheck disable=SC2206
+            build_command=($BUILD_COMMAND)
+            "$SCIP_JAVA_CLI" index "${index_args[@]}" -- "${build_command[@]}"
+          else
+            "$SCIP_JAVA_CLI" index "${index_args[@]}"
+          fi
+
+          test -s index.scip
+          du -h index.scip
