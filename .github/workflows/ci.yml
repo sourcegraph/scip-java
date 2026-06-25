@@ -62,6 +62,7 @@ jobs:
 
       - uses: DeterminateSystems/magic-nix-cache-action@v13
 
+      - run: nix develop --command mvn --batch-mode -DskipTests install
       - run: nix develop --command bazelisk build //... --//scip-javac:enabled=true
       - run: nix develop --command bazelisk run scip-aggregator:bazel -- --sourceroot "$PWD"
       - run: du -h index.scip
@@ -83,7 +84,7 @@ jobs:
 
       - uses: DeterminateSystems/magic-nix-cache-action@v13
 
-      - run: nix develop --command mvn --batch-mode -pl scip-java -am -DskipTests package
+      - run: nix develop --command mvn --batch-mode -DskipTests install
       - run: echo "$PWD/scip-java/target/install/scip-java/bin" >> "$GITHUB_PATH"
       - name: Auto-index scip-java codebase
         run: |

@@ -13,6 +13,24 @@ maven.install(
         "org.scip-code:scip-java-bindings:0.8.0",
     ],
     known_contributing_modules = ["protobuf"],
-    repositories = ["https://repo1.maven.org/maven2"],
+    repositories = [
+        "https://repo1.maven.org/maven2",
+    ],
+    lock_file = "//:maven_install.json",
 )
-use_repo(maven, "maven")
+
+# Keep changing in-repo tool artifacts unpinned: `mvn install` populates m2Local
+# before Bazel runs, avoiding duplicate Bazel-side build rules for these jars.
+maven.install(
+    name = "local_maven",
+    artifacts = [
+        "com.sourcegraph:scip-aggregator:0.0.0-SNAPSHOT",
+        "com.sourcegraph:scip-javac:jar:all:0.0.0-SNAPSHOT",
+    ],
+    fail_on_missing_checksum = False,
+    repositories = [
+        "m2Local",
+        "https://repo1.maven.org/maven2",
+    ],
+)
+use_repo(maven, "maven", "local_maven")

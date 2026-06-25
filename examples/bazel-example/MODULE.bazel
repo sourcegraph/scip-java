@@ -24,4 +24,16 @@ maven.install(
     ],
     repositories = ["https://repo1.maven.org/maven2"],
 )
-use_repo(maven, "maven")
+
+# This source-checkout example consumes scip-java's SNAPSHOT tool jars from
+# m2Local. Run `mvn -DskipTests install` at the repository root first.
+maven.install(
+    name = "local_maven",
+    fail_on_missing_checksum = False,
+    known_contributing_modules = ["scip_java"],
+    repositories = [
+        "m2Local",
+        "https://repo1.maven.org/maven2",
+    ],
+)
+use_repo(maven, "maven", "local_maven")

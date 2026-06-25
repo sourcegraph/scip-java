@@ -1,5 +1,6 @@
 load("@com_google_protobuf//bazel:java_proto_library.bzl", "java_proto_library")
 load("@com_google_protobuf//bazel:proto_library.bzl", "proto_library")
+load("@rules_jvm_external//:defs.bzl", "artifact")
 load("@rules_java//java:defs.bzl", "java_binary", "java_library")
 
 package(
@@ -10,7 +11,10 @@ java_binary(
     name = "bazel",
     main_class = "com.sourcegraph.scip_aggregator.BazelBuildTool",
     runtime_deps = [
-        ":scip-aggregator",
+        artifact(
+            "com.sourcegraph:scip-aggregator:0.0.0-SNAPSHOT",
+            repository_name = "local_maven",
+        ),
     ],
 )
 
