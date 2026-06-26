@@ -49,8 +49,7 @@ public class DependencyWriterMojo extends AbstractMojo {
                   + " referred back to.\n");
     } else {
       for (Object root : sourceRoots) {
-        if (root instanceof String) {
-          String rootString = (String) root;
+        if (root instanceof String rootString) {
           builder.append(
               String.format("%s\t%s\t%s\t%s\n", groupID, artifactID, version, rootString));
         }
@@ -58,8 +57,7 @@ public class DependencyWriterMojo extends AbstractMojo {
     }
 
     for (Object dep : artifacts) {
-      if (dep instanceof Artifact) {
-        Artifact artifact = (Artifact) dep;
+      if (dep instanceof Artifact artifact) {
         if (artifact.getFile() != null) {
           builder.append(
               String.format(

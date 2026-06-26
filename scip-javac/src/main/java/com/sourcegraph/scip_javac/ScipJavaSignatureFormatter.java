@@ -66,14 +66,14 @@ final class ScipJavaSignatureFormatter {
    * Returns the signature text for {@code sym}, or {@code ""} when {@code sym} has no signature.
    */
   String format(Element sym, Tree declTree) {
-    if (sym instanceof TypeElement) {
-      return formatClass((TypeElement) sym, declTree);
-    } else if (sym instanceof ExecutableElement) {
-      return formatMethod((ExecutableElement) sym, declTree);
-    } else if (sym instanceof VariableElement) {
-      return formatVariable((VariableElement) sym, declTree);
-    } else if (sym instanceof TypeParameterElement) {
-      return formatTypeParameter((TypeParameterElement) sym);
+    if (sym instanceof TypeElement typeElement) {
+      return formatClass(typeElement, declTree);
+    } else if (sym instanceof ExecutableElement executableElement) {
+      return formatMethod(executableElement, declTree);
+    } else if (sym instanceof VariableElement variableElement) {
+      return formatVariable(variableElement, declTree);
+    } else if (sym instanceof TypeParameterElement typeParameterElement) {
+      return formatTypeParameter(typeParameterElement);
     }
     return "";
   }
@@ -382,9 +382,9 @@ final class ScipJavaSignatureFormatter {
   }
 
   private static ModifiersTree modifiers(Tree tree) {
-    if (tree instanceof ClassTree) return ((ClassTree) tree).getModifiers();
-    if (tree instanceof MethodTree) return ((MethodTree) tree).getModifiers();
-    if (tree instanceof VariableTree) return ((VariableTree) tree).getModifiers();
+    if (tree instanceof ClassTree classTree) return classTree.getModifiers();
+    if (tree instanceof MethodTree methodTree) return methodTree.getModifiers();
+    if (tree instanceof VariableTree variableTree) return variableTree.getModifiers();
     return null;
   }
 
@@ -398,8 +398,7 @@ final class ScipJavaSignatureFormatter {
       b.append('(');
       ExpressionTree first = args.get(0);
       // `@Foo(value = X)` collapses to `@Foo(X)`, per JLS 9.7.3.
-      if (first instanceof AssignmentTree) {
-        AssignmentTree assign = (AssignmentTree) first;
+      if (first instanceof AssignmentTree assign) {
         if (isValueIdentifier(assign.getVariable())) {
           b.append(formatExpression(assign.getExpression()));
         } else {
@@ -423,46 +422,41 @@ final class ScipJavaSignatureFormatter {
   }
 
   private static boolean isValueIdentifier(ExpressionTree tree) {
-    return tree instanceof IdentifierTree
-        && "value".contentEquals(((IdentifierTree) tree).getName());
+    return tree instanceof IdentifierTree identifierTree
+        && "value".contentEquals(identifierTree.getName());
   }
 
   private String formatExpression(ExpressionTree expr) {
-    if (expr instanceof LiteralTree) return formatLiteral(((LiteralTree) expr).getValue());
-    if (expr instanceof IdentifierTree) return ((IdentifierTree) expr).getName().toString();
-    if (expr instanceof MemberSelectTree) {
-      MemberSelectTree select = (MemberSelectTree) expr;
+    if (expr instanceof LiteralTree literalTree) return formatLiteral(literalTree.getValue());
+    if (expr instanceof IdentifierTree identifierTree) return identifierTree.getName().toString();
+    if (expr instanceof MemberSelectTree select) {
       return formatExpression(select.getExpression()) + "." + select.getIdentifier();
     }
-    if (expr instanceof NewArrayTree) {
-      List<? extends ExpressionTree> inits = ((NewArrayTree) expr).getInitializers();
+    if (expr instanceof NewArrayTree newArrayTree) {
+      List<? extends ExpressionTree> inits = newArrayTree.getInitializers();
       if (inits == null) inits = Collections.emptyList();
       return inits.stream().map(this::formatExpression).collect(Collectors.joining(", ", "{", "}"));
     }
-    if (expr instanceof AnnotationTree) return formatAnnotation((AnnotationTree) expr);
-    if (expr instanceof AssignmentTree) {
-      AssignmentTree assign = (AssignmentTree) expr;
+    if (expr instanceof AnnotationTree annotationTree) return formatAnnotation(annotationTree);
+    if (expr instanceof AssignmentTree assign) {
       return formatExpression(assign.getVariable())
           + " = "
           + formatExpression(assign.getExpression());
     }
-    if (expr instanceof BinaryTree) {
-      BinaryTree bin = (BinaryTree) expr;
+    if (expr instanceof BinaryTree bin) {
       return formatExpression(bin.getLeftOperand())
           + " "
           + binaryOperator(bin.getKind())
           + " "
           + formatExpression(bin.getRightOperand());
     }
-    if (expr instanceof UnaryTree) {
-      UnaryTree un = (UnaryTree) expr;
+    if (expr instanceof UnaryTree un) {
       return unaryOperator(un.getKind(), formatExpression(un.getExpression()));
     }
-    if (expr instanceof ParenthesizedTree) {
-      return formatExpression(((ParenthesizedTree) expr).getExpression());
+    if (expr instanceof ParenthesizedTree parenthesizedTree) {
+      return formatExpression(parenthesizedTree.getExpression());
     }
-    if (expr instanceof TypeCastTree) {
-      TypeCastTree cast = (TypeCastTree) expr;
+    if (expr instanceof TypeCastTree cast) {
       TypeMirror type = typeOf(cast.getType());
       String typeText = type != null ? formatType(type) : cast.getType().toString();
       return "(" + typeText + ") " + formatExpression(cast.getExpression());
@@ -570,11 +564,12 @@ final class ScipJavaSignatureFormatter {
    * the initializer is not a {@code new EnumType(...)} expression or carries no arguments.
    */
   private static String enumConstantArgs(Tree declTree) {
-    if (!(declTree instanceof VariableTree)) return "";
-    ExpressionTree initializer = ((VariableTree) declTree).getInitializer();
-    if (!(initializer instanceof NewClassTree)) return "";
-    return ((NewClassTree) initializer)
-        .getArguments().stream().map(Object::toString).collect(Collectors.joining(", "));
+    if (!(declTree instanceof VariableTree variableTree)) return "";
+    ExpressionTree initializer = variableTree.getInitializer();
+    if (!(initializer instanceof NewClassTree newClassTree)) return "";
+    return newClassTree.getArguments().stream()
+        .map(Object::toString)
+        .collect(Collectors.joining(", "));
   }
 
   private static boolean isEnumParent(TypeMirror parent) {
@@ -590,10 +585,10 @@ final class ScipJavaSignatureFormatter {
   }
 
   private static boolean isQualified(TypeMirror tpe, String qualifiedName) {
-    if (!(tpe instanceof DeclaredType)) return false;
-    Element elem = ((DeclaredType) tpe).asElement();
-    return elem instanceof TypeElement
-        && qualifiedName.contentEquals(((TypeElement) elem).getQualifiedName());
+    if (!(tpe instanceof DeclaredType declaredType)) return false;
+    Element elem = declaredType.asElement();
+    return elem instanceof TypeElement typeElement
+        && qualifiedName.contentEquals(typeElement.getQualifiedName());
   }
 
   private Element elementOf(Tree tree) {

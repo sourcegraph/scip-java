@@ -40,11 +40,11 @@ public final class GlobalSymbolsCache {
   private String uncachedSymbol(Element sym, LocalSymbolsCache<Element, String> locals) {
     if (sym == null) return ScipSymbols.ROOT_PACKAGE;
 
-    if (sym instanceof PackageElement) {
-      if (((PackageElement) sym).isUnnamed()) return ScipSymbols.ROOT_PACKAGE;
+    if (sym instanceof PackageElement packageElement) {
+      if (packageElement.isUnnamed()) return ScipSymbols.ROOT_PACKAGE;
 
       StringBuilder sb = new StringBuilder();
-      String qualifiedName = ((PackageElement) sym).getQualifiedName().toString();
+      String qualifiedName = packageElement.getQualifiedName().toString();
       int i = 0;
       int j = 0;
       while (j < qualifiedName.length()) {
@@ -68,8 +68,8 @@ public final class GlobalSymbolsCache {
 
     ScipSymbols.Descriptor desc = scipDescriptor(sym);
     if (options.verboseEnabled && desc.kind == ScipSymbols.Descriptor.Kind.None) {
-      if (sym instanceof QualifiedNameable)
-        pprint(((QualifiedNameable) sym).getQualifiedName().toString());
+      if (sym instanceof QualifiedNameable qualifiedNameable)
+        pprint(qualifiedNameable.getQualifiedName().toString());
       else pprint(sym.getSimpleName().toString());
       pprint(
           String.format(
@@ -97,11 +97,11 @@ public final class GlobalSymbolsCache {
     if (sym instanceof TypeElement) {
       return new ScipSymbols.Descriptor(
           ScipSymbols.Descriptor.Kind.Type, sym.getSimpleName().toString());
-    } else if (sym instanceof ExecutableElement) {
+    } else if (sym instanceof ExecutableElement executableElement) {
       return new ScipSymbols.Descriptor(
           ScipSymbols.Descriptor.Kind.Method,
           sym.getSimpleName().toString(),
-          methodDisambiguator((ExecutableElement) sym));
+          methodDisambiguator(executableElement));
     } else if (sym instanceof TypeParameterElement) {
       return new ScipSymbols.Descriptor(
           ScipSymbols.Descriptor.Kind.TypeParameter, sym.getSimpleName().toString());
@@ -135,8 +135,9 @@ public final class GlobalSymbolsCache {
     Iterable<? extends Element> elements = sym.getEnclosingElement().getEnclosedElements();
     ArrayList<ExecutableElement> methods = new ArrayList<>();
     for (Element e : elements) {
-      if (e instanceof ExecutableElement && e.getSimpleName() == sym.getSimpleName()) {
-        methods.add((ExecutableElement) e);
+      if (e instanceof ExecutableElement executableElement
+          && e.getSimpleName() == sym.getSimpleName()) {
+        methods.add(executableElement);
       }
     }
     // NOTE(olafur): sort static methods last, according to the spec. Historical note: this

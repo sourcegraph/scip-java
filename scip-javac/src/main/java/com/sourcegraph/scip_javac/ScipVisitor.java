@@ -122,11 +122,9 @@ final class ScipVisitor extends TreePathScanner<Void, Void> {
   private void resolveNodes() {
     Set<Tree> ignoreNodes = new HashSet<>();
     for (Tree node : nodes.keySet()) {
-      if (node instanceof NewClassTree) {
-        NewClassTree newClassTree = (NewClassTree) node;
+      if (node instanceof NewClassTree newClassTree) {
         if (newClassTree.getClassBody() == null) {
-          if (newClassTree.getIdentifier() instanceof ParameterizedTypeTree) {
-            ParameterizedTypeTree paramNode = (ParameterizedTypeTree) newClassTree.getIdentifier();
+          if (newClassTree.getIdentifier() instanceof ParameterizedTypeTree paramNode) {
             ignoreNodes.add(paramNode.getType());
           }
           ignoreNodes.add(newClassTree.getIdentifier());
@@ -137,22 +135,22 @@ final class ScipVisitor extends TreePathScanner<Void, Void> {
     for (Map.Entry<Tree, TreePath> entry : nodes.entrySet()) {
       Tree node = entry.getKey();
       if (ignoreNodes.contains(node)) continue;
-      if (node instanceof TypeParameterTree) {
-        resolveTypeParameterTree((TypeParameterTree) node, entry.getValue());
-      } else if (node instanceof ClassTree) {
-        resolveClassTree((ClassTree) node, entry.getValue());
-      } else if (node instanceof MethodTree) {
-        resolveMethodTree((MethodTree) node, entry.getValue());
-      } else if (node instanceof VariableTree) {
-        resolveVariableTree((VariableTree) node, entry.getValue());
-      } else if (node instanceof IdentifierTree) {
-        resolveIdentifierTree((IdentifierTree) node, entry.getValue());
-      } else if (node instanceof MemberReferenceTree) {
-        resolveMemberReferenceTree((MemberReferenceTree) node, entry.getValue());
-      } else if (node instanceof MemberSelectTree) {
-        resolveMemberSelectTree((MemberSelectTree) node, entry.getValue());
-      } else if (node instanceof NewClassTree) {
-        resolveNewClassTree((NewClassTree) node, entry.getValue());
+      if (node instanceof TypeParameterTree typeParameterTree) {
+        resolveTypeParameterTree(typeParameterTree, entry.getValue());
+      } else if (node instanceof ClassTree classTree) {
+        resolveClassTree(classTree, entry.getValue());
+      } else if (node instanceof MethodTree methodTree) {
+        resolveMethodTree(methodTree, entry.getValue());
+      } else if (node instanceof VariableTree variableTree) {
+        resolveVariableTree(variableTree, entry.getValue());
+      } else if (node instanceof IdentifierTree identifierTree) {
+        resolveIdentifierTree(identifierTree, entry.getValue());
+      } else if (node instanceof MemberReferenceTree memberReferenceTree) {
+        resolveMemberReferenceTree(memberReferenceTree, entry.getValue());
+      } else if (node instanceof MemberSelectTree memberSelectTree) {
+        resolveMemberSelectTree(memberSelectTree, entry.getValue());
+      } else if (node instanceof NewClassTree newClassTree) {
+        resolveNewClassTree(newClassTree, entry.getValue());
       }
     }
   }
@@ -302,16 +300,17 @@ final class ScipVisitor extends TreePathScanner<Void, Void> {
     SymbolInformation.Kind kind = scipKind(sym);
     if (kind != SymbolInformation.Kind.UnspecifiedKind) builder.setKind(kind);
 
-    if (sym instanceof TypeElement) {
-      for (TypeElement parent : parentTypeElements((TypeElement) sym)) {
+    if (sym instanceof TypeElement typeElement) {
+      for (TypeElement parent : parentTypeElements(typeElement)) {
         String parentSymbol = scipSymbol(parent);
         if (parentSymbol.isEmpty()) continue;
         builder.addRelationships(
             Relationship.newBuilder().setSymbol(parentSymbol).setIsImplementation(true));
       }
-    } else if (sym instanceof ExecutableElement && sym.getKind() == ElementKind.METHOD) {
+    } else if (sym instanceof ExecutableElement executableElement
+        && sym.getKind() == ElementKind.METHOD) {
       for (String overridden :
-          overriddenSymbols((ExecutableElement) sym, sym.getEnclosingElement(), new HashSet<>())) {
+          overriddenSymbols(executableElement, sym.getEnclosingElement(), new HashSet<>())) {
         if (overridden.isEmpty()) continue;
         builder.addRelationships(
             Relationship.newBuilder()
@@ -321,14 +320,12 @@ final class ScipVisitor extends TreePathScanner<Void, Void> {
       }
     }
 
-    if (sym.getKind() == ElementKind.ENUM_CONSTANT && tree instanceof VariableTree) {
-      VariableTree variableTree = (VariableTree) tree;
-      if (variableTree.getInitializer() instanceof NewClassTree) {
+    if (sym.getKind() == ElementKind.ENUM_CONSTANT && tree instanceof VariableTree variableTree) {
+      if (variableTree.getInitializer() instanceof NewClassTree newClassTree) {
         String args =
-            ((NewClassTree) variableTree.getInitializer())
-                .getArguments().stream()
-                    .map(ExpressionTree::toString)
-                    .collect(Collectors.joining(", "));
+            newClassTree.getArguments().stream()
+                .map(ExpressionTree::toString)
+                .collect(Collectors.joining(", "));
         if (!args.isEmpty()) {
           builder.setDisplayName(sym.getSimpleName().toString() + "(" + args + ")");
         }
@@ -469,14 +466,14 @@ final class ScipVisitor extends TreePathScanner<Void, Void> {
   private void addParent(TypeMirror parent, Set<TypeElement> seen, List<TypeElement> out) {
     if (parent instanceof NoType) return;
     Element parentElement = types.asElement(parent);
-    if (!(parentElement instanceof TypeElement)) return;
-    if (!seen.add((TypeElement) parentElement)) return;
+    if (!(parentElement instanceof TypeElement parentTypeElement)) return;
+    if (!seen.add(parentTypeElement)) return;
     // Skip java.lang.Object: it is the implicit superclass of every class and would
     // dominate find-implementations searches in downstream tooling.
-    if (!isJavaLangObject((TypeElement) parentElement)) {
-      out.add((TypeElement) parentElement);
+    if (!isJavaLangObject(parentTypeElement)) {
+      out.add(parentTypeElement);
     }
-    collectParents((TypeElement) parentElement, seen, out);
+    collectParents(parentTypeElement, seen, out);
   }
 
   private static boolean isJavaLangObject(TypeElement element) {
@@ -487,13 +484,12 @@ final class ScipVisitor extends TreePathScanner<Void, Void> {
       ExecutableElement sym, Element enclosingElement, Set<String> out) {
     if (!(enclosingElement instanceof TypeElement)) return out;
     for (TypeMirror superType : types.directSupertypes(enclosingElement.asType())) {
-      if (!(superType instanceof DeclaredType)) continue;
-      Element superElement = ((DeclaredType) superType).asElement();
+      if (!(superType instanceof DeclaredType declaredType)) continue;
+      Element superElement = declaredType.asElement();
       if (!(superElement instanceof TypeElement)) continue;
       boolean methodFound = false;
       for (Element enclosed : superElement.getEnclosedElements()) {
-        if (!(enclosed instanceof ExecutableElement)) continue;
-        ExecutableElement candidate = (ExecutableElement) enclosed;
+        if (!(enclosed instanceof ExecutableElement candidate)) continue;
         if (!elements.overrides(sym, candidate, (TypeElement) sym.getEnclosingElement())) continue;
         String symbol = scipSymbol(candidate);
         if (!symbol.isEmpty()) out.add(symbol);
