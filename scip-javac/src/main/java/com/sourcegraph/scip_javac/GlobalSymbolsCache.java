@@ -8,12 +8,12 @@ import java.util.ArrayList;
 import java.util.IdentityHashMap;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ExecutableElement;
+import javax.lang.model.element.ModuleElement;
 import javax.lang.model.element.PackageElement;
 import javax.lang.model.element.QualifiedNameable;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.TypeParameterElement;
 import javax.lang.model.element.VariableElement;
-import javax.lang.model.type.NoType;
 
 /** Cache of SCIP symbols that can be referenced between files. */
 public final class GlobalSymbolsCache {
@@ -40,11 +40,11 @@ public final class GlobalSymbolsCache {
   private String uncachedSymbol(Element sym, LocalSymbolsCache<Element, String> locals) {
     if (sym == null) return ScipSymbols.ROOT_PACKAGE;
 
-    if (sym instanceof PackageElement) {
-      if (((PackageElement) sym).isUnnamed()) return ScipSymbols.ROOT_PACKAGE;
+    if (sym instanceof PackageElement packageElement) {
+      if (packageElement.isUnnamed()) return ScipSymbols.ROOT_PACKAGE;
 
       StringBuilder sb = new StringBuilder();
-      String qualifiedName = ((PackageElement) sym).getQualifiedName().toString();
+      String qualifiedName = packageElement.getQualifiedName().toString();
       int i = 0;
       int j = 0;
       while (j < qualifiedName.length()) {
@@ -59,9 +59,7 @@ public final class GlobalSymbolsCache {
       }
 
       return sb.toString();
-    } else
-    // check for Module without referring to Module as it doesn't exist < JDK 9
-    if (sym.asType() instanceof NoType) return ScipSymbols.ROOT_PACKAGE;
+    } else if (sym instanceof ModuleElement) return ScipSymbols.ROOT_PACKAGE;
 
     if (isAnonymousClass(sym) || isLocalVariable(sym)) return locals.put(sym);
 
@@ -69,9 +67,9 @@ public final class GlobalSymbolsCache {
     if (ScipSymbols.isLocal(owner)) return locals.put(sym);
 
     ScipSymbols.Descriptor desc = scipDescriptor(sym);
-    if (options.verboseEnabled && desc.kind == ScipSymbols.Descriptor.Kind.None) {
-      if (sym instanceof QualifiedNameable)
-        pprint(((QualifiedNameable) sym).getQualifiedName().toString());
+    if (options.verboseEnabled && desc.kind() == ScipSymbols.Descriptor.Kind.None) {
+      if (sym instanceof QualifiedNameable qualifiedNameable)
+        pprint(qualifiedNameable.getQualifiedName().toString());
       else pprint(sym.getSimpleName().toString());
       pprint(
           String.format(
@@ -81,14 +79,10 @@ public final class GlobalSymbolsCache {
   }
 
   private boolean isLocalVariable(Element sym) {
-    switch (sym.getKind()) {
-      case PARAMETER:
-      case EXCEPTION_PARAMETER:
-      case LOCAL_VARIABLE:
-        return true;
-      default:
-        return false;
-    }
+    return switch (sym.getKind()) {
+      case PARAMETER, EXCEPTION_PARAMETER, LOCAL_VARIABLE -> true;
+      default -> false;
+    };
   }
 
   private boolean isAnonymousClass(Element sym) {
@@ -99,11 +93,11 @@ public final class GlobalSymbolsCache {
     if (sym instanceof TypeElement) {
       return new ScipSymbols.Descriptor(
           ScipSymbols.Descriptor.Kind.Type, sym.getSimpleName().toString());
-    } else if (sym instanceof ExecutableElement) {
+    } else if (sym instanceof ExecutableElement executableElement) {
       return new ScipSymbols.Descriptor(
           ScipSymbols.Descriptor.Kind.Method,
           sym.getSimpleName().toString(),
-          methodDisambiguator((ExecutableElement) sym));
+          methodDisambiguator(executableElement));
     } else if (sym instanceof TypeParameterElement) {
       return new ScipSymbols.Descriptor(
           ScipSymbols.Descriptor.Kind.TypeParameter, sym.getSimpleName().toString());
@@ -137,8 +131,9 @@ public final class GlobalSymbolsCache {
     Iterable<? extends Element> elements = sym.getEnclosingElement().getEnclosedElements();
     ArrayList<ExecutableElement> methods = new ArrayList<>();
     for (Element e : elements) {
-      if (e instanceof ExecutableElement && e.getSimpleName() == sym.getSimpleName()) {
-        methods.add((ExecutableElement) e);
+      if (e instanceof ExecutableElement executableElement
+          && e.getSimpleName() == sym.getSimpleName()) {
+        methods.add(executableElement);
       }
     }
     // NOTE(olafur): sort static methods last, according to the spec. Historical note: this

@@ -1,7 +1,5 @@
 package com.sourcegraph.scip;
 
-import java.util.Objects;
-
 /**
  * Utilities to construct SCIP symbols.
  *
@@ -52,7 +50,7 @@ public final class ScipSymbols {
    *   <li>method descriptor "method()."
    * </ul>
    */
-  public static final class Descriptor {
+  public record Descriptor(Kind kind, String name, String disambiguator) {
 
     public static Descriptor NONE = new Descriptor(Kind.None, "", "");
 
@@ -67,18 +65,8 @@ public final class ScipSymbols {
       TypeParameter;
     }
 
-    public final Kind kind;
-    public final String name;
-    public final String disambiguator;
-
     public Descriptor(Kind kind, String name) {
       this(kind, name, "");
-    }
-
-    public Descriptor(Kind kind, String name, String disambiguator) {
-      this.kind = kind;
-      this.name = name;
-      this.disambiguator = disambiguator;
     }
 
     public Descriptor withName(String newName) {
@@ -93,54 +81,17 @@ public final class ScipSymbols {
       return new Descriptor(Kind.Local, name);
     }
 
-    @Override
-    public boolean equals(Object o) {
-      if (this == o) return true;
-      if (o == null || getClass() != o.getClass()) return false;
-      Descriptor that = (Descriptor) o;
-      return kind == that.kind
-          && Objects.equals(name, that.name)
-          && Objects.equals(disambiguator, that.disambiguator);
-    }
-
-    @Override
-    public int hashCode() {
-      return Objects.hash(kind, name, disambiguator);
-    }
-
-    @Override
-    public String toString() {
-      return "Descriptor{"
-          + "kind="
-          + kind
-          + ", name='"
-          + name
-          + '\''
-          + ", disambiguator='"
-          + disambiguator
-          + '\''
-          + '}';
-    }
-
     public String encode() {
-      switch (kind) {
-        case None:
-          return "";
-        case Term:
-          return encodeName(name) + ".";
-        case Method:
-          return encodeName(name) + disambiguator + ".";
-        case Type:
-          return encodeName(name) + "#";
-        case Package:
-          return encodeName(name) + "/";
-        case Parameter:
-          return "(" + encodeName(name) + ")";
-        case TypeParameter:
-          return "[" + encodeName(name) + "]";
-        default:
-          throw new IllegalArgumentException(String.format("%s", kind));
-      }
+      return switch (kind) {
+        case None -> "";
+        case Term -> encodeName(name) + ".";
+        case Method -> encodeName(name) + disambiguator + ".";
+        case Type -> encodeName(name) + "#";
+        case Package -> encodeName(name) + "/";
+        case Parameter -> "(" + encodeName(name) + ")";
+        case TypeParameter -> "[" + encodeName(name) + "]";
+        default -> throw new IllegalArgumentException(String.format("%s", kind));
+      };
     }
 
     /** Wraps non-alphanumeric identifiers in backticks, according to the SCIP spec. */

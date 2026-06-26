@@ -71,8 +71,7 @@ public final class ScipDocumentBuilder {
     @Override
     public boolean equals(Object other) {
       if (this == other) return true;
-      if (!(other instanceof OccurrenceKey)) return false;
-      OccurrenceKey that = (OccurrenceKey) other;
+      if (!(other instanceof OccurrenceKey that)) return false;
       return roles == that.roles
           && Objects.equals(range, that.range)
           && Objects.equals(symbol, that.symbol);

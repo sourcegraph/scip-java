@@ -91,9 +91,7 @@
         };
 
         devShells = {
-          default = mkDevShell pkgs.temurin-bin-11;
-          # https://github.com/NixOS/nixpkgs/issues/526834
-          jdk11 = mkDevShell pkgs.temurin-bin-11;
+          default = mkDevShell pkgs.jdk17;
           jdk17 = mkDevShell pkgs.jdk17;
           jdk21 = mkDevShell pkgs.jdk21;
         };

@@ -27,12 +27,12 @@ public class PackageTable {
 
   public PackageTable(ScipAggregatorOptions options) throws IOException {
     this.jdkPackage = JdkPackage.forRuntime();
-    this.indexDirectoryEntries = options.allowExportingGlobalSymbolsFromDirectoryEntries;
+    this.indexDirectoryEntries = options.allowExportingGlobalSymbolsFromDirectoryEntries();
     // NOTE: it's important that we index the JDK before maven packages. Some maven packages
     // redefine classes from the JDK and we want those maven packages to take precedence over
     // the JDK. The motivation to prioritize maven packages over the JDK is that we only want
     // to exports monikers against the JDK when indexing the JDK repo.
-    for (MavenPackage pkg : options.packages) {
+    for (MavenPackage pkg : options.packages()) {
       indexPackage(pkg);
     }
   }
@@ -41,7 +41,7 @@ public class PackageTable {
     return SymbolDescriptor.toplevel(symbol)
         .flatMap(
             toplevel -> {
-              String classfile = toplevel.owner + toplevel.descriptor.name + ".class";
+              String classfile = toplevel.owner() + toplevel.descriptor().name() + ".class";
               return packageForClassfile(classfile);
             });
   }

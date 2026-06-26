@@ -19,9 +19,9 @@
   
 //  ⌄ enclosing_range_start scip-java maven . . minimized/SubClasses#abstractImplementation().
     @Override
-//   ^^^^^^^^ reference scip-java maven jdk 11 java/lang/Override#
+//   ^^^^^^^^ reference scip-java maven jdk 17 java/lang/Override#
     public String abstractImplementation() {
-//         ^^^^^^ reference scip-java maven jdk 11 java/lang/String#
+//         ^^^^^^ reference scip-java maven jdk 17 java/lang/String#
 //                ^^^^^^^^^^^^^^^^^^^^^^ definition scip-java maven . . minimized/SubClasses#abstractImplementation().
 //                                       kind Method
 //                                       display_name abstractImplementation
@@ -35,9 +35,9 @@
   
 //  ⌄ enclosing_range_start scip-java maven . . minimized/SubClasses#abstractInterfaceMethod().
     @Override
-//   ^^^^^^^^ reference scip-java maven jdk 11 java/lang/Override#
+//   ^^^^^^^^ reference scip-java maven jdk 17 java/lang/Override#
     public String abstractInterfaceMethod() {
-//         ^^^^^^ reference scip-java maven jdk 11 java/lang/String#
+//         ^^^^^^ reference scip-java maven jdk 17 java/lang/String#
 //                ^^^^^^^^^^^^^^^^^^^^^^^ definition scip-java maven . . minimized/SubClasses#abstractInterfaceMethod().
 //                                        kind Method
 //                                        display_name abstractInterfaceMethod
@@ -51,7 +51,7 @@
   
 //  ⌄ enclosing_range_start scip-java maven . . minimized/SubClasses#app().
     public static String app() {
-//                ^^^^^^ reference scip-java maven jdk 11 java/lang/String#
+//                ^^^^^^ reference scip-java maven jdk 17 java/lang/String#
 //                       ^^^ definition scip-java maven . . minimized/SubClasses#app().
 //                           kind StaticMethod
 //                           display_name app

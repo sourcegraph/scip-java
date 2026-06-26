@@ -66,23 +66,25 @@ public class ScipAggregator {
     SymbolRewriter rewriter = new SymbolRewriter(packages);
     List<Path> shards = findShards();
     Collections.sort(shards);
-    if (options.reporter.hasErrors()) return;
-    if (shards.isEmpty() && !options.allowEmptyIndex) {
-      options.reporter.error(
-          "No SCIP shards found. This typically means that `scip-java` is unable to automatically"
-              + " index this codebase. If you are using Gradle or Maven, please report an issue to"
-              + " https://github.com/sourcegraph/scip-java and include steps to reproduce. If you"
-              + " are using a different build tool, make sure that you have followed all of the"
-              + " manual configuration steps.");
+    if (options.reporter().hasErrors()) return;
+    if (shards.isEmpty() && !options.allowEmptyIndex()) {
+      options
+          .reporter()
+          .error(
+              "No SCIP shards found. This typically means that `scip-java` is unable to"
+                  + " automatically index this codebase. If you are using Gradle or Maven, please"
+                  + " report an issue to https://github.com/sourcegraph/scip-java and include steps"
+                  + " to reproduce. If you are using a different build tool, make sure that you"
+                  + " have followed all of the manual configuration steps.");
       return;
     }
-    options.reporter.startProcessing(shards.size());
+    options.reporter().startProcessing(shards.size());
     writer.emitTyped(metadataIndex());
 
     Map<String, List<String>> inverseReferences = computeInverseReferences(shards, rewriter);
     shardStream(shards).forEach(shard -> processShard(shard, rewriter, inverseReferences));
     writer.build();
-    options.reporter.endProcessing();
+    options.reporter().endProcessing();
   }
 
   /**
@@ -101,16 +103,17 @@ public class ScipAggregator {
 
           @Override
           public FileVisitResult visitFileFailed(Path file, IOException exc) {
-            options.reporter.error(exc);
+            options.reporter().error(exc);
             return FileVisitResult.CONTINUE;
           }
         };
-    for (Path root : options.targetroots) {
+    for (Path root : options.targetroots()) {
       if (JAR_PATTERN.matches(root)) shards.add(root);
       else if (Files.isDirectory(root)) Files.walkFileTree(root, visitor);
       else
-        options.reporter.warning(
-            "ignoring target root that does not exist or is not a directory: " + root);
+        options
+            .reporter()
+            .warning("ignoring target root that does not exist or is not a directory: " + root);
     }
     return shards;
   }
@@ -120,13 +123,13 @@ public class ScipAggregator {
         .setMetadata(
             Metadata.newBuilder()
                 .setVersion(ProtocolVersion.UnspecifiedProtocolVersion)
-                .setProjectRoot(options.sourceroot.toUri().toString())
+                .setProjectRoot(options.sourceroot().toUri().toString())
                 .setTextDocumentEncoding(TextEncoding.UTF8)
                 .setToolInfo(
                     ToolInfo.newBuilder()
-                        .setName(options.toolInfo.getName())
-                        .setVersion(options.toolInfo.getVersion())
-                        .addAllArguments(options.toolInfo.getArgumentsList())))
+                        .setName(options.toolInfo().getName())
+                        .setVersion(options.toolInfo().getVersion())
+                        .addAllArguments(options.toolInfo().getArgumentsList())))
         .build();
   }
 
@@ -135,7 +138,7 @@ public class ScipAggregator {
     for (Document shard : readShard(shardPath)) {
       Document rewritten = rewriteDocument(shard, rewriter, inverseReferences);
       writer.emitTyped(Index.newBuilder().addDocuments(rewritten).build());
-      options.reporter.processedOneItem();
+      options.reporter().processedOneItem();
     }
   }
 
@@ -198,7 +201,7 @@ public class ScipAggregator {
    */
   private Map<String, List<String>> computeInverseReferences(
       List<Path> shards, SymbolRewriter rewriter) {
-    if (!options.emitInverseRelationships) return Collections.emptyMap();
+    if (!options.emitInverseRelationships()) return Collections.emptyMap();
     Map<String, List<String>> result = new HashMap<>();
     for (Path shard : shards) {
       for (Document doc : readShard(shard)) {
@@ -218,17 +221,10 @@ public class ScipAggregator {
   }
 
   private static boolean supportsReferenceRelationship(SymbolInformation info) {
-    switch (info.getKind()) {
-      case Class:
-      case Enum:
-      case Interface:
-      case Type:
-      case Object:
-      case PackageObject:
-        return false;
-      default:
-        return true;
-    }
+    return switch (info.getKind()) {
+      case Class, Enum, Interface, Type, Object, PackageObject -> false;
+      default -> true;
+    };
   }
 
   private static boolean isIgnoredOverriddenSymbol(String symbol) {
@@ -238,7 +234,7 @@ public class ScipAggregator {
   }
 
   private Stream<Path> shardStream(List<Path> shards) {
-    return options.parallel ? shards.parallelStream() : shards.stream();
+    return options.parallel() ? shards.parallelStream() : shards.stream();
   }
 
   private Collection<Document> readShard(Path shardPath) {
@@ -246,8 +242,8 @@ public class ScipAggregator {
       if (JAR_PATTERN.matches(shardPath)) return readShardsFromJar(shardPath);
       return Index.parseFrom(parseFromBytes(Files.readAllBytes(shardPath))).getDocumentsList();
     } catch (IOException e) {
-      options.reporter.error("invalid SCIP shard: " + shardPath);
-      options.reporter.error(e);
+      options.reporter().error("invalid SCIP shard: " + shardPath);
+      options.reporter().error(e);
       return Collections.emptyList();
     }
   }

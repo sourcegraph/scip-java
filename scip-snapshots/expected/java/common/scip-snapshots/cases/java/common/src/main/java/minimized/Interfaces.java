@@ -18,7 +18,7 @@
   
 //  ⌄ enclosing_range_start scip-java maven . . minimized/Interfaces#abstractInterfaceMethod().
     String abstractInterfaceMethod();
-//  ^^^^^^ reference scip-java maven jdk 11 java/lang/String#
+//  ^^^^^^ reference scip-java maven jdk 17 java/lang/String#
 //         ^^^^^^^^^^^^^^^^^^^^^^^ definition scip-java maven . . minimized/Interfaces#abstractInterfaceMethod().
 //                                 kind AbstractMethod
 //                                 display_name abstractInterfaceMethod
@@ -29,7 +29,7 @@
   
 //  ⌄ enclosing_range_start scip-java maven . . minimized/Interfaces#defaultInterfaceMethod().
     default String defaultInterfaceMethod() {
-//          ^^^^^^ reference scip-java maven jdk 11 java/lang/String#
+//          ^^^^^^ reference scip-java maven jdk 17 java/lang/String#
 //                 ^^^^^^^^^^^^^^^^^^^^^^ definition scip-java maven . . minimized/Interfaces#defaultInterfaceMethod().
 //                                        kind Method
 //                                        display_name defaultInterfaceMethod

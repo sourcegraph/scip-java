@@ -25,7 +25,7 @@
 //                          display_name main
 //                          signature_documentation
 //                          > public static void main(String[] args)
-//                          ^^^^^^ reference scip-java maven jdk 11 java/lang/String#
+//                          ^^^^^^ reference scip-java maven jdk 17 java/lang/String#
 //                                   ^^^^ definition local 0
 //                                        display_name args
 //                                        signature_documentation
@@ -37,9 +37,9 @@
 //                          ^^^^^^^^^^^^^ reference scip-java maven . . minimized/TypeVariables#
 //                                        ^^ reference scip-java maven . . minimized/TypeVariables#CT#`<init>`().
       System.out.println(
-//    ^^^^^^ reference scip-java maven jdk 11 java/lang/System#
-//           ^^^ reference scip-java maven jdk 11 java/lang/System#out.
-//               ^^^^^^^ reference scip-java maven jdk 11 java/io/PrintStream#println(+8).
+//    ^^^^^^ reference scip-java maven jdk 17 java/lang/System#
+//           ^^^ reference scip-java maven jdk 17 java/lang/System#out.
+//               ^^^^^^^ reference scip-java maven jdk 17 java/io/PrintStream#println(+8).
           Methods.app(42, "42")
 //        ^^^^^^^ reference scip-java maven . . minimized/Methods#
 //                ^^^ reference scip-java maven . . minimized/Methods#app().
@@ -63,13 +63,13 @@
 //                         ^^^ reference scip-java maven . . minimized/Primitives#app().
               + new ParameterizedTypes<Integer, String>().app(42, "42")
 //                  ^^^^^^^^^^^^^^^^^^ reference scip-java maven . . minimized/ParameterizedTypes#`<init>`().
-//                                     ^^^^^^^ reference scip-java maven jdk 11 java/lang/Integer#
-//                                              ^^^^^^ reference scip-java maven jdk 11 java/lang/String#
+//                                     ^^^^^^^ reference scip-java maven jdk 17 java/lang/Integer#
+//                                              ^^^^^^ reference scip-java maven jdk 17 java/lang/String#
 //                                                        ^^^ reference scip-java maven . . minimized/ParameterizedTypes#app().
               + RawTypes.x.toString()
 //              ^^^^^^^^ reference scip-java maven . . minimized/RawTypes#
 //                       ^ reference scip-java maven . . minimized/RawTypes#x.
-//                         ^^^^^^^^ reference scip-java maven jdk 11 java/lang/Object#toString().
+//                         ^^^^^^^^ reference scip-java maven jdk 17 java/lang/Object#toString().
               + ClassOf.app()
 //              ^^^^^^^ reference scip-java maven . . minimized/ClassOf#
 //                      ^^^ reference scip-java maven . . minimized/ClassOf#app().

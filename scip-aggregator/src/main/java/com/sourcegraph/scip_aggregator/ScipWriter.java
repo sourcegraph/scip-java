@@ -31,7 +31,7 @@ public class ScipWriter implements AutoCloseable {
 
   public void build() throws IOException {
     close();
-    Files.move(tmp, options.output, StandardCopyOption.REPLACE_EXISTING);
+    Files.move(tmp, options.output(), StandardCopyOption.REPLACE_EXISTING);
   }
 
   @Override
@@ -43,7 +43,7 @@ public class ScipWriter implements AutoCloseable {
     try {
       output.flush();
     } catch (IOException e) {
-      options.reporter.error(e);
+      options.reporter().error(e);
     }
   }
 }

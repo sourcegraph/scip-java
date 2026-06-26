@@ -55,44 +55,34 @@ public enum CompilerRange {
   FROM_END_WITH_TEXT_SEARCH;
 
   public boolean isFromPoint() {
-    switch (this) {
-      case FROM_POINT_TO_SYMBOL_NAME:
-      case FROM_POINT_TO_SYMBOL_NAME_PLUS_ONE:
-      case FROM_POINT_WITH_TEXT_SEARCH:
-        return true;
-      default:
-        return false;
-    }
+    return switch (this) {
+      case FROM_POINT_TO_SYMBOL_NAME,
+          FROM_POINT_TO_SYMBOL_NAME_PLUS_ONE,
+          FROM_POINT_WITH_TEXT_SEARCH ->
+          true;
+      default -> false;
+    };
   }
 
   public boolean isFromEndPoint() {
-    switch (this) {
-      case FROM_END_TO_SYMBOL_NAME:
-      case FROM_END_WITH_TEXT_SEARCH:
-        return true;
-      default:
-        return false;
-    }
+    return switch (this) {
+      case FROM_END_TO_SYMBOL_NAME, FROM_END_WITH_TEXT_SEARCH -> true;
+      default -> false;
+    };
   }
 
   public boolean isFromTextSearch() {
-    switch (this) {
-      case FROM_TEXT_SEARCH:
-      case FROM_END_WITH_TEXT_SEARCH:
-      case FROM_POINT_WITH_TEXT_SEARCH:
-        return true;
-      default:
-        return false;
-    }
+    return switch (this) {
+      case FROM_TEXT_SEARCH, FROM_END_WITH_TEXT_SEARCH, FROM_POINT_WITH_TEXT_SEARCH -> true;
+      default -> false;
+    };
   }
 
   public boolean isPlusOne() {
-    switch (this) {
-      case FROM_POINT_TO_SYMBOL_NAME_PLUS_ONE:
-        return true;
-      default:
-        return false;
-    }
+    return switch (this) {
+      case FROM_POINT_TO_SYMBOL_NAME_PLUS_ONE -> true;
+      default -> false;
+    };
   }
 
   public boolean isFromEnd() {

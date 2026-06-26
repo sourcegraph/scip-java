@@ -39,7 +39,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        java: [11, 17, 21]
+        java: [17, 21]
     steps:
       - uses: actions/checkout@v4
 
@@ -150,7 +150,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        java: [11, 17, 21]
+        java: [17, 21]
     steps:
       - uses: actions/checkout@v4
 

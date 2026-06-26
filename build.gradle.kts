@@ -57,13 +57,13 @@ subprojects {
 
     plugins.withType<JavaPlugin> {
         extensions.configure<JavaPluginExtension> {
-            sourceCompatibility = JavaVersion.VERSION_11
-            targetCompatibility = JavaVersion.VERSION_11
+            sourceCompatibility = JavaVersion.VERSION_17
+            targetCompatibility = JavaVersion.VERSION_17
         }
 
         tasks.withType<JavaCompile>().configureEach {
             options.encoding = "UTF-8"
-            options.release.set(11)
+            options.release.set(17)
         }
 
         tasks.withType<Javadoc>().configureEach {
@@ -81,7 +81,7 @@ subprojects {
 
     plugins.withId("org.jetbrains.kotlin.jvm") {
         tasks.withType<KotlinCompile>().configureEach {
-            compilerOptions.jvmTarget.set(JvmTarget.JVM_11)
+            compilerOptions.jvmTarget.set(JvmTarget.JVM_17)
         }
     }
 }
@@ -342,10 +342,26 @@ project(":scip-java") {
         }
     }
 
+    // Emit the javac --add-exports flags as a ready-to-use, space-separated
+    // string so the Docker wrapper script can read them with a plain `cat`,
+    // keeping gradle/javac-internals.properties the single source of truth.
+    val generateJavacJvmOptions = tasks.register("generateJavacJvmOptions") {
+        val output = layout.buildDirectory.file("generated/distribution/javac-jvm-options")
+        val options = javacJvmOptions.joinToString(" ")
+        inputs.property("options", options)
+        outputs.file(output)
+        doLast {
+            val file = output.get().asFile
+            file.parentFile.mkdirs()
+            file.writeText("$options\n")
+        }
+    }
+
     extensions.configure<DistributionContainer> {
         named("main") {
             contents {
                 from(generateDistributionVersion)
+                from(generateJavacJvmOptions)
             }
         }
     }
@@ -455,7 +471,7 @@ project(":scip-snapshots") {
                 rootProject.layout.projectDirectory.dir("scip-snapshots/expected/kotlin/common").asFile.absolutePath,
             "snapshot.case.kotlin-common.targetroot" to kotlinTargetroot.get().asFile.absolutePath,
             "snapshot.case.kotlin-common.aggregateNoEmitInverseRelationships" to "true",
-            "scip.jdk.version" to "11",
+            "scip.jdk.version" to "17",
         )
 
     tasks.named<Test>("test") {

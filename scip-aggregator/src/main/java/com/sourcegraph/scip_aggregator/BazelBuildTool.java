@@ -67,8 +67,8 @@ public class BazelBuildTool {
             );
     ScipAggregator.run(scipOptions);
 
-    if (!scipOptions.reporter.hasErrors()) {
-      System.out.println("done: " + scipOptions.output);
+    if (!scipOptions.reporter().hasErrors()) {
+      System.out.println("done: " + scipOptions.output());
       return 0;
     } else {
       System.out.println("SCIP index generation failed");

@@ -4,7 +4,7 @@
   import java.io.Serializable
 //       ^^^^ reference scip-java maven . . java/
 //            ^^ reference scip-java maven . . java/io/
-//               ^^^^^^^^^^^^ reference scip-java maven jdk 11 java/io/Serializable#
+//               ^^^^^^^^^^^^ reference scip-java maven jdk 17 java/io/Serializable#
   
 //⌄ enclosing_range_start scip-java maven . . snapshots/DocstringSuperclass#
 //⌄ enclosing_range_start scip-java maven . . snapshots/DocstringSuperclass#`<init>`().
@@ -30,7 +30,7 @@
 //                 documentation
 //                 > Example class docstring.
 //                 relationship scip-java maven . . snapshots/DocstringSuperclass# implementation
-//                 relationship scip-java maven jdk 11 java/io/Serializable# implementation
+//                 relationship scip-java maven jdk 17 java/io/Serializable# implementation
 //      ^^^^^^^^^^ definition scip-java maven . . snapshots/Docstrings#`<init>`().
 //                 display_name Docstrings
 //                 signature_documentation
@@ -38,7 +38,7 @@
 //                 documentation
 //                 > Example class docstring.
 //                    ^^^^^^^^^^^^^^^^^^^ reference scip-java maven . . snapshots/DocstringSuperclass#
-//                                           ^^^^^^^^^^^^ reference scip-java maven jdk 11 java/io/Serializable#
+//                                           ^^^^^^^^^^^^ reference scip-java maven jdk 17 java/io/Serializable#
   }
 //⌃ enclosing_range_end scip-java maven . . snapshots/Docstrings#
 //⌃ enclosing_range_end scip-java maven . . snapshots/Docstrings#`<init>`().

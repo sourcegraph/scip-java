@@ -43,7 +43,7 @@ public class ScipJavacOptions extends ScipOptions {
         String argValue = arg.substring("-targetroot:".length());
         if (argValue.equals(JAVAC_CLASSES_DIR_ARG)) {
           useJavacClassesDir = true;
-          result.targetroot = getJavacClassesDir(result, task).classes;
+          result.targetroot = getJavacClassesDir(result, task).classes();
         } else {
           result.targetroot = Paths.get(argValue);
         }
@@ -52,30 +52,22 @@ public class ScipJavacOptions extends ScipOptions {
       } else if (arg.startsWith("-no-relative-path:")) {
         String value = arg.substring("-no-relative-path:".length());
         switch (value) {
-          case "index_anyway":
-            result.noRelativePath = NoRelativePathMode.INDEX_ANYWAY;
-            break;
-          case "skip":
-            result.noRelativePath = NoRelativePathMode.SKIP;
-            break;
-          case "error":
-            result.noRelativePath = NoRelativePathMode.ERROR;
-            break;
-          case "warning":
-            result.noRelativePath = NoRelativePathMode.WARNING;
-            break;
-          default:
-            result.errors.add(
-                String.format(
-                    "unknown -no-relative-path mode '%s'. Valid values are %s.",
-                    value, NoRelativePathMode.validStringValues()));
+          case "index_anyway" -> result.noRelativePath = NoRelativePathMode.INDEX_ANYWAY;
+          case "skip" -> result.noRelativePath = NoRelativePathMode.SKIP;
+          case "error" -> result.noRelativePath = NoRelativePathMode.ERROR;
+          case "warning" -> result.noRelativePath = NoRelativePathMode.WARNING;
+          default ->
+              result.errors.add(
+                  String.format(
+                      "unknown -no-relative-path mode '%s'. Valid values are %s.",
+                      value, NoRelativePathMode.validStringValues()));
         }
       } else if (arg.equals("-build-tool:bazel")) {
         result.uriScheme = UriScheme.BAZEL;
         useJavacClassesDir = true;
         TargetPaths paths = getJavacClassesDir(result, task);
-        result.targetroot = paths.classes;
-        result.generatedTargetRoot = paths.sources;
+        result.targetroot = paths.classes();
+        result.generatedTargetRoot = paths.sources();
       } else if (arg.equals("-text:on")) {
         result.includeText = true;
       } else if (arg.equals("-text:off")) {

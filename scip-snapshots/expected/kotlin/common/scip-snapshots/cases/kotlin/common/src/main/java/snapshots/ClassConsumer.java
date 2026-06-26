@@ -20,9 +20,9 @@
 //                         signature_documentation
 //                         > public static void run()
       System.out.println(new Class().getAsdf());
-//    ^^^^^^ reference scip-java maven jdk 11 java/lang/System#
-//           ^^^ reference scip-java maven jdk 11 java/lang/System#out.
-//               ^^^^^^^ reference scip-java maven jdk 11 java/io/PrintStream#println(+9).
+//    ^^^^^^ reference scip-java maven jdk 17 java/lang/System#
+//           ^^^ reference scip-java maven jdk 17 java/lang/System#out.
+//               ^^^^^^^ reference scip-java maven jdk 17 java/io/PrintStream#println(+9).
 //                           ^^^^^ reference scip-java maven . . snapshots/Class#`<init>`(+1).
 //                                   ^^^^^^^ reference scip-java maven . . snapshots/Class#getAsdf().
     }
