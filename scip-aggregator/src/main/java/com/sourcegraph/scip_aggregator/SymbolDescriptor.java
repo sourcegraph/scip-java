@@ -5,15 +5,7 @@ import com.sourcegraph.scip.ScipSymbols.Descriptor;
 import com.sourcegraph.scip.ScipSymbols.Descriptor.Kind;
 import java.util.Optional;
 
-public class SymbolDescriptor {
-
-  public final ScipSymbols.Descriptor descriptor;
-  public final String owner;
-
-  public SymbolDescriptor(ScipSymbols.Descriptor descriptor, String owner) {
-    this.descriptor = descriptor;
-    this.owner = owner;
-  }
+public record SymbolDescriptor(ScipSymbols.Descriptor descriptor, String owner) {
 
   public static SymbolDescriptor NONE = new SymbolDescriptor(Descriptor.NONE, ScipSymbols.NONE);
 
@@ -29,14 +21,14 @@ public class SymbolDescriptor {
       return Optional.empty();
     }
     SymbolDescriptor current = parseFromSymbol(symbol);
-    if (current.descriptor.kind() == Kind.Package) {
+    if (current.descriptor().kind() == Kind.Package) {
       return Optional.empty();
     }
-    SymbolDescriptor owner = parseFromSymbol(current.owner);
-    if (owner.descriptor.kind() == Kind.Package) {
+    SymbolDescriptor owner = parseFromSymbol(current.owner());
+    if (owner.descriptor().kind() == Kind.Package) {
       return Optional.of(current);
     } else {
-      return toplevel(current.owner);
+      return toplevel(current.owner());
     }
   }
 
