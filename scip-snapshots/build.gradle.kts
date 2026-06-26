@@ -14,17 +14,13 @@ dependencies {
 // plugins; each publishes its target-root directory as the `scipTargetrootElements` artifact.
 val javaTargetroot = projectArtifact(":scip-snapshots-java-common", "scipTargetrootElements", "javaTargetroot")
 val kotlinTargetroot = projectArtifact(":scip-snapshots-kotlin-common", "scipTargetrootElements", "kotlinTargetroot")
+// The case list, expected-golden layout and per-case indexing flags are fixed test metadata defined
+// in MinimizedSnapshotScipGenerator; the build only supplies the build-time paths it owns.
 val snapshotProperties =
     mapOf(
         "snapshot.sourceroot" to rootProject.rootDir.absolutePath,
-        "snapshot.cases" to "java-common,kotlin-common",
-        "snapshot.case.java-common.expectDir" to
-            rootProject.layout.projectDirectory.dir("scip-snapshots/expected/java/common").asFile.absolutePath,
         "snapshot.case.java-common.targetroot" to javaTargetroot.singleFile.absolutePath,
-        "snapshot.case.kotlin-common.expectDir" to
-            rootProject.layout.projectDirectory.dir("scip-snapshots/expected/kotlin/common").asFile.absolutePath,
         "snapshot.case.kotlin-common.targetroot" to kotlinTargetroot.singleFile.absolutePath,
-        "snapshot.case.kotlin-common.aggregateNoEmitInverseRelationships" to "true",
         "scip.jdk.version" to "17",
     )
 
