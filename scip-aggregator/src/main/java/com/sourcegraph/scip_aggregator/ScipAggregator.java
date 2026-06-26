@@ -218,17 +218,10 @@ public class ScipAggregator {
   }
 
   private static boolean supportsReferenceRelationship(SymbolInformation info) {
-    switch (info.getKind()) {
-      case Class:
-      case Enum:
-      case Interface:
-      case Type:
-      case Object:
-      case PackageObject:
-        return false;
-      default:
-        return true;
-    }
+    return switch (info.getKind()) {
+      case Class, Enum, Interface, Type, Object, PackageObject -> false;
+      default -> true;
+    };
   }
 
   private static boolean isIgnoredOverriddenSymbol(String symbol) {

@@ -91,20 +91,11 @@ final class ScipJavaSignatureFormatter {
     if (!isEnum && !isAnnotation && !isInterface) printKeyword(s, formatModifiers(sym));
 
     switch (sym.getKind()) {
-      case CLASS:
-        printKeyword(s, "class");
-        break;
-      case ENUM:
-        printKeyword(s, "enum");
-        break;
-      case ANNOTATION_TYPE:
-        printKeyword(s, "@interface");
-        break;
-      case INTERFACE:
-        printKeyword(s, "interface");
-        break;
-      default:
-        break;
+      case CLASS -> printKeyword(s, "class");
+      case ENUM -> printKeyword(s, "enum");
+      case ANNOTATION_TYPE -> printKeyword(s, "@interface");
+      case INTERFACE -> printKeyword(s, "interface");
+      default -> {}
     }
     s.append(sym.getSimpleName());
 
@@ -133,8 +124,7 @@ final class ScipJavaSignatureFormatter {
 
     // Mirror SignatureFormatter's Java extends/implements logic.
     switch (sym.getKind()) {
-      case CLASS:
-      case ENUM:
+      case CLASS, ENUM -> {
         if (isEnum || !hasNonRedundantParent) {
           printKeyword(s, " implements");
           s.append(nonSynthetic.stream().map(this::formatType).collect(Collectors.joining(", ")));
@@ -148,14 +138,12 @@ final class ScipJavaSignatureFormatter {
             s.append(supers);
           }
         }
-        break;
-      case INTERFACE:
-      case ANNOTATION_TYPE:
+      }
+      case INTERFACE, ANNOTATION_TYPE -> {
         printKeyword(s, " extends");
         s.append(nonSynthetic.stream().map(this::formatType).collect(Collectors.joining(", ")));
-        break;
-      default:
-        break;
+      }
+      default -> {}
     }
     return s.toString();
   }
@@ -319,28 +307,18 @@ final class ScipJavaSignatureFormatter {
       };
 
   private static String primitiveName(TypeKind kind) {
-    switch (kind) {
-      case BOOLEAN:
-        return "boolean";
-      case BYTE:
-        return "byte";
-      case SHORT:
-        return "short";
-      case INT:
-        return "int";
-      case LONG:
-        return "long";
-      case CHAR:
-        return "char";
-      case FLOAT:
-        return "float";
-      case DOUBLE:
-        return "double";
-      case VOID:
-        return "void";
-      default:
-        return UNRESOLVED;
-    }
+    return switch (kind) {
+      case BOOLEAN -> "boolean";
+      case BYTE -> "byte";
+      case SHORT -> "short";
+      case INT -> "int";
+      case LONG -> "long";
+      case CHAR -> "char";
+      case FLOAT -> "float";
+      case DOUBLE -> "double";
+      case VOID -> "void";
+      default -> UNRESOLVED;
+    };
   }
 
   // -------- Access / modifiers --------
@@ -473,72 +451,43 @@ final class ScipJavaSignatureFormatter {
   }
 
   private static String binaryOperator(Tree.Kind kind) {
-    switch (kind) {
-      case PLUS:
-        return "+";
-      case MINUS:
-        return "-";
-      case MULTIPLY:
-        return "*";
-      case DIVIDE:
-        return "/";
-      case REMAINDER:
-        return "%";
-      case GREATER_THAN:
-        return ">";
-      case LESS_THAN:
-        return "<";
-      case AND:
-        return "&";
-      case XOR:
-        return "^";
-      case OR:
-        return "|";
-      case CONDITIONAL_AND:
-        return "&&";
-      case CONDITIONAL_OR:
-        return "||";
-      case LEFT_SHIFT:
-        return "<<";
-      case RIGHT_SHIFT:
-        return ">>";
-      case UNSIGNED_RIGHT_SHIFT:
-        return ">>>";
-      case EQUAL_TO:
-        return "==";
-      case NOT_EQUAL_TO:
-        return "!=";
-      case GREATER_THAN_EQUAL:
-        return ">=";
-      case LESS_THAN_EQUAL:
-        return "<=";
-      default:
-        throw new IllegalArgumentException("unexpected binary operator " + kind);
-    }
+    return switch (kind) {
+      case PLUS -> "+";
+      case MINUS -> "-";
+      case MULTIPLY -> "*";
+      case DIVIDE -> "/";
+      case REMAINDER -> "%";
+      case GREATER_THAN -> ">";
+      case LESS_THAN -> "<";
+      case AND -> "&";
+      case XOR -> "^";
+      case OR -> "|";
+      case CONDITIONAL_AND -> "&&";
+      case CONDITIONAL_OR -> "||";
+      case LEFT_SHIFT -> "<<";
+      case RIGHT_SHIFT -> ">>";
+      case UNSIGNED_RIGHT_SHIFT -> ">>>";
+      case EQUAL_TO -> "==";
+      case NOT_EQUAL_TO -> "!=";
+      case GREATER_THAN_EQUAL -> ">=";
+      case LESS_THAN_EQUAL -> "<=";
+      default -> throw new IllegalArgumentException("unexpected binary operator " + kind);
+    };
   }
 
   private static String unaryOperator(Tree.Kind kind, String value) {
-    switch (kind) {
-      case UNARY_MINUS:
+    return switch (kind) {
       // The old SignatureFormatter.formatUnaryOperation rendered UNARY_PLUS as "-value".
       // Preserve that behavior to keep snapshots stable.
-      case UNARY_PLUS:
-        return "-" + value;
-      case POSTFIX_INCREMENT:
-        return value + "++";
-      case POSTFIX_DECREMENT:
-        return value + "--";
-      case PREFIX_INCREMENT:
-        return "++" + value;
-      case PREFIX_DECREMENT:
-        return "--" + value;
-      case BITWISE_COMPLEMENT:
-        return "~" + value;
-      case LOGICAL_COMPLEMENT:
-        return "!" + value;
-      default:
-        throw new IllegalArgumentException("unexpected unary operator " + kind);
-    }
+      case UNARY_MINUS, UNARY_PLUS -> "-" + value;
+      case POSTFIX_INCREMENT -> value + "++";
+      case POSTFIX_DECREMENT -> value + "--";
+      case PREFIX_INCREMENT -> "++" + value;
+      case PREFIX_DECREMENT -> "--" + value;
+      case BITWISE_COMPLEMENT -> "~" + value;
+      case LOGICAL_COMPLEMENT -> "!" + value;
+      default -> throw new IllegalArgumentException("unexpected unary operator " + kind);
+    };
   }
 
   // -------- Helpers --------

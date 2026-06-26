@@ -79,14 +79,10 @@ public final class GlobalSymbolsCache {
   }
 
   private boolean isLocalVariable(Element sym) {
-    switch (sym.getKind()) {
-      case PARAMETER:
-      case EXCEPTION_PARAMETER:
-      case LOCAL_VARIABLE:
-        return true;
-      default:
-        return false;
-    }
+    return switch (sym.getKind()) {
+      case PARAMETER, EXCEPTION_PARAMETER, LOCAL_VARIABLE -> true;
+      default -> false;
+    };
   }
 
   private boolean isAnonymousClass(Element sym) {

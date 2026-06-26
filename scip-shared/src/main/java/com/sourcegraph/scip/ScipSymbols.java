@@ -123,24 +123,16 @@ public final class ScipSymbols {
     }
 
     public String encode() {
-      switch (kind) {
-        case None:
-          return "";
-        case Term:
-          return encodeName(name) + ".";
-        case Method:
-          return encodeName(name) + disambiguator + ".";
-        case Type:
-          return encodeName(name) + "#";
-        case Package:
-          return encodeName(name) + "/";
-        case Parameter:
-          return "(" + encodeName(name) + ")";
-        case TypeParameter:
-          return "[" + encodeName(name) + "]";
-        default:
-          throw new IllegalArgumentException(String.format("%s", kind));
-      }
+      return switch (kind) {
+        case None -> "";
+        case Term -> encodeName(name) + ".";
+        case Method -> encodeName(name) + disambiguator + ".";
+        case Type -> encodeName(name) + "#";
+        case Package -> encodeName(name) + "/";
+        case Parameter -> "(" + encodeName(name) + ")";
+        case TypeParameter -> "[" + encodeName(name) + "]";
+        default -> throw new IllegalArgumentException(String.format("%s", kind));
+      };
     }
 
     /** Wraps non-alphanumeric identifiers in backticks, according to the SCIP spec. */

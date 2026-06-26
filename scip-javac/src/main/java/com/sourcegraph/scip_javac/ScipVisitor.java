@@ -340,29 +340,21 @@ final class ScipVisitor extends TreePathScanner<Void, Void> {
     boolean isStatic = mods.contains(Modifier.STATIC);
     boolean isAbstract = mods.contains(Modifier.ABSTRACT);
     boolean isDefault = mods.contains(Modifier.DEFAULT);
-    switch (sym.getKind()) {
-      case ENUM:
-        return SymbolInformation.Kind.Enum;
-      case CLASS:
-        return SymbolInformation.Kind.Class;
-      case INTERFACE:
-      case ANNOTATION_TYPE:
-        return SymbolInformation.Kind.Interface;
-      case CONSTRUCTOR:
-        return SymbolInformation.Kind.Constructor;
-      case METHOD:
-        if (isStatic) return SymbolInformation.Kind.StaticMethod;
-        if (isAbstract && !isDefault) return SymbolInformation.Kind.AbstractMethod;
-        return SymbolInformation.Kind.Method;
-      case FIELD:
-        return isStatic ? SymbolInformation.Kind.StaticField : SymbolInformation.Kind.Field;
-      case LOCAL_VARIABLE:
-        return SymbolInformation.Kind.Variable;
-      case TYPE_PARAMETER:
-        return SymbolInformation.Kind.TypeParameter;
-      default:
-        return SymbolInformation.Kind.UnspecifiedKind;
-    }
+    return switch (sym.getKind()) {
+      case ENUM -> SymbolInformation.Kind.Enum;
+      case CLASS -> SymbolInformation.Kind.Class;
+      case INTERFACE, ANNOTATION_TYPE -> SymbolInformation.Kind.Interface;
+      case CONSTRUCTOR -> SymbolInformation.Kind.Constructor;
+      case METHOD -> {
+        if (isStatic) yield SymbolInformation.Kind.StaticMethod;
+        if (isAbstract && !isDefault) yield SymbolInformation.Kind.AbstractMethod;
+        yield SymbolInformation.Kind.Method;
+      }
+      case FIELD -> isStatic ? SymbolInformation.Kind.StaticField : SymbolInformation.Kind.Field;
+      case LOCAL_VARIABLE -> SymbolInformation.Kind.Variable;
+      case TYPE_PARAMETER -> SymbolInformation.Kind.TypeParameter;
+      default -> SymbolInformation.Kind.UnspecifiedKind;
+    };
   }
 
   // =======================================
