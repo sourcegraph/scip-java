@@ -1,5 +1,6 @@
-import com.sourcegraph.buildlogic.JavacInternals
+import com.sourcegraph.buildlogic.cleanDirectoryBeforeRunning
 import com.sourcegraph.buildlogic.shadowJarArtifact
+import com.sourcegraph.buildlogic.useScipJavac
 
 plugins {
     id("scip.java-library")
@@ -13,20 +14,16 @@ dependencies {
 }
 
 val annotationProcessorClasspath = configurations.named("annotationProcessor")
+val scipTargetroot = layout.buildDirectory.dir("scip-targetroot")
+val sourceroot = rootProject.rootDir.absolutePath
+val targetroot = scipTargetroot.get().asFile.absolutePath
 
 tasks.named<JavaCompile>("compileJava") {
-    val scipTargetroot = layout.buildDirectory.dir("scip-targetroot")
-    classpath = classpath.plus(javacShadowJar)
+    useScipJavac(rootDir, javacShadowJar, scipTargetroot)
     options.annotationProcessorPath = annotationProcessorClasspath.get().plus(javacShadowJar)
-    outputs.dir(scipTargetroot)
-    options.isFork = true
-    options.forkOptions.jvmArgs = (options.forkOptions.jvmArgs ?: emptyList()) + JavacInternals.jvmOptions(rootDir)
     options.compilerArgs.add(
-        "-Xplugin:scip -text:on -verbose -sourceroot:${rootProject.rootDir.absolutePath} " +
-            "-targetroot:${scipTargetroot.get().asFile.absolutePath} -randomtimestamp=${System.nanoTime()}"
+        "-Xplugin:scip -text:on -verbose -sourceroot:$sourceroot " +
+            "-targetroot:$targetroot -randomtimestamp=${System.nanoTime()}"
     )
-    doFirst {
-        scipTargetroot.get().asFile.deleteRecursively()
-        scipTargetroot.get().asFile.mkdirs()
-    }
+    cleanDirectoryBeforeRunning(scipTargetroot)
 }

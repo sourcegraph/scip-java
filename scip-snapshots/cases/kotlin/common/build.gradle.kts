@@ -1,6 +1,7 @@
-import com.sourcegraph.buildlogic.JavacInternals
+import com.sourcegraph.buildlogic.cleanDirectoryBeforeRunning
 import com.sourcegraph.buildlogic.scipKotlincPluginArgs
 import com.sourcegraph.buildlogic.shadowJarArtifact
+import com.sourcegraph.buildlogic.useScipJavac
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
@@ -16,31 +17,18 @@ dependencies {
 }
 
 val scipTargetroot = layout.buildDirectory.dir("scip-targetroot")
-
 val sourceroot = rootProject.rootDir.absolutePath
 val targetroot = scipTargetroot.get().asFile.absolutePath
 
 tasks.named<KotlinCompile>("compileKotlin") {
-    // Bind to a local so the doFirst action captures the provider, not the
-    // surrounding script object (which the configuration cache cannot serialize).
-    val targetrootDir = scipTargetroot
     inputs.files(kotlincShadowJar)
-    outputs.dir(targetrootDir)
+    outputs.dir(scipTargetroot)
     compilerOptions.freeCompilerArgs.addAll(scipKotlincPluginArgs(kotlincShadowJar.elements, sourceroot, targetroot))
-    doFirst {
-        targetrootDir.get().asFile.deleteRecursively()
-        targetrootDir.get().asFile.mkdirs()
-    }
+    cleanDirectoryBeforeRunning(scipTargetroot)
 }
 
 tasks.named<JavaCompile>("compileJava") {
-    classpath = classpath.plus(javacShadowJar)
+    useScipJavac(rootDir, javacShadowJar, scipTargetroot)
     options.annotationProcessorPath = javacShadowJar
-    outputs.dir(scipTargetroot)
-    options.isFork = true
-    options.forkOptions.jvmArgs = (options.forkOptions.jvmArgs ?: emptyList()) + JavacInternals.jvmOptions(rootDir)
-    options.compilerArgs.add(
-        "-Xplugin:scip -sourceroot:${rootProject.rootDir.absolutePath} " +
-            "-targetroot:${scipTargetroot.get().asFile.absolutePath}"
-    )
+    options.compilerArgs.add("-Xplugin:scip -sourceroot:$sourceroot -targetroot:$targetroot")
 }
