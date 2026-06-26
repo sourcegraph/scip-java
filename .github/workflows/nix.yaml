@@ -122,6 +122,64 @@ jobs:
       - name: scip-kotlinc tests
         run: gradle :scip-kotlinc:test --no-daemon
 
+  jdk25-plugin:
+    runs-on: ubuntu-latest
+    name: scip-javac plugin (JDK 25)
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: DeterminateSystems/nix-installer-action@v22
+        with:
+          summarize: false
+
+      - uses: DeterminateSystems/magic-nix-cache-action@v13
+
+      # The plugin jar targets `--release 11`, so it is built with the default
+      # toolchain (Gradle 8.14 cannot run on JDK 25) and then exercised against a
+      # JDK 25 `javac` below.
+      - name: Build scip-javac plugin jar
+        run: gradle :scip-javac:shadowJar --no-daemon
+
+      - name: Index a fixture with JDK 25 javac
+        env:
+          NIX_DEVELOP: ${{ github.workspace }}#jdk25
+        run: |
+          java -version
+          javac -version
+          shopt -s nullglob
+          jars=(scip-javac/target/gradle/libs/scip-javac-*-all.jar)
+          if [ "${#jars[@]}" -eq 0 ]; then
+            echo "scip-javac shadow jar not found" >&2
+            exit 1
+          fi
+          jar="${jars[0]}"
+          work="$(mktemp -d)"
+          mkdir -p "$work/src" "$work/out" "$work/classes"
+          printf '%s\n' \
+            'public class Hello {' \
+            '  public static void main(String[] args) {' \
+            '    System.out.println("hello from JDK 25");' \
+            '  }' \
+            '}' > "$work/src/Hello.java"
+          javac \
+            -J--add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED \
+            -J--add-exports=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED \
+            -J--add-exports=jdk.compiler/com.sun.tools.javac.model=ALL-UNNAMED \
+            -J--add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED \
+            -J--add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED \
+            -cp "$jar" \
+            -processorpath "$jar" \
+            -d "$work/classes" \
+            "-Xplugin:scip -sourceroot:$work/src -targetroot:$work/out" \
+            "$work/src/Hello.java"
+          shards=("$work"/out/META-INF/scip/*.scip)
+          if [ "${#shards[@]}" -eq 0 ]; then
+            echo "no SCIP shard produced under $work/out" >&2
+            find "$work/out" -type f >&2 || true
+            exit 1
+          fi
+          echo "SCIP shard generated: ${shards[0]}"
+
   snapshots:
     runs-on: ubuntu-latest
     name: Snapshots

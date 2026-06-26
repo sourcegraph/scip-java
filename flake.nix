@@ -96,6 +96,7 @@
           jdk11 = mkDevShell pkgs.temurin-bin-11;
           jdk17 = mkDevShell pkgs.jdk17;
           jdk21 = mkDevShell pkgs.jdk21;
+          jdk25 = mkDevShell pkgs.jdk25;
         };
       }
     );

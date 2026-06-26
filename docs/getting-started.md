@@ -35,7 +35,8 @@ finished indexing the project.
 
 > The `sourcegraph/scip-java` Docker image is made available for convenience at
 > the cost of performance. The `sourcegraph/scip-java` image is a big download
-> because it includes pre-installed versions of Java 11, Java 17, and Java 21.
+> because it includes pre-installed versions of Java 11, Java 17, Java 21, and
+> Java 25.
 > The `sourcegraph/scip-java` image has slow performance because it needs to
 > download all external dependencies of your codebase on every invocation.
 >
@@ -54,6 +55,9 @@ docker run -v $(pwd):/sources --env JVM_VERSION=17 sourcegraph/scip-java:latest 
 
 # Java 21
 docker run -v $(pwd):/sources --env JVM_VERSION=21 sourcegraph/scip-java:latest scip-java index
+
+# Java 25
+docker run -v $(pwd):/sources --env JVM_VERSION=25 sourcegraph/scip-java:latest scip-java index
 
 ```
 
@@ -207,6 +211,7 @@ of Java versions.
 | Java 11      | ✅                           |                |
 | Java 17      | ✅, requires `--add-exports` |                |
 | Java 21      | ✅, requires `--add-exports` |                |
+| Java 25      | ✅, requires `--add-exports` |                |
 
 For Java 17 and newer versions, the following JVM options are required:
 
