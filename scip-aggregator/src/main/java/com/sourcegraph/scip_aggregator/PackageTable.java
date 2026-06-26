@@ -41,7 +41,7 @@ public class PackageTable {
     return SymbolDescriptor.toplevel(symbol)
         .flatMap(
             toplevel -> {
-              String classfile = toplevel.owner + toplevel.descriptor.name + ".class";
+              String classfile = toplevel.owner + toplevel.descriptor.name() + ".class";
               return packageForClassfile(classfile);
             });
   }

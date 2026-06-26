@@ -14,9 +14,9 @@ class SymbolDescriptorTest {
 
   private static void check(String symbol, Kind kind, String name, String owner) {
     SymbolDescriptor obtained = SymbolDescriptor.parseFromSymbol(symbol);
-    assertEquals(name, obtained.descriptor.name, symbol);
+    assertEquals(name, obtained.descriptor.name(), symbol);
     assertEquals(owner, obtained.owner, symbol);
-    assertEquals(kind, obtained.descriptor.kind, symbol);
+    assertEquals(kind, obtained.descriptor.kind(), symbol);
   }
 
   @Test

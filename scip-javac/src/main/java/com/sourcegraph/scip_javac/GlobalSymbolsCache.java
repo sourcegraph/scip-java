@@ -67,7 +67,7 @@ public final class GlobalSymbolsCache {
     if (ScipSymbols.isLocal(owner)) return locals.put(sym);
 
     ScipSymbols.Descriptor desc = scipDescriptor(sym);
-    if (options.verboseEnabled && desc.kind == ScipSymbols.Descriptor.Kind.None) {
+    if (options.verboseEnabled && desc.kind() == ScipSymbols.Descriptor.Kind.None) {
       if (sym instanceof QualifiedNameable qualifiedNameable)
         pprint(qualifiedNameable.getQualifiedName().toString());
       else pprint(sym.getSimpleName().toString());

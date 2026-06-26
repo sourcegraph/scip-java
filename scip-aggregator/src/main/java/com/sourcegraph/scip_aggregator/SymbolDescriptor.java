@@ -29,11 +29,11 @@ public class SymbolDescriptor {
       return Optional.empty();
     }
     SymbolDescriptor current = parseFromSymbol(symbol);
-    if (current.descriptor.kind == Kind.Package) {
+    if (current.descriptor.kind() == Kind.Package) {
       return Optional.empty();
     }
     SymbolDescriptor owner = parseFromSymbol(current.owner);
-    if (owner.descriptor.kind == Kind.Package) {
+    if (owner.descriptor.kind() == Kind.Package) {
       return Optional.of(current);
     } else {
       return toplevel(current.owner);
