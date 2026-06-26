@@ -8,8 +8,9 @@ public final class SaveSnapshots {
   private SaveSnapshots() {}
 
   public static void main(String[] args) {
-    // Keep regenerated goldens stable across JDK 11/17/21 by pinning the JDK version embedded in
-    // stdlib SCIP symbols. Matches the `-Dscip.jdk.version=11` set on the test JVM in Gradle.
+    // Keep regenerated goldens stable across the supported JDK matrix by pinning the JDK version
+    // embedded in stdlib SCIP symbols. "11" is a historical, deterministic label (not a supported
+    // runtime); it only needs to match the `-Dscip.jdk.version` set on the test JVM in Gradle.
     System.setProperty("scip.jdk.version", "11");
     MinimizedSnapshotScipGenerator generator = new MinimizedSnapshotScipGenerator();
     for (MinimizedSnapshotScipGenerator.SnapshotCase snapshotCase :

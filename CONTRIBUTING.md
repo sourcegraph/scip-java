@@ -9,7 +9,7 @@ The recommended way to get a working development environment is via
 [Nix](https://nixos.org/download) and the provided [flake](https://github.com/sourcegraph/scip-java/blob/main/flake.nix):
 
 ```sh
-nix develop              # default shell (JDK 11)
+nix develop              # default shell (JDK 17)
 nix develop .#jdk17      # JDK 17
 nix develop .#jdk21      # JDK 21
 ```
@@ -19,7 +19,7 @@ This drops you into a shell with `gradle`, `maven`, `bazelisk`, `nodejs`,
 
 If you'd rather install tools manually, you'll need at least:
 
-- `java`: any version should work
+- `java`: JDK 17 or newer
 - `git`: any version should work
 - `gradle`: `brew install gradle`, or see
   [general installation guide](https://gradle.org/install/).

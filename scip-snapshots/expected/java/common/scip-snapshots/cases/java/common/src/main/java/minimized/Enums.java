@@ -20,6 +20,7 @@
 //           relationship scip-java maven jdk 11 java/io/Serializable# implementation
 //           relationship scip-java maven jdk 11 java/lang/Comparable# implementation
 //           relationship scip-java maven jdk 11 java/lang/Enum# implementation
+//           relationship scip-java maven jdk 11 java/lang/constant/Constable# implementation
 //  ⌄ enclosing_range_start scip-java maven . . minimized/Enums#A.
     A("A", 420),
 //  ^ definition scip-java maven . . minimized/Enums#A.

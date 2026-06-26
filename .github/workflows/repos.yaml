@@ -56,16 +56,6 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - name: gradle-java11-pusher
-            repository: pusher/pusher-http-java
-            ref: 94f25a2848e5939cf27dafad8ed25aeaa2d83274
-            directory: .
-            build_tool: gradle
-            build_command: ""
-            java: 11
-            bazel_version: ""
-            covers: Gradle, Java project target 11, Java 11 runtime
-
           - name: maven-java17-spring-boot
             repository: spring-guides/gs-spring-boot
             ref: 2ffad4f418c3052b534184228a45d062f566096f
@@ -75,16 +65,6 @@ jobs:
             java: 17
             bazel_version: ""
             covers: Maven, Java project target 17, Java 17 runtime
-
-          - name: maven-java11-wagon-multimodule
-            repository: apache/maven-wagon
-            ref: 20b847446bb60f49af0428d592eadee774b5bff2
-            directory: .
-            build_tool: maven
-            build_command: "-DskipTests compile"
-            java: 11
-            bazel_version: ""
-            covers: Maven, multi-module Java, Java 11 runtime
 
           - name: maven-kotlin-json-kotlin-maven
             repository: pwall567/json-kotlin-maven
@@ -107,16 +87,6 @@ jobs:
             java: 21
             bazel_version: ""
             covers: Gradle, Java project target 21, Java 21 runtime
-
-          - name: gradle-java11-mapstruct-lombok
-            repository: mapstruct/mapstruct-examples
-            ref: 3f9fd5ffe9e2272b6219a4216e842f8c009d1005
-            directory: mapstruct-lombok
-            build_tool: gradle
-            build_command: "compileJava"
-            java: 11
-            bazel_version: ""
-            covers: Gradle, Java annotation processors, Lombok, MapStruct, generated sources, Java 11 runtime
 
           - name: gradle-kotlin-okio
             repository: square/okio

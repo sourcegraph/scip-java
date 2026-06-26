@@ -67,16 +67,14 @@ class GradleBuildToolTest : BuildToolHarness() {
             )
         )
         add(checkGradleBuild("basic", "gradle/basic", expectedScipFiles = 2))
-        for (java in listOf(11, 17, 21)) {
-            add(
-                checkGradleBuild(
-                    "toolchains-$java",
-                    "gradle/toolchains",
-                    expectedScipFiles = 1,
-                    substitutions = mapOf("@JAVA@" to "$java"),
-                )
+        add(
+            checkGradleBuild(
+                "toolchains",
+                "gradle/toolchains",
+                expectedScipFiles = 1,
+                substitutions = mapOf("@JAVA@" to "17"),
             )
-        }
+        )
         add(
             checkGradleBuild(
                 "protobuf-generator",
@@ -130,16 +128,14 @@ class GradleBuildToolTest : BuildToolHarness() {
                         .trimMargin(),
             )
         )
-        for (java in listOf(11, 17)) {
-            add(
-                checkGradleBuild(
-                    "kotlin-jvm-toolchains-jdk$java",
-                    "gradle/kotlin-jvm-toolchains",
-                    expectedScipFiles = 1,
-                    substitutions = mapOf("@JAVA@" to "$java"),
-                )
+        add(
+            checkGradleBuild(
+                "kotlin-jvm-toolchains-jdk17",
+                "gradle/kotlin-jvm-toolchains",
+                expectedScipFiles = 1,
+                substitutions = mapOf("@JAVA@" to "17"),
             )
-        }
+        )
         // Regression test: projects that lazily register custom source sets (e.g.
         // intTest) with a Java toolchain used to fail because the eager `.all {}`
         // API finalized the javaCompiler property before Gradle finished

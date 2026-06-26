@@ -15,6 +15,7 @@
 //                             relationship scip-java maven jdk 11 java/io/Serializable# implementation
 //                             relationship scip-java maven jdk 11 java/lang/Comparable# implementation
 //                             relationship scip-java maven jdk 11 java/lang/Enum# implementation
+//                             relationship scip-java maven jdk 11 java/lang/constant/Constable# implementation
 //     ^^^^^^^^^^^^^^^^^^^^^^^ definition scip-java maven . . minimized/EnumImplementsInterface#`<init>`().
 //                             kind Constructor
 //                             display_name <init>

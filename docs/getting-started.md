@@ -35,7 +35,7 @@ finished indexing the project.
 
 > The `sourcegraph/scip-java` Docker image is made available for convenience at
 > the cost of performance. The `sourcegraph/scip-java` image is a big download
-> because it includes pre-installed versions of Java 11, Java 17, and Java 21.
+> because it includes pre-installed versions of Java 17 and Java 21.
 > The `sourcegraph/scip-java` image has slow performance because it needs to
 > download all external dependencies of your codebase on every invocation.
 >
@@ -46,9 +46,6 @@ Java 17 is the default Java version in the `sourcegraph/scip-java` Docker image.
 Use the following commands to use a different JVM version:
 
 ```sh
-# Java 11
-docker run -v $(pwd):/sources --env JVM_VERSION=11 sourcegraph/scip-java:latest scip-java index
-
 # Java 17 (default)
 docker run -v $(pwd):/sources --env JVM_VERSION=17 sourcegraph/scip-java:latest scip-java index
 
@@ -60,7 +57,7 @@ docker run -v $(pwd):/sources --env JVM_VERSION=21 sourcegraph/scip-java:latest 
 ### Java launcher
 
 Use the Java launcher to install `scip-java` on your local computer or any
-Docker image with a pre-installed Java version.
+Docker image with a pre-installed Java version (JDK 17 or newer).
 
 ```sh
 # macOS/Linux
@@ -86,7 +83,8 @@ the `index` subcommand.
 ### Java fat jar
 
 Use the fat jar option to build a standalone `scip-java` executable. Note that
-you still need a Java installation to run the `scip-java` binary.
+you still need a Java installation (JDK 17 or newer) to run the `scip-java`
+binary.
 
 ```sh
 # macOS/Linux
@@ -204,7 +202,7 @@ of Java versions.
 | ------------ | ---------------------------- | -------------- |
 | Java 7       | ❌                           |                |
 | Java 8       | ❌                           |                |
-| Java 11      | ✅                           |                |
+| Java 11      | ❌                           |                |
 | Java 17      | ✅, requires `--add-exports` |                |
 | Java 21      | ✅, requires `--add-exports` |                |
 

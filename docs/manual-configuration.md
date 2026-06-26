@@ -117,8 +117,8 @@ targetroot directory.
 
 ```
 ❯ find $TARGETROOT -type f
-build/scip-targetroot/META-INF/scip/j11/src/test/java/example/ExampleTest.java.scip
-build/scip-targetroot/META-INF/scip/j11/src/main/java/example/Example.java.scip
+build/scip-targetroot/META-INF/scip/j17/src/test/java/example/ExampleTest.java.scip
+build/scip-targetroot/META-INF/scip/j17/src/main/java/example/Example.java.scip
 ...
 ```
 
