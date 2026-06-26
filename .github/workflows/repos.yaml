@@ -1,0 +1,293 @@
+name: Repository indexing
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
+
+env:
+  NIX_DEVELOP: ${{ github.workspace }}#jdk21
+
+defaults:
+  run:
+    shell: bash -eo pipefail -c "nix develop \"$NIX_DEVELOP\" --command bash -eo pipefail \"$1\"" -- {0}
+
+jobs:
+  build-cli:
+    runs-on: ubuntu-latest
+    name: Build scip-java CLI
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: DeterminateSystems/nix-installer-action@v22
+        with:
+          summarize: false
+
+      - uses: DeterminateSystems/magic-nix-cache-action@v13
+
+      - name: Build distribution
+        run: gradle :scip-java:installDist --no-daemon
+
+      - name: Package distribution
+        run: tar -C scip-java/build/install -czf scip-java-dist.tgz scip-java
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: scip-java-dist
+          path: scip-java-dist.tgz
+          retention-days: 1
+
+  index-repo:
+    runs-on: ubuntu-latest
+    needs: build-cli
+    name: ${{ matrix.name }}
+    env:
+      NIX_DEVELOP: ${{ github.workspace }}#jdk${{ matrix.java }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: gradle-java11-pusher
+            repository: pusher/pusher-http-java
+            ref: 94f25a2848e5939cf27dafad8ed25aeaa2d83274
+            directory: .
+            build_tool: gradle
+            build_command: ""
+            java: 11
+            bazel_version: ""
+            covers: Gradle, Java project target 11, Java 11 runtime
+
+          - name: maven-java17-spring-boot
+            repository: spring-guides/gs-spring-boot
+            ref: 2ffad4f418c3052b534184228a45d062f566096f
+            directory: complete
+            build_tool: maven
+            build_command: ""
+            java: 17
+            bazel_version: ""
+            covers: Maven, Java project target 17, Java 17 runtime
+
+          - name: maven-java11-wagon-multimodule
+            repository: apache/maven-wagon
+            ref: 20b847446bb60f49af0428d592eadee774b5bff2
+            directory: .
+            build_tool: maven
+            build_command: "-DskipTests compile"
+            java: 11
+            bazel_version: ""
+            covers: Maven, multi-module Java, Java 11 runtime
+
+          - name: maven-kotlin-json-kotlin-maven
+            repository: pwall567/json-kotlin-maven
+            ref: 523f4fd624c3abca4a083c96be596d6f4799b705
+            directory: .
+            build_tool: scip
+            build_command: ""
+            java: 17
+            bazel_version: ""
+            scip_config: maven-kotlin
+            expected_language: kotlin
+            covers: Maven Kotlin project, manual SCIP config, Kotlin source, Java 17 runtime
+
+          - name: gradle-java21-readiness
+            repository: ePages-de/spring-boot-readiness
+            ref: 8a91762e723e5204c69339ebbfc2517a48a8651a
+            directory: .
+            build_tool: gradle
+            build_command: "clean compileJava"
+            java: 21
+            bazel_version: ""
+            covers: Gradle, Java project target 21, Java 21 runtime
+
+          - name: gradle-java11-mapstruct-lombok
+            repository: mapstruct/mapstruct-examples
+            ref: 3f9fd5ffe9e2272b6219a4216e842f8c009d1005
+            directory: mapstruct-lombok
+            build_tool: gradle
+            build_command: "compileJava"
+            java: 11
+            bazel_version: ""
+            covers: Gradle, Java annotation processors, Lombok, MapStruct, generated sources, Java 11 runtime
+
+          - name: gradle-kotlin-okio
+            repository: square/okio
+            ref: parent-3.16.0
+            directory: .
+            build_tool: gradle
+            build_command: "-Dkjs=false -Dkwasm=false :okio:compileKotlinJvm"
+            java: 17
+            bazel_version: ""
+            covers: Gradle, Kotlin, Kotlin 2.2.0
+
+          - name: gradle-kotlin-flowext
+            repository: hoc081098/FlowExt
+            ref: 7341f3853d670af0283258f57643a68ed273f8ac
+            directory: .
+            build_tool: gradle
+            build_command: "compileKotlinJvm"
+            java: 17
+            bazel_version: ""
+            expected_language: kotlin
+            covers: Gradle, Kotlin multiplatform JVM target, Kotlin 2.2.0, Java 17 runtime
+
+          - name: gradle-mixed-okio-jmh
+            repository: square/okio
+            ref: parent-3.16.0
+            directory: .
+            build_tool: gradle
+            build_command: "-Dkjs=false -Dkwasm=false :okio:jvm:jmh:jmhClasses"
+            java: 21
+            bazel_version: ""
+            covers: Gradle, mixed Java/Kotlin, Java 21 runtime
+
+          - name: bazel-java-examples
+            repository: bazelbuild/examples
+            ref: dbf3399037ae65f901d46147804749fae1409ef2
+            directory: java-tutorial
+            build_tool: bazel
+            build_command: "//:ProjectRunner"
+            java: 21
+            bazel_version: 7.6.1
+            covers: Bazel, Java, Java 21 runtime
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: DeterminateSystems/nix-installer-action@v22
+        with:
+          summarize: false
+
+      - uses: DeterminateSystems/magic-nix-cache-action@v13
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: scip-java-dist
+          path: scip-java-dist
+
+      - name: Install scip-java CLI
+        run: |
+          mkdir -p "$RUNNER_TEMP/scip-java"
+          tar -xzf scip-java-dist/scip-java-dist.tgz -C "$RUNNER_TEMP/scip-java"
+          cli="$RUNNER_TEMP/scip-java/scip-java/bin/scip-java"
+          chmod +x "$cli"
+          "$cli" --help >/dev/null
+          printf 'SCIP_JAVA_CLI=%s\n' "$cli" >> "$GITHUB_ENV"
+
+      - name: Clone repository
+        env:
+          REPOSITORY: ${{ matrix.repository }}
+          REF: ${{ matrix.ref }}
+          DIRECTORY: ${{ matrix.directory }}
+          COVERS: ${{ matrix.covers }}
+        run: |
+          repo_dir="$RUNNER_TEMP/repos/${REPOSITORY//\//-}"
+          mkdir -p "$(dirname "$repo_dir")"
+          git init "$repo_dir"
+          git -C "$repo_dir" remote add origin "https://github.com/$REPOSITORY.git"
+          git -C "$repo_dir" fetch --depth=1 origin "$REF"
+          git -C "$repo_dir" checkout --detach FETCH_HEAD
+          git -C "$repo_dir" submodule update --init --recursive --depth 1
+
+          find "$repo_dir" -maxdepth 3 \( -name gradlew -o -name mvnw \) -type f -exec chmod +x {} +
+
+          workdir="$repo_dir/$DIRECTORY"
+          test -d "$workdir"
+
+          echo "Covers: $COVERS"
+          git -C "$repo_dir" rev-parse HEAD
+          printf 'REPO_WORKDIR=%s\n' "$workdir" >> "$GITHUB_ENV"
+
+      - name: Run scip-java index
+        env:
+          BUILD_TOOL: ${{ matrix.build_tool }}
+          BUILD_COMMAND: ${{ matrix.build_command }}
+          BAZEL_VERSION: ${{ matrix.bazel_version }}
+          SCIP_CONFIG: ${{ matrix.scip_config }}
+        run: |
+          cd "$REPO_WORKDIR"
+
+          if [[ "$SCIP_CONFIG" == "maven-kotlin" ]]; then
+            mkdir -p target
+            mvn --batch-mode -q dependency:build-classpath -Dmdep.outputFile=target/scip-java-classpath.txt
+            jq -Rn '
+              input
+              | split(":")
+              | map(select(length > 0))
+              | {
+                  sourceFiles: ["src/main/kotlin"],
+                  classpath: .,
+                  javacOptions: ["-source", "1.8", "-target", "1.8"]
+                }
+            ' < target/scip-java-classpath.txt > scip-java.json
+          fi
+
+          index_args=(--build-tool="$BUILD_TOOL")
+          if [[ "$BUILD_TOOL" == "bazel" ]]; then
+            index_args+=(--bazel-scip-java-binary="$SCIP_JAVA_CLI" --bazel-overwrite-aspect-file)
+          fi
+
+          if [[ -n "$BAZEL_VERSION" ]]; then
+            export USE_BAZEL_VERSION="$BAZEL_VERSION"
+          fi
+
+          if [[ -n "$BUILD_COMMAND" ]]; then
+            # shellcheck disable=SC2206
+            build_command=($BUILD_COMMAND)
+            "$SCIP_JAVA_CLI" index "${index_args[@]}" -- "${build_command[@]}"
+          else
+            "$SCIP_JAVA_CLI" index "${index_args[@]}"
+          fi
+
+      - name: Validate SCIP index data
+        env:
+          EXPECTED_LANGUAGE: ${{ matrix.expected_language }}
+        run: |
+          cd "$REPO_WORKDIR"
+
+          test -s index.scip
+          du -h index.scip
+          scip stats --from index.scip | tee index.stats.json
+
+          documents="$(jq -r '.documents' index.stats.json)"
+          occurrences="$(jq -r '.occurrences' index.stats.json)"
+          definitions="$(jq -r '.definitions' index.stats.json)"
+
+          if (( documents < 1 || occurrences < 1 || definitions < 1 )); then
+            echo "SCIP index did not contain enough generated data: documents=$documents occurrences=$occurrences definitions=$definitions" >&2
+            exit 1
+          fi
+
+          scip print --json index.scip > index.print.json
+
+          source_documents=0
+          while IFS= read -r path; do
+            if [[ -f "$path" ]]; then
+              source_documents=$((source_documents + 1))
+            fi
+          done < <(
+            jq -r --arg expected_language "$EXPECTED_LANGUAGE" '
+              .documents[]?
+              | select((if $expected_language == "" then (.language == "java" or .language == "kotlin") else .language == $expected_language end)
+                  and ((.relative_path // .relativePath // "") | test(if $expected_language == "kotlin" then "\\.kt$" elif $expected_language == "java" then "\\.java$" else "\\.(java|kt)$" end))
+                  and ((.occurrences // []) | length > 0)
+                  and ((.symbols // []) | length > 0))
+              | .relative_path // .relativePath
+            ' index.print.json
+          )
+
+          if (( source_documents < 1 )); then
+            if [[ -n "$EXPECTED_LANGUAGE" ]]; then
+              echo "SCIP index did not contain any checked-out $EXPECTED_LANGUAGE source documents with occurrences and symbols" >&2
+            else
+              echo "SCIP index did not contain any checked-out Java/Kotlin source documents with occurrences and symbols" >&2
+            fi
+            exit 1
+          fi
