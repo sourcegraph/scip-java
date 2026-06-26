@@ -43,7 +43,7 @@ public class ScipJavacOptions extends ScipOptions {
         String argValue = arg.substring("-targetroot:".length());
         if (argValue.equals(JAVAC_CLASSES_DIR_ARG)) {
           useJavacClassesDir = true;
-          result.targetroot = getJavacClassesDir(result, task).classes;
+          result.targetroot = getJavacClassesDir(result, task).classes();
         } else {
           result.targetroot = Paths.get(argValue);
         }
@@ -66,8 +66,8 @@ public class ScipJavacOptions extends ScipOptions {
         result.uriScheme = UriScheme.BAZEL;
         useJavacClassesDir = true;
         TargetPaths paths = getJavacClassesDir(result, task);
-        result.targetroot = paths.classes;
-        result.generatedTargetRoot = paths.sources;
+        result.targetroot = paths.classes();
+        result.generatedTargetRoot = paths.sources();
       } else if (arg.equals("-text:on")) {
         result.includeText = true;
       } else if (arg.equals("-text:off")) {
