@@ -3,20 +3,6 @@ import com.google.protobuf.gradle.ProtobufExtension
 import com.google.protobuf.gradle.proto
 import com.vanniktech.maven.publish.MavenPublishBaseExtension
 import java.util.Properties
-import org.gradle.api.JavaVersion
-import org.gradle.api.distribution.DistributionContainer
-import org.gradle.api.plugins.JavaApplication
-import org.gradle.api.plugins.JavaPlugin
-import org.gradle.api.plugins.JavaPluginExtension
-import org.gradle.api.tasks.JavaExec
-import org.gradle.api.tasks.SourceSetContainer
-import org.gradle.api.tasks.Sync
-import org.gradle.api.tasks.compile.JavaCompile
-import org.gradle.api.tasks.javadoc.Javadoc
-import org.gradle.api.tasks.testing.Test
-import org.gradle.external.javadoc.StandardJavadocDocletOptions
-import org.gradle.jvm.tasks.Jar
-import org.gradle.language.jvm.tasks.ProcessResources
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
@@ -132,7 +118,7 @@ project(":scip-shared") {
 
 project(":scip-javac") {
     apply(plugin = "java-library")
-    apply(plugin = "com.github.johnrengelman.shadow")
+    apply(plugin = "com.gradleup.shadow")
     description = "A javac plugin to emit SCIP information"
 
     dependencies {
@@ -173,7 +159,7 @@ project(":scip-javac") {
 project(":scip-kotlinc") {
     apply(plugin = "java-library")
     apply(plugin = "org.jetbrains.kotlin.jvm")
-    apply(plugin = "com.github.johnrengelman.shadow")
+    apply(plugin = "com.gradleup.shadow")
     description = "A kotlinc plugin to emit SCIP information"
 
     dependencies {
@@ -210,7 +196,7 @@ project(":scip-kotlinc") {
 
 project(":scip-gradle-plugin") {
     apply(plugin = "java-library")
-    apply(plugin = "com.github.johnrengelman.shadow")
+    apply(plugin = "com.gradleup.shadow")
 
     dependencies {
         "compileOnly"(catalog.gradle.api)
@@ -333,12 +319,13 @@ project(":scip-java") {
 
     val generateDistributionVersion = tasks.register("generateDistributionVersion") {
         val output = layout.buildDirectory.file("generated/distribution/VERSION")
-        inputs.property("version", project.version.toString())
+        val version = project.version.toString()
+        inputs.property("version", version)
         outputs.file(output)
         doLast {
             val file = output.get().asFile
             file.parentFile.mkdirs()
-            file.writeText("version:=${project.version}\n")
+            file.writeText("version:=$version\n")
         }
     }
 

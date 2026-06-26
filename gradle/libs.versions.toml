@@ -12,9 +12,9 @@ maven-plugin-annotations = "3.6.4"
 maven-plugin-api = "3.6.3"
 maven-project = "2.2.1"
 protobuf = "4.34.2"
-protobuf-plugin = "0.9.4"
+protobuf-plugin = "0.10.0"
 scip-bindings = "0.8.0"
-shadow = "8.1.1"
+shadow = "9.4.3"
 vanniktech-maven-publish = "0.35.0"
 
 [libraries]
@@ -46,5 +46,5 @@ scip-kotlin-bindings = { module = "org.scip-code:scip-kotlin-bindings", version.
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 protobuf = { id = "com.google.protobuf", version.ref = "protobuf-plugin" }
-shadow = { id = "com.github.johnrengelman.shadow", version.ref = "shadow" }
+shadow = { id = "com.gradleup.shadow", version.ref = "shadow" }
 vanniktech-maven-publish = { id = "com.vanniktech.maven.publish", version.ref = "vanniktech-maven-publish" }

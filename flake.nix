@@ -30,7 +30,7 @@
               bazelisk
               git
               google-java-format
-              (gradle.override ({ java = jdk; }))
+              (gradle_9.override ({ java = jdk; }))
               jdk
               jq
               ktfmt
