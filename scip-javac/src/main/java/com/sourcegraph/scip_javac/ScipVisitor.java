@@ -110,9 +110,9 @@ final class ScipVisitor extends TreePathScanner<Void, Void> {
 
   @Override
   public Void visitPackage(PackageTree node, Void unused) {
-    // JDK 17+ TreePathScanner would otherwise recurse into the package name's
-    // identifiers and emit a self-reference for `package X.Y;`. JDK 11 does
-    // not. Skipping the package subtree keeps output stable across JDKs.
+    // Skip the package subtree: TreePathScanner would otherwise recurse into the
+    // package name's identifiers and emit an unwanted self-reference for
+    // `package X.Y;`.
     return null;
   }
 

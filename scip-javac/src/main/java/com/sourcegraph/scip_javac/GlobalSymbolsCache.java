@@ -8,12 +8,12 @@ import java.util.ArrayList;
 import java.util.IdentityHashMap;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ExecutableElement;
+import javax.lang.model.element.ModuleElement;
 import javax.lang.model.element.PackageElement;
 import javax.lang.model.element.QualifiedNameable;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.TypeParameterElement;
 import javax.lang.model.element.VariableElement;
-import javax.lang.model.type.NoType;
 
 /** Cache of SCIP symbols that can be referenced between files. */
 public final class GlobalSymbolsCache {
@@ -59,9 +59,7 @@ public final class GlobalSymbolsCache {
       }
 
       return sb.toString();
-    } else
-    // check for Module without referring to Module as it doesn't exist < JDK 9
-    if (sym.asType() instanceof NoType) return ScipSymbols.ROOT_PACKAGE;
+    } else if (sym instanceof ModuleElement) return ScipSymbols.ROOT_PACKAGE;
 
     if (isAnonymousClass(sym) || isLocalVariable(sym)) return locals.put(sym);
 
