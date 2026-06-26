@@ -342,10 +342,26 @@ project(":scip-java") {
         }
     }
 
+    // Emit the javac --add-exports flags as a ready-to-use, space-separated
+    // string so the Docker wrapper script can read them with a plain `cat`,
+    // keeping gradle/javac-internals.properties the single source of truth.
+    val generateJavacJvmOptions = tasks.register("generateJavacJvmOptions") {
+        val output = layout.buildDirectory.file("generated/distribution/javac-jvm-options")
+        val options = javacJvmOptions.joinToString(" ")
+        inputs.property("options", options)
+        outputs.file(output)
+        doLast {
+            val file = output.get().asFile
+            file.parentFile.mkdirs()
+            file.writeText("$options\n")
+        }
+    }
+
     extensions.configure<DistributionContainer> {
         named("main") {
             contents {
                 from(generateDistributionVersion)
+                from(generateJavacJvmOptions)
             }
         }
     }

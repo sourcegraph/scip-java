@@ -12,6 +12,13 @@ if test -f "$FILE"; then
 	fi
 fi
 
+# scip-java requires JDK 17+, all of which need these --add-exports to reach
+# internal javac APIs, so apply them unconditionally. The build derives them
+# from gradle/javac-internals.properties (the single source of truth) and ships
+# them ready-to-use in the distribution.
+JAVA_OPTS=$(cat /app/scip-java/javac-jvm-options)
+export JAVA_OPTS
+
 JVM_VERSIONS=$(echo "$JVM_VERSION" | tr "," "\n")
 
 LAST_CODE="-1"
@@ -21,9 +28,6 @@ do
 	if [ "$LAST_CODE" != "0" ]; then
 		echo "Using JVM version '$JVM_VERSION'"
 
-		# scip-java requires JDK 17+, all of which need these --add-exports to
-		# reach internal javac APIs, so apply them unconditionally.
-		export JAVA_OPTS="--add-exports jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED --add-exports jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED --add-exports jdk.compiler/com.sun.tools.javac.model=ALL-UNNAMED --add-exports jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED --add-exports jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED"
 		eval "$(coursier java --jvm "$JVM_VERSION" --env --jvm-index https://github.com/coursier/jvm-index/blob/master/index.json)"
 
 		java -version
