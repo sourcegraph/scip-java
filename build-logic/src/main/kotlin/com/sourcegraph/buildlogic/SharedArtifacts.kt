@@ -2,6 +2,8 @@ package com.sourcegraph.buildlogic
 
 import org.gradle.api.Project
 import org.gradle.api.artifacts.Configuration
+import org.gradle.api.file.FileSystemLocation
+import org.gradle.api.provider.Provider
 
 /**
  * Declares a resolvable view of another project's shaded jar, published by its `shadowJarElements`
@@ -20,3 +22,26 @@ fun Project.shadowJarArtifact(producerPath: String, name: String): Configuration
     )
     return configurations.resolvable(name) { extendsFrom(bucket.get()) }.get()
 }
+
+/**
+ * Builds the `kotlinc` arguments that load the scip-kotlinc compiler plugin from [pluginClasspath]
+ * (the resolved shaded jar) and point it at [sourceroot]/[targetroot].
+ *
+ * The mapping lives here, in compiled build logic, rather than in a build script: a `.map {}`
+ * lambda declared in a `.gradle.kts` file captures a hidden reference to the script object, which
+ * the configuration cache cannot serialize.
+ */
+fun scipKotlincPluginArgs(
+    pluginClasspath: Provider<Set<FileSystemLocation>>,
+    sourceroot: String,
+    targetroot: String,
+): Provider<List<String>> =
+    pluginClasspath.map { locations ->
+        listOf(
+            "-Xplugin=${locations.single().asFile.absolutePath}",
+            "-P",
+            "plugin:scip-kotlinc:sourceroot=$sourceroot",
+            "-P",
+            "plugin:scip-kotlinc:targetroot=$targetroot",
+        )
+    }

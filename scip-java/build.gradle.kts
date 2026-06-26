@@ -1,4 +1,5 @@
 import com.sourcegraph.buildlogic.JavacInternals
+import com.sourcegraph.buildlogic.registerGeneratedFile
 import com.sourcegraph.buildlogic.shadowJarArtifact
 
 plugins {
@@ -62,32 +63,18 @@ tasks.named<Jar>("jar") {
     }
 }
 
-val generateDistributionVersion = tasks.register("generateDistributionVersion") {
-    val output = layout.buildDirectory.file("generated/distribution/VERSION")
-    val version = project.version.toString()
-    inputs.property("version", version)
-    outputs.file(output)
-    doLast {
-        val file = output.get().asFile
-        file.parentFile.mkdirs()
-        file.writeText("version:=$version\n")
-    }
-}
+val generateDistributionVersion =
+    registerGeneratedFile("generateDistributionVersion", "distribution/VERSION", "version:=${project.version}")
 
 // Emit the javac --add-exports flags as a ready-to-use, space-separated string
 // so the Docker wrapper script can read them with a plain `cat`, keeping
 // gradle/javac-internals.properties the single source of truth.
-val generateJavacJvmOptions = tasks.register("generateJavacJvmOptions") {
-    val output = layout.buildDirectory.file("generated/distribution/javac-jvm-options")
-    val options = JavacInternals.jvmOptions(rootDir).joinToString(" ")
-    inputs.property("options", options)
-    outputs.file(output)
-    doLast {
-        val file = output.get().asFile
-        file.parentFile.mkdirs()
-        file.writeText("$options\n")
-    }
-}
+val generateJavacJvmOptions =
+    registerGeneratedFile(
+        "generateJavacJvmOptions",
+        "distribution/javac-jvm-options",
+        JavacInternals.jvmOptions(rootDir).joinToString(" "),
+    )
 
 distributions {
     named("main") {

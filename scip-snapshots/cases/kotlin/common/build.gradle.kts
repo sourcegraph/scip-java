@@ -1,4 +1,5 @@
 import com.sourcegraph.buildlogic.JavacInternals
+import com.sourcegraph.buildlogic.scipKotlincPluginArgs
 import com.sourcegraph.buildlogic.shadowJarArtifact
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
@@ -16,24 +17,19 @@ dependencies {
 
 val scipTargetroot = layout.buildDirectory.dir("scip-targetroot")
 
-val kotlincPluginArgs = kotlincShadowJar.elements.map { locations ->
-    val pluginPath = locations.single().asFile.absolutePath
-    listOf(
-        "-Xplugin=$pluginPath",
-        "-P",
-        "plugin:scip-kotlinc:sourceroot=${rootProject.rootDir.absolutePath}",
-        "-P",
-        "plugin:scip-kotlinc:targetroot=${scipTargetroot.get().asFile.absolutePath}",
-    )
-}
+val sourceroot = rootProject.rootDir.absolutePath
+val targetroot = scipTargetroot.get().asFile.absolutePath
 
 tasks.named<KotlinCompile>("compileKotlin") {
+    // Bind to a local so the doFirst action captures the provider, not the
+    // surrounding script object (which the configuration cache cannot serialize).
+    val targetrootDir = scipTargetroot
     inputs.files(kotlincShadowJar)
-    outputs.dir(scipTargetroot)
-    compilerOptions.freeCompilerArgs.addAll(kotlincPluginArgs)
+    outputs.dir(targetrootDir)
+    compilerOptions.freeCompilerArgs.addAll(scipKotlincPluginArgs(kotlincShadowJar.elements, sourceroot, targetroot))
     doFirst {
-        scipTargetroot.get().asFile.deleteRecursively()
-        scipTargetroot.get().asFile.mkdirs()
+        targetrootDir.get().asFile.deleteRecursively()
+        targetrootDir.get().asFile.mkdirs()
     }
 }
 
