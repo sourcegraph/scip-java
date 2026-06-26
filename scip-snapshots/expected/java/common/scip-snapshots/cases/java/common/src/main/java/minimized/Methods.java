@@ -33,13 +33,13 @@
 //  ⌄ enclosing_range_start scip-java maven . . minimized/Methods#overload(+1).
 //                          ⌄ enclosing_range_start local 1
     private String overload(String value) {
-//          ^^^^^^ reference scip-java maven jdk 11 java/lang/String#
+//          ^^^^^^ reference scip-java maven jdk 17 java/lang/String#
 //                 ^^^^^^^^ definition scip-java maven . . minimized/Methods#overload(+1).
 //                          kind Method
 //                          display_name overload
 //                          signature_documentation
 //                          > private String overload(String value)
-//                          ^^^^^^ reference scip-java maven jdk 11 java/lang/String#
+//                          ^^^^^^ reference scip-java maven jdk 17 java/lang/String#
 //                                 ^^^^^ definition local 1
 //                                       display_name value
 //                                       signature_documentation
@@ -71,13 +71,13 @@
 //  ⌄ enclosing_range_start scip-java maven . . minimized/Methods#staticOverload(+1).
 //                                       ⌄ enclosing_range_start local 3
     private static String staticOverload(String value) {
-//                 ^^^^^^ reference scip-java maven jdk 11 java/lang/String#
+//                 ^^^^^^ reference scip-java maven jdk 17 java/lang/String#
 //                        ^^^^^^^^^^^^^^ definition scip-java maven . . minimized/Methods#staticOverload(+1).
 //                                       kind StaticMethod
 //                                       display_name staticOverload
 //                                       signature_documentation
 //                                       > private static String staticOverload(String value)
-//                                       ^^^^^^ reference scip-java maven jdk 11 java/lang/String#
+//                                       ^^^^^^ reference scip-java maven jdk 17 java/lang/String#
 //                                              ^^^^^ definition local 3
 //                                                    display_name value
 //                                                    signature_documentation
@@ -92,7 +92,7 @@
 //                           ⌄ enclosing_range_start local 4
 //                                  ⌄ enclosing_range_start local 5
     public static String app(int n, String m) throws RuntimeException, IndexOutOfBoundsException {
-//                ^^^^^^ reference scip-java maven jdk 11 java/lang/String#
+//                ^^^^^^ reference scip-java maven jdk 17 java/lang/String#
 //                       ^^^ definition scip-java maven . . minimized/Methods#app().
 //                           kind StaticMethod
 //                           display_name app
@@ -102,13 +102,13 @@
 //                                 display_name n
 //                                 signature_documentation
 //                                 > int n
-//                                  ^^^^^^ reference scip-java maven jdk 11 java/lang/String#
+//                                  ^^^^^^ reference scip-java maven jdk 17 java/lang/String#
 //                                         ^ definition local 5
 //                                           display_name m
 //                                           signature_documentation
 //                                           > String m
-//                                                   ^^^^^^^^^^^^^^^^ reference scip-java maven jdk 11 java/lang/RuntimeException#
-//                                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^ reference scip-java maven jdk 11 java/lang/IndexOutOfBoundsException#
+//                                                   ^^^^^^^^^^^^^^^^ reference scip-java maven jdk 17 java/lang/RuntimeException#
+//                                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^ reference scip-java maven jdk 17 java/lang/IndexOutOfBoundsException#
 //                               ⌃ enclosing_range_end local 4
 //                                         ⌃ enclosing_range_end local 5
 //    ⌄ enclosing_range_start local 6
@@ -133,7 +133,7 @@
 //                             ⌃ enclosing_range_end local 7
 //    ⌄ enclosing_range_start local 8
       String b = staticOverload(m);
-//    ^^^^^^ reference scip-java maven jdk 11 java/lang/String#
+//    ^^^^^^ reference scip-java maven jdk 17 java/lang/String#
 //           ^ definition local 8
 //             kind Variable
 //             display_name b
@@ -155,7 +155,7 @@
 //                               ⌃ enclosing_range_end local 9
 //    ⌄ enclosing_range_start local 10
       String d = methods.overload(m);
-//    ^^^^^^ reference scip-java maven jdk 11 java/lang/String#
+//    ^^^^^^ reference scip-java maven jdk 17 java/lang/String#
 //           ^ definition local 10
 //             kind Variable
 //             display_name d

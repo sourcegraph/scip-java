@@ -4,27 +4,27 @@
 //       ^^^^ reference scip-java maven . . java/
 //            ^^^^ reference scip-java maven . . java/lang/
 //                 ^^^^^^^ reference scip-java maven . . java/lang/reflect/
-//                         ^^^^^^^^^^^ reference scip-java maven jdk 11 java/lang/reflect/Constructor#
+//                         ^^^^^^^^^^^ reference scip-java maven jdk 17 java/lang/reflect/Constructor#
   import java.lang.reflect.InvocationHandler;
 //       ^^^^ reference scip-java maven . . java/
 //            ^^^^ reference scip-java maven . . java/lang/
 //                 ^^^^^^^ reference scip-java maven . . java/lang/reflect/
-//                         ^^^^^^^^^^^^^^^^^ reference scip-java maven jdk 11 java/lang/reflect/InvocationHandler#
+//                         ^^^^^^^^^^^^^^^^^ reference scip-java maven jdk 17 java/lang/reflect/InvocationHandler#
   import java.util.concurrent.ConcurrentHashMap;
 //       ^^^^ reference scip-java maven . . java/
 //            ^^^^ reference scip-java maven . . java/util/
 //                 ^^^^^^^^^^ reference scip-java maven . . java/util/concurrent/
-//                            ^^^^^^^^^^^^^^^^^ reference scip-java maven jdk 11 java/util/concurrent/ConcurrentHashMap#
+//                            ^^^^^^^^^^^^^^^^^ reference scip-java maven jdk 17 java/util/concurrent/ConcurrentHashMap#
   import java.util.concurrent.ConcurrentMap;
 //       ^^^^ reference scip-java maven . . java/
 //            ^^^^ reference scip-java maven . . java/util/
 //                 ^^^^^^^^^^ reference scip-java maven . . java/util/concurrent/
-//                            ^^^^^^^^^^^^^ reference scip-java maven jdk 11 java/util/concurrent/ConcurrentMap#
+//                            ^^^^^^^^^^^^^ reference scip-java maven jdk 17 java/util/concurrent/ConcurrentMap#
   import java.util.function.Function;
 //       ^^^^ reference scip-java maven . . java/
 //            ^^^^ reference scip-java maven . . java/util/
 //                 ^^^^^^^^ reference scip-java maven . . java/util/function/
-//                          ^^^^^^^^ reference scip-java maven jdk 11 java/util/function/Function#
+//                          ^^^^^^^^ reference scip-java maven jdk 17 java/util/function/Function#
   
 //⌄ enclosing_range_start scip-java maven . . minimized/AnnotationsOnParameterizedTypes#
   public interface AnnotationsOnParameterizedTypes {
@@ -63,7 +63,7 @@
 //        display_name W
 //        signature_documentation
 //        > W
-//         ^^^^^^^^ reference scip-java maven jdk 11 java/util/function/Function#
+//         ^^^^^^^^ reference scip-java maven jdk 17 java/util/function/Function#
 //                  ^ reference scip-java maven . . minimized/AnnotationsOnParameterizedTypes#adapter().[W]
 //                     ^ reference scip-java maven . . minimized/AnnotationsOnParameterizedTypes#adapter().[C]
 //                        ^^^^^^^ definition scip-java maven . . minimized/AnnotationsOnParameterizedTypes#adapter().
@@ -72,13 +72,13 @@
 //                                signature_documentation
 //                                > public abstract <C, W> Function<W, C> adapter(Class<C> contract, Class<W> wrappedClass)
 //                                relationship scip-java maven . . minimized/AnnotationsOnParameterizedTypesImpl#adapter(). implementation reference
-//                                ^^^^^ reference scip-java maven jdk 11 java/lang/Class#
+//                                ^^^^^ reference scip-java maven jdk 17 java/lang/Class#
 //                                      ^ reference scip-java maven . . minimized/AnnotationsOnParameterizedTypes#adapter().[C]
 //                                         ^^^^^^^^ definition local 0
 //                                                  display_name contract
 //                                                  signature_documentation
 //                                                  > Class<C> contract
-//                                                   ^^^^^ reference scip-java maven jdk 11 java/lang/Class#
+//                                                   ^^^^^ reference scip-java maven jdk 17 java/lang/Class#
 //                                                         ^ reference scip-java maven . . minimized/AnnotationsOnParameterizedTypes#adapter().[W]
 //                                                            ^^^^^^^^^^^^ definition local 1
 //                                                                         display_name wrappedClass
@@ -109,22 +109,22 @@
 //                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference scip-java maven . . minimized/AnnotationsOnParameterizedTypes#
 //  ⌄ enclosing_range_start scip-java maven . . minimized/AnnotationsOnParameterizedTypesImpl#proxyConstructors.
     private ConcurrentMap<Class<?>, Constructor<?>> proxyConstructors = new ConcurrentHashMap<>();
-//          ^^^^^^^^^^^^^ reference scip-java maven jdk 11 java/util/concurrent/ConcurrentMap#
-//                        ^^^^^ reference scip-java maven jdk 11 java/lang/Class#
-//                                  ^^^^^^^^^^^ reference scip-java maven jdk 11 java/lang/reflect/Constructor#
+//          ^^^^^^^^^^^^^ reference scip-java maven jdk 17 java/util/concurrent/ConcurrentMap#
+//                        ^^^^^ reference scip-java maven jdk 17 java/lang/Class#
+//                                  ^^^^^^^^^^^ reference scip-java maven jdk 17 java/lang/reflect/Constructor#
 //                                                  ^^^^^^^^^^^^^^^^^ definition scip-java maven . . minimized/AnnotationsOnParameterizedTypesImpl#proxyConstructors.
 //                                                                    kind Field
 //                                                                    display_name proxyConstructors
 //                                                                    signature_documentation
 //                                                                    > private ConcurrentMap<Class<?>, Constructor<?>> proxyConstructors
-//                                                                          ^^^^^^^^^^^^^^^^^ reference scip-java maven jdk 11 java/util/concurrent/ConcurrentHashMap#`<init>`().
+//                                                                          ^^^^^^^^^^^^^^^^^ reference scip-java maven jdk 17 java/util/concurrent/ConcurrentHashMap#`<init>`().
 //                                                                                               ⌃ enclosing_range_end scip-java maven . . minimized/AnnotationsOnParameterizedTypesImpl#proxyConstructors.
   
 //  ⌄ enclosing_range_start scip-java maven . . minimized/AnnotationsOnParameterizedTypesImpl#adapter().[C]
 //  ⌄ enclosing_range_start scip-java maven . . minimized/AnnotationsOnParameterizedTypesImpl#adapter().[W]
 //  ⌄ enclosing_range_start scip-java maven . . minimized/AnnotationsOnParameterizedTypesImpl#adapter().
     @Override
-//   ^^^^^^^^ reference scip-java maven jdk 11 java/lang/Override#
+//   ^^^^^^^^ reference scip-java maven jdk 17 java/lang/Override#
 //                                       ⌄ enclosing_range_start local 2
 //                                                          ⌄ enclosing_range_start local 3
     public <C, W> Function<W, C> adapter(Class<C> contract, Class<W> wrappedClass) {
@@ -138,7 +138,7 @@
 //               display_name W
 //               signature_documentation
 //               > W
-//                ^^^^^^^^ reference scip-java maven jdk 11 java/util/function/Function#
+//                ^^^^^^^^ reference scip-java maven jdk 17 java/util/function/Function#
 //                         ^ reference scip-java maven . . minimized/AnnotationsOnParameterizedTypesImpl#adapter().[W]
 //                            ^ reference scip-java maven . . minimized/AnnotationsOnParameterizedTypesImpl#adapter().[C]
 //                               ^^^^^^^ definition scip-java maven . . minimized/AnnotationsOnParameterizedTypesImpl#adapter().
@@ -148,13 +148,13 @@
 //                                       > @Override
 //                                       > public <C, W> Function<W, C> adapter(Class<C> contract, Class<W> wrappedClass)
 //                                       relationship scip-java maven . . minimized/AnnotationsOnParameterizedTypes#adapter(). implementation reference
-//                                       ^^^^^ reference scip-java maven jdk 11 java/lang/Class#
+//                                       ^^^^^ reference scip-java maven jdk 17 java/lang/Class#
 //                                             ^ reference scip-java maven . . minimized/AnnotationsOnParameterizedTypesImpl#adapter().[C]
 //                                                ^^^^^^^^ definition local 2
 //                                                         display_name contract
 //                                                         signature_documentation
 //                                                         > Class<C> contract
-//                                                          ^^^^^ reference scip-java maven jdk 11 java/lang/Class#
+//                                                          ^^^^^ reference scip-java maven jdk 17 java/lang/Class#
 //                                                                ^ reference scip-java maven . . minimized/AnnotationsOnParameterizedTypesImpl#adapter().[W]
 //                                                                   ^^^^^^^^^^^^ definition local 3
 //                                                                                display_name wrappedClass
@@ -165,8 +165,8 @@
   
 //    ⌄ enclosing_range_start local 4
       Function<InvocationHandler, C> constructor = getConstructor(contract);
-//    ^^^^^^^^ reference scip-java maven jdk 11 java/util/function/Function#
-//             ^^^^^^^^^^^^^^^^^ reference scip-java maven jdk 11 java/lang/reflect/InvocationHandler#
+//    ^^^^^^^^ reference scip-java maven jdk 17 java/util/function/Function#
+//             ^^^^^^^^^^^^^^^^^ reference scip-java maven jdk 17 java/lang/reflect/InvocationHandler#
 //                                ^ reference scip-java maven . . minimized/AnnotationsOnParameterizedTypesImpl#adapter().[C]
 //                                   ^^^^^^^^^^^ definition local 4
 //                                               kind Variable
@@ -178,9 +178,9 @@
 //                                                                         ⌃ enclosing_range_end local 4
   
       System.out.println(constructor);
-//    ^^^^^^ reference scip-java maven jdk 11 java/lang/System#
-//           ^^^ reference scip-java maven jdk 11 java/lang/System#out.
-//               ^^^^^^^ reference scip-java maven jdk 11 java/io/PrintStream#println(+9).
+//    ^^^^^^ reference scip-java maven jdk 17 java/lang/System#
+//           ^^^ reference scip-java maven jdk 17 java/lang/System#out.
+//               ^^^^^^^ reference scip-java maven jdk 17 java/io/PrintStream#println(+9).
 //                       ^^^^^^^^^^^ reference local 4
   
       return null;
@@ -198,15 +198,15 @@
 //             display_name T
 //             signature_documentation
 //             > T
-//              ^^^^^^^^ reference scip-java maven jdk 11 java/util/function/Function#
-//                       ^^^^^^^^^^^^^^^^^ reference scip-java maven jdk 11 java/lang/reflect/InvocationHandler#
+//              ^^^^^^^^ reference scip-java maven jdk 17 java/util/function/Function#
+//                       ^^^^^^^^^^^^^^^^^ reference scip-java maven jdk 17 java/lang/reflect/InvocationHandler#
 //                                          ^ reference scip-java maven . . minimized/AnnotationsOnParameterizedTypesImpl#getConstructor().[T]
 //                                             ^^^^^^^^^^^^^^ definition scip-java maven . . minimized/AnnotationsOnParameterizedTypesImpl#getConstructor().
 //                                                            kind Method
 //                                                            display_name getConstructor
 //                                                            signature_documentation
 //                                                            > private <T> Function<InvocationHandler, T> getConstructor(Class<T> contract)
-//                                                            ^^^^^ reference scip-java maven jdk 11 java/lang/Class#
+//                                                            ^^^^^ reference scip-java maven jdk 17 java/lang/Class#
 //                                                                  ^ reference scip-java maven . . minimized/AnnotationsOnParameterizedTypesImpl#getConstructor().[T]
 //                                                                     ^^^^^^^^ definition local 5
 //                                                                              display_name contract
@@ -215,10 +215,10 @@
 //                                                                            ⌃ enclosing_range_end local 5
 //    ⌄ enclosing_range_start local 6
       @SuppressWarnings("unchecked")
-//     ^^^^^^^^^^^^^^^^ reference scip-java maven jdk 11 java/lang/SuppressWarnings#
+//     ^^^^^^^^^^^^^^^^ reference scip-java maven jdk 17 java/lang/SuppressWarnings#
 //                                                                                              ⌄ enclosing_range_start local 7
       Constructor<T> constructor = (Constructor<T>) proxyConstructors.computeIfAbsent(contract, c -> {
-//    ^^^^^^^^^^^ reference scip-java maven jdk 11 java/lang/reflect/Constructor#
+//    ^^^^^^^^^^^ reference scip-java maven jdk 17 java/lang/reflect/Constructor#
 //                ^ reference scip-java maven . . minimized/AnnotationsOnParameterizedTypesImpl#getConstructor().[T]
 //                   ^^^^^^^^^^^ definition local 6
 //                               kind Variable
@@ -226,10 +226,10 @@
 //                               signature_documentation
 //                               > @SuppressWarnings("unchecked")
 //                               > Constructor<T> constructor
-//                                  ^^^^^^^^^^^ reference scip-java maven jdk 11 java/lang/reflect/Constructor#
+//                                  ^^^^^^^^^^^ reference scip-java maven jdk 17 java/lang/reflect/Constructor#
 //                                              ^ reference scip-java maven . . minimized/AnnotationsOnParameterizedTypesImpl#getConstructor().[T]
 //                                                  ^^^^^^^^^^^^^^^^^ reference scip-java maven . . minimized/AnnotationsOnParameterizedTypesImpl#proxyConstructors.
-//                                                                    ^^^^^^^^^^^^^^^ reference scip-java maven jdk 11 java/util/concurrent/ConcurrentMap#computeIfAbsent().
+//                                                                    ^^^^^^^^^^^^^^^ reference scip-java maven jdk 17 java/util/concurrent/ConcurrentMap#computeIfAbsent().
 //                                                                                    ^^^^^^^^ reference local 5
 //                                                                                              ^ definition local 7
 //                                                                                                display_name c
@@ -241,9 +241,9 @@
 //      ⌃ enclosing_range_end local 6
   
       System.out.println(constructor);
-//    ^^^^^^ reference scip-java maven jdk 11 java/lang/System#
-//           ^^^ reference scip-java maven jdk 11 java/lang/System#out.
-//               ^^^^^^^ reference scip-java maven jdk 11 java/io/PrintStream#println(+9).
+//    ^^^^^^ reference scip-java maven jdk 17 java/lang/System#
+//           ^^^ reference scip-java maven jdk 17 java/lang/System#out.
+//               ^^^^^^^ reference scip-java maven jdk 17 java/io/PrintStream#println(+9).
 //                       ^^^^^^^^^^^ reference local 6
   
       return null;

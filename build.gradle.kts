@@ -471,7 +471,7 @@ project(":scip-snapshots") {
                 rootProject.layout.projectDirectory.dir("scip-snapshots/expected/kotlin/common").asFile.absolutePath,
             "snapshot.case.kotlin-common.targetroot" to kotlinTargetroot.get().asFile.absolutePath,
             "snapshot.case.kotlin-common.aggregateNoEmitInverseRelationships" to "true",
-            "scip.jdk.version" to "11",
+            "scip.jdk.version" to "17",
         )
 
     tasks.named<Test>("test") {

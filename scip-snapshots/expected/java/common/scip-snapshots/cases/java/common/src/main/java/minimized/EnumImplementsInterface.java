@@ -3,7 +3,7 @@
   import java.io.Serializable;
 //       ^^^^ reference scip-java maven . . java/
 //            ^^ reference scip-java maven . . java/io/
-//               ^^^^^^^^^^^^ reference scip-java maven jdk 11 java/io/Serializable#
+//               ^^^^^^^^^^^^ reference scip-java maven jdk 17 java/io/Serializable#
   
 //⌄ enclosing_range_start scip-java maven . . minimized/EnumImplementsInterface#
   enum EnumImplementsInterface implements Serializable {
@@ -12,16 +12,16 @@
 //                             display_name EnumImplementsInterface
 //                             signature_documentation
 //                             > enum EnumImplementsInterface implements Serializable
-//                             relationship scip-java maven jdk 11 java/io/Serializable# implementation
-//                             relationship scip-java maven jdk 11 java/lang/Comparable# implementation
-//                             relationship scip-java maven jdk 11 java/lang/Enum# implementation
-//                             relationship scip-java maven jdk 11 java/lang/constant/Constable# implementation
+//                             relationship scip-java maven jdk 17 java/io/Serializable# implementation
+//                             relationship scip-java maven jdk 17 java/lang/Comparable# implementation
+//                             relationship scip-java maven jdk 17 java/lang/Enum# implementation
+//                             relationship scip-java maven jdk 17 java/lang/constant/Constable# implementation
 //     ^^^^^^^^^^^^^^^^^^^^^^^ definition scip-java maven . . minimized/EnumImplementsInterface#`<init>`().
 //                             kind Constructor
 //                             display_name <init>
 //                             signature_documentation
 //                             > private EnumImplementsInterface()
-//                                        ^^^^^^^^^^^^ reference scip-java maven jdk 11 java/io/Serializable#
+//                                        ^^^^^^^^^^^^ reference scip-java maven jdk 17 java/io/Serializable#
 //  ⌄ enclosing_range_start scip-java maven . . minimized/EnumImplementsInterface#A.
     A,
 //  ^ definition scip-java maven . . minimized/EnumImplementsInterface#A.

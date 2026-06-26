@@ -12,18 +12,18 @@
 //⌄ enclosing_range_start scip-java maven . . minimized/Hello#HelloBuilder#message().
 //⌄ enclosing_range_start local 1
   @lombok.Builder
-//^^^^^^^^^^^^^^^ reference scip-java maven jdk 11 java/lang/SuppressWarnings#
+//^^^^^^^^^^^^^^^ reference scip-java maven jdk 17 java/lang/SuppressWarnings#
 //^^^^^^^^^^^^^^^ reference scip-java maven . . java/lang/
 //^^^^^^^^^^^^^^^ reference scip-java maven . . java/
-//^^^^^^^^^^^^^^^ reference scip-java maven jdk 11 java/lang/String#
+//^^^^^^^^^^^^^^^ reference scip-java maven jdk 17 java/lang/String#
 //^^^^^^^^^^^^^^^ reference scip-java maven . . minimized/Hello#message.
 //^^^^^^^^^^^^^^^ reference local 0
-//^^^^^^^^^^^^^^^ reference scip-java maven jdk 11 java/lang/SuppressWarnings#value().
+//^^^^^^^^^^^^^^^ reference scip-java maven jdk 17 java/lang/SuppressWarnings#value().
 //^^^^^^^^^^^^^^^ reference scip-java maven . . minimized/Hello#HelloBuilder#
 //^^^^^^^^^^^^^^^ reference scip-java maven . . minimized/Hello#
 //^^^^^^^^^^^^^^^ reference scip-java maven . . minimized/Hello#HelloBuilder#message.
 //^^^^^^^^^^^^^^^ reference local 1
-//^^^^^^^^^^^^^^^ reference scip-java maven jdk 11 java/lang/Override#
+//^^^^^^^^^^^^^^^ reference scip-java maven jdk 17 java/lang/Override#
 // ^^^^^^ reference scip-java maven . . lombok/
 //        ^^^^^^^ reference scip-java maven . . lombok/Builder#
 //              ⌃ enclosing_range_end scip-java maven . . minimized/Hello#HelloBuilder#build().
@@ -52,7 +52,7 @@
 //      ^^^^^ reference scip-java maven . . minimized/Hello#`<init>`().
 //  ⌄ enclosing_range_start scip-java maven . . minimized/Hello#message.
     private String message;
-//          ^^^^^^ reference scip-java maven jdk 11 java/lang/String#
+//          ^^^^^^ reference scip-java maven jdk 17 java/lang/String#
 //                 ^^^^^^^ definition scip-java maven . . minimized/Hello#message.
 //                         kind Field
 //                         display_name message

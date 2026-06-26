@@ -7,7 +7,7 @@
 //               display_name Bar
 //               signature_documentation
 //               > @interface Bar
-//               relationship scip-java maven jdk 11 java/lang/annotation/Annotation# implementation
+//               relationship scip-java maven jdk 17 java/lang/annotation/Annotation# implementation
 //  ⌄ enclosing_range_start scip-java maven . . minimized/Bar#value().
     double value();
 //         ^^^^^ definition scip-java maven . . minimized/Bar#value().
@@ -26,7 +26,7 @@
 //                display_name BarB
 //                signature_documentation
 //                > @interface BarB
-//                relationship scip-java maven jdk 11 java/lang/annotation/Annotation# implementation
+//                relationship scip-java maven jdk 17 java/lang/annotation/Annotation# implementation
 //  ⌄ enclosing_range_start scip-java maven . . minimized/BarB#value().
     boolean value();
 //          ^^^^^ definition scip-java maven . . minimized/BarB#value().
@@ -45,10 +45,10 @@
 //                    display_name Nullable
 //                    signature_documentation
 //                    > @interface Nullable
-//                    relationship scip-java maven jdk 11 java/lang/annotation/Annotation# implementation
+//                    relationship scip-java maven jdk 17 java/lang/annotation/Annotation# implementation
 //  ⌄ enclosing_range_start scip-java maven . . minimized/Nullable#value().
     String value() default "";
-//  ^^^^^^ reference scip-java maven jdk 11 java/lang/String#
+//  ^^^^^^ reference scip-java maven jdk 17 java/lang/String#
 //         ^^^^^ definition scip-java maven . . minimized/Nullable#value().
 //               kind AbstractMethod
 //               display_name value
@@ -66,10 +66,10 @@
 //                  display_name BarRef
 //                  signature_documentation
 //                  > @interface BarRef
-//                  relationship scip-java maven jdk 11 java/lang/annotation/Annotation# implementation
+//                  relationship scip-java maven jdk 17 java/lang/annotation/Annotation# implementation
 //  ⌄ enclosing_range_start scip-java maven . . minimized/BarRef#value().
     SuppressWarnings value();
-//  ^^^^^^^^^^^^^^^^ reference scip-java maven jdk 11 java/lang/SuppressWarnings#
+//  ^^^^^^^^^^^^^^^^ reference scip-java maven jdk 17 java/lang/SuppressWarnings#
 //                   ^^^^^ definition scip-java maven . . minimized/BarRef#value().
 //                         kind AbstractMethod
 //                         display_name value
@@ -102,8 +102,8 @@
     @Bar(~5)
 //   ^^^ reference scip-java maven . . minimized/Bar#
     @SuppressWarnings(value = "unchecked")
-//   ^^^^^^^^^^^^^^^^ reference scip-java maven jdk 11 java/lang/SuppressWarnings#
-//                    ^^^^^ reference scip-java maven jdk 11 java/lang/SuppressWarnings#value().
+//   ^^^^^^^^^^^^^^^^ reference scip-java maven jdk 17 java/lang/SuppressWarnings#
+//                    ^^^^^ reference scip-java maven jdk 17 java/lang/SuppressWarnings#value().
     double test2();
 //         ^^^^^ definition scip-java maven . . minimized/Foo#test2().
 //               kind AbstractMethod
@@ -163,8 +163,8 @@
 //  ⌄ enclosing_range_start scip-java maven . . minimized/TestRef#testCase().
     @BarRef(@SuppressWarnings(value = "unchecked"))
 //   ^^^^^^ reference scip-java maven . . minimized/BarRef#
-//           ^^^^^^^^^^^^^^^^ reference scip-java maven jdk 11 java/lang/SuppressWarnings#
-//                            ^^^^^ reference scip-java maven jdk 11 java/lang/SuppressWarnings#value().
+//           ^^^^^^^^^^^^^^^^ reference scip-java maven jdk 17 java/lang/SuppressWarnings#
+//                            ^^^^^ reference scip-java maven jdk 17 java/lang/SuppressWarnings#value().
     abstract double testCase();
 //                  ^^^^^^^^ definition scip-java maven . . minimized/TestRef#testCase().
 //                           kind AbstractMethod
