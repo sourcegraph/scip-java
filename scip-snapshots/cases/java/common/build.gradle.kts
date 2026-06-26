@@ -1,4 +1,5 @@
 import com.sourcegraph.buildlogic.cleanDirectoryBeforeRunning
+import com.sourcegraph.buildlogic.publishDirectoryArtifact
 import com.sourcegraph.buildlogic.shadowJarArtifact
 import com.sourcegraph.buildlogic.useScipJavac
 
@@ -27,3 +28,5 @@ tasks.named<JavaCompile>("compileJava") {
     )
     cleanDirectoryBeforeRunning(scipTargetroot)
 }
+
+publishDirectoryArtifact("scipTargetrootElements", scipTargetroot, tasks.named("classes"))
