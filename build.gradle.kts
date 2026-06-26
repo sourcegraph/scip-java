@@ -42,11 +42,6 @@ subprojects {
     }
 
     plugins.withType<JavaPlugin> {
-        extensions.configure<JavaPluginExtension> {
-            sourceCompatibility = JavaVersion.VERSION_17
-            targetCompatibility = JavaVersion.VERSION_17
-        }
-
         tasks.withType<JavaCompile>().configureEach {
             options.encoding = "UTF-8"
             options.release.set(17)
@@ -57,8 +52,13 @@ subprojects {
             (options as StandardJavadocDocletOptions).addStringOption("Xdoclint:none", "-quiet")
         }
 
+        extensions.configure<TestingExtension> {
+            suites.named<JvmTestSuite>("test") {
+                useJUnitJupiter(catalog.versions.junit.jupiter)
+            }
+        }
+
         tasks.withType<Test>().configureEach {
-            useJUnitPlatform()
             testLogging {
                 events("failed", "skipped")
             }
@@ -123,9 +123,6 @@ project(":scip-javac") {
 
     dependencies {
         "api"(project(":scip-shared"))
-        "testImplementation"(catalog.junit.jupiter.api)
-        "testRuntimeOnly"(catalog.junit.jupiter.engine)
-        "testRuntimeOnly"(catalog.junit.platform.launcher)
     }
 
     tasks.named<JavaCompile>("compileJava") {
@@ -174,8 +171,6 @@ project(":scip-kotlinc") {
         "testImplementation"(catalog.kotlin.reflect)
         "testImplementation"(catalog.kotest.assertions.core)
         "testImplementation"(catalog.kctfork.core)
-        "testRuntimeOnly"(catalog.junit.jupiter.engine)
-        "testRuntimeOnly"(catalog.junit.platform.launcher)
     }
 
     tasks.withType<KotlinCompile>().configureEach {
@@ -235,9 +230,6 @@ project(":scip-aggregator") {
     dependencies {
         "api"(catalog.scip.java.bindings)
         "implementation"(project(":scip-shared"))
-        "testImplementation"(catalog.junit.jupiter.api)
-        "testRuntimeOnly"(catalog.junit.jupiter.engine)
-        "testRuntimeOnly"(catalog.junit.platform.launcher)
     }
 
     extensions.configure<ProtobufExtension>("protobuf") {
@@ -276,8 +268,6 @@ project(":scip-java") {
 
         "testImplementation"(catalog.kotlin.test)
         "testImplementation"(catalog.kotlin.test.junit5)
-        "testRuntimeOnly"(catalog.junit.jupiter.engine)
-        "testRuntimeOnly"(catalog.junit.platform.launcher)
     }
 
     tasks.named<Test>("test") {
@@ -436,9 +426,6 @@ project(":scip-snapshots") {
     dependencies {
         "implementation"(project(":scip-java"))
         "implementation"(catalog.scip.java.bindings)
-        "testImplementation"(catalog.junit.jupiter.api)
-        "testRuntimeOnly"(catalog.junit.jupiter.engine)
-        "testRuntimeOnly"(catalog.junit.platform.launcher)
     }
 
     val javaCase = project(":scip-snapshots-java-common")

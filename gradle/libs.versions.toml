@@ -2,7 +2,6 @@
 clikt = "5.0.3"
 gradle-api = "8.10"
 junit-jupiter = "5.11.4"
-junit-platform = "1.11.4"
 kctfork = "0.7.1"
 kotest = "4.6.3"
 kotlin = "2.2.0"
@@ -21,9 +20,6 @@ vanniktech-maven-publish = "0.35.0"
 clikt-jvm = { module = "com.github.ajalt.clikt:clikt-jvm", version.ref = "clikt" }
 gradle-api = { module = "dev.gradleplugins:gradle-api", version.ref = "gradle-api" }
 gradle-test-kit = { module = "dev.gradleplugins:gradle-test-kit", version.ref = "gradle-api" }
-junit-jupiter-api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "junit-jupiter" }
-junit-jupiter-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junit-jupiter" }
-junit-platform-launcher = { module = "org.junit.platform:junit-platform-launcher", version.ref = "junit-platform" }
 kctfork-core = { module = "dev.zacsweers.kctfork:core", version.ref = "kctfork" }
 kotest-assertions-core = { module = "io.kotest:kotest-assertions-core-jvm", version.ref = "kotest" }
 kotlin-compiler-embeddable = { module = "org.jetbrains.kotlin:kotlin-compiler-embeddable", version.ref = "kotlin" }
