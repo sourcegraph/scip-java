@@ -78,6 +78,16 @@ jobs:
             expected_language: kotlin
             covers: Maven Kotlin project, manual SCIP config, Kotlin source, Java 17 runtime
 
+          - name: maven-java25-demo
+            repository: SimonVerhoeven/java25-demo
+            ref: fe3eb1b96f23ef57f441ad9e2af8197f9371abfe
+            directory: .
+            build_tool: maven
+            build_command: "compile"
+            java: 25
+            bazel_version: ""
+            covers: Maven, Java project target 25, Java 25 preview/incubator features, Java 25 runtime
+
           - name: gradle-java21-readiness
             repository: ePages-de/spring-boot-readiness
             ref: 8a91762e723e5204c69339ebbfc2517a48a8651a
