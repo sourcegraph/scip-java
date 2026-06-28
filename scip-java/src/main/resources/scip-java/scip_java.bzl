@@ -38,6 +38,8 @@ Example command to run this aspect directly:
 To learn more about aspects: https://bazel.build/extending/aspects
 """
 
+load("@rules_java//java/common:java_info.bzl", "JavaInfo")
+
 def _scip_java(target, ctx):
     if JavaInfo not in target or not hasattr(ctx.rule.attr, "srcs"):
         return None
@@ -96,7 +98,7 @@ def _scip_java(target, ctx):
         processorpath += [j.path for j in annotations.processor_classpath.to_list()]
         processors = annotations.processor_classnames
 
-    # In Bazel 8 compilation.javac_options is a depset of shell-quoted strings;
+    # In Bazel 8+ compilation.javac_options is a depset of shell-quoted strings;
     # ctx.tokenize splits each entry into proper individual flags.
     raw_options = compilation.javac_options
     if hasattr(raw_options, "to_list"):
@@ -160,7 +162,7 @@ def _scip_java(target, ctx):
 def _scip_java_aspect(target, ctx):
     scip = _scip_java(target, ctx)
     if not scip:
-        return struct()
+        return []
     return [OutputGroupInfo(scip = [scip])]
 
 scip_java_aspect = aspect(
