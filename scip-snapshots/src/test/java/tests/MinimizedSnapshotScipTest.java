@@ -12,11 +12,7 @@ class MinimizedSnapshotScipTest {
     MinimizedSnapshotScipGenerator generator = new MinimizedSnapshotScipGenerator();
     for (MinimizedSnapshotScipGenerator.SnapshotCase snapshotCase :
         MinimizedSnapshotScipGenerator.snapshotCases()) {
-      generator.onTargetroot(
-          snapshotCase.context(),
-          handler,
-          snapshotCase.targetroot,
-          snapshotCase.aggregateNoEmitInverseRelationships);
+      generator.run(snapshotCase, handler);
     }
     return handler.tests();
   }
