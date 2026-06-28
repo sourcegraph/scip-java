@@ -28,10 +28,8 @@ tasks.named<Test>("test") {
 
 tasks.named<ShadowJar>("shadowJar") {
     mergeServiceFiles()
-    exclude("javax/**", "com/sun/**", "sun/**", "META-INF/versions/9/module-info.class")
     relocate("com.google", "com.sourcegraph.shaded.com.google")
     relocate("google", "com.sourcegraph.shaded.google")
-    relocate("org.relaxng", "com.sourcegraph.shaded.relaxng")
     relocate("com.sourcegraph", "com.sourcegraph.shaded.com.sourcegraph") {
         exclude("com.sourcegraph.scip_javac.ScipPlugin")
         exclude("com.sourcegraph.scip_javac.InjectScipOptions")

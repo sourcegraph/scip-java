@@ -34,5 +34,4 @@ tasks.named<Test>("test") {
 
 tasks.named<ShadowJar>("shadowJar") {
     mergeServiceFiles()
-    relocate("com.intellij", "org.jetbrains.kotlin.com.intellij")
 }
