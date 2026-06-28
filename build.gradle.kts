@@ -21,9 +21,3 @@ spotless {
         ktfmt("0.61").kotlinlangStyle()
     }
 }
-
-tasks.register("format") {
-    group = "formatting"
-    description = "Formats Java and Kotlin sources."
-    dependsOn("spotlessApply")
-}

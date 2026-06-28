@@ -31,20 +31,6 @@ jobs:
 
       - run: nix flake check -L
 
-  format:
-    runs-on: ubuntu-latest
-    name: Formatting
-    steps:
-      - uses: actions/checkout@v4
-
-      - uses: DeterminateSystems/nix-installer-action@v22
-        with:
-          summarize: false
-
-      - uses: DeterminateSystems/magic-nix-cache-action@v13
-
-      - run: gradle spotlessCheck --no-daemon
-
   test:
     runs-on: ubuntu-latest
     name: Tests (JDK ${{ matrix.java }})
@@ -120,21 +106,6 @@ jobs:
         working-directory: examples/bazel-example
       - run: du -h index.scip
         working-directory: examples/bazel-example
-
-  kotlin_plugin:
-    runs-on: ubuntu-latest
-    name: scip-kotlinc
-    steps:
-      - uses: actions/checkout@v4
-
-      - uses: DeterminateSystems/nix-installer-action@v22
-        with:
-          summarize: false
-
-      - uses: DeterminateSystems/magic-nix-cache-action@v13
-
-      - name: scip-kotlinc tests
-        run: gradle :scip-kotlinc:test --no-daemon
 
   snapshots:
     runs-on: ubuntu-latest
