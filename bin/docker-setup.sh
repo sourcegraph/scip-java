@@ -15,8 +15,8 @@ unzip -d /opt/gradle gradle.zip
 rm gradle.zip
 mv /opt/gradle/*/* /opt/gradle
 
-# pre-install JDK for all major versions
-for JVM_VERSION in 21 17
+# pre-install JDK for all supported major versions
+for JVM_VERSION in 25 21 17
 do 
   coursier java --jvm $JVM_VERSION --jvm-index https://github.com/coursier/jvm-index/blob/master/index.json -- -version
 done

@@ -15,6 +15,8 @@
 //^^^^^^^^^^^^^^^ reference scip-java maven jdk 17 java/lang/SuppressWarnings#
 //^^^^^^^^^^^^^^^ reference scip-java maven . . java/lang/
 //^^^^^^^^^^^^^^^ reference scip-java maven . . java/
+//^^^^^^^^^^^^^^^ reference scip-java maven . . lombok/Generated#
+//^^^^^^^^^^^^^^^ reference scip-java maven . . lombok/
 //^^^^^^^^^^^^^^^ reference scip-java maven jdk 17 java/lang/String#
 //^^^^^^^^^^^^^^^ reference scip-java maven . . minimized/Hello#message.
 //^^^^^^^^^^^^^^^ reference local 0
@@ -48,6 +50,7 @@
 //            display_name <init>
 //            signature_documentation
 //            > @SuppressWarnings("all")
+//            > @Generated
 //            > Hello(String message)
 //      ^^^^^ reference scip-java maven . . minimized/Hello#`<init>`().
 //  ⌄ enclosing_range_start scip-java maven . . minimized/Hello#message.
@@ -67,12 +70,14 @@
 //                         display_name message
 //                         signature_documentation
 //                         > @SuppressWarnings("all")
+//                         > @Generated
 //                         > private String message
 //                 ^^^^^^^ definition scip-java maven . . minimized/Hello#HelloBuilder#message().
 //                         kind Method
 //                         display_name message
 //                         signature_documentation
 //                         > @SuppressWarnings("all")
+//                         > @Generated
 //                         > public HelloBuilder message(String message)
 //                         documentation
 //                         > @return {@code this}.
