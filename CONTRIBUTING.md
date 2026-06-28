@@ -58,8 +58,8 @@ These are the main components of the project.
 | `gradle :scip-snapshots:saveSnapshots --no-daemon`      | terminal | Regenerate Java and Kotlin snapshot goldens.                             |
 | `gradle :scip-java:installDist --no-daemon`             | terminal | Build a local `scip-java` distribution under `scip-java/build/install/`. |
 | `gradle :scip-java:run --args='--cwd DIRECTORY'`        | terminal | Run `scip-java` against a given Gradle/Maven build.                      |
-| `google-java-format --replace $(git ls-files '*.java')` | terminal | Format Java sources (from `nix develop`). Enforced by `nix flake check`. |
-| `ktfmt --kotlinlang-style $(git ls-files '*.kt')`       | terminal | Format Kotlin sources (from `nix develop`). Enforced by `nix flake check`. |
+| `gradle spotlessApply`                                  | terminal | Format Java and Kotlin sources with Spotless.                            |
+| `gradle spotlessCheck`                                  | terminal | Check Java and Kotlin formatting. Enforced by GitHub Actions.            |
 
 ## Import the project into IntelliJ
 

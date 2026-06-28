@@ -10,7 +10,7 @@ unzip -d /opt/maven maven.zip
 rm maven.zip
 mv /opt/maven/*/* /opt/maven
 
-curl -fLo gradle.zip https://services.gradle.org/distributions/gradle-8.14.4-bin.zip
+curl -fLo gradle.zip https://services.gradle.org/distributions/gradle-9.4.1-bin.zip
 unzip -d /opt/gradle gradle.zip 
 rm gradle.zip
 mv /opt/gradle/*/* /opt/gradle

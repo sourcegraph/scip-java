@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.scip_code.scip.Document;
 import org.scip_code.scip.Index;
@@ -109,26 +108,25 @@ public class MinimizedSnapshotScipGenerator {
     }
   }
 
+  /**
+   * The snapshot corpora and their indexing options. This is fixed test metadata, so it lives here
+   * rather than in the build script; the Gradle build only supplies each case's compiled
+   * target-root (as {@code -Dsnapshot.case.<id>.targetroot}) and the source root, which are
+   * build-time paths.
+   */
   public static List<SnapshotCase> snapshotCases() {
-    List<SnapshotCase> cases =
-        Arrays.stream(requiredProperty("snapshot.cases").split(","))
-            .map(String::trim)
-            .filter(id -> !id.isEmpty())
-            .map(MinimizedSnapshotScipGenerator::snapshotCase)
-            .collect(Collectors.toList());
-    if (cases.isEmpty()) {
-      throw new IllegalStateException("Missing snapshot cases in -Dsnapshot.cases");
-    }
-    return cases;
-  }
-
-  private static SnapshotCase snapshotCase(String id) {
-    String prefix = "snapshot.case." + id + ".";
-    return new SnapshotCase(
-        id,
-        requiredPathProperty(prefix + "expectDir"),
-        requiredPathProperty(prefix + "targetroot"),
-        Boolean.parseBoolean(System.getProperty(prefix + "aggregateNoEmitInverseRelationships")));
+    Path sourceroot = requiredPathProperty("snapshot.sourceroot");
+    return Arrays.asList(
+        new SnapshotCase(
+            "java-common",
+            sourceroot.resolve("scip-snapshots/expected/java/common"),
+            requiredPathProperty("snapshot.case.java-common.targetroot"),
+            false),
+        new SnapshotCase(
+            "kotlin-common",
+            sourceroot.resolve("scip-snapshots/expected/kotlin/common"),
+            requiredPathProperty("snapshot.case.kotlin-common.targetroot"),
+            true));
   }
 
   public static Path requiredPathProperty(String name) {

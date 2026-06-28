@@ -5,6 +5,41 @@ on:
       - main
   pull_request:
 jobs:
+  format:
+    runs-on: ubuntu-latest
+    name: Formatting
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: 9.4.1
+
+      - run: gradle spotlessCheck --no-daemon
+
+  kotlin_plugin:
+    runs-on: ubuntu-latest
+    name: scip-kotlinc
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: 9.4.1
+
+      - name: scip-kotlinc tests
+        run: gradle :scip-kotlinc:test --no-daemon
+
   docker_test:
     runs-on: ubuntu-latest
     name: Docker CLI tests
