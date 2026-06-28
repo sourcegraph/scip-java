@@ -5,11 +5,11 @@ import java.nio.file.StandardOpenOption
 import org.junit.jupiter.api.DynamicTest
 import org.junit.jupiter.api.TestFactory
 
-private const val GRADLE_VERSION = "8.10"
+private const val GRADLE_VERSION = "9.1.0"
 
-// Gradle 8.10 runs on JDK 8 through 21.
+// Gradle 9.1.0 runs on JDK 17 through 25.
 // See https://docs.gradle.org/current/userguide/compatibility.html
-private const val GRADLE_MAX_JDK = 21
+private const val GRADLE_MAX_JDK = 25
 
 class GradleBuildToolTest : BuildToolHarness() {
 

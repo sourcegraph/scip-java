@@ -26,8 +26,10 @@ include(
     "scip-java",
     "scip-snapshots",
     "scip-snapshots-java-common",
+    "scip-snapshots-java-25",
     "scip-snapshots-kotlin-common",
 )
 
 project(":scip-snapshots-java-common").projectDir = file("scip-snapshots/cases/java/common")
+project(":scip-snapshots-java-25").projectDir = file("scip-snapshots/cases/java-25")
 project(":scip-snapshots-kotlin-common").projectDir = file("scip-snapshots/cases/kotlin/common")

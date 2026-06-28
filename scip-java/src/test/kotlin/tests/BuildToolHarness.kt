@@ -115,8 +115,8 @@ abstract class BuildToolHarness {
         substitutions: Map<String, String> = emptyMap(),
     ): DynamicTest =
         dynamicTest(name) {
-            // Some build tools cap the JDK they support (e.g. Gradle 8.10 tops
-            // out at JDK 21); skip rather than fail when the JDK is too new.
+            // Some build tools cap the JDK they support; skip rather than fail
+            // when the JDK running the test is too new.
             assumeTrue(
                 maxJdk == null || currentJavaVersion <= maxJdk,
                 "Test $name ignored: JDK $currentJavaVersion exceeds max $maxJdk",

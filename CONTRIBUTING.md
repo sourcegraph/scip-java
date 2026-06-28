@@ -12,6 +12,7 @@ The recommended way to get a working development environment is via
 nix develop              # default shell (JDK 17)
 nix develop .#jdk17      # JDK 17
 nix develop .#jdk21      # JDK 21
+nix develop .#jdk25      # JDK 25
 ```
 
 This drops you into a shell with `gradle`, `maven`, `bazelisk`, `nodejs`,

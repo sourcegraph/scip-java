@@ -35,22 +35,25 @@ finished indexing the project.
 
 > The `sourcegraph/scip-java` Docker image is made available for convenience at
 > the cost of performance. The `sourcegraph/scip-java` image is a big download
-> because it includes pre-installed versions of Java 17 and Java 21.
+> because it includes pre-installed versions of Java 17, Java 21, and Java 25.
 > The `sourcegraph/scip-java` image has slow performance because it needs to
 > download all external dependencies of your codebase on every invocation.
 >
 > For better performance, we recommend using your own Docker image together with
 > the [Java launcher](#java-launcher) option.
 
-Java 17 is the default Java version in the `sourcegraph/scip-java` Docker image.
-Use the following commands to use a different JVM version:
+By default, the `sourcegraph/scip-java` Docker image tries Java 21 and falls
+back to Java 17. Use the following commands to select a specific JVM version:
 
 ```sh
-# Java 17 (default)
+# Java 17
 docker run -v $(pwd):/sources --env JVM_VERSION=17 sourcegraph/scip-java:latest scip-java index
 
 # Java 21
 docker run -v $(pwd):/sources --env JVM_VERSION=21 sourcegraph/scip-java:latest scip-java index
+
+# Java 25
+docker run -v $(pwd):/sources --env JVM_VERSION=25 sourcegraph/scip-java:latest scip-java index
 
 ```
 
@@ -196,7 +199,8 @@ com.sourcegraph.scip_java.ScipJava.INSTANCE.printHelp(Console.out)
 The `scip-java` indexer is implemented as a Java compiler plugin that runs as
 part of your regular compilation in the build tool. By using Java compiler APIs,
 `scip-java` is able to generate accurate indexing information for a broad range
-of Java versions.
+of Java versions. The project targets support for the three most recent Java LTS
+releases.
 
 | Java version | Support                      | Tracking issue |
 | ------------ | ---------------------------- | -------------- |
@@ -205,6 +209,7 @@ of Java versions.
 | Java 11      | ❌                           |                |
 | Java 17      | ✅, requires `--add-exports` |                |
 | Java 21      | ✅, requires `--add-exports` |                |
+| Java 25      | ✅, requires `--add-exports` |                |
 
 For Java 17 and newer versions, the following JVM options are required:
 
