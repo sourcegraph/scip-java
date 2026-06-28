@@ -10,7 +10,9 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.scip_code.scip.Document;
@@ -23,25 +25,10 @@ import org.scip_code.scip.Index;
 public class MinimizedSnapshotScipGenerator {
   private static final List<SnapshotCaseSpec> SNAPSHOT_CASES =
       Arrays.asList(
+          new SnapshotCaseSpec("java-common", "scip-snapshots/expected/java/common", false, "17"),
+          new SnapshotCaseSpec("java-25", "scip-snapshots/expected/java-25", false, "25"),
           new SnapshotCaseSpec(
-              "java-common",
-              "scip-snapshots/expected/java/common",
-              "snapshot.case.java-common.targetroot",
-              false,
-              "17"),
-          new SnapshotCaseSpec(
-              "java-25",
-              "scip-snapshots/expected/java-25",
-              "snapshot.case.java-25.targetroot",
-              false,
-              "25",
-              25),
-          new SnapshotCaseSpec(
-              "kotlin-common",
-              "scip-snapshots/expected/kotlin/common",
-              "snapshot.case.kotlin-common.targetroot",
-              true,
-              "17"));
+              "kotlin-common", "scip-snapshots/expected/kotlin/common", true, "17"));
 
   public static final class SnapshotCase {
     public final String id;
@@ -71,50 +58,25 @@ public class MinimizedSnapshotScipGenerator {
   private static final class SnapshotCaseSpec {
     private final String id;
     private final String expectDirectory;
-    private final String targetrootProperty;
     private final boolean aggregateNoEmitInverseRelationships;
     private final String jdkVersion;
-    private final int minimumJavaFeature;
 
     private SnapshotCaseSpec(
         String id,
         String expectDirectory,
-        String targetrootProperty,
         boolean aggregateNoEmitInverseRelationships,
         String jdkVersion) {
-      this(
-          id,
-          expectDirectory,
-          targetrootProperty,
-          aggregateNoEmitInverseRelationships,
-          jdkVersion,
-          0);
-    }
-
-    private SnapshotCaseSpec(
-        String id,
-        String expectDirectory,
-        String targetrootProperty,
-        boolean aggregateNoEmitInverseRelationships,
-        String jdkVersion,
-        int minimumJavaFeature) {
       this.id = id;
       this.expectDirectory = expectDirectory;
-      this.targetrootProperty = targetrootProperty;
       this.aggregateNoEmitInverseRelationships = aggregateNoEmitInverseRelationships;
       this.jdkVersion = jdkVersion;
-      this.minimumJavaFeature = minimumJavaFeature;
-    }
-
-    private boolean isEnabled() {
-      return Runtime.version().feature() >= minimumJavaFeature;
     }
 
     private SnapshotCase toSnapshotCase(Path sourceroot) {
       return new SnapshotCase(
           id,
           sourceroot.resolve(expectDirectory),
-          requiredPathProperty(targetrootProperty),
+          requiredPathProperty(targetrootProperty(id)),
           aggregateNoEmitInverseRelationships,
           jdkVersion);
     }
@@ -204,14 +166,46 @@ public class MinimizedSnapshotScipGenerator {
    */
   public static List<SnapshotCase> snapshotCases() {
     Path sourceroot = requiredPathProperty("snapshot.sourceroot");
+    Set<String> buildCaseIds = requiredCsvProperty("snapshot.case.ids");
+    Set<String> enabledCaseIds = requiredCsvProperty("snapshot.enabledCases");
+    Set<String> specCaseIds =
+        SNAPSHOT_CASES.stream()
+            .map(snapshotCase -> snapshotCase.id)
+            .collect(Collectors.toCollection(LinkedHashSet::new));
+    if (!buildCaseIds.equals(specCaseIds)) {
+      throw new IllegalStateException(
+          "Snapshot case metadata mismatch. Gradle cases="
+              + buildCaseIds
+              + ", Java specs="
+              + specCaseIds);
+    }
+    if (!specCaseIds.containsAll(enabledCaseIds)) {
+      throw new IllegalStateException(
+          "Enabled snapshot cases must be a subset of known cases. Enabled="
+              + enabledCaseIds
+              + ", Java specs="
+              + specCaseIds);
+    }
     return SNAPSHOT_CASES.stream()
-        .filter(SnapshotCaseSpec::isEnabled)
+        .filter(snapshotCase -> enabledCaseIds.contains(snapshotCase.id))
         .map(snapshotCase -> snapshotCase.toSnapshotCase(sourceroot))
         .collect(Collectors.toList());
   }
 
+  private static String targetrootProperty(String id) {
+    return "snapshot.case." + id + ".targetroot";
+  }
+
   public static Path requiredPathProperty(String name) {
     return Paths.get(requiredProperty(name));
+  }
+
+  private static Set<String> requiredCsvProperty(String name) {
+    String value = requiredProperty(name);
+    return Arrays.stream(value.split(","))
+        .map(String::trim)
+        .filter(entry -> !entry.isEmpty())
+        .collect(Collectors.toCollection(LinkedHashSet::new));
   }
 
   private static String requiredProperty(String name) {

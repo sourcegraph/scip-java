@@ -38,7 +38,11 @@ val snapshotTargetroots =
 // The case list, expected-golden layout and per-case indexing flags are fixed test metadata defined
 // in MinimizedSnapshotScipGenerator; the build only supplies the build-time paths it owns.
 val snapshotProperties =
-    mutableMapOf("snapshot.sourceroot" to rootProject.rootDir.absolutePath)
+    mutableMapOf(
+            "snapshot.sourceroot" to rootProject.rootDir.absolutePath,
+            "snapshot.case.ids" to snapshotCaseInputs.joinToString(",") { it.id },
+            "snapshot.enabledCases" to enabledSnapshotCaseInputs.joinToString(",") { it.id },
+        )
         .apply {
             snapshotTargetroots.forEach { (snapshotCase, targetroot) ->
                 put(snapshotCase.targetrootProperty, targetroot.singleFile.absolutePath)
