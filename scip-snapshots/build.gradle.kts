@@ -33,7 +33,6 @@ tasks.named<Test>("test") {
 tasks.register<JavaExec>("saveSnapshots") {
     group = "verification"
     description = "Regenerates Java and Kotlin SCIP snapshot goldens."
-    dependsOn(tasks.named("classes"))
     inputs.files(javaTargetroot, kotlinTargetroot)
     val sourceSets = project.extensions.getByType<SourceSetContainer>()
     classpath = sourceSets.named("main").get().runtimeClasspath

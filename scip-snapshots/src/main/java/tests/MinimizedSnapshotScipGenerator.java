@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.scip_code.scip.Document;
 import org.scip_code.scip.Index;
@@ -115,35 +114,19 @@ public class MinimizedSnapshotScipGenerator {
    * target-root (as {@code -Dsnapshot.case.<id>.targetroot}) and the source root, which are
    * build-time paths.
    */
-  private static final List<CaseSpec> CASE_SPECS =
-      Arrays.asList(
-          new CaseSpec("java-common", "scip-snapshots/expected/java/common", false),
-          new CaseSpec("kotlin-common", "scip-snapshots/expected/kotlin/common", true));
-
-  private static final class CaseSpec {
-    final String id;
-    final String relativeExpectDirectory;
-    final boolean aggregateNoEmitInverseRelationships;
-
-    CaseSpec(
-        String id, String relativeExpectDirectory, boolean aggregateNoEmitInverseRelationships) {
-      this.id = id;
-      this.relativeExpectDirectory = relativeExpectDirectory;
-      this.aggregateNoEmitInverseRelationships = aggregateNoEmitInverseRelationships;
-    }
-  }
-
   public static List<SnapshotCase> snapshotCases() {
     Path sourceroot = requiredPathProperty("snapshot.sourceroot");
-    return CASE_SPECS.stream()
-        .map(
-            spec ->
-                new SnapshotCase(
-                    spec.id,
-                    sourceroot.resolve(spec.relativeExpectDirectory),
-                    requiredPathProperty("snapshot.case." + spec.id + ".targetroot"),
-                    spec.aggregateNoEmitInverseRelationships))
-        .collect(Collectors.toList());
+    return Arrays.asList(
+        new SnapshotCase(
+            "java-common",
+            sourceroot.resolve("scip-snapshots/expected/java/common"),
+            requiredPathProperty("snapshot.case.java-common.targetroot"),
+            false),
+        new SnapshotCase(
+            "kotlin-common",
+            sourceroot.resolve("scip-snapshots/expected/kotlin/common"),
+            requiredPathProperty("snapshot.case.kotlin-common.targetroot"),
+            true));
   }
 
   public static Path requiredPathProperty(String name) {

@@ -1,4 +1,3 @@
-import com.google.protobuf.gradle.ProtobufExtension
 import com.google.protobuf.gradle.proto
 
 plugins {
