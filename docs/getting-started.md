@@ -199,7 +199,8 @@ com.sourcegraph.scip_java.ScipJava.INSTANCE.printHelp(Console.out)
 The `scip-java` indexer is implemented as a Java compiler plugin that runs as
 part of your regular compilation in the build tool. By using Java compiler APIs,
 `scip-java` is able to generate accurate indexing information for a broad range
-of Java versions.
+of Java versions. The project targets support for the three most recent Java LTS
+releases.
 
 | Java version | Support                      | Tracking issue |
 | ------------ | ---------------------------- | -------------- |
