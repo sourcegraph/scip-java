@@ -14,6 +14,7 @@ protobuf = "4.34.2"
 protobuf-plugin = "0.10.0"
 scip-bindings = "0.8.0"
 shadow = "9.4.3"
+spotless = "8.7.0"
 vanniktech-maven-publish = "0.35.0"
 
 [libraries]
@@ -43,4 +44,5 @@ scip-kotlin-bindings = { module = "org.scip-code:scip-kotlin-bindings", version.
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 protobuf = { id = "com.google.protobuf", version.ref = "protobuf-plugin" }
 shadow = { id = "com.gradleup.shadow", version.ref = "shadow" }
+spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
 vanniktech-maven-publish = { id = "com.vanniktech.maven.publish", version.ref = "vanniktech-maven-publish" }

@@ -31,6 +31,20 @@ jobs:
 
       - run: nix flake check -L
 
+  format:
+    runs-on: ubuntu-latest
+    name: Formatting
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: DeterminateSystems/nix-installer-action@v22
+        with:
+          summarize: false
+
+      - uses: DeterminateSystems/magic-nix-cache-action@v13
+
+      - run: gradle spotlessCheck --no-daemon
+
   test:
     runs-on: ubuntu-latest
     name: Tests (JDK ${{ matrix.java }})
