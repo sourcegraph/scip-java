@@ -98,8 +98,6 @@ def _scip_java(target, ctx):
         processorpath += [j.path for j in annotations.processor_classpath.to_list()]
         processors = annotations.processor_classnames
 
-    # In Bazel 8+ compilation.javac_options is a depset of shell-quoted strings;
-    # ctx.tokenize splits each entry into proper individual flags.
     raw_options = compilation.javac_options
     if hasattr(raw_options, "to_list"):
         raw_options = raw_options.to_list()
