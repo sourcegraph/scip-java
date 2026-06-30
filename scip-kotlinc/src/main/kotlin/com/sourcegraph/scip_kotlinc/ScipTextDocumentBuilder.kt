@@ -1,8 +1,7 @@
 package com.sourcegraph.scip_kotlinc
 
 import com.sourcegraph.scip.ScipDocumentBuilder
-import com.sourcegraph.scip.ScipRanges
-import com.sourcegraph.scip.ScipRanges.Range
+import com.sourcegraph.scip.ScipRange
 import com.sourcegraph.scip.ScipShardPaths
 import java.nio.file.Path
 import java.nio.file.Paths
@@ -116,19 +115,19 @@ class ScipTextDocumentBuilder(
         return builder.build()
     }
 
-    private fun range(element: KtSourceElement): Range {
+    private fun range(element: KtSourceElement): ScipRange {
         val line = lineMap.lineNumber(element) - 1
         val startCol = lineMap.startCharacter(element)
         val endCol = lineMap.endCharacter(element)
-        return ScipRanges.singleLineRange(line, startCol, endCol)
+        return ScipRange.singleLine(line, startCol, endCol)
     }
 
-    private fun enclosingRange(element: KtSourceElement): Range {
+    private fun enclosingRange(element: KtSourceElement): ScipRange {
         val startLine = lineMap.lineNumber(element) - 1
         val startCol = lineMap.startCharacter(element)
         val endLine = lineMap.lineNumberForOffset(element.endOffset) - 1
         val endCol = lineMap.columnForOffset(element.endOffset)
-        return ScipRanges.range(startLine, startCol, endLine, endCol)
+        return ScipRange.range(startLine, startCol, endLine, endCol)
     }
 
     private fun relativePath(): String =

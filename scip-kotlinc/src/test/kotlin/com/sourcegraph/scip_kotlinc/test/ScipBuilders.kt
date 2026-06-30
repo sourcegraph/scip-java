@@ -1,7 +1,6 @@
 package com.sourcegraph.scip_kotlinc.test
 
-import com.sourcegraph.scip.ScipRanges
-import com.sourcegraph.scip.ScipRanges.Range
+import com.sourcegraph.scip.ScipRange
 import org.scip_code.scip.Occurrence
 import org.scip_code.scip.SymbolInformation
 import org.scip_code.scip.SymbolRole
@@ -39,9 +38,9 @@ class ScipRangeBuilder {
     var endLine: Int = -1
     var endCharacter: Int = 0
 
-    internal fun toScipRange(): Range {
+    internal fun toScipRange(): ScipRange {
         val line = if (endLine < 0) startLine else endLine
-        return ScipRanges.range(startLine, startCharacter, line, endCharacter)
+        return ScipRange.range(startLine, startCharacter, line, endCharacter)
     }
 }
 
@@ -49,8 +48,8 @@ class ScipRangeBuilder {
 class ScipOccurrenceBuilder {
     var role: Int = REFERENCE
     var symbol: String = ""
-    private var range: Range? = null
-    private var enclosingRange: Range? = null
+    private var range: ScipRange? = null
+    private var enclosingRange: ScipRange? = null
 
     fun range(block: ScipRangeBuilder.() -> Unit) {
         range = ScipRangeBuilder().apply(block).toScipRange()

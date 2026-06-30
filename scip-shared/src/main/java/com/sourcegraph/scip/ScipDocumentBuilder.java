@@ -20,8 +20,8 @@ import org.scip_code.scip.SymbolInformation;
  */
 public final class ScipDocumentBuilder {
   private static final Comparator<Occurrence> OCCURRENCE_ORDER =
-      Comparator.<Occurrence>comparingInt(ScipRanges::rangeStartLine)
-          .thenComparingInt(ScipRanges::rangeStartCharacter);
+      Comparator.<Occurrence>comparingInt(o -> ScipRange.from(o).startLine())
+          .thenComparingInt(o -> ScipRange.from(o).startCharacter());
 
   private final Map<OccurrenceKey, Occurrence> occurrences = new LinkedHashMap<>();
   private final Map<String, SymbolInformation> symbols = new LinkedHashMap<>();
@@ -49,12 +49,12 @@ public final class ScipDocumentBuilder {
   }
 
   private static final class OccurrenceKey {
-    private final ScipRanges.Range range;
+    private final ScipRange range;
     private final String symbol;
     private final int roles;
 
     OccurrenceKey(Occurrence occurrence) {
-      this.range = ScipRanges.range(occurrence);
+      this.range = ScipRange.from(occurrence);
       this.symbol = occurrence.getSymbol();
       this.roles = occurrence.getSymbolRoles();
     }
