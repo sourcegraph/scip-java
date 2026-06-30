@@ -153,11 +153,20 @@ public class ScipAggregator {
     for (Occurrence occ : shard.getOccurrencesList()) {
       Occurrence.Builder rebuilt =
           Occurrence.newBuilder()
-              .addAllRange(occ.getRangeList())
               .setSymbol(rewriter.rewrite(occ.getSymbol()))
               .setSymbolRoles(occ.getSymbolRoles());
-      if (occ.getEnclosingRangeCount() > 0) {
-        rebuilt.addAllEnclosingRange(occ.getEnclosingRangeList());
+      switch (occ.getTypedRangeCase()) {
+        case SINGLE_LINE_RANGE -> rebuilt.setSingleLineRange(occ.getSingleLineRange());
+        case MULTI_LINE_RANGE -> rebuilt.setMultiLineRange(occ.getMultiLineRange());
+        case TYPEDRANGE_NOT_SET ->
+            throw new IllegalArgumentException("expected SCIP 0.9 typed occurrence range");
+      }
+      switch (occ.getTypedEnclosingRangeCase()) {
+        case SINGLE_LINE_ENCLOSING_RANGE ->
+            rebuilt.setSingleLineEnclosingRange(occ.getSingleLineEnclosingRange());
+        case MULTI_LINE_ENCLOSING_RANGE ->
+            rebuilt.setMultiLineEnclosingRange(occ.getMultiLineEnclosingRange());
+        case TYPEDENCLOSINGRANGE_NOT_SET -> {}
       }
       out.addOccurrences(rebuilt);
     }

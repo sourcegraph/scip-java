@@ -1,9 +1,9 @@
 package com.sourcegraph.scip_kotlinc.test
 
+import com.sourcegraph.scip.ScipRange
 import org.scip_code.scip.Occurrence
 import org.scip_code.scip.SymbolInformation
 import org.scip_code.scip.SymbolRole
-import org.scip_code.scip.occurrence
 import org.scip_code.scip.relationship
 import org.scip_code.scip.signature
 import org.scip_code.scip.symbolInformation
@@ -38,10 +38,9 @@ class ScipRangeBuilder {
     var endLine: Int = -1
     var endCharacter: Int = 0
 
-    internal fun toIntList(): List<Int> {
+    internal fun toScipRange(): ScipRange {
         val line = if (endLine < 0) startLine else endLine
-        return if (line == startLine) listOf(startLine, startCharacter, endCharacter)
-        else listOf(startLine, startCharacter, line, endCharacter)
+        return ScipRange.range(startLine, startCharacter, line, endCharacter)
     }
 }
 
@@ -49,22 +48,28 @@ class ScipRangeBuilder {
 class ScipOccurrenceBuilder {
     var role: Int = REFERENCE
     var symbol: String = ""
-    private var range: List<Int>? = null
-    private var enclosingRange: List<Int>? = null
+    private var range: ScipRange? = null
+    private var enclosingRange: ScipRange? = null
 
     fun range(block: ScipRangeBuilder.() -> Unit) {
-        range = ScipRangeBuilder().apply(block).toIntList()
+        range = ScipRangeBuilder().apply(block).toScipRange()
     }
 
     fun enclosingRange(block: ScipRangeBuilder.() -> Unit) {
-        enclosingRange = ScipRangeBuilder().apply(block).toIntList()
+        enclosingRange = ScipRangeBuilder().apply(block).toScipRange()
     }
 
-    internal fun build(): Occurrence = occurrence {
-        symbol = this@ScipOccurrenceBuilder.symbol
-        symbolRoles = role
-        this@ScipOccurrenceBuilder.range?.let { range += it }
-        this@ScipOccurrenceBuilder.enclosingRange?.let { enclosingRange += it }
+    internal fun build(): Occurrence {
+        val builder = Occurrence.newBuilder().setSymbol(symbol).setSymbolRoles(role)
+        range?.let {
+            if (it.isSingleLine) builder.singleLineRange = it.toSingleLineRange()
+            else builder.multiLineRange = it.toMultiLineRange()
+        }
+        enclosingRange?.let {
+            if (it.isSingleLine) builder.singleLineEnclosingRange = it.toSingleLineRange()
+            else builder.multiLineEnclosingRange = it.toMultiLineRange()
+        }
+        return builder.build()
     }
 }
 
