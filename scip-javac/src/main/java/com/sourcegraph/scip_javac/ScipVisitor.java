@@ -2,6 +2,8 @@ package com.sourcegraph.scip_javac;
 
 import com.sourcegraph.scip.LocalSymbolsCache;
 import com.sourcegraph.scip.ScipDocumentBuilder;
+import com.sourcegraph.scip.ScipRanges;
+import com.sourcegraph.scip.ScipRanges.Range;
 import com.sourcegraph.scip.ScipSymbols;
 import com.sun.source.tree.AnnotatedTypeTree;
 import com.sun.source.tree.ClassTree;
@@ -182,7 +184,7 @@ final class ScipVisitor extends TreePathScanner<Void, Void> {
   private void resolveVariableTree(VariableTree node, TreePath treePath) {
     Element sym = trees.getElement(treePath);
     if (sym == null) return;
-    int[] range =
+    Range range =
         emitDefinition(sym, node, sym.getSimpleName(), CompilerRange.FROM_POINT_WITH_TEXT_SEARCH);
     if (sym.getKind() == ElementKind.ENUM_CONSTANT) {
       TreePath typeTreePath = nodes.get(node.getInitializer());
@@ -246,8 +248,8 @@ final class ScipVisitor extends TreePathScanner<Void, Void> {
   // =======================================
   // Occurrence + SymbolInformation emission
   // =======================================
-  private int[] emitDefinition(Element sym, Tree tree, Name name, CompilerRange kind) {
-    int[] range = computeRange(tree, kind, sym, name == null ? null : name.toString());
+  private Range emitDefinition(Element sym, Tree tree, Name name, CompilerRange kind) {
+    Range range = computeRange(tree, kind, sym, name == null ? null : name.toString());
     if (range == null) return null;
     emitOccurrence(sym, range, SymbolRole.Definition_VALUE, computeEnclosingRange(tree));
     declTrees.put(sym, tree);
@@ -256,18 +258,18 @@ final class ScipVisitor extends TreePathScanner<Void, Void> {
   }
 
   private void emitReference(Element sym, Tree tree, Name name, CompilerRange kind) {
-    int[] range = computeRange(tree, kind, sym, name == null ? null : name.toString());
+    Range range = computeRange(tree, kind, sym, name == null ? null : name.toString());
     if (range == null) return;
     emitOccurrence(sym, range, 0 /* reference */, null);
   }
 
-  private void emitOccurrence(Element sym, int[] range, int role, int[] enclosingRange) {
+  private void emitOccurrence(Element sym, Range range, int role, Range enclosingRange) {
     String symbol = scipSymbol(sym);
     if (symbol.isEmpty()) return;
     Occurrence.Builder b = Occurrence.newBuilder().setSymbol(symbol).setSymbolRoles(role);
-    for (int v : range) b.addRange(v);
+    ScipRanges.setRange(b, range);
     if (enclosingRange != null) {
-      for (int v : enclosingRange) b.addEnclosingRange(v);
+      ScipRanges.setEnclosingRange(b, enclosingRange);
     }
     documentBuilder.addOccurrence(b.build());
   }
@@ -360,7 +362,7 @@ final class ScipVisitor extends TreePathScanner<Void, Void> {
   // =======================================
   // Source position / range computation
   // =======================================
-  private int[] computeRange(Tree tree, CompilerRange kind, Element sym, String name) {
+  private Range computeRange(Tree tree, CompilerRange kind, Element sym, String name) {
     if (sym == null) return null;
     SourcePositions sourcePositions = trees.getSourcePositions();
     int start = (int) sourcePositions.getStartPosition(compUnitTree, tree);
@@ -394,7 +396,7 @@ final class ScipVisitor extends TreePathScanner<Void, Void> {
     return lineMapRange(start, end);
   }
 
-  private int[] computeEnclosingRange(Tree tree) {
+  private Range computeEnclosingRange(Tree tree) {
     if (tree == null) return null;
     TreePath path = nodes.get(tree);
     if (path == null) return null;
@@ -413,7 +415,7 @@ final class ScipVisitor extends TreePathScanner<Void, Void> {
     return lineMapRange(start, end);
   }
 
-  private int[] lineMapRange(int start, int end) {
+  private Range lineMapRange(int start, int end) {
     if (start == Diagnostic.NOPOS || end == Diagnostic.NOPOS || end <= start) return null;
     LineMap lineMap = compUnitTree.getLineMap();
     int startLine = (int) lineMap.getLineNumber(start) - 1;
@@ -431,8 +433,8 @@ final class ScipVisitor extends TreePathScanner<Void, Void> {
       endChar -= count * 7;
     }
 
-    if (startLine == endLine) return new int[] {startLine, startChar, endChar};
-    return new int[] {startLine, startChar, endLine, endChar};
+    if (startLine == endLine) return ScipRanges.singleLineRange(startLine, startChar, endChar);
+    return ScipRanges.range(startLine, startChar, endLine, endChar);
   }
 
   // =======================================

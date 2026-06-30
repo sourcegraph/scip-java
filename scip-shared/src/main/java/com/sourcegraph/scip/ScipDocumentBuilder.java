@@ -1,7 +1,6 @@
 package com.sourcegraph.scip;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -21,8 +20,8 @@ import org.scip_code.scip.SymbolInformation;
  */
 public final class ScipDocumentBuilder {
   private static final Comparator<Occurrence> OCCURRENCE_ORDER =
-      Comparator.<Occurrence>comparingInt(o -> rangeStartLine(o))
-          .thenComparingInt(o -> rangeStartCharacter(o));
+      Comparator.<Occurrence>comparingInt(ScipRanges::rangeStartLine)
+          .thenComparingInt(ScipRanges::rangeStartCharacter);
 
   private final Map<OccurrenceKey, Occurrence> occurrences = new LinkedHashMap<>();
   private final Map<String, SymbolInformation> symbols = new LinkedHashMap<>();
@@ -49,21 +48,13 @@ public final class ScipDocumentBuilder {
         .build();
   }
 
-  private static int rangeStartLine(Occurrence occurrence) {
-    return occurrence.getRangeCount() > 0 ? occurrence.getRange(0) : 0;
-  }
-
-  private static int rangeStartCharacter(Occurrence occurrence) {
-    return occurrence.getRangeCount() > 1 ? occurrence.getRange(1) : 0;
-  }
-
   private static final class OccurrenceKey {
-    private final List<Integer> range;
+    private final ScipRanges.Range range;
     private final String symbol;
     private final int roles;
 
     OccurrenceKey(Occurrence occurrence) {
-      this.range = Collections.unmodifiableList(new ArrayList<>(occurrence.getRangeList()));
+      this.range = ScipRanges.range(occurrence);
       this.symbol = occurrence.getSymbol();
       this.roles = occurrence.getSymbolRoles();
     }

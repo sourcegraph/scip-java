@@ -1,6 +1,8 @@
 package com.sourcegraph.scip_kotlinc
 
 import com.sourcegraph.scip.ScipDocumentBuilder
+import com.sourcegraph.scip.ScipRanges
+import com.sourcegraph.scip.ScipRanges.Range
 import com.sourcegraph.scip.ScipShardPaths
 import java.nio.file.Path
 import java.nio.file.Paths
@@ -22,7 +24,6 @@ import org.scip_code.scip.Document
 import org.scip_code.scip.Occurrence
 import org.scip_code.scip.SymbolInformation
 import org.scip_code.scip.SymbolRole
-import org.scip_code.scip.occurrence
 import org.scip_code.scip.relationship
 import org.scip_code.scip.signature
 import org.scip_code.scip.symbolInformation
@@ -98,29 +99,29 @@ class ScipTextDocumentBuilder(
         element: KtSourceElement,
         isDefinition: Boolean,
         enclosingSource: KtSourceElement?,
-    ): Occurrence = occurrence {
-        this.symbol = symbol.toString()
-        if (isDefinition) symbolRoles = SymbolRole.Definition.number
-        range += range(element).asIterable()
+    ): Occurrence {
+        val builder = Occurrence.newBuilder().setSymbol(symbol.toString())
+        if (isDefinition) builder.setSymbolRoles(SymbolRole.Definition.number)
+        ScipRanges.setRange(builder, range(element))
         if (enclosingSource != null) {
-            enclosingRange += enclosingRange(enclosingSource).asIterable()
+            ScipRanges.setEnclosingRange(builder, enclosingRange(enclosingSource))
         }
+        return builder.build()
     }
 
-    private fun range(element: KtSourceElement): IntArray {
+    private fun range(element: KtSourceElement): Range {
         val line = lineMap.lineNumber(element) - 1
         val startCol = lineMap.startCharacter(element)
         val endCol = lineMap.endCharacter(element)
-        return intArrayOf(line, startCol, endCol)
+        return ScipRanges.singleLineRange(line, startCol, endCol)
     }
 
-    private fun enclosingRange(element: KtSourceElement): IntArray {
+    private fun enclosingRange(element: KtSourceElement): Range {
         val startLine = lineMap.lineNumber(element) - 1
         val startCol = lineMap.startCharacter(element)
         val endLine = lineMap.lineNumberForOffset(element.endOffset) - 1
         val endCol = lineMap.columnForOffset(element.endOffset)
-        return if (startLine == endLine) intArrayOf(startLine, startCol, endCol)
-        else intArrayOf(startLine, startCol, endLine, endCol)
+        return ScipRanges.range(startLine, startCol, endLine, endCol)
     }
 
     private fun relativePath(): String =

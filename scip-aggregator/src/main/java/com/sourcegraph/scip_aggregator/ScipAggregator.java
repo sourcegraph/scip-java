@@ -1,6 +1,7 @@
 package com.sourcegraph.scip_aggregator;
 
 import com.google.protobuf.CodedInputStream;
+import com.sourcegraph.scip.ScipRanges;
 import com.sourcegraph.scip.ScipSymbols;
 import java.io.IOException;
 import java.nio.file.FileSystems;
@@ -153,12 +154,10 @@ public class ScipAggregator {
     for (Occurrence occ : shard.getOccurrencesList()) {
       Occurrence.Builder rebuilt =
           Occurrence.newBuilder()
-              .addAllRange(occ.getRangeList())
               .setSymbol(rewriter.rewrite(occ.getSymbol()))
               .setSymbolRoles(occ.getSymbolRoles());
-      if (occ.getEnclosingRangeCount() > 0) {
-        rebuilt.addAllEnclosingRange(occ.getEnclosingRangeList());
-      }
+      ScipRanges.copyRange(occ, rebuilt);
+      ScipRanges.copyEnclosingRange(occ, rebuilt);
       out.addOccurrences(rebuilt);
     }
 

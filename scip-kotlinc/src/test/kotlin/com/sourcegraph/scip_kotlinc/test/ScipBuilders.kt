@@ -1,9 +1,10 @@
 package com.sourcegraph.scip_kotlinc.test
 
+import com.sourcegraph.scip.ScipRanges
+import com.sourcegraph.scip.ScipRanges.Range
 import org.scip_code.scip.Occurrence
 import org.scip_code.scip.SymbolInformation
 import org.scip_code.scip.SymbolRole
-import org.scip_code.scip.occurrence
 import org.scip_code.scip.relationship
 import org.scip_code.scip.signature
 import org.scip_code.scip.symbolInformation
@@ -38,10 +39,9 @@ class ScipRangeBuilder {
     var endLine: Int = -1
     var endCharacter: Int = 0
 
-    internal fun toIntList(): List<Int> {
+    internal fun toScipRange(): Range {
         val line = if (endLine < 0) startLine else endLine
-        return if (line == startLine) listOf(startLine, startCharacter, endCharacter)
-        else listOf(startLine, startCharacter, line, endCharacter)
+        return ScipRanges.range(startLine, startCharacter, line, endCharacter)
     }
 }
 
@@ -49,22 +49,22 @@ class ScipRangeBuilder {
 class ScipOccurrenceBuilder {
     var role: Int = REFERENCE
     var symbol: String = ""
-    private var range: List<Int>? = null
-    private var enclosingRange: List<Int>? = null
+    private var range: Range? = null
+    private var enclosingRange: Range? = null
 
     fun range(block: ScipRangeBuilder.() -> Unit) {
-        range = ScipRangeBuilder().apply(block).toIntList()
+        range = ScipRangeBuilder().apply(block).toScipRange()
     }
 
     fun enclosingRange(block: ScipRangeBuilder.() -> Unit) {
-        enclosingRange = ScipRangeBuilder().apply(block).toIntList()
+        enclosingRange = ScipRangeBuilder().apply(block).toScipRange()
     }
 
-    internal fun build(): Occurrence = occurrence {
-        symbol = this@ScipOccurrenceBuilder.symbol
-        symbolRoles = role
-        this@ScipOccurrenceBuilder.range?.let { range += it }
-        this@ScipOccurrenceBuilder.enclosingRange?.let { enclosingRange += it }
+    internal fun build(): Occurrence {
+        val builder = Occurrence.newBuilder().setSymbol(symbol).setSymbolRoles(role)
+        range?.let { ScipRanges.setRange(builder, it) }
+        enclosingRange?.let { ScipRanges.setEnclosingRange(builder, it) }
+        return builder.build()
     }
 }
 
