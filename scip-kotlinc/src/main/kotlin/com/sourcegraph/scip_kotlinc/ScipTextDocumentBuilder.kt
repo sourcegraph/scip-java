@@ -102,9 +102,16 @@ class ScipTextDocumentBuilder(
     ): Occurrence {
         val builder = Occurrence.newBuilder().setSymbol(symbol.toString())
         if (isDefinition) builder.setSymbolRoles(SymbolRole.Definition.number)
-        ScipRanges.setRange(builder, range(element))
+        val range = range(element)
+        if (range.isSingleLine) builder.singleLineRange = range.toSingleLineRange()
+        else builder.multiLineRange = range.toMultiLineRange()
         if (enclosingSource != null) {
-            ScipRanges.setEnclosingRange(builder, enclosingRange(enclosingSource))
+            val enclosingRange = enclosingRange(enclosingSource)
+            if (enclosingRange.isSingleLine) {
+                builder.singleLineEnclosingRange = enclosingRange.toSingleLineRange()
+            } else {
+                builder.multiLineEnclosingRange = enclosingRange.toMultiLineRange()
+            }
         }
         return builder.build()
     }

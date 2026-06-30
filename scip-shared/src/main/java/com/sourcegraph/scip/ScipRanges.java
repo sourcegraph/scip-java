@@ -4,7 +4,7 @@ import org.scip_code.scip.MultiLineRange;
 import org.scip_code.scip.Occurrence;
 import org.scip_code.scip.SingleLineRange;
 
-/** Helpers for reading and writing SCIP occurrence ranges. */
+/** Helpers for creating and reading typed SCIP occurrence ranges. */
 public final class ScipRanges {
   private ScipRanges() {}
 
@@ -14,61 +14,6 @@ public final class ScipRanges {
 
   public static Range range(int startLine, int startCharacter, int endLine, int endCharacter) {
     return new Range(startLine, startCharacter, endLine, endCharacter);
-  }
-
-  /** Sets the typed {@code range} oneof on {@code builder}. */
-  public static Occurrence.Builder setRange(Occurrence.Builder builder, Range range) {
-    clearRange(builder);
-    if (range.isSingleLine()) {
-      builder.setSingleLineRange(range.toSingleLineRange());
-    } else {
-      builder.setMultiLineRange(range.toMultiLineRange());
-    }
-    return builder;
-  }
-
-  /** Sets the typed {@code enclosing_range} oneof on {@code builder}. */
-  public static Occurrence.Builder setEnclosingRange(Occurrence.Builder builder, Range range) {
-    clearEnclosingRange(builder);
-    if (range.isSingleLine()) {
-      builder.setSingleLineEnclosingRange(range.toSingleLineRange());
-    } else {
-      builder.setMultiLineEnclosingRange(range.toMultiLineRange());
-    }
-    return builder;
-  }
-
-  /** Copies the preferred range encoding from {@code source} to {@code target}. */
-  public static Occurrence.Builder copyRange(Occurrence source, Occurrence.Builder target) {
-    clearRange(target);
-    switch (source.getTypedRangeCase()) {
-      case SINGLE_LINE_RANGE:
-        target.setSingleLineRange(source.getSingleLineRange());
-        return target;
-      case MULTI_LINE_RANGE:
-        target.setMultiLineRange(source.getMultiLineRange());
-        return target;
-      case TYPEDRANGE_NOT_SET:
-        throw new IllegalArgumentException("expected SCIP 0.9 typed occurrence range");
-    }
-    throw new IllegalArgumentException("expected SCIP 0.9 typed occurrence range");
-  }
-
-  /** Copies the preferred enclosing range encoding from {@code source} to {@code target}. */
-  public static Occurrence.Builder copyEnclosingRange(
-      Occurrence source, Occurrence.Builder target) {
-    clearEnclosingRange(target);
-    switch (source.getTypedEnclosingRangeCase()) {
-      case SINGLE_LINE_ENCLOSING_RANGE:
-        target.setSingleLineEnclosingRange(source.getSingleLineEnclosingRange());
-        return target;
-      case MULTI_LINE_ENCLOSING_RANGE:
-        target.setMultiLineEnclosingRange(source.getMultiLineEnclosingRange());
-        return target;
-      case TYPEDENCLOSINGRANGE_NOT_SET:
-        return target;
-    }
-    return target;
   }
 
   public static Range range(Occurrence occurrence) {
@@ -91,16 +36,6 @@ public final class ScipRanges {
     return range(occurrence).startCharacter();
   }
 
-  private static void clearRange(Occurrence.Builder builder) {
-    builder.clearSingleLineRange();
-    builder.clearMultiLineRange();
-  }
-
-  private static void clearEnclosingRange(Occurrence.Builder builder) {
-    builder.clearSingleLineEnclosingRange();
-    builder.clearMultiLineEnclosingRange();
-  }
-
   public record Range(int startLine, int startCharacter, int endLine, int endCharacter) {
     private static Range from(SingleLineRange range) {
       return new Range(
@@ -115,11 +50,12 @@ public final class ScipRanges {
           range.getEndCharacter());
     }
 
-    private boolean isSingleLine() {
+    public boolean isSingleLine() {
       return startLine == endLine;
     }
 
-    private SingleLineRange toSingleLineRange() {
+    public SingleLineRange toSingleLineRange() {
+      if (!isSingleLine()) throw new IllegalStateException("expected single-line range");
       return SingleLineRange.newBuilder()
           .setLine(startLine)
           .setStartCharacter(startCharacter)
@@ -127,7 +63,8 @@ public final class ScipRanges {
           .build();
     }
 
-    private MultiLineRange toMultiLineRange() {
+    public MultiLineRange toMultiLineRange() {
+      if (isSingleLine()) throw new IllegalStateException("expected multi-line range");
       return MultiLineRange.newBuilder()
           .setStartLine(startLine)
           .setStartCharacter(startCharacter)

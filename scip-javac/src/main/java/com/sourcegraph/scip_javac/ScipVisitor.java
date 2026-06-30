@@ -267,9 +267,17 @@ final class ScipVisitor extends TreePathScanner<Void, Void> {
     String symbol = scipSymbol(sym);
     if (symbol.isEmpty()) return;
     Occurrence.Builder b = Occurrence.newBuilder().setSymbol(symbol).setSymbolRoles(role);
-    ScipRanges.setRange(b, range);
+    if (range.isSingleLine()) {
+      b.setSingleLineRange(range.toSingleLineRange());
+    } else {
+      b.setMultiLineRange(range.toMultiLineRange());
+    }
     if (enclosingRange != null) {
-      ScipRanges.setEnclosingRange(b, enclosingRange);
+      if (enclosingRange.isSingleLine()) {
+        b.setSingleLineEnclosingRange(enclosingRange.toSingleLineRange());
+      } else {
+        b.setMultiLineEnclosingRange(enclosingRange.toMultiLineRange());
+      }
     }
     documentBuilder.addOccurrence(b.build());
   }

@@ -62,8 +62,14 @@ class ScipOccurrenceBuilder {
 
     internal fun build(): Occurrence {
         val builder = Occurrence.newBuilder().setSymbol(symbol).setSymbolRoles(role)
-        range?.let { ScipRanges.setRange(builder, it) }
-        enclosingRange?.let { ScipRanges.setEnclosingRange(builder, it) }
+        range?.let {
+            if (it.isSingleLine) builder.singleLineRange = it.toSingleLineRange()
+            else builder.multiLineRange = it.toMultiLineRange()
+        }
+        enclosingRange?.let {
+            if (it.isSingleLine) builder.singleLineEnclosingRange = it.toSingleLineRange()
+            else builder.multiLineEnclosingRange = it.toMultiLineRange()
+        }
         return builder.build()
     }
 }

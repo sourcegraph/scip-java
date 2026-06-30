@@ -1,7 +1,6 @@
 package com.sourcegraph.scip_aggregator;
 
 import com.google.protobuf.CodedInputStream;
-import com.sourcegraph.scip.ScipRanges;
 import com.sourcegraph.scip.ScipSymbols;
 import java.io.IOException;
 import java.nio.file.FileSystems;
@@ -156,8 +155,19 @@ public class ScipAggregator {
           Occurrence.newBuilder()
               .setSymbol(rewriter.rewrite(occ.getSymbol()))
               .setSymbolRoles(occ.getSymbolRoles());
-      ScipRanges.copyRange(occ, rebuilt);
-      ScipRanges.copyEnclosingRange(occ, rebuilt);
+      switch (occ.getTypedRangeCase()) {
+        case SINGLE_LINE_RANGE -> rebuilt.setSingleLineRange(occ.getSingleLineRange());
+        case MULTI_LINE_RANGE -> rebuilt.setMultiLineRange(occ.getMultiLineRange());
+        case TYPEDRANGE_NOT_SET ->
+            throw new IllegalArgumentException("expected SCIP 0.9 typed occurrence range");
+      }
+      switch (occ.getTypedEnclosingRangeCase()) {
+        case SINGLE_LINE_ENCLOSING_RANGE ->
+            rebuilt.setSingleLineEnclosingRange(occ.getSingleLineEnclosingRange());
+        case MULTI_LINE_ENCLOSING_RANGE ->
+            rebuilt.setMultiLineEnclosingRange(occ.getMultiLineEnclosingRange());
+        case TYPEDENCLOSINGRANGE_NOT_SET -> {}
+      }
       out.addOccurrences(rebuilt);
     }
 
