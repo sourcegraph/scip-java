@@ -1,7 +1,4 @@
----
-id: design
-title: Design
----
+# Design
 
 This project is implemented as a
 [Java compiler plugin](https://docs.oracle.com/en/java/javase/11/docs/api/jdk.compiler/com/sun/source/util/Plugin.html)

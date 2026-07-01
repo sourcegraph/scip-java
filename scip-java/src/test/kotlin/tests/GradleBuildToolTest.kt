@@ -63,7 +63,7 @@ class GradleBuildToolTest : BuildToolHarness() {
                 "publishing",
                 "gradle/publishing",
                 expectedScipFiles = 1,
-                expectedPackages = "maven:com.sourcegraph:example-library:1.1",
+                expectedPackages = "maven:org.scip-code:example-library:1.1",
             )
         )
         add(checkGradleBuild("basic", "gradle/basic", expectedScipFiles = 2))

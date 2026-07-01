@@ -154,7 +154,7 @@ jobs:
           printf 'SCIP_JAVA_VERSION=%s\n' "$SCIP_JAVA_VERSION" >> "$GITHUB_ENV"
           printf 'SCIP_JAVA_CLI=%s\n' "$PWD/scip-java/build/install/scip-java/bin/scip-java" >> "$GITHUB_ENV"
 
-      - run: mvn clean verify -DskipTests "-Dscip-java.version=$SCIP_JAVA_VERSION" sourcegraph:sourcegraphDependencies
+      - run: mvn clean verify -DskipTests "-Dscip-java.version=$SCIP_JAVA_VERSION" scip:dependencies
         working-directory: examples/maven-example
 
       - run: |

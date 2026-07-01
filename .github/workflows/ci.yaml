@@ -47,7 +47,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Build Dockerised CLI
-        run: docker build -t sourcegraph/scip-java:latest .
+        run: docker build -t ghcr.io/scip-code/scip-java:latest .
 
       - name: Test repos
         shell: bash
@@ -58,7 +58,7 @@ jobs:
             mkdir -p ".repos/$REPO"
             git clone "https://github.com/$REPO.git" ".repos/$REPO" && cd ".repos/$REPO" && git submodule update --init
 
-            docker run -v "$PWD/.repos/$REPO:/sources" -w /sources sourcegraph/scip-java:latest scip-java index
+            docker run -v "$PWD/.repos/$REPO:/sources" -w /sources ghcr.io/scip-code/scip-java:latest scip-java index
             file ".repos/$REPO/index.scip" || (echo "$REPO SCIP index doesn't exist!"; exit 1)
           }
 
