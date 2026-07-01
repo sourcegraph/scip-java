@@ -1,8 +1,8 @@
-import com.sourcegraph.buildlogic.cleanDirectoryBeforeRunning
-import com.sourcegraph.buildlogic.publishDirectoryArtifact
-import com.sourcegraph.buildlogic.scipKotlincPluginArgs
-import com.sourcegraph.buildlogic.shadowJarArtifact
-import com.sourcegraph.buildlogic.useScipJavac
+import org.scip_code.scip_java.buildlogic.cleanDirectoryBeforeRunning
+import org.scip_code.scip_java.buildlogic.publishDirectoryArtifact
+import org.scip_code.scip_java.buildlogic.scipKotlincPluginArgs
+import org.scip_code.scip_java.buildlogic.shadowJarArtifact
+import org.scip_code.scip_java.buildlogic.useScipJavac
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {

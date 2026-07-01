@@ -1,8 +1,5 @@
 package tests
 
-import com.sourcegraph.scip_java.CliEnvironment
-import com.sourcegraph.scip_java.ScipJavaApp
-import com.sourcegraph.scip_java.buildtools.ClasspathEntry
 import java.io.ByteArrayOutputStream
 import java.io.PrintStream
 import java.nio.charset.StandardCharsets
@@ -17,6 +14,9 @@ import kotlin.test.fail
 import org.junit.jupiter.api.Assumptions.assumeTrue
 import org.junit.jupiter.api.DynamicTest
 import org.junit.jupiter.api.DynamicTest.dynamicTest
+import org.scip_code.scip_java.CliEnvironment
+import org.scip_code.scip_java.ScipJavaApp
+import org.scip_code.scip_java.buildtools.ClasspathEntry
 
 /**
  * Base class for build-tool integration tests. Each `check*` helper returns a JUnit 5

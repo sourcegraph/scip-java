@@ -3,19 +3,19 @@
 <!-- Written by hand by Anton, send help -->
 
 <plugin>
-  <name>Sourcegraph scip-java Maven plugin</name>
+  <name>scip-java Maven plugin</name>
   <description>A Maven plugin which exports your project's dependencies in a format scip-java can understand</description>
-  <groupId>com.sourcegraph</groupId>
+  <groupId>org.scip-code</groupId>
   <artifactId>scip-maven-plugin</artifactId>
   <version>@VERSION@</version>
-  <goalPrefix>sourcegraph</goalPrefix>
+  <goalPrefix>scip</goalPrefix>
   <isolatedRealm>false</isolatedRealm>
   <inheritedByDefault>true</inheritedByDefault>
   <requiredJavaVersion>11</requiredJavaVersion>
   <requiredMavenVersion>3.9.5</requiredMavenVersion>
   <mojos>
     <mojo>
-      <goal>sourcegraphDependencies</goal>
+      <goal>dependencies</goal>
       <requiresDirectInvocation>false</requiresDirectInvocation>
       <requiresProject>true</requiresProject>
       <requiresReports>false</requiresReports>
@@ -23,7 +23,7 @@
       <requiresOnline>false</requiresOnline>
       <inheritedByDefault>true</inheritedByDefault>
       <phase>generate-resources</phase>
-      <implementation>com.sourcegraph.maven.DependencyWriterMojo</implementation>
+      <implementation>org.scip_code.scip_java.maven.DependencyWriterMojo</implementation>
       <language>java</language>
       <instantiationStrategy>per-lookup</instantiationStrategy>
       <executionStrategy>once-per-session</executionStrategy>

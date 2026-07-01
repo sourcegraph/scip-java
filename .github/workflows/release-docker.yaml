@@ -4,6 +4,9 @@ on:
     branches:
       - main
     tags: ["*"]
+permissions:
+  contents: read
+  packages: write
 jobs:
   publish:
     runs-on: ubuntu-latest
@@ -12,23 +15,24 @@ jobs:
         with:
           fetch-depth: 0
       - uses: docker/setup-buildx-action@v3
-      - name: Login to DockerHub
+      - name: Login to GitHub Container Registry
         uses: docker/login-action@v3
         with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ github.token }}
       - name: Build and push Docker image
         shell: bash
         run: |
           set -euo pipefail
 
-          tags=(--tag sourcegraph/scip-java:latest-snapshot)
+          tags=(--tag ghcr.io/scip-code/scip-java:latest-snapshot)
 
           if [[ "${GITHUB_REF_TYPE}" == "tag" ]]; then
             version="${GITHUB_REF_NAME#v}"
             tags=(
-              --tag sourcegraph/scip-java:latest
-              --tag "sourcegraph/scip-java:${version}"
+              --tag ghcr.io/scip-code/scip-java:latest
+              --tag "ghcr.io/scip-code/scip-java:${version}"
             )
           fi
 

@@ -1,5 +1,5 @@
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
-import com.sourcegraph.buildlogic.JavacInternals
+import org.scip_code.scip_java.buildlogic.JavacInternals
 
 plugins {
     id("scip.java-library")
@@ -28,10 +28,10 @@ tasks.named<Test>("test") {
 
 tasks.named<ShadowJar>("shadowJar") {
     mergeServiceFiles()
-    relocate("com.google", "com.sourcegraph.shaded.com.google")
-    relocate("google", "com.sourcegraph.shaded.google")
-    relocate("com.sourcegraph", "com.sourcegraph.shaded.com.sourcegraph") {
-        exclude("com.sourcegraph.scip_javac.ScipPlugin")
-        exclude("com.sourcegraph.scip_javac.InjectScipOptions")
+    relocate("com.google", "org.scip_code.scip_java.shaded.com.google")
+    relocate("google", "org.scip_code.scip_java.shaded.google")
+    relocate("org.scip_code.scip_java", "org.scip_code.scip_java.shaded.org.scip_code.scip_java") {
+        exclude("org.scip_code.scip_java.javac.ScipPlugin")
+        exclude("org.scip_code.scip_java.javac.InjectScipOptions")
     }
 }

@@ -1,5 +1,5 @@
-import com.sourcegraph.buildlogic.JavacInternals
-import com.sourcegraph.buildlogic.projectArtifact
+import org.scip_code.scip_java.buildlogic.JavacInternals
+import org.scip_code.scip_java.buildlogic.projectArtifact
 
 plugins {
     id("scip.java-library")

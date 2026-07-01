@@ -5,7 +5,7 @@ plugins {
 }
 
 extensions.configure<MavenPublishBaseExtension>("mavenPublishing") {
-    val repositoryUrl = "https://github.com/sourcegraph/scip-java"
+    val repositoryUrl = "https://github.com/scip-code/scip-java"
     publishToMavenCentral()
     signAllPublications()
 
@@ -21,13 +21,13 @@ extensions.configure<MavenPublishBaseExtension>("mavenPublishing") {
         }
         developers {
             developer {
-                id.set("sourcegraph")
-                name.set("Sourcegraph")
+                id.set("scip-code")
+                name.set("SCIP Code")
             }
         }
         scm {
             connection.set("scm:git:$repositoryUrl.git")
-            developerConnection.set("scm:git:ssh://git@github.com/sourcegraph/scip-java.git")
+            developerConnection.set("scm:git:ssh://git@github.com/scip-code/scip-java.git")
             url.set(repositoryUrl)
         }
     }

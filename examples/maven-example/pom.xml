@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.sourcegraph</groupId>
+    <groupId>org.scip-code</groupId>
     <artifactId>example</artifactId>
     <version>${revision}</version>
 
@@ -27,7 +27,7 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>com.sourcegraph</groupId>
+            <groupId>org.scip-code</groupId>
             <artifactId>scip-javac</artifactId>
             <version>${scip-java.version}</version>
         </dependency>
@@ -81,13 +81,13 @@
                     <version>3.0.0</version>
                 </plugin>
                 <plugin>
-                    <groupId>com.sourcegraph</groupId>
+                    <groupId>org.scip-code</groupId>
                     <artifactId>scip-maven-plugin</artifactId>
                     <version>${scip-java.version}</version>
                     <executions>
                         <execution>
                             <goals>
-                                <goal>sourcegraphDependencies</goal>
+                                <goal>dependencies</goal>
                             </goals>
                         </execution>
                     </executions>

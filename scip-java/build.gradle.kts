@@ -1,6 +1,6 @@
-import com.sourcegraph.buildlogic.JavacInternals
-import com.sourcegraph.buildlogic.registerGeneratedFile
-import com.sourcegraph.buildlogic.shadowJarArtifact
+import org.scip_code.scip_java.buildlogic.JavacInternals
+import org.scip_code.scip_java.buildlogic.registerGeneratedFile
+import org.scip_code.scip_java.buildlogic.shadowJarArtifact
 
 plugins {
     id("scip.java-base")
@@ -36,7 +36,7 @@ tasks.named<Test>("test") {
 }
 
 application {
-    mainClass.set("com.sourcegraph.scip_java.ScipJava")
+    mainClass.set("org.scip_code.scip_java.ScipJava")
 }
 
 val generateEmbeddedResources = tasks.register<Sync>("generateEmbeddedResources") {

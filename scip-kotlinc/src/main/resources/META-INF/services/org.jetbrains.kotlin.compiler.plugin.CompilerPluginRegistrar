@@ -1,1 +1,1 @@
-com.sourcegraph.scip_kotlinc.AnalyzerRegistrar
+org.scip_code.scip_java.kotlinc.AnalyzerRegistrar

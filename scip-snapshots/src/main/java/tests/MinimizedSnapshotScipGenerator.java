@@ -1,6 +1,5 @@
 package tests;
 
-import com.sourcegraph.scip_java.ScipJava;
 import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.nio.charset.StandardCharsets;
@@ -17,6 +16,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.scip_code.scip.Document;
 import org.scip_code.scip.Index;
+import org.scip_code.scip_java.ScipJava;
 
 /**
  * Indexes the {@code scip-snapshots/cases} corpora and renders golden SCIP snapshots. Runtime paths
