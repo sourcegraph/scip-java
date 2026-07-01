@@ -19,8 +19,8 @@ jobs:
         if: ${{ !startsWith(github.ref, 'refs/tags/') }}
         run: nix develop --command gradle --no-daemon publishToMavenCentral
         env:
-          ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.SONATYPE_PASSWORD }}
-          ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.SONATYPE_USERNAME }}
+          ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.MAVEN_PASSWORD }}
+          ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.MAVEN_USERNAME }}
       - name: Publish release ${{ github.ref }}
         if: ${{ startsWith(github.ref, 'refs/tags/') }}
         run: |
@@ -28,10 +28,9 @@ jobs:
           nix develop --command gradle --no-daemon \
             "-PreleaseVersion=$version" publishAndReleaseToMavenCentral
         env:
-          ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.SONATYPE_PASSWORD }}
-          ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.SONATYPE_USERNAME }}
-          ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.PGP_SECRET }}
-          ORG_GRADLE_PROJECT_signingInMemoryKeyPassword: ${{ secrets.PGP_PASSPHRASE }}
+          ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.MAVEN_PASSWORD }}
+          ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.MAVEN_USERNAME }}
+          ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.MAVEN_GPG_PRIVATE_KEY }}
 
   release-cli:
     if: ${{ startsWith(github.ref, 'refs/tags/') }}

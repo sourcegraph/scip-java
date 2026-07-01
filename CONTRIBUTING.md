@@ -1,12 +1,12 @@
 # Contributing guide
 
 This page documents tips and tricks for contributing to the
-[sourcegraph/scip-java](https://github.com/sourcegraph/scip-java) codebase.
+[scip-code/scip-java](https://github.com/scip-code/scip-java) codebase.
 
 ## System dependencies
 
 The recommended way to get a working development environment is via
-[Nix](https://nixos.org/download) and the provided [flake](https://github.com/sourcegraph/scip-java/blob/main/flake.nix):
+[Nix](https://nixos.org/download) and the provided [flake](flake.nix):
 
 ```sh
 nix develop              # default shell (JDK 17)

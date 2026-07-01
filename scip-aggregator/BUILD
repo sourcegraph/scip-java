@@ -8,7 +8,7 @@ package(
 
 java_binary(
     name = "bazel",
-    main_class = "com.sourcegraph.scip_aggregator.BazelBuildTool",
+    main_class = "org.scip_code.scip_java.aggregator.BazelBuildTool",
     runtime_deps = [
         ":scip-aggregator",
     ],

@@ -32,7 +32,7 @@ java \
   -Dscip.output="$NEW_JAVAC_OPTS" \
   "-Dscip.old-output=$SCIP_OLD_JAVAC_OPTS" \
   -classpath "$SCIP_PLUGINPATH" \
-  com.sourcegraph.scip_javac.InjectScipOptions \
+  org.scip_code.scip_java.javac.InjectScipOptions \
   "$@"
 
 javac "${JAVAC_JVM_OPTIONS[@]}" "@$NEW_JAVAC_OPTS" "${LAUNCHER_ARGS[@]}"

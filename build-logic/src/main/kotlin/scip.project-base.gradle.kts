@@ -1,4 +1,4 @@
-group = "com.sourcegraph"
+group = "org.scip-code"
 version = providers.gradleProperty("releaseVersion").orElse("0.0.0-SNAPSHOT").get()
 
 // Several modules also have Bazel `BUILD` files. On the default macOS
