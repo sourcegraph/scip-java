@@ -4,18 +4,18 @@
 //       ^^^^ reference scip-java maven . . java/
 //            ^^^^ reference scip-java maven . . java/lang/
 //                 ^^^^^^^^^^ reference scip-java maven . . java/lang/annotation/
-//                            ^^^^^^^^^^^ reference scip-java maven jdk 11 java/lang/annotation/ElementType#
+//                            ^^^^^^^^^^^ reference scip-java maven jdk 17 java/lang/annotation/ElementType#
   import java.lang.annotation.Target;
 //       ^^^^ reference scip-java maven . . java/
 //            ^^^^ reference scip-java maven . . java/lang/
 //                 ^^^^^^^^^^ reference scip-java maven . . java/lang/annotation/
-//                            ^^^^^^ reference scip-java maven jdk 11 java/lang/annotation/Target#
+//                            ^^^^^^ reference scip-java maven jdk 17 java/lang/annotation/Target#
   
 //⌄ enclosing_range_start scip-java maven . . minimized/TypeAnnotation#
   @Target({ ElementType.TYPE_USE })
-// ^^^^^^ reference scip-java maven jdk 11 java/lang/annotation/Target#
-//          ^^^^^^^^^^^ reference scip-java maven jdk 11 java/lang/annotation/ElementType#
-//                      ^^^^^^^^ reference scip-java maven jdk 11 java/lang/annotation/ElementType#TYPE_USE.
+// ^^^^^^ reference scip-java maven jdk 17 java/lang/annotation/Target#
+//          ^^^^^^^^^^^ reference scip-java maven jdk 17 java/lang/annotation/ElementType#
+//                      ^^^^^^^^ reference scip-java maven jdk 17 java/lang/annotation/ElementType#TYPE_USE.
   @interface TypeAnnotation {
 //           ^^^^^^^^^^^^^^ definition scip-java maven . . minimized/TypeAnnotation#
 //                          kind Interface
@@ -23,7 +23,7 @@
 //                          signature_documentation
 //                          > @Target({ElementType.TYPE_USE})
 //                          > @interface TypeAnnotation
-//                          relationship scip-java maven jdk 11 java/lang/annotation/Annotation# implementation
+//                          relationship scip-java maven jdk 17 java/lang/annotation/Annotation# implementation
 //    ⌄ enclosing_range_start scip-java maven . . minimized/TypeAnnotation#integer().
       int integer() default 1;
 //        ^^^^^^^ definition scip-java maven . . minimized/TypeAnnotation#integer().
@@ -50,7 +50,7 @@
 //                                                      signature_documentation
 //                                                      > T extends Number
 //                      ^^^^^^^^^^^^^^ reference scip-java maven . . minimized/TypeAnnotation#
-//                                               ^^^^^^ reference scip-java maven jdk 11 java/lang/Number#
+//                                               ^^^^^^ reference scip-java maven jdk 17 java/lang/Number#
   
 //    ⌄ enclosing_range_start scip-java maven . . minimized/ClassProcessed#`<init>`().
       public ClassProcessed() {
@@ -61,15 +61,15 @@
 //                          > public ClassProcessed()
 //        ⌄ enclosing_range_start local 0
           String s = new @TypeAnnotation String();
-//        ^^^^^^ reference scip-java maven jdk 11 java/lang/String#
+//        ^^^^^^ reference scip-java maven jdk 17 java/lang/String#
 //               ^ definition local 0
 //                 kind Variable
 //                 display_name s
 //                 signature_documentation
 //                 > String s
 //                        ^^^^^^^^^^^^^^ reference scip-java maven . . minimized/TypeAnnotation#
-//                                       ^^^^^^ reference scip-java maven jdk 11 java/lang/String#`<init>`().
-//                                       ^^^^^^ reference scip-java maven jdk 11 java/lang/String#
+//                                       ^^^^^^ reference scip-java maven jdk 17 java/lang/String#`<init>`().
+//                                       ^^^^^^ reference scip-java maven jdk 17 java/lang/String#
 //                                               ⌃ enclosing_range_end local 0
       }
 //    ⌃ enclosing_range_end scip-java maven . . minimized/ClassProcessed#`<init>`().

@@ -14,7 +14,7 @@
 //                    > public Arrays()
 //  ⌄ enclosing_range_start scip-java maven . . minimized/Arrays#app().
     public static String app() {
-//                ^^^^^^ reference scip-java maven jdk 11 java/lang/String#
+//                ^^^^^^ reference scip-java maven jdk 17 java/lang/String#
 //                       ^^^ definition scip-java maven . . minimized/Arrays#app().
 //                           kind StaticMethod
 //                           display_name app
@@ -30,7 +30,7 @@
 //                       ⌃ enclosing_range_end local 0
 //    ⌄ enclosing_range_start local 1
       String[] b = {"1", "2", "3"};
-//    ^^^^^^ reference scip-java maven jdk 11 java/lang/String#
+//    ^^^^^^ reference scip-java maven jdk 17 java/lang/String#
 //             ^ definition local 1
 //               kind Variable
 //               display_name b
@@ -47,7 +47,7 @@
 //                               ⌃ enclosing_range_end local 2
 //    ⌄ enclosing_range_start local 3
       String[][] d = {{"1"}, {"2"}, {"3"}};
-//    ^^^^^^ reference scip-java maven jdk 11 java/lang/String#
+//    ^^^^^^ reference scip-java maven jdk 17 java/lang/String#
 //               ^ definition local 3
 //                 kind Variable
 //                 display_name d

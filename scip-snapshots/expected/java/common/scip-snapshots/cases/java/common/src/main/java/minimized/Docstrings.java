@@ -79,15 +79,15 @@
   
 //  ⌄ enclosing_range_start scip-java maven . . minimized/Docstrings#app().
     public static String app() {
-//                ^^^^^^ reference scip-java maven jdk 11 java/lang/String#
+//                ^^^^^^ reference scip-java maven jdk 17 java/lang/String#
 //                       ^^^ definition scip-java maven . . minimized/Docstrings#app().
 //                           kind StaticMethod
 //                           display_name app
 //                           signature_documentation
 //                           > public static String app()
       return String.format("%s%s%s", field, method(), methodParameter(42));
-//           ^^^^^^ reference scip-java maven jdk 11 java/lang/String#
-//                  ^^^^^^ reference scip-java maven jdk 11 java/lang/String#format().
+//           ^^^^^^ reference scip-java maven jdk 17 java/lang/String#
+//                  ^^^^^^ reference scip-java maven jdk 17 java/lang/String#format().
 //                                   ^^^^^ reference scip-java maven . . minimized/Docstrings#field.
 //                                          ^^^^^^ reference scip-java maven . . minimized/Docstrings#method().
 //                                                    ^^^^^^^^^^^^^^^ reference scip-java maven . . minimized/Docstrings#methodParameter().

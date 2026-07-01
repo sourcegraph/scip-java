@@ -19,7 +19,7 @@
   
 //  ⌄ enclosing_range_start scip-java maven . . minimized/InnerClasses#STRING.
     private static final String STRING = "asdf";
-//                       ^^^^^^ reference scip-java maven jdk 11 java/lang/String#
+//                       ^^^^^^ reference scip-java maven jdk 17 java/lang/String#
 //                              ^^^^^^ definition scip-java maven . . minimized/InnerClasses#STRING.
 //                                     kind StaticField
 //                                     display_name STRING
@@ -70,9 +70,10 @@
 //                        display_name InnerEnum
 //                        signature_documentation
 //                        > public enum InnerEnum
-//                        relationship scip-java maven jdk 11 java/io/Serializable# implementation
-//                        relationship scip-java maven jdk 11 java/lang/Comparable# implementation
-//                        relationship scip-java maven jdk 11 java/lang/Enum# implementation
+//                        relationship scip-java maven jdk 17 java/io/Serializable# implementation
+//                        relationship scip-java maven jdk 17 java/lang/Comparable# implementation
+//                        relationship scip-java maven jdk 17 java/lang/Enum# implementation
+//                        relationship scip-java maven jdk 17 java/lang/constant/Constable# implementation
 //              ^^^^^^^^^ definition scip-java maven . . minimized/InnerClasses#InnerEnum#`<init>`().
 //                        kind Constructor
 //                        display_name <init>
@@ -153,7 +154,7 @@
 //                                    display_name InnerAnnotation
 //                                    signature_documentation
 //                                    > public @interface InnerAnnotation
-//                                    relationship scip-java maven jdk 11 java/lang/annotation/Annotation# implementation
+//                                    relationship scip-java maven jdk 17 java/lang/annotation/Annotation# implementation
 //    ⌄ enclosing_range_start scip-java maven . . minimized/InnerClasses#InnerAnnotation#value().
       int value();
 //        ^^^^^ definition scip-java maven . . minimized/InnerClasses#InnerAnnotation#value().
@@ -167,7 +168,7 @@
   
 //  ⌄ enclosing_range_start scip-java maven . . minimized/InnerClasses#InnerStaticClass#
     @SuppressWarnings(STRING + " ")
-//   ^^^^^^^^^^^^^^^^ reference scip-java maven jdk 11 java/lang/SuppressWarnings#
+//   ^^^^^^^^^^^^^^^^ reference scip-java maven jdk 17 java/lang/SuppressWarnings#
 //                    ^^^^^^ reference scip-java maven . . minimized/InnerClasses#STRING.
     @InnerAnnotation(top / bottom)
 //   ^^^^^^^^^^^^^^^ reference scip-java maven . . minimized/InnerClasses#InnerAnnotation#
@@ -207,8 +208,8 @@
 //                          > public class InnerClass implements InnerInterface<Integer, Integer>
 //                          relationship scip-java maven . . minimized/InnerClasses#InnerInterface# implementation
 //                                     ^^^^^^^^^^^^^^ reference scip-java maven . . minimized/InnerClasses#InnerInterface#
-//                                                    ^^^^^^^ reference scip-java maven jdk 11 java/lang/Integer#
-//                                                             ^^^^^^^ reference scip-java maven jdk 11 java/lang/Integer#
+//                                                    ^^^^^^^ reference scip-java maven jdk 17 java/lang/Integer#
+//                                                             ^^^^^^^ reference scip-java maven jdk 17 java/lang/Integer#
 //    ⌄ enclosing_range_start scip-java maven . . minimized/InnerClasses#InnerClass#field.
       private final int field;
 //                      ^^^^^ definition scip-java maven . . minimized/InnerClasses#InnerClass#field.
@@ -245,9 +246,9 @@
 //                            signature_documentation
 //                            > public void innerMethod()
         System.out.println(field + exampleField);
-//      ^^^^^^ reference scip-java maven jdk 11 java/lang/System#
-//             ^^^ reference scip-java maven jdk 11 java/lang/System#out.
-//                 ^^^^^^^ reference scip-java maven jdk 11 java/io/PrintStream#println(+3).
+//      ^^^^^^ reference scip-java maven jdk 17 java/lang/System#
+//             ^^^ reference scip-java maven jdk 17 java/lang/System#out.
+//                 ^^^^^^^ reference scip-java maven jdk 17 java/io/PrintStream#println(+3).
 //                         ^^^^^ reference scip-java maven . . minimized/InnerClasses#InnerClass#field.
 //                                 ^^^^^^^^^^^^ reference scip-java maven . . minimized/InnerClasses#exampleField.
       }
@@ -255,10 +256,10 @@
   
 //    ⌄ enclosing_range_start scip-java maven . . minimized/InnerClasses#InnerClass#apply().
       @Override
-//     ^^^^^^^^ reference scip-java maven jdk 11 java/lang/Override#
+//     ^^^^^^^^ reference scip-java maven jdk 17 java/lang/Override#
 //                         ⌄ enclosing_range_start local 3
       public Integer apply(Integer integer) {
-//           ^^^^^^^ reference scip-java maven jdk 11 java/lang/Integer#
+//           ^^^^^^^ reference scip-java maven jdk 17 java/lang/Integer#
 //                   ^^^^^ definition scip-java maven . . minimized/InnerClasses#InnerClass#apply().
 //                         kind Method
 //                         display_name apply
@@ -266,7 +267,7 @@
 //                         > @Override
 //                         > public Integer apply(Integer integer)
 //                         relationship scip-java maven . . minimized/InnerClasses#InnerInterface#apply(). implementation reference
-//                         ^^^^^^^ reference scip-java maven jdk 11 java/lang/Integer#
+//                         ^^^^^^^ reference scip-java maven jdk 17 java/lang/Integer#
 //                                 ^^^^^^^ definition local 3
 //                                         display_name integer
 //                                         signature_documentation
@@ -340,10 +341,10 @@
 //                                                  > InnerEnum magicEnum
 //                                                ⌃ enclosing_range_end local 6
       if (System.nanoTime() > System.currentTimeMillis()) {
-//        ^^^^^^ reference scip-java maven jdk 11 java/lang/System#
-//               ^^^^^^^^ reference scip-java maven jdk 11 java/lang/System#nanoTime().
-//                            ^^^^^^ reference scip-java maven jdk 11 java/lang/System#
-//                                   ^^^^^^^^^^^^^^^^^ reference scip-java maven jdk 11 java/lang/System#currentTimeMillis().
+//        ^^^^^^ reference scip-java maven jdk 17 java/lang/System#
+//               ^^^^^^^^ reference scip-java maven jdk 17 java/lang/System#nanoTime().
+//                            ^^^^^^ reference scip-java maven jdk 17 java/lang/System#
+//                                   ^^^^^^^^^^^^^^^^^ reference scip-java maven jdk 17 java/lang/System#currentTimeMillis().
         magicEnum = InnerEnum.B;
 //      ^^^^^^^^^ reference local 6
 //                  ^^^^^^^^^ reference scip-java maven . . minimized/InnerClasses#InnerEnum#
@@ -354,16 +355,16 @@
         case B:
 //           ^ reference scip-java maven . . minimized/InnerClasses#InnerEnum#B.
           System.out.println("b");
-//        ^^^^^^ reference scip-java maven jdk 11 java/lang/System#
-//               ^^^ reference scip-java maven jdk 11 java/lang/System#out.
-//                   ^^^^^^^ reference scip-java maven jdk 11 java/io/PrintStream#println(+8).
+//        ^^^^^^ reference scip-java maven jdk 17 java/lang/System#
+//               ^^^ reference scip-java maven jdk 17 java/lang/System#out.
+//                   ^^^^^^^ reference scip-java maven jdk 17 java/io/PrintStream#println(+8).
           break;
         case A:
 //           ^ reference scip-java maven . . minimized/InnerClasses#InnerEnum#A.
           System.out.println("a");
-//        ^^^^^^ reference scip-java maven jdk 11 java/lang/System#
-//               ^^^ reference scip-java maven jdk 11 java/lang/System#out.
-//                   ^^^^^^^ reference scip-java maven jdk 11 java/io/PrintStream#println(+8).
+//        ^^^^^^ reference scip-java maven jdk 17 java/lang/System#
+//               ^^^ reference scip-java maven jdk 17 java/lang/System#out.
+//                   ^^^^^^^ reference scip-java maven jdk 17 java/io/PrintStream#println(+8).
           break;
         default:
           break;
@@ -372,20 +373,20 @@
 //        ^^^^^^^^^ reference local 6
 //                     ^^^^^^^^^ reference scip-java maven . . minimized/InnerClasses#InnerEnum#
 //                               ^ reference scip-java maven . . minimized/InnerClasses#InnerEnum#A.
-//                                  ^^^^^^ reference scip-java maven jdk 11 java/lang/System#
-//                                         ^^^ reference scip-java maven jdk 11 java/lang/System#out.
-//                                             ^^^^^^^ reference scip-java maven jdk 11 java/io/PrintStream#println(+8).
+//                                  ^^^^^^ reference scip-java maven jdk 17 java/lang/System#
+//                                         ^^^ reference scip-java maven jdk 17 java/lang/System#out.
+//                                             ^^^^^^^ reference scip-java maven jdk 17 java/io/PrintStream#println(+8).
       else if (magicEnum == InnerEnum.C) System.out.println("b");
 //             ^^^^^^^^^ reference local 6
 //                          ^^^^^^^^^ reference scip-java maven . . minimized/InnerClasses#InnerEnum#
 //                                    ^ reference scip-java maven . . minimized/InnerClasses#InnerEnum#C.
-//                                       ^^^^^^ reference scip-java maven jdk 11 java/lang/System#
-//                                              ^^^ reference scip-java maven jdk 11 java/lang/System#out.
-//                                                  ^^^^^^^ reference scip-java maven jdk 11 java/io/PrintStream#println(+8).
+//                                       ^^^^^^ reference scip-java maven jdk 17 java/lang/System#
+//                                              ^^^ reference scip-java maven jdk 17 java/lang/System#out.
+//                                                  ^^^^^^^ reference scip-java maven jdk 17 java/io/PrintStream#println(+8).
       else System.out.println("c");
-//         ^^^^^^ reference scip-java maven jdk 11 java/lang/System#
-//                ^^^ reference scip-java maven jdk 11 java/lang/System#out.
-//                    ^^^^^^^ reference scip-java maven jdk 11 java/io/PrintStream#println(+8).
+//         ^^^^^^ reference scip-java maven jdk 17 java/lang/System#
+//                ^^^ reference scip-java maven jdk 17 java/lang/System#out.
+//                    ^^^^^^^ reference scip-java maven jdk 17 java/io/PrintStream#println(+8).
     }
 //  ⌃ enclosing_range_end scip-java maven . . minimized/InnerClasses#testEnum().
   
@@ -399,8 +400,8 @@
 //    ⌄ enclosing_range_start local 7
       InnerInterface<String, String> fn =
 //    ^^^^^^^^^^^^^^ reference scip-java maven . . minimized/InnerClasses#InnerInterface#
-//                   ^^^^^^ reference scip-java maven jdk 11 java/lang/String#
-//                           ^^^^^^ reference scip-java maven jdk 11 java/lang/String#
+//                   ^^^^^^ reference scip-java maven jdk 17 java/lang/String#
+//                           ^^^^^^ reference scip-java maven jdk 17 java/lang/String#
 //                                   ^^ definition local 7
 //                                      kind Variable
 //                                      display_name fn
@@ -408,14 +409,14 @@
 //                                      > InnerInterface<String, String> fn
           new InnerInterface<String, String>() {
 //            ^^^^^^^^^^^^^^ reference scip-java maven . . minimized/InnerClasses#InnerInterface#
-//                           ^^^^^^ reference scip-java maven jdk 11 java/lang/String#
-//                                   ^^^^^^ reference scip-java maven jdk 11 java/lang/String#
+//                           ^^^^^^ reference scip-java maven jdk 17 java/lang/String#
+//                                   ^^^^^^ reference scip-java maven jdk 17 java/lang/String#
 //          ⌄ enclosing_range_start local 9
             @Override
-//           ^^^^^^^^ reference scip-java maven jdk 11 java/lang/Override#
+//           ^^^^^^^^ reference scip-java maven jdk 17 java/lang/Override#
 //                              ⌄ enclosing_range_start local 10
             public String apply(String s) {
-//                 ^^^^^^ reference scip-java maven jdk 11 java/lang/String#
+//                 ^^^^^^ reference scip-java maven jdk 17 java/lang/String#
 //                        ^^^^^ definition local 9
 //                              kind Method
 //                              display_name apply
@@ -423,7 +424,7 @@
 //                              > @Override
 //                              > public String apply(String s)
 //                              relationship scip-java maven . . minimized/InnerClasses#InnerInterface#apply(). implementation reference
-//                              ^^^^^^ reference scip-java maven jdk 11 java/lang/String#
+//                              ^^^^^^ reference scip-java maven jdk 17 java/lang/String#
 //                                     ^ definition local 10
 //                                       display_name s
 //                                       signature_documentation
@@ -436,9 +437,9 @@
           };
 //         ⌃ enclosing_range_end local 7
       System.out.println(fn.apply("a"));
-//    ^^^^^^ reference scip-java maven jdk 11 java/lang/System#
-//           ^^^ reference scip-java maven jdk 11 java/lang/System#out.
-//               ^^^^^^^ reference scip-java maven jdk 11 java/io/PrintStream#println(+8).
+//    ^^^^^^ reference scip-java maven jdk 17 java/lang/System#
+//           ^^^ reference scip-java maven jdk 17 java/lang/System#out.
+//               ^^^^^^^ reference scip-java maven jdk 17 java/io/PrintStream#println(+8).
 //                       ^^ reference local 7
 //                          ^^^^^ reference scip-java maven . . minimized/InnerClasses#InnerInterface#apply().
     }
@@ -446,7 +447,7 @@
   
 //  ⌄ enclosing_range_start scip-java maven . . minimized/InnerClasses#app().
     public static String app() {
-//                ^^^^^^ reference scip-java maven jdk 11 java/lang/String#
+//                ^^^^^^ reference scip-java maven jdk 17 java/lang/String#
 //                       ^^^ definition scip-java maven . . minimized/InnerClasses#app().
 //                           kind StaticMethod
 //                           display_name app
@@ -490,9 +491,9 @@
 //    ^^^^^^^^^^ reference local 13
 //               ^^^^^^^^^^^ reference scip-java maven . . minimized/InnerClasses#InnerClass#innerMethod().
       System.out.println(runInnerInterface(innerClass, a));
-//    ^^^^^^ reference scip-java maven jdk 11 java/lang/System#
-//           ^^^ reference scip-java maven jdk 11 java/lang/System#out.
-//               ^^^^^^^ reference scip-java maven jdk 11 java/io/PrintStream#println(+9).
+//    ^^^^^^ reference scip-java maven jdk 17 java/lang/System#
+//           ^^^ reference scip-java maven jdk 17 java/lang/System#out.
+//               ^^^^^^^ reference scip-java maven jdk 17 java/io/PrintStream#println(+9).
 //                       ^^^^^^^^^^^^^^^^^ reference scip-java maven . . minimized/InnerClasses#runInnerInterface().
 //                                         ^^^^^^^^^^ reference local 13
 //                                                     ^ reference local 11

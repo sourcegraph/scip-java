@@ -3,19 +3,19 @@
   import java.util.HashMap;
 //       ^^^^ reference scip-java maven . . java/
 //            ^^^^ reference scip-java maven . . java/util/
-//                 ^^^^^^^ reference scip-java maven jdk 11 java/util/HashMap#
+//                 ^^^^^^^ reference scip-java maven jdk 17 java/util/HashMap#
   import java.util.Iterator;
 //       ^^^^ reference scip-java maven . . java/
 //            ^^^^ reference scip-java maven . . java/util/
-//                 ^^^^^^^^ reference scip-java maven jdk 11 java/util/Iterator#
+//                 ^^^^^^^^ reference scip-java maven jdk 17 java/util/Iterator#
   import java.util.List;
 //       ^^^^ reference scip-java maven . . java/
 //            ^^^^ reference scip-java maven . . java/util/
-//                 ^^^^ reference scip-java maven jdk 11 java/util/List#
+//                 ^^^^ reference scip-java maven jdk 17 java/util/List#
   import java.util.Map;
 //       ^^^^ reference scip-java maven . . java/
 //            ^^^^ reference scip-java maven . . java/util/
-//                 ^^^ reference scip-java maven jdk 11 java/util/Map#
+//                 ^^^ reference scip-java maven jdk 17 java/util/Map#
   
 //⌄ enclosing_range_start scip-java maven . . minimized/ParameterizedTypes#
 //⌄ enclosing_range_start scip-java maven . . minimized/ParameterizedTypes#[A]
@@ -41,7 +41,7 @@
 //                                     display_name B
 //                                     signature_documentation
 //                                     > B extends String
-//                                             ^^^^^^ reference scip-java maven jdk 11 java/lang/String#
+//                                             ^^^^^^ reference scip-java maven jdk 17 java/lang/String#
 //  ⌄ enclosing_range_start scip-java maven . . minimized/ParameterizedTypes#iteratorable().[T]
 //  ⌄ enclosing_range_start scip-java maven . . minimized/ParameterizedTypes#iteratorable().
 //                                                                 ⌄ enclosing_range_start local 0
@@ -51,16 +51,16 @@
 //            display_name T
 //            signature_documentation
 //            > T extends Iterable<A> & Iterator<B>
-//                    ^^^^^^^^ reference scip-java maven jdk 11 java/lang/Iterable#
+//                    ^^^^^^^^ reference scip-java maven jdk 17 java/lang/Iterable#
 //                             ^ reference scip-java maven . . minimized/ParameterizedTypes#[A]
-//                                  ^^^^^^^^ reference scip-java maven jdk 11 java/util/Iterator#
+//                                  ^^^^^^^^ reference scip-java maven jdk 17 java/util/Iterator#
 //                                           ^ reference scip-java maven . . minimized/ParameterizedTypes#[B]
 //                                                    ^^^^^^^^^^^^ definition scip-java maven . . minimized/ParameterizedTypes#iteratorable().
 //                                                                 kind Method
 //                                                                 display_name iteratorable
 //                                                                 signature_documentation
 //                                                                 > public <T extends Iterable<A> & Iterator<B>> void iteratorable(List<T> list)
-//                                                                 ^^^^ reference scip-java maven jdk 11 java/util/List#
+//                                                                 ^^^^ reference scip-java maven jdk 17 java/util/List#
 //                                                                      ^ reference scip-java maven . . minimized/ParameterizedTypes#iteratorable().[T]
 //                                                                         ^^^^ definition local 0
 //                                                                              display_name list
@@ -74,7 +74,7 @@
 //                    ⌄ enclosing_range_start local 1
 //                         ⌄ enclosing_range_start local 2
     public String app(A a, B b) {
-//         ^^^^^^ reference scip-java maven jdk 11 java/lang/String#
+//         ^^^^^^ reference scip-java maven jdk 17 java/lang/String#
 //                ^^^ definition scip-java maven . . minimized/ParameterizedTypes#app().
 //                    kind Method
 //                    display_name app
@@ -94,15 +94,15 @@
 //                           ⌃ enclosing_range_end local 2
       return a.toString() + b;
 //           ^ reference local 1
-//             ^^^^^^^^ reference scip-java maven jdk 11 java/lang/Object#toString().
+//             ^^^^^^^^ reference scip-java maven jdk 17 java/lang/Object#toString().
 //                          ^ reference local 2
     }
 //  ⌃ enclosing_range_end scip-java maven . . minimized/ParameterizedTypes#app().
   
 //  ⌄ enclosing_range_start scip-java maven . . minimized/ParameterizedTypes#doStuff().
     public Map<? extends String, ?> doStuff() { return null; }
-//         ^^^ reference scip-java maven jdk 11 java/util/Map#
-//                       ^^^^^^ reference scip-java maven jdk 11 java/lang/String#
+//         ^^^ reference scip-java maven jdk 17 java/util/Map#
+//                       ^^^^^^ reference scip-java maven jdk 17 java/lang/String#
 //                                  ^^^^^^^ definition scip-java maven . . minimized/ParameterizedTypes#doStuff().
 //                                          kind Method
 //                                          display_name doStuff
@@ -113,9 +113,9 @@
 //  ⌄ enclosing_range_start scip-java maven . . minimized/ParameterizedTypes#createQuadruplet().
     public Quadruplet<String, ?, Object, ? super Integer> createQuadruplet() { return null; }
 //         ^^^^^^^^^^ reference scip-java maven . . minimized/ParameterizedTypes#Quadruplet#
-//                    ^^^^^^ reference scip-java maven jdk 11 java/lang/String#
-//                               ^^^^^^ reference scip-java maven jdk 11 java/lang/Object#
-//                                               ^^^^^^^ reference scip-java maven jdk 11 java/lang/Integer#
+//                    ^^^^^^ reference scip-java maven jdk 17 java/lang/String#
+//                               ^^^^^^ reference scip-java maven jdk 17 java/lang/Object#
+//                                               ^^^^^^^ reference scip-java maven jdk 17 java/lang/Integer#
 //                                                        ^^^^^^^^^^^^^^^^ definition scip-java maven . . minimized/ParameterizedTypes#createQuadruplet().
 //                                                                         kind Method
 //                                                                         display_name createQuadruplet

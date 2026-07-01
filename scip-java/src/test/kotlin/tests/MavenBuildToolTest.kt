@@ -14,9 +14,9 @@ class MavenBuildToolTest : BuildToolHarness() {
                 expectedScipFiles = 2,
                 expectedPackages =
                     """
-                    |maven:com.sourcegraph:example:1.0-SNAPSHOT
                     |maven:junit:junit:4.11
                     |maven:org.hamcrest:hamcrest-core:1.3
+                    |maven:org.scip-code:example:1.0-SNAPSHOT
                     |"""
                         .trimMargin(),
             ),

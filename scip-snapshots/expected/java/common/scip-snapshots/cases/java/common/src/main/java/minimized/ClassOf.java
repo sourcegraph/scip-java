@@ -14,7 +14,7 @@
 //                     > public ClassOf()
 //  ⌄ enclosing_range_start scip-java maven . . minimized/ClassOf#app().
     public static String app() {
-//                ^^^^^^ reference scip-java maven jdk 11 java/lang/String#
+//                ^^^^^^ reference scip-java maven jdk 17 java/lang/String#
 //                       ^^^ definition scip-java maven . . minimized/ClassOf#app().
 //                           kind StaticMethod
 //                           display_name app
@@ -23,7 +23,7 @@
       return ClassOf.class.getName();
 //           ^^^^^^^ reference scip-java maven . . minimized/ClassOf#
 //                   ^^^^^ reference scip-java maven . . minimized/ClassOf#class.
-//                         ^^^^^^^ reference scip-java maven jdk 11 java/lang/Class#getName().
+//                         ^^^^^^^ reference scip-java maven jdk 17 java/lang/Class#getName().
     }
 //  ⌃ enclosing_range_end scip-java maven . . minimized/ClassOf#app().
   }

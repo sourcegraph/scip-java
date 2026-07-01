@@ -79,3 +79,5 @@ scip-snapshots/META-INF/
 # writes META-INF/scip/sources/Test.kt.scip relative to the test
 # cwd.
 scip-kotlinc/META-INF/
+
+/.kotlin/

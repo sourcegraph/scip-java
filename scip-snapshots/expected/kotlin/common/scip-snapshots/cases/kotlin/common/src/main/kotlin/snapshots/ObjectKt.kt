@@ -4,7 +4,7 @@
   import java.lang.RuntimeException
 //       ^^^^ reference scip-java maven . . java/
 //            ^^^^ reference scip-java maven . . java/lang/
-//                 ^^^^^^^^^^^^^^^^ reference scip-java maven jdk 11 java/lang/RuntimeException#
+//                 ^^^^^^^^^^^^^^^^ reference scip-java maven jdk 17 java/lang/RuntimeException#
   
 //⌄ enclosing_range_start scip-java maven . . snapshots/ObjectKt#
 //⌄ enclosing_range_start scip-java maven . . snapshots/ObjectKt#`<init>`().
@@ -32,7 +32,7 @@
 //                              ^^^^^^^ reference scip-java maven . . kotlin/Nothing#
 //                          ⌃ enclosing_range_end scip-java maven . . snapshots/ObjectKt#fail().(message)
       throw RuntimeException(message)
-//          ^^^^^^^^^^^^^^^^ reference scip-java maven jdk 11 java/lang/RuntimeException#`<init>`().
+//          ^^^^^^^^^^^^^^^^ reference scip-java maven jdk 17 java/lang/RuntimeException#`<init>`().
 //                           ^^^^^^^ reference scip-java maven . . snapshots/ObjectKt#fail().(message)
     }
 //  ⌃ enclosing_range_end scip-java maven . . snapshots/ObjectKt#fail().

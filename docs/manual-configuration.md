@@ -1,7 +1,4 @@
----
-id: manual-configuration
-title: Manual configuration
----
+# Manual configuration
 
 The `scip-java index` command does a best-effort to automatically index a given
 codebase. The automatic step may not always work. The purpose of this page is to
@@ -25,13 +22,13 @@ The second phase is quite simple to configure and it usually runs very fast.
 The SCIP compiler plugin is published to Maven Central as a
 zero-dependency Java library that you can install like any normal dependency.
 
-[![](https://img.shields.io/maven-central/v/com.sourcegraph/scip-javac)](https://repo1.maven.org/maven2/com/sourcegraph/scip-javac/)
+[![](https://img.shields.io/maven-central/v/org.scip-code/scip-javac)](https://repo1.maven.org/maven2/org/scip-code/scip-javac/)
 
 Use `curl` to download the compiler plugin jar file manually so that it can be
 added to the `javac -classpath` option.
 
 ```sh
-curl -Lo scip-javac.jar https://repo1.maven.org/maven2/com/sourcegraph/scip-javac/@STABLE_VERSION@/scip-javac-@STABLE_VERSION@.jar
+curl -Lo scip-javac.jar https://repo1.maven.org/maven2/org/scip-code/scip-javac/@STABLE_VERSION@/scip-javac-@STABLE_VERSION@.jar
 javac -classpath scip-javac.jar MyApplication.java
 ```
 
@@ -39,16 +36,16 @@ If you're using Gradle.
 
 ```groovy
 // Option 1: if you are not using annotation processors
-compileOnly 'com.sourcegraph:scip-javac:@STABLE_VERSION@'
+compileOnly 'org.scip-code:scip-javac:@STABLE_VERSION@'
 // Option 2: if you are using annotation processors
-annotationProcessor 'com.sourcegraph:scip-javac:@STABLE_VERSION@'
+annotationProcessor 'org.scip-code:scip-javac:@STABLE_VERSION@'
 ```
 
 If you're using Maven.
 
 ```xml
 <dependency>
-    <groupId>com.sourcegraph</groupId>
+    <groupId>org.scip-code</groupId>
     <artifactId>scip-javac</artifactId>
     <version>@STABLE_VERSION@</version>
 </dependency>
@@ -117,8 +114,8 @@ targetroot directory.
 
 ```
 ❯ find $TARGETROOT -type f
-build/scip-targetroot/META-INF/scip/j11/src/test/java/example/ExampleTest.java.scip
-build/scip-targetroot/META-INF/scip/j11/src/main/java/example/Example.java.scip
+build/scip-targetroot/META-INF/scip/j17/src/test/java/example/ExampleTest.java.scip
+build/scip-targetroot/META-INF/scip/j17/src/main/java/example/Example.java.scip
 ...
 ```
 
@@ -173,27 +170,27 @@ plugin that can dump the project's dependencies in a format that scip-java under
 You can either use it directly from commandline:
 
 ```
-$ mvn com.sourcegraph:scip-maven-plugin:@STABLE_VERSION@:sourcegraphDependencies
+$ mvn org.scip-code:scip-maven-plugin:@STABLE_VERSION@:dependencies
 ```
 
 Or add it to your build like any other maven plugin:
 
 ```xml
 <plugin>
-    <groupId>com.sourcegraph</groupId>
+    <groupId>org.scip-code</groupId>
     <artifactId>scip-maven-plugin</artifactId>
     <version>@STABLE_VERSION@</version>
     <executions>
         <execution>
             <goals>
-                <goal>sourcegraphDependencies</goal>
+                <goal>dependencies</goal>
             </goals>
         </execution>
     </executions>
 </plugin>
 ```
 
-Which allows you to invoke it by simply running `mvn sourcegraph:sourcegraphDependencies`.
+Which allows you to invoke it by simply running `mvn scip:dependencies`.
 
 Cross-repository navigation is a feature that allows "goto definition" and "find
 references" to show results from multiple repositories.
@@ -211,4 +208,3 @@ files into a single SCIP index.
 ❯ file index.scip
 index.scip: JSON data
 ```
-

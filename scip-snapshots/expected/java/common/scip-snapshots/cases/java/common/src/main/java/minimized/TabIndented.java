@@ -21,16 +21,16 @@
 //                  > public void app()
 //    ⌄ enclosing_range_start local 0
       Object o = new Object() {
-//    ^^^^^^ reference scip-java maven jdk 11 java/lang/Object#
+//    ^^^^^^ reference scip-java maven jdk 17 java/lang/Object#
 //           ^ definition local 0
 //             kind Variable
 //             display_name o
 //             signature_documentation
 //             > Object o
-//                   ^^^^^^ reference scip-java maven jdk 11 java/lang/Object#
+//                   ^^^^^^ reference scip-java maven jdk 17 java/lang/Object#
 //      ⌄ enclosing_range_start local 2
         @Override
-//       ^^^^^^^^ reference scip-java maven jdk 11 java/lang/Override#
+//       ^^^^^^^^ reference scip-java maven jdk 17 java/lang/Override#
 //                            ⌄ enclosing_range_start local 3
         public boolean equals(Object other) {
 //                     ^^^^^^ definition local 2
@@ -39,8 +39,8 @@
 //                            signature_documentation
 //                            > @Override
 //                            > public boolean equals(Object other)
-//                            relationship scip-java maven jdk 11 java/lang/Object#equals(). implementation reference
-//                            ^^^^^^ reference scip-java maven jdk 11 java/lang/Object#
+//                            relationship scip-java maven jdk 17 java/lang/Object#equals(). implementation reference
+//                            ^^^^^^ reference scip-java maven jdk 17 java/lang/Object#
 //                                   ^^^^^ definition local 3
 //                                         display_name other
 //                                         signature_documentation
@@ -52,7 +52,7 @@
   
 //      ⌄ enclosing_range_start local 4
         @Override
-//       ^^^^^^^^ reference scip-java maven jdk 11 java/lang/Override#
+//       ^^^^^^^^ reference scip-java maven jdk 17 java/lang/Override#
         public int hashCode() {
 //                 ^^^^^^^^ definition local 4
 //                          kind Method
@@ -60,25 +60,25 @@
 //                          signature_documentation
 //                          > @Override
 //                          > public int hashCode()
-//                          relationship scip-java maven jdk 11 java/lang/Object#hashCode(). implementation reference
+//                          relationship scip-java maven jdk 17 java/lang/Object#hashCode(). implementation reference
           return System.identityHashCode(this);
-//               ^^^^^^ reference scip-java maven jdk 11 java/lang/System#
-//                      ^^^^^^^^^^^^^^^^ reference scip-java maven jdk 11 java/lang/System#identityHashCode().
+//               ^^^^^^ reference scip-java maven jdk 17 java/lang/System#
+//                      ^^^^^^^^^^^^^^^^ reference scip-java maven jdk 17 java/lang/System#identityHashCode().
         }
 //      ⌃ enclosing_range_end local 4
   
 //      ⌄ enclosing_range_start local 5
         @Override
-//       ^^^^^^^^ reference scip-java maven jdk 11 java/lang/Override#
+//       ^^^^^^^^ reference scip-java maven jdk 17 java/lang/Override#
         public String toString() {
-//             ^^^^^^ reference scip-java maven jdk 11 java/lang/String#
+//             ^^^^^^ reference scip-java maven jdk 17 java/lang/String#
 //                    ^^^^^^^^ definition local 5
 //                             kind Method
 //                             display_name toString
 //                             signature_documentation
 //                             > @Override
 //                             > public String toString()
-//                             relationship scip-java maven jdk 11 java/lang/Object#toString(). implementation reference
+//                             relationship scip-java maven jdk 17 java/lang/Object#toString(). implementation reference
           return "";
         }
 //      ⌃ enclosing_range_end local 5

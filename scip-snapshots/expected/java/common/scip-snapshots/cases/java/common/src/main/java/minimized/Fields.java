@@ -118,7 +118,7 @@
   
 //  ⌄ enclosing_range_start scip-java maven . . minimized/Fields#app().
     public static String app() {
-//                ^^^^^^ reference scip-java maven jdk 11 java/lang/String#
+//                ^^^^^^ reference scip-java maven jdk 17 java/lang/String#
 //                       ^^^ definition scip-java maven . . minimized/Fields#app().
 //                           kind StaticMethod
 //                           display_name app
@@ -156,8 +156,8 @@
 //                                              ^^^^^^^^^^^^^^^^^ reference scip-java maven . . minimized/Fields#InnerStaticFields#`<init>`().
 //                                                                 ⌃ enclosing_range_end local 2
       return String.valueOf(fields.privateField)
-//           ^^^^^^ reference scip-java maven jdk 11 java/lang/String#
-//                  ^^^^^^^ reference scip-java maven jdk 11 java/lang/String#valueOf(+5).
+//           ^^^^^^ reference scip-java maven jdk 17 java/lang/String#
+//                  ^^^^^^^ reference scip-java maven jdk 17 java/lang/String#valueOf(+5).
 //                          ^^^^^^ reference local 0
 //                                 ^^^^^^^^^^^^ reference scip-java maven . . minimized/Fields#privateField.
           + fields.protectedField
