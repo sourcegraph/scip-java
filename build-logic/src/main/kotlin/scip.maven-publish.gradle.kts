@@ -21,8 +21,9 @@ extensions.configure<MavenPublishBaseExtension>("mavenPublishing") {
         }
         developers {
             developer {
-                id.set("scip-code")
-                name.set("SCIP Code")
+                name.set("SCIP Maintainers")
+                organization.set("scip-code")
+                organizationUrl.set("https://github.com/scip-code")
             }
         }
         scm {
