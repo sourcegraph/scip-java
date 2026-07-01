@@ -7,7 +7,7 @@ This directory contains end-to-end snapshot fixtures for `scip-javac`,
 
 ```text
 cases/
-  java/common/      Java fixtures compiled with `--release 11`.
+  java/common/      Java fixtures compiled with `--release 17`.
   kotlin/common/    Kotlin fixtures, including Java interop consumers.
   mixed/            Reserved for first-class mixed-language integration cases.
 

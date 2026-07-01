@@ -8,19 +8,14 @@ public final class SaveSnapshots {
   private SaveSnapshots() {}
 
   public static void main(String[] args) {
-    // Keep regenerated goldens stable across JDK 11/17/21 by pinning the JDK version embedded in
-    // stdlib SCIP symbols. Matches the `-Dscip.jdk.version=11` set on the test JVM in Gradle.
-    System.setProperty("scip.jdk.version", "11");
+    // Each snapshot case pins the JDK version embedded in stdlib SCIP symbols,
+    // keeping regenerated goldens stable across the supported JDK matrix.
     MinimizedSnapshotScipGenerator generator = new MinimizedSnapshotScipGenerator();
     for (MinimizedSnapshotScipGenerator.SnapshotCase snapshotCase :
         MinimizedSnapshotScipGenerator.snapshotCases()) {
       SnapshotContext context = snapshotCase.context();
       SaveSnapshotHandler handler = new SaveSnapshotHandler();
-      generator.onTargetroot(
-          context,
-          handler,
-          snapshotCase.targetroot,
-          snapshotCase.aggregateNoEmitInverseRelationships);
+      generator.run(snapshotCase, handler);
       handler.onFinished(context);
     }
   }

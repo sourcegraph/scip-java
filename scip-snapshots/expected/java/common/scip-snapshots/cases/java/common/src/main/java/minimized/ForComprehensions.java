@@ -3,11 +3,11 @@
   import java.util.Collections;
 //       ^^^^ reference scip-java maven . . java/
 //            ^^^^ reference scip-java maven . . java/util/
-//                 ^^^^^^^^^^^ reference scip-java maven jdk 11 java/util/Collections#
+//                 ^^^^^^^^^^^ reference scip-java maven jdk 17 java/util/Collections#
   import java.util.List;
 //       ^^^^ reference scip-java maven . . java/
 //            ^^^^ reference scip-java maven . . java/util/
-//                 ^^^^ reference scip-java maven jdk 11 java/util/List#
+//                 ^^^^ reference scip-java maven jdk 17 java/util/List#
   
 //⌄ enclosing_range_start scip-java maven . . minimized/ForComprehensions#
   public class ForComprehensions {
@@ -36,15 +36,15 @@
 //                            ⌃ enclosing_range_end local 0
 //    ⌄ enclosing_range_start local 1
       List<Integer> integers = Collections.singletonList(n);
-//    ^^^^ reference scip-java maven jdk 11 java/util/List#
-//         ^^^^^^^ reference scip-java maven jdk 11 java/lang/Integer#
+//    ^^^^ reference scip-java maven jdk 17 java/util/List#
+//         ^^^^^^^ reference scip-java maven jdk 17 java/lang/Integer#
 //                  ^^^^^^^^ definition local 1
 //                           kind Variable
 //                           display_name integers
 //                           signature_documentation
 //                           > List<Integer> integers
-//                             ^^^^^^^^^^^ reference scip-java maven jdk 11 java/util/Collections#
-//                                         ^^^^^^^^^^^^^ reference scip-java maven jdk 11 java/util/Collections#singletonList().
+//                             ^^^^^^^^^^^ reference scip-java maven jdk 17 java/util/Collections#
+//                                         ^^^^^^^^^^^^^ reference scip-java maven jdk 17 java/util/Collections#singletonList().
 //                                                       ^ reference local 0
 //                                                         ⌃ enclosing_range_end local 1
 //    ⌄ enclosing_range_start local 2

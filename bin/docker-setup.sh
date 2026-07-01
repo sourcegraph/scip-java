@@ -10,13 +10,13 @@ unzip -d /opt/maven maven.zip
 rm maven.zip
 mv /opt/maven/*/* /opt/maven
 
-curl -fLo gradle.zip https://services.gradle.org/distributions/gradle-8.14.4-bin.zip
+curl -fLo gradle.zip https://services.gradle.org/distributions/gradle-9.4.1-bin.zip
 unzip -d /opt/gradle gradle.zip 
 rm gradle.zip
 mv /opt/gradle/*/* /opt/gradle
 
-# pre-install JDK for all major versions
-for JVM_VERSION in 21 17 11
+# pre-install JDK for all supported major versions
+for JVM_VERSION in 25 21 17
 do 
   coursier java --jvm $JVM_VERSION --jvm-index https://github.com/coursier/jvm-index/blob/master/index.json -- -version
 done

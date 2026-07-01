@@ -29,13 +29,13 @@
 //                        signature_documentation
 //                        > public static int app()
       return "".lastIndexOf('a')
-//              ^^^^^^^^^^^ reference scip-java maven jdk 11 java/lang/String#lastIndexOf().
+//              ^^^^^^^^^^^ reference scip-java maven jdk 17 java/lang/String#lastIndexOf().
           + "".lastIndexOf('b', 0)
-//             ^^^^^^^^^^^ reference scip-java maven jdk 11 java/lang/String#lastIndexOf(+1).
+//             ^^^^^^^^^^^ reference scip-java maven jdk 17 java/lang/String#lastIndexOf(+1).
           + "".lastIndexOf("c")
-//             ^^^^^^^^^^^ reference scip-java maven jdk 11 java/lang/String#lastIndexOf(+2).
+//             ^^^^^^^^^^^ reference scip-java maven jdk 17 java/lang/String#lastIndexOf(+2).
           + "".lastIndexOf("d", 0);
-//             ^^^^^^^^^^^ reference scip-java maven jdk 11 java/lang/String#lastIndexOf(+3).
+//             ^^^^^^^^^^^ reference scip-java maven jdk 17 java/lang/String#lastIndexOf(+3).
     }
 //  ⌃ enclosing_range_end scip-java maven . . minimized/OverloadResolution#app().
   }

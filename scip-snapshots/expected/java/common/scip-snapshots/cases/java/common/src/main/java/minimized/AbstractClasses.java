@@ -14,7 +14,7 @@
 //                                      > public AbstractClasses()
 //  ⌄ enclosing_range_start scip-java maven . . minimized/AbstractClasses#defaultImplementation().
     public String defaultImplementation() {
-//         ^^^^^^ reference scip-java maven jdk 11 java/lang/String#
+//         ^^^^^^ reference scip-java maven jdk 17 java/lang/String#
 //                ^^^^^^^^^^^^^^^^^^^^^ definition scip-java maven . . minimized/AbstractClasses#defaultImplementation().
 //                                      kind Method
 //                                      display_name defaultImplementation
@@ -26,7 +26,7 @@
   
 //  ⌄ enclosing_range_start scip-java maven . . minimized/AbstractClasses#abstractImplementation().
     public abstract String abstractImplementation();
-//                  ^^^^^^ reference scip-java maven jdk 11 java/lang/String#
+//                  ^^^^^^ reference scip-java maven jdk 17 java/lang/String#
 //                         ^^^^^^^^^^^^^^^^^^^^^^ definition scip-java maven . . minimized/AbstractClasses#abstractImplementation().
 //                                                kind AbstractMethod
 //                                                display_name abstractImplementation

@@ -37,7 +37,7 @@ jobs:
           cd "$OUT_DIR"
 
           VERSION=${VERSION#v}
-          ARTIFACT="com.sourcegraph:scip-java:${VERSION}"
+          ARTIFACT="org.scip-code:scip-java:${VERSION}"
 
           for attempt in {1..10}; do
             if cs resolve "$ARTIFACT" >/dev/null 2>&1; then
@@ -57,7 +57,7 @@ jobs:
             --bat=true \
             -o scip-java \
             "$ARTIFACT" \
-            --main com.sourcegraph.scip_java.ScipJava
+            --main org.scip_code.scip_java.ScipJava
 
           chmod +x scip-java
           ./scip-java --help >/dev/null
@@ -74,11 +74,11 @@ jobs:
         run: |
           set -euo pipefail
 
-          if gh release view "$TAG" --repo "sourcegraph/scip-java" >/dev/null 2>&1; then
+          if gh release view "$TAG" --repo "scip-code/scip-java" >/dev/null 2>&1; then
             echo "exists=true" >> "$GITHUB_OUTPUT"
           else
             echo "exists=false" >> "$GITHUB_OUTPUT"
-            echo "GitHub release $TAG does not exist in sourcegraph/scip-java; skipping asset upload."
+            echo "GitHub release $TAG does not exist in scip-code/scip-java; skipping asset upload."
           fi
 
       - name: Upload release assets
@@ -96,5 +96,5 @@ jobs:
             "scip-java-${TAG}" \
             "scip-java-${TAG}.bat" \
             "scip-java-${TAG}.sha256" \
-            --repo "sourcegraph/scip-java" \
+            --repo "scip-code/scip-java" \
             --clobber

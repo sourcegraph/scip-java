@@ -5,11 +5,11 @@ import java.nio.file.StandardOpenOption
 import org.junit.jupiter.api.DynamicTest
 import org.junit.jupiter.api.TestFactory
 
-private const val GRADLE_VERSION = "8.10"
+private const val GRADLE_VERSION = "9.1.0"
 
-// Gradle 8.10 runs on JDK 8 through 21.
+// Gradle 9.1.0 runs on JDK 17 through 25.
 // See https://docs.gradle.org/current/userguide/compatibility.html
-private const val GRADLE_MAX_JDK = 21
+private const val GRADLE_MAX_JDK = 25
 
 class GradleBuildToolTest : BuildToolHarness() {
 
@@ -63,20 +63,18 @@ class GradleBuildToolTest : BuildToolHarness() {
                 "publishing",
                 "gradle/publishing",
                 expectedScipFiles = 1,
-                expectedPackages = "maven:com.sourcegraph:example-library:1.1",
+                expectedPackages = "maven:org.scip-code:example-library:1.1",
             )
         )
         add(checkGradleBuild("basic", "gradle/basic", expectedScipFiles = 2))
-        for (java in listOf(11, 17, 21)) {
-            add(
-                checkGradleBuild(
-                    "toolchains-$java",
-                    "gradle/toolchains",
-                    expectedScipFiles = 1,
-                    substitutions = mapOf("@JAVA@" to "$java"),
-                )
+        add(
+            checkGradleBuild(
+                "toolchains",
+                "gradle/toolchains",
+                expectedScipFiles = 1,
+                substitutions = mapOf("@JAVA@" to "17"),
             )
-        }
+        )
         add(
             checkGradleBuild(
                 "protobuf-generator",
@@ -130,16 +128,14 @@ class GradleBuildToolTest : BuildToolHarness() {
                         .trimMargin(),
             )
         )
-        for (java in listOf(11, 17)) {
-            add(
-                checkGradleBuild(
-                    "kotlin-jvm-toolchains-jdk$java",
-                    "gradle/kotlin-jvm-toolchains",
-                    expectedScipFiles = 1,
-                    substitutions = mapOf("@JAVA@" to "$java"),
-                )
+        add(
+            checkGradleBuild(
+                "kotlin-jvm-toolchains-jdk17",
+                "gradle/kotlin-jvm-toolchains",
+                expectedScipFiles = 1,
+                substitutions = mapOf("@JAVA@" to "17"),
             )
-        }
+        )
         // Regression test: projects that lazily register custom source sets (e.g.
         // intTest) with a Java toolchain used to fail because the eager `.all {}`
         // API finalized the javaCompiler property before Gradle finished
