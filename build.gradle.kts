@@ -1,5 +1,7 @@
 plugins {
+    alias(libs.plugins.kotlin.jvm) apply false
     alias(libs.plugins.spotless)
+    alias(libs.plugins.vanniktech.maven.publish) apply false
 }
 
 tasks.register("saveSnapshots") {
