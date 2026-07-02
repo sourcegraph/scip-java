@@ -22,6 +22,13 @@ tasks.named<JavaCompile>("compileJava") {
     }
 }
 
+tasks.named<JavaCompile>("compileTestJava") {
+    // Tests use `@ClientCodeWrapper.Trusted` (an internal javac API) to construct file objects
+    // that mimic Bazel's compiler. `--add-exports` is incompatible with `--release`.
+    options.release.set(null as Int?)
+    options.compilerArgs.addAll(JavacInternals.jvmOptions(rootDir))
+}
+
 tasks.named<Test>("test") {
     jvmArgs(JavacInternals.jvmOptions(rootDir))
 }

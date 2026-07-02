@@ -177,15 +177,17 @@ public final class ScipTaskListener implements TaskListener {
   }
 
   // Infers the `-sourceroot:` flag from the provided file.
-  // FIXME: add unit tests https://github.com/scip-code/scip-java/issues/444
   private void inferBazelSourceroot(JavaFileObject file) {
     if (options.uriScheme != UriScheme.BAZEL || options.sourceroot != null) return;
-    Path absolutePath = absolutePathFromUri(options, file);
-    Path uriPath = Paths.get(file.toUri());
-    // absolutePath is the "human-readable" original path, e.g. /home/repo/com/example/Hello.java.
-    // uriPath is the sandbox/temporary file path, e.g. /private/var/tmp/com/example/Hello.java.
-    // Infer sourceroot by iterating the names of both files in reverse order and stopping at
-    // the first entry where the two paths differ.
+    options.sourceroot =
+        inferBazelSourceroot(absolutePathFromUri(options, file), Paths.get(file.toUri()));
+  }
+
+  // absolutePath is the "human-readable" original path, e.g. /home/repo/com/example/Hello.java.
+  // uriPath is the sandbox/temporary file path, e.g. /private/var/tmp/com/example/Hello.java.
+  // Infer sourceroot by iterating the names of both files in reverse order and stopping at
+  // the first entry where the two paths differ.
+  private static Path inferBazelSourceroot(Path absolutePath, Path uriPath) {
     int relativePathDepth = 0;
     int uriPathDepth = uriPath.getNameCount();
     int absolutePathDepth = absolutePath.getNameCount();
@@ -195,10 +197,15 @@ public final class ScipTaskListener implements TaskListener {
       if (!uriName.equals(pathName)) break;
       relativePathDepth++;
     }
-    options.sourceroot =
-        absolutePath
-            .getRoot()
-            .resolve(absolutePath.subpath(0, absolutePathDepth - relativePathDepth));
+    if (relativePathDepth == absolutePathDepth) {
+      // Every name of absolutePath is a suffix of uriPath (for example, when both paths are
+      // identical because the file object's toString() didn't match a known Bazel pattern).
+      // There is no prefix left to use as the sourceroot, so fall back to the filesystem root.
+      return absolutePath.getRoot();
+    }
+    return absolutePath
+        .getRoot()
+        .resolve(absolutePath.subpath(0, absolutePathDepth - relativePathDepth));
   }
 
   private Result<Path, String> scipShardOutputPath(TaskEvent e) {
