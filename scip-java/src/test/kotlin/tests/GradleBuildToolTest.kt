@@ -91,6 +91,12 @@ class GradleBuildToolTest : BuildToolHarness() {
             )
         )
         add(checkGradleBuild("basic", "gradle/basic", expectedScipFiles = 2))
+        // Regression test: FAIL_ON_PROJECT_REPOS rejects project-level
+        // repositories, so the plugin must not inject Maven Central/local.
+        // https://github.com/scip-code/scip-java/issues/847
+        add(
+            checkGradleBuild("centralized-repos", "gradle/centralized-repos", expectedScipFiles = 1)
+        )
         add(
             checkGradleBuild(
                 "toolchains",
