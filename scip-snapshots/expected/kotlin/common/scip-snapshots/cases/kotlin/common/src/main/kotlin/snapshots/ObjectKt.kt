@@ -28,7 +28,7 @@
 //                   display_name message
 //                   signature_documentation
 //                   > message: String?
-//                    ^^^^^^^ reference scip-java maven . . kotlin/String#
+//                    ^^^^^^ reference scip-java maven . . kotlin/String#
 //                              ^^^^^^^ reference scip-java maven . . kotlin/Nothing#
 //                          ⌃ enclosing_range_end scip-java maven . . snapshots/ObjectKt#fail().(message)
       throw RuntimeException(message)

@@ -7,7 +7,7 @@
 //      ^^^^^^^^^ definition scip-java maven . . snapshots/Overrides#
 //                display_name Overrides
 //                signature_documentation
-//                > public final class Overrides : {kotlin/AutoCloseable=} AutoCloseable
+//                > public final class Overrides : AutoCloseable
 //                relationship scip-java maven jdk 17 java/lang/AutoCloseable# implementation
 //      ^^^^^^^^^ definition scip-java maven . . snapshots/Overrides#`<init>`().
 //                display_name Overrides

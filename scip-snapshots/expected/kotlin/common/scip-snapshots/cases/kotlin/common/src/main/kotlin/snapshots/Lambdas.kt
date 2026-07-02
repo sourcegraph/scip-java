@@ -15,6 +15,7 @@
 //      signature_documentation
 //      > public get(): Unit
 //        ^^^^^^^^^^^ reference scip-java maven . . kotlin/collections/arrayListOf().
+//                    ^^^^^^ reference scip-java maven . . kotlin/String#
 //                              ^^^^^^^^^^^^^^ reference scip-java maven . . kotlin/collections/forEachIndexed(+9).
 //                                               ^ definition local 0
 //                                                 display_name i
