@@ -25,14 +25,11 @@ public class ScipGradlePlugin implements Plugin<Project> {
       project.getRepositories().add(project.getRepositories().mavenCentral());
       project.getRepositories().add(project.getRepositories().mavenLocal());
     } catch (InvalidUserCodeException exc) {
-      // The build declares repositories centrally in settings.gradle with
-      // RepositoriesMode.FAIL_ON_PROJECT_REPOS, which makes any project-level
-      // repository an error (issue #847). Repositories are guaranteed to be
-      // declared in settings in that mode, so the injection is unnecessary.
+      // FAIL_ON_PROJECT_REPOS forbids project repositories; they are declared
+      // in settings instead, so the injection isn't needed (issue #847).
       project
           .getLogger()
-          .info(
-              "scip-java: not injecting Maven Central/local repositories: " + exc.getMessage());
+          .info("scip-java: not injecting Maven Central/local repositories: " + exc.getMessage());
     }
 
     Map<String, Object> extraProperties =

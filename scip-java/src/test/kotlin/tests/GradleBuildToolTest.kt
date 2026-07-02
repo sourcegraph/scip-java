@@ -91,17 +91,11 @@ class GradleBuildToolTest : BuildToolHarness() {
             )
         )
         add(checkGradleBuild("basic", "gradle/basic", expectedScipFiles = 2))
-        // Regression test: builds that centralize repository declarations in
-        // settings.gradle with RepositoriesMode.FAIL_ON_PROJECT_REPOS reject any
-        // project-level repository, so the plugin must not inject Maven
-        // Central/local into the project.
+        // Regression test: FAIL_ON_PROJECT_REPOS rejects project-level
+        // repositories, so the plugin must not inject Maven Central/local.
         // https://github.com/scip-code/scip-java/issues/847
         add(
-            checkGradleBuild(
-                "centralized-repos",
-                "gradle/centralized-repos",
-                expectedScipFiles = 1,
-            )
+            checkGradleBuild("centralized-repos", "gradle/centralized-repos", expectedScipFiles = 1)
         )
         add(
             checkGradleBuild(
