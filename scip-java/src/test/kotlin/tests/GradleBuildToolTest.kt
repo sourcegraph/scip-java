@@ -55,6 +55,19 @@ class GradleBuildToolTest : BuildToolHarness() {
                 expectedScipFiles = 2,
             )
         )
+        // Regression test: annotation processors declared only for the test source
+        // set (testAnnotationProcessor) make Gradle pass -processorpath to
+        // compileTestJava, so the SCIP javac plugin must be added to that same
+        // configuration or plugin discovery fails with "plug-in not found: scip".
+        add(
+            checkGradleBuild(
+                "test-annotation-path",
+                "gradle/test-annotation-path",
+                // The generated immutable class is compiled alongside the original
+                // test source, so two SCIP shards are produced.
+                expectedScipFiles = 2,
+            )
+        )
         add(
             checkGradleBuild("build-with-Werror", "gradle/build-with-Werror", expectedScipFiles = 2)
         )
