@@ -39,13 +39,13 @@ jobs:
           VERSION=${VERSION#v}
           ARTIFACT="org.scip-code:scip-java:${VERSION}"
 
-          for attempt in {1..20}; do
+          for attempt in {1..10}; do
             if cs resolve "$ARTIFACT" >/dev/null; then
               break
             fi
 
-            if [ "$attempt" -eq 20 ]; then
-              echo "Artifact $ARTIFACT was not resolvable after 20 attempts" >&2
+            if [ "$attempt" -eq 10 ]; then
+              echo "Artifact $ARTIFACT was not resolvable after 10 attempts" >&2
               exit 1
             fi
 
@@ -55,7 +55,6 @@ jobs:
 
           cs bootstrap \
             --standalone \
-            --bat=true \
             -o scip-java \
             "$ARTIFACT" \
             --main org.scip_code.scip_java.ScipJava
@@ -64,8 +63,7 @@ jobs:
           ./scip-java --help >/dev/null
 
           mv scip-java "scip-java-${TAG}"
-          mv scip-java.bat "scip-java-${TAG}.bat"
-          shasum -a 256 "scip-java-${TAG}" "scip-java-${TAG}.bat" > "scip-java-${TAG}.sha256"
+          shasum -a 256 "scip-java-${TAG}" > "scip-java-${TAG}.sha256"
 
       - name: Check for GitHub release
         id: release
@@ -95,7 +93,6 @@ jobs:
 
           gh release upload "$TAG" \
             "scip-java-${TAG}" \
-            "scip-java-${TAG}.bat" \
             "scip-java-${TAG}.sha256" \
             --repo "scip-code/scip-java" \
             --clobber
