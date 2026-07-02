@@ -23,7 +23,7 @@ jobs:
         with:
           summarize: false
 
-      - uses: DeterminateSystems/magic-nix-cache-action@v13
+      - uses: DeterminateSystems/magic-nix-cache-action@v14
 
       - name: Build standalone launcher
         env:
