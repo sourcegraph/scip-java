@@ -28,6 +28,7 @@
           pkgs.mkShellNoCC {
             buildInputs = with pkgs; [
               bazelisk
+              coursier
               git
               (gradle_9.override ({ java = jdk; }))
               jdk
