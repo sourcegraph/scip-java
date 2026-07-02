@@ -26,7 +26,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Build scip-java CLI
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - uses: DeterminateSystems/nix-installer-action@v22
         with:
@@ -139,7 +139,7 @@ jobs:
             bazel_version: 7.6.1
             covers: Bazel, Java, Java 21 runtime
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - uses: DeterminateSystems/nix-installer-action@v22
         with:

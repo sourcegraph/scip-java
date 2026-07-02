@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     name: nix flake check
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - uses: DeterminateSystems/nix-installer-action@v22
         with:
@@ -41,7 +41,7 @@ jobs:
       matrix:
         java: [17, 21, 25]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - uses: DeterminateSystems/nix-installer-action@v22
         with:
@@ -68,7 +68,7 @@ jobs:
             javac_option: "--@scip_java//scip-javac:enabled=true"
             aggregator_target: "@scip_java//scip-aggregator:bazel"
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - uses: DeterminateSystems/nix-installer-action@v22
         with:
@@ -86,7 +86,7 @@ jobs:
   bazel_aspect:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - uses: DeterminateSystems/nix-installer-action@v22
         with:
@@ -111,7 +111,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Snapshots
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - uses: DeterminateSystems/nix-installer-action@v22
         with:
@@ -137,7 +137,7 @@ jobs:
       matrix:
         java: [17, 21, 25]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - uses: DeterminateSystems/nix-installer-action@v22
         with:
