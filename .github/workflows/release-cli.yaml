@@ -39,16 +39,17 @@ jobs:
           VERSION=${VERSION#v}
           ARTIFACT="org.scip-code:scip-java:${VERSION}"
 
-          for attempt in {1..10}; do
-            if cs resolve "$ARTIFACT" >/dev/null 2>&1; then
+          for attempt in {1..20}; do
+            if cs resolve "$ARTIFACT" >/dev/null; then
               break
             fi
 
-            if [ "$attempt" -eq 10 ]; then
-              echo "Artifact $ARTIFACT was not resolvable after 10 attempts" >&2
+            if [ "$attempt" -eq 20 ]; then
+              echo "Artifact $ARTIFACT was not resolvable after 20 attempts" >&2
               exit 1
             fi
 
+            echo "Attempt $attempt: $ARTIFACT is not resolvable yet, retrying in 30 seconds" >&2
             sleep 30
           done
 
