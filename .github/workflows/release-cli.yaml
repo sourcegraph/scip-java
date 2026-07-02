@@ -1,0 +1,100 @@
+name: Release CLI
+on:
+  workflow_call:
+    inputs:
+      tag:
+        description: Git tag to release assets for.
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: nix develop --command bash -e {0}
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: DeterminateSystems/nix-installer-action@v22
+        with:
+          summarize: false
+
+      - uses: DeterminateSystems/magic-nix-cache-action@v13
+
+      - name: Build standalone launcher
+        env:
+          OUT_DIR: ${{ runner.temp }}/release-cli
+          TAG: ${{ inputs.tag }}
+          VERSION: ${{ inputs.tag }}
+        run: |
+          set -euo pipefail
+
+          mkdir -p "$OUT_DIR"
+          cd "$OUT_DIR"
+
+          VERSION=${VERSION#v}
+          ARTIFACT="org.scip-code:scip-java:${VERSION}"
+
+          for attempt in {1..10}; do
+            if cs resolve "$ARTIFACT" >/dev/null 2>&1; then
+              break
+            fi
+
+            if [ "$attempt" -eq 10 ]; then
+              echo "Artifact $ARTIFACT was not resolvable after 10 attempts" >&2
+              exit 1
+            fi
+
+            sleep 30
+          done
+
+          cs bootstrap \
+            --standalone \
+            --bat=true \
+            -o scip-java \
+            "$ARTIFACT" \
+            --main org.scip_code.scip_java.ScipJava
+
+          chmod +x scip-java
+          ./scip-java --help >/dev/null
+
+          mv scip-java "scip-java-${TAG}"
+          mv scip-java.bat "scip-java-${TAG}.bat"
+          shasum -a 256 "scip-java-${TAG}" "scip-java-${TAG}.bat" > "scip-java-${TAG}.sha256"
+
+      - name: Check for GitHub release
+        id: release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ inputs.tag }}
+        run: |
+          set -euo pipefail
+
+          if gh release view "$TAG" --repo "scip-code/scip-java" >/dev/null 2>&1; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+            echo "GitHub release $TAG does not exist in scip-code/scip-java; skipping asset upload."
+          fi
+
+      - name: Upload release assets
+        if: steps.release.outputs.exists == 'true'
+        env:
+          OUT_DIR: ${{ runner.temp }}/release-cli
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ inputs.tag }}
+        run: |
+          set -euo pipefail
+
+          cd "$OUT_DIR"
+
+          gh release upload "$TAG" \
+            "scip-java-${TAG}" \
+            "scip-java-${TAG}.bat" \
+            "scip-java-${TAG}.sha256" \
+            --repo "scip-code/scip-java" \
+            --clobber

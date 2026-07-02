@@ -1,4 +1,4 @@
-load("@scip_java//semanticdb-javac:defs.bzl", "java_library")
+load("@scip_java//scip-javac:defs.bzl", "java_library")
 load("@rules_java//java:defs.bzl", "java_plugin")
 
 package(

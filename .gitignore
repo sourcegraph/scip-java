@@ -1,7 +1,13 @@
 *.class
 *.log
 
-# sbt specific
+# nix
+result
+result-*
+
+# build tool output
+.gradle/
+build/
 .cache
 .history
 .lib/
@@ -9,8 +15,6 @@ dist/*
 target/
 lib_managed/
 src_managed/
-project/boot/
-project/plugins/project/
 .bloop
 
 _site/
@@ -57,12 +61,23 @@ index.scip
 ./generated
 /sources
 bazel-bin
-bazel-scip-java
 bazel-out
 bazel-testlogs
-bazel-lsif-java
+/bazel-bindings
+/bazel-scip-java
+/bazel-lsif-java
+/examples/bazel-example/bazel-bazel-example
 
 VERSION
 
-semanticdb-gradle-plugin/gradle
-aspects/scip_java.bzl
+scip-gradle-plugin/gradle
+/aspects/
+
+scip-snapshots/META-INF/
+
+# scip-kotlinc kctfork-based tests run kotlinc with our plugin, which
+# writes META-INF/scip/sources/Test.kt.scip relative to the test
+# cwd.
+scip-kotlinc/META-INF/
+
+/.kotlin/

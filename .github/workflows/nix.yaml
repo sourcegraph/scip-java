@@ -1,0 +1,170 @@
+name: Nix
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
+
+env:
+  NIX_DEVELOP: ${{ github.workspace }}
+
+defaults:
+  run:
+    shell: bash --noprofile --norc -eo pipefail -c "nix develop $NIX_DEVELOP --command bash --noprofile --norc -eo pipefail $1" -- {0}
+
+jobs:
+  flake-check:
+    runs-on: ubuntu-latest
+    name: nix flake check
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: DeterminateSystems/nix-installer-action@v22
+        with:
+          summarize: false
+
+      - uses: DeterminateSystems/magic-nix-cache-action@v13
+
+      - run: nix flake check -L
+
+  test:
+    runs-on: ubuntu-latest
+    name: Tests (JDK ${{ matrix.java }})
+    env:
+      NIX_DEVELOP: ${{ github.workspace }}#jdk${{ matrix.java }}
+    strategy:
+      fail-fast: false
+      matrix:
+        java: [17, 21, 25]
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: DeterminateSystems/nix-installer-action@v22
+        with:
+          summarize: false
+
+      - uses: DeterminateSystems/magic-nix-cache-action@v13
+
+      - name: Main project tests
+        run: gradle test --no-daemon
+
+  bazel:
+    runs-on: ubuntu-latest
+    name: Bazel (${{ matrix.name }})
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: scip-java
+            directory: .
+            javac_option: "--//scip-javac:enabled=true"
+            aggregator_target: "scip-aggregator:bazel"
+          - name: bazel-example
+            directory: examples/bazel-example
+            javac_option: "--@scip_java//scip-javac:enabled=true"
+            aggregator_target: "@scip_java//scip-aggregator:bazel"
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: DeterminateSystems/nix-installer-action@v22
+        with:
+          summarize: false
+
+      - uses: DeterminateSystems/magic-nix-cache-action@v13
+
+      - run: bazelisk build //... ${{ matrix.javac_option }}
+        working-directory: ${{ matrix.directory }}
+      - run: bazelisk run ${{ matrix.aggregator_target }} -- --sourceroot "$PWD"
+        working-directory: ${{ matrix.directory }}
+      - run: du -h index.scip
+        working-directory: ${{ matrix.directory }}
+
+  bazel_aspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: DeterminateSystems/nix-installer-action@v22
+        with:
+          summarize: false
+
+      - uses: DeterminateSystems/magic-nix-cache-action@v13
+
+      - run: gradle :scip-java:installDist --no-daemon
+      - run: printf 'SCIP_JAVA_CLI=%s\n' "$PWD/scip-java/build/install/scip-java/bin/scip-java" >> "$GITHUB_ENV"
+      - name: Auto-index scip-java codebase
+        run: |
+          "$SCIP_JAVA_CLI" index --build-tool=bazel --bazel-scip-java-binary="$SCIP_JAVA_CLI"
+      - run: du -h index.scip
+      - name: Auto-index example/bazel-workspace
+        run: |
+          "$SCIP_JAVA_CLI" index --build-tool=bazel --bazel-scip-java-binary="$SCIP_JAVA_CLI"
+        working-directory: examples/bazel-example
+      - run: du -h index.scip
+        working-directory: examples/bazel-example
+
+  snapshots:
+    runs-on: ubuntu-latest
+    name: Snapshots
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: DeterminateSystems/nix-installer-action@v22
+        with:
+          summarize: false
+
+      - uses: DeterminateSystems/magic-nix-cache-action@v13
+
+      - name: Regenerate snapshots
+        run: gradle :scip-snapshots:saveSnapshots --no-daemon
+
+      - name: Check snapshot drift
+        run: |
+          git diff --exit-code \
+            scip-snapshots/expected
+
+  maven:
+    runs-on: ubuntu-latest
+    name: Maven tests (JDK ${{ matrix.java }})
+    env:
+      NIX_DEVELOP: ${{ github.workspace }}#jdk${{ matrix.java }}
+    strategy:
+      fail-fast: false
+      matrix:
+        java: [17, 21, 25]
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: DeterminateSystems/nix-installer-action@v22
+        with:
+          summarize: false
+
+      - uses: DeterminateSystems/magic-nix-cache-action@v13
+
+      - run: |
+          gradle --no-daemon :scip-java:installDist publishToMavenLocal
+          SCIP_JAVA_VERSION="$(
+            sed -n 's/^version:=//p' scip-java/build/install/scip-java/VERSION
+          )"
+          test -n "$SCIP_JAVA_VERSION"
+          printf 'SCIP_JAVA_VERSION=%s\n' "$SCIP_JAVA_VERSION" >> "$GITHUB_ENV"
+          printf 'SCIP_JAVA_CLI=%s\n' "$PWD/scip-java/build/install/scip-java/bin/scip-java" >> "$GITHUB_ENV"
+
+      - run: mvn clean verify -DskipTests "-Dscip-java.version=$SCIP_JAVA_VERSION" scip:dependencies
+        working-directory: examples/maven-example
+
+      - run: |
+          "$SCIP_JAVA_CLI" aggregate target/scip-targetroot
+        working-directory: examples/maven-example
+
+      - run: |
+          grep org.hamcrest target/scip-targetroot/*dependencies.txt
+          grep "$PWD/src/main/java" target/scip-targetroot/*dependencies.txt
+        working-directory: examples/maven-example
+
+      - run: du -h index.scip
+        working-directory: examples/maven-example

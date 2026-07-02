@@ -1,0 +1,6 @@
+apply plugin: 'java'
+java {
+  toolchain {
+    languageVersion = JavaLanguageVersion.of(@JAVA@)
+  }
+}

@@ -1,7 +1,4 @@
----
-id: manual-configuration
-title: Manual configuration
----
+# Manual configuration
 
 The `scip-java index` command does a best-effort to automatically index a given
 codebase. The automatic step may not always work. The purpose of this page is to
@@ -12,64 +9,58 @@ fails.
 
 Indexing a codebase consists of two independent phases:
 
-- Compile the codebase with the SemanticDB compiler plugin.
-- Generate SCIP index from SemanticDB files.
+- Compile the codebase with the SCIP compiler plugin.
+- Generate SCIP index from SCIP files.
 
-![A three stage pipeline that starts with a list of Java sources, creates a list of SemanticDB files that then become a single SCIP index.](assets/semanticdb-javac-pipeline.svg)
+![A three stage pipeline that starts with a list of Java sources, creates a list of SCIP files that then become a single SCIP index.](assets/scip-javac-pipeline.svg)
 
 The first phase can be complicated to configure and it can take a while to run.
 The second phase is quite simple to configure and it usually runs very fast.
 
-## Step 1: Add SemanticDB compiler plugin to the classpath
+## Step 1: Add SCIP compiler plugin to the classpath
 
-The SemanticDB compiler plugin is published to Maven Central as a
+The SCIP compiler plugin is published to Maven Central as a
 zero-dependency Java library that you can install like any normal dependency.
 
-[![](https://img.shields.io/maven-central/v/com.sourcegraph/semanticdb-javac)](https://repo1.maven.org/maven2/com/sourcegraph/semanticdb-javac/)
+[![](https://img.shields.io/maven-central/v/org.scip-code/scip-javac)](https://repo1.maven.org/maven2/org/scip-code/scip-javac/)
 
 Use `curl` to download the compiler plugin jar file manually so that it can be
 added to the `javac -classpath` option.
 
 ```sh
-curl -Lo semanticdb-javac.jar https://repo1.maven.org/maven2/com/sourcegraph/semanticdb-javac/@STABLE_VERSION@/semanticdb-javac-@STABLE_VERSION@.jar
-javac -classpath semanticdb-javac.jar MyApplication.java
+curl -Lo scip-javac.jar https://repo1.maven.org/maven2/org/scip-code/scip-javac/@STABLE_VERSION@/scip-javac-@STABLE_VERSION@.jar
+javac -classpath scip-javac.jar MyApplication.java
 ```
 
 If you're using Gradle.
 
 ```groovy
 // Option 1: if you are not using annotation processors
-compileOnly 'com.sourcegraph:semanticdb-javac:@STABLE_VERSION@'
+compileOnly 'org.scip-code:scip-javac:@STABLE_VERSION@'
 // Option 2: if you are using annotation processors
-annotationProcessor 'com.sourcegraph:semanticdb-javac:@STABLE_VERSION@'
+annotationProcessor 'org.scip-code:scip-javac:@STABLE_VERSION@'
 ```
 
 If you're using Maven.
 
 ```xml
 <dependency>
-    <groupId>com.sourcegraph</groupId>
-    <artifactId>semanticdb-javac</artifactId>
+    <groupId>org.scip-code</groupId>
+    <artifactId>scip-javac</artifactId>
     <version>@STABLE_VERSION@</version>
 </dependency>
 ```
 
-If you're using sbt.
+## Step 2: Enable `-Xplugin:scip` compiler option
 
-```scala
-libraryDependencies += "com.sourcegraph" % "semanticdb-javac" % "@STABLE_VERSION@"
-```
-
-## Step 2: Enable `-Xplugin:semanticdb` compiler option
-
-Add `-Xplugin:semanticdb` to your compiler options to enable the SemanticDB
+Add `-Xplugin:scip` to your compiler options to enable the SCIP
 compiler plugin. To do this you need to explicitly configure two directories:
 
 - `-sourceroot:PATH`: the absolute path to the root directory of your codebase.
   It's important that all of the source files that should be index live under
   this directory.
 - `-targetroot:PATH`: the absolute path to the directory where to generate
-  SemanticDB file. This directory can be anywhere on your file system.  
+  SCIP file. This directory can be anywhere on your file system.  
   Alternatively, pass in `-targetroot:javac-classes-directory` for the plugin to
   automatically use the `javac` output directory.
 
@@ -78,8 +69,8 @@ If you're using Gradle.
 ```groovy
 tasks.withType(JavaCompile) {
   def sourceroot = rootProject.projectDir
-  def targetroot = new File(rootProject.buildDir, "semanticdb-targetroot")
-  options.compilerArgs << "-Xplugin:semanticdb -sourceroot:$sourceroot -targetroot:$targetroot"
+  def targetroot = new File(rootProject.buildDir, "scip-targetroot")
+  options.compilerArgs << "-Xplugin:scip -sourceroot:$sourceroot -targetroot:$targetroot"
 }
 ```
 
@@ -97,7 +88,7 @@ If you're using Maven.
          <version>3.8.1</version>
          <configuration>
            <compilerArgs>
-+            <arg>-Xplugin:semanticdb -sourceroot:${session.executionRootDirectory} -targetroot:${session.executionRootDirectory}/target/semanticdb-targetroot</arg>
++            <arg>-Xplugin:scip -sourceroot:${session.executionRootDirectory} -targetroot:${session.executionRootDirectory}/target/scip-targetroot</arg>
            </compilerArgs>
          </configuration>
        </plugin>
@@ -108,17 +99,6 @@ If you're using Maven.
  </project>
 ```
 
-If you're using sbt.
-
-```scala
-javaHome := Some(...) // Must be configured to fork the compiler.
-Compile / javacOptions += {
-    val sourceroot = (ThisBuild / baseDirectory).value
-    val targetroot = sourceroot / "target" / "semanticdb-targetroot"
-    s"-Xplugin:semanticdb -sourceroot:$sourceroot -targetroot:$targetroot"
-}
-```
-
 ## Step 3: Compile the codebase
 
 Compile all source files in the codebase once the compiler setting has been
@@ -127,16 +107,15 @@ examples:
 
 - Gradle: `./gradlew clean compileJava compileTestJava`
 - Maven: `mvn clean verify -DskipTests`
-- sbt: `sbt clean test:compile`
 - Bazel: `bazel build //...`
 
-If everything went well, you should have a lot of `*.semanticdb` files in the
+If everything went well, you should have a lot of `*.scip` files in the
 targetroot directory.
 
 ```
 ❯ find $TARGETROOT -type f
-build/semanticdb-targetroot/META-INF/semanticdb/j8/src/test/java/example/ExampleTest.java.semanticdb
-build/semanticdb-targetroot/META-INF/semanticdb/j8/src/main/java/example/Example.java.semanticdb
+build/scip-targetroot/META-INF/scip/j17/src/test/java/example/ExampleTest.java.scip
+build/scip-targetroot/META-INF/scip/j17/src/main/java/example/Example.java.scip
 ...
 ```
 
@@ -148,8 +127,8 @@ references" to show results from multiple repositories.
 
 By default, the `index.scip` file only enables navigation within the local
 repository. You can optionally enable cross-repository navigation by creating
-one of the following files in the SemanticDB _targetroot_ directory (the path in
-`-Xplugin:semanticdb -targeroot:PATH`).
+one of the following files in the SCIP _targetroot_ directory (the path in
+`-Xplugin:scip -targeroot:PATH`).
 
 - `javacopts.txt`: line-separated list of Java compiler options that got passed
   to the compiler. For example,
@@ -191,42 +170,41 @@ plugin that can dump the project's dependencies in a format that scip-java under
 You can either use it directly from commandline:
 
 ```
-$ mvn com.sourcegraph:maven-plugin:@STABLE_VERSION@:sourcegraphDependencies
+$ mvn org.scip-code:scip-maven-plugin:@STABLE_VERSION@:dependencies
 ```
 
 Or add it to your build like any other maven plugin:
 
 ```xml
 <plugin>
-    <groupId>com.sourcegraph</groupId>
-    <artifactId>maven-plugin</artifactId>
+    <groupId>org.scip-code</groupId>
+    <artifactId>scip-maven-plugin</artifactId>
     <version>@STABLE_VERSION@</version>
     <executions>
         <execution>
             <goals>
-                <goal>sourcegraphDependencies</goal>
+                <goal>dependencies</goal>
             </goals>
         </execution>
     </executions>
 </plugin>
 ```
 
-Which allows you to invoke it by simply running `mvn sourcegraph:sourcegraphDependencies`.
+Which allows you to invoke it by simply running `mvn scip:dependencies`.
 
 Cross-repository navigation is a feature that allows "goto definition" and "find
 references" to show results from multiple repositories.
 
-## Step 5: Generate SCIP index from SemanticDB files
+## Step 5: Generate SCIP index from SCIP files
 
 First, install the `scip-java` command-line tool according to the instructions
 in the [getting started guide](getting-started.md).
 
-Next, run the `scip-java index-semanticdb` command to convert SemanticDB files
-into SCIP.
+Next, run the `scip-java aggregate` command to merge the per-file SCIP
+files into a single SCIP index.
 
 ```sh
-❯ scip-java index-semanticdb $TARGETROOT
+❯ scip-java aggregate $TARGETROOT
 ❯ file index.scip
 index.scip: JSON data
 ```
-

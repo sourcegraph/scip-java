@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.sourcegraph</groupId>
+    <groupId>org.scip-code</groupId>
     <artifactId>example</artifactId>
     <version>${revision}</version>
 
@@ -14,8 +14,8 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
         <revision>1.0.0-SNAPSHOT</revision>
     </properties>
 
@@ -27,8 +27,8 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>com.sourcegraph</groupId>
-            <artifactId>semanticdb-javac</artifactId>
+            <groupId>org.scip-code</groupId>
+            <artifactId>scip-javac</artifactId>
             <version>${scip-java.version}</version>
         </dependency>
     </dependencies>
@@ -51,7 +51,7 @@
                     <version>3.8.0</version>
                     <configuration>
                       <compilerArgs>
-                       <arg>-Xplugin:semanticdb -sourceroot:${session.executionRootDirectory} -targetroot:${session.executionRootDirectory}/target/semanticdb-targetroot</arg>
+                       <arg>-Xplugin:scip -sourceroot:${session.executionRootDirectory} -targetroot:${session.executionRootDirectory}/target/scip-targetroot</arg>
                       </compilerArgs>
                     </configuration>
                 </plugin>
@@ -81,13 +81,13 @@
                     <version>3.0.0</version>
                 </plugin>
                 <plugin>
-                    <groupId>com.sourcegraph</groupId>
-                    <artifactId>maven-plugin</artifactId>
+                    <groupId>org.scip-code</groupId>
+                    <artifactId>scip-maven-plugin</artifactId>
                     <version>${scip-java.version}</version>
                     <executions>
                         <execution>
                             <goals>
-                                <goal>sourcegraphDependencies</goal>
+                                <goal>dependencies</goal>
                             </goals>
                         </execution>
                     </executions>

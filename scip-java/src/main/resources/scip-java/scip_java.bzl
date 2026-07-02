@@ -9,8 +9,7 @@ different contents.
 This aspect is needed for scip-java to inspect the structure of the Bazel build
 and register actions to index all java_library/java_test/java_binary targets.
 The result of running this aspect is that your bazel-bin/ directory will contain
-many *.scip (https://github.com/sourcegraph/scip) and
-*.semanticdb (https://scalameta.org/docs/semanticdb/specification.html) files.
+many *.scip (https://github.com/scip-code/scip) files.
 These files encode information about which symbols are referenced from which
 locations in your source code.
 
@@ -32,6 +31,8 @@ Example command to run this aspect directly:
 
 To learn more about aspects: https://bazel.build/extending/aspects
 """
+
+load("@rules_java//java/common:java_info.bzl", "JavaInfo")
 
 def _scip_java(target, ctx):
     if JavaInfo not in target or not hasattr(ctx.rule.attr, "srcs"):
@@ -91,21 +92,16 @@ def _scip_java(target, ctx):
         processorpath += [j.path for j in annotations.processor_classpath.to_list()]
         processors = annotations.processor_classnames
 
+    raw_options = compilation.javac_options
+    if hasattr(raw_options, "to_list"):
+        raw_options = raw_options.to_list()
+
     launcher_javac_flags = []
     compiler_javac_flags = []
-
-    # In different versions of bazel javac options are either a nested set or a depset or a list...
-    javac_options = []
-    if hasattr(compilation, "javac_options_list"):
-        javac_options = compilation.javac_options_list
-    else:
-        javac_options = compilation.javac_options
-
-    for value in javac_options:
-        # NOTE(Anton): for some bizarre reason I see empty string starting the list of
-        # javac options - which then gets propagated into the JSON config, and ends up
-        # crashing the actual javac invokation.
-        if value != "":
+    for raw in raw_options:
+        for value in ctx.tokenize(raw):
+            if not value:
+                continue
             if value.startswith("-J"):
                 launcher_javac_flags.append(value)
             else:
@@ -125,16 +121,20 @@ def _scip_java(target, ctx):
     build_config_path = ctx.actions.declare_file(ctx.label.name + ".scip.json")
 
     scip_output = ctx.actions.declare_file(ctx.label.name + ".scip")
-    targetroot = ctx.actions.declare_directory(ctx.label.name + ".semanticdb")
+    targetroot = ctx.actions.declare_directory(ctx.label.name + ".scip-targetroot")
     ctx.actions.write(
         output = build_config_path,
-        content = build_config.to_json(),
+        content = json.encode(build_config),
     )
 
     deps = [javac_action.inputs, annotations.processor_classpath]
 
     ctx.actions.run_shell(
-        command = "\"{}\" index --no-cleanup --index-semanticdb.allow-empty-index --targetroot {} --scip-config \"{}\" --output \"{}\"".format(
+        # The action runs in the execroot (sandboxed or not), so bazel-out
+        # paths resolve directly. Prefix them with $PWD to make them absolute,
+        # which keeps them unambiguous regardless of how scip-java resolves
+        # relative paths.
+        command = "\"{}\" index --no-cleanup --aggregate.allow-empty-index --targetroot \"$PWD/{}\" --scip-config \"$PWD/{}\" --output \"$PWD/{}\"".format(
             ctx.var["scip_java_binary"],
             targetroot.path,
             build_config_path.path,
@@ -154,7 +154,7 @@ def _scip_java(target, ctx):
 def _scip_java_aspect(target, ctx):
     scip = _scip_java(target, ctx)
     if not scip:
-        return struct()
+        return []
     return [OutputGroupInfo(scip = [scip])]
 
 scip_java_aspect = aspect(

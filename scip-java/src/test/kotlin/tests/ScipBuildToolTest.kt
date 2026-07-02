@@ -1,0 +1,48 @@
+package tests
+
+import java.nio.file.Files
+import kotlin.test.assertTrue
+import org.junit.jupiter.api.DynamicTest
+import org.junit.jupiter.api.TestFactory
+
+class ScipBuildToolTest : BuildToolHarness() {
+
+    @TestFactory
+    fun tests(): List<DynamicTest> =
+        listOf(
+            checkBuild(
+                "rejects-dependencies-field",
+                fixture = "scip/rejects-dependencies-field",
+                expectedError = { output ->
+                    assertTrue(
+                        output.contains(
+                            "scip-java no longer resolves Maven coordinates from " +
+                                "the 'dependencies' field"
+                        ),
+                        "output: $output",
+                    )
+                },
+            ),
+            checkBuild(
+                "compiles-with-empty-classpath",
+                fixture = "scip/compiles-with-empty-classpath",
+                expectedScipFiles = 2,
+            ),
+            checkBuild(
+                "compiles-with-classpath",
+                fixture = "scip/compiles-with-classpath",
+                expectedScipFiles = 1,
+                // The `lib-classes` entry referenced by lsif-java.json is produced
+                // imperatively: compile a helper class from a directory outside the
+                // workspace so its sources are not themselves indexed.
+                prepare = { workingDirectory ->
+                    val libSrcDir = Files.createTempDirectory("scip-classpath-lib")
+                    copyFixture("scip/compiles-with-classpath-lib", libSrcDir)
+                    val libSrc = libSrcDir.resolve("bar").resolve("Greeter.java")
+                    val libClasses = workingDirectory.resolve("lib-classes")
+                    Files.createDirectories(libClasses)
+                    exec(listOf("javac", "-d", libClasses.toString(), libSrc.toString()), libSrcDir)
+                },
+            ),
+        )
+}
