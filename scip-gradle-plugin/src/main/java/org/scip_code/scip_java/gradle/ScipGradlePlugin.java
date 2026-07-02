@@ -3,6 +3,7 @@ package org.scip_code.scip_java.gradle;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import org.gradle.api.InvalidUserCodeException;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
 import org.gradle.api.Task;
@@ -20,8 +21,19 @@ public class ScipGradlePlugin implements Plugin<Project> {
     // Inject Maven Central/local so the indexer (and plugins like protobuf that
     // resolve their own artifacts) can resolve dependencies even when the build
     // being indexed doesn't declare any repositories of its own.
-    project.getRepositories().add(project.getRepositories().mavenCentral());
-    project.getRepositories().add(project.getRepositories().mavenLocal());
+    try {
+      project.getRepositories().add(project.getRepositories().mavenCentral());
+      project.getRepositories().add(project.getRepositories().mavenLocal());
+    } catch (InvalidUserCodeException exc) {
+      // The build declares repositories centrally in settings.gradle with
+      // RepositoriesMode.FAIL_ON_PROJECT_REPOS, which makes any project-level
+      // repository an error (issue #847). Repositories are guaranteed to be
+      // declared in settings in that mode, so the injection is unnecessary.
+      project
+          .getLogger()
+          .info(
+              "scip-java: not injecting Maven Central/local repositories: " + exc.getMessage());
+    }
 
     Map<String, Object> extraProperties =
         project.getExtensions().getExtraProperties().getProperties();
