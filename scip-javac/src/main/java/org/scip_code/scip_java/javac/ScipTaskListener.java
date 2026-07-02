@@ -177,7 +177,6 @@ public final class ScipTaskListener implements TaskListener {
   }
 
   // Infers the `-sourceroot:` flag from the provided file.
-  // FIXME: add unit tests https://github.com/scip-code/scip-java/issues/444
   private void inferBazelSourceroot(JavaFileObject file) {
     if (options.uriScheme != UriScheme.BAZEL || options.sourceroot != null) return;
     Path absolutePath = absolutePathFromUri(options, file);
@@ -194,6 +193,13 @@ public final class ScipTaskListener implements TaskListener {
       String pathName = absolutePath.getName(absolutePathDepth - relativePathDepth - 1).toString();
       if (!uriName.equals(pathName)) break;
       relativePathDepth++;
+    }
+    if (relativePathDepth == absolutePathDepth) {
+      // Every name of absolutePath is a suffix of uriPath (for example, when both paths are
+      // identical because the file object's toString() didn't match a known Bazel pattern).
+      // There is no prefix left to use as the sourceroot, so fall back to the filesystem root.
+      options.sourceroot = absolutePath.getRoot();
+      return;
     }
     options.sourceroot =
         absolutePath
