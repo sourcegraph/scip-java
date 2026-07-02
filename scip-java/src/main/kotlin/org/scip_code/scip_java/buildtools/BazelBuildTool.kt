@@ -65,13 +65,9 @@ class BazelBuildTool(index: IndexCommand) : BuildTool("Bazel", index) {
                 bazelExecutable,
                 "build",
                 "--noshow_progress",
-                // The local strategy is required for now because we write
-                // SCIP and SCIP files to the provided targetroot directory.
-                "--spawn_strategy=local",
                 "--aspects",
                 "$aspectLabel%scip_java_aspect",
                 "--output_groups=scip",
-                "--define=sourceroot=${index.workingDirectory}",
                 "--define=java_home=$javaHome",
                 "--define=scip_java_binary=$scipJavaBinary",
                 "--verbose_failures",
