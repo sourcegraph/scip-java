@@ -71,6 +71,17 @@ class GradleBuildToolTest : BuildToolHarness() {
         add(
             checkGradleBuild("build-with-Werror", "gradle/build-with-Werror", expectedScipFiles = 2)
         )
+        // Regression test: Groovy string interpolation puts GString elements
+        // (not java.lang.String) into compilerArgs, which used to crash the
+        // plugin with a ClassCastException.
+        // https://github.com/scip-code/scip-java/issues/801
+        add(
+            checkGradleBuild(
+                "gstring-compiler-args",
+                "gradle/gstring-compiler-args",
+                expectedScipFiles = 1,
+            )
+        )
         add(
             checkGradleBuild(
                 "publishing",

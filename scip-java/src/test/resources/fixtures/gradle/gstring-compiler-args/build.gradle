@@ -1,0 +1,14 @@
+plugins {
+    id 'java'
+}
+repositories {
+    mavenCentral()
+}
+// Groovy string interpolation produces GString elements, not java.lang.String,
+// so compilerArgs may hold non-String values despite its List<String>
+// signature. Regression test for
+// https://github.com/scip-code/scip-java/issues/801
+def maxErrors = 500
+compileJava {
+    options.compilerArgs << "-Xmaxerrs" << "${maxErrors}"
+}

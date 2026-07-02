@@ -51,25 +51,34 @@ public class ScipGradlePlugin implements Plugin<Project> {
                 task.getOptions().setIncremental(false);
 
                 if (pluginAdded) {
-                  List<String> args = task.getOptions().getCompilerArgs();
+                  // Groovy build scripts can append interpolated strings
+                  // (GString) to compilerArgs, so despite the List<String>
+                  // signature the list may hold non-String elements. Iterate
+                  // through a wildcard reference so elements are not implicitly
+                  // cast to String, which throws ClassCastException (issue
+                  // #801).
+                  List<?> args = task.getOptions().getCompilerArgs();
 
                   // It's important we don't add the plugin configuration more
                   // than once, as javac considers that an error.
                   boolean alreadyAdded =
-                      args.stream().anyMatch(arg -> arg.startsWith("-Xplugin:scip"));
+                      args.stream()
+                          .anyMatch(arg -> String.valueOf(arg).startsWith("-Xplugin:scip"));
                   if (!alreadyAdded) {
                     // The random timestamp ensures the sources are _always_
                     // recompiled, so Gradle doesn't cache any state.
                     // TODO: before this plugin is published to Maven Central, we
                     // will need to revert this change - as it can have
                     // detrimental effect on people's builds.
-                    args.add(
-                        "-Xplugin:scip -targetroot:"
-                            + targetRoot
-                            + " -sourceroot:"
-                            + sourceRoot
-                            + " -randomtimestamp="
-                            + System.nanoTime());
+                    task.getOptions()
+                        .getCompilerArgs()
+                        .add(
+                            "-Xplugin:scip -targetroot:"
+                                + targetRoot
+                                + " -sourceroot:"
+                                + sourceRoot
+                                + " -randomtimestamp="
+                                + System.nanoTime());
                   }
                 }
               });
