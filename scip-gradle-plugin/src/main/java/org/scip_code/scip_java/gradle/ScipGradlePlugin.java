@@ -20,8 +20,16 @@ public class ScipGradlePlugin implements Plugin<Project> {
     // Inject Maven Central/local so the indexer (and plugins like protobuf that
     // resolve their own artifacts) can resolve dependencies even when the build
     // being indexed doesn't declare any repositories of its own.
-    project.getRepositories().add(project.getRepositories().mavenCentral());
-    project.getRepositories().add(project.getRepositories().mavenLocal());
+    try {
+      project.getRepositories().add(project.getRepositories().mavenCentral());
+      project.getRepositories().add(project.getRepositories().mavenLocal());
+    } catch (Exception exc) {
+      // The build uses RepositoriesMode.FAIL_ON_PROJECT_REPOS, which rejects
+      // project-level repositories at the point they are added. Repositories
+      // are then declared in settings via dependencyResolutionManagement, so
+      // the injection isn't needed in the first place.
+      project.getLogger().debug("scip-java: not injecting repositories ({})", exc.getMessage());
+    }
 
     Map<String, Object> extraProperties =
         project.getExtensions().getExtraProperties().getProperties();
