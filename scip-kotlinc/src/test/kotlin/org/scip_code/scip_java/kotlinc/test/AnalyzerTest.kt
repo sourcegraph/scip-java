@@ -3,10 +3,8 @@ package org.scip_code.scip_java.kotlinc.test
 import com.tschuchort.compiletesting.KotlinCompilation
 import com.tschuchort.compiletesting.PluginOption
 import com.tschuchort.compiletesting.SourceFile
-import io.kotest.assertions.assertSoftly
 import io.kotest.assertions.fail
-import io.kotest.assertions.withClue
-import io.kotest.matchers.collections.shouldContain
+import io.kotest.matchers.collections.shouldContainAll
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.shouldNotBe
 import java.io.File
@@ -103,9 +101,7 @@ class AnalyzerTest {
                     }
                 },
             )
-        assertSoftly(document.occurrencesList) {
-            withClue(this) { occurrences.forEach(::shouldContain) }
-        }
+        document.occurrencesList.shouldContainAll(*occurrences)
 
         val symbols =
             arrayOf(
@@ -120,7 +116,7 @@ class AnalyzerTest {
                     signatureText = "public final fun foo(): Unit"
                 },
             )
-        assertSoftly(document.symbolsList) { withClue(this) { symbols.forEach(::shouldContain) } }
+        document.symbolsList.shouldContainAll(*symbols)
     }
 
     @Test
@@ -189,9 +185,7 @@ class AnalyzerTest {
                     }
                 },
             )
-        assertSoftly(document.occurrencesList) {
-            withClue(this) { occurrences.forEach(::shouldContain) }
-        }
+        document.occurrencesList.shouldContainAll(*occurrences)
     }
 
     @Test
@@ -279,9 +273,7 @@ class AnalyzerTest {
                     }
                 },
             )
-        assertSoftly(document.occurrencesList) {
-            withClue(this) { occurrences.forEach(::shouldContain) }
-        }
+        document.occurrencesList.shouldContainAll(*occurrences)
 
         val symbols =
             arrayOf(
@@ -306,7 +298,7 @@ class AnalyzerTest {
                     signatureText = "public final fun localClassMethod(): Unit"
                 },
             )
-        assertSoftly(document.symbolsList) { withClue(this) { symbols.forEach(::shouldContain) } }
+        document.symbolsList.shouldContainAll(*symbols)
     }
 
     @Test
@@ -412,9 +404,7 @@ class AnalyzerTest {
                     }
                 },
             )
-        assertSoftly(document.occurrencesList) {
-            withClue(this) { occurrences.forEach(::shouldContain) }
-        }
+        document.occurrencesList.shouldContainAll(*occurrences)
 
         val symbols =
             arrayOf(
@@ -441,7 +431,7 @@ class AnalyzerTest {
                     addOverriddenSymbols("sample/Interface#foo().")
                 },
             )
-        assertSoftly(document.symbolsList) { withClue(this) { symbols.forEach(::shouldContain) } }
+        document.symbolsList.shouldContainAll(*symbols)
     }
 
     @Test
@@ -627,9 +617,7 @@ class AnalyzerTest {
                     }
                 },
             )
-        assertSoftly(document.occurrencesList) {
-            withClue(this) { occurrences.forEach(::shouldContain) }
-        }
+        document.occurrencesList.shouldContainAll(*occurrences)
 
         val symbols =
             arrayOf(
@@ -663,7 +651,7 @@ class AnalyzerTest {
                     addOverriddenSymbols("sample/Interface#foo().")
                 },
             )
-        assertSoftly(document.symbolsList) { withClue(this) { symbols.forEach(::shouldContain) } }
+        document.symbolsList.shouldContainAll(*symbols)
     }
 
     @Test
@@ -732,9 +720,7 @@ class AnalyzerTest {
                     }
                 },
             )
-        assertSoftly(document.occurrencesList) {
-            withClue(this) { occurrences.forEach(::shouldContain) }
-        }
+        document.occurrencesList.shouldContainAll(*occurrences)
     }
 
     @Test
@@ -777,9 +763,7 @@ class AnalyzerTest {
                     }
                 },
             )
-        assertSoftly(document.occurrencesList) {
-            withClue(this) { occurrences.forEach(::shouldContain) }
-        }
+        document.occurrencesList.shouldContainAll(*occurrences)
     }
 
     @Test
@@ -1310,9 +1294,7 @@ class AnalyzerTest {
                 },
             )
 
-        assertSoftly(document.occurrencesList) {
-            withClue(document.occurrencesList) { occurrences.forEach(::shouldContain) }
-        }
+        document.occurrencesList.shouldContainAll(*occurrences)
 
         val symbols =
             arrayOf(
@@ -1323,7 +1305,7 @@ class AnalyzerTest {
                 }
             )
 
-        assertSoftly(document.symbolsList) { withClue(this) { symbols.forEach(::shouldContain) } }
+        document.symbolsList.shouldContainAll(*symbols)
     }
 
     @Test
@@ -1397,9 +1379,7 @@ class AnalyzerTest {
                     }
                 },
             )
-        assertSoftly(document.occurrencesList) {
-            withClue(this) { occurrences.forEach(::shouldContain) }
-        }
+        document.occurrencesList.shouldContainAll(*occurrences)
 
         val symbols =
             arrayOf(
@@ -1414,7 +1394,7 @@ class AnalyzerTest {
                     signatureText = "public final fun foo(): Unit"
                 },
             )
-        assertSoftly(document.symbolsList) { withClue(this) { symbols.forEach(::shouldContain) } }
+        document.symbolsList.shouldContainAll(*symbols)
     }
 
     @Test
