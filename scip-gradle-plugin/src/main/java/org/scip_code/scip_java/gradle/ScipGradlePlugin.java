@@ -29,10 +29,9 @@ public class ScipGradlePlugin implements Plugin<Project> {
       project.getRepositories().add(project.getRepositories().mavenCentral());
       project.getRepositories().add(project.getRepositories().mavenLocal());
     } catch (Exception exc) {
-      // The build uses RepositoriesMode.FAIL_ON_PROJECT_REPOS, which rejects
-      // project-level repositories at the point they are added. Repositories
-      // are then declared in settings via dependencyResolutionManagement, so
-      // the injection isn't needed in the first place.
+      // RepositoriesMode.FAIL_ON_PROJECT_REPOS rejects project-level repositories
+      // as they are added; the build declares them in settings instead, so the
+      // injection isn't needed.
       project.getLogger().debug("scip-java: not injecting repositories ({})", exc.getMessage());
     }
 
@@ -164,11 +163,9 @@ public class ScipGradlePlugin implements Plugin<Project> {
   }
 
   /**
-   * Kotlin sources are no longer indexed inside kotlinc: after each Kotlin compile task runs, its
-   * sources and classpath are dumped to {@code <targetroot>/kotlin-configs/<task>.txt}, and the
-   * scip-java CLI indexes them with the standalone Analysis API indexer after the build. This
-   * removes any binary-compatibility coupling with the Kotlin compiler version of the build being
-   * indexed.
+   * Kotlin sources are not indexed inside kotlinc: after each Kotlin compile task runs, its sources
+   * and classpath are dumped to {@code <targetroot>/kotlin-configs/<task>.txt} for the scip-java
+   * CLI to index after the build, decoupling indexing from the build's Kotlin compiler version.
    */
   private static void configureKotlinCompileTask(Task task, String sourceRoot, String targetRoot) {
     if (!task.getClass().getSimpleName().contains("KotlinCompile")) {
